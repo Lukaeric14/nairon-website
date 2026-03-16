@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as UniverseRouteImport } from './routes/universe'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PitchDeckRouteImport } from './routes/pitch-deck'
 import { Route as FluxRouteImport } from './routes/flux'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
@@ -31,6 +32,11 @@ const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PitchDeckRoute = PitchDeckRouteImport.update({
+  id: '/pitch-deck',
+  path: '/pitch-deck',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FluxRoute = FluxRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/acceptable-use': typeof AcceptableUseRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/flux': typeof FluxRoute
+  '/pitch-deck': typeof PitchDeckRoute
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/acceptable-use': typeof AcceptableUseRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/flux': typeof FluxRoute
+  '/pitch-deck': typeof PitchDeckRoute
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/acceptable-use': typeof AcceptableUseRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/flux': typeof FluxRoute
+  '/pitch-deck': typeof PitchDeckRoute
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/acceptable-use'
     | '/cookie-policy'
     | '/flux'
+    | '/pitch-deck'
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/acceptable-use'
     | '/cookie-policy'
     | '/flux'
+    | '/pitch-deck'
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/acceptable-use'
     | '/cookie-policy'
     | '/flux'
+    | '/pitch-deck'
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   AcceptableUseRoute: typeof AcceptableUseRoute
   CookiePolicyRoute: typeof CookiePolicyRoute
   FluxRoute: typeof FluxRoute
+  PitchDeckRoute: typeof PitchDeckRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   UniverseRoute: typeof UniverseRoute
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pitch-deck': {
+      id: '/pitch-deck'
+      path: '/pitch-deck'
+      fullPath: '/pitch-deck'
+      preLoaderRoute: typeof PitchDeckRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/flux': {
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   AcceptableUseRoute: AcceptableUseRoute,
   CookiePolicyRoute: CookiePolicyRoute,
   FluxRoute: FluxRoute,
+  PitchDeckRoute: PitchDeckRoute,
   PrivacyRoute: PrivacyRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   UniverseRoute: UniverseRoute,
