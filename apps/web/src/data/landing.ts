@@ -122,7 +122,6 @@ export const HIRING_MANAGER_NAV: NavConfig = {
 		{ kind: "link", label: "Our Approach", href: "/hire" },
 		{ kind: "link", label: "Team", href: "/team" },
 		{ kind: "link", label: "Success Stories", href: "/success-stories" },
-		{ kind: "link", label: "Pricing", href: "/pricing" },
 		{ kind: "link", label: "Contact", href: "/contact" },
 	],
 	cta: {
@@ -422,7 +421,6 @@ export const FOOTER_LINKS = {
 		{ label: "Our Approach", href: "/hire" },
 		{ label: "Team", href: "/team" },
 		{ label: "Success Stories", href: "/success-stories" },
-		{ label: "Pricing", href: "/pricing" },
 		{ label: "Contact", href: "/contact" },
 	],
 } as const;
@@ -986,7 +984,7 @@ export const APPRENTICESHIP_CONTENT = {
 			"Additional vetted talent pipeline",
 		],
 		pills: ["Standalone", "Remote", "Trained"],
-		cta: { label: "Access This Pool", href: "/pricing" },
+		cta: { label: "Access This Pool", href: "/contact" },
 	},
 } as const;
 
@@ -1130,6 +1128,6 @@ export const FINAL_CTA = {
 		],
 		subtext: "This could be the start of something big.",
 		primaryCta: { label: "Submit a Role", href: "/approach" },
-		secondaryCta: { label: "See Pricing", href: "/pricing" },
+		secondaryCta: { label: "Get in Touch", href: "/contact" },
 	},
 } as const;

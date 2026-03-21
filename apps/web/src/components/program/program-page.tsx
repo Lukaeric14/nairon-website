@@ -7,7 +7,6 @@ import { Requirements } from "./requirements";
 import { ApplicationTimeline } from "./application-timeline";
 import { Outcomes } from "./outcomes";
 import { ProgramPhilosophy } from "./philosophy";
-import { PricingCard } from "./pricing-card";
 import { ProgramFAQ } from "./faq";
 import { ProgramCTA } from "./program-cta";
 import type { ProgramData } from "@/data/programs";
@@ -24,7 +23,6 @@ export function ProgramPage({ data }: { data: ProgramData }) {
 			<ApplicationTimeline data={data.applicationSteps} />
 			<Outcomes data={data.outcomes} />
 			<ProgramPhilosophy data={data.philosophy} />
-			<PricingCard data={data.pricing} />
 			<ProgramFAQ items={data.faq} />
 			<ProgramCTA data={data.cta} />
 			<CTA />

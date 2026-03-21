@@ -139,7 +139,6 @@ const mobileLinks: MobileLink[] = [
         groupName: 'Solutions',
         links: [...useCases, ...contentLinks],
     },
-    { name: 'Pricing', href: '#' },
     { name: 'Company', href: '#' },
 ]
 
@@ -415,13 +414,6 @@ const NavMenu = () => {
                             </div>
                         </div>
                     </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem value="pricing">
-                    <NavigationMenuLink
-                        asChild
-                        className={navigationMenuTriggerStyle()}>
-                        <Link href="#">Pricing</Link>
-                    </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem value="company">
                     <NavigationMenuLink
