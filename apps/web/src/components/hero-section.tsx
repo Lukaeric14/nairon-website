@@ -31,12 +31,6 @@ const platforms = [
     icon: "/icons/claude-code.png",
   },
   {
-    name: "Factory Droid",
-    shortName: "Factory",
-    status: "supported",
-    icon: "/icons/factory.png",
-  },
-  {
     name: "Codex",
     shortName: "Codex",
     status: "supported",
