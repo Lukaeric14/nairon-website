@@ -79,14 +79,7 @@ export function Navbar() {
 						Flux
 					</a>
 
-					<span
-						className="px-4 py-2 rounded-full text-sm text-[#A39E96] cursor-not-allowed"
-						title="Coming Soon"
-						aria-disabled="true"
-					>
-						Coming Soon
-					</span>
-
+	
 					<a
 						href="https://github.com/Nairon-AI/flux"
 						target="_blank"
@@ -136,10 +129,7 @@ export function Navbar() {
 						Flux
 					</a>
 
-					<span className="block px-4 py-3 rounded-xl text-base text-[#A39E96]" aria-disabled="true">
-						Coming Soon
-					</span>
-
+	
 					<a
 						href="https://github.com/Nairon-AI/flux"
 						target="_blank"

@@ -104,22 +104,12 @@ export function CandidateModal() {
 								})}
 							</div>
 
-							<a
-								href="https://universe.naironai.com"
-								target="_blank"
-								rel="noopener noreferrer"
-								className={`mt-8 w-full inline-flex items-center justify-center gap-2 font-semibold text-sm px-6 py-3 rounded-full transition-all ${
-									selected.size > 0
-										? "bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C]"
-										: "bg-white/[0.06] text-[#A39E96] cursor-default"
-								}`}
-								onClick={(e) => {
-									if (selected.size === 0) e.preventDefault();
-								}}
+							<span
+								className="mt-8 w-full inline-flex items-center justify-center gap-2 font-semibold text-sm px-6 py-3 rounded-full bg-white/[0.06] text-[#A39E96] cursor-not-allowed opacity-60"
+								aria-disabled="true"
 							>
-								Enter Nairon Universe
-								<ArrowUpRight className="w-4 h-4" />
-							</a>
+								Enter Nairon Universe — Coming Soon
+							</span>
 						</div>
 					</div>
 

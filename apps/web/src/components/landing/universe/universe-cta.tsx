@@ -35,14 +35,14 @@ export function UniverseCTA() {
 						<span className="text-[#C9A96E]">.</span>
 					</h2>
 					<p className="text-[#A39E96] text-lg mb-8 max-w-lg mx-auto">
-						Engineers who engage with the Universe stay at the cutting
+						The Universe is coming soon. Engineers who engage will stay at the cutting
 						edge — and get matched to the best opportunities.
 					</p>
 					<div className="flex flex-wrap justify-center gap-4">
-						<a href="https://universe.naironai.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#C9A96E]/55 text-[#0C0C0C] font-semibold text-base px-8 py-3.5 rounded-full hover:bg-[#C9A96E]/70 transition-colors">
-							Universe
-						</a>
-						<a 
+						<span className="inline-flex items-center gap-2 bg-white/[0.06] text-[#A39E96] font-semibold text-base px-8 py-3.5 rounded-full cursor-not-allowed opacity-70">
+							Coming Soon
+						</span>
+						<a
 							href="/flux"
 							className="inline-flex items-center gap-2 border border-white/10 text-[#E8E4DE] hover:border-[#C9A96E]/50 hover:text-[#C9A96E] font-medium text-base px-6 py-3.5 rounded-full transition-colors"
 						>
