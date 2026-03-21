@@ -108,12 +108,11 @@ export default function HeroSection() {
 
               <div className="mx-auto mb-8 sm:mb-12 mt-6 max-w-2xl">
                 <p className="text-lg md:text-xl text-[#A39E96] leading-relaxed mb-6 sm:mb-8 px-2 sm:px-0">
-                  Flux is the missing Coding Agent plugin that gives you a deterministic workflow state engine, plus the
-                  structure to ship with AI{" "}
+                  Flux is the missing (self-improving) harness for Claude Code. Build Software{" "}
                   <span className="font-serif italic text-[#C9A96E]">
-                    reliably
+                    deterministically
                   </span>
-                  —while staying flexible enough to adopt optimizations the moment they drop.
+                  {" "}without outsourcing your thinking.
                 </p>
 
                 <div className="flex items-center justify-center gap-2 sm:gap-3">
