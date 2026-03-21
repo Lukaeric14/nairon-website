@@ -148,8 +148,7 @@ const faqItems: {
         question: "Which agents are supported?",
         answer: (
           <>
-            Claude Code is first-class, but it works in Factory Droid and
-            OpenAI's Codex agent. The{" "}
+            Claude Code is the first-class, default agent. The{" "}
             <a
               href="https://github.com/Nairon-AI/flux-opencode"
               target="_blank"
@@ -158,7 +157,7 @@ const faqItems: {
             >
               OpenCode port
             </a>{" "}
-            is currently experimental.
+            is currently experimental — we're working hard to make it a fully supported agent.
           </>
         ),
       },
