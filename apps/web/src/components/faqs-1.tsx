@@ -93,6 +93,24 @@ const faqItems: {
           "It audits your real agent harness: recent conversation history, current tools, MCP servers, skills, project structure, and what you are building. It then fetches from the Flux recommendation engine to find the best tools, MCP servers, skills, and agentic strategies to improve your harness. This means Flux improves itself with you over time — the more you work with it, the better your harness naturally becomes.",
       },
       {
+        id: "item-3b",
+        question: "Which agents are supported?",
+        answer: (
+          <>
+            Claude Code is the first-class, default agent. The{" "}
+            <a
+              href="https://github.com/Nairon-AI/flux-opencode"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#C9A96E] underline underline-offset-2 hover:text-[#E8E4DE]"
+            >
+              OpenCode port
+            </a>{" "}
+            is currently experimental — we're working hard to make it a fully supported agent.
+          </>
+        ),
+      },
+      {
         id: "item-4",
         question: "What is the default workflow?",
         answer: (
@@ -142,24 +160,6 @@ const faqItems: {
         question: "Does session data leave the machine?",
         answer:
           "Core analysis is local-first. Data is only shared when teams explicitly export or publish reports.",
-      },
-      {
-        id: "item-2",
-        question: "Which agents are supported?",
-        answer: (
-          <>
-            Claude Code is the first-class, default agent. The{" "}
-            <a
-              href="https://github.com/Nairon-AI/flux-opencode"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#C9A96E] underline underline-offset-2 hover:text-[#E8E4DE]"
-            >
-              OpenCode port
-            </a>{" "}
-            is currently experimental — we're working hard to make it a fully supported agent.
-          </>
-        ),
       },
       {
         id: "item-3",
