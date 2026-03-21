@@ -11,7 +11,7 @@ import ExpandableFeatures from "@/components/expandable-features-10";
 // import BentoSeven from "@/components/bento-7"; // Hidden for now
 import { FluxWorkflow } from "@/components/flux/workflow";
 import { FluxCTA } from "@/components/flux/cta";
-import { FluxPricing } from "@/components/flux/pricing";
+// import { FluxPricing } from "@/components/flux/pricing"; // Hidden - Flux is free
 import ComparatorSection from "@/components/comparator-7";
 import StatsSection from "@/components/stats-4";
 import FAQs from "@/components/faqs-1";
@@ -70,8 +70,7 @@ function FluxPage() {
 				{/* Stats - stats-4 */}
 				<StatsSection />
 
-				{/* Pricing - Free vs Pro */}
-				<FluxPricing />
+				{/* Pricing hidden — Flux is free */}
 
 				{/* Platforms/Integrations - integrations-6 (hidden for now) */}
 				{/* <IntegrationsSection /> */}
