@@ -93,14 +93,14 @@ export function FluxCTA() {
 
         {/* CTAs */}
         <div className="flex flex-wrap justify-center gap-4 mt-8">
-          <Button asChild size="lg" variant="secondary">
+          <Button asChild size="lg" className="bg-white text-[#0C0C0C] hover:bg-white/90">
             <a
               href="https://github.com/Nairon-AI/flux"
               target="_blank"
               rel="noopener noreferrer"
             >
               <Github className="mr-2 h-5 w-5" />
-              Star on GitHub
+              Open repo
             </a>
           </Button>
           <Button
