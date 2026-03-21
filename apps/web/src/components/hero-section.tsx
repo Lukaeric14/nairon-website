@@ -31,12 +31,6 @@ const platforms = [
     icon: "/icons/claude-code.png",
   },
   {
-    name: "Codex",
-    shortName: "Codex",
-    status: "supported",
-    icon: "/icons/codex.png",
-  },
-  {
     name: "OpenCode",
     shortName: "OpenCode",
     status: "beta",
