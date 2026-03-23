@@ -71,7 +71,7 @@ export function HeroNew() {
 
 			{/* Subtitle */}
 			<p className="mt-6 text-lg md:text-xl text-[#A39E96] max-w-2xl leading-relaxed">
-				Nairon is a data-driven technical recruiting agency. We use proprietary
+				Nairon is a data-driven technical recruiting startup. We use proprietary
 				benchmarks to match companies with AI-native engineers who build.
 			</p>
 

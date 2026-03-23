@@ -8,12 +8,12 @@ export const Route = createFileRoute("/pitch-deck")({
 		seoHead({
 			title: "Pitch Deck — Nairon",
 			description:
-				"Nairon pitch deck. Data-driven technical recruiting agency specializing in AI-native engineering talent.",
+				"Nairon pitch deck. Data-driven technical recruiting startup specializing in AI-native engineering talent.",
 			path: "/pitch-deck",
 		}),
 });
 
-const TOTAL_SLIDES = 11;
+const TOTAL_SLIDES = 10;
 
 function PitchDeckPage() {
 	const [current, setCurrent] = useState(0);
@@ -210,7 +210,7 @@ function SlideFrame({ children, num }: { children: React.ReactNode; num?: string
 			{children}
 			{num && (
 				<span className="absolute bottom-[20px] left-[100px] text-[13px] text-white/[0.15] font-medium tracking-[0.16em] uppercase">
-					{num} / 11
+					{num} / 10
 				</span>
 			)}
 			<span className="absolute bottom-[20px] right-[100px] font-[Urbanist,sans-serif] font-normal text-[14px] text-white/[0.12] tracking-[0.22em] uppercase">
@@ -227,24 +227,14 @@ function SlideContent({ index }: { index: number }) {
 		/* ── 1. Business Overview ── */
 		<SlideFrame key="1">
 			<div className="w-full h-full flex flex-col items-center justify-center text-center px-[200px]">
-				<h1 className="font-[Urbanist,sans-serif] text-[120px] font-normal tracking-[-3px] leading-[1.05] text-[#E8E4DE]">
-					<span className="font-[Instrument_Serif,serif] italic text-[#C9A96E]">Nairon</span>
-				</h1>
+				<img src="/nairon-logo.png" alt="Nairon" className="h-[80px] w-auto" />
 				<p className="font-[Urbanist,sans-serif] text-[48px] font-normal tracking-[-0.48px] mt-6 text-[#E8E4DE] leading-[1.2]">
-					Find AI-native engineers{" "}
+					We find AI-native engineers{" "}
 					<span className="font-[Instrument_Serif,serif] italic text-[#C9A96E]">who ship</span>
 				</p>
 				<p className="text-[22px] mt-10 text-[#A39E96] max-w-[800px] leading-[1.7]">
-					Nairon is a data-driven technical recruiting agency. We use proprietary benchmarks to match companies with AI-native engineers who build.
+					We build proprietary tooling and benchmarking systems to identify, train & place the next generation of AI-Native Engineers.
 				</p>
-				<div className="flex items-center gap-6 mt-14">
-					<div className="bg-[#C9A96E] text-[#0C0C0C] px-8 py-3 rounded-full text-[16px] font-medium">
-						Hire engineers
-					</div>
-					<div className="border border-white/[0.15] text-[#E8E4DE] px-8 py-3 rounded-full text-[16px] font-medium">
-						I'm a candidate
-					</div>
-				</div>
 				<p className="text-[14px] text-white/[0.2] mt-16 tracking-[0.16em] uppercase">
 					Dubai, UAE &middot; naironai.com
 				</p>
@@ -261,13 +251,13 @@ function SlideContent({ index }: { index: number }) {
 					talent gap
 				</h2>
 				<p className="text-[22px] text-[#A39E96] max-w-[1100px] mb-16 leading-[1.7]">
-					Nairon is a data-driven technical recruiting agency that uses proprietary benchmarks to match companies with AI-native engineers — developers who don't just use AI tools, but build systems where AI is a first-class citizen.
+					Nairon is a data-driven technical recruiting startup that uses proprietary benchmarks to match companies with AI-native engineers — developers who don't just use AI tools, but build systems where AI is a first-class citizen.
 				</p>
 				{/* Stats grid with dividers */}
 				<NotchedGrid cols={4}>
 					{[
-						{ value: "100+", label: "Engineers assessed" },
-						{ value: "NBench", label: "Proprietary benchmark" },
+						{ value: "600+", label: "Engineers assessed" },
+						{ value: "Flux", label: "Proprietary benchmark" },
 						{ value: "UAE", label: "HQ — Global reach" },
 						{ value: "2026", label: "Founded" },
 					].map((stat, i) => (
@@ -292,23 +282,15 @@ function SlideContent({ index }: { index: number }) {
 					What we{" "}
 					<span className="font-[Instrument_Serif,serif] italic text-[#C9A96E]">offer</span>
 				</h2>
-				<div className="grid grid-cols-2 gap-6">
+				<div className="grid grid-cols-2 gap-6 mb-14">
 					{[
 						{
 							title: "Technical Recruiting",
 							desc: "End-to-end hiring pipeline for AI-native engineers. From sourcing to placement, powered by data — not gut feel.",
 						},
 						{
-							title: "NBench Assessments",
-							desc: "Proprietary benchmarks measuring agent-first thinking, eval discipline, and token efficiency — the signals that matter.",
-						},
-						{
 							title: "Flux — AI Workflow Tool",
 							desc: "Open-source structured scoping, execution, and review plugin for AI-augmented development. 30+ curated tools.",
-						},
-						{
-							title: "Programs",
-							desc: "Residence & Apprenticeship programs that train and certify engineers in AI-native development practices.",
 						},
 					].map((item) => (
 						<div key={item.title} className="relative border border-white/[0.06] rounded-[16px] p-10">
@@ -320,6 +302,43 @@ function SlideContent({ index }: { index: number }) {
 						</div>
 					))}
 				</div>
+				<SectionLabel text="How It Works" />
+				<NotchedGrid cols={4}>
+					{[
+						{
+							step: "01",
+							title: "Source",
+							desc: "AI agents like OpenClaw scan and identify qualified candidates from global talent pools",
+						},
+						{
+							step: "02",
+							title: "Benchmark",
+							desc: "Candidates are scored on AI-nativeness using our proprietary Flux benchmark — not resumes",
+						},
+						{
+							step: "03",
+							title: "Match",
+							desc: "AI-driven matching pairs vetted engineers with open roles based on skills, culture, and fit",
+						},
+						{
+							step: "04",
+							title: "Place",
+							desc: "End-to-end support from interview to onboarding. Data-backed, fast, and precise",
+						},
+					].map((item, i) => (
+						<NotchedCell key={item.step} borderRight={i < 3}>
+							<div className="p-8">
+								<div className="font-[Urbanist,sans-serif] text-[42px] font-normal tracking-[-1px] text-[#C9A96E] mb-5 tabular-nums">
+									{item.step}
+								</div>
+								<h3 className="font-[Urbanist,sans-serif] text-[22px] font-normal tracking-[-0.48px] text-[#E8E4DE] mb-3">
+									{item.title}
+								</h3>
+								<p className="text-[16px] text-[#A39E96] leading-[1.6]">{item.desc}</p>
+							</div>
+						</NotchedCell>
+					))}
+				</NotchedGrid>
 			</div>
 		</SlideFrame>,
 
@@ -445,18 +464,12 @@ function SlideContent({ index }: { index: number }) {
 							Multiple revenue streams built around data-driven recruiting and AI-native assessment.
 						</p>
 						<div className="space-y-8">
-							{[
-								{ title: "Placement fees", desc: "Success-based fees for permanent and contract AI-native engineer placements" },
-								{ title: "Assessment services", desc: "Enterprise licensing of NBench for internal team evaluation" },
-								{ title: "Programs & training", desc: "Residence and apprenticeship program enrollment fees" },
-							].map((item) => (
-								<div key={item.title} className="border-l-[2px] border-[#C9A96E]/30 pl-6">
-									<h3 className="font-[Urbanist,sans-serif] text-[22px] font-normal text-[#E8E4DE] mb-2">
-										{item.title}
-									</h3>
-									<p className="text-[16px] text-[#A39E96] leading-[1.6]">{item.desc}</p>
-								</div>
-							))}
+							<div className="border-l-[2px] border-[#C9A96E]/30 pl-6">
+								<h3 className="font-[Urbanist,sans-serif] text-[22px] font-normal text-[#E8E4DE] mb-2">
+									Placement fees
+								</h3>
+								<p className="text-[16px] text-[#A39E96] leading-[1.6]">15% – 20% of annual comp</p>
+							</div>
 						</div>
 					</div>
 					{/* Divider */}
@@ -466,9 +479,9 @@ function SlideContent({ index }: { index: number }) {
 						<SectionLabel text="Growth Targets" />
 						<div className="space-y-0">
 							{[
-								{ year: "Year 1", desc: "Establish talent pipeline, 50+ engineer placements, Flux adoption among 1,000+ developers" },
+								{ year: "Year 1", desc: "Establish talent pipeline, 10+ engineer placements, Flux adoption among 200+ developers" },
 								{ year: "Year 2", desc: "Scale placement volume, enterprise assessment contracts, regional expansion" },
-								{ year: "Year 3", desc: "Platform monetization, international presence, 500+ annual placements" },
+								{ year: "Year 3", desc: "Platform monetization, international presence, 100+ annual placements" },
 							].map((item, i) => (
 								<div
 									key={item.year}
@@ -504,7 +517,7 @@ function SlideContent({ index }: { index: number }) {
 						</div>
 						<div className="space-y-6">
 							{[
-								["3 founding members", "CEO, CTO, and Founding AI Engineer"],
+								["2 founding members", "CEO & AI Engineer"],
 								["AI-native operations", "Lean team amplified by AI tooling and automation"],
 								["Full-stack capability", "Product, engineering, business development covered in-house"],
 							].map(([title, desc]) => (
@@ -528,7 +541,7 @@ function SlideContent({ index }: { index: number }) {
 								["Q2 2026", "Talent acquisition specialist, community manager"],
 								["Q3 2026", "Senior recruiter, marketing lead"],
 								["Q4 2026", "Enterprise sales, additional engineers"],
-								["2027", "Scale to 12–15 team members across functions"],
+								["2027", "Scale to 6–9 team members across functions"],
 							].map(([period, desc], i) => (
 								<div
 									key={period}
@@ -554,19 +567,29 @@ function SlideContent({ index }: { index: number }) {
 					Built by{" "}
 					<span className="font-[Instrument_Serif,serif] italic text-[#C9A96E]">builders</span>
 				</h2>
-				<NotchedGrid cols={1}>
-					<NotchedCell>
+				<NotchedGrid cols={2}>
+					<NotchedCell borderRight>
 						<div className="p-12">
-							<div className="w-[56px] h-[56px] rounded-full bg-gradient-to-br from-[#C9A96E] to-[#A67A0D] mb-8 flex items-center justify-center font-[Urbanist,sans-serif] text-[20px] font-medium text-[#0C0C0C]">
-								OR
-							</div>
+							<img src="/assets/framer/Xse9UYp1XHtcxoFdIq5x3WbveBc.webp" alt="Obaid Ur-Rahmaan" className="w-[56px] h-[56px] rounded-full object-cover mb-8" />
 							<div className="font-[Urbanist,sans-serif] text-[28px] font-normal tracking-[-0.48px] text-[#E8E4DE] mb-2">
 								Obaid Ur-Rahmaan
 							</div>
 							<div className="text-[15px] text-[#C9A96E] mb-6 tracking-[0.04em]">
-								CEO
+								Founder & CEO
 							</div>
 							<p className="text-[17px] text-[#A39E96] leading-[1.6]">Technical leadership across the full stack. Architecting Flux, NBench, and the Nairon platform.</p>
+						</div>
+					</NotchedCell>
+					<NotchedCell>
+						<div className="p-12">
+							<img src="/abdi.jpg" alt="Abdi" className="w-[56px] h-[56px] rounded-full object-cover mb-8" />
+							<div className="font-[Urbanist,sans-serif] text-[28px] font-normal tracking-[-0.48px] text-[#E8E4DE] mb-2">
+								Abdi
+							</div>
+							<div className="text-[15px] text-[#C9A96E] mb-6 tracking-[0.04em]">
+								AI Engineer
+							</div>
+							<p className="text-[17px] text-[#A39E96] leading-[1.6]">AI-native engineer building the core platform, assessment tooling, and automation infrastructure.</p>
 						</div>
 					</NotchedCell>
 				</NotchedGrid>
@@ -596,7 +619,7 @@ function SlideContent({ index }: { index: number }) {
 						{
 							num: "03",
 							title: "Licensing & legal",
-							desc: "Business licensing support to operate as a recruiting agency in the UAE market",
+							desc: "Business licensing support to operate as a recruiting startup in the UAE market",
 						},
 						{
 							num: "04",
@@ -624,63 +647,8 @@ function SlideContent({ index }: { index: number }) {
 			</div>
 		</SlideFrame>,
 
-		/* ── 10. Additional Details ── */
-		<SlideFrame key="10" num="10">
-			<div className="w-full h-full flex flex-col justify-center px-[120px] py-[100px]">
-				<div className="grid grid-cols-[1fr_1px_1fr] gap-0 mb-14">
-					<div className="pr-16">
-						<SectionLabel text="The Ecosystem" />
-						<h2 className="font-[Urbanist,sans-serif] text-[48px] font-normal tracking-[-0.48px] leading-[1.15] text-[#E8E4DE]">
-							Backed by{" "}
-							<span className="font-[Instrument_Serif,serif] italic text-[#C9A96E]">Flux</span>{" "}
-							data
-						</h2>
-					</div>
-					<GridDivider />
-					<div className="pl-16 flex items-center">
-						<p className="text-[18px] text-[#A39E96] leading-[1.7]">
-							Our proprietary AI-nativeness benchmark scores every candidate on architecture, eval discipline, token spend, and tooling freshness.
-						</p>
-					</div>
-				</div>
-				{/* Stats + ecosystem grid */}
-				<NotchedGrid cols={4}>
-					{[
-						{ value: "2,000+", label: "Engineers in our network" },
-						{ value: "94%", label: "Placement success rate" },
-						{ value: "30", label: "Average days to placement" },
-						{ value: "4.8", label: "Average Flux score" },
-					].map((stat, i) => (
-						<NotchedCell key={stat.label} borderRight={i < 3} borderBottom={true}>
-							<div className="text-center py-12 px-8">
-								<div className="font-[Urbanist,sans-serif] text-[42px] font-normal tracking-[-1px] text-[#C9A96E] tabular-nums mb-3">
-									{stat.value}
-								</div>
-								<p className="text-[#A39E96] text-[14px] leading-snug">{stat.label}</p>
-							</div>
-						</NotchedCell>
-					))}
-					{[
-						{ title: "Flux", desc: "Open-source AI workflow plugin. 30+ tools, 5 scoring dimensions." },
-						{ title: "Universe", desc: "Engineer profiles, benchmark scores, and matching platform." },
-						{ title: "NBench", desc: "Proprietary assessment for AI-native capabilities." },
-						{ title: "Community", desc: "Active Slack, blog, podcast, and events network." },
-					].map((item, i) => (
-						<NotchedCell key={item.title} borderRight={i < 3}>
-							<div className="p-8">
-								<h3 className="font-[Urbanist,sans-serif] text-[20px] font-normal text-[#E8E4DE] mb-2">
-									{item.title}
-								</h3>
-								<p className="text-[15px] text-[#A39E96] leading-[1.5]">{item.desc}</p>
-							</div>
-						</NotchedCell>
-					))}
-				</NotchedGrid>
-			</div>
-		</SlideFrame>,
-
-		/* ── 11. Contact Details ── */
-		<SlideFrame key="11">
+		/* ── 10. Contact Details ── */
+		<SlideFrame key="10">
 			<div className="w-full h-full flex flex-col items-center justify-center text-center px-[200px]">
 				<h1 className="font-[Urbanist,sans-serif] text-[72px] font-normal tracking-[-0.48px] leading-[1.15] text-[#E8E4DE] mb-2">
 					Let's{" "}
@@ -689,8 +657,8 @@ function SlideContent({ index }: { index: number }) {
 				<div className="w-[60px] h-[2px] bg-[#C9A96E]/40 mt-8 mb-12 mx-auto" />
 				<NotchedGrid cols={3} className="w-full max-w-[1200px] mb-12">
 					{[
-						{ label: "Email", value: "info@naironai.com" },
-						{ label: "Phone", value: "+971 58 588 9750" },
+						{ label: "Email", value: "obaid@naironai.com" },
+						{ label: "Phone", value: "+971 58 894 1635" },
 						{ label: "Web", value: "naironai.com" },
 					].map((item, i) => (
 						<NotchedCell key={item.label} borderRight={i < 2}>
