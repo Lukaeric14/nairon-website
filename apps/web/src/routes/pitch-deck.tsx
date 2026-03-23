@@ -267,7 +267,7 @@ function SlideContent({ index }: { index: number }) {
 				<NotchedGrid cols={4}>
 					{[
 						{ value: "100+", label: "Engineers assessed" },
-						{ value: "NBench", label: "Proprietary benchmark" },
+						{ value: "Flux", label: "AI workflow tool" },
 						{ value: "UAE", label: "HQ — Global reach" },
 						{ value: "2026", label: "Founded" },
 					].map((stat, i) => (
@@ -299,8 +299,8 @@ function SlideContent({ index }: { index: number }) {
 							desc: "End-to-end hiring pipeline for AI-native engineers. From sourcing to placement, powered by data — not gut feel.",
 						},
 						{
-							title: "NBench Assessments",
-							desc: "Proprietary benchmarks measuring agent-first thinking, eval discipline, and token efficiency — the signals that matter.",
+							title: "Technical Assessments",
+							desc: "Measuring agent-first thinking, eval discipline, and token efficiency — the signals that matter.",
 						},
 						{
 							title: "Flux — AI Workflow Tool",
@@ -447,7 +447,7 @@ function SlideContent({ index }: { index: number }) {
 						<div className="space-y-8">
 							{[
 								{ title: "Placement fees", desc: "Success-based fees for permanent and contract AI-native engineer placements" },
-								{ title: "Assessment services", desc: "Enterprise licensing of NBench for internal team evaluation" },
+								{ title: "Assessment services", desc: "Enterprise licensing of assessments for internal team evaluation" },
 								{ title: "Programs & training", desc: "Residence and apprenticeship program enrollment fees" },
 							].map((item) => (
 								<div key={item.title} className="border-l-[2px] border-[#C9A96E]/30 pl-6">
@@ -566,7 +566,7 @@ function SlideContent({ index }: { index: number }) {
 							<div className="text-[15px] text-[#C9A96E] mb-6 tracking-[0.04em]">
 								CEO
 							</div>
-							<p className="text-[17px] text-[#A39E96] leading-[1.6]">Technical leadership across the full stack. Architecting Flux, NBench, and the Nairon platform.</p>
+							<p className="text-[17px] text-[#A39E96] leading-[1.6]">Technical leadership across the full stack. Architecting Flux and the Nairon platform.</p>
 						</div>
 					</NotchedCell>
 				</NotchedGrid>
@@ -663,7 +663,7 @@ function SlideContent({ index }: { index: number }) {
 					{[
 						{ title: "Flux", desc: "Open-source AI workflow plugin. 30+ tools, 5 scoring dimensions." },
 						{ title: "Universe", desc: "Engineer profiles, benchmark scores, and matching platform." },
-						{ title: "NBench", desc: "Proprietary assessment for AI-native capabilities." },
+						{ title: "Assessments", desc: "Technical evaluation for AI-native capabilities." },
 						{ title: "Community", desc: "Active Slack, blog, podcast, and events network." },
 					].map((item, i) => (
 						<NotchedCell key={item.title} borderRight={i < 3}>
@@ -703,16 +703,16 @@ function SlideContent({ index }: { index: number }) {
 				</NotchedGrid>
 				<div className="flex gap-12 justify-center">
 					{[
-						["LinkedIn", "/company/nairon-ai"],
-						["X", "@nairon__ai"],
-						["GitHub", "Nairon-AI"],
-					].map(([platform, handle]) => (
-						<div key={platform} className="text-center">
+						["LinkedIn", "/company/nairon-ai", "https://www.linkedin.com/company/nairon-ai/"],
+						["X", "@nairon__ai", "https://x.com/nairon__ai"],
+						["GitHub", "Nairon-AI", "https://github.com/Nairon-AI/"],
+					].map(([platform, handle, url]) => (
+						<a key={platform} href={url} target="_blank" rel="noopener noreferrer" className="text-center group">
 							<p className="text-[#A39E96] text-[12px] uppercase tracking-[0.16em] mb-2">
 								{platform}
 							</p>
-							<p className="text-[18px] text-[#E8E4DE]/60">{handle}</p>
-						</div>
+							<p className="text-[18px] text-[#E8E4DE]/60 group-hover:text-[#E8E4DE] transition-colors">{handle}</p>
+						</a>
 					))}
 				</div>
 				<p className="text-[13px] text-white/[0.15] mt-16 tracking-[0.16em] uppercase">
