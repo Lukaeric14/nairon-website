@@ -30,8 +30,8 @@ const tools: {
 
 const founders = [
 	{
-		name: "Obaid Ur-Rehman",
-		title: "Founder & CTO",
+		name: "Obaid Ur-Rahmaan",
+		title: "Founder / CEO",
 		image: "/assets/framer/Xse9UYp1XHtcxoFdIq5x3WbveBc.webp",
 	},
 	{
