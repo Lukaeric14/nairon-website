@@ -8,7 +8,7 @@ export const Route = createFileRoute("/pitch-deck")({
 		seoHead({
 			title: "Pitch Deck — Nairon",
 			description:
-				"Nairon pitch deck. Data-driven technical recruiting agency specializing in AI-native engineering talent.",
+				"Nairon pitch deck. Data-driven technical recruiting startup specializing in AI-native engineering talent.",
 			path: "/pitch-deck",
 		}),
 });
@@ -231,11 +231,11 @@ function SlideContent({ index }: { index: number }) {
 					<span className="font-[Instrument_Serif,serif] italic text-[#C9A96E]">Nairon</span>
 				</h1>
 				<p className="font-[Urbanist,sans-serif] text-[48px] font-normal tracking-[-0.48px] mt-6 text-[#E8E4DE] leading-[1.2]">
-					Find AI-native engineers{" "}
+					We find AI-native engineers{" "}
 					<span className="font-[Instrument_Serif,serif] italic text-[#C9A96E]">who ship</span>
 				</p>
 				<p className="text-[22px] mt-10 text-[#A39E96] max-w-[800px] leading-[1.7]">
-					Nairon is a data-driven technical recruiting agency. We use proprietary benchmarks to match companies with AI-native engineers who build.
+					Nairon is a data-driven technical recruiting startup. We use proprietary benchmarks to match companies with AI-native engineers.
 				</p>
 				<div className="flex items-center gap-6 mt-14">
 					<div className="bg-[#C9A96E] text-[#0C0C0C] px-8 py-3 rounded-full text-[16px] font-medium">
@@ -261,13 +261,13 @@ function SlideContent({ index }: { index: number }) {
 					talent gap
 				</h2>
 				<p className="text-[22px] text-[#A39E96] max-w-[1100px] mb-16 leading-[1.7]">
-					Nairon is a data-driven technical recruiting agency that uses proprietary benchmarks to match companies with AI-native engineers — developers who don't just use AI tools, but build systems where AI is a first-class citizen.
+					Developers who don't just use AI tools, but build systems where AI is a first-class citizen.
 				</p>
 				{/* Stats grid with dividers */}
 				<NotchedGrid cols={4}>
 					{[
 						{ value: "100+", label: "Engineers assessed" },
-						{ value: "NBench", label: "Proprietary benchmark" },
+						{ value: "Flux", label: "AI workflow tool" },
 						{ value: "UAE", label: "HQ — Global reach" },
 						{ value: "2026", label: "Founded" },
 					].map((stat, i) => (
@@ -296,19 +296,11 @@ function SlideContent({ index }: { index: number }) {
 					{[
 						{
 							title: "Technical Recruiting",
-							desc: "End-to-end hiring pipeline for AI-native engineers. From sourcing to placement, powered by data — not gut feel.",
+							desc: "End-to-end hiring pipeline for AI-native engineers. From sourcing to placement, powered by a scalable combination of data and a human-gated screening process.",
 						},
 						{
-							title: "NBench Assessments",
-							desc: "Proprietary benchmarks measuring agent-first thinking, eval discipline, and token efficiency — the signals that matter.",
-						},
-						{
-							title: "Flux — AI Workflow Tool",
-							desc: "Open-source structured scoping, execution, and review plugin for AI-augmented development. 30+ curated tools.",
-						},
-						{
-							title: "Programs",
-							desc: "Residence & Apprenticeship programs that train and certify engineers in AI-native development practices.",
+							title: "Technical Assessments",
+							desc: "A next-generation interview process designed for the AI era. Traditional coding interviews are dead — we measure what actually matters.",
 						},
 					].map((item) => (
 						<div key={item.title} className="relative border border-white/[0.06] rounded-[16px] p-10">
@@ -447,7 +439,7 @@ function SlideContent({ index }: { index: number }) {
 						<div className="space-y-8">
 							{[
 								{ title: "Placement fees", desc: "Success-based fees for permanent and contract AI-native engineer placements" },
-								{ title: "Assessment services", desc: "Enterprise licensing of NBench for internal team evaluation" },
+								{ title: "Assessment services", desc: "Enterprise licensing of assessments for internal team evaluation" },
 								{ title: "Programs & training", desc: "Residence and apprenticeship program enrollment fees" },
 							].map((item) => (
 								<div key={item.title} className="border-l-[2px] border-[#C9A96E]/30 pl-6">
@@ -554,19 +546,29 @@ function SlideContent({ index }: { index: number }) {
 					Built by{" "}
 					<span className="font-[Instrument_Serif,serif] italic text-[#C9A96E]">builders</span>
 				</h2>
-				<NotchedGrid cols={1}>
+				<NotchedGrid cols={2}>
 					<NotchedCell>
 						<div className="p-12">
-							<div className="w-[56px] h-[56px] rounded-full bg-gradient-to-br from-[#C9A96E] to-[#A67A0D] mb-8 flex items-center justify-center font-[Urbanist,sans-serif] text-[20px] font-medium text-[#0C0C0C]">
-								OR
-							</div>
+							<img src="/assets/framer/Xse9UYp1XHtcxoFdIq5x3WbveBc.webp" alt="Obaid Ur-Rahmaan" className="w-[56px] h-[56px] rounded-full object-cover object-top mb-8" />
 							<div className="font-[Urbanist,sans-serif] text-[28px] font-normal tracking-[-0.48px] text-[#E8E4DE] mb-2">
 								Obaid Ur-Rahmaan
 							</div>
 							<div className="text-[15px] text-[#C9A96E] mb-6 tracking-[0.04em]">
-								CEO
+								Founder / CEO
 							</div>
-							<p className="text-[17px] text-[#A39E96] leading-[1.6]">Technical leadership across the full stack. Architecting Flux, NBench, and the Nairon platform.</p>
+							<p className="text-[17px] text-[#A39E96] leading-[1.6]">Ex-Staff Engineer at Big Tech. Has worked for and built startups. Architecting Flux and the Nairon platform.</p>
+						</div>
+					</NotchedCell>
+					<NotchedCell>
+						<div className="p-12">
+							<img src="/assets/framer/abdulrahman-yahya.jpeg" alt="Abdulrahman Yahya" className="w-[56px] h-[56px] rounded-full object-cover object-top mb-8" />
+							<div className="font-[Urbanist,sans-serif] text-[28px] font-normal tracking-[-0.48px] text-[#E8E4DE] mb-2">
+								Abdulrahman Yahya
+							</div>
+							<div className="text-[15px] text-[#C9A96E] mb-6 tracking-[0.04em]">
+								Founding Engineer
+							</div>
+							<p className="text-[17px] text-[#A39E96] leading-[1.6]">AI-native engineer with experience founding and scaling ventures. Driving growth and operations at Nairon.</p>
 						</div>
 					</NotchedCell>
 				</NotchedGrid>
@@ -596,7 +598,7 @@ function SlideContent({ index }: { index: number }) {
 						{
 							num: "03",
 							title: "Licensing & legal",
-							desc: "Business licensing support to operate as a recruiting agency in the UAE market",
+							desc: "Business licensing support to operate as a recruiting startup in the UAE market",
 						},
 						{
 							num: "04",
@@ -663,7 +665,7 @@ function SlideContent({ index }: { index: number }) {
 					{[
 						{ title: "Flux", desc: "Open-source AI workflow plugin. 30+ tools, 5 scoring dimensions." },
 						{ title: "Universe", desc: "Engineer profiles, benchmark scores, and matching platform." },
-						{ title: "NBench", desc: "Proprietary assessment for AI-native capabilities." },
+						{ title: "Assessments", desc: "Technical evaluation for AI-native capabilities." },
 						{ title: "Community", desc: "Active Slack, blog, podcast, and events network." },
 					].map((item, i) => (
 						<NotchedCell key={item.title} borderRight={i < 3}>
@@ -703,16 +705,16 @@ function SlideContent({ index }: { index: number }) {
 				</NotchedGrid>
 				<div className="flex gap-12 justify-center">
 					{[
-						["LinkedIn", "/company/nairon-ai"],
-						["X", "@nairon__ai"],
-						["GitHub", "Nairon-AI"],
-					].map(([platform, handle]) => (
-						<div key={platform} className="text-center">
+						["LinkedIn", "/company/nairon-ai", "https://www.linkedin.com/company/nairon-ai/"],
+						["X", "@nairon__ai", "https://x.com/nairon__ai"],
+						["GitHub", "Nairon-AI", "https://github.com/Nairon-AI/"],
+					].map(([platform, handle, url]) => (
+						<a key={platform} href={url} target="_blank" rel="noopener noreferrer" className="text-center group">
 							<p className="text-[#A39E96] text-[12px] uppercase tracking-[0.16em] mb-2">
 								{platform}
 							</p>
-							<p className="text-[18px] text-[#E8E4DE]/60">{handle}</p>
-						</div>
+							<p className="text-[18px] text-[#E8E4DE]/60 group-hover:text-[#E8E4DE] transition-colors">{handle}</p>
+						</a>
 					))}
 				</div>
 				<p className="text-[13px] text-white/[0.15] mt-16 tracking-[0.16em] uppercase">
