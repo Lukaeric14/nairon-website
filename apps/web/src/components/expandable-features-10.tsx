@@ -18,8 +18,8 @@ const features = [
   {
     title: "Recommendations Engine",
     description:
-      "Nightly jobs scrape X & Gitub for emerging tools and workflow patterns worth adopting.",
-    callout: "Friction/Optimization signals from the best AI-native engineers on the planet (on X & GitHub) → so you can stop doom scrolling and actually sleep at night.",
+      "Curates friction signals from X & GitHub, detects your infrastructure, and autonomously builds reusable skills from patterns it observes across sessions.",
+    callout: "Friction signals from the best AI-native engineers on the planet + autonomous skill generation → your harness improves itself while you sleep.",
   },
   {
     title: "Observability Layer",

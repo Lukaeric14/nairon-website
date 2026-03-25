@@ -52,7 +52,7 @@ export default function HeroSection() {
                 rel="noopener noreferrer"
                 className="mb-4 sm:mb-5 inline-flex items-center gap-1.5 rounded-full bg-[#C9A96E]/10 px-3 py-1 text-xs font-medium text-[#C9A96E] ring-1 ring-inset ring-[#C9A96E]/20 transition-colors hover:bg-[#C9A96E]/15"
               >
-                v2.26.1
+                v2.29
               </a>
 
               {/* Platform pills */}
