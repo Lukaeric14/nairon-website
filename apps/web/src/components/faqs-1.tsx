@@ -90,7 +90,7 @@ const faqItems: {
         id: "item-3",
         question: "What does /flux:improve actually do?",
         answer:
-          "It audits your real agent harness: recent conversation history, current tools, MCP servers, skills, project structure, and what you are building. It then fetches from the Flux recommendation engine to find the best tools, MCP servers, skills, and agentic strategies to improve your harness. This means Flux improves itself with you over time — the more you work with it, the better your harness naturally becomes.",
+          "It audits your real agent harness: recent conversation history, current tools, MCP servers, skills, project structure, and infrastructure. It detects your stack (Vercel, AWS, etc.) and recommends relevant MCPs and CLIs. It can also autonomously build reusable skills from patterns it observes across sessions. The more you work with Flux, the better your harness naturally becomes.",
       },
       {
         id: "item-3b",

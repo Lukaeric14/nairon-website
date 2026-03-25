@@ -30,7 +30,7 @@ export const Route = createFileRoute("/flux")({
 		const base = seoHead({
 			title: "Flux — Find the gaps in your AI workflow | Nairon AI",
 			description:
-				"Open-source Claude Code workflow layer with a deterministic state engine. Flux keeps features, bugs, and refactors aligned through scoping progress, implementation state, and review routing.",
+				"Open-source self-improving harness for Claude Code with a deterministic state engine. Structured scoping, cross-model review, Brain Vault memory, security suite, and autonomous skill building.",
 			path: "/flux",
 		})
 		return {

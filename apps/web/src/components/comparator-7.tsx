@@ -47,16 +47,24 @@ const features: Feature[] = [
         },
     },
     {
-        name: 'AFK mode (throw the epic at it)',
-        description: 'Queue an entire epic and walk away. Same re-anchoring and evidence guarantees.',
+        name: 'Ralph mode (fully autonomous)',
+        description: 'Run an entire epic unattended — all tasks, reviews, and reflections without stopping.',
         plans: {
             claude: false,
             flux: true,
         },
     },
     {
-        name: 'Zero context drift',
-        description: 'Persistent memory across sessions. Intent, decisions, and constraints survive compaction.',
+        name: 'Brain Vault (persistent memory)',
+        description: 'Obsidian-compatible knowledge base in .flux/brain/. Pitfalls, principles, conventions, and decisions survive across sessions.',
+        plans: {
+            claude: false,
+            flux: true,
+        },
+    },
+    {
+        name: 'Security suite (STRIDE + scanning)',
+        description: 'Built-in threat modeling, vulnerability scanning, security review, and PoC validation.',
         plans: {
             claude: false,
             flux: true,
@@ -104,7 +112,7 @@ export default function ComparatorSection() {
                     <div className="max-w-lg max-md:px-6">
                         <div className="text-balance lg:max-w-xs">
                             <h2 className="text-[28px] leading-[32px] md:text-[36px] md:leading-[40px] lg:text-[44px] lg:leading-[48px] font-normal tracking-[-1px] text-[#E8E4DE]">Claude Code vs Claude Code + <span className="font-serif italic text-[#C9A96E]">Flux</span></h2>
-                            <p className="text-[#A39E96] mt-4 text-balance lg:mt-6">Flux keeps Claude Code in the same dev flow, but adds process intelligence, scoring, and recommendation loops.</p>
+                            <p className="text-[#A39E96] mt-4 text-balance lg:mt-6">Flux keeps Claude Code in the same dev flow, but adds process intelligence, persistent memory, security scanning, and self-improving recommendations.</p>
                         </div>
                     </div>
 

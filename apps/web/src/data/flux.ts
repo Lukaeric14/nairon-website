@@ -77,11 +77,11 @@ export const FLUX_MODELS = {
 	badge: "Works everywhere you code",
 	title: "One plugin. Every AI coding tool.",
 	description:
-		"Flux runs inside Claude Code, Factory Droid, and OpenAI Codex. Same workflow intelligence across every agent you use.",
+		"Flux runs inside Claude Code with first-class support, and OpenCode experimentally. Same workflow intelligence across every agent you use.",
 	cta: "View supported platforms",
 	placeholder: "Select your agent...",
 	rows: [
-		{ name: "Claude Sonnet 4.5", role: "Agent", kind: "recommended" },
+		{ name: "Claude Sonnet 4.6", role: "Agent", kind: "recommended" },
 		{ name: "OpenCode", role: "Agent", kind: "fast" },
 		{ name: "GPT-5", role: "Agent", kind: "reasoning" },
 		{ name: "Gemini 2.5 Flash", role: "Agent", kind: "multimodal" },
@@ -165,8 +165,8 @@ export const FLUX_CAPABILITIES = {
 			tag: "Analysis",
 		},
 		{
-			title: "Curated recommendations",
-			copy: "30+ battle-tested tools: MCPs, skills, CLI utilities. Community-driven, friction-mapped, agent-installed.",
+			title: "Self-improving recommendations",
+			copy: "Detects your infrastructure, maps friction patterns to fixes, and autonomously builds reusable skills from what it observes.",
 			tag: "Improvements",
 		},
 	],
