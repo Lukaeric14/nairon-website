@@ -6,34 +6,40 @@ const features = [
   {
     title: "Deterministic state",
     description:
-      "Flux tracks the active feature, bug, or refactor in .flux so Claude can realign before scoping, during implementation, and when sessions resume.",
+      "Flux keeps repo-local workflow state in .flux so Codex can re-anchor before scoping, during implementation, and when sessions resume.",
     icon: <Anchor className="stroke-foreground fill-violet-500/15" />,
   },
   {
     title: "Evidence-based",
     description:
-      "Decisions are grounded in facts: test results, type checks, build outputs. Nothing merges without proof it works.",
+      "Quality is enforced through facts: tests, type checks, build outputs, and review findings before anything ships.",
     icon: <Eye className="stroke-foreground fill-blue-500/15" />,
   },
   {
     title: "Adversarial Review",
     description:
-      "One model can't do it all. Multiple models critique each other's work. Catch blind spots, challenge assumptions, ship with confidence.",
+      "Codex stays the primary driver while secondary reviewers challenge assumptions, catch blind spots, and harden the final result.",
     icon: <Users className="stroke-foreground fill-emerald-500/15" />,
   },
 ];
 
 const platforms = [
   {
+    name: "Codex CLI",
+    shortName: "Codex",
+    status: "primary",
+    icon: "/icons/codex.png",
+  },
+  {
     name: "Claude Code",
     shortName: "Claude",
-    status: "primary",
+    status: "secondary",
     icon: "/icons/claude-code.png",
   },
   {
     name: "OpenCode",
     shortName: "OpenCode",
-    status: "beta",
+    status: "experimental",
     icon: "/icons/opencode.png",
   },
 ];
@@ -52,7 +58,7 @@ export default function HeroSection() {
                 rel="noopener noreferrer"
                 className="mb-4 sm:mb-5 inline-flex items-center gap-1.5 rounded-full bg-[#C9A96E]/10 px-3 py-1 text-xs font-medium text-[#C9A96E] ring-1 ring-inset ring-[#C9A96E]/20 transition-colors hover:bg-[#C9A96E]/15"
               >
-                v2.31.0
+                Latest release: v2.37.0
               </a>
 
               {/* Platform pills */}
@@ -63,7 +69,9 @@ export default function HeroSection() {
                     className={`inline-flex items-center gap-1 sm:gap-1.5 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium ring-1 ring-inset ${
                       platform.status === "primary"
                         ? "bg-violet-500/10 text-violet-400 ring-violet-500/20"
-                        : platform.status === "beta"
+                        : platform.status === "secondary"
+                          ? "bg-blue-500/10 text-blue-400 ring-blue-500/20"
+                        : platform.status === "experimental"
                           ? "bg-amber-500/10 text-amber-400 ring-amber-500/20"
                           : "bg-zinc-500/10 text-zinc-400 ring-zinc-500/20"
                     }`}
@@ -77,7 +85,12 @@ export default function HeroSection() {
                       {platform.shortName}
                     </span>
                     <span className="sm:hidden">{platform.shortName}</span>
-                    {platform.status === "beta" && (
+                    {platform.status === "secondary" && (
+                      <span className="ml-0.5 sm:ml-1 rounded bg-blue-500/20 px-1 py-0.5 text-[8px] sm:text-[10px] uppercase tracking-wide">
+                        opt
+                      </span>
+                    )}
+                    {platform.status === "experimental" && (
                       <span className="ml-0.5 sm:ml-1 rounded bg-amber-500/20 px-1 py-0.5 text-[8px] sm:text-[10px] uppercase tracking-wide">
                         exp
                       </span>
@@ -87,16 +100,16 @@ export default function HeroSection() {
               </div>
 
               <h1 className="mx-auto text-balance text-[32px] leading-[36px] sm:text-[40px] sm:leading-[44px] md:text-[56px] md:leading-[60px] lg:text-[72px] lg:leading-[76px] font-normal tracking-[-1.5px] md:tracking-[-2.4px] text-[#E8E4DE]">
-                Stay{" "}
+                Build software{" "}
                 <span className="font-serif italic text-[#C9A96E]">
-                  AI-native
+                  reliably
                 </span>
-                , no matter how fast the industry evolves.
+                .
               </h1>
 
               <div className="mx-auto mb-8 sm:mb-12 mt-6 max-w-2xl">
                 <p className="text-lg md:text-xl text-[#A39E96] leading-relaxed mb-6 sm:mb-8 px-2 sm:px-0">
-                  Flux is the missing (self-improving) harness for Claude Code. Build Software{" "}
+                  Flux is the missing (self-improving) harness for Codex CLI. Build software{" "}
                   <span className="font-serif italic text-[#C9A96E]">
                     deterministically
                   </span>
@@ -125,7 +138,7 @@ export default function HeroSection() {
                         ?.scrollIntoView({ behavior: "smooth" })
                     }
                   >
-                    Install
+                    Install Flux
                   </Button>
                 </div>
               </div>

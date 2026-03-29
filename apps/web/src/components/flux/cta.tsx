@@ -32,7 +32,7 @@ export function FluxCTA() {
         </h2>
 
         <p className="text-[#A39E96] mt-6 text-lg max-w-xl mx-auto">
-          Copy this prompt into your current agent session for an autonomous install flow.
+          Copy this prompt into your current agent session. Flux will detect the environment and run the right install flow.
         </p>
 
         {/* Install prompt card */}
@@ -70,25 +70,7 @@ export function FluxCTA() {
 
         {/* Requirements note */}
         <p className="text-[#A39E96] text-sm mt-4">
-          Requires{" "}
-          <a
-            href="https://claude.ai/pro"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#E8E4DE] underline underline-offset-2 hover:text-[#A39E96]"
-          >
-            Claude Pro
-          </a>{" "}
-          and{" "}
-          <a
-            href="https://chatgpt.com/plus"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#E8E4DE] underline underline-offset-2 hover:text-[#A39E96]"
-          >
-            ChatGPT Plus
-          </a>{" "}
-          ($20/mo each) for cross-model review.
+          Bring your own model plans. Codex is the primary driver, and Claude is optional for adversarial review or transcript import workflows.
         </p>
 
         {/* CTAs */}
@@ -123,7 +105,7 @@ export function FluxCTA() {
         {/* Philosophy quote */}
         <div className="mt-16 pt-8 border-t border-white/10">
           <blockquote className="text-muted-foreground italic text-lg">
-            "Stop hoping AI makes you better. Start measuring it."
+            "These aren't model failures. They're process failures."
           </blockquote>
         </div>
       </div>
