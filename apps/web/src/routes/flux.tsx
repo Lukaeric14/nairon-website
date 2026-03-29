@@ -28,9 +28,9 @@ export const Route = createFileRoute("/flux")({
 	component: FluxPage,
 	head: () => {
 		const base = seoHead({
-			title: "Flux — Find the gaps in your AI workflow | Nairon AI",
+			title: "Flux — Build software reliably with Codex CLI | Nairon AI",
 			description:
-				"Open-source self-improving harness for Claude Code with a deterministic state engine. Structured scoping, cross-model review, Brain Vault memory, security suite, and autonomous skill building.",
+				"The missing self-improving harness for Codex CLI. Flux adds deterministic workflow state, evidence-based quality gates, adversarial review, and self-improving recommendations.",
 			path: "/flux",
 		})
 		return {

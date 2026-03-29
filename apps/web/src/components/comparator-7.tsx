@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { TooltipProvider, Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
-const plans = ['claude', 'flux'] as const
+const plans = ['codex', 'flux'] as const
 
 type Plan = (typeof plans)[number]
 
@@ -12,12 +12,12 @@ type Feature = {
 }
 
 const features: Feature[] = [
-    // Features Claude Code already has (checks first)
+    // Features Codex already has (checks first)
     {
         name: 'HITL mode (one task at a time)',
         description: 'Stay deeply involved. Review each task before the next one starts.',
         plans: {
-            claude: true,
+            codex: true,
             flux: true,
         },
     },
@@ -26,7 +26,7 @@ const features: Feature[] = [
         name: 'Re-anchoring at every checkpoint',
         description: 'Agents verify alignment with original intent before, during, and after each task.',
         plans: {
-            claude: false,
+            codex: false,
             flux: true,
         },
     },
@@ -34,7 +34,7 @@ const features: Feature[] = [
         name: 'Evidence-based merge gates',
         description: 'Nothing ships without proof: tests pass, types check, builds succeed.',
         plans: {
-            claude: false,
+            codex: false,
             flux: true,
         },
     },
@@ -42,7 +42,7 @@ const features: Feature[] = [
         name: 'Cross-model review',
         description: 'Multiple models critique each other. Blind spots and assumptions get caught automatically.',
         plans: {
-            claude: false,
+            codex: false,
             flux: true,
         },
     },
@@ -50,7 +50,7 @@ const features: Feature[] = [
         name: 'Ralph mode (fully autonomous)',
         description: 'Run an entire epic unattended — all tasks, reviews, and reflections without stopping.',
         plans: {
-            claude: false,
+            codex: false,
             flux: true,
         },
     },
@@ -58,7 +58,7 @@ const features: Feature[] = [
         name: 'Brain Vault (persistent memory)',
         description: 'Obsidian-compatible knowledge base in .flux/brain/. Pitfalls, principles, conventions, and decisions survive across sessions.',
         plans: {
-            claude: false,
+            codex: false,
             flux: true,
         },
     },
@@ -66,7 +66,7 @@ const features: Feature[] = [
         name: 'Security suite (STRIDE + scanning)',
         description: 'Built-in threat modeling, vulnerability scanning, security review, and PoC validation.',
         plans: {
-            claude: false,
+            codex: false,
             flux: true,
         },
     },
@@ -74,13 +74,13 @@ const features: Feature[] = [
 
 const renderPlanColumn = (plan: Plan) => {
     const header =
-        plan === 'claude' ? (
+        plan === 'codex' ? (
             <div className="sticky top-0 flex h-14 flex-col items-center justify-center gap-1.5 rounded-t-xl px-4 text-center lg:px-6">
-                <span className="text-sm font-semibold">Claude Code</span>
+                <span className="text-sm font-semibold">Codex CLI</span>
             </div>
         ) : (
             <div className="sticky top-0 flex h-14 flex-col items-center justify-center gap-1.5 px-4 pt-2 text-center lg:px-8">
-                <span className="text-sm font-semibold">Claude Code + Flux</span>
+                <span className="text-sm font-semibold">Codex CLI + Flux</span>
             </div>
         )
 
@@ -111,8 +111,8 @@ export default function ComparatorSection() {
                 <div className="grid gap-12 lg:grid-cols-2">
                     <div className="max-w-lg max-md:px-6">
                         <div className="text-balance lg:max-w-xs">
-                            <h2 className="text-[28px] leading-[32px] md:text-[36px] md:leading-[40px] lg:text-[44px] lg:leading-[48px] font-normal tracking-[-1px] text-[#E8E4DE]">Claude Code vs Claude Code + <span className="font-serif italic text-[#C9A96E]">Flux</span></h2>
-                            <p className="text-[#A39E96] mt-4 text-balance lg:mt-6">Flux keeps Claude Code in the same dev flow, but adds process intelligence, persistent memory, security scanning, and self-improving recommendations.</p>
+                            <h2 className="text-[28px] leading-[32px] md:text-[36px] md:leading-[40px] lg:text-[44px] lg:leading-[48px] font-normal tracking-[-1px] text-[#E8E4DE]">Codex CLI vs Codex CLI + <span className="font-serif italic text-[#C9A96E]">Flux</span></h2>
+                            <p className="text-[#A39E96] mt-4 text-balance lg:mt-6">Flux keeps Codex in the same dev flow, but adds deterministic workflow state, evidence-based quality gates, adversarial review, and self-improving recommendations.</p>
                         </div>
                     </div>
 

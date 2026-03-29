@@ -10,22 +10,22 @@ const AUTOPLAY_DURATION = 7000;
 
 const features = [
   {
-    title: "CLI Runtime",
+    title: "Project-local runtime",
     description:
-      "Slash commands guide you through structured workflows, backed by a deterministic state engine in .flux. Flux remembers the active objective, current phase, and next action so scope and implementation stay aligned.",
-    callout: "Your terminal becomes the control plane—structured loops keep you in control while agents execute.",
+      "Flux runs from the project checkout, keeps workflow state in .flux, and routes natural-language requests into scope, work, review, or reflect.",
+    callout: "Repo-local state, instructions, and secure skill installs keep the agent aligned without depending on a global setup.",
   },
   {
     title: "Recommendations Engine",
     description:
-      "Curates friction signals from X & GitHub, detects your infrastructure, and autonomously builds reusable skills from patterns it observes across sessions.",
-    callout: "Friction signals from the best AI-native engineers on the planet + autonomous skill generation → your harness improves itself while you sleep.",
+      "Flux audits your harness, detects repo fit, and recommends MCPs, CLI tools, and secured skills that match the way your team actually works.",
+    callout: "The harness improves over time: better tools, stronger guardrails, and fewer repeated mistakes.",
   },
   {
     title: "Observability Layer",
     description:
-      "Team-wide dashboards show who's improving, where friction clusters, and which workflows produce the best output.",
-    callout: "Engineering leaders get shared visibility—quality metrics, not just velocity numbers.",
+      "Team-wide visibility into capability trends, workflow friction, and which review loops produce the best outcomes is coming next.",
+    callout: "Shared quality signals for engineering leaders, not just velocity theater.",
     comingSoon: true,
   },
 ];
@@ -65,7 +65,7 @@ export default function ExpandableFeatures() {
             <span className="font-serif italic text-[#C9A96E]">Architecture</span>
           </h2>
           <p className="text-[#A39E96] mx-auto mt-3 max-w-lg text-lg">
-            Three connected layers: in-agent runtime, recommendation engine, and
+            Three connected layers: project-local runtime, recommendation engine, and
             enterprise observability.
           </p>
         </div>

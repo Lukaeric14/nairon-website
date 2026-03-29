@@ -64,7 +64,7 @@ const faqItems: {
         id: "item-1",
         question: "Is it free?",
         answer:
-          "Yes - Flux itself is free and open-source because it is a plugin/workflow layer. You still use your own model plans. In practice, the strongest setup is having both a Claude Code plan and a Codex plan: Claude can use Codex for deep implementation review and spin up Codex sub-agents for codebase discovery/research when needed.",
+          "Yes. Flux is free and open source. You still use your own model plans. Codex is the primary implementation path, and Claude is optional as a secondary reviewer for adversarial review, cloud PR autofix, or importing older transcript learnings.",
       },
       {
         id: "item-2",
@@ -90,14 +90,14 @@ const faqItems: {
         id: "item-3",
         question: "What does /flux:improve actually do?",
         answer:
-          "It audits your real agent harness: recent conversation history, current tools, MCP servers, skills, project structure, and infrastructure. It detects your stack (Vercel, AWS, etc.) and recommends relevant MCPs and CLIs. It can also autonomously build reusable skills from patterns it observes across sessions. The more you work with Flux, the better your harness naturally becomes.",
+          "It audits your real agent harness: project structure, current tools, MCP servers, skills, and repo fit. It recommends relevant MCPs, CLI tools, and secured skills for your stack, and it can turn repeated high-value patterns into reusable skills over time.",
       },
       {
         id: "item-3b",
         question: "Which agents are supported?",
         answer: (
           <>
-            Claude Code is the first-class, default agent. The{" "}
+            Codex CLI is the primary driver today. Claude stays optional and secondary for review-oriented flows, and the{" "}
             <a
               href="https://github.com/Nairon-AI/flux-opencode"
               target="_blank"
@@ -106,7 +106,7 @@ const faqItems: {
             >
               OpenCode port
             </a>{" "}
-            is currently experimental — we're working hard to make it a fully supported agent.
+            is still experimental.
           </>
         ),
       },
@@ -117,7 +117,7 @@ const faqItems: {
           <div className="space-y-3">
             <p>
               <span className="font-medium text-[#E8E4DE]">1. Install Flux (once)</span>{" "}
-              Let your agent install Flux in the current environment and handle the right platform-specific path for you.
+              Paste the install prompt into your current agent session and let Flux choose the right platform-specific path.
             </p>
             <p>
               <span className="font-medium text-[#E8E4DE]">2. Setup Flux (once)</span>{" "}
@@ -132,12 +132,12 @@ const faqItems: {
               After prime, just tell the agent what you want to do. Flux keeps the active objective in <code className="rounded bg-white/5 px-1.5 py-0.5 font-mono text-xs text-[#E8E4DE]">.flux/</code>, so natural requests like “fix this bug” or “continue this feature” can realign to the correct workflow state.
             </p>
             <p>
-              <span className="font-medium text-[#E8E4DE]">5. Track scoping progress</span>{" "}
+              <span className="font-medium text-[#E8E4DE]">5. Use explicit commands when needed</span>{" "}
               During{" "}
               <code className="rounded bg-white/5 px-1.5 py-0.5 font-mono text-xs text-[#E8E4DE]">
                 /flux:scope
               </code>{" "}
-              Flux shows phase progress so you always know whether you are in Start, Discover, Define, Develop, Deliver, or Handoff.
+              Flux shows phase progress so you always know whether you are in Start, Discover, Define, Develop, Deliver, or Handoff, but natural-language requests remain the default day-to-day UX.
             </p>
             <p>
               <span className="font-medium text-[#E8E4DE]">6. End each session with Reflect</span>{" "}
@@ -159,7 +159,7 @@ const faqItems: {
         id: "item-1",
         question: "Does session data leave the machine?",
         answer:
-          "Core analysis is local-first. Data is only shared when teams explicitly export or publish reports.",
+          "Core analysis is local-first. Flux keeps workflow state in the repo and only shares data when you explicitly export, publish, or opt into team-level reporting.",
       },
       {
         id: "item-3",
@@ -183,10 +183,7 @@ const faqItems: {
         question: "Can I contribute to Flux?",
         answer: (
           <>
-            Yes! Flux is open source. But we have strict contribution guidelines
-            to filter out low-effort AI slop. You must use AI, export your
-            conversation history, include a demo video, and post to social media
-            (on X, tag @_7obaid_). PRs that don't follow the{" "}
+            Yes. Flux is open source, but the project keeps strict contribution standards to filter out low-effort AI slop. Follow the{" "}
             <a
               href="https://github.com/Nairon-AI/flux/blob/main/CONTRIBUTING.md"
               target="_blank"
@@ -195,7 +192,7 @@ const faqItems: {
             >
               contributing guidelines
             </a>{" "}
-            are automatically closed.
+            before opening a PR.
           </>
         ),
       },
