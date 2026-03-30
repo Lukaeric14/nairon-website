@@ -18,6 +18,9 @@ import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ForRealEstateV2RouteImport } from './routes/for/real-estate-v2'
+import { Route as ForRealEstateRouteImport } from './routes/for/real-estate'
+import { Route as ForRealEstatePropertyPdfRouteImport } from './routes/for/real-estate_.property-pdf'
 
 const UniverseRoute = UniverseRouteImport.update({
   id: '/universe',
@@ -64,6 +67,22 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ForRealEstateV2Route = ForRealEstateV2RouteImport.update({
+  id: '/for/real-estate-v2',
+  path: '/for/real-estate-v2',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForRealEstateRoute = ForRealEstateRouteImport.update({
+  id: '/for/real-estate',
+  path: '/for/real-estate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForRealEstatePropertyPdfRoute =
+  ForRealEstatePropertyPdfRouteImport.update({
+    id: '/for/real-estate_/property-pdf',
+    path: '/for/real-estate/property-pdf',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +94,9 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
+  '/for/real-estate': typeof ForRealEstateRoute
+  '/for/real-estate-v2': typeof ForRealEstateV2Route
+  '/for/real-estate/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +108,9 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
+  '/for/real-estate': typeof ForRealEstateRoute
+  '/for/real-estate-v2': typeof ForRealEstateV2Route
+  '/for/real-estate/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +123,9 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
+  '/for/real-estate': typeof ForRealEstateRoute
+  '/for/real-estate-v2': typeof ForRealEstateV2Route
+  '/for/real-estate_/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +139,9 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
+    | '/for/real-estate'
+    | '/for/real-estate-v2'
+    | '/for/real-estate/property-pdf'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +153,9 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
+    | '/for/real-estate'
+    | '/for/real-estate-v2'
+    | '/for/real-estate/property-pdf'
   id:
     | '__root__'
     | '/'
@@ -133,6 +167,9 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
+    | '/for/real-estate'
+    | '/for/real-estate-v2'
+    | '/for/real-estate_/property-pdf'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +182,9 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   UniverseRoute: typeof UniverseRoute
+  ForRealEstateRoute: typeof ForRealEstateRoute
+  ForRealEstateV2Route: typeof ForRealEstateV2Route
+  ForRealEstatePropertyPdfRoute: typeof ForRealEstatePropertyPdfRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +252,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/for/real-estate-v2': {
+      id: '/for/real-estate-v2'
+      path: '/for/real-estate-v2'
+      fullPath: '/for/real-estate-v2'
+      preLoaderRoute: typeof ForRealEstateV2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for/real-estate': {
+      id: '/for/real-estate'
+      path: '/for/real-estate'
+      fullPath: '/for/real-estate'
+      preLoaderRoute: typeof ForRealEstateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for/real-estate_/property-pdf': {
+      id: '/for/real-estate_/property-pdf'
+      path: '/for/real-estate/property-pdf'
+      fullPath: '/for/real-estate/property-pdf'
+      preLoaderRoute: typeof ForRealEstatePropertyPdfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +286,9 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   UniverseRoute: UniverseRoute,
+  ForRealEstateRoute: ForRealEstateRoute,
+  ForRealEstateV2Route: ForRealEstateV2Route,
+  ForRealEstatePropertyPdfRoute: ForRealEstatePropertyPdfRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

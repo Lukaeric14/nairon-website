@@ -67,6 +67,31 @@ export default defineSchema({
 		createdAt: v.number(),
 	}).index("by_email", ["email"]),
 
+	// Property PDF generation jobs
+	pdfJobs: defineTable({
+		zillowUrl: v.string(),
+		status: v.union(
+			v.literal("pending"),
+			v.literal("scraping"),
+			v.literal("classifying"),
+			v.literal("enhancing"),
+			v.literal("generating"),
+			v.literal("completed"),
+			v.literal("failed"),
+		),
+		// Listing data stored as JSON string (too complex for Convex schema)
+		listingJson: v.optional(v.string()),
+		error: v.optional(v.string()),
+		// Image processing progress
+		totalImages: v.optional(v.number()),
+		processedImages: v.optional(v.number()),
+		// Optional email for async delivery
+		notifyEmail: v.optional(v.string()),
+		emailSent: v.optional(v.boolean()),
+		createdAt: v.number(),
+		completedAt: v.optional(v.number()),
+	}).index("by_url", ["zillowUrl"]),
+
 	// Flux CTO observability waitlist
 	fluxWaitlist: defineTable({
 		email: v.string(),
