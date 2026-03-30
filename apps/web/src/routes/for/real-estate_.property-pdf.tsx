@@ -168,112 +168,108 @@ function PropertyPdfPage() {
 
 				<div className="pt-16 mt-12 md:mt-16 relative overflow-hidden">
 					{/* Decorative: slanted faded property brochure cards */}
-					<div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-						{/* Left card — luxury exterior at dusk */}
+					<div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+						{/* Left stack — back card (upper) */}
 						<div
-							className="absolute hidden md:block rounded-xl overflow-hidden shadow-2xl"
-							style={{
-								width: 280,
-								height: 370,
-								top: 40,
-								left: "8%",
-								transform: "rotate(-12deg)",
-								opacity: 0.22,
-							}}
-						>
-							<img
-								src="/preview/property-1.webp"
-								alt=""
-								className="w-full h-[60%] object-cover"
-							/>
-							<div className="bg-white/90 px-4 py-3 h-[40%]">
-								<div className="h-1.5 w-16 bg-[#C9A96E]/40 rounded mb-2" />
-								<div className="h-2.5 w-3/4 bg-black/20 rounded mb-1.5" />
-								<div className="h-2 w-1/2 bg-black/10 rounded mb-3" />
-								<div className="h-1 w-full bg-black/[0.06] rounded mb-1" />
-								<div className="h-1 w-full bg-black/[0.06] rounded mb-1" />
-								<div className="h-1 w-2/3 bg-black/[0.06] rounded" />
-							</div>
-						</div>
-						{/* Right card — Mediterranean villa */}
-						<div
-							className="absolute hidden md:block rounded-xl overflow-hidden shadow-2xl"
-							style={{
-								width: 260,
-								height: 340,
-								top: 60,
-								right: "8%",
-								transform: "rotate(10deg)",
-								opacity: 0.20,
-							}}
-						>
-							<img
-								src="/preview/property-2.webp"
-								alt=""
-								className="w-full h-[55%] object-cover"
-							/>
-							<div className="bg-white/90 px-4 py-3 h-[45%]">
-								<div className="h-1.5 w-20 bg-[#C9A96E]/40 rounded mb-2" />
-								<div className="h-2.5 w-2/3 bg-black/20 rounded mb-1.5" />
-								<div className="h-2 w-1/3 bg-black/10 rounded mb-3" />
-								<div className="grid grid-cols-2 gap-2 mt-2">
-									<div className="h-8 bg-black/[0.04] rounded" />
-									<div className="h-8 bg-black/[0.04] rounded" />
-								</div>
-							</div>
-						</div>
-						{/* Bottom-left — aerial neighborhood */}
-						<div
-							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl"
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:z-50 hover:scale-105"
 							style={{
 								width: 220,
 								height: 290,
-								top: 300,
-								left: "14%",
-								transform: "rotate(-5deg)",
-								opacity: 0.15,
+								top: 20,
+								left: "calc(50% - 560px)",
+								transform: "rotate(-4deg)",
+								zIndex: 1,
 							}}
 						>
 							<img
 								src="/preview/property-3.webp"
 								alt=""
-								className="w-full h-[55%] object-cover"
+								className="w-full h-[58%] object-cover"
 							/>
-							<div className="bg-white/90 px-3 py-2.5 h-[45%]">
-								<div className="h-1.5 w-14 bg-[#C9A96E]/40 rounded mb-2" />
-								<div className="h-2 w-3/4 bg-black/15 rounded mb-1" />
-								<div className="h-1.5 w-1/2 bg-black/10 rounded mb-3" />
-								<div className="h-1 w-full bg-black/[0.06] rounded mb-1" />
-								<div className="h-1 w-full bg-black/[0.06] rounded" />
+							<div className="bg-[#1a1a1a] px-4 py-3 h-[42%]">
+								<div className="h-1.5 w-16 bg-[#C9A96E]/50 rounded mb-2" />
+								<div className="h-2.5 w-3/4 bg-white/20 rounded mb-1.5" />
+								<div className="h-2 w-1/2 bg-white/10 rounded mb-3" />
+								<div className="h-1 w-full bg-white/[0.06] rounded mb-1" />
+								<div className="h-1 w-full bg-white/[0.06] rounded mb-1" />
+								<div className="h-1 w-2/3 bg-white/[0.06] rounded" />
 							</div>
 						</div>
-						{/* Bottom-right — interior living room */}
+						{/* Left stack — front card (lower, offset) */}
 						<div
-							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl"
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:z-50 hover:scale-105"
 							style={{
-								width: 240,
-								height: 310,
-								top: 280,
-								right: "14%",
-								transform: "rotate(14deg)",
-								opacity: 0.16,
+								width: 220,
+								height: 290,
+								top: 200,
+								left: "calc(50% - 600px)",
+								transform: "rotate(-12deg)",
+								zIndex: 2,
+							}}
+						>
+							<img
+								src="/preview/property-1.webp"
+								alt=""
+								className="w-full h-[58%] object-cover"
+							/>
+							<div className="bg-[#1a1a1a] px-4 py-3 h-[42%]">
+								<div className="h-1.5 w-20 bg-[#C9A96E]/50 rounded mb-2" />
+								<div className="h-2.5 w-2/3 bg-white/20 rounded mb-1.5" />
+								<div className="h-2 w-1/3 bg-white/10 rounded mb-3" />
+								<div className="h-1 w-full bg-white/[0.06] rounded mb-1" />
+								<div className="h-1 w-full bg-white/[0.06] rounded" />
+							</div>
+						</div>
+						{/* Right stack — back card (upper) */}
+						<div
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:z-50 hover:scale-105"
+							style={{
+								width: 220,
+								height: 290,
+								top: 20,
+								right: "calc(50% - 560px)",
+								transform: "rotate(4deg)",
+								zIndex: 1,
 							}}
 						>
 							<img
 								src="/preview/property-4.webp"
 								alt=""
-								className="w-full h-[55%] object-cover"
+								className="w-full h-[58%] object-cover"
 							/>
-							<div className="bg-white/90 px-3 py-2.5 h-[45%]">
-								<div className="flex gap-1.5 mb-2">
-									<div className="h-5 w-5 rounded bg-[#C9A96E]/20" />
-									<div className="h-5 w-5 rounded bg-[#C9A96E]/20" />
-									<div className="h-5 w-5 rounded bg-[#C9A96E]/20" />
+							<div className="bg-[#1a1a1a] px-4 py-3 h-[42%]">
+								<div className="h-1.5 w-16 bg-[#C9A96E]/50 rounded mb-2" />
+								<div className="h-2.5 w-3/4 bg-white/20 rounded mb-1.5" />
+								<div className="h-2 w-1/2 bg-white/10 rounded mb-3" />
+								<div className="grid grid-cols-2 gap-2 mt-1">
+									<div className="h-7 bg-white/[0.04] rounded" />
+									<div className="h-7 bg-white/[0.04] rounded" />
 								</div>
-								<div className="h-2 w-2/3 bg-black/15 rounded mb-1" />
-								<div className="h-1.5 w-1/2 bg-black/10 rounded mb-3" />
-								<div className="h-1 w-full bg-black/[0.06] rounded mb-1" />
-								<div className="h-1 w-full bg-black/[0.06] rounded" />
+							</div>
+						</div>
+						{/* Right stack — front card (lower, offset) */}
+						<div
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:z-50 hover:scale-105"
+							style={{
+								width: 220,
+								height: 290,
+								top: 200,
+								right: "calc(50% - 600px)",
+								transform: "rotate(12deg)",
+								zIndex: 2,
+							}}
+						>
+							<img
+								src="/preview/property-2.webp"
+								alt=""
+								className="w-full h-[58%] object-cover"
+							/>
+							<div className="bg-[#1a1a1a] px-4 py-3 h-[42%]">
+								<div className="h-1.5 w-14 bg-[#C9A96E]/50 rounded mb-2" />
+								<div className="h-2.5 w-2/3 bg-white/20 rounded mb-1.5" />
+								<div className="h-2 w-1/3 bg-white/10 rounded mb-3" />
+								<div className="h-1 w-full bg-white/[0.06] rounded mb-1" />
+								<div className="h-1 w-full bg-white/[0.06] rounded" />
 							</div>
 						</div>
 					</div>
