@@ -5,7 +5,7 @@
 		"build": {
 			"dependsOn": ["^build"],
 			"outputs": ["dist/**", ".vercel/output/**"],
-			"env": ["VITE_CONVEX_URL", "VITE_CONVEX_SITE_URL"]
+			"env": ["VITE_CONVEX_URL", "VITE_CONVEX_SITE_URL", "CONVEX_DEPLOY_KEY"]
 		},
 		"dev": {
 			"cache": false,
