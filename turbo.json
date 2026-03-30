@@ -1,12 +1,12 @@
 {
 	"$schema": "https://turbo.build/schema.json",
 	"ui": "tui",
-	"globalPassThroughEnv": ["CONVEX_DEPLOY_KEY"],
+	"globalPassThroughEnv": [],
 	"tasks": {
 		"build": {
 			"dependsOn": ["^build"],
 			"outputs": ["dist/**", ".vercel/output/**"],
-			"env": ["VITE_CONVEX_URL", "VITE_CONVEX_SITE_URL", "CONVEX_DEPLOY_KEY"]
+			"env": ["VITE_CONVEX_URL", "VITE_CONVEX_SITE_URL", "FIRECRAWL_API_KEY"]
 		},
 		"dev": {
 			"cache": false,
