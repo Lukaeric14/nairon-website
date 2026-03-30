@@ -171,14 +171,13 @@ function PropertyPdfPage() {
 					<div className="absolute inset-0 overflow-hidden" aria-hidden="true">
 						{/* Left stack — back card (upper) */}
 						<div
-							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:z-50 hover:scale-105"
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer z-[1] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
 							style={{
 								width: 220,
 								height: 290,
-								top: 20,
-								left: "calc(50% - 560px)",
+								top: 60,
+								left: "calc(50% - 660px)",
 								transform: "rotate(-4deg)",
-								zIndex: 1,
 							}}
 						>
 							<img
@@ -197,14 +196,13 @@ function PropertyPdfPage() {
 						</div>
 						{/* Left stack — front card (lower, offset) */}
 						<div
-							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:z-50 hover:scale-105"
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer z-[2] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
 							style={{
 								width: 220,
 								height: 290,
-								top: 200,
-								left: "calc(50% - 600px)",
+								top: 240,
+								left: "calc(50% - 700px)",
 								transform: "rotate(-12deg)",
-								zIndex: 2,
 							}}
 						>
 							<img
@@ -222,14 +220,13 @@ function PropertyPdfPage() {
 						</div>
 						{/* Right stack — back card (upper) */}
 						<div
-							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:z-50 hover:scale-105"
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer z-[1] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
 							style={{
 								width: 220,
 								height: 290,
-								top: 20,
-								right: "calc(50% - 560px)",
+								top: 60,
+								right: "calc(50% - 660px)",
 								transform: "rotate(4deg)",
-								zIndex: 1,
 							}}
 						>
 							<img
@@ -249,14 +246,13 @@ function PropertyPdfPage() {
 						</div>
 						{/* Right stack — front card (lower, offset) */}
 						<div
-							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:z-50 hover:scale-105"
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer z-[2] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
 							style={{
 								width: 220,
 								height: 290,
-								top: 200,
-								right: "calc(50% - 600px)",
+								top: 240,
+								right: "calc(50% - 700px)",
 								transform: "rotate(12deg)",
-								zIndex: 2,
 							}}
 						>
 							<img
