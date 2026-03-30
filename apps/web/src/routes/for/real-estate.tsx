@@ -765,24 +765,166 @@ function formatUsd(n: number): string {
 	return `$${n.toFixed(0)}`;
 }
 
+type Department = "sales" | "operations" | "recruiting" | "finance";
+
+const DEPARTMENT_CONFIG: Record<
+	Department,
+	{
+		label: string;
+		headline: string;
+		headlineAccent: string;
+		subtitle: string;
+		lostLabel: string;
+		currentLabel: string;
+		currentSublabel: (inputs: Record<string, number>) => string;
+		aiLabel: string;
+		aiSublabel: string;
+		inputs: {
+			key: string;
+			label: string;
+			min: number;
+			max: number;
+			step: number;
+			default: number;
+			prefix?: string;
+			suffix?: string;
+		}[];
+		calculate: (inputs: Record<string, number>) => {
+			current: number;
+			ai: number;
+			lost: number;
+			multiplier: number;
+		};
+	}
+> = {
+	sales: {
+		label: "Sales",
+		headline: "How Much Revenue Are You",
+		headlineAccent: "Leaving on the Table?",
+		subtitle:
+			"Leads contacted within 5 minutes are 21x more likely to qualify. Most brokerages respond in 30+ minutes. See what that's costing you.",
+		lostLabel: "Estimated Revenue Left on the Table",
+		currentLabel: "Current",
+		currentSublabel: (i) => `${i.responseTime} min response`,
+		aiLabel: "With AI",
+		aiSublabel: "30s response",
+		inputs: [
+			{ key: "leads", label: "Monthly leads", min: 10, max: 2000, step: 10, default: 200, suffix: "leads/mo" },
+			{ key: "responseTime", label: "Avg. response time", min: 1, max: 120, step: 1, default: 30, suffix: "minutes" },
+			{ key: "dealValue", label: "Avg. deal value", min: 1000, max: 100000, step: 500, default: 8000, prefix: "$" },
+			{ key: "closeRate", label: "Close rate", min: 0.5, max: 20, step: 0.5, default: 3, suffix: "%" },
+		],
+		calculate: (i) => {
+			const rate = i.closeRate / 100;
+			const currentQR = qualificationRate(i.responseTime);
+			const aiQR = qualificationRate(0.5);
+			const current = i.leads * currentQR * rate * i.dealValue;
+			const ai = i.leads * aiQR * rate * i.dealValue;
+			return { current, ai, lost: ai - current, multiplier: currentQR > 0 ? aiQR / currentQR : 0 };
+		},
+	},
+	operations: {
+		label: "Operations",
+		headline: "How Much Are You Spending on",
+		headlineAccent: "Manual Admin Work?",
+		subtitle:
+			"The average brokerage spends 15-20 hours per week on contract prep, compliance checks, and transaction coordination. AI handles it in minutes.",
+		lostLabel: "Estimated Cost of Manual Operations",
+		currentLabel: "Current",
+		currentSublabel: (i) => `${i.adminHours} hrs/week manual`,
+		aiLabel: "With AI",
+		aiSublabel: "90% automated",
+		inputs: [
+			{ key: "agents", label: "Number of agents", min: 1, max: 200, step: 1, default: 25, suffix: "agents" },
+			{ key: "adminHours", label: "Admin hours per agent/week", min: 1, max: 40, step: 1, default: 12, suffix: "hrs/wk" },
+			{ key: "hourlyRate", label: "Admin staff hourly cost", min: 15, max: 75, step: 1, default: 28, prefix: "$" },
+			{ key: "errorRate", label: "Rework/error rate", min: 1, max: 30, step: 1, default: 8, suffix: "%" },
+		],
+		calculate: (i) => {
+			const weeklyHours = i.agents * i.adminHours;
+			const monthlyCost = weeklyHours * 4.33 * i.hourlyRate;
+			const reworkCost = monthlyCost * (i.errorRate / 100);
+			const current = monthlyCost + reworkCost;
+			const ai = current * 0.15; // AI reduces to ~15% of manual cost
+			return { current, ai, lost: current - ai, multiplier: current > 0 ? current / ai : 0 };
+		},
+	},
+	recruiting: {
+		label: "Recruiting",
+		headline: "How Much Does It Cost to",
+		headlineAccent: "Find & Onboard Agents?",
+		subtitle:
+			"Brokerages lose top candidates to slow outreach and manual screening. AI sources, qualifies, and nurtures agent prospects around the clock.",
+		lostLabel: "Estimated Recruiting Cost Savings",
+		currentLabel: "Current",
+		currentSublabel: (i) => `${i.timeToHire} day avg hire`,
+		aiLabel: "With AI",
+		aiSublabel: "60% faster pipeline",
+		inputs: [
+			{ key: "hiresPerYear", label: "Agent hires per year", min: 1, max: 100, step: 1, default: 12, suffix: "hires/yr" },
+			{ key: "costPerHire", label: "Cost per hire (all-in)", min: 1000, max: 25000, step: 500, default: 6000, prefix: "$" },
+			{ key: "timeToHire", label: "Avg. time to hire", min: 10, max: 180, step: 5, default: 60, suffix: "days" },
+			{ key: "attritionRate", label: "First-year attrition", min: 5, max: 60, step: 1, default: 25, suffix: "%" },
+		],
+		calculate: (i) => {
+			const annualCost = i.hiresPerYear * i.costPerHire;
+			const attritionCost = annualCost * (i.attritionRate / 100);
+			const current = (annualCost + attritionCost) / 12; // monthly
+			const ai = current * 0.4; // AI reduces recruiting cost by ~60%
+			return { current, ai, lost: current - ai, multiplier: current > 0 ? current / ai : 0 };
+		},
+	},
+	finance: {
+		label: "Finance",
+		headline: "How Much Revenue Leaks Through",
+		headlineAccent: "Untracked Commissions?",
+		subtitle:
+			"Manual commission tracking, split errors, and delayed invoicing cost brokerages 3-5% of gross revenue. AI reconciles in real time.",
+		lostLabel: "Estimated Revenue Leakage",
+		currentLabel: "Current",
+		currentSublabel: (i) => `${i.leakageRate}% leakage`,
+		aiLabel: "With AI",
+		aiSublabel: "0.5% leakage",
+		inputs: [
+			{ key: "monthlyGCI", label: "Monthly gross commission", min: 50000, max: 5000000, step: 25000, default: 500000, prefix: "$" },
+			{ key: "leakageRate", label: "Commission leakage rate", min: 0.5, max: 10, step: 0.5, default: 4, suffix: "%" },
+			{ key: "transactions", label: "Monthly transactions", min: 5, max: 500, step: 5, default: 40, suffix: "txns/mo" },
+			{ key: "reconcileHours", label: "Hours on reconciliation", min: 1, max: 80, step: 1, default: 20, suffix: "hrs/mo" },
+		],
+		calculate: (i) => {
+			const leakage = i.monthlyGCI * (i.leakageRate / 100);
+			const reconcileCost = i.reconcileHours * 35; // ~$35/hr bookkeeper
+			const current = leakage + reconcileCost;
+			const aiLeakage = i.monthlyGCI * 0.005; // AI reduces to 0.5%
+			const aiReconcile = reconcileCost * 0.1; // 90% automated
+			const ai = aiLeakage + aiReconcile;
+			return { current, ai, lost: current - ai, multiplier: current > 0 ? current / ai : 0 };
+		},
+	},
+};
+
 function LeadResponseCalculator() {
-	const [leads, setLeads] = useState(200);
-	const [responseTime, setResponseTime] = useState(30);
-	const [dealValue, setDealValue] = useState(8000);
-	const [closeRate, setCloseRate] = useState(3);
+	const [dept, setDept] = useState<Department>("sales");
+	const config = DEPARTMENT_CONFIG[dept];
 
-	const results = useMemo(() => {
-		const rate = closeRate / 100;
-		const currentQR = qualificationRate(responseTime);
-		const aiQR = qualificationRate(0.5); // 30-second response
+	const [inputs, setInputs] = useState<Record<string, number>>(() =>
+		Object.fromEntries(config.inputs.map((i) => [i.key, i.default])),
+	);
 
-		const currentRevenue = leads * currentQR * rate * dealValue;
-		const aiRevenue = leads * aiQR * rate * dealValue;
-		const lostRevenue = aiRevenue - currentRevenue;
-		const multiplier = currentQR > 0 ? aiQR / currentQR : 0;
+	// Reset inputs when department changes
+	const prevDept = useRef(dept);
+	if (prevDept.current !== dept) {
+		prevDept.current = dept;
+		const defaults = Object.fromEntries(
+			config.inputs.map((i) => [i.key, i.default]),
+		);
+		// Using a conditional set to avoid infinite loop — only if inputs don't match
+		if (JSON.stringify(inputs) !== JSON.stringify(defaults)) {
+			setInputs(defaults);
+		}
+	}
 
-		return { currentRevenue, aiRevenue, lostRevenue, multiplier };
-	}, [leads, responseTime, dealValue, closeRate]);
+	const results = useMemo(() => config.calculate(inputs), [config, inputs]);
 
 	return (
 		<div className="px-6 md:px-12 py-16 md:py-24">
@@ -791,16 +933,32 @@ function LeadResponseCalculator() {
 					Revenue Calculator
 				</p>
 				<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#E8E4DE] max-w-3xl">
-					How Much Revenue Are You{" "}
+					{config.headline}{" "}
 					<span className="font-serif italic text-[#C9A96E]">
-						Leaving on the Table?
+						{config.headlineAccent}
 					</span>
 				</h2>
 				<p className="mt-4 text-[#A39E96] text-base md:text-lg leading-relaxed max-w-2xl">
-					Leads contacted within 5 minutes are 21x more likely to
-					qualify. Most brokerages respond in 30+ minutes. See what
-					that&apos;s costing you.
+					{config.subtitle}
 				</p>
+
+				{/* Department tabs */}
+				<div className="mt-8 flex gap-1 p-1 rounded-lg bg-white/[0.04] border border-white/[0.06] w-fit">
+					{(Object.keys(DEPARTMENT_CONFIG) as Department[]).map((key) => (
+						<button
+							key={key}
+							type="button"
+							onClick={() => setDept(key)}
+							className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+								dept === key
+									? "bg-[#C9A96E] text-[#0C0C0C]"
+									: "text-[#A39E96] hover:text-[#E8E4DE] hover:bg-white/[0.04]"
+							}`}
+						>
+							{DEPARTMENT_CONFIG[key].label}
+						</button>
+					))}
+				</div>
 			</div>
 
 			<div className="mt-12 grid md:grid-cols-[1fr_1fr] gap-10 md:gap-16 items-start">
@@ -809,42 +967,19 @@ function LeadResponseCalculator() {
 					<p className="text-[#A39E96] text-[10px] uppercase tracking-[0.2em] font-medium mb-1">
 						Your Numbers
 					</p>
-					<InputField
-						label="Monthly leads"
-						value={leads}
-						onChange={setLeads}
-						min={10}
-						max={2000}
-						step={10}
-						suffix="leads/mo"
-					/>
-					<InputField
-						label="Avg. response time"
-						value={responseTime}
-						onChange={setResponseTime}
-						min={1}
-						max={120}
-						step={1}
-						suffix="minutes"
-					/>
-					<InputField
-						label="Avg. deal value"
-						value={dealValue}
-						onChange={setDealValue}
-						min={1000}
-						max={100000}
-						step={500}
-						prefix="$"
-					/>
-					<InputField
-						label="Close rate"
-						value={closeRate}
-						onChange={setCloseRate}
-						min={0.5}
-						max={20}
-						step={0.5}
-						suffix="%"
-					/>
+					{config.inputs.map((field) => (
+						<InputField
+							key={field.key}
+							label={field.label}
+							value={inputs[field.key] ?? field.default}
+							onChange={(v) => setInputs((prev) => ({ ...prev, [field.key]: v }))}
+							min={field.min}
+							max={field.max}
+							step={field.step}
+							prefix={field.prefix}
+							suffix={field.suffix}
+						/>
+					))}
 				</div>
 
 				{/* ── Results ── */}
@@ -854,10 +989,10 @@ function LeadResponseCalculator() {
 						<div className="absolute -top-12 -right-12 w-40 h-40 bg-[#C9A96E]/[0.06] rounded-full blur-3xl" />
 						<div className="absolute bottom-0 left-0 w-24 h-24 bg-[#C9A96E]/[0.03] rounded-full blur-2xl" />
 						<p className="relative text-[#A39E96] text-[10px] uppercase tracking-[0.2em] font-medium mb-3">
-							Estimated Revenue Left on the Table
+							{config.lostLabel}
 						</p>
 						<p className="relative text-[44px] md:text-[60px] font-light tracking-[-3px] text-[#C9A96E] leading-none tabular-nums font-mono">
-							{formatUsd(results.lostRevenue)}
+							{formatUsd(results.lost)}
 						</p>
 						<p className="relative text-[#A39E96] text-sm mt-3 tracking-wide">per month</p>
 					</div>
@@ -866,25 +1001,25 @@ function LeadResponseCalculator() {
 					<div className="grid grid-cols-2 gap-4">
 						<div className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-5 md:p-6">
 							<p className="text-[#A39E96] text-[10px] uppercase tracking-[0.16em] mb-2 leading-tight">
-								Current<br />
-								<span className="text-[#A39E96]/60">{responseTime} min response</span>
+								{config.currentLabel}<br />
+								<span className="text-[#A39E96]/60">{config.currentSublabel(inputs)}</span>
 							</p>
 							<p className="text-xl md:text-2xl font-light tracking-[-1px] text-[#E8E4DE] tabular-nums font-mono">
-								{formatUsd(results.currentRevenue)}
+								{formatUsd(results.current)}
 							</p>
 							<p className="text-[#A39E96]/50 text-xs mt-1.5">/month</p>
 						</div>
 						<div className="rounded-xl border border-[#C9A96E]/15 bg-[#C9A96E]/[0.025] p-5 md:p-6">
 							<p className="text-[#C9A96E] text-[10px] uppercase tracking-[0.16em] mb-2 leading-tight">
-								With AI<br />
-								<span className="text-[#C9A96E]/60">30s response</span>
+								{config.aiLabel}<br />
+								<span className="text-[#C9A96E]/60">{config.aiSublabel}</span>
 							</p>
 							<p className="text-xl md:text-2xl font-light tracking-[-1px] text-[#E8E4DE] tabular-nums font-mono">
-								{formatUsd(results.aiRevenue)}
+								{formatUsd(results.ai)}
 							</p>
 							<p className="text-[#C9A96E] text-xs mt-1.5 font-medium">
 								{results.multiplier > 1
-									? `${results.multiplier.toFixed(1)}x more revenue`
+									? `${results.multiplier.toFixed(1)}x savings`
 									: "/month"}
 							</p>
 						</div>
