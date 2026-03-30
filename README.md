@@ -156,6 +156,26 @@ Use the end-to-end job smoke test when you want to verify the actual Convex pipe
 bun run verify:zillow
 ```
 
+### Production Deploy Note
+
+Deploying the web app on Vercel does **not** deploy the Convex backend. The Property PDF Generator depends on Convex background actions, so after backend changes you must deploy Convex production manually.
+
+Manual production steps:
+
+```bash
+cd packages/backend
+CONVEX_DEPLOY_KEY=prod:... bun run deploy
+```
+
+After that, confirm the production Convex deployment has the required backend env vars set:
+
+- `BRIGHTDATA_API_KEY`
+- `OPENAI_API_KEY`
+- `FAL_KEY`
+- `SLACK_WEBHOOK_URL` if you want Slack notifications
+
+If the frontend is live but production still shows the old Zillow-blocked error, the usual cause is that Vercel deployed successfully while Convex prod did not.
+
 ### Environment Variables
 
 ```bash

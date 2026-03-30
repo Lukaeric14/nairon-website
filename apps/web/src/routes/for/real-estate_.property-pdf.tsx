@@ -61,6 +61,8 @@ type PageState =
 	| { step: "error"; message: string }
 	| { step: "ready"; listing: ZillowListing }
 
+const EXAMPLE_DECK_URL = "/200-Balmoral-Gardens-Ct-nairon.pdf"
+
 function PropertyPdfPage() {
 	const { job: jobParam } = useSearch({ from: "/for/real-estate_/property-pdf" })
 	const fromEmailLink = useRef(!!jobParam)
@@ -477,6 +479,21 @@ function InputForm({
 					</>
 				)}
 			</button>
+
+			<div className="flex flex-col items-center gap-2 text-center">
+				<p className="text-sm text-[#A39E96]">
+					Want to see the output first?
+				</p>
+				<a
+					href={EXAMPLE_DECK_URL}
+					target="_blank"
+					rel="noreferrer"
+					className="inline-flex items-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.03] px-4 py-2.5 text-sm font-medium text-[#E8E4DE] transition-all hover:border-[#C9A96E]/40 hover:bg-[#C9A96E]/8 hover:text-white"
+				>
+					View Example Deck
+					<ArrowUpRight className="h-4 w-4" />
+				</a>
+			</div>
 		</form>
 	)
 }
