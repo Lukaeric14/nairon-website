@@ -3,8 +3,8 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev --port ${PORT:-3001}",
-		"build": "cd ../.. && npx convex codegen --typecheck disable && npx convex deploy && cd apps/web && vite build",
+		"dev": "node ../../scripts/sync-convex-env.mjs && vite dev --port ${PORT:-3001}",
+		"build": "vite build",
 		"check-types": "tsc --noEmit"
 	},
 	"dependencies": {

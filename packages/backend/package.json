@@ -6,8 +6,8 @@
 		"./auth": "./src/auth.ts"
 	},
 	"scripts": {
-		"dev": "convex dev",
-		"deploy": "convex deploy"
+		"dev": "cd ../.. && convex dev",
+		"deploy": "cd ../.. && convex deploy"
 	},
 	"dependencies": {
 		"convex": "catalog:",
