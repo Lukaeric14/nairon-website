@@ -10,7 +10,7 @@ import { useModals } from "./modal-provider";
 // const UNIVERSE_TOOLS = [...];
 // function UniverseDropdown() { ... }
 
-export function Navbar() {
+export function Navbar({ minimal = false }: { minimal?: boolean }) {
 	const [scrolled, setScrolled] = useState(false);
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const { openHireModal } = useModals();
@@ -71,15 +71,16 @@ export function Navbar() {
 				</a>
 
 				{/* Desktop nav */}
+				{!minimal && (
 				<div className="hidden md:flex items-center gap-1">
-					<a 
-						href="/flux" 
+					<a
+						href="/flux"
 						className="px-4 py-2 rounded-full text-sm text-[#E8E4DE] hover:text-[#C9A96E] transition-colors"
 					>
 						Flux
 					</a>
 
-	
+
 					<a
 						href="https://github.com/Nairon-AI/flux"
 						target="_blank"
@@ -99,8 +100,9 @@ export function Navbar() {
 						<ArrowUpRight className="w-3.5 h-3.5" />
 					</button>
 				</div>
+				)}
 
-				<div className="md:hidden flex items-center gap-2">
+				<div className={cn("md:hidden flex items-center gap-2", minimal && "hidden")}>
 					<button
 						type="button"
 						className="w-10 h-10 flex items-center justify-center text-[#E8E4DE]"
@@ -119,9 +121,9 @@ export function Navbar() {
 			{/* Full-width Universe dropdown intentionally disabled while coming soon */}
 
 			{/* Mobile menu */}
-			{mobileOpen && (
+			{mobileOpen && !minimal && (
 				<div className="md:hidden bg-[#0C0C0C] border-t border-white/6 px-6 py-6 space-y-1">
-					<a 
+					<a
 						href="/flux"
 						className="block px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
 						onClick={() => setMobileOpen(false)}
@@ -129,7 +131,7 @@ export function Navbar() {
 						Flux
 					</a>
 
-	
+
 					<a
 						href="https://github.com/Nairon-AI/flux"
 						target="_blank"

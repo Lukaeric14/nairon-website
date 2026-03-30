@@ -41,6 +41,30 @@ const FOOTER_COLS: FooterCol[] = [
 	},
 ];
 
+const REAL_ESTATE_COLS: FooterCol[] = [
+	{
+		heading: "Company",
+		links: [
+			{ label: "About", href: "/" },
+			{ label: "Contact", href: "#discovery" },
+		],
+	},
+	{
+		heading: "Services",
+		links: [
+			{ label: "AI Infrastructure", href: "#discovery" },
+			{ label: "Custom Solutions", href: "#discovery" },
+		],
+	},
+	{
+		heading: "Legal",
+		links: [
+			{ label: "Privacy", href: "/privacy" },
+			{ label: "Terms", href: "/terms-and-conditions" },
+		],
+	},
+];
+
 function SocialLinks() {
 	return (
 		<div className="flex gap-3">
@@ -80,13 +104,19 @@ function SocialLinks() {
 	);
 }
 
-export function Footer() {
+export function Footer({ variant = "default" }: { variant?: "default" | "real-estate" }) {
 	const { openHireModal, openCandidateModal } = useModals();
 
 	const handleAction = (action: string) => {
 		if (action === "hire") openHireModal();
 		else if (action === "candidate") openCandidateModal();
 	};
+
+	const cols = variant === "real-estate" ? REAL_ESTATE_COLS : FOOTER_COLS;
+	const tagline =
+		variant === "real-estate"
+			? "Custom AI infrastructure for real estate brokerages."
+			: "Data-driven technical recruiting. Powered by Flux.";
 
 	return (
 		<footer className="bg-[#0C0C0C] border-t border-white/6">
@@ -103,7 +133,7 @@ export function Footer() {
 							className="h-8 w-auto mb-4"
 						/>
 						<p className="text-[#A39E96] text-sm leading-relaxed max-w-xs">
-							Data-driven technical recruiting. Powered by Flux.
+							{tagline}
 						</p>
 						<div className="mt-6">
 							<SocialLinks />
@@ -111,7 +141,7 @@ export function Footer() {
 					</div>
 
 					{/* Nav columns */}
-					{FOOTER_COLS.map((col) => (
+					{cols.map((col) => (
 						<div key={col.heading}>
 							<h4 className="text-[#E8E4DE] text-xs font-medium uppercase tracking-[0.16em] mb-4">
 								{col.heading}

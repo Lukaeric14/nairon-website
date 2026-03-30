@@ -18,6 +18,7 @@ import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ForRealEstateRouteImport } from './routes/for/real-estate'
 
 const UniverseRoute = UniverseRouteImport.update({
   id: '/universe',
@@ -64,6 +65,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ForRealEstateRoute = ForRealEstateRouteImport.update({
+  id: '/for/real-estate',
+  path: '/for/real-estate',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
+  '/for/real-estate': typeof ForRealEstateRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
+  '/for/real-estate': typeof ForRealEstateRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
+  '/for/real-estate': typeof ForRealEstateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
+    | '/for/real-estate'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
+    | '/for/real-estate'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
+    | '/for/real-estate'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   UniverseRoute: typeof UniverseRoute
+  ForRealEstateRoute: typeof ForRealEstateRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/for/real-estate': {
+      id: '/for/real-estate'
+      path: '/for/real-estate'
+      fullPath: '/for/real-estate'
+      preLoaderRoute: typeof ForRealEstateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   UniverseRoute: UniverseRoute,
+  ForRealEstateRoute: ForRealEstateRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

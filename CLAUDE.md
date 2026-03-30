@@ -50,6 +50,10 @@ bun install               # Install dependencies
 bun run dev               # Start development
 ```
 
+## Frontend Development
+
+When working on frontend code (components, pages, styles, animations), always use the `frontend-design` skill from ui-skills for guidance on design quality, typography, motion, and visual polish. Invoke it via `/frontend-design` with the relevant file path and description of what needs to be built or improved.
+
 ## Supermemory
 
 All organizational knowledge (strategy, targets, decisions, processes) lives in Supermemory.
