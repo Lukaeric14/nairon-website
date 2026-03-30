@@ -166,9 +166,114 @@ function PropertyPdfPage() {
 			<div className="min-h-screen bg-[#0C0C0C] text-[#E8E4DE] font-inter">
 				<Navbar minimal />
 
-				<div className="pt-16 mt-12 md:mt-16">
+				<div className="pt-16 mt-12 md:mt-16 relative overflow-hidden">
+					{/* Decorative: slanted faded PDF preview slides */}
+					<div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+						{/* Left slide — cover page mockup */}
+						<div
+							className="absolute hidden md:block"
+							style={{
+								width: 260,
+								height: 340,
+								top: 60,
+								left: -30,
+								transform: "rotate(-12deg)",
+								opacity: 0.07,
+							}}
+						>
+							<div className="w-full h-full rounded-lg bg-gradient-to-br from-white/80 to-white/40 shadow-2xl overflow-hidden">
+								<div className="h-[45%] bg-gradient-to-b from-[#8B7355]/40 to-[#8B7355]/20" />
+								<div className="px-4 pt-3">
+									<div className="h-2 w-3/4 bg-white/30 rounded mb-2" />
+									<div className="h-1.5 w-1/2 bg-white/20 rounded mb-4" />
+									<div className="h-1 w-full bg-white/10 rounded mb-1" />
+									<div className="h-1 w-full bg-white/10 rounded mb-1" />
+									<div className="h-1 w-2/3 bg-white/10 rounded" />
+								</div>
+							</div>
+						</div>
+						{/* Right slide — stats page mockup */}
+						<div
+							className="absolute hidden md:block"
+							style={{
+								width: 240,
+								height: 320,
+								top: 80,
+								right: -20,
+								transform: "rotate(10deg)",
+								opacity: 0.06,
+							}}
+						>
+							<div className="w-full h-full rounded-lg bg-gradient-to-br from-white/80 to-white/40 shadow-2xl overflow-hidden">
+								<div className="h-2 w-full bg-[#C9A96E]/20" />
+								<div className="px-4 pt-4">
+									<div className="flex gap-2 mb-3">
+										<div className="h-16 w-16 bg-white/15 rounded" />
+										<div className="h-16 w-16 bg-white/15 rounded" />
+										<div className="h-16 w-16 bg-white/15 rounded" />
+									</div>
+									<div className="h-2 w-2/3 bg-white/20 rounded mb-2" />
+									<div className="h-1.5 w-1/2 bg-white/15 rounded mb-4" />
+									<div className="grid grid-cols-2 gap-2">
+										<div className="h-10 bg-white/10 rounded" />
+										<div className="h-10 bg-white/10 rounded" />
+										<div className="h-10 bg-white/10 rounded" />
+										<div className="h-10 bg-white/10 rounded" />
+									</div>
+								</div>
+							</div>
+						</div>
+						{/* Far left — location page mockup */}
+						<div
+							className="absolute hidden lg:block"
+							style={{
+								width: 200,
+								height: 260,
+								top: 280,
+								left: 60,
+								transform: "rotate(-6deg)",
+								opacity: 0.04,
+							}}
+						>
+							<div className="w-full h-full rounded-lg bg-gradient-to-br from-white/70 to-white/30 shadow-2xl overflow-hidden">
+								<div className="h-[50%] bg-gradient-to-br from-[#6B8B6B]/30 to-[#6B8B6B]/10" />
+								<div className="px-3 pt-3">
+									<div className="h-1.5 w-3/4 bg-white/20 rounded mb-2" />
+									<div className="h-1 w-full bg-white/10 rounded mb-1" />
+									<div className="h-1 w-full bg-white/10 rounded mb-1" />
+									<div className="h-1 w-1/2 bg-white/10 rounded" />
+								</div>
+							</div>
+						</div>
+						{/* Far right — features page mockup */}
+						<div
+							className="absolute hidden lg:block"
+							style={{
+								width: 220,
+								height: 280,
+								top: 260,
+								right: 80,
+								transform: "rotate(15deg)",
+								opacity: 0.05,
+							}}
+						>
+							<div className="w-full h-full rounded-lg bg-gradient-to-br from-white/70 to-white/30 shadow-2xl overflow-hidden">
+								<div className="flex h-[40%]">
+									<div className="w-1/2 bg-[#8B7355]/20" />
+									<div className="w-1/2 px-2 pt-3">
+										<div className="h-1.5 w-full bg-white/20 rounded mb-1.5" />
+										<div className="h-1 w-3/4 bg-white/15 rounded mb-3" />
+										<div className="h-1 w-full bg-white/10 rounded mb-1" />
+										<div className="h-1 w-full bg-white/10 rounded" />
+									</div>
+								</div>
+								<div className="h-[60%] bg-gradient-to-b from-[#4A6B4A]/15 to-transparent" />
+							</div>
+						</div>
+					</div>
+
 					{/* Hero */}
-					<div className="px-6 md:px-12 py-16 md:py-24 max-w-4xl mx-auto text-center">
+					<div className="px-6 md:px-12 py-16 md:py-24 max-w-4xl mx-auto text-center relative z-10">
 						<p className="text-[#C9A96E] text-xs font-medium uppercase tracking-[0.2em] mb-5">
 							Free Tool for Brokerages
 						</p>
