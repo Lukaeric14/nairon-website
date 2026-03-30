@@ -1,16 +1,20 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState, useCallback } from "react";
-import { ArrowUpRight, FileDown, Loader2, AlertCircle, CheckCircle2, Link2 } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router"
+import { useState, useCallback } from "react"
 import {
-	Navbar,
-	Footer,
-} from "@/components/landing";
-import { ModalProvider } from "@/components/landing/modal-provider";
-import { HireModal } from "@/components/landing/hire-modal";
-import { CandidateModal } from "@/components/landing/candidate-modal";
-import { seoHead } from "@/lib/seo";
-import { scrapeZillowListing } from "@/server/zillow-scrape";
-import type { ZillowListing } from "@/server/zillow-scrape";
+	ArrowUpRight,
+	FileDown,
+	Loader2,
+	AlertCircle,
+	CheckCircle2,
+	Link2,
+} from "lucide-react"
+import { Navbar, Footer } from "@/components/landing"
+import { ModalProvider } from "@/components/landing/modal-provider"
+import { HireModal } from "@/components/landing/hire-modal"
+import { CandidateModal } from "@/components/landing/candidate-modal"
+import { seoHead } from "@/lib/seo"
+import { scrapeZillowListing } from "@/server/zillow-scrape"
+import type { ZillowListing } from "@/server/zillow-scrape"
 
 export const Route = createFileRoute("/for/real-estate_/property-pdf")({
 	component: PropertyPdfPage,
@@ -21,34 +25,35 @@ export const Route = createFileRoute("/for/real-estate_/property-pdf")({
 				"Paste a Zillow link and instantly generate a beautiful, branded property PDF. Free tool for real estate brokerages.",
 			path: "/for/real-estate/property-pdf",
 		}),
-});
+})
 
 type PageState =
 	| { step: "input" }
 	| { step: "loading" }
 	| { step: "error"; message: string }
-	| { step: "ready"; listing: ZillowListing };
+	| { step: "ready"; listing: ZillowListing }
 
 function PropertyPdfPage() {
-	const [state, setState] = useState<PageState>({ step: "input" });
-	const [url, setUrl] = useState("");
-	const [email, setEmail] = useState("");
-	const [generating, setGenerating] = useState(false);
+	const [state, setState] = useState<PageState>({ step: "input" })
+	const [url, setUrl] = useState("")
+	const [generating, setGenerating] = useState(false)
 
 	const handleSubmit = useCallback(
 		async (e: React.FormEvent) => {
-			e.preventDefault();
-			if (!url.trim() || !email.trim()) return;
+			e.preventDefault()
+			if (!url.trim()) return
 
-			setState({ step: "loading" });
+			setState({ step: "loading" })
 
 			try {
 				const result = await scrapeZillowListing({
-					data: { url: url.trim(), email: email.trim() },
+					data: {
+						url: url.trim(),
+					},
 				})
 
 				if (result.success && result.listing) {
-					setState({ step: "ready", listing: result.listing });
+					setState({ step: "ready", listing: result.listing })
 				} else {
 					setState({
 						step: "error",
@@ -65,43 +70,50 @@ function PropertyPdfPage() {
 				})
 			}
 		},
-		[url, email],
+		[url],
 	)
 
+	const personalization = {
+		brokerageName: "",
+		agentName: "",
+	}
+
 	const handleDownloadPdf = useCallback(async () => {
-		if (state.step !== "ready") return;
-		setGenerating(true);
+		if (state.step !== "ready") return
+		setGenerating(true)
 
 		try {
-			// Dynamic import to avoid SSR issues with @react-pdf/renderer
-			const { pdf } = await import("@react-pdf/renderer");
+			const { pdf } = await import("@react-pdf/renderer")
 			const { PropertyPDF } = await import(
 				"@/components/property-pdf/pdf-template"
 			)
-			const { createElement } = await import("react");
+			const { createElement } = await import("react")
 
 			const blob = await pdf(
-				createElement(PropertyPDF, { listing: state.listing }) as any,
-			).toBlob();
+				createElement(PropertyPDF, {
+					listing: state.listing,
+					personalization,
+				}) as any,
+			).toBlob()
 
-			const downloadUrl = URL.createObjectURL(blob);
-			const a = document.createElement("a");
-			a.href = downloadUrl;
+			const downloadUrl = URL.createObjectURL(blob)
+			const a = document.createElement("a")
+			a.href = downloadUrl
 			a.download = `${state.listing.address || "property"}-nairon.pdf`.replace(
 				/[^a-zA-Z0-9.-]/g,
 				"-",
 			)
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-			URL.revokeObjectURL(downloadUrl);
+			document.body.appendChild(a)
+			a.click()
+			document.body.removeChild(a)
+			URL.revokeObjectURL(downloadUrl)
 		} catch (err) {
-			console.error("PDF generation failed:", err);
-			alert("PDF generation failed. Please try again.");
+			console.error("PDF generation failed:", err)
+			alert(`PDF generation failed: ${err instanceof Error ? err.message : "Unknown error"}`)
 		} finally {
-			setGenerating(false);
+			setGenerating(false)
 		}
-	}, [state]);
+	}, [state, personalization])
 
 	return (
 		<ModalProvider>
@@ -121,14 +133,14 @@ function PropertyPdfPage() {
 								lineHeight: 1.15,
 							}}
 						>
-							Generate a Property PDF{" "}
+							Generate a Deck for Your Listing{" "}
 							<span className="font-serif italic text-[#C9A96E]">
 								in Seconds
 							</span>
 						</h1>
 						<p className="mt-5 text-[#A39E96] text-base md:text-lg leading-relaxed max-w-xl mx-auto">
 							Paste any Zillow listing link and get a beautifully designed,
-							ready-to-share property brochure. No design skills needed.
+							5-page property brochure in seconds.
 						</p>
 					</div>
 
@@ -137,9 +149,7 @@ function PropertyPdfPage() {
 						{state.step === "input" && (
 							<InputForm
 								url={url}
-								email={email}
 								onUrlChange={setUrl}
-								onEmailChange={setEmail}
 								onSubmit={handleSubmit}
 							/>
 						)}
@@ -159,7 +169,7 @@ function PropertyPdfPage() {
 								onDownload={handleDownloadPdf}
 								generating={generating}
 								onReset={() => {
-									setState({ step: "input" });
+									setState({ step: "input" })
 									setUrl("")
 								}}
 							/>
@@ -176,17 +186,17 @@ function PropertyPdfPage() {
 								{
 									num: "01",
 									title: "Paste a Zillow Link",
-									desc: "Copy any Zillow listing URL and paste it into the tool above.",
+									desc: "Copy any Zillow listing URL and paste it above.",
 								},
 								{
 									num: "02",
-									title: "We Extract the Data",
-									desc: "Our AI scrapes the listing details, images, and market data automatically.",
+									title: "We Build Your Brochure",
+									desc: "Images, description, pricing, and market data — scraped and laid out automatically.",
 								},
 								{
 									num: "03",
-									title: "Download Your PDF",
-									desc: "Get a professionally designed property brochure ready to share with clients.",
+									title: "Download & Share",
+									desc: "Get a 5-page branded PDF ready to send to clients and buyers.",
 								},
 							].map((step) => (
 								<div key={step.num} className="text-center">
@@ -207,21 +217,20 @@ function PropertyPdfPage() {
 					{/* CTA */}
 					<div className="border-t border-white/[0.06] px-6 md:px-12 py-16 md:py-24 text-center">
 						<h2 className="text-[24px] md:text-[36px] font-normal tracking-[-1px] text-[#E8E4DE] max-w-2xl mx-auto">
-							Want AI to Do This{" "}
+							Ready to Automate{" "}
 							<span className="font-serif italic text-[#C9A96E]">
-								Automatically for Every Listing?
+								More of Your Business?
 							</span>
 						</h2>
 						<p className="mt-4 text-[#A39E96] text-base leading-relaxed max-w-lg mx-auto">
-							Nairon builds custom AI infrastructure for brokerages — from
-							instant lead response to automated marketing materials.
+							From instant lead response to listing marketing, CRM workflows, and client follow-ups — we build AI systems that handle the repetitive work so you can focus on closing.
 						</p>
 						<div className="mt-8">
 							<a
 								href="/for/real-estate#discovery"
 								className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-base px-6 py-3 rounded-full transition-colors"
 							>
-								Book your discovery
+								Book a discovery call
 								<ArrowUpRight className="w-4 h-4" />
 							</a>
 						</div>
@@ -238,25 +247,23 @@ function PropertyPdfPage() {
 
 /* ── Sub-components ── */
 
+const inputCls =
+	"w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-4 text-[#E8E4DE] text-base placeholder:text-[#A39E96]/30 outline-none focus:border-[#C9A96E]/40 focus:ring-1 focus:ring-[#C9A96E]/20 transition-all"
+
 function InputForm({
 	url,
-	email,
 	onUrlChange,
-	onEmailChange,
 	onSubmit,
 }: {
-	url: string;
-	email: string;
-	onUrlChange: (v: string) => void;
-	onEmailChange: (v: string) => void;
-	onSubmit: (e: React.FormEvent) => void;
+	url: string
+	onUrlChange: (v: string) => void
+	onSubmit: (e: React.FormEvent) => void
 }) {
-	const isValid =
-		url.includes("zillow.com") && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+	const isValid = url.includes("zillow.com")
 
 	return (
 		<form onSubmit={onSubmit} className="space-y-5">
-			{/* URL input */}
+			{/* Zillow URL */}
 			<div>
 				<label className="text-[#A39E96] text-sm mb-2 block">
 					Zillow Listing URL
@@ -268,26 +275,9 @@ function InputForm({
 						value={url}
 						onChange={(e) => onUrlChange(e.target.value)}
 						placeholder="https://www.zillow.com/homedetails/..."
-						className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl pl-11 pr-4 py-4 text-[#E8E4DE] text-base placeholder:text-[#A39E96]/30 outline-none focus:border-[#C9A96E]/40 focus:ring-1 focus:ring-[#C9A96E]/20 transition-all"
+						className={`${inputCls} pl-11`}
 					/>
 				</div>
-			</div>
-
-			{/* Email input */}
-			<div>
-				<label className="text-[#A39E96] text-sm mb-2 block">
-					Your email
-				</label>
-				<input
-					type="email"
-					value={email}
-					onChange={(e) => onEmailChange(e.target.value)}
-					placeholder="you@yourbrokerage.com"
-					className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-4 text-[#E8E4DE] text-base placeholder:text-[#A39E96]/30 outline-none focus:border-[#C9A96E]/40 focus:ring-1 focus:ring-[#C9A96E]/20 transition-all"
-				/>
-				<p className="text-[#A39E96]/40 text-xs mt-2">
-					We&apos;ll send you a copy. No spam, ever.
-				</p>
 			</div>
 
 			{/* Submit */}
@@ -307,7 +297,9 @@ function LoadingState() {
 	return (
 		<div className="flex flex-col items-center justify-center py-20">
 			<Loader2 className="w-8 h-8 text-[#C9A96E] animate-spin mb-4" />
-			<p className="text-[#A39E96] text-base">Fetching listing data...</p>
+			<p className="text-[#A39E96] text-base">
+				Scraping listing data & building your brochure...
+			</p>
 			<p className="text-[#A39E96]/50 text-sm mt-2">
 				This takes a few seconds
 			</p>
@@ -319,8 +311,8 @@ function ErrorState({
 	message,
 	onRetry,
 }: {
-	message: string;
-	onRetry: () => void;
+	message: string
+	onRetry: () => void
 }) {
 	return (
 		<div className="flex flex-col items-center justify-center py-16">
@@ -350,14 +342,14 @@ function ReadyState({
 	generating,
 	onReset,
 }: {
-	listing: ZillowListing;
-	onDownload: () => void;
-	generating: boolean;
-	onReset: () => void;
+	listing: ZillowListing
+	onDownload: () => void
+	generating: boolean
+	onReset: () => void
 }) {
 	const location = [listing.city, listing.state, listing.zipCode]
 		.filter(Boolean)
-		.join(", ");
+		.join(", ")
 
 	return (
 		<div className="space-y-6">
@@ -386,11 +378,9 @@ function ReadyState({
 					{/* Stats row */}
 					<div className="flex items-center gap-6 mb-4">
 						{listing.price > 0 && (
-							<div>
-								<p className="text-[#C9A96E] text-xl md:text-2xl font-semibold tabular-nums">
-									${listing.price.toLocaleString()}
-								</p>
-							</div>
+							<p className="text-[#C9A96E] text-xl md:text-2xl font-semibold tabular-nums">
+								${listing.price.toLocaleString()}
+							</p>
 						)}
 						<div className="flex items-center gap-4 text-[#A39E96] text-sm">
 							{listing.beds > 0 && <span>{listing.beds} bed</span>}
@@ -401,11 +391,66 @@ function ReadyState({
 						</div>
 					</div>
 
-					{/* Success message */}
-					<div className="flex items-center gap-2 text-emerald-400 text-sm mb-5">
+					{/* Images found */}
+					<div className="flex items-center gap-2 text-emerald-400 text-sm mb-2">
 						<CheckCircle2 className="w-4 h-4" />
-						<span>Listing data extracted successfully</span>
+						<span>
+							{listing.images.length} photos extracted
+						</span>
 					</div>
+
+					{/* Debug: scraped image gallery */}
+					{listing.images.length > 0 && (
+						<div className="mb-5">
+							<p className="text-[#A39E96]/50 text-xs mb-2">
+								Scraped images (used in PDF pages 1-5):
+							</p>
+							<div className="grid grid-cols-5 gap-2">
+								{listing.images.map((imgUrl, i) => (
+									<div key={imgUrl} className="relative aspect-square rounded overflow-hidden border border-white/[0.08]">
+										<img
+											src={imgUrl}
+											alt={`Scraped ${i + 1}`}
+											className="w-full h-full object-cover"
+											onError={(e) => {
+												(e.target as HTMLImageElement).style.display = "none"
+												;(e.target as HTMLImageElement).parentElement!.classList.add("bg-red-500/20")
+											}}
+										/>
+										<span className="absolute top-0.5 left-1 text-[10px] font-mono text-white bg-black/60 px-1 rounded">
+											{i}
+										</span>
+										{imgUrl.includes("zillowstatic") ? (
+											<span className="absolute bottom-0.5 right-1 text-[8px] font-mono text-emerald-400 bg-black/60 px-1 rounded">
+												zillow
+											</span>
+										) : (
+											<span className="absolute bottom-0.5 right-1 text-[8px] font-mono text-amber-400 bg-black/60 px-1 rounded">
+												other
+											</span>
+										)}
+									</div>
+								))}
+							</div>
+							{/* Show raw URLs for debugging */}
+							<details className="mt-2">
+								<summary className="text-[#A39E96]/40 text-[10px] cursor-pointer hover:text-[#A39E96]/60">
+									Show raw URLs
+								</summary>
+								<div className="mt-1 space-y-0.5">
+									{listing.images.map((imgUrl, i) => (
+										<p key={imgUrl} className="text-[10px] font-mono text-[#A39E96]/40 break-all">
+											[{i}] {imgUrl}
+										</p>
+									))}
+								</div>
+							</details>
+						</div>
+					)}
+
+					<p className="text-[#A39E96]/50 text-xs mb-5">
+						5-page PDF: Cover, Stats, About, Features, Location
+					</p>
 
 					{/* Download button */}
 					<button
@@ -417,7 +462,7 @@ function ReadyState({
 						{generating ? (
 							<>
 								<Loader2 className="w-4 h-4 animate-spin" />
-								Generating PDF...
+								Generating 5-page PDF...
 							</>
 						) : (
 							<>

@@ -18,6 +18,7 @@ import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ForRealEstateV2RouteImport } from './routes/for/real-estate-v2'
 import { Route as ForRealEstateRouteImport } from './routes/for/real-estate'
 import { Route as ForRealEstatePropertyPdfRouteImport } from './routes/for/real-estate_.property-pdf'
 
@@ -66,6 +67,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ForRealEstateV2Route = ForRealEstateV2RouteImport.update({
+  id: '/for/real-estate-v2',
+  path: '/for/real-estate-v2',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ForRealEstateRoute = ForRealEstateRouteImport.update({
   id: '/for/real-estate',
   path: '/for/real-estate',
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
   '/for/real-estate': typeof ForRealEstateRoute
+  '/for/real-estate-v2': typeof ForRealEstateV2Route
   '/for/real-estate/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
 export interface FileRoutesByTo {
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
   '/for/real-estate': typeof ForRealEstateRoute
+  '/for/real-estate-v2': typeof ForRealEstateV2Route
   '/for/real-estate/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
 export interface FileRoutesById {
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
   '/for/real-estate': typeof ForRealEstateRoute
+  '/for/real-estate-v2': typeof ForRealEstateV2Route
   '/for/real-estate_/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
 export interface FileRouteTypes {
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/universe'
     | '/for/real-estate'
+    | '/for/real-estate-v2'
     | '/for/real-estate/property-pdf'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/universe'
     | '/for/real-estate'
+    | '/for/real-estate-v2'
     | '/for/real-estate/property-pdf'
   id:
     | '__root__'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/universe'
     | '/for/real-estate'
+    | '/for/real-estate-v2'
     | '/for/real-estate_/property-pdf'
   fileRoutesById: FileRoutesById
 }
@@ -171,6 +183,7 @@ export interface RootRouteChildren {
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   UniverseRoute: typeof UniverseRoute
   ForRealEstateRoute: typeof ForRealEstateRoute
+  ForRealEstateV2Route: typeof ForRealEstateV2Route
   ForRealEstatePropertyPdfRoute: typeof ForRealEstatePropertyPdfRoute
 }
 
@@ -239,6 +252,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/for/real-estate-v2': {
+      id: '/for/real-estate-v2'
+      path: '/for/real-estate-v2'
+      fullPath: '/for/real-estate-v2'
+      preLoaderRoute: typeof ForRealEstateV2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/for/real-estate': {
       id: '/for/real-estate'
       path: '/for/real-estate'
@@ -267,6 +287,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   UniverseRoute: UniverseRoute,
   ForRealEstateRoute: ForRealEstateRoute,
+  ForRealEstateV2Route: ForRealEstateV2Route,
   ForRealEstatePropertyPdfRoute: ForRealEstatePropertyPdfRoute,
 }
 export const routeTree = rootRouteImport

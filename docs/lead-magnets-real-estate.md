@@ -2,11 +2,7 @@
 
 ## Context
 
-**Company**: Nairon — AI infrastructure agency for real estate brokerages
-**Target**: Brokerage owners/operators (decision-makers, not individual agents)
-**What we automate**: Lead gen, lead qualification, client follow-up, social media, admin/docs, market analysis
-**Page**: `/for/real-estate` landing page
-**Goal**: Capture emails from prospects who aren't ready to book a discovery call yet
+**Company**: Nairon — AI infrastructure agency for real estate brokerages **Target**: Brokerage owners/operators (decision-makers, not individual agents) **What we automate**: Lead gen, lead qualification, client follow-up, social media, admin/docs, market analysis **Page**: `/for/real-estate` landing page **Goal**: Capture emails from prospects who aren't ready to book a discovery call yet
 
 ---
 
@@ -14,9 +10,8 @@
 
 ### 1. "The AI Readiness Scorecard for Brokerages" — Quiz/Assessment
 
-**Format**: Interactive quiz (5-8 questions) → personalized PDF report
-**Buyer stage**: Awareness → Consideration
-**Why this works**:
+**Format**: Interactive quiz (5-8 questions) → personalized PDF report **Buyer stage**: Awareness → Consideration **Why this works**:
+
 - Brokers are curious but don't know where they stand — a score gives them a concrete starting point
 - Self-assessment creates a natural gap ("You scored 3/10 on lead qualification automation")
 - The gap IS your product pitch — "Nairon closes these gaps"
@@ -24,22 +19,21 @@
 - Enables segmentation: low scorers get education sequences, high scorers get demo CTAs
 
 **Questions could cover**:
+
 - How do you currently qualify incoming leads? (manual / CRM rules / AI)
 - What percentage of leads get a response within 5 minutes?
 - How do you generate listing content for social media?
 - Do you have automated follow-up sequences?
 - How do you track agent performance metrics?
 
-**Effort**: Medium (1-2 weeks — form + scoring logic + PDF report template)
-**CTA on page**: "Find out how AI-ready your brokerage is — free 2-min assessment"
+**Effort**: Medium (1-2 weeks — form + scoring logic + PDF report template) **CTA on page**: "Find out how AI-ready your brokerage is — free 2-min assessment"
 
 ---
 
 ### 2. "The Brokerage AI Automation Playbook" — Cheat Sheet / One-Pager
 
-**Format**: Beautifully designed single-page PDF (front and back)
-**Buyer stage**: Awareness
-**Why this works**:
+**Format**: Beautifully designed single-page PDF (front and back) **Buyer stage**: Awareness **Why this works**:
+
 - Low friction — looks quick to consume (it IS quick)
 - Maps out the 6 areas of brokerage operations that can be automated with AI
 - Each area has a "manual way vs. AI way" comparison
@@ -47,8 +41,9 @@
 - Easy to share with business partners
 
 **Content structure**:
+
 | Operation | Manual (2022) | AI-Powered (2026) |
-|-----------|--------------|-------------------|
+| --- | --- | --- |
 | Lead Gen | Cold calls, bought lists | AI-targeted campaigns, intent signals |
 | Lead Qualification | Agents manually triage | Instant AI scoring + routing |
 | Follow-up | Manual CRM reminders | Autonomous multi-channel sequences |
@@ -56,23 +51,22 @@
 | Admin & Docs | Hours of paperwork | Auto-filled contracts, AI summaries |
 | Market Analysis | Manual comps research | Real-time AI market intelligence |
 
-**Effort**: Low (2-4 hours — design + copywriting)
-**CTA on page**: "Download the free AI Automation Playbook for brokerages"
+**Effort**: Low (2-4 hours — design + copywriting) **CTA on page**: "Download the free AI Automation Playbook for brokerages"
 
 ---
 
 ### 3. "5-Minute Lead Response Calculator" — Interactive Tool
 
-**Format**: Simple calculator on the page (no download needed, email-gate the results)
-**Buyer stage**: Awareness → Consideration
-**Why this works**:
+**Format**: Simple calculator on the page (no download needed, email-gate the results) **Buyer stage**: Awareness → Consideration **Why this works**:
+
 - Lead response time is the #1 pain point brokers understand viscerally
 - Industry data: responding within 5 min = 21x more likely to qualify a lead
 - Calculator shows: "You're losing $X/month by responding in Y minutes instead of Z"
 - Creates urgency with a dollar figure tied to THEIR numbers
-- Natural bridge to "Nairon's AI responds in <30 seconds"
+- Natural bridge to "Nairon's AI responds in &lt;30 seconds"
 
 **Inputs**:
+
 - Average monthly leads
 - Average response time (minutes)
 - Average deal value
@@ -80,16 +74,14 @@
 
 **Output**: Estimated revenue lost per month + "What if you responded in 30 seconds?"
 
-**Effort**: Medium (1 week — calculator UI + formula + email gate)
-**CTA on page**: "See how much revenue you're leaving on the table"
+**Effort**: Medium (1 week — calculator UI + formula + email gate) **CTA on page**: "See how much revenue you're leaving on the table"
 
 ---
 
 ### 4. "AI Implementation Roadmap Template" — Notion/Google Doc Template
 
-**Format**: Pre-built Notion template or Google Doc
-**Buyer stage**: Consideration → Decision
-**Why this works**:
+**Format**: Pre-built Notion template or Google Doc **Buyer stage**: Consideration → Decision **Why this works**:
+
 - For brokers who are already sold on AI but don't know where to start
 - Gives them a structured 90-day plan to evaluate and implement AI
 - Weeks 1-4: Audit (matches our process step 1-2)
@@ -97,30 +89,27 @@
 - Weeks 9-12: Measure + expand
 - Natural realization: "I could do this myself in 12 weeks... or Nairon could do it in 4"
 
-**Effort**: Low-Medium (4-8 hours)
-**CTA on page**: "Get the free 90-day AI roadmap for your brokerage"
+**Effort**: Low-Medium (4-8 hours) **CTA on page**: "Get the free 90-day AI roadmap for your brokerage"
 
 ---
 
 ### 5. "Real Estate AI Case Study Pack" — PDF Collection
 
-**Format**: 3-5 page PDF with 2-3 detailed case studies
-**Buyer stage**: Consideration → Decision
-**Why this works**:
+**Format**: 3-5 page PDF with 2-3 detailed case studies **Buyer stage**: Consideration → Decision **Why this works**:
+
 - Social proof from actual brokerage transformations
 - Numbers-driven: "Reduced lead response time from 4 hours to 28 seconds"
 - Shows the BEFORE/AFTER that brokers can relate to
 - Highest quality leads — someone downloading case studies is close to buying
 
-**Effort**: Medium (1-2 weeks — need real client stories)
-**CTA on page**: "See how brokerages like yours are using AI"
+**Effort**: Medium (1-2 weeks — need real client stories) **CTA on page**: "See how brokerages like yours are using AI"
 
 ---
 
 ## Recommended Priority Order
 
 | Priority | Lead Magnet | Why First |
-|----------|------------|-----------|
+| --- | --- | --- |
 | **1** | AI Automation Playbook (cheat sheet) | Fastest to create, broadest appeal, lowest friction |
 | **2** | AI Readiness Scorecard (quiz) | Highest conversion + segmentation value |
 | **3** | Lead Response Calculator | Creates urgency with real dollars |
@@ -131,13 +120,14 @@
 
 ## Gating & Capture Plan
 
-**Form fields**: Email only (maximize conversion)
-**Placement**:
+**Form fields**: Email only (maximize conversion) **Placement**:
+
 - Inline CTA between sections on `/for/real-estate` (after "The Gap" section is ideal)
 - Exit-intent popup with lead magnet offer
 - Sticky bottom bar on mobile
 
 **Landing page for each lead magnet** (when ready):
+
 - `/for/real-estate/playbook`
 - `/for/real-estate/assessment`
 

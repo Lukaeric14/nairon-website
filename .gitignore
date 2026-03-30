@@ -11,3 +11,5 @@ convex/_generated/
 *.tsbuildinfo
 app.config.timestamp_*
 tmp/
+.vercel
+.env*.local
