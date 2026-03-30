@@ -8,8 +8,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, "..");
 const rootEnvPaths = [
-	path.join(projectRoot, ".env.local"),
 	path.join(projectRoot, ".env"),
+	path.join(projectRoot, ".env.local"),
 ];
 const webEnvLocalPath = path.join(projectRoot, "apps/web/.env.local");
 const timeoutMs = Number(process.env.CONVEX_ENV_SYNC_TIMEOUT_MS ?? 30_000);
