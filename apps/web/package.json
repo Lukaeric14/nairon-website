@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev --port ${PORT:-3001}",
-		"build": "vite build",
+		"build": "cd ../.. && npx convex codegen --typecheck disable && npx convex deploy && cd apps/web && vite build",
 		"check-types": "tsc --noEmit"
 	},
 	"dependencies": {
