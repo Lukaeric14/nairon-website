@@ -176,9 +176,9 @@ function PropertyPdfPage() {
 								width: 280,
 								height: 370,
 								top: 40,
-								left: -40,
+								left: "8%",
 								transform: "rotate(-12deg)",
-								opacity: 0.12,
+								opacity: 0.22,
 							}}
 						>
 							<img
@@ -202,9 +202,9 @@ function PropertyPdfPage() {
 								width: 260,
 								height: 340,
 								top: 60,
-								right: -30,
+								right: "8%",
 								transform: "rotate(10deg)",
-								opacity: 0.10,
+								opacity: 0.20,
 							}}
 						>
 							<img
@@ -229,9 +229,9 @@ function PropertyPdfPage() {
 								width: 220,
 								height: 290,
 								top: 300,
-								left: 40,
+								left: "14%",
 								transform: "rotate(-5deg)",
-								opacity: 0.07,
+								opacity: 0.15,
 							}}
 						>
 							<img
@@ -254,9 +254,9 @@ function PropertyPdfPage() {
 								width: 240,
 								height: 310,
 								top: 280,
-								right: 60,
+								right: "14%",
 								transform: "rotate(14deg)",
-								opacity: 0.08,
+								opacity: 0.16,
 							}}
 						>
 							<img
