@@ -6,8 +6,7 @@
 		"jsx": "react-jsx",
 		"types": ["vite/client"],
 		"paths": {
-			"@/*": ["./src/*"],
-			"@convex/*": ["../../convex/*"]
+			"@/*": ["./src/*"]
 		},
 		"outDir": "./dist"
 	},
