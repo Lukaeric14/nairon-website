@@ -156,6 +156,63 @@ Use the end-to-end job smoke test when you want to verify the actual Convex pipe
 bun run verify:zillow
 ```
 
+### Production Deploy Note
+
+Deploying the web app on Vercel does **not** deploy the Convex backend. The Property PDF Generator depends on Convex background actions, so after backend changes you must deploy Convex production manually.
+
+Manual production steps:
+
+```bash
+cd packages/backend
+CONVEX_DEPLOY_KEY=prod:... bun run deploy
+```
+
+After that, confirm the production Convex deployment has the required backend env vars set:
+
+- `BRIGHTDATA_API_KEY`
+- `OPENAI_API_KEY`
+- `FAL_KEY`
+- `SLACK_WEBHOOK_URL` if you want Slack notifications
+
+If the frontend is live but production still shows the old Zillow-blocked error, the usual cause is that Vercel deployed successfully while Convex prod did not.
+
+### Production Troubleshooting
+
+If the Property PDF Generator stops working in production, check these first before debugging code:
+
+1. **Convex prod deploy actually happened**
+   - Vercel deploys the frontend only.
+   - Run `cd packages/backend && CONVEX_DEPLOY_KEY=prod:... bun run deploy` after backend changes.
+
+2. **Bright Data balance and API key**
+   - Confirm `BRIGHTDATA_API_KEY` is set on the production Convex deployment.
+   - Confirm the Bright Data account still has balance / active billing.
+   - If Zillow extraction starts failing immediately, Bright Data credits or dataset access are one of the first things to check.
+
+3. **fal.ai balance and API key**
+   - Confirm `FAL_KEY` is set in production Convex.
+   - Confirm the fal account still has credits.
+   - If jobs get stuck during `classifying`, fal credits or auth are likely suspects.
+
+4. **OpenAI key and usage limits**
+   - Confirm `OPENAI_API_KEY` is set in production Convex.
+   - Check for exhausted credits, spend caps, or rate limits.
+   - Neighborhood copy has a fallback, but OpenAI failures can still degrade or delay the flow.
+
+5. **Resend / Slack optional integrations**
+   - If email delivery fails, verify Resend configuration and domain status.
+   - If Slack notifications stop, verify `SLACK_WEBHOOK_URL` is still valid.
+   - These do not block PDF generation itself, but they can make the automation look partially broken.
+
+6. **Smoke test the real production backend**
+   - Run `bun run verify:zillow` against the intended deployment after any production change.
+   - If needed, probe Bright Data directly with `BRIGHTDATA_API_KEY=... bun run probe:zillow:brightdata:dataset`.
+
+7. **Watch the phase where jobs stop**
+   - `scraping` issues usually point to Bright Data / upstream Zillow extraction.
+   - `classifying` issues usually point to fal.ai.
+   - `generating` issues usually point to PDF rendering or downstream completion logic.
+
 ### Environment Variables
 
 ```bash

@@ -1144,10 +1144,10 @@ async function generateNeighborhoodDescription(
 				messages: [
 					{
 						role: "user",
-						content: `Write a 3-4 sentence description of the neighborhood around ${listing.address || "this property"} in ${loc || "this area"}. Property: ${listing.propertyType}, ${listing.beds} bed, ${listing.baths} bath, ${listing.sqft ? listing.sqft + " sqft" : ""}, ${listing.yearBuilt ? "built " + listing.yearBuilt : ""}. Write naturally like a local agent. No emdashes, exclamation marks, or buzzwords. Don't start with "Welcome" or "Nestled in".`,
+						content: `Write a concise neighborhood description of the area around ${listing.address || "this property"} in ${loc || "this area"}. Property: ${listing.propertyType}, ${listing.beds} bed, ${listing.baths} bath, ${listing.sqft ? listing.sqft + " sqft" : ""}, ${listing.yearBuilt ? "built " + listing.yearBuilt : ""}. Use 2-3 short sentences, keep it under 260 characters, and make it brochure-friendly. Write naturally like a local agent. No emdashes, exclamation marks, or buzzwords. Don't start with "Welcome" or "Nestled in".`,
 					},
 				],
-				max_tokens: 200,
+				max_tokens: 120,
 			}),
 		});
 

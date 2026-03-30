@@ -492,10 +492,41 @@ function fmt(n: number): string {
 	return `$${n.toLocaleString()}`;
 }
 
+function normalizeCopy(text: string): string {
+	return text.replace(/\s+/g, " ").trim();
+}
+
 function trunc(text: string, max: number): string {
-	if (!text) return "";
-	if (text.length <= max) return text;
-	return `${text.slice(0, max).trimEnd()}…`;
+	const normalized = normalizeCopy(text);
+	if (!normalized) return "";
+	if (normalized.length <= max) return normalized;
+
+	const wordSafe = normalized.slice(0, max + 1).replace(/\s+\S*$/, "").trimEnd();
+	return `${wordSafe || normalized.slice(0, max).trimEnd()}…`;
+}
+
+function fitCopy(
+	text: string,
+	{ maxChars, maxSentences }: { maxChars: number; maxSentences: number },
+): string {
+	const normalized = normalizeCopy(text);
+	if (!normalized) return "";
+
+	const sentences =
+		normalized.match(/[^.!?]+[.!?]?/g)?.map((sentence) => sentence.trim()).filter(Boolean) ??
+		[normalized];
+
+	const sentenceLimited = sentences.slice(0, maxSentences);
+	let fitted = "";
+
+	for (const sentence of sentenceLimited) {
+		const candidate = fitted ? `${fitted} ${sentence}` : sentence;
+		if (candidate.length > maxChars) break;
+		fitted = candidate;
+	}
+
+	if (fitted) return fitted;
+	return trunc(sentenceLimited.join(" "), maxChars);
 }
 
 export function PropertyPDF({
@@ -647,7 +678,10 @@ export function PropertyPDF({
 					)}
 
 					<Text style={s.splitDesc}>
-						{trunc(listing.description, 200) ||
+						{fitCopy(listing.description, {
+							maxChars: 150,
+							maxSentences: 2,
+						}) ||
 							`A beautifully appointed ${listing.propertyType.toLowerCase()} in ${loc || "a prime location"}.`}
 					</Text>
 
@@ -685,7 +719,10 @@ export function PropertyPDF({
 							: ""}
 					</Text>
 					<Text style={s.aboutDesc}>
-						{trunc(listing.description, 500) ||
+						{fitCopy(listing.description, {
+							maxChars: 320,
+							maxSentences: 4,
+						}) ||
 							`This ${listing.propertyType.toLowerCase()} offers ${listing.beds ? `${listing.beds} bedrooms` : "generous living spaces"}${listing.baths ? ` and ${listing.baths} bathrooms` : ""}${listing.sqft ? ` across ${listing.sqft.toLocaleString()} square feet of thoughtfully designed living space` : ""}. Contact the listing agent for a private showing.`}
 					</Text>
 
@@ -803,7 +840,10 @@ export function PropertyPDF({
 					{listing.neighborhoodDescription ? (
 						<View style={s.marketCard}>
 							<Text style={s.marketCardText}>
-								{listing.neighborhoodDescription}
+								{fitCopy(listing.neighborhoodDescription, {
+									maxChars: 260,
+									maxSentences: 3,
+								})}
 							</Text>
 						</View>
 					) : null}
@@ -815,13 +855,16 @@ export function PropertyPDF({
 									Time on Market
 								</Text>
 								<Text style={s.marketCardText}>
-									This property has been listed for{" "}
-									{listing.daysOnZillow} days.
-									{listing.daysOnZillow < 7
-										? " This is a new listing. Schedule a showing before it's gone."
-										: listing.daysOnZillow < 30
-											? " Still a fresh listing with strong interest expected."
-											: " There may be room for negotiation. Ask your agent."}
+									{fitCopy(
+										`This property has been listed for ${listing.daysOnZillow} days.${
+											listing.daysOnZillow < 7
+												? " This is a new listing. Schedule a showing before it's gone."
+												: listing.daysOnZillow < 30
+													? " Still a fresh listing with strong interest expected."
+													: " There may be room for negotiation. Ask your agent."
+										}`,
+										{ maxChars: 180, maxSentences: 2 },
+									)}
 								</Text>
 							</View>
 						)}
@@ -833,16 +876,16 @@ export function PropertyPDF({
 							Property Details
 						</Text>
 						<Text style={s.marketCardText}>
-							{listing.propertyType} in {loc || "a desirable location"}.
-							{listing.price && listing.sqft
-								? ` Listed at $${Math.round(listing.price / listing.sqft)} per square foot.`
-								: ""}
-							{listing.yearBuilt
-								? ` Built in ${listing.yearBuilt}.`
-								: ""}
-							{listing.lotSize
-								? ` ${listing.lotSize} lot.`
-								: ""}
+							{fitCopy(
+								`${listing.propertyType} in ${loc || "a desirable location"}.${
+									listing.price && listing.sqft
+										? ` Listed at $${Math.round(listing.price / listing.sqft)} per square foot.`
+										: ""
+								}${listing.yearBuilt ? ` Built in ${listing.yearBuilt}.` : ""}${
+									listing.lotSize ? ` ${listing.lotSize} lot.` : ""
+								}`,
+								{ maxChars: 170, maxSentences: 3 },
+							)}
 						</Text>
 					</View>
 
