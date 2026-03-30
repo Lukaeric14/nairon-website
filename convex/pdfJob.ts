@@ -55,6 +55,8 @@ interface ZillowListing {
 	neighborhoodDescription: string;
 }
 
+const DEFAULT_BRIGHTDATA_ZILLOW_DATASET_ID = "gd_lfqkr8wm13ixtbd8f5";
+
 // ── Client-facing: create job + subscribe ──────────────────────────────────
 
 export const createJob = mutation({
@@ -147,11 +149,67 @@ export const processJob = internalAction({
 				status: "scraping",
 			});
 
+			const brightDataKey = process.env.BRIGHTDATA_API_KEY;
+			const brightDataDatasetId =
+				process.env.BRIGHTDATA_DATASET_ID ||
+				DEFAULT_BRIGHTDATA_ZILLOW_DATASET_ID;
 			const firecrawlKey = process.env.FIRECRAWL_API_KEY;
-			if (!firecrawlKey) throw new Error("FIRECRAWL_API_KEY not configured");
+			let brightDataFailure: string | null = null;
 
-			const html = await fetchWithFirecrawl(url, firecrawlKey);
-			const listing = parseZillowHtml(html, url);
+			let listing: ZillowListing;
+			let source: string;
+
+			if (brightDataKey) {
+				try {
+					listing = await fetchWithBrightDataDataset(
+						url,
+						brightDataKey,
+						brightDataDatasetId,
+					);
+					source = `brightdata:${brightDataDatasetId}`;
+					console.log(
+						`[pdfJob] Using ${source} for ${url} (images=${listing.images.length}, address=${listing.address})`,
+					);
+				} catch (error) {
+					brightDataFailure =
+						error instanceof Error ? error.message : String(error);
+					console.error(`[pdfJob] Bright Data failed: ${brightDataFailure}`);
+
+					try {
+						const fallback = await fetchZillowListingWithFallback(url, firecrawlKey);
+						listing = fallback.listing;
+						source = fallback.source;
+						console.log(
+							`[pdfJob] Falling back to ${source} for ${url} (${fallback.html.length} chars)`,
+						);
+					} catch (fallbackError) {
+						const fallbackMessage =
+							fallbackError instanceof Error
+								? fallbackError.message
+								: String(fallbackError);
+						throw new Error(
+							`Bright Data failed: ${brightDataFailure}. ${fallbackMessage}`,
+						);
+					}
+				}
+			} else {
+				try {
+					const fallback = await fetchZillowListingWithFallback(url, firecrawlKey);
+					listing = fallback.listing;
+					source = fallback.source;
+					console.log(
+						`[pdfJob] Using ${source} scrape result for ${url} (${fallback.html.length} chars)`,
+					);
+				} catch (fallbackError) {
+					const fallbackMessage =
+						fallbackError instanceof Error
+							? fallbackError.message
+							: String(fallbackError);
+					throw new Error(
+						`BRIGHTDATA_API_KEY is not configured in Convex. ${fallbackMessage}`,
+					);
+				}
+			}
 
 			// Step 2: Validate images
 			if (listing.images.length > 0) {
@@ -176,12 +234,6 @@ export const processJob = internalAction({
 					}),
 				);
 				listing.images = validated.filter(Boolean) as string[];
-			}
-
-			if (!listing.address && !listing.price) {
-				throw new Error(
-					"Could not extract listing data. Zillow may have blocked the request.",
-				);
 			}
 
 			// Step 3: Classify images + generate neighborhood description (parallel)
@@ -390,6 +442,383 @@ async function fetchWithFirecrawl(
 		}
 	}
 	throw lastError!;
+}
+
+function buildLotSize(
+	lotAreaValue: unknown,
+	lotAreaUnits: unknown,
+): string | null {
+	if (
+		typeof lotAreaValue !== "number" ||
+		!Number.isFinite(lotAreaValue) ||
+		lotAreaValue <= 0
+	) {
+		return null;
+	}
+
+	if (lotAreaUnits === "Acres") {
+		return `${lotAreaValue} Acres`;
+	}
+
+	if (lotAreaUnits === "Square Feet") {
+		return `${Math.round(lotAreaValue).toLocaleString()} sqft`;
+	}
+
+	return `${lotAreaValue} ${typeof lotAreaUnits === "string" ? lotAreaUnits : ""}`.trim();
+}
+
+function extractBrightDataImages(item: Record<string, any>): string[] {
+	const photos = Array.isArray(item.photos) ? item.photos : [];
+	const images: string[] = [];
+
+	for (const photo of photos) {
+		const jpegSources = Array.isArray(photo?.mixedSources?.jpeg)
+			? photo.mixedSources.jpeg
+			: [];
+		if (jpegSources.length === 0) continue;
+
+		const best = jpegSources.reduce((largest: any, current: any) => {
+			const largestWidth =
+				typeof largest?.width === "number" ? largest.width : 0;
+			const currentWidth =
+				typeof current?.width === "number" ? current.width : 0;
+			return currentWidth > largestWidth ? current : largest;
+		}, jpegSources[0]);
+
+		if (typeof best?.url === "string") {
+			images.push(best.url);
+		}
+	}
+
+	return images.slice(0, 20);
+}
+
+function parseBrightDataListing(
+	item: Record<string, any>,
+	url: string,
+): ZillowListing {
+	const nestedAddress =
+		item.address && typeof item.address === "object" ? item.address : {};
+	const streetAddress =
+		typeof item.streetAddress === "string"
+			? item.streetAddress
+			: typeof nestedAddress.streetAddress === "string"
+				? nestedAddress.streetAddress
+				: "";
+	const city =
+		typeof item.city === "string"
+			? item.city
+			: typeof nestedAddress.city === "string"
+				? nestedAddress.city
+				: "";
+	const state =
+		typeof item.state === "string"
+			? item.state
+			: typeof nestedAddress.state === "string"
+				? nestedAddress.state
+				: "";
+	const zipCode =
+		typeof item.zipcode === "string"
+			? item.zipcode
+			: typeof nestedAddress.zipcode === "string"
+				? nestedAddress.zipcode
+				: "";
+
+	const propertyType =
+		typeof item.homeType === "string"
+			? item.homeType.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())
+			: "Residential";
+
+	return {
+		address: streetAddress,
+		city,
+		state,
+		zipCode,
+		price: typeof item.price === "number" ? item.price : 0,
+		beds: typeof item.bedrooms === "number" ? item.bedrooms : 0,
+		baths: typeof item.bathrooms === "number" ? item.bathrooms : 0,
+		sqft: typeof item.livingArea === "number" ? item.livingArea : 0,
+		yearBuilt: typeof item.yearBuilt === "number" ? item.yearBuilt : null,
+		description: typeof item.description === "string" ? item.description : "",
+		images: extractBrightDataImages(item),
+		classifiedImages: [],
+		lotSize: buildLotSize(item.lotAreaValue, item.lotAreaUnits),
+		propertyType,
+		zestimate: typeof item.zestimate === "number" ? item.zestimate : null,
+		daysOnZillow:
+			typeof item.daysOnZillow === "number" ? item.daysOnZillow : null,
+		url:
+			typeof item.hdpUrl === "string" && item.hdpUrl.startsWith("http")
+				? item.hdpUrl
+				: url,
+		neighborhoodDescription: "",
+	};
+}
+
+function normalizeBrightDataResponse(body: string): Record<string, any>[] {
+	const trimmed = body.trim();
+	if (!trimmed) {
+		throw new Error("Bright Data returned an empty response body");
+	}
+
+	try {
+		const parsed = JSON.parse(trimmed);
+		if (Array.isArray(parsed)) return parsed;
+		return [parsed];
+	} catch {
+		return trimmed
+			.split(/\r?\n/)
+			.map((line) => line.trim())
+			.filter(Boolean)
+			.map((line) => JSON.parse(line));
+	}
+}
+
+async function fetchBrightDataSnapshot(
+	apiKey: string,
+	snapshotId: string,
+): Promise<Record<string, any>[]> {
+	const deadline = Date.now() + 90_000;
+
+	while (Date.now() < deadline) {
+		const progressResponse = await fetch(
+			`https://api.brightdata.com/datasets/v3/progress/${snapshotId}`,
+			{
+				headers: {
+					Authorization: `Bearer ${apiKey}`,
+				},
+			},
+		);
+
+		if (!progressResponse.ok) {
+			throw new Error(
+				`Bright Data progress check failed (${progressResponse.status})`,
+			);
+		}
+
+		const progress = await progressResponse.json();
+		if (progress.status === "ready") {
+			const downloadResponse = await fetch(
+				`https://api.brightdata.com/datasets/snapshots/${snapshotId}/download?format=json`,
+				{
+					headers: {
+						Authorization: `Bearer ${apiKey}`,
+					},
+				},
+			);
+
+			if (!downloadResponse.ok) {
+				throw new Error(
+					`Bright Data snapshot download failed (${downloadResponse.status})`,
+				);
+			}
+
+			return normalizeBrightDataResponse(await downloadResponse.text());
+		}
+
+		if (progress.status === "failed") {
+			throw new Error(`Bright Data snapshot ${snapshotId} failed`);
+		}
+
+		await new Promise((resolve) => setTimeout(resolve, 2_000));
+	}
+
+	throw new Error(`Bright Data snapshot ${snapshotId} timed out`);
+}
+
+async function fetchWithBrightDataDataset(
+	url: string,
+	apiKey: string,
+	datasetId: string,
+): Promise<ZillowListing> {
+	const query = new URLSearchParams({
+		dataset_id: datasetId,
+		notify: "false",
+		include_errors: "true",
+		format: "json",
+	});
+	const response = await fetch(
+		`https://api.brightdata.com/datasets/v3/scrape?${query.toString()}`,
+		{
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${apiKey}`,
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				input: [{ url }],
+			}),
+		},
+	);
+
+	const body = await response.text();
+	let items: Record<string, any>[] = [];
+
+	if (response.status === 202) {
+		const parsed = JSON.parse(body);
+		if (!parsed.snapshot_id) {
+			throw new Error("Bright Data returned 202 without a snapshot_id");
+		}
+		items = await fetchBrightDataSnapshot(apiKey, parsed.snapshot_id);
+	} else if (response.ok) {
+		items = normalizeBrightDataResponse(body);
+	} else {
+		throw new Error(`Bright Data scrape failed (${response.status}): ${body.slice(0, 500)}`);
+	}
+
+	const item = items[0];
+	if (!item || typeof item !== "object") {
+		throw new Error("Bright Data returned no listing data");
+	}
+
+	if (item.error || item.errors) {
+		throw new Error(
+			`Bright Data dataset error: ${JSON.stringify(item.error || item.errors).slice(0, 500)}`,
+		);
+	}
+
+	const listing = parseBrightDataListing(item, url);
+	if (!hasEnoughListingData(listing)) {
+		throw new Error("Bright Data returned a listing payload without usable fields");
+	}
+
+	return listing;
+}
+
+async function fetchWithJina(url: string): Promise<string> {
+	const response = await fetch(`https://r.jina.ai/${url}`, {
+		headers: {
+			Accept: "text/html",
+			"X-Return-Format": "html",
+		},
+	});
+
+	if (!response.ok) {
+		throw new Error(`Jina Reader request failed (${response.status})`);
+	}
+
+	const html = await response.text();
+	if (!html || html.length < 1000) {
+		throw new Error("Jina Reader returned insufficient content");
+	}
+	return html;
+}
+
+async function fetchDirect(url: string): Promise<string> {
+	const response = await fetch(url, {
+		headers: {
+			"User-Agent":
+				"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+			Accept:
+				"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+			"Accept-Language": "en-US,en;q=0.9",
+			Referer: "https://www.google.com/",
+		},
+		redirect: "follow",
+	});
+
+	if (!response.ok) {
+		throw new Error(`Direct fetch failed (${response.status})`);
+	}
+
+	const html = await response.text();
+	if (!html || html.length < 1000) {
+		throw new Error("Direct fetch returned insufficient content");
+	}
+	return html;
+}
+
+function looksLikeBotProtectionPage(html: string): boolean {
+	const lowered = html.toLowerCase();
+	return [
+		"access to this page has been denied",
+		"px-captcha",
+		"perimeterx",
+		"captcha",
+		"verify you are human",
+		"verify you're human",
+		"automated access",
+	].some((pattern) => lowered.includes(pattern));
+}
+
+function summarizeHtml(html: string): string {
+	return html.replace(/\s+/g, " ").trim().slice(0, 220);
+}
+
+function hasEnoughListingData(listing: ZillowListing): boolean {
+	return Boolean(
+		listing.address ||
+			listing.price ||
+			listing.images.length > 0 ||
+			(listing.beds && listing.baths) ||
+			(listing.city && listing.state),
+	);
+}
+
+async function fetchZillowListingWithFallback(
+	url: string,
+	firecrawlKey: string | undefined,
+): Promise<{ html: string; listing: ZillowListing; source: string }> {
+	const attempts: Array<{
+		source: string;
+		run: () => Promise<string>;
+	}> = [];
+
+	if (firecrawlKey) {
+		attempts.push({
+			source: "firecrawl",
+			run: () => fetchWithFirecrawl(url, firecrawlKey),
+		});
+	}
+
+	attempts.push(
+		{ source: "jina", run: () => fetchWithJina(url) },
+		{ source: "direct", run: () => fetchDirect(url) },
+	);
+
+	const failures: string[] = [];
+
+	for (const attempt of attempts) {
+		try {
+			const html = await attempt.run();
+			const blocked = looksLikeBotProtectionPage(html);
+			const listing = parseZillowHtml(html, url);
+			const hasListingData = hasEnoughListingData(listing);
+
+			console.log(
+				`[pdfJob] ${attempt.source} returned ${html.length} chars (blocked=${blocked}, listingData=${hasListingData})`,
+			);
+
+			if (blocked) {
+				failures.push(
+					`${attempt.source}: anti-bot page (${summarizeHtml(html)})`,
+				);
+				continue;
+			}
+
+			if (!hasListingData) {
+				failures.push(
+					`${attempt.source}: no listing data (${summarizeHtml(html)})`,
+				);
+				continue;
+			}
+
+			return {
+				html,
+				listing,
+				source: attempt.source,
+			};
+		} catch (error) {
+			const message =
+				error instanceof Error ? error.message : String(error);
+			console.error(`[pdfJob] ${attempt.source} failed: ${message}`);
+			failures.push(`${attempt.source}: ${message}`);
+		}
+	}
+
+	throw new Error(
+		`Could not extract listing data. Zillow blocked the request or returned unsupported HTML. Attempts: ${failures.join(" | ")}`,
+	);
 }
 
 function parseZillowHtml(html: string, url: string): ZillowListing {

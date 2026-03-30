@@ -6,6 +6,16 @@ import { routeTree } from "./routeTree.gen";
 
 export async function getRouter() {
 	const convexUrl = import.meta.env.VITE_CONVEX_URL;
+	const isPlaceholderConvexUrl =
+		typeof convexUrl === "string" &&
+		(convexUrl.includes("your-deployment") ||
+			convexUrl.includes("placeholder.convex.cloud"));
+
+	if (isPlaceholderConvexUrl) {
+		throw new Error(
+			"[convex] Invalid VITE_CONVEX_URL. Start the backend with `cd packages/backend && bun run dev`, then restart the web app with `cd apps/web && bun run dev`.",
+		);
+	}
 
 	const queryClient = new QueryClient();
 	let convex: ConvexReactClient;

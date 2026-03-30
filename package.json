@@ -7,6 +7,8 @@
 		"dev": "turbo dev",
 		"dev:web": "turbo dev --filter=@nairon-website/web",
 		"dev:server": "turbo dev --filter=@nairon-website/backend",
+		"probe:zillow:brightdata:dataset": "bun run scripts/probe-zillow-brightdata-dataset.ts",
+		"verify:zillow": "bun run scripts/verify-zillow-smoke.ts",
 		"build": "turbo build",
 		"check-types": "turbo check-types"
 	},
