@@ -5,7 +5,6 @@ dist/
 .env.local
 .env.*.local
 .convex/
-convex/_generated/
 .turbo/
 .vercel/
 *.tsbuildinfo
