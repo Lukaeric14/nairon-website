@@ -167,107 +167,113 @@ function PropertyPdfPage() {
 				<Navbar minimal />
 
 				<div className="pt-16 mt-12 md:mt-16 relative overflow-hidden">
-					{/* Decorative: slanted faded PDF preview slides */}
+					{/* Decorative: slanted faded property brochure cards */}
 					<div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-						{/* Left slide — cover page mockup */}
+						{/* Left card — luxury exterior at dusk */}
 						<div
-							className="absolute hidden md:block"
+							className="absolute hidden md:block rounded-xl overflow-hidden shadow-2xl"
+							style={{
+								width: 280,
+								height: 370,
+								top: 40,
+								left: -40,
+								transform: "rotate(-12deg)",
+								opacity: 0.12,
+							}}
+						>
+							<img
+								src="/preview/property-1.webp"
+								alt=""
+								className="w-full h-[60%] object-cover"
+							/>
+							<div className="bg-white/90 px-4 py-3 h-[40%]">
+								<div className="h-1.5 w-16 bg-[#C9A96E]/40 rounded mb-2" />
+								<div className="h-2.5 w-3/4 bg-black/20 rounded mb-1.5" />
+								<div className="h-2 w-1/2 bg-black/10 rounded mb-3" />
+								<div className="h-1 w-full bg-black/[0.06] rounded mb-1" />
+								<div className="h-1 w-full bg-black/[0.06] rounded mb-1" />
+								<div className="h-1 w-2/3 bg-black/[0.06] rounded" />
+							</div>
+						</div>
+						{/* Right card — Mediterranean villa */}
+						<div
+							className="absolute hidden md:block rounded-xl overflow-hidden shadow-2xl"
 							style={{
 								width: 260,
 								height: 340,
 								top: 60,
-								left: -30,
-								transform: "rotate(-12deg)",
+								right: -30,
+								transform: "rotate(10deg)",
+								opacity: 0.10,
+							}}
+						>
+							<img
+								src="/preview/property-2.webp"
+								alt=""
+								className="w-full h-[55%] object-cover"
+							/>
+							<div className="bg-white/90 px-4 py-3 h-[45%]">
+								<div className="h-1.5 w-20 bg-[#C9A96E]/40 rounded mb-2" />
+								<div className="h-2.5 w-2/3 bg-black/20 rounded mb-1.5" />
+								<div className="h-2 w-1/3 bg-black/10 rounded mb-3" />
+								<div className="grid grid-cols-2 gap-2 mt-2">
+									<div className="h-8 bg-black/[0.04] rounded" />
+									<div className="h-8 bg-black/[0.04] rounded" />
+								</div>
+							</div>
+						</div>
+						{/* Bottom-left — aerial neighborhood */}
+						<div
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl"
+							style={{
+								width: 220,
+								height: 290,
+								top: 300,
+								left: 40,
+								transform: "rotate(-5deg)",
 								opacity: 0.07,
 							}}
 						>
-							<div className="w-full h-full rounded-lg bg-gradient-to-br from-white/80 to-white/40 shadow-2xl overflow-hidden">
-								<div className="h-[45%] bg-gradient-to-b from-[#8B7355]/40 to-[#8B7355]/20" />
-								<div className="px-4 pt-3">
-									<div className="h-2 w-3/4 bg-white/30 rounded mb-2" />
-									<div className="h-1.5 w-1/2 bg-white/20 rounded mb-4" />
-									<div className="h-1 w-full bg-white/10 rounded mb-1" />
-									<div className="h-1 w-full bg-white/10 rounded mb-1" />
-									<div className="h-1 w-2/3 bg-white/10 rounded" />
-								</div>
+							<img
+								src="/preview/property-3.webp"
+								alt=""
+								className="w-full h-[55%] object-cover"
+							/>
+							<div className="bg-white/90 px-3 py-2.5 h-[45%]">
+								<div className="h-1.5 w-14 bg-[#C9A96E]/40 rounded mb-2" />
+								<div className="h-2 w-3/4 bg-black/15 rounded mb-1" />
+								<div className="h-1.5 w-1/2 bg-black/10 rounded mb-3" />
+								<div className="h-1 w-full bg-black/[0.06] rounded mb-1" />
+								<div className="h-1 w-full bg-black/[0.06] rounded" />
 							</div>
 						</div>
-						{/* Right slide — stats page mockup */}
+						{/* Bottom-right — interior living room */}
 						<div
-							className="absolute hidden md:block"
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl"
 							style={{
 								width: 240,
-								height: 320,
-								top: 80,
-								right: -20,
-								transform: "rotate(10deg)",
-								opacity: 0.06,
-							}}
-						>
-							<div className="w-full h-full rounded-lg bg-gradient-to-br from-white/80 to-white/40 shadow-2xl overflow-hidden">
-								<div className="h-2 w-full bg-[#C9A96E]/20" />
-								<div className="px-4 pt-4">
-									<div className="flex gap-2 mb-3">
-										<div className="h-16 w-16 bg-white/15 rounded" />
-										<div className="h-16 w-16 bg-white/15 rounded" />
-										<div className="h-16 w-16 bg-white/15 rounded" />
-									</div>
-									<div className="h-2 w-2/3 bg-white/20 rounded mb-2" />
-									<div className="h-1.5 w-1/2 bg-white/15 rounded mb-4" />
-									<div className="grid grid-cols-2 gap-2">
-										<div className="h-10 bg-white/10 rounded" />
-										<div className="h-10 bg-white/10 rounded" />
-										<div className="h-10 bg-white/10 rounded" />
-										<div className="h-10 bg-white/10 rounded" />
-									</div>
-								</div>
-							</div>
-						</div>
-						{/* Far left — location page mockup */}
-						<div
-							className="absolute hidden lg:block"
-							style={{
-								width: 200,
-								height: 260,
+								height: 310,
 								top: 280,
-								left: 60,
-								transform: "rotate(-6deg)",
-								opacity: 0.04,
+								right: 60,
+								transform: "rotate(14deg)",
+								opacity: 0.08,
 							}}
 						>
-							<div className="w-full h-full rounded-lg bg-gradient-to-br from-white/70 to-white/30 shadow-2xl overflow-hidden">
-								<div className="h-[50%] bg-gradient-to-br from-[#6B8B6B]/30 to-[#6B8B6B]/10" />
-								<div className="px-3 pt-3">
-									<div className="h-1.5 w-3/4 bg-white/20 rounded mb-2" />
-									<div className="h-1 w-full bg-white/10 rounded mb-1" />
-									<div className="h-1 w-full bg-white/10 rounded mb-1" />
-									<div className="h-1 w-1/2 bg-white/10 rounded" />
+							<img
+								src="/preview/property-4.webp"
+								alt=""
+								className="w-full h-[55%] object-cover"
+							/>
+							<div className="bg-white/90 px-3 py-2.5 h-[45%]">
+								<div className="flex gap-1.5 mb-2">
+									<div className="h-5 w-5 rounded bg-[#C9A96E]/20" />
+									<div className="h-5 w-5 rounded bg-[#C9A96E]/20" />
+									<div className="h-5 w-5 rounded bg-[#C9A96E]/20" />
 								</div>
-							</div>
-						</div>
-						{/* Far right — features page mockup */}
-						<div
-							className="absolute hidden lg:block"
-							style={{
-								width: 220,
-								height: 280,
-								top: 260,
-								right: 80,
-								transform: "rotate(15deg)",
-								opacity: 0.05,
-							}}
-						>
-							<div className="w-full h-full rounded-lg bg-gradient-to-br from-white/70 to-white/30 shadow-2xl overflow-hidden">
-								<div className="flex h-[40%]">
-									<div className="w-1/2 bg-[#8B7355]/20" />
-									<div className="w-1/2 px-2 pt-3">
-										<div className="h-1.5 w-full bg-white/20 rounded mb-1.5" />
-										<div className="h-1 w-3/4 bg-white/15 rounded mb-3" />
-										<div className="h-1 w-full bg-white/10 rounded mb-1" />
-										<div className="h-1 w-full bg-white/10 rounded" />
-									</div>
-								</div>
-								<div className="h-[60%] bg-gradient-to-b from-[#4A6B4A]/15 to-transparent" />
+								<div className="h-2 w-2/3 bg-black/15 rounded mb-1" />
+								<div className="h-1.5 w-1/2 bg-black/10 rounded mb-3" />
+								<div className="h-1 w-full bg-black/[0.06] rounded mb-1" />
+								<div className="h-1 w-full bg-black/[0.06] rounded" />
 							</div>
 						</div>
 					</div>
