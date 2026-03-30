@@ -15,8 +15,8 @@ import { HireModal } from "@/components/landing/hire-modal"
 import { CandidateModal } from "@/components/landing/candidate-modal"
 import { seoHead } from "@/lib/seo"
 import { useQuery, useMutation } from "convex/react"
-import { api } from "../../../../../convex/_generated/api"
-import type { Id } from "../../../../../convex/_generated/dataModel"
+import { api } from "@convex/_generated/api"
+import type { Id } from "@convex/_generated/dataModel"
 import type { ImageTag } from "@/server/zillow-scrape"
 
 // Re-export the ZillowListing type shape for use in this file
