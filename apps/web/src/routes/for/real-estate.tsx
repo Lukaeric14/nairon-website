@@ -63,7 +63,7 @@ function CustomSolutions() {
 		<div className="px-6 md:px-12 py-16 md:py-24">
 			<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#E8E4DE] max-w-3xl">
 				Every Brokerage Is Different.{" "}
-				<span className="font-serif italic text-[#C9A96E]">
+				<span className="font-serif italic text-[#C9A96E] whitespace-nowrap">
 					We Build Custom Solutions to Match
 				</span>
 			</h2>
