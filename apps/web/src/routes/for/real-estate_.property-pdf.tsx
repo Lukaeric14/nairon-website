@@ -297,7 +297,7 @@ function PropertyPdfPage() {
 						>
 							Generate a Deck for Your Listing{" "}
 							<span className="font-serif italic text-[#C9A96E]">
-								in Minutes
+								in Seconds
 							</span>
 						</h1>
 						<p className="mt-5 text-[#A39E96] text-base md:text-lg leading-relaxed max-w-xl mx-auto">
@@ -369,7 +369,7 @@ function PropertyPdfPage() {
 								{
 									num: "02",
 									title: "We Build Your Brochure",
-									desc: "AI classifies photos, enhances images, and writes a neighborhood description.",
+									desc: "AI classifies photos, enhances images, and writes compelling descriptions.",
 								},
 								{
 									num: "03",
