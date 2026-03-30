@@ -126,17 +126,27 @@ function PropertyPdfPage() {
 					}) as any,
 				).toBlob()
 
-				const downloadUrl = URL.createObjectURL(blob)
-				const a = document.createElement("a")
-				a.href = downloadUrl
-				a.download = `${listing.address || "property"}-nairon.pdf`.replace(
+				const blobUrl = URL.createObjectURL(blob)
+				const fileName = `${listing.address || "property"}-nairon.pdf`.replace(
 					/[^a-zA-Z0-9.-]/g,
 					"-",
 				)
-				document.body.appendChild(a)
-				a.click()
-				document.body.removeChild(a)
-				URL.revokeObjectURL(downloadUrl)
+
+				// iOS Safari doesn't support blob: downloads via <a download>.
+				// It navigates to the blob URL instead, causing a 404.
+				// Detect mobile/tablet and open in new tab for native Save/Share.
+				const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+				if (isMobile) {
+					window.open(blobUrl, "_blank")
+				} else {
+					const a = document.createElement("a")
+					a.href = blobUrl
+					a.download = fileName
+					document.body.appendChild(a)
+					a.click()
+					document.body.removeChild(a)
+					URL.revokeObjectURL(blobUrl)
+				}
 			} catch (err) {
 				console.error("PDF generation failed:", err)
 				alert(
