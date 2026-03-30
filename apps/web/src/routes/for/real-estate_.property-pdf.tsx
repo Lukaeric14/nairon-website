@@ -166,9 +166,112 @@ function PropertyPdfPage() {
 			<div className="min-h-screen bg-[#0C0C0C] text-[#E8E4DE] font-inter">
 				<Navbar minimal />
 
-				<div className="pt-16 mt-12 md:mt-16">
+				<div className="pt-16 mt-12 md:mt-16 relative overflow-hidden">
+					{/* Decorative: slanted faded property brochure cards */}
+					<div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+						{/* Left stack — back card (upper) */}
+						<div
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer z-[1] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
+							style={{
+								width: 220,
+								height: 290,
+								top: 60,
+								left: "calc(50% - 660px)",
+								transform: "rotate(-4deg)",
+							}}
+						>
+							<img
+								src="/preview/property-3.webp"
+								alt=""
+								className="w-full h-[58%] object-cover"
+							/>
+							<div className="bg-[#1a1a1a] px-4 py-3 h-[42%]">
+								<div className="h-1.5 w-16 bg-[#C9A96E]/50 rounded mb-2" />
+								<div className="h-2.5 w-3/4 bg-white/20 rounded mb-1.5" />
+								<div className="h-2 w-1/2 bg-white/10 rounded mb-3" />
+								<div className="h-1 w-full bg-white/[0.06] rounded mb-1" />
+								<div className="h-1 w-full bg-white/[0.06] rounded mb-1" />
+								<div className="h-1 w-2/3 bg-white/[0.06] rounded" />
+							</div>
+						</div>
+						{/* Left stack — front card (lower, offset) */}
+						<div
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer z-[2] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
+							style={{
+								width: 220,
+								height: 290,
+								top: 240,
+								left: "calc(50% - 700px)",
+								transform: "rotate(-12deg)",
+							}}
+						>
+							<img
+								src="/preview/property-1.webp"
+								alt=""
+								className="w-full h-[58%] object-cover"
+							/>
+							<div className="bg-[#1a1a1a] px-4 py-3 h-[42%]">
+								<div className="h-1.5 w-20 bg-[#C9A96E]/50 rounded mb-2" />
+								<div className="h-2.5 w-2/3 bg-white/20 rounded mb-1.5" />
+								<div className="h-2 w-1/3 bg-white/10 rounded mb-3" />
+								<div className="h-1 w-full bg-white/[0.06] rounded mb-1" />
+								<div className="h-1 w-full bg-white/[0.06] rounded" />
+							</div>
+						</div>
+						{/* Right stack — back card (upper) */}
+						<div
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer z-[1] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
+							style={{
+								width: 220,
+								height: 290,
+								top: 60,
+								right: "calc(50% - 660px)",
+								transform: "rotate(4deg)",
+							}}
+						>
+							<img
+								src="/preview/property-4.webp"
+								alt=""
+								className="w-full h-[58%] object-cover"
+							/>
+							<div className="bg-[#1a1a1a] px-4 py-3 h-[42%]">
+								<div className="h-1.5 w-16 bg-[#C9A96E]/50 rounded mb-2" />
+								<div className="h-2.5 w-3/4 bg-white/20 rounded mb-1.5" />
+								<div className="h-2 w-1/2 bg-white/10 rounded mb-3" />
+								<div className="grid grid-cols-2 gap-2 mt-1">
+									<div className="h-7 bg-white/[0.04] rounded" />
+									<div className="h-7 bg-white/[0.04] rounded" />
+								</div>
+							</div>
+						</div>
+						{/* Right stack — front card (lower, offset) */}
+						<div
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer z-[2] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
+							style={{
+								width: 220,
+								height: 290,
+								top: 240,
+								right: "calc(50% - 700px)",
+								transform: "rotate(12deg)",
+							}}
+						>
+							<img
+								src="/preview/property-2.webp"
+								alt=""
+								className="w-full h-[58%] object-cover"
+							/>
+							<div className="bg-[#1a1a1a] px-4 py-3 h-[42%]">
+								<div className="h-1.5 w-14 bg-[#C9A96E]/50 rounded mb-2" />
+								<div className="h-2.5 w-2/3 bg-white/20 rounded mb-1.5" />
+								<div className="h-2 w-1/3 bg-white/10 rounded mb-3" />
+								<div className="h-1 w-full bg-white/[0.06] rounded mb-1" />
+								<div className="h-1 w-full bg-white/[0.06] rounded" />
+							</div>
+						</div>
+					</div>
+
 					{/* Hero */}
-					<div className="px-6 md:px-12 py-16 md:py-24 max-w-4xl mx-auto text-center">
+					<div className="px-6 md:px-12 py-16 md:py-24 max-w-4xl mx-auto text-center relative z-10">
 						<p className="text-[#C9A96E] text-xs font-medium uppercase tracking-[0.2em] mb-5">
 							Free Tool for Brokerages
 						</p>
@@ -367,12 +470,11 @@ const STATUS_INDEX: Record<string, number> = {
 	pending: 0,
 	scraping: 1,
 	classifying: 2,
-	enhancing: 3,
-	generating: 4,
-	completed: 5,
+	generating: 3,
+	completed: 4,
 }
 
-const TOTAL_STEPS = 6
+const TOTAL_STEPS = 5
 
 const EMAIL_PROMPT_DELAY = 25000 // Show email prompt after 25s
 
@@ -443,22 +545,16 @@ function ProcessingState({
 	const processedImages = job?.processedImages ?? 0
 
 	// Build step labels dynamically based on image counts
-	const classifyCount = totalImages > 10 ? 10 : totalImages
 	const stepLabels = [
 		"Queuing your request",
 		totalImages > 0
 			? `Found ${totalImages} images`
 			: "Fetching listing from Zillow",
 		activeStep === 2 && processedImages > 0
-			? `Classified ${processedImages} of ${classifyCount} images`
+			? `Classified ${processedImages} of ${totalImages} images`
 			: activeStep > 2
-				? `Classified ${classifyCount} images`
+				? `Classified ${totalImages} images`
 				: "Classifying images with AI",
-		activeStep === 3 && processedImages > 0
-			? `Enhanced ${processedImages} of 5 photos`
-			: activeStep > 3
-				? "Enhanced 5 photos"
-				: "Enhancing photos for print quality",
 		"Writing neighborhood description",
 		"Assembling your brochure",
 	]
