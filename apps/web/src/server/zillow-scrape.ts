@@ -287,8 +287,14 @@ function parseZillowHtml(html: string, url: string): ZillowListing {
 		const imgUrl = m[1];
 		const hash = m[2]; // unique photo identifier
 
-		// Skip tiny thumbnails
+		// Skip tiny thumbnails, map tiles, logos, and non-photo assets
 		if (imgUrl.includes("_t.") || imgUrl.includes("/32_")) continue;
+		if (imgUrl.includes("maps") || imgUrl.includes("static-map")) continue;
+		if (imgUrl.includes("logo") || imgUrl.includes("icon") || imgUrl.includes("badge")) continue;
+		if (imgUrl.includes("branding") || imgUrl.includes("watermark")) continue;
+		// Skip very small resolution variants (< 200px wide)
+		const ccSize = imgUrl.match(/cc_ft_(\d+)/);
+		if (ccSize && Number(ccSize[1]) < 200) continue;
 
 		// Extract size from URL (e.g., cc_ft_1536 → 1536, uncropped_scaled_within_1536_1152 → 1536)
 		const sizeMatch = imgUrl.match(/(\d{3,4})(?:\.\w+$|_\d+\.\w+$)/);
@@ -360,7 +366,7 @@ function parseZillowHtml(html: string, url: string): ZillowListing {
 
 /**
  * Classify a single image using Moondream 3 on fal.ai.
- * Returns a tag and short caption.
+ * Uses fal.run() (synchronous) instead of fal.subscribe() (queue+poll) for speed.
  */
 async function classifyImage(imageUrl: string): Promise<ClassifiedImage> {
 	const VALID_TAGS: ImageTag[] = [
@@ -369,7 +375,7 @@ async function classifyImage(imageUrl: string): Promise<ClassifiedImage> {
 	];
 
 	try {
-		const result = await fal.subscribe("fal-ai/moondream3-preview/query", {
+		const result = await fal.run("fal-ai/moondream3-preview/query", {
 			input: {
 				image_url: imageUrl,
 				prompt:
@@ -393,7 +399,9 @@ async function classifyImage(imageUrl: string): Promise<ClassifiedImage> {
 }
 
 /**
- * Classify all images in parallel using fal.ai Moondream 3.
+ * Classify a subset of images in parallel using fal.ai Moondream 3.
+ * Only classifies up to 8 images (we only need 5 for slides, 8 gives variety).
+ * Remaining images get tagged as "other".
  */
 async function classifyImages(imageUrls: string[]): Promise<ClassifiedImage[]> {
 	const falKey = process.env.FAL_KEY;
@@ -403,11 +411,54 @@ async function classifyImages(imageUrls: string[]): Promise<ClassifiedImage[]> {
 
 	fal.config({ credentials: falKey });
 
-	console.log(`[zillow] Classifying ${imageUrls.length} images with Moondream 3...`);
-	const results = await Promise.all(imageUrls.map(classifyImage));
-	console.log(`[zillow] Classification complete:`, results.map((r) => `${r.tag}: ${r.caption}`));
+	// Sample 10 images from front, middle, and end for variety
+	// Zillow tends to put exterior first, interiors in middle, backyard/aerial at end
+	const MAX_CLASSIFY = 10;
+	const len = imageUrls.length;
+	const sampleIndices = new Set<number>();
+
+	if (len <= MAX_CLASSIFY) {
+		// Classify all if we have 10 or fewer
+		for (let i = 0; i < len; i++) sampleIndices.add(i);
+	} else {
+		// First 3 (exterior/hero shots)
+		sampleIndices.add(0);
+		sampleIndices.add(1);
+		sampleIndices.add(2);
+		// Middle 4 (interiors: kitchen, living room, bedrooms)
+		const mid = Math.floor(len / 2);
+		sampleIndices.add(mid - 2);
+		sampleIndices.add(mid - 1);
+		sampleIndices.add(mid);
+		sampleIndices.add(mid + 1);
+		// Last 3 (backyard, pool, aerial)
+		sampleIndices.add(len - 3);
+		sampleIndices.add(len - 2);
+		sampleIndices.add(len - 1);
+	}
+
+	const indicesToClassify = [...sampleIndices].filter((i) => i >= 0 && i < len);
+	const toClassify = indicesToClassify.map((i) => imageUrls[i]);
+
+	console.log(`[zillow] Classifying ${toClassify.length}/${len} images (sampled from front/middle/end)...`);
+	const classified = await Promise.all(toClassify.map(classifyImage));
+	console.log(`[zillow] Classification complete:`, classified.map((r) => `${r.tag}: ${r.caption}`));
+
+	// Build full result array — classified images in their original positions, rest as "other"
+	const classifiedSet = new Set(indicesToClassify);
+	const classifiedMap = new Map<number, ClassifiedImage>();
+	for (let i = 0; i < indicesToClassify.length; i++) {
+		classifiedMap.set(indicesToClassify[i], classified[i]);
+	}
+
+	const results: ClassifiedImage[] = imageUrls.map((url, i) =>
+		classifiedSet.has(i)
+			? classifiedMap.get(i)!
+			: { url, tag: "other" as ImageTag, caption: "property photo" },
+	);
 	return results;
 }
+
 
 /**
  * Generate a human-sounding neighborhood description using GPT-4o-mini.
@@ -476,7 +527,7 @@ export const scrapeZillowListing = createServerFn({ method: "POST" })
 			const listing = parseZillowHtml(html, cleanUrl);
 			console.log(`[zillow] Extracted ${listing.images.length} images (pre-validation)`);
 
-			// Validate images in parallel — remove any that 404 or are access-restricted
+			// Validate images in parallel — remove 404s, access-restricted, and tiny non-photos
 			if (listing.images.length > 0) {
 				const validated = await Promise.all(
 					listing.images.map(async (imgUrl) => {
@@ -489,7 +540,11 @@ export const scrapeZillowListing = createServerFn({ method: "POST" })
 									Referer: "https://www.zillow.com/",
 								},
 							});
-							return res.ok ? imgUrl : null;
+							if (!res.ok) return null;
+							// Must be an image content type
+							const contentType = res.headers.get("content-type") || "";
+							if (contentType && !contentType.startsWith("image/")) return null;
+							return imgUrl;
 						} catch {
 							return null;
 						}

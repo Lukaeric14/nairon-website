@@ -4,7 +4,8 @@ import { internalAction } from "./_generated/server";
 import { v } from "convex/values";
 
 export const resend = new Resend(components.resend, {
-  testMode: process.env.NODE_ENV !== "production",
+  // Convex doesn't set NODE_ENV — use RESEND_TEST_MODE env var to opt in
+  testMode: process.env.RESEND_TEST_MODE === "true",
 });
 
 export const sendWaitlistConfirmation = internalAction({

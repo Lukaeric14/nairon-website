@@ -554,8 +554,8 @@ export function PropertyPDF({
 
 	const coverImg = pickUniqueImage(["exterior", "aerial"], 0);
 	const overviewImg = pickUniqueImage(["living_room", "kitchen", "dining"], 1);
-	const aboutImg = pickUniqueImage(["kitchen", "dining", "living_room"], 2);
-	const highlightImg = pickUniqueImage(["bedroom", "bathroom", "other"], 3);
+	const aboutImg = pickUniqueImage(["dining", "kitchen", "bedroom", "living_room"], 2);
+	const highlightImg = pickUniqueImage(["bedroom", "bathroom"], 3);
 	const locationImg = pickUniqueImage(["backyard", "pool", "aerial", "exterior"], 4);
 	const brokerage = personalization.brokerageName;
 
