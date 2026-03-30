@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { ArrowUpRight } from "lucide-react";
 import {
 	Navbar,
@@ -675,6 +675,291 @@ function FeedbackLoop() {
 	);
 }
 
+/* ── Testimonial ─────────────────────────────────────────────── */
+function Testimonial() {
+	return (
+		<div className="px-6 md:px-12 py-16 md:py-24">
+			<div className="relative max-w-4xl mx-auto">
+				{/* Decorative quote mark */}
+				<span
+					className="absolute -top-4 -left-2 md:-top-6 md:-left-4 text-[80px] md:text-[120px] leading-none font-serif text-[#C9A96E] opacity-[0.08] select-none pointer-events-none"
+					aria-hidden="true"
+				>
+					&ldquo;
+				</span>
+
+				<div className="flex flex-col md:flex-row gap-10 md:gap-16 items-start">
+					{/* Quote */}
+					<div className="flex-1 min-w-0">
+						<blockquote className="text-xl md:text-2xl leading-relaxed md:leading-[1.6] text-[#E8E4DE] font-normal tracking-[-0.3px]">
+							Nairon&apos;s team didn&apos;t just build us a tool — they
+							embedded AI into how we operate. Lead qualification that used
+							to take our agents hours now happens in seconds, and the
+							systems keep getting smarter. This is the kind of
+							infrastructure every brokerage will need.
+						</blockquote>
+
+						<div className="mt-8 flex items-center gap-4">
+							<img
+								src="/nima.jpeg"
+								alt="Nima Ghassemi"
+								width={56}
+								height={56}
+								className="w-14 h-14 rounded-full object-cover border border-white/10"
+								loading="lazy"
+							/>
+							<div>
+								<p className="text-[#E8E4DE] font-semibold text-base">
+									Nima Ghassemi
+								</p>
+								<p className="text-[#A39E96] text-sm mt-0.5">
+									8-Figure Real Estate Marketing Tech Entrepreneur
+								</p>
+								<p className="text-[#C9A96E] text-xs font-medium tracking-wide mt-1">
+									KEYLEAD
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+/* ── Lead Response Calculator ────────────────────────────────── */
+
+/**
+ * Qualification rate decay based on response time.
+ * Derived from InsideSales / Harvard Business Review lead response data.
+ * Returns a 0-1 multiplier: 1.0 = maximum qualification rate.
+ */
+function qualificationRate(responseMinutes: number): number {
+	// Piecewise interpolation from industry benchmarks
+	const points: [number, number][] = [
+		[0.5, 1.0], // 30 seconds — baseline (AI speed)
+		[1, 0.91],
+		[5, 0.48],
+		[10, 0.28],
+		[30, 0.10],
+		[60, 0.05],
+		[120, 0.02],
+	];
+	if (responseMinutes <= points[0][0]) return points[0][1];
+	if (responseMinutes >= points[points.length - 1][0])
+		return points[points.length - 1][1];
+	for (let i = 0; i < points.length - 1; i++) {
+		const [t0, r0] = points[i];
+		const [t1, r1] = points[i + 1];
+		if (responseMinutes <= t1) {
+			const frac = (responseMinutes - t0) / (t1 - t0);
+			return r0 + (r1 - r0) * frac;
+		}
+	}
+	return points[points.length - 1][1];
+}
+
+function formatUsd(n: number): string {
+	if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
+	if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`;
+	return `$${n.toFixed(0)}`;
+}
+
+function LeadResponseCalculator() {
+	const [leads, setLeads] = useState(200);
+	const [responseTime, setResponseTime] = useState(30);
+	const [dealValue, setDealValue] = useState(8000);
+	const [closeRate, setCloseRate] = useState(3);
+
+	const results = useMemo(() => {
+		const rate = closeRate / 100;
+		const currentQR = qualificationRate(responseTime);
+		const aiQR = qualificationRate(0.5); // 30-second response
+
+		const currentRevenue = leads * currentQR * rate * dealValue;
+		const aiRevenue = leads * aiQR * rate * dealValue;
+		const lostRevenue = aiRevenue - currentRevenue;
+		const multiplier = currentQR > 0 ? aiQR / currentQR : 0;
+
+		return { currentRevenue, aiRevenue, lostRevenue, multiplier };
+	}, [leads, responseTime, dealValue, closeRate]);
+
+	return (
+		<div className="px-6 md:px-12 py-16 md:py-24">
+			<div className="max-w-4xl">
+				<p className="text-[#C9A96E] text-xs font-medium uppercase tracking-[0.16em] mb-4">
+					Revenue Calculator
+				</p>
+				<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#E8E4DE] max-w-3xl">
+					How Much Revenue Are You{" "}
+					<span className="font-serif italic text-[#C9A96E]">
+						Leaving on the Table?
+					</span>
+				</h2>
+				<p className="mt-4 text-[#A39E96] text-base md:text-lg leading-relaxed max-w-2xl">
+					Leads contacted within 5 minutes are 21x more likely to
+					qualify. Most brokerages respond in 30+ minutes. See what
+					that&apos;s costing you.
+				</p>
+			</div>
+
+			<div className="mt-12 grid md:grid-cols-[1fr_1fr] gap-10 md:gap-16 items-start">
+				{/* ── Inputs ── */}
+				<div className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-6 md:p-8 space-y-7">
+					<p className="text-[#A39E96] text-[10px] uppercase tracking-[0.2em] font-medium mb-1">
+						Your Numbers
+					</p>
+					<InputField
+						label="Monthly leads"
+						value={leads}
+						onChange={setLeads}
+						min={10}
+						max={2000}
+						step={10}
+						suffix="leads/mo"
+					/>
+					<InputField
+						label="Avg. response time"
+						value={responseTime}
+						onChange={setResponseTime}
+						min={1}
+						max={120}
+						step={1}
+						suffix="minutes"
+					/>
+					<InputField
+						label="Avg. deal value"
+						value={dealValue}
+						onChange={setDealValue}
+						min={1000}
+						max={100000}
+						step={500}
+						prefix="$"
+					/>
+					<InputField
+						label="Close rate"
+						value={closeRate}
+						onChange={setCloseRate}
+						min={0.5}
+						max={20}
+						step={0.5}
+						suffix="%"
+					/>
+				</div>
+
+				{/* ── Results ── */}
+				<div className="flex flex-col gap-5">
+					{/* Lost revenue card */}
+					<div className="relative overflow-hidden rounded-xl border border-[#C9A96E]/20 bg-gradient-to-br from-[#C9A96E]/[0.04] to-transparent p-7 md:p-9">
+						<div className="absolute -top-12 -right-12 w-40 h-40 bg-[#C9A96E]/[0.06] rounded-full blur-3xl" />
+						<div className="absolute bottom-0 left-0 w-24 h-24 bg-[#C9A96E]/[0.03] rounded-full blur-2xl" />
+						<p className="relative text-[#A39E96] text-[10px] uppercase tracking-[0.2em] font-medium mb-3">
+							Estimated Revenue Left on the Table
+						</p>
+						<p className="relative text-[44px] md:text-[60px] font-light tracking-[-3px] text-[#C9A96E] leading-none tabular-nums font-mono">
+							{formatUsd(results.lostRevenue)}
+						</p>
+						<p className="relative text-[#A39E96] text-sm mt-3 tracking-wide">per month</p>
+					</div>
+
+					{/* Comparison */}
+					<div className="grid grid-cols-2 gap-4">
+						<div className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-5 md:p-6">
+							<p className="text-[#A39E96] text-[10px] uppercase tracking-[0.16em] mb-2 leading-tight">
+								Current<br />
+								<span className="text-[#A39E96]/60">{responseTime} min response</span>
+							</p>
+							<p className="text-xl md:text-2xl font-light tracking-[-1px] text-[#E8E4DE] tabular-nums font-mono">
+								{formatUsd(results.currentRevenue)}
+							</p>
+							<p className="text-[#A39E96]/50 text-xs mt-1.5">/month</p>
+						</div>
+						<div className="rounded-xl border border-[#C9A96E]/15 bg-[#C9A96E]/[0.025] p-5 md:p-6">
+							<p className="text-[#C9A96E] text-[10px] uppercase tracking-[0.16em] mb-2 leading-tight">
+								With AI<br />
+								<span className="text-[#C9A96E]/60">30s response</span>
+							</p>
+							<p className="text-xl md:text-2xl font-light tracking-[-1px] text-[#E8E4DE] tabular-nums font-mono">
+								{formatUsd(results.aiRevenue)}
+							</p>
+							<p className="text-[#C9A96E] text-xs mt-1.5 font-medium">
+								{results.multiplier > 1
+									? `${results.multiplier.toFixed(1)}x more revenue`
+									: "/month"}
+							</p>
+						</div>
+					</div>
+
+					{/* CTA */}
+					<div className="mt-1">
+						<DiscoveryCTA />
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+/* Styled range slider with filled track */
+function InputField({
+	label,
+	value,
+	onChange,
+	min,
+	max,
+	step,
+	prefix,
+	suffix,
+}: {
+	label: string;
+	value: number;
+	onChange: (v: number) => void;
+	min: number;
+	max: number;
+	step: number;
+	prefix?: string;
+	suffix?: string;
+}) {
+	const pct = ((value - min) / (max - min)) * 100;
+	return (
+		<div className="group">
+			<div className="flex items-baseline justify-between mb-3">
+				<label className="text-[#A39E96] text-sm tracking-wide">{label}</label>
+				<span className="text-[#E8E4DE] text-base font-medium tabular-nums font-mono">
+					{prefix}
+					{value.toLocaleString()}
+					{suffix ? <span className="text-[#A39E96] text-xs ml-1">{suffix}</span> : ""}
+				</span>
+			</div>
+			<div className="relative h-6 flex items-center">
+				<div className="absolute inset-x-0 h-[3px] rounded-full bg-white/[0.06]" />
+				<div
+					className="absolute left-0 h-[3px] rounded-full bg-gradient-to-r from-[#C9A96E]/60 to-[#C9A96E]"
+					style={{ width: `${pct}%` }}
+				/>
+				<input
+					type="range"
+					min={min}
+					max={max}
+					step={step}
+					value={value}
+					onChange={(e) => onChange(Number(e.target.value))}
+					className="absolute inset-0 w-full appearance-none bg-transparent outline-none cursor-pointer z-10
+						[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[14px] [&::-webkit-slider-thumb]:h-[14px]
+						[&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#C9A96E]
+						[&::-webkit-slider-thumb]:shadow-[0_0_0_3px_rgba(201,169,110,0.15),0_0_12px_rgba(201,169,110,0.2)]
+						[&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-shadow [&::-webkit-slider-thumb]:duration-200
+						[&::-webkit-slider-thumb]:hover:shadow-[0_0_0_5px_rgba(201,169,110,0.2),0_0_16px_rgba(201,169,110,0.3)]
+						[&::-moz-range-thumb]:w-[14px] [&::-moz-range-thumb]:h-[14px]
+						[&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#C9A96E]
+						[&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer
+						[&::-moz-range-track]:bg-transparent"
+				/>
+			</div>
+		</div>
+	);
+}
+
 /* ── Final CTA ────────────────────────────────────────────────── */
 function FinalCTA() {
 	return (
@@ -724,6 +1009,15 @@ function RealEstatePage() {
 					<GridSection columns="1fr" border>
 						<FeedbackLoop />
 					</GridSection>
+
+					<GridSection columns="1fr" border>
+						<LeadResponseCalculator />
+					</GridSection>
+
+					{/* Testimonial — hidden until image + copy confirmed */}
+					{/* <GridSection columns="1fr" border>
+						<Testimonial />
+					</GridSection> */}
 
 					<GridSection columns="1fr" border={false}>
 						<FinalCTA />

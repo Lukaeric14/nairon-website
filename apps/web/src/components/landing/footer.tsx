@@ -41,29 +41,7 @@ const FOOTER_COLS: FooterCol[] = [
 	},
 ];
 
-const REAL_ESTATE_COLS: FooterCol[] = [
-	{
-		heading: "Company",
-		links: [
-			{ label: "About", href: "/" },
-			{ label: "Contact", href: "#discovery" },
-		],
-	},
-	{
-		heading: "Services",
-		links: [
-			{ label: "AI Infrastructure", href: "#discovery" },
-			{ label: "Custom Solutions", href: "#discovery" },
-		],
-	},
-	{
-		heading: "Legal",
-		links: [
-			{ label: "Privacy", href: "/privacy" },
-			{ label: "Terms", href: "/terms-and-conditions" },
-		],
-	},
-];
+const REAL_ESTATE_COLS: FooterCol[] = [];
 
 function SocialLinks() {
 	return (
@@ -135,9 +113,11 @@ export function Footer({ variant = "default" }: { variant?: "default" | "real-es
 						<p className="text-[#A39E96] text-sm leading-relaxed max-w-xs">
 							{tagline}
 						</p>
+						{variant !== "real-estate" && (
 						<div className="mt-6">
 							<SocialLinks />
 						</div>
+					)}
 					</div>
 
 					{/* Nav columns */}
