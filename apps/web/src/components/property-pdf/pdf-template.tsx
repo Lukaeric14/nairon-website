@@ -529,7 +529,14 @@ export function PropertyPDF({
 		return rawImages.length > 0 ? rawImages[fallbackIndex % rawImages.length] : "";
 	}
 
-	// Pick unique images per slide — avoid repeats
+	// Tags that should never appear in the PDF slides
+	const EXCLUDED_TAGS = new Set(["floor_plan", "icon", "other"]);
+	// URLs of non-property images (icons, headshots, floor plans)
+	const excludedUrls = new Set(
+		classified.filter((c) => EXCLUDED_TAGS.has(c.tag)).map((c) => c.url),
+	);
+
+	// Pick unique images per slide — avoid repeats and non-property images
 	const used = new Set<string>();
 	function pickUniqueImage(preferredTags: ImageTag[], fallbackIndex: number): string {
 		if (classified.length > 0) {
@@ -541,12 +548,19 @@ export function PropertyPDF({
 				}
 			}
 		}
-		// Fallback: pick first unused image
+		// Fallback: pick first unused PROPERTY image (skip excluded)
 		for (let i = 0; i < rawImages.length; i++) {
 			const idx = (fallbackIndex + i) % rawImages.length;
-			if (!used.has(rawImages[idx])) {
+			if (!used.has(rawImages[idx]) && !excludedUrls.has(rawImages[idx])) {
 				used.add(rawImages[idx]);
 				return rawImages[idx];
+			}
+		}
+		// Last resort: any unused image
+		for (let i = 0; i < rawImages.length; i++) {
+			if (!used.has(rawImages[i])) {
+				used.add(rawImages[i]);
+				return rawImages[i];
 			}
 		}
 		return rawImages.length > 0 ? rawImages[fallbackIndex % rawImages.length] : "";

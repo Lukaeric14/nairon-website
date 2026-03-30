@@ -24,6 +24,8 @@ type ImageTag =
 	| "garage"
 	| "pool"
 	| "aerial"
+	| "floor_plan"
+	| "icon"
 	| "other";
 
 interface ClassifiedImage {
@@ -206,22 +208,7 @@ export const processJob = internalAction({
 			listing.classifiedImages = classifiedImages;
 			listing.neighborhoodDescription = neighborhoodDesc;
 
-			// Step 4: Upscale the 5 slide images
-			await ctx.runMutation(internal.pdfJob.updateJobStatus, {
-				jobId,
-				status: "enhancing",
-				processedImages: 0,
-				totalImages: 5,
-			});
-
-			await upscaleSlideImages(listing, falKey, async (processed) => {
-				await ctx.runMutation(internal.pdfJob.updateImageProgress, {
-					jobId,
-					processedImages: processed,
-				});
-			});
-
-			// Step 5: Done — store the listing
+			// Step 4: Done — store the listing
 			await ctx.runMutation(internal.pdfJob.updateJobStatus, {
 				jobId,
 				status: "completed",
@@ -629,6 +616,8 @@ const VALID_TAGS: ImageTag[] = [
 	"garage",
 	"pool",
 	"aerial",
+	"floor_plan",
+	"icon",
 	"other",
 ];
 
@@ -646,7 +635,7 @@ async function classifyImage(
 			body: JSON.stringify({
 				image_url: imageUrl,
 				prompt:
-					"Classify this real estate photo. Reply with EXACTLY one word from this list: exterior, living_room, kitchen, bedroom, bathroom, dining, backyard, garage, pool, aerial, other. Then a comma, then a 3-5 word description. Example: kitchen, modern white kitchen island",
+					"Classify this real estate listing photo. Reply with EXACTLY one word from this list: exterior, living_room, kitchen, bedroom, bathroom, dining, backyard, garage, pool, aerial, floor_plan, icon, other. Use floor_plan for floor plans or maps. Use icon for logos, icons, AR markers, text graphics, or agent headshots. Then a comma, then a 3-5 word description. Example: kitchen, modern white kitchen island",
 				reasoning: false,
 			}),
 		});
@@ -683,158 +672,24 @@ async function classifyImages(
 		}));
 	}
 
-	// Sample 10 images from front, middle, and end
-	const len = imageUrls.length;
-	const MAX_CLASSIFY = 10;
-	const sampleIndices = new Set<number>();
-
-	if (len <= MAX_CLASSIFY) {
-		for (let i = 0; i < len; i++) sampleIndices.add(i);
-	} else {
-		// First 3 (exterior/hero)
-		sampleIndices.add(0);
-		sampleIndices.add(1);
-		sampleIndices.add(2);
-		// Middle 4 (interiors)
-		const mid = Math.floor(len / 2);
-		sampleIndices.add(mid - 2);
-		sampleIndices.add(mid - 1);
-		sampleIndices.add(mid);
-		sampleIndices.add(mid + 1);
-		// Last 3 (backyard/aerial)
-		sampleIndices.add(len - 3);
-		sampleIndices.add(len - 2);
-		sampleIndices.add(len - 1);
-	}
-
-	const indicesToClassify = [...sampleIndices].filter(
-		(i) => i >= 0 && i < len,
-	);
-	const toClassify = indicesToClassify.map((i) => imageUrls[i]);
-
 	console.log(
-		`[pdfJob] Classifying ${toClassify.length}/${len} images (sampled front/middle/end)...`,
+		`[pdfJob] Classifying all ${imageUrls.length} images...`,
 	);
 
-	// Classify one at a time to report progress
+	// Classify every image — no sampling
 	const classified: ClassifiedImage[] = [];
-	for (let i = 0; i < toClassify.length; i++) {
-		const result = await classifyImage(toClassify[i], falKey);
+	for (let i = 0; i < imageUrls.length; i++) {
+		const result = await classifyImage(imageUrls[i], falKey);
 		classified.push(result);
 		if (onProgress) await onProgress(i + 1);
 	}
 
-	const classifiedSet = new Set(indicesToClassify);
-	const classifiedMap = new Map<number, ClassifiedImage>();
-	for (let i = 0; i < indicesToClassify.length; i++) {
-		classifiedMap.set(indicesToClassify[i], classified[i]);
-	}
-
-	return imageUrls.map((url, i) =>
-		classifiedSet.has(i)
-			? classifiedMap.get(i)!
-			: { url, tag: "other" as ImageTag, caption: "property photo" },
-	);
+	return classified;
 }
 
-// ── Image upscaling ──
+// ── Non-property image tags (excluded from slide selection) ──
 
-async function upscaleImage(
-	imageUrl: string,
-	falKey: string,
-): Promise<string> {
-	try {
-		const response = await fetch("https://fal.run/fal-ai/thera", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Key ${falKey}`,
-			},
-			body: JSON.stringify({
-				image_url: imageUrl,
-				upscale_factor: 2,
-				backbone: "edsr",
-			}),
-		});
-
-		if (!response.ok) return imageUrl;
-		const result = await response.json();
-		return result?.image?.url || imageUrl;
-	} catch {
-		return imageUrl;
-	}
-}
-
-async function upscaleSlideImages(
-	listing: ZillowListing,
-	falKey: string | undefined,
-	onProgress?: (processed: number) => Promise<void>,
-): Promise<void> {
-	if (!falKey) return;
-
-	const SLIDE_PREFS: ImageTag[][] = [
-		["exterior", "aerial"],
-		["living_room", "kitchen", "dining"],
-		["dining", "kitchen", "bedroom", "living_room"],
-		["bedroom", "bathroom"],
-		["backyard", "pool", "aerial", "exterior"],
-	];
-
-	const classified = listing.classifiedImages || [];
-	const used = new Set<string>();
-	const slideUrls: string[] = [];
-
-	for (const prefs of SLIDE_PREFS) {
-		let picked: string | null = null;
-		if (classified.length > 0) {
-			for (const tag of prefs) {
-				const match = classified.find(
-					(c) => c.tag === tag && !used.has(c.url),
-				);
-				if (match) {
-					picked = match.url;
-					used.add(match.url);
-					break;
-				}
-			}
-		}
-		if (!picked) {
-			for (const img of listing.images) {
-				if (!used.has(img)) {
-					picked = img;
-					used.add(img);
-					break;
-				}
-			}
-		}
-		if (picked) slideUrls.push(picked);
-	}
-
-	if (slideUrls.length === 0) return;
-
-	console.log(
-		`[pdfJob] Upscaling ${slideUrls.length} slide images with Thera...`,
-	);
-	const enhanced: string[] = [];
-	for (let i = 0; i < slideUrls.length; i++) {
-		const result = await upscaleImage(slideUrls[i], falKey);
-		enhanced.push(result);
-		if (onProgress) await onProgress(i + 1);
-	}
-
-	for (let i = 0; i < slideUrls.length; i++) {
-		if (enhanced[i] !== slideUrls[i]) {
-			const origUrl = slideUrls[i];
-			const newUrl = enhanced[i];
-			const imgIdx = listing.images.indexOf(origUrl);
-			if (imgIdx !== -1) listing.images[imgIdx] = newUrl;
-			const classIdx = listing.classifiedImages.findIndex(
-				(c) => c.url === origUrl,
-			);
-			if (classIdx !== -1) listing.classifiedImages[classIdx].url = newUrl;
-		}
-	}
-}
+const EXCLUDED_TAGS: ImageTag[] = ["floor_plan", "icon", "other"];
 
 // ── Neighborhood description ──
 

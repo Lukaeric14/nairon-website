@@ -367,12 +367,11 @@ const STATUS_INDEX: Record<string, number> = {
 	pending: 0,
 	scraping: 1,
 	classifying: 2,
-	enhancing: 3,
-	generating: 4,
-	completed: 5,
+	generating: 3,
+	completed: 4,
 }
 
-const TOTAL_STEPS = 6
+const TOTAL_STEPS = 5
 
 const EMAIL_PROMPT_DELAY = 25000 // Show email prompt after 25s
 
@@ -443,22 +442,16 @@ function ProcessingState({
 	const processedImages = job?.processedImages ?? 0
 
 	// Build step labels dynamically based on image counts
-	const classifyCount = totalImages > 10 ? 10 : totalImages
 	const stepLabels = [
 		"Queuing your request",
 		totalImages > 0
 			? `Found ${totalImages} images`
 			: "Fetching listing from Zillow",
 		activeStep === 2 && processedImages > 0
-			? `Classified ${processedImages} of ${classifyCount} images`
+			? `Classified ${processedImages} of ${totalImages} images`
 			: activeStep > 2
-				? `Classified ${classifyCount} images`
+				? `Classified ${totalImages} images`
 				: "Classifying images with AI",
-		activeStep === 3 && processedImages > 0
-			? `Enhanced ${processedImages} of 5 photos`
-			: activeStep > 3
-				? "Enhanced 5 photos"
-				: "Enhancing photos for print quality",
 		"Writing neighborhood description",
 		"Assembling your brochure",
 	]
