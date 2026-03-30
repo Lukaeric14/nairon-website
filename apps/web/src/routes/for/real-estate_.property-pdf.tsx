@@ -1,4 +1,4 @@
-import { createFileRoute, useSearch } from "@tanstack/react-router"
+import { createFileRoute, useSearch, useNavigate } from "@tanstack/react-router"
 import { useState, useCallback, useEffect, useRef } from "react"
 import {
 	ArrowUpRight,
@@ -73,6 +73,7 @@ function PropertyPdfPage() {
 	const [url, setUrl] = useState("")
 	const [generating, setGenerating] = useState(false)
 	const [submitting, setSubmitting] = useState(false)
+	const navigate = useNavigate()
 
 	const createJob = useMutation(api.pdfJob.createJob)
 
@@ -168,10 +169,10 @@ function PropertyPdfPage() {
 
 				<div className="pt-16 mt-12 md:mt-16 relative overflow-hidden">
 					{/* Decorative: slanted faded property brochure cards */}
-					<div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+					<div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
 						{/* Left stack — back card (upper) */}
 						<div
-							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer z-[1] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer pointer-events-auto z-[1] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
 							style={{
 								width: 220,
 								height: 290,
@@ -196,7 +197,7 @@ function PropertyPdfPage() {
 						</div>
 						{/* Left stack — front card (lower, offset) */}
 						<div
-							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer z-[2] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer pointer-events-auto z-[2] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
 							style={{
 								width: 220,
 								height: 290,
@@ -220,7 +221,7 @@ function PropertyPdfPage() {
 						</div>
 						{/* Right stack — back card (upper) */}
 						<div
-							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer z-[1] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer pointer-events-auto z-[1] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
 							style={{
 								width: 220,
 								height: 290,
@@ -246,7 +247,7 @@ function PropertyPdfPage() {
 						</div>
 						{/* Right stack — front card (lower, offset) */}
 						<div
-							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer z-[2] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
+							className="absolute hidden lg:block rounded-xl overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ease-out cursor-pointer pointer-events-auto z-[2] hover:z-50 hover:-translate-y-8 hover:shadow-[0_20px_60px_rgba(201,169,110,0.15)] hover:scale-105"
 							style={{
 								width: 220,
 								height: 290,
@@ -331,6 +332,11 @@ function PropertyPdfPage() {
 								onReset={() => {
 									setState({ step: "input" })
 									setUrl("")
+									navigate({
+										to: "/for/real-estate/property-pdf",
+										search: {},
+										replace: true,
+									})
 								}}
 							/>
 						)}
