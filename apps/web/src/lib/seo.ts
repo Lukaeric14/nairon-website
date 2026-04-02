@@ -117,7 +117,7 @@ export function fluxProductJsonLd() {
 		"@type": "SoftwareApplication",
 		name: "Flux",
 		description:
-			"The missing self-improving harness for Codex CLI. Flux adds deterministic workflow state, evidence-based quality gates, adversarial review, and self-improving recommendations.",
+			"Flux is the missing self-improving harness for coding agents. Flux adds deterministic workflow state, evidence-based quality gates, adversarial review, and self-improving recommendations.",
 		applicationCategory: "DeveloperApplication",
 		operatingSystem: "Cross-platform",
 		url: `${SITE_URL}/flux`,

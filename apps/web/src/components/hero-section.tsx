@@ -1,6 +1,11 @@
+import { useEffect, useState } from "react";
 import { ImageIllustration } from "@/components/ui/illustrations/image-illustration";
 import { Button } from "@/components/ui/button";
 import { Anchor, Users, Eye } from "lucide-react";
+import {
+  FLUX_RELEASE_FALLBACK,
+  getFluxLatestRelease,
+} from "@/server/flux-release";
 
 const features = [
   {
@@ -45,6 +50,29 @@ const platforms = [
 ];
 
 export default function HeroSection() {
+  const [release, setRelease] = useState(FLUX_RELEASE_FALLBACK);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadLatestRelease = async () => {
+      try {
+        const result = await getFluxLatestRelease();
+        if (mounted && result?.version && result?.url) {
+          setRelease(result);
+        }
+      } catch {
+        // Keep the verified fallback release when GitHub is unavailable.
+      }
+    };
+
+    void loadLatestRelease();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <main role="main" className="overflow-hidden">
       <section>
@@ -53,12 +81,12 @@ export default function HeroSection() {
             <div className="text-center">
               {/* Version pill */}
               <a
-                href="https://github.com/Nairon-AI/flux/releases"
+                href={release.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mb-4 sm:mb-5 inline-flex items-center gap-1.5 rounded-full bg-[#C9A96E]/10 px-3 py-1 text-xs font-medium text-[#C9A96E] ring-1 ring-inset ring-[#C9A96E]/20 transition-colors hover:bg-[#C9A96E]/15"
               >
-                Latest release: v2.37.0
+                Latest release: {release.version}
               </a>
 
               {/* Platform pills */}
@@ -109,7 +137,7 @@ export default function HeroSection() {
 
               <div className="mx-auto mb-8 sm:mb-12 mt-6 max-w-2xl">
                 <p className="text-lg md:text-xl text-[#A39E96] leading-relaxed mb-6 sm:mb-8 px-2 sm:px-0">
-                  Flux is the missing (self-improving) harness for Codex CLI. Build software{" "}
+                  Flux is the missing (self-improving) harness for Coding Agents. Build software{" "}
                   <span className="font-serif italic text-[#C9A96E]">
                     deterministically
                   </span>
