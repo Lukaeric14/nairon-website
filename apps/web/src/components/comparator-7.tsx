@@ -76,11 +76,11 @@ const renderPlanColumn = (plan: Plan) => {
     const header =
         plan === 'codex' ? (
             <div className="sticky top-0 flex h-14 flex-col items-center justify-center gap-1.5 rounded-t-xl px-4 text-center lg:px-6">
-                <span className="text-sm font-semibold">Codex CLI</span>
+                <span className="text-sm font-semibold">Coding Agents</span>
             </div>
         ) : (
             <div className="sticky top-0 flex h-14 flex-col items-center justify-center gap-1.5 px-4 pt-2 text-center lg:px-8">
-                <span className="text-sm font-semibold">Codex CLI + Flux</span>
+                <span className="text-sm font-semibold">Coding Agents + Flux</span>
             </div>
         )
 
@@ -111,8 +111,8 @@ export default function ComparatorSection() {
                 <div className="grid gap-12 lg:grid-cols-2">
                     <div className="max-w-lg max-md:px-6">
                         <div className="text-balance lg:max-w-xs">
-                            <h2 className="text-[28px] leading-[32px] md:text-[36px] md:leading-[40px] lg:text-[44px] lg:leading-[48px] font-normal tracking-[-1px] text-[#E8E4DE]">Codex CLI vs Codex CLI + <span className="font-serif italic text-[#C9A96E]">Flux</span></h2>
-                            <p className="text-[#A39E96] mt-4 text-balance lg:mt-6">Flux keeps Codex in the same dev flow, but adds deterministic workflow state, evidence-based quality gates, adversarial review, and self-improving recommendations.</p>
+                            <h2 className="text-[28px] leading-[32px] md:text-[36px] md:leading-[40px] lg:text-[44px] lg:leading-[48px] font-normal tracking-[-1px] text-[#E8E4DE]">Coding Agents vs Coding Agents + <span className="font-serif italic text-[#C9A96E]">Flux</span></h2>
+                            <p className="text-[#A39E96] mt-4 text-balance lg:mt-6">Flux keeps coding agents in the same dev flow, but adds deterministic workflow state, evidence-based quality gates, adversarial review, and self-improving recommendations.</p>
                         </div>
                     </div>
 
