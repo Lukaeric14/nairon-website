@@ -11,21 +11,21 @@ const tools: {
 	mobileRow?: string;
 }[] = [
 	// Desktop: Row 1–2
-	{ name: "Nairon CRM", description: "Client and delivery operating pipeline", col: "1 / 3", row: "1 / 3", mobileCol: "1 / 3", mobileRow: "1 / 2" },
-	{ name: "Outreach Agent", description: "Prospecting and follow-up on autopilot", col: "3 / 4", row: "1 / 2", mobileCol: "3 / 4", mobileRow: "1 / 2" },
-	{ name: "Support Agent", description: "Fast first-response coverage", col: "4 / 5", row: "1 / 2", mobileCol: "1 / 2", mobileRow: "2 / 3" },
-	{ name: "Nairon Universe", description: "Living knowledge graph of workflow context", col: "5 / 7", row: "1 / 3", mobileCol: "2 / 4", mobileRow: "2 / 3" },
+	{ name: "Outbound AI Employee", description: "Researches leads, personalises outreach, and keeps follow-up moving", col: "1 / 3", row: "1 / 3", mobileCol: "1 / 3", mobileRow: "1 / 2" },
+	{ name: "Inbox AI Employee", description: "Monitors inbound requests and routes the right next step fast", col: "3 / 4", row: "1 / 2", mobileCol: "3 / 4", mobileRow: "1 / 2" },
+	{ name: "Support AI Employee", description: "Handles first-response coverage and escalates edge cases cleanly", col: "4 / 5", row: "1 / 2", mobileCol: "1 / 2", mobileRow: "2 / 3" },
+	{ name: "Knowledge AI Employee", description: "Maintains workflow context, memory, and operating history across the team", col: "5 / 7", row: "1 / 3", mobileCol: "2 / 4", mobileRow: "2 / 3" },
 	// Desktop: Row 2
-	{ name: "Admin Agent", description: "Ops busywork delegated safely", col: "3 / 4", row: "2 / 3", mobileCol: "1 / 2", mobileRow: "3 / 4" },
-	{ name: "Nairon Slackapp", description: "Real-time team intel in Slack", col: "4 / 5", row: "2 / 3", mobileCol: "2 / 3", mobileRow: "3 / 4" },
+	{ name: "Scheduling AI Employee", description: "Books meetings, chases confirmations, and handles calendar coordination", col: "3 / 4", row: "2 / 3", mobileCol: "1 / 2", mobileRow: "3 / 4" },
+	{ name: "Operator Alerts", description: "Sends approval requests, exceptions, and decision prompts into Slack", col: "4 / 5", row: "2 / 3", mobileCol: "2 / 3", mobileRow: "3 / 4" },
 	// Desktop: Row 3–4
-	{ name: "Role Engine", description: "Function-to-AI-fit scoring", col: "1 / 2", row: "3 / 4", mobileCol: "3 / 4", mobileRow: "3 / 4" },
-	{ name: "Report Generator", description: "One-click operational reports", col: "2 / 3", row: "3 / 4", mobileCol: "1 / 2", mobileRow: "4 / 5" },
-	{ name: "Review Engine", description: "Stress-tests output before rollout", col: "3 / 5", row: "3 / 5", mobileCol: "2 / 4", mobileRow: "4 / 5" },
-	{ name: "Pipeline Tracker", description: "Live delivery and KPI analytics", col: "5 / 7", row: "3 / 4", mobileCol: "1 / 2", mobileRow: "5 / 6" },
+	{ name: "Research AI Employee", description: "Builds lists, enriches accounts, and prepares work before humans step in", col: "1 / 2", row: "3 / 4", mobileCol: "3 / 4", mobileRow: "3 / 4" },
+	{ name: "Reporting AI Employee", description: "Turns activity into clean weekly summaries and KPI updates", col: "2 / 3", row: "3 / 4", mobileCol: "1 / 2", mobileRow: "4 / 5" },
+	{ name: "QA AI Employee", description: "Checks output, catches misses, and flags risky actions before they ship", col: "3 / 5", row: "3 / 5", mobileCol: "2 / 4", mobileRow: "4 / 5" },
+	{ name: "CRM AI Employee", description: "Keeps records updated, pipelines clean, and ownership visible", col: "5 / 7", row: "3 / 4", mobileCol: "1 / 2", mobileRow: "5 / 6" },
 	// Desktop: Row 4
-	{ name: "Ops Graph", description: "Workflow and dependency mapping", col: "1 / 3", row: "4 / 5", mobileCol: "2 / 4", mobileRow: "5 / 6" },
-	{ name: "Approval Engine", description: "Human checkpoints for risky actions", col: "5 / 7", row: "4 / 5", mobileCol: "1 / 4", mobileRow: "6 / 7" },
+	{ name: "Coordination AI Employee", description: "Owns handoffs, reminders, and status-chasing across operations", col: "1 / 3", row: "4 / 5", mobileCol: "2 / 4", mobileRow: "5 / 6" },
+	{ name: "Approvals Layer", description: "Human checkpoints for sensitive actions, exceptions, and final sign-off", col: "5 / 7", row: "4 / 5", mobileCol: "1 / 4", mobileRow: "6 / 7" },
 ];
 
 const founders = [

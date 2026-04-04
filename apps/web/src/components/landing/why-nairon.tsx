@@ -3,21 +3,21 @@ import { GridSection, GridCell, CornerNotches } from "./grid-system";
 
 const points = [
 	{
-		title: "Automation is not enough",
+		title: "Headcount alone does not scale execution",
 		description:
-			"Automations follow a script. AI employees operate inside a role. They handle messy inputs, bounded decisions, and exceptions while humans stay in control.",
+			"Most teams do not have a strategy problem. They have a capacity problem. Work stacks up in research, follow-up, coordination, and QA long before leadership can hire enough people to keep up.",
 		image: "/backgrounds/pastoral-hills.webp",
 	},
 	{
-		title: "Role-first deployment",
+		title: "Manual work creates invisible revenue leaks",
 		description:
-			"We do not try to make AI your executive team. We place it into a specific business function where the KPI, permissions, and oversight model are clear.",
+			"When the process depends on people doing every handoff manually, follow-up gets missed, turnaround slows down, and opportunities die quietly in the gaps between systems.",
 		image: "/backgrounds/hazy-landscape.webp",
 	},
 	{
-		title: "Operator oversight",
+		title: "AI employees give the team leverage without removing control",
 		description:
-			"Your human team becomes the operator, not every moving part in the train. They review, direct, and improve the system while repetitive work gets delegated.",
+			"Your team stays in charge of decisions, approvals, and edge cases. AI employees take on the repetitive execution layer so humans can focus on judgment instead of busywork.",
 		image: "/backgrounds/rolling-hills.webp",
 	},
 ];
@@ -109,7 +109,7 @@ export function WhyNairon() {
 					<div className="flex items-center gap-3 mb-4">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
 						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
-							Why this model works
+							Why they need it
 						</span>
 					</div>
 					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE] max-w-3xl">
@@ -131,7 +131,7 @@ export function WhyNairon() {
 							))}
 						</span>
 						<br />
-						doesn&#8217;t mean you deployed AI employees
+						doesn&#8217;t fix the execution bottleneck
 					</h2>
 				</GridCell>
 			</GridSection>

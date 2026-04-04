@@ -48,14 +48,14 @@ function HomePage() {
 							<LogoStrip />
 						</GridSection>
 
-							{/* <WhyNairon /> */}
+						<WhyNairon />
 						<Process />
 						<SecuritySection />
 						<DevComparison />
 						<DevOutcome />
 						<DataCredibility />
 						<BuiltByBuilders />
-						<AudienceSplit />
+						{/* <AudienceSplit /> */}
 						<Testimonials />
 						<AIFaqSection />
 
