@@ -1,3 +1,4 @@
+import type { MouseEvent } from "react";
 import { useState, useEffect } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
@@ -26,6 +27,21 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 	useEffect(() => {
 		setMobileOpen(false);
 	}, [location.pathname]);
+
+	const handleSectionClick =
+		(sectionId: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+			if (location.pathname !== "/") return;
+
+			event.preventDefault();
+			setMobileOpen(false);
+
+			document.getElementById(sectionId)?.scrollIntoView({
+				behavior: "smooth",
+				block: "start",
+			});
+
+			window.history.replaceState(null, "", `/#${sectionId}`);
+		};
 
 	return (
 		<nav
@@ -72,18 +88,20 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 				{/* Desktop nav */}
 				{!minimal && (
 				<div className="hidden md:flex items-center gap-1">
-					<a
-						href="/#process"
-						className="px-4 py-2 rounded-full text-sm text-[#E8E4DE] hover:text-[#C9A96E] transition-colors"
-					>
-						How it works
+						<a
+							href="/#process"
+							onClick={handleSectionClick("process")}
+							className="px-4 py-2 rounded-full text-sm text-[#E8E4DE] hover:text-[#C9A96E] transition-colors"
+						>
+							How it works
 					</a>
 
-					<a
-						href="/#security"
-						className="px-4 py-2 rounded-full text-sm text-[#E8E4DE] hover:text-[#C9A96E] transition-colors"
-					>
-						Security
+						<a
+							href="/#security"
+							onClick={handleSectionClick("security")}
+							className="px-4 py-2 rounded-full text-sm text-[#E8E4DE] hover:text-[#C9A96E] transition-colors"
+						>
+							Security
 					</a>
 
 					<a
@@ -124,21 +142,21 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 			{/* Mobile menu */}
 			{mobileOpen && !minimal && (
 				<div className="md:hidden bg-[#0C0C0C] border-t border-white/6 px-6 py-6 space-y-1">
-					<a
-						href="/#process"
-						className="block px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
-						onClick={() => setMobileOpen(false)}
-					>
-						How it works
-					</a>
+						<a
+							href="/#process"
+							className="block px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
+							onClick={handleSectionClick("process")}
+						>
+							How it works
+						</a>
 
-					<a
-						href="/#security"
-						className="block px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
-						onClick={() => setMobileOpen(false)}
-					>
-						Security
-					</a>
+						<a
+							href="/#security"
+							className="block px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
+							onClick={handleSectionClick("security")}
+						>
+							Security
+						</a>
 
 					<a
 						href="/for/real-estate"

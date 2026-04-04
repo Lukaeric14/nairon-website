@@ -135,7 +135,11 @@
 }
 
 @layer base {
-	:root {
+	html {
+		scroll-behavior: smooth;
+	}
+
+		:root {
 		/* Brand — gold-forward, green as subtle accent */
 		--brand: #C9A96E;
 		--brand-hover: #B8944F;

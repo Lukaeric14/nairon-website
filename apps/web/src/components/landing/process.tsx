@@ -51,8 +51,8 @@ export function Process() {
 		return () => observer.disconnect();
 	}, []);
 
-	return (
-		<div id="process" ref={sectionRef}>
+		return (
+			<div id="process" ref={sectionRef} className="scroll-mt-24 md:scroll-mt-28">
 			{/* Mobile: title on top, full-width. Desktop: title left, steps right */}
 			<GridSection columns="5fr 7fr">
 				{/* Left: sticky heading */}

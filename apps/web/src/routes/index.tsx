@@ -43,19 +43,19 @@ function HomePage() {
 						<HeroNew />
 					</GridSection>
 
-					<GridSection columns="1fr" border>
-						<LogoStrip />
-					</GridSection>
+						<GridSection columns="1fr" border>
+							<LogoStrip />
+						</GridSection>
 
-					<WhyNairon />
-					<DevComparison />
-					<DevOutcome />
-					<Process />
-					<SecuritySection />
-					<DataCredibility />
-					<AudienceSplit />
-					<BuiltByBuilders />
-					<Testimonials />
+						<WhyNairon />
+						<Process />
+						<SecuritySection />
+						<DevComparison />
+						<DevOutcome />
+						<DataCredibility />
+						<BuiltByBuilders />
+						<AudienceSplit />
+						<Testimonials />
 
 					<GridSection columns="1fr" border={false}>
 						<CTASection />
