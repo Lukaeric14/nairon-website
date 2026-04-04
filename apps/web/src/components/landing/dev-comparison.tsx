@@ -274,16 +274,66 @@ export function DevComparison() {
 				</GridCell>
 			</GridSection>
 
-			<GridSection columns="1fr" border>
-				<GridCell>
-					<div
-						ref={containerRef}
-						className="relative h-[360px] select-none overflow-hidden md:h-[620px]"
-					>
+				<GridSection columns="1fr" border>
+					<GridCell>
+						<div className="space-y-4 p-4 md:hidden">
+							<div className="relative overflow-hidden rounded-[22px] border border-white/8 bg-[#111111]">
+								<img
+									src="/backgrounds/hazy-landscape.webp"
+									alt="Before state with only human employees"
+									className="absolute inset-0 h-full w-full object-cover"
+									loading="lazy"
+								/>
+								<div className="absolute inset-0 bg-[rgba(12,12,12,0.58)]" />
+								<div className="relative z-10 p-4">
+									<div className="mb-4">
+										<span className="inline-block rounded-full border border-white/8 bg-white/[0.08] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-[#A39E96]">
+											Before: human-only team
+										</span>
+									</div>
+									<div className="h-[280px]">
+										<HumanOnlyCanvas />
+									</div>
+									<p className="mt-4 text-xs leading-relaxed text-[#A39E96]">
+										Every lane depends on humans doing the research, follow-up, coordination,
+										and checking themselves.
+									</p>
+								</div>
+							</div>
+
+							<div className="relative overflow-hidden rounded-[22px] border border-white/8 bg-[#111111]">
+								<img
+									src="/backgrounds/pastoral-hills.webp"
+									alt="After state with human employees supported by AI employees"
+									className="absolute inset-0 h-full w-full object-cover"
+									loading="lazy"
+								/>
+								<div className="absolute inset-0 bg-[rgba(12,12,12,0.5)]" />
+								<div className="relative z-10 p-4">
+									<div className="mb-4">
+										<span className="inline-block rounded-full border border-[#C9A96E]/20 bg-[#C9A96E]/12 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-[#C9A96E]">
+											After: human + AI employees
+										</span>
+									</div>
+									<div className="h-[280px]">
+										<AugmentedOrgChartCanvas />
+									</div>
+									<p className="mt-4 text-xs leading-relaxed text-[#A39E96]">
+										The same human team stays in place, but each function is backed by AI
+										employees handling execution-heavy work.
+									</p>
+								</div>
+							</div>
+						</div>
+
 						<div
-							className="absolute inset-0"
-							style={{ clipPath: `inset(0 0 0 ${pos}%)` }}
+							ref={containerRef}
+							className="relative hidden h-[620px] select-none overflow-hidden md:block"
 						>
+							<div
+								className="absolute inset-0"
+								style={{ clipPath: `inset(0 0 0 ${pos}%)` }}
+							>
 							<img
 								src="/backgrounds/pastoral-hills.webp"
 								alt="Pastoral hills landscape representing AI employee systems"
@@ -291,33 +341,34 @@ export function DevComparison() {
 								loading="lazy"
 							/>
 							<div className="absolute inset-0 bg-[rgba(12,12,12,0.42)]" />
-							<div
-								className="absolute rounded-lg"
-								style={{
-									left: "50%",
-									top: "50%",
-									width: "85%",
-									height: "75%",
-									maxHeight: 460,
-									transform: "translate(-50%, -50%)",
-									zIndex: 2,
-								}}
-							>
+								<div
+									className="absolute rounded-lg"
+									style={{
+										left: "75%",
+										top: "50%",
+										width: "42%",
+										height: "75%",
+										maxWidth: 540,
+										maxHeight: 440,
+										transform: "translate(-50%, -50%)",
+										zIndex: 2,
+									}}
+								>
 									<AugmentedOrgChartCanvas />
-							</div>
-							<div className="absolute right-3 top-3 z-10 md:right-6 md:top-6">
-								<span
+								</div>
+								<div className="absolute right-3 top-3 z-10 md:right-6 md:top-6">
+									<span
 									className="inline-block rounded-full px-2 py-1 text-[10px] font-medium uppercase tracking-[0.12em] md:px-3 md:py-1.5 md:text-xs"
 									style={{
 										background: "rgba(201, 169, 110, 0.12)",
 										color: "#C9A96E",
 										border: "1px solid rgba(201, 169, 110, 0.2)",
 									}}
-								>
-									After: AI employee system
-								</span>
+									>
+										After: human + AI employees
+									</span>
+								</div>
 							</div>
-						</div>
 
 						<div
 							className="absolute inset-0"
@@ -330,33 +381,34 @@ export function DevComparison() {
 								loading="lazy"
 							/>
 							<div className="absolute inset-0 bg-[rgba(12,12,12,0.45)]" />
-							<div
-								className="absolute rounded-lg"
-								style={{
-									left: "50%",
-									top: "50%",
-									width: "85%",
-									height: "75%",
-									maxHeight: 460,
-									transform: "translate(-50%, -50%)",
-									zIndex: 2,
-								}}
-							>
+								<div
+									className="absolute rounded-lg"
+									style={{
+										left: "25%",
+										top: "50%",
+										width: "42%",
+										height: "75%",
+										maxWidth: 540,
+										maxHeight: 440,
+										transform: "translate(-50%, -50%)",
+										zIndex: 2,
+									}}
+								>
 									<HumanOnlyCanvas />
-							</div>
-							<div className="absolute left-3 top-3 z-10 md:left-6 md:top-6">
-								<span
+								</div>
+								<div className="absolute left-3 top-3 z-10 md:left-6 md:top-6">
+									<span
 									className="inline-block rounded-full px-2 py-1 text-[10px] font-medium uppercase tracking-[0.12em] md:px-3 md:py-1.5 md:text-xs"
 									style={{
 										background: "rgba(255, 255, 255, 0.08)",
 										color: "#A39E96",
 										border: "1px solid rgba(255, 255, 255, 0.06)",
 									}}
-								>
-									Before: static automation
-								</span>
+									>
+										Before: human-only team
+									</span>
+								</div>
 							</div>
-						</div>
 
 						<div
 							className="absolute bottom-0 top-0 z-20"
@@ -401,24 +453,24 @@ export function DevComparison() {
 								</svg>
 							</div>
 						</div>
-					</div>
-				</GridCell>
-			</GridSection>
+						</div>
+					</GridCell>
+				</GridSection>
 
-			<GridSection columns="1fr 1fr" border>
-				<GridCell borderRight className="px-4 md:px-8 py-4 md:py-6">
-					<p className="text-xs leading-relaxed text-[#A39E96] md:text-sm">
+				<GridSection columns="1fr 1fr" border className="hidden md:grid">
+					<GridCell borderRight className="px-4 md:px-8 py-4 md:py-6">
+						<p className="text-xs leading-relaxed text-[#A39E96] md:text-sm">
 							Before: the whole org chart is human-only, so every repetitive task, follow-up,
 							handoff, and check still sits on people.
-					</p>
-				</GridCell>
-				<GridCell className="px-4 md:px-8 py-4 md:py-6">
-					<p className="text-xs leading-relaxed text-[#A39E96] md:text-sm">
+						</p>
+					</GridCell>
+					<GridCell className="px-4 md:px-8 py-4 md:py-6">
+						<p className="text-xs leading-relaxed text-[#A39E96] md:text-sm">
 							After: the same human team stays in place, but each lane gets AI employees working
 							under them to expand execution capacity without losing oversight.
-					</p>
-				</GridCell>
-			</GridSection>
+						</p>
+					</GridCell>
+				</GridSection>
 		</div>
 	);
 }
