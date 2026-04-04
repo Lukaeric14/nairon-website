@@ -12,24 +12,15 @@ const FOOTER_COLS: FooterCol[] = [
 		heading: "Company",
 		links: [
 			{ label: "About", href: "/#what-we-do" },
+			{ label: "Process", href: "/#process" },
 			{ label: "Contact", action: "hire" },
 		],
 	},
 	{
 		heading: "Services",
 		links: [
-			{ label: "AI-Native Recruiting", action: "hire" },
-			{ label: "Flux", href: "/flux" },
-			{ label: "For Candidates", action: "candidate" },
-		],
-	},
-	{
-		heading: "Universe (Coming Soon)",
-		links: [
-			{ label: "Signals & Trends", href: "#", disabled: true },
-			{ label: "AI Tool Directory", href: "#", disabled: true },
-			{ label: "Jobs", href: "#", disabled: true },
-			{ label: "Community", href: "#", disabled: true },
+			{ label: "AI Employees", action: "hire" },
+			{ label: "Real Estate", href: "/for/real-estate" },
 		],
 	},
 	{
@@ -83,18 +74,17 @@ function SocialLinks() {
 }
 
 export function Footer({ variant = "default" }: { variant?: "default" | "real-estate" }) {
-	const { openHireModal, openCandidateModal } = useModals();
+	const { openHireModal } = useModals();
 
 	const handleAction = (action: string) => {
 		if (action === "hire") openHireModal();
-		else if (action === "candidate") openCandidateModal();
 	};
 
 	const cols = variant === "real-estate" ? REAL_ESTATE_COLS : FOOTER_COLS;
 	const tagline =
 		variant === "real-estate"
 			? "Custom AI infrastructure for real estate brokerages."
-			: "Data-driven technical recruiting. Powered by Flux.";
+			: "Company for building and deploying AI employees.";
 
 	return (
 		<footer className="bg-[#0C0C0C] border-t border-white/6">

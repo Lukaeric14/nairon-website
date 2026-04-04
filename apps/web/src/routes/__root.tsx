@@ -35,11 +35,11 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 		meta: [
 			{ charSet: "utf-8" },
 			{ name: "viewport", content: "width=device-width, initial-scale=1" },
-			{ title: "Nairon — AI-Native Recruiting" },
+			{ title: "Nairon — Company for AI Employees" },
 			{
 				name: "description",
 				content:
-					"Data-driven technical recruiting powered by AI-nativeness benchmarks. Find engineers who ship with Nairon AI.",
+					"Nairon builds and deploys AI employees for modern teams, with industry-specific offers like real estate living under dedicated ICP pages.",
 			},
 			{ name: "theme-color", content: "#000000" },
 		],

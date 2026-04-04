@@ -32,9 +32,9 @@ export function CTASection() {
 					}}
 				>
 					<h2 className="text-3xl md:text-[56px] md:leading-[60px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#E8E4DE] mb-6">
-						Ready to find your{" "}
+						Ready to deploy your{" "}
 						<span className="font-serif italic text-[#C9A96E]">
-							next AI-native engineer
+							first AI employee
 						</span>
 						<span className="text-[#C9A96E]">?</span>
 					</h2>
@@ -48,10 +48,10 @@ export function CTASection() {
 							<ArrowUpRight className="w-4 h-4" />
 						</button>
 						<a 
-							href="/flux"
+							href="/for/real-estate"
 							className="inline-flex items-center gap-2 border border-white/10 text-[#E8E4DE] hover:border-[#C9A96E]/50 hover:text-[#C9A96E] font-medium text-base px-6 py-3.5 rounded-full transition-colors"
 						>
-							Explore Flux
+							See real estate
 						</a>
 					</div>
 				</div>

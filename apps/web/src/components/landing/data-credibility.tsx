@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { GridSection, GridCell, CornerNotches } from "./grid-system";
 
 const stats = [
-	{ value: "2,000+", label: "Engineers in our network" },
-	{ value: "94%", label: "Placement success rate" },
-	{ value: "30", label: "Average days to placement" },
-	{ value: "4.8", label: "Average Flux score" },
+	{ value: "4", label: "Weeks to a live v1" },
+	{ value: "$500", label: "Monthly token usage included" },
+	{ value: "1", label: "Weekly strategy call" },
+	{ value: "90", label: "Quarterly planning cadence" },
 ];
 
 /** Parse a display string like "2,000+" into { number, prefix, suffix, decimals } */
@@ -95,19 +95,17 @@ export function DataCredibility() {
 					<div className="flex items-center gap-3 mb-4 md:mb-6">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
 						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
-							The numbers
+							The engagement model
 						</span>
 					</div>
 					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE]">
-						Backed by{" "}
-						<span className="text-gradient-gold">Flux</span> data
+						Structured around visible delivery data
 					</h2>
 				</GridCell>
 				<GridCell className="px-6 md:px-12 py-4 md:py-12 flex items-end">
 					<p className="text-[#A39E96] text-base md:text-lg leading-relaxed">
-						Our proprietary AI-nativeness benchmark scores every
-						candidate on architecture, eval discipline, token spend,
-						and tooling freshness.
+						We operate on a subscription model with weekly touchpoints, quarterly KPI planning,
+						and a transparent usage policy so the AI employee keeps improving after launch.
 					</p>
 				</GridCell>
 			</GridSection>
@@ -124,17 +122,6 @@ export function DataCredibility() {
 				))}
 			</GridSection>
 
-			{/* Flux link row */}
-			<GridSection columns="1fr" border>
-				<GridCell className="py-5 md:py-6 text-center">
-					<a 
-						href="/flux"
-						className="inline-flex items-center gap-2 text-[#E8E4DE] hover:text-[#C9A96E] text-sm font-medium transition-colors"
-					>
-						Explore Flux
-					</a>
-				</GridCell>
-			</GridSection>
 		</div>
 	);
 }

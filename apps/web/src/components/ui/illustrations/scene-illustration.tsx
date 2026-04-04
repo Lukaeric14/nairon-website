@@ -20,7 +20,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
     }
 
     const platformStyle = {
-        opacity: activeDevice !== null ? 0.5 : 1,
+        opacity: activeDevice !== null ? 0.62 : 0.88,
         transition: 'opacity 0.5s ease',
     } as React.CSSProperties
     return (
@@ -28,7 +28,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
             viewBox="0 0 627 441"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="lg:w-164 h-full [--color-layer-border-2:--alpha(var(--color-foreground)/50%)] [--color-layer-border:--alpha(var(--color-foreground)/15%)]">
+            className="lg:w-164 h-full [--color-layer-border-2:--alpha(var(--color-foreground)/60%)] [--color-layer-border:--alpha(var(--color-foreground)/18%)]">
             <g
                 id="scene-frame"
                 style={platformStyle}>
@@ -40,7 +40,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                     d="M625.507 330.594L625.006 330.882L521.083 390.859L520.583 391.147L520.083 390.859L104.438 150.663L103.938 150.374V69.2197L104.438 68.9316L208.361 8.95404L208.862 8.66595L209.362 8.95404L625.007 249.15L625.507 249.439V330.594Z"
                     fill="var(--color-background)"
                     stroke="var(--color-border)"
-                    strokeWidth="1"
+                    strokeWidth="1.2"
                 />
                 <path
                     d="M208.862 9.69525L624.554 249.695L624.554 330.004L208.862 90.0036L208.862 9.69525Z"
@@ -57,7 +57,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                 <path
                     d="M104.313 150.297L209.313 89.5473M209.313 89.5473L624.85 330.079M209.313 89.5473V9.1723"
                     stroke="var(--color-border)"
-                    strokeWidth="1.5"
+                    strokeWidth="1.8"
                     strokeLinecap="square"
                     strokeDasharray="2 6"
                 />
@@ -129,6 +129,16 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                     d="M296.364 180.848L293.477 182.514L296.364 184.181L299.251 182.514L296.364 180.848Z"
                     fill="var(--color-layer-border)"
                 />
+                <g transform="matrix(0.86 0.3 -0.62 0.5 294 167)">
+                    <image
+                        href="/composio.svg"
+                        x="-18"
+                        y="-4.2"
+                        width="36"
+                        height="7.2"
+                        preserveAspectRatio="xMidYMid meet"
+                    />
+                </g>
             </g>
 
             <g
@@ -195,6 +205,189 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                     fill="var(--color-muted)"
                     stroke="var(--color-layer-border)"
                 />
+                <g clipPath="url(#deviceMobileClip)">
+                    <g
+                        transform="matrix(0.84 0.485 -0.59 0.34 214.866 362.426)"
+                        opacity="0.98">
+                        <rect
+                            x="-20"
+                            y="-22"
+                            width="76"
+                            height="70"
+                            fill="rgba(12,12,12,0.96)"
+                        />
+                        <g>
+                            <animateTransform
+                                attributeName="transform"
+                                type="translate"
+                                dur="6.8s"
+                                values="0 8;0 8;0 0;0 0;0 8;0 8"
+                                keyTimes="0;0.08;0.18;0.42;0.52;1"
+                                repeatCount="indefinite"
+                            />
+                            <animate
+                                attributeName="opacity"
+                                dur="6.8s"
+                                values="0;0;1;1;0;0"
+                                keyTimes="0;0.08;0.18;0.42;0.52;1"
+                                repeatCount="indefinite"
+                            />
+                            <rect
+                                x="-10"
+                                y="-10"
+                                width="50"
+                                height="18"
+                                rx="4"
+                                fill="rgba(255,255,255,0.08)"
+                                stroke="rgba(255,255,255,0.10)"
+                            />
+                            <circle
+                                cx="-4"
+                                cy="-1"
+                                r="2"
+                                fill="rgba(201,169,110,0.9)"
+                            />
+                            <rect
+                                x="1"
+                                y="-4"
+                                width="14"
+                                height="3"
+                                rx="1.5"
+                                fill="rgba(255,255,255,0.14)"
+                            />
+                            <rect
+                                x="1"
+                                y="1"
+                                width="26"
+                                height="2.5"
+                                rx="1.25"
+                                fill="rgba(255,255,255,0.10)"
+                            />
+                            <rect
+                                x="30"
+                                y="0"
+                                width="8"
+                                height="4"
+                                rx="2"
+                                fill="rgba(201,169,110,0.28)"
+                            />
+                        </g>
+                        <g opacity="0">
+                            <animateTransform
+                                attributeName="transform"
+                                type="translate"
+                                dur="6.8s"
+                                values="0 10;0 10;0 0;0 0;0 10;0 10"
+                                keyTimes="0;0.34;0.44;0.72;0.82;1"
+                                repeatCount="indefinite"
+                            />
+                            <animate
+                                attributeName="opacity"
+                                dur="6.8s"
+                                values="0;0;1;1;0;0"
+                                keyTimes="0;0.34;0.44;0.72;0.82;1"
+                                repeatCount="indefinite"
+                            />
+                            <rect
+                                x="-6"
+                                y="12"
+                                width="48"
+                                height="20"
+                                rx="4"
+                                fill="rgba(255,255,255,0.08)"
+                                stroke="rgba(255,255,255,0.10)"
+                            />
+                            <circle
+                                cx="-1"
+                                cy="21"
+                                r="2"
+                                fill="rgba(255,255,255,0.16)"
+                            />
+                            <rect
+                                x="4"
+                                y="18"
+                                width="17"
+                                height="3"
+                                rx="1.5"
+                                fill="rgba(255,255,255,0.14)"
+                            />
+                            <rect
+                                x="4"
+                                y="23"
+                                width="24"
+                                height="2.5"
+                                rx="1.25"
+                                fill="rgba(255,255,255,0.10)"
+                            />
+                            <rect
+                                x="31"
+                                y="17"
+                                width="7"
+                                height="5"
+                                rx="2.5"
+                                fill="rgba(201,169,110,0.78)"
+                            />
+                            <rect
+                                x="31"
+                                y="25"
+                                width="9"
+                                height="3"
+                                rx="1.5"
+                                fill="rgba(255,255,255,0.10)"
+                            />
+                        </g>
+                        <g opacity="0">
+                            <animateTransform
+                                attributeName="transform"
+                                type="translate"
+                                dur="6.8s"
+                                values="0 10;0 10;0 0;0 0;0 10;0 10"
+                                keyTimes="0;0.62;0.72;0.92;0.98;1"
+                                repeatCount="indefinite"
+                            />
+                            <animate
+                                attributeName="opacity"
+                                dur="6.8s"
+                                values="0;0;1;1;0;0"
+                                keyTimes="0;0.62;0.72;0.92;0.98;1"
+                                repeatCount="indefinite"
+                            />
+                            <rect
+                                x="0"
+                                y="34"
+                                width="42"
+                                height="16"
+                                rx="4"
+                                fill="rgba(201,169,110,0.16)"
+                                stroke="rgba(201,169,110,0.20)"
+                            />
+                            <rect
+                                x="5"
+                                y="39"
+                                width="14"
+                                height="3"
+                                rx="1.5"
+                                fill="rgba(255,255,255,0.14)"
+                            />
+                            <rect
+                                x="5"
+                                y="44"
+                                width="20"
+                                height="2.5"
+                                rx="1.25"
+                                fill="rgba(255,255,255,0.10)"
+                            />
+                            <rect
+                                x="29"
+                                y="39"
+                                width="8"
+                                height="6"
+                                rx="3"
+                                fill="rgba(201,169,110,0.82)"
+                            />
+                        </g>
+                    </g>
+                </g>
                 <circle
                     cx="5"
                     cy="5"
@@ -223,12 +416,380 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                     fill="var(--color-muted)"
                     stroke="var(--color-layer-border)"
                 />
+                <g clipPath="url(#deviceTabClip)">
+                    <g
+                        transform="matrix(0.853 0.492 -0.587 0.339 86.832 286.087)"
+                        opacity="0.96">
+                        <rect
+                            x="0"
+                            y="0"
+                            width="100"
+                            height="100"
+                            fill="rgba(12,12,12,0.96)"
+                        />
+                        <rect
+                            x="0"
+                            y="0"
+                            width="100"
+                            height="18"
+                            fill="rgba(255,255,255,0.045)"
+                        />
+                        <circle
+                            cx="8"
+                            cy="9"
+                            r="1.6"
+                            fill="rgba(255,255,255,0.14)"
+                        />
+                        <circle
+                            cx="13"
+                            cy="9"
+                            r="1.6"
+                            fill="rgba(255,255,255,0.10)"
+                        />
+                        <circle
+                            cx="18"
+                            cy="9"
+                            r="1.6"
+                            fill="rgba(255,255,255,0.08)"
+                        />
+                        <rect
+                            x="25"
+                            y="4"
+                            width="20"
+                            height="8"
+                            rx="4"
+                            fill="rgba(255,255,255,0.08)"
+                        />
+                        <rect
+                            x="48"
+                            y="4"
+                            width="18"
+                            height="8"
+                            rx="4"
+                            fill="rgba(255,255,255,0.05)"
+                        />
+                        <rect
+                            x="25"
+                            y="4"
+                            width="20"
+                            height="8"
+                            rx="4"
+                            fill="rgba(201,169,110,0.72)">
+                            <animate
+                                attributeName="x"
+                                dur="6.6s"
+                                values="25;48;25;25"
+                                repeatCount="indefinite"
+                            />
+                        </rect>
+                        <rect
+                            x="8"
+                            y="21"
+                            width="59"
+                            height="7"
+                            rx="4"
+                            fill="rgba(255,255,255,0.06)"
+                        />
+                        <rect
+                            x="70"
+                            y="21"
+                            width="20"
+                            height="7"
+                            rx="3.5"
+                            fill="rgba(255,255,255,0.04)"
+                        />
+                        <rect
+                            x="11"
+                            y="23"
+                            width="12"
+                            height="3"
+                            rx="1.5"
+                            fill="rgba(255,255,255,0.12)"
+                        />
+                        <rect
+                            x="26"
+                            y="23"
+                            width="27"
+                            height="3"
+                            rx="1.5"
+                            fill="rgba(255,255,255,0.09)"
+                        />
+                        <g>
+                            <animate
+                                attributeName="opacity"
+                                dur="6.6s"
+                                values="1;1;0;0;0;1"
+                                repeatCount="indefinite"
+                            />
+                            <rect
+                                x="8"
+                                y="34"
+                                width="26"
+                                height="42"
+                                rx="4"
+                                fill="rgba(255,255,255,0.035)"
+                            />
+                            <rect
+                                x="11"
+                                y="38"
+                                width="18"
+                                height="4"
+                                rx="2"
+                                fill="rgba(255,255,255,0.10)"
+                            />
+                            <rect
+                                x="11"
+                                y="46"
+                                width="14"
+                                height="14"
+                                rx="3"
+                                fill="rgba(255,255,255,0.08)"
+                            />
+                            <rect
+                                x="11"
+                                y="64"
+                                width="18"
+                                height="3.5"
+                                rx="1.75"
+                                fill="rgba(255,255,255,0.07)"
+                            />
+                            <rect
+                                x="39"
+                                y="34"
+                                width="50"
+                                height="18"
+                                rx="4"
+                                fill="rgba(255,255,255,0.04)"
+                            />
+                            <rect
+                                x="42"
+                                y="34"
+                                width="17"
+                                height="18"
+                                rx="3"
+                                fill="rgba(201,169,110,0.18)"
+                            />
+                            <rect
+                                x="63"
+                                y="38"
+                                width="20"
+                                height="3.5"
+                                rx="1.75"
+                                fill="rgba(255,255,255,0.11)"
+                            />
+                            <rect
+                                x="63"
+                                y="44"
+                                width="14"
+                                height="3"
+                                rx="1.5"
+                                fill="rgba(255,255,255,0.08)"
+                            />
+                            <rect
+                                x="39"
+                                y="56"
+                                width="50"
+                                height="20"
+                                rx="4"
+                                fill="rgba(255,255,255,0.03)"
+                            />
+                            <rect
+                                x="43"
+                                y="60"
+                                width="42"
+                                height="4"
+                                rx="2"
+                                fill="rgba(255,255,255,0.09)"
+                            />
+                            <rect
+                                x="43"
+                                y="68"
+                                width="31"
+                                height="3"
+                                rx="1.5"
+                                fill="rgba(255,255,255,0.07)"
+                            />
+                        </g>
+                        <g opacity="0">
+                            <animate
+                                attributeName="opacity"
+                                dur="6.6s"
+                                values="0;0;1;1;0;0"
+                                repeatCount="indefinite"
+                            />
+                            <rect
+                                x="8"
+                                y="34"
+                                width="82"
+                                height="10"
+                                rx="4"
+                                fill="rgba(255,255,255,0.04)"
+                            />
+                            <rect
+                                x="12"
+                                y="37"
+                                width="15"
+                                height="4"
+                                rx="2"
+                                fill="rgba(255,255,255,0.08)"
+                            />
+                            <rect
+                                x="33"
+                                y="37"
+                                width="22"
+                                height="4"
+                                rx="2"
+                                fill="rgba(201,169,110,0.58)"
+                            />
+                            <rect
+                                x="8"
+                                y="48"
+                                width="82"
+                                height="11"
+                                rx="4"
+                                fill="rgba(201,169,110,0.16)"
+                            />
+                            <rect
+                                x="8"
+                                y="63"
+                                width="25"
+                                height="16"
+                                rx="4"
+                                fill="rgba(255,255,255,0.08)"
+                            />
+                            <rect
+                                x="37"
+                                y="63"
+                                width="25"
+                                height="16"
+                                rx="4"
+                                fill="rgba(255,255,255,0.05)"
+                            />
+                            <rect
+                                x="66"
+                                y="63"
+                                width="24"
+                                height="16"
+                                rx="4"
+                                fill="rgba(255,255,255,0.10)"
+                            />
+                        </g>
+                        <g opacity="0">
+                            <animate
+                                attributeName="opacity"
+                                dur="6.6s"
+                                values="0;0;0;0;1;1"
+                                repeatCount="indefinite"
+                            />
+                            <rect
+                                x="8"
+                                y="34"
+                                width="18"
+                                height="44"
+                                rx="4"
+                                fill="rgba(255,255,255,0.05)"
+                            />
+                            <rect
+                                x="30"
+                                y="34"
+                                width="56"
+                                height="14"
+                                rx="4"
+                                fill="rgba(201,169,110,0.18)"
+                            />
+                            <rect
+                                x="30"
+                                y="54"
+                                width="50"
+                                height="4"
+                                rx="2"
+                                fill="rgba(255,255,255,0.09)"
+                            />
+                            <rect
+                                x="30"
+                                y="64"
+                                width="37"
+                                height="3.5"
+                                rx="1.75"
+                                fill="rgba(255,255,255,0.07)"
+                            />
+                            <rect
+                                x="30"
+                                y="74"
+                                width="29"
+                                height="3.5"
+                                rx="1.75"
+                                fill="rgba(255,255,255,0.07)"
+                            />
+                        </g>
+                        <g>
+                            <path
+                                d="M0 0L0 7.8L2.1 5.5L4.1 9.9L6.2 8.9L4.1 4.8L7.1 4.8Z"
+                                fill="rgba(244,240,233,0.96)"
+                                stroke="rgba(12,12,12,0.72)"
+                                strokeWidth="0.55">
+                                <animateMotion
+                                    dur="6.6s"
+                                    repeatCount="indefinite"
+                                    path="M18 24 C23 22, 29 21, 35 22 C41 23, 46 26, 50 28 C55 31, 58 37, 58 42 C58 46, 56 49, 52 53 C48 57, 43 59, 39 57 C35 55, 34 50, 37 46 C40 42, 47 40, 55 40 C64 40, 73 40, 79 42 C74 47, 67 55, 58 61 C50 66, 41 67, 33 62" />
+                            </path>
+                            <circle
+                                cx="58"
+                                cy="42"
+                                r="1.5"
+                                fill="rgba(201,169,110,0.55)"
+                                opacity="0">
+                                <animate
+                                    attributeName="opacity"
+                                    dur="6.6s"
+                                    values="0;0;0;0.85;0;0;0;0"
+                                    keyTimes="0;0.38;0.44;0.48;0.7;0.82;0.9;1"
+                                    repeatCount="indefinite"
+                                />
+                                <animate
+                                    attributeName="r"
+                                    dur="6.6s"
+                                    values="1.2;1.2;1.2;4.6;1.2;1.2;1.2;1.2"
+                                    keyTimes="0;0.38;0.44;0.48;0.7;0.82;0.9;1"
+                                    repeatCount="indefinite"
+                                />
+                            </circle>
+                            <circle
+                                cx="36"
+                                cy="56"
+                                r="1.5"
+                                fill="rgba(201,169,110,0.55)"
+                                opacity="0">
+                                <animate
+                                    attributeName="opacity"
+                                    dur="6.6s"
+                                    values="0;0;0;0;0;0.9;0;0"
+                                    keyTimes="0;0.38;0.44;0.48;0.7;0.82;0.88;1"
+                                    repeatCount="indefinite"
+                                />
+                                <animate
+                                    attributeName="r"
+                                    dur="6.6s"
+                                    values="1.2;1.2;1.2;1.2;1.2;4.2;1.2;1.2"
+                                    keyTimes="0;0.38;0.44;0.48;0.7;0.82;0.88;1"
+                                    repeatCount="indefinite"
+                                />
+                            </circle>
+                        </g>
+                    </g>
+                </g>
             </g>
             <defs>
                 <StripesPattern
                     rotate={0}
                     id="deviceStripesPattern"
                 />
+                <clipPath id="deviceTabClip">
+                    <path d="M86.8319 286.087C88.1922 285.302 90.3977 285.302 91.758 286.087L172.135 332.493C173.496 333.279 173.496 334.552 172.135 335.337L113.409 369.243C112.048 370.029 109.843 370.029 108.483 369.243L28.1051 322.837C26.7448 322.052 26.7448 320.779 28.1051 319.993L86.8319 286.087Z" />
+                </clipPath>
+                <clipPath id="deviceMobileClip">
+                    <path d="M214.866 362.426C216.226 361.641 218.431 361.641 219.792 362.426L244.311 376.582C245.671 377.368 245.671 378.641 244.311 379.426L196.409 407.082C195.049 407.868 192.843 407.868 191.483 407.082L166.964 392.926C165.604 392.141 165.604 390.868 166.964 390.082L214.866 362.426Z" />
+                </clipPath>
             </defs>
         </svg>
     )

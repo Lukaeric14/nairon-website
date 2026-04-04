@@ -13,6 +13,7 @@ export { HeroNew } from "./hero-new";
 export { LogoStrip } from "./logo-strip";
 export { WhatWeDo } from "./what-we-do";
 export { Process } from "./process";
+export { SecuritySection } from "./security-section";
 export { DataCredibility } from "./data-credibility";
 export { AudienceSplit } from "./audience-split";
 export { Testimonials } from "./testimonials";

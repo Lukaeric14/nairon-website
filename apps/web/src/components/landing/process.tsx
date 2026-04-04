@@ -4,27 +4,27 @@ import { GridSection, GridCell } from "./grid-system";
 const steps = [
 	{
 		number: "01",
-		title: "Discovery Call",
+		title: "Week 1: Audit",
 		description:
-			"We learn your company's stage, tech stack, culture, and what kind of AI-native engineer you actually need — not what a job description template says.",
+			"We map your workflows, identify the highest-leverage AI employee opportunity, and define the KPI, constraints, and handoffs before anything gets built.",
 	},
 	{
 		number: "02",
-		title: "Candidate Sourcing",
+		title: "Week 2: Build and deploy v1",
 		description:
-			"Our network of 2,000+ vetted AI-native engineers is cross-referenced with your requirements. We present 10–15 curated candidates within 1 week.",
+			"Our team builds the first working version and deploys it into your real stack so the system starts operating where it actually needs to live.",
 	},
 	{
 		number: "03",
-		title: "Flux Assessment",
+		title: "Week 3: Stress-test",
 		description:
-			"Each candidate goes through our proprietary benchmark — evaluating AI-nativeness, architecture decisions, team scaling experience, and technical debt philosophy.",
+			"We probe edge cases, tighten permissions, validate exception handling, and make sure nothing important is leaking through the cracks.",
 	},
 	{
 		number: "04",
-		title: "Interview & Close",
+		title: "Week 4: Go operational",
 		description:
-			"We facilitate the interview process, handle offer negotiations, and support onboarding. 90-day placement guarantee included.",
+			"We move from pilot mode into a working operating rhythm with reporting, weekly touchpoints, and a backlog for the next optimization cycle.",
 	},
 ];
 
@@ -59,18 +59,18 @@ export function Process() {
 				<GridCell borderRight className="px-6 md:px-12 py-8 md:py-12">
 					<div className="md:sticky md:top-24">
 						<div className="flex items-center gap-3 mb-4 md:mb-6">
-							<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-							<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
-								How it works
-							</span>
-						</div>
-						<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE]">
-							From brief to{" "}
-							<span className="font-serif italic text-[#C9A96E]">placement</span>{" "}
-							in 30 days
-						</h2>
+						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
+						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+							How it works
+						</span>
 					</div>
-				</GridCell>
+					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE]">
+						From audit to{" "}
+						<span className="font-serif italic text-[#C9A96E]">deployment</span>{" "}
+						in four weeks
+					</h2>
+				</div>
+			</GridCell>
 
 				{/* Right: steps — full width on mobile */}
 				<GridCell className="px-6 md:px-12 py-4 md:py-12">

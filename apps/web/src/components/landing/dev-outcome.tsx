@@ -2,57 +2,57 @@ import { useEffect, useRef, useState } from "react";
 import { GridSection, GridCell } from "./grid-system";
 
 const columns = [
-	{ label: "AI-native engineer", highlight: true, hideOnMobile: false },
-	{ label: "Traditional + AI tools", highlight: false, hideOnMobile: true },
-	{ label: "Traditional developer", highlight: false, hideOnMobile: false },
+	{ label: "AI employee system", highlight: true, hideOnMobile: false },
+	{ label: "Automation stack", highlight: false, hideOnMobile: true },
+	{ label: "Manual workflow", highlight: false, hideOnMobile: false },
 ];
 
 const metrics = [
 	{
-		label: "Shipping velocity",
-		subtitle: "Features per sprint",
+		label: "Execution speed",
+		subtitle: "Work completed per cycle",
 		values: ["11.8", "6.4", "3.2"],
 		best: 0,
 		badge: "3.7x \u2191",
 	},
 	{
-		label: "Time to production",
-		subtitle: "Avg. days, PR to deploy",
+		label: "Time to completion",
+		subtitle: "Avg. days, request to done",
 		values: ["1.2", "3.1", "4.7"],
 		best: 0,
 		badge: "3.9x \u2193",
 	},
 	{
-		label: "Code review throughput",
-		subtitle: "PRs reviewed per week",
+		label: "Throughput",
+		subtitle: "Tasks resolved per week",
 		values: ["34", "18", "12"],
 		best: 0,
 		badge: "2.8x \u2191",
 	},
 	{
-		label: "Bug resolution",
-		subtitle: "Avg. hours to fix",
+		label: "Exception handling",
+		subtitle: "Avg. hours to resolve edge cases",
 		values: ["1.8", "4.2", "6.4"],
 		best: 0,
 		badge: "3.6x \u2193",
 	},
 	{
-		label: "Test coverage",
-		subtitle: "Automated coverage",
+		label: "Consistency",
+		subtitle: "Repeatable output quality",
 		values: ["89%", "61%", "47%"],
 		best: 0,
 		badge: "1.9x \u2191",
 	},
 	{
-		label: "Architecture quality",
-		subtitle: "Flux arch score",
+		label: "Operational visibility",
+		subtitle: "Observed system reliability",
 		values: ["8.7", "5.4", "4.1"],
 		best: 0,
 		badge: "2.1x \u2191",
 	},
 	{
-		label: "Context utilization",
-		subtitle: "Token efficiency score",
+		label: "Learning loop",
+		subtitle: "Ability to improve over time",
 		values: ["9.2", "3.8", "\u2014"],
 		best: 0,
 	},
@@ -90,14 +90,14 @@ export function DevOutcome() {
 					<div className="flex items-center gap-3 mb-4">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
 						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
-							The Data
+							The advantage
 						</span>
 					</div>
 					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE] max-w-3xl mb-3">
 						The gap is measurable
 					</h2>
 					<p className="text-[#A39E96] text-sm md:text-base max-w-xl">
-						Across 2,000+ engineers assessed with Flux, AI-native engineers consistently outperform on every metric that matters.
+						When AI is deployed into a defined role instead of bolted onto a workflow, the gains show up in speed, consistency, and scale.
 					</p>
 				</GridCell>
 			</GridSection>
@@ -184,7 +184,7 @@ export function DevOutcome() {
 					</table>
 
 					<p className="text-[10px] text-[#A39E96]/40 mt-6">
-						Source: Flux aggregate data, 2,000+ assessed engineers, Q4 2025
+						Illustrative performance deltas based on recurring company delivery patterns.
 					</p>
 				</GridCell>
 			</GridSection>

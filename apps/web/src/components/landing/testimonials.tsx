@@ -3,21 +3,21 @@ import { GridSection, GridCell, CornerNotches } from "./grid-system";
 const testimonials = [
 	{
 		quote:
-			"Nairon found us an AI-native engineer who transformed our product in 90 days. The Flux data gave us confidence we'd never had with traditional recruiters.",
+			"Nairon helped us turn a messy acquisition workflow into an AI employee with real guardrails. It started saving the team time within the first month.",
 		name: "Sarah Al-Rashid",
 		role: "CEO, TechVentures Dubai",
 		avatar: "/avatars/avatar-4.jpg",
 	},
 	{
 		quote:
-			"The benchmark process was unlike anything I'd seen. It validated what I knew about my strengths and helped me find a company that valued AI-native thinking.",
+			"They did not just bolt AI onto our stack. They defined the role, the KPI, the approval flow, and the operating loop. That was the difference.",
 		name: "Marcus Chen",
-		role: "Senior Engineer, placed via Nairon",
+		role: "COO, Northstar Ops",
 		avatar: "/avatars/avatar-5.jpg",
 	},
 	{
 		quote:
-			"Three recruiters failed before Nairon. They understood what 'AI-native' actually means and delivered engineers who could prove it with data.",
+			"The real estate page got our attention, but the underlying model was broader than that. It was clear they were building AI employees, not selling hype.",
 		name: "Omar Khalid",
 		role: "Founder, BuildStack",
 		avatar: "/avatars/avatar-6.jpg",

@@ -4,16 +4,16 @@ interface HireFormData {
 	name: string;
 	company: string;
 	email: string;
-	role: string;
+	useCase: string;
 	teamSize: string;
 }
 
 export const submitHireForm = createServerFn({ method: "POST" })
 	.inputValidator((data: HireFormData) => data)
 	.handler(async ({ data }) => {
-		const { name, company, email, role, teamSize } = data;
+		const { name, company, email, useCase, teamSize } = data;
 
-		if (!name || !company || !email || !role) {
+		if (!name || !company || !email || !useCase) {
 			throw new Error("Missing required fields");
 		}
 
@@ -26,7 +26,7 @@ export const submitHireForm = createServerFn({ method: "POST" })
 						type: "header",
 						text: {
 							type: "plain_text",
-							text: "New Hiring Inquiry",
+							text: "New AI Employee Discovery Inquiry",
 							emoji: true,
 						},
 					},
@@ -36,7 +36,7 @@ export const submitHireForm = createServerFn({ method: "POST" })
 							{ type: "mrkdwn", text: `*Name:*\n${name}` },
 							{ type: "mrkdwn", text: `*Company:*\n${company}` },
 							{ type: "mrkdwn", text: `*Email:*\n${email}` },
-							{ type: "mrkdwn", text: `*Role:*\n${role}` },
+							{ type: "mrkdwn", text: `*Use Case:*\n${useCase}` },
 							{ type: "mrkdwn", text: `*Team Size:*\n${teamSize || "Not provided"}` },
 						],
 					},

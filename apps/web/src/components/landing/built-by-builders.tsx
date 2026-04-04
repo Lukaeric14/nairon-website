@@ -11,27 +11,27 @@ const tools: {
 	mobileRow?: string;
 }[] = [
 	// Desktop: Row 1–2
-	{ name: "Nairon CRM", description: "Full-cycle candidate & client pipeline", col: "1 / 3", row: "1 / 3", mobileCol: "1 / 3", mobileRow: "1 / 2" },
-	{ name: "Outreach Agent", description: "Cold outreach on autopilot", col: "3 / 4", row: "1 / 2", mobileCol: "3 / 4", mobileRow: "1 / 2" },
-	{ name: "Screening Agent", description: "Instant resume triage", col: "4 / 5", row: "1 / 2", mobileCol: "1 / 2", mobileRow: "2 / 3" },
-	{ name: "Nairon Universe", description: "Living knowledge graph of every signal", col: "5 / 7", row: "1 / 3", mobileCol: "2 / 4", mobileRow: "2 / 3" },
+	{ name: "Nairon CRM", description: "Client and delivery operating pipeline", col: "1 / 3", row: "1 / 3", mobileCol: "1 / 3", mobileRow: "1 / 2" },
+	{ name: "Outreach Agent", description: "Prospecting and follow-up on autopilot", col: "3 / 4", row: "1 / 2", mobileCol: "3 / 4", mobileRow: "1 / 2" },
+	{ name: "Support Agent", description: "Fast first-response coverage", col: "4 / 5", row: "1 / 2", mobileCol: "1 / 2", mobileRow: "2 / 3" },
+	{ name: "Nairon Universe", description: "Living knowledge graph of workflow context", col: "5 / 7", row: "1 / 3", mobileCol: "2 / 4", mobileRow: "2 / 3" },
 	// Desktop: Row 2
-	{ name: "Admin Agent", description: "Ops busywork, automated", col: "3 / 4", row: "2 / 3", mobileCol: "1 / 2", mobileRow: "3 / 4" },
+	{ name: "Admin Agent", description: "Ops busywork delegated safely", col: "3 / 4", row: "2 / 3", mobileCol: "1 / 2", mobileRow: "3 / 4" },
 	{ name: "Nairon Slackapp", description: "Real-time team intel in Slack", col: "4 / 5", row: "2 / 3", mobileCol: "2 / 3", mobileRow: "3 / 4" },
 	// Desktop: Row 3–4
-	{ name: "Match Engine", description: "Role-to-engineer fit scoring", col: "1 / 2", row: "3 / 4", mobileCol: "3 / 4", mobileRow: "3 / 4" },
-	{ name: "Report Generator", description: "One-click placement reports", col: "2 / 3", row: "3 / 4", mobileCol: "1 / 2", mobileRow: "4 / 5" },
-	{ name: "Flux", description: "Proprietary AI-nativeness benchmark", col: "3 / 5", row: "3 / 5", mobileCol: "2 / 4", mobileRow: "4 / 5" },
-	{ name: "Pipeline Tracker", description: "Live hiring funnel analytics", col: "5 / 7", row: "3 / 4", mobileCol: "1 / 2", mobileRow: "5 / 6" },
+	{ name: "Role Engine", description: "Function-to-AI-fit scoring", col: "1 / 2", row: "3 / 4", mobileCol: "3 / 4", mobileRow: "3 / 4" },
+	{ name: "Report Generator", description: "One-click operational reports", col: "2 / 3", row: "3 / 4", mobileCol: "1 / 2", mobileRow: "4 / 5" },
+	{ name: "Review Engine", description: "Stress-tests output before rollout", col: "3 / 5", row: "3 / 5", mobileCol: "2 / 4", mobileRow: "4 / 5" },
+	{ name: "Pipeline Tracker", description: "Live delivery and KPI analytics", col: "5 / 7", row: "3 / 4", mobileCol: "1 / 2", mobileRow: "5 / 6" },
 	// Desktop: Row 4
-	{ name: "Talent Graph", description: "Engineer network mapping", col: "1 / 3", row: "4 / 5", mobileCol: "2 / 4", mobileRow: "5 / 6" },
-	{ name: "Offer Engine", description: "Comp benchmarking & negotiation intel", col: "5 / 7", row: "4 / 5", mobileCol: "1 / 4", mobileRow: "6 / 7" },
+	{ name: "Ops Graph", description: "Workflow and dependency mapping", col: "1 / 3", row: "4 / 5", mobileCol: "2 / 4", mobileRow: "5 / 6" },
+	{ name: "Approval Engine", description: "Human checkpoints for risky actions", col: "5 / 7", row: "4 / 5", mobileCol: "1 / 4", mobileRow: "6 / 7" },
 ];
 
 const founders = [
 	{
 		name: "Obaid Ur-Rahmaan",
-		title: "Founder & CEO",
+		title: "CTO / Head of Product",
 		image: "/assets/framer/Xse9UYp1XHtcxoFdIq5x3WbveBc.webp",
 	},
 	{
@@ -220,9 +220,9 @@ export function BuiltByBuilders() {
 							}`}
 						>
 							<h2 className="text-xl md:text-[40px] md:leading-[48px] font-normal tracking-[-0.48px] text-[#E8E4DE]">
-								Built by two{" "}
+								Built by builders{" "}
 								<span className="font-serif italic text-[#C9A96E]">builders</span>{" "}
-								& tens of AI agents
+								and the systems they deploy
 							</h2>
 						</div>
 					</div>

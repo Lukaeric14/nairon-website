@@ -85,21 +85,21 @@ export function websiteJsonLd() {
 }
 
 /**
- * JSON-LD Service schema for recruiting services.
+ * JSON-LD Service schema for Nairon's company offer.
  */
 export function serviceJsonLd() {
 	return {
 		"@context": "https://schema.org",
 		"@type": "Service",
-		name: "AI-Native Technical Recruiting",
+		name: "AI Employee Company",
 		description:
-			"Data-driven technical recruiting that uses proprietary AI-nativeness benchmarks to match companies with engineers who ship.",
+			"Nairon builds and deploys AI employees for modern businesses, embedding agentic systems into acquisition and operations workflows.",
 		provider: {
 			"@type": "Organization",
 			name: SITE_NAME,
 			url: SITE_URL,
 		},
-		serviceType: "Technical Recruiting",
+		serviceType: "AI Automation Company",
 		areaServed: {
 			"@type": "Place",
 			name: "Worldwide",

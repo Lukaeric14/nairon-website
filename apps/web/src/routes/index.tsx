@@ -6,8 +6,8 @@ import {
 	WhyNairon,
 	DevComparison,
 	DevOutcome,
-	FluxSection,
 	Process,
+	SecuritySection,
 	DataCredibility,
 	AudienceSplit,
 	BuiltByBuilders,
@@ -19,16 +19,15 @@ import {
 } from "@/components/landing";
 import { ModalProvider } from "@/components/landing/modal-provider";
 import { HireModal } from "@/components/landing/hire-modal";
-import { CandidateModal } from "@/components/landing/candidate-modal";
 import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
 	component: HomePage,
 	head: () =>
 		seoHead({
-			title: "Nairon — AI-Native Recruiting",
+			title: "Nairon — Company for AI Employees",
 			description:
-				"Data-driven recruiting powered by AI-nativeness benchmarks. We match companies with engineers who ship using Flux.",
+				"Nairon builds and deploys AI employees for modern teams, then keeps them improving inside your operations, acquisition, and delivery workflows.",
 			path: "/",
 		}),
 });
@@ -36,60 +35,36 @@ export const Route = createFileRoute("/")({
 function HomePage() {
 	return (
 		<ModalProvider>
-		<div className="min-h-screen bg-[#0C0C0C] text-[#E8E4DE] font-inter">
-			<Navbar />
+			<div className="min-h-screen bg-[#0C0C0C] text-[#E8E4DE] font-inter">
+				<Navbar />
 
-			<GridSystem className="pt-16 mt-12 md:mt-16">
-				{/* Hero */}
-				<GridSection columns="1fr" border>
-					<HeroNew />
-				</GridSection>
+				<GridSystem className="pt-16 mt-12 md:mt-16">
+					<GridSection columns="1fr" border>
+						<HeroNew />
+					</GridSection>
 
-				{/* Logo strip */}
-				<GridSection columns="1fr" border>
-					<LogoStrip />
-				</GridSection>
+					<GridSection columns="1fr" border>
+						<LogoStrip />
+					</GridSection>
 
-				{/* AI-Nativeness — what it means */}
-				<WhyNairon />
+					<WhyNairon />
+					<DevComparison />
+					<DevOutcome />
+					<Process />
+					<SecuritySection />
+					<DataCredibility />
+					<AudienceSplit />
+					<BuiltByBuilders />
+					<Testimonials />
 
-				{/* Dev comparison — traditional vs AI-native */}
-				<DevComparison />
+					<GridSection columns="1fr" border={false}>
+						<CTASection />
+					</GridSection>
+				</GridSystem>
 
-				{/* Dev outcome — data comparison chart */}
-				<DevOutcome />
-
-				{/* Flux — how we measure and train */}
-				<FluxSection />
-
-				{/* Process */}
-				<Process />
-
-				{/* Data credibility */}
-				<DataCredibility />
-
-				{/* Audience split */}
-				<AudienceSplit />
-
-				{/* Built by builders */}
-				<BuiltByBuilders />
-
-				{/* Testimonials */}
-				<Testimonials />
-
-				{/* Blog — hidden for now */}
-				{/* <BlogSection /> */}
-
-				{/* CTA */}
-				<GridSection columns="1fr" border={false}>
-					<CTASection />
-				</GridSection>
-			</GridSystem>
-
-			<Footer />
-		</div>
-		<HireModal />
-		<CandidateModal />
+				<Footer />
+			</div>
+			<HireModal />
 		</ModalProvider>
 	);
 }

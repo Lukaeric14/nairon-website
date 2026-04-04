@@ -3,7 +3,7 @@ import { GridSection, GridCell, CornerNotches } from "./grid-system";
 import { useModals } from "./modal-provider";
 
 export function AudienceSplit() {
-	const { openHireModal, openCandidateModal } = useModals();
+	const { openHireModal } = useModals();
 	return (
 		<div>
 			{/* Heading row */}
@@ -28,21 +28,20 @@ export function AudienceSplit() {
 				<GridCell borderRight className="p-6 md:p-12">
 					<CornerNotches size={12} />
 					<span className="text-[#C9A96E] text-xs font-medium uppercase tracking-[0.16em]">
-						For Companies
+						For companies
 					</span>
 					<h3 className="text-xl md:text-3xl font-normal text-[#E8E4DE] mt-3 md:mt-4 mb-3 md:mb-4">
-						Hire AI-native engineers who build
+						Deploy AI employees into the core business
 					</h3>
 					<p className="text-[#A39E96] text-sm md:text-base leading-relaxed mb-6 md:mb-8">
-						Stop gambling on resumes. We benchmark every candidate
-						on real-world AI-nativeness, architecture quality, and
-						engineering velocity — so you hire with confidence.
+						We help companies turn repetitive, high-leverage workflows into operational
+						AI systems across acquisition, fulfillment, support, and internal ops.
 					</p>
 					<ul className="space-y-2 md:space-y-3 mb-6 md:mb-8">
 						{[
-							"Flux-scored candidate shortlist",
-							"Culture & team-fit matching",
-							"90-day placement guarantee",
+							"Role-first AI deployment",
+							"Human oversight by design",
+							"Ongoing optimization on subscription",
 						].map((item) => (
 							<li key={item} className="flex items-start gap-3">
 								<div className="w-1 h-1 rounded-full bg-[#C9A96E] mt-2.5 shrink-0" />
@@ -55,30 +54,29 @@ export function AudienceSplit() {
 						onClick={openHireModal}
 						className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-sm px-5 py-2.5 rounded-full transition-colors"
 					>
-						Start hiring
+						Book discovery
 						<ArrowUpRight className="w-3.5 h-3.5" />
 					</button>
 				</GridCell>
 
-				{/* For Candidates */}
+				{/* Real estate ICP */}
 				<GridCell className="p-6 md:p-12">
 					<CornerNotches size={12} />
 					<span className="text-[#C9A96E] text-xs font-medium uppercase tracking-[0.16em]">
-						For Candidates
+						For real estate
 					</span>
 					<h3 className="text-xl md:text-3xl font-normal text-[#E8E4DE] mt-3 md:mt-4 mb-3 md:mb-4">
-						Land your next AI-native role
+						See the ICP-specific version of the offer
 					</h3>
 					<p className="text-[#A39E96] text-sm md:text-base leading-relaxed mb-6 md:mb-8">
-						Join our network of AI-native engineers. Get benchmark-scored,
-						matched with the right companies, and skip the noise of
-						traditional job boards.
+						The main landing page stays broad because the business model is broad.
+						`/for/real-estate` exists so we can speak directly to one focused wedge.
 					</p>
 					<ul className="space-y-2 md:space-y-3 mb-6 md:mb-8">
 						{[
-							"Free Flux assessment & score",
-							"Matched to companies that fit your style",
-							"Confidential process, always",
+							"Brokerage-specific messaging",
+							"Real estate workflow examples",
+							"Same company model, narrower ICP",
 						].map((item) => (
 							<li key={item} className="flex items-start gap-3">
 								<div className="w-1 h-1 rounded-full bg-[#C9A96E] mt-2.5 shrink-0" />
@@ -86,14 +84,13 @@ export function AudienceSplit() {
 							</li>
 						))}
 					</ul>
-					<button
-						type="button"
-						onClick={openCandidateModal}
+					<a
+						href="/for/real-estate"
 						className="inline-flex items-center gap-2 border border-white/10 text-[#E8E4DE] font-medium text-sm px-5 py-2.5 rounded-full hover:bg-white/5 transition-colors"
 					>
-						Join the network
+						View real estate page
 						<ArrowUpRight className="w-3.5 h-3.5" />
-					</button>
+					</a>
 				</GridCell>
 			</GridSection>
 		</div>

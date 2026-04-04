@@ -14,7 +14,7 @@ export function HireModal() {
 		name: "",
 		company: "",
 		email: "",
-		role: "",
+		useCase: "",
 		teamSize: "",
 	});
 
@@ -23,7 +23,7 @@ export function HireModal() {
 			closeHireModal();
 			setTimeout(() => {
 				setStep("form");
-				setForm({ name: "", company: "", email: "", role: "", teamSize: "" });
+				setForm({ name: "", company: "", email: "", useCase: "", teamSize: "" });
 			}, 200);
 		}
 	}
@@ -58,10 +58,10 @@ export function HireModal() {
 							<div className="p-8 md:p-10 flex flex-col justify-center">
 								<div className="mb-6">
 									<h2 className="text-2xl font-normal text-[#E8E4DE]">
-										Hire AI-native engineers
+										Book an AI employee discovery
 									</h2>
 									<p className="text-[#A39E96] text-sm mt-1.5">
-										Tell us about your hiring needs and book a call with our team.
+										Tell us which role you want AI to own and book a call with our team.
 									</p>
 								</div>
 
@@ -114,15 +114,15 @@ export function HireModal() {
 
 									<div>
 										<label htmlFor="hire-role" className="block text-xs text-[#A39E96] mb-1.5">
-											Role you're hiring for *
+											What should your first AI employee own? *
 										</label>
 										<input
 											id="hire-role"
 											type="text"
 											required
-											value={form.role}
-											onChange={update("role")}
-											placeholder="Senior AI Engineer"
+											value={form.useCase}
+											onChange={update("useCase")}
+											placeholder="Lead qualification, support, transaction coordination"
 											className={inputClass}
 										/>
 									</div>
@@ -179,9 +179,9 @@ export function HireModal() {
 								/>
 								<div className="relative z-10 flex flex-col gap-3 p-6 h-full justify-center">
 									{[
-										{ icon: BarChart3, title: "Flux-scored shortlist", desc: "Every candidate benchmarked on real AI-nativeness" },
-										{ icon: Shield, title: "90-day guarantee", desc: "Full replacement if the placement doesn't work out" },
-										{ icon: Zap, title: "30-day placement", desc: "From brief to signed offer in under a month" },
+										{ icon: BarChart3, title: "Role-first discovery", desc: "We identify the highest-leverage AI employee before we ship." },
+										{ icon: Shield, title: "Guardrails from day one", desc: "Scoped permissions, approval layers, and auditability are built in." },
+										{ icon: Zap, title: "Fast deployment loop", desc: "Audit, launch, stress-test, and operationalize in a tight cycle." },
 									].map(({ icon: Icon, title, desc }) => (
 										<div
 											key={title}
