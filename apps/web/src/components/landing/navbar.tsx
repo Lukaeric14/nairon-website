@@ -101,7 +101,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 							onClick={handleSectionClick("security")}
 							className="px-4 py-2 rounded-full text-sm text-[#E8E4DE] hover:text-[#C9A96E] transition-colors"
 						>
-							Security
+								Infrastructure
 					</a>
 
 					<a
@@ -155,7 +155,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 							className="block px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
 							onClick={handleSectionClick("security")}
 						>
-							Security
+								Infrastructure
 						</a>
 
 					<a

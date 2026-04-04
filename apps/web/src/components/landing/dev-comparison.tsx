@@ -29,37 +29,6 @@ function CanvasShell({
 	);
 }
 
-function AutomationCanvas() {
-	return (
-		<CanvasShell label="Linear rules">
-			<div className="flex h-full flex-col justify-center">
-				<div className="mx-auto grid w-full max-w-[520px] gap-3 md:gap-4">
-					{[
-						{ title: "Trigger", copy: "New lead enters inbox" },
-						{ title: "Rule", copy: "If source is Zillow, send template A" },
-						{ title: "Action", copy: "Create CRM record and notify team" },
-						{ title: "Failure mode", copy: "Breaks when the input changes" },
-					].map((item, index) => (
-						<div key={item.title} className="relative">
-							{index > 0 && (
-								<div className="absolute -top-3 left-6 h-3 w-px bg-white/14 md:-top-4 md:h-4" />
-							)}
-							<div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4 md:p-5">
-								<p className="text-[11px] uppercase tracking-[0.14em] text-white/34 md:text-xs">
-									{item.title}
-								</p>
-								<p className="mt-2 text-sm leading-[1.55] text-white/78 md:text-[15px]">
-									{item.copy}
-								</p>
-							</div>
-						</div>
-					))}
-				</div>
-			</div>
-		</CanvasShell>
-	);
-}
-
 function OrgNode({
 	title,
 	subtitle,
@@ -116,61 +85,146 @@ function OrgNode({
 	);
 }
 
-function OrgChartCanvas() {
+function SupportNode({
+	title,
+	count,
+}: {
+	title: string;
+	count: string;
+}) {
 	return (
-		<CanvasShell label="Org chart" accent>
+		<div className="rounded-xl border border-[#C9A96E]/18 bg-[#C9A96E]/8 px-3 py-2.5">
+			<div className="flex items-start gap-2.5">
+				<div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#C9A96E]/22 bg-[#C9A96E]/12 text-[#C9A96E]">
+					<Bot className="h-3.5 w-3.5" />
+				</div>
+				<div className="min-w-0">
+					<p className="text-[10px] uppercase tracking-[0.14em] text-[#C9A96E]">AI employee</p>
+					<p className="mt-1 text-xs leading-[1.35] text-white/86">{title}</p>
+					<p className="mt-1 text-[10px] leading-relaxed text-white/42">{count}</p>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+function HumanOnlyCanvas() {
+	const executiveRow = [
+		{ title: "Marketing lead", detail: "Owns demand and campaigns" },
+		{ title: "Operations lead", detail: "Runs delivery and follow-up" },
+		{ title: "Sales lead", detail: "Handles conversations and pipeline" },
+		{ title: "Chief of staff", detail: "Coordinates approvals and execution" },
+	];
+
+	const operatorRow = [
+		{ title: "Research analyst", detail: "Manual prep and list building" },
+		{ title: "Inbox coordinator", detail: "Responds and routes requests" },
+		{ title: "Project coordinator", detail: "Tracks handoffs and updates" },
+		{ title: "QA reviewer", detail: "Checks work before it ships" },
+	];
+
+	return (
+		<CanvasShell label="Human-only org">
 			<div className="flex h-full flex-col justify-center">
 				<div className="mx-auto w-full max-w-[560px]">
-					<div className="mx-auto max-w-[180px]">
-						<OrgNode title="CEO" subtitle="Human leadership" detail="Sets direction and approves priorities" />
+					<div className="mx-auto max-w-[190px]">
+						<OrgNode
+							title="CEO"
+							subtitle="Human leadership"
+							detail="One team carrying all execution themselves"
+						/>
 					</div>
 
-					<div className="mx-auto h-6 w-px bg-[#C9A96E]/35 md:h-8" />
+					<div className="mx-auto h-5 w-px bg-white/12 md:h-6" />
 
-					<div className="mx-auto grid max-w-[500px] gap-3 md:grid-cols-3 md:gap-4">
-						<OrgNode title="Revenue operator" subtitle="Human oversight" detail="Reviews pipeline outcomes" />
-						<OrgNode title="Ops operator" subtitle="Human oversight" detail="Handles escalations" />
-						<OrgNode title="Chief of staff" subtitle="Human oversight" detail="Approves sensitive actions" />
+					<div className="mx-auto grid max-w-[560px] gap-3 md:grid-cols-4 md:gap-4">
+						{executiveRow.map((person) => (
+							<OrgNode
+								key={person.title}
+								title={person.title}
+								subtitle="Human employee"
+								detail={person.detail}
+							/>
+						))}
 					</div>
 
-					<div className="relative mx-auto mt-5 max-w-[540px] rounded-[24px] border border-dashed border-[#C9A96E]/28 bg-[linear-gradient(180deg,rgba(201,169,110,0.06),rgba(12,12,12,0.55))] p-4 md:mt-6 md:p-5">
-						<div className="absolute left-1/2 top-0 h-5 w-px -translate-x-1/2 -translate-y-5 bg-[#C9A96E]/35 md:h-6 md:-translate-y-6" />
+					<div className="mx-auto h-5 w-px bg-white/12 md:h-6" />
+
+					<div className="mx-auto grid max-w-[560px] gap-3 md:grid-cols-4 md:gap-4">
+						{operatorRow.map((person) => (
+							<OrgNode
+								key={person.title}
+								title={person.title}
+								subtitle="Human employee"
+								detail={person.detail}
+							/>
+						))}
+					</div>
+				</div>
+			</div>
+		</CanvasShell>
+	);
+}
+
+function AugmentedOrgChartCanvas() {
+	const executiveRow = [
+		{
+			title: "Marketing lead",
+			detail: "Directs demand strategy",
+			ai: { title: "Research + follow-up team", count: "2 AI employees" },
+		},
+		{
+			title: "Operations lead",
+			detail: "Owns fulfillment rhythm",
+			ai: { title: "Coordination + QA team", count: "2 AI employees" },
+		},
+		{
+			title: "Sales lead",
+			detail: "Runs pipeline decisions",
+			ai: { title: "Qualification + outreach team", count: "2 AI employees" },
+		},
+		{
+			title: "Chief of staff",
+			detail: "Handles approvals and edge cases",
+			ai: { title: "Escalation + reporting team", count: "2 AI employees" },
+		},
+	];
+
+	return (
+		<CanvasShell label="Augmented org" accent>
+			<div className="flex h-full flex-col justify-center">
+				<div className="mx-auto w-full max-w-[560px]">
+					<div className="mx-auto max-w-[190px]">
+						<OrgNode
+							title="CEO"
+							subtitle="Human leadership"
+							detail="Humans stay in charge while AI employees handle execution"
+						/>
+					</div>
+
+					<div className="mx-auto h-5 w-px bg-[#C9A96E]/35 md:h-6" />
+
+					<div className="mx-auto grid max-w-[560px] gap-3 md:grid-cols-4 md:gap-4">
+						{executiveRow.map((person) => (
+							<div key={person.title} className="space-y-2.5">
+								<OrgNode
+									title={person.title}
+									subtitle="Human employee"
+									detail={person.detail}
+								/>
+								<SupportNode title={person.ai.title} count={person.ai.count} />
+							</div>
+						))}
+					</div>
+
+					<div className="mx-auto mt-4 max-w-[560px] rounded-[24px] border border-dashed border-[#C9A96E]/24 bg-[linear-gradient(180deg,rgba(201,169,110,0.06),rgba(12,12,12,0.55))] p-4 md:mt-5 md:p-5">
 						<p className="mb-2 text-center text-[11px] uppercase tracking-[0.16em] text-[#C9A96E] md:text-xs">
 							AI employee layer
 						</p>
-						<p className="mb-4 text-center text-xs leading-relaxed text-white/46">
-							These are the operating nodes. They do the work while humans supervise the lane.
+						<p className="text-center text-xs leading-relaxed text-white/46">
+							After deployment, each human lane is supported by dedicated AI employees doing
+							research, follow-up, coordination, QA, and execution-heavy work.
 						</p>
-						<div className="grid gap-3 md:grid-cols-2">
-							<OrgNode
-								title="Acquisition AI employee"
-								subtitle="AI employee"
-								type="ai"
-								highlight
-								detail="Research, outreach, qualification"
-							/>
-							<OrgNode
-								title="Operations AI employee"
-								subtitle="AI employee"
-								type="ai"
-								highlight
-								detail="Fulfillment, coordination, handoffs"
-							/>
-							<OrgNode
-								title="Support AI employee"
-								subtitle="AI employee"
-								type="ai"
-								highlight
-								detail="Inbox handling and routine response"
-							/>
-							<OrgNode
-								title="QA AI employee"
-								subtitle="AI employee"
-								type="ai"
-								highlight
-								detail="Checks, exceptions, escalation prep"
-							/>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -249,7 +303,7 @@ export function DevComparison() {
 									zIndex: 2,
 								}}
 							>
-								<OrgChartCanvas />
+									<AugmentedOrgChartCanvas />
 							</div>
 							<div className="absolute right-3 top-3 z-10 md:right-6 md:top-6">
 								<span
@@ -288,7 +342,7 @@ export function DevComparison() {
 									zIndex: 2,
 								}}
 							>
-								<AutomationCanvas />
+									<HumanOnlyCanvas />
 							</div>
 							<div className="absolute left-3 top-3 z-10 md:left-6 md:top-6">
 								<span
@@ -354,14 +408,14 @@ export function DevComparison() {
 			<GridSection columns="1fr 1fr" border>
 				<GridCell borderRight className="px-4 md:px-8 py-4 md:py-6">
 					<p className="text-xs leading-relaxed text-[#A39E96] md:text-sm">
-						Before: rigid rule chains break the moment the input gets messy. Useful for narrow
-						tasks, brittle everywhere else.
+							Before: the whole org chart is human-only, so every repetitive task, follow-up,
+							handoff, and check still sits on people.
 					</p>
 				</GridCell>
 				<GridCell className="px-4 md:px-8 py-4 md:py-6">
 					<p className="text-xs leading-relaxed text-[#A39E96] md:text-sm">
-						After: AI employee nodes sit inside the org chart with bounded permissions, human
-						oversight, and continuous improvement inside the real business workflow.
+							After: the same human team stays in place, but each lane gets AI employees working
+							under them to expand execution capacity without losing oversight.
 					</p>
 				</GridCell>
 			</GridSection>

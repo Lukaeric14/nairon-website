@@ -11,6 +11,7 @@ import {
 	DataCredibility,
 	AudienceSplit,
 	BuiltByBuilders,
+	AIFaqSection,
 	Testimonials,
 	CTASection,
 	Footer,
@@ -47,7 +48,7 @@ function HomePage() {
 							<LogoStrip />
 						</GridSection>
 
-						<WhyNairon />
+							{/* <WhyNairon /> */}
 						<Process />
 						<SecuritySection />
 						<DevComparison />
@@ -56,9 +57,10 @@ function HomePage() {
 						<BuiltByBuilders />
 						<AudienceSplit />
 						<Testimonials />
+						<AIFaqSection />
 
-					<GridSection columns="1fr" border={false}>
-						<CTASection />
+						<GridSection columns="1fr" border={false}>
+							<CTASection />
 					</GridSection>
 				</GridSystem>
 
