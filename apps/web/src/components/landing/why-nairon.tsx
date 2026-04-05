@@ -3,26 +3,26 @@ import { GridSection, GridCell, CornerNotches } from "./grid-system";
 
 const points = [
 	{
-		title: "Agent-first thinking",
+		title: "Headcount alone does not scale execution",
 		description:
-			"They design systems where agents are first-class citizens. The codebase, the CI pipeline, the review process. All built assuming AI does the work and humans direct it.",
+			"Most teams do not have a strategy problem. They have a capacity problem. Work stacks up in research, follow-up, coordination, and QA long before leadership can hire enough people to keep up.",
 		image: "/backgrounds/pastoral-hills.webp",
 	},
 	{
-		title: "Eval discipline",
+		title: "Manual work creates invisible revenue leaks",
 		description:
-			"They treat AI output like an untrusted junior's PR. They catch hallucinations systematically and know exactly when to override.",
+			"When the process depends on people doing every handoff manually, follow-up gets missed, turnaround slows down, and opportunities die quietly in the gaps between systems.",
 		image: "/backgrounds/hazy-landscape.webp",
 	},
 	{
-		title: "Token efficiency",
+		title: "AI employees give the team leverage without removing control",
 		description:
-			"They think about context windows, model selection, and cost-per-output the way senior engineers think about database queries.",
+			"Your team stays in charge of decisions, approvals, and edge cases. AI employees take on the repetitive execution layer so humans can focus on judgment instead of busywork.",
 		image: "/backgrounds/rolling-hills.webp",
 	},
 ];
 
-const tools = ["Cursor", "ChatGPT", "Claude Code", "Copilot", "Windsurf"];
+const tools = ["Cursor", "ChatGPT", "Claude Code"];
 const TOOL_CYCLE_DURATION = 2500; // ms per tool name
 const CYCLE_DURATION = 5000; // ms per card
 
@@ -109,7 +109,7 @@ export function WhyNairon() {
 					<div className="flex items-center gap-3 mb-4">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
 						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
-							AI-Nativeness
+							Why they need it
 						</span>
 					</div>
 					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE] max-w-3xl">
@@ -131,7 +131,7 @@ export function WhyNairon() {
 							))}
 						</span>
 						<br />
-						doesn&#8217;t make them AI&#8209;native
+						doesn&#8217;t fix the execution bottleneck
 					</h2>
 				</GridCell>
 			</GridSection>

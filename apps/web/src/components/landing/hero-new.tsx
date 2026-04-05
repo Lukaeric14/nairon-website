@@ -37,7 +37,7 @@ function CornerNotches() {
 }
 
 export function HeroNew() {
-	const { openHireModal, openCandidateModal } = useModals();
+	const { openHireModal } = useModals();
 	return (
 		<div className="relative flex flex-col justify-center items-center text-center px-5 md:px-12 py-16 md:py-24">
 			<CornerNotches />
@@ -57,22 +57,22 @@ export function HeroNew() {
 					))}
 				</div>
 				<span className="text-[#A39E96] text-sm">
-					Trusted by hundreds of engineers
+					Built for teams deploying AI into real operations
 				</span>
 			</div>
 
 			{/* Headline */}
 			<h1 className="text-[36px] leading-[40px] md:text-[80px] md:leading-[80px] font-normal tracking-[-1.5px] md:tracking-[-2.4px] text-[#E8E4DE] max-w-4xl">
-				Find AI-native engineers{" "}
+				Deploy AI employees{" "}
 				<span className="font-serif italic text-[#C9A96E]">
-					who ship
+					who operate 24/7
 				</span>
 			</h1>
 
 			{/* Subtitle */}
 			<p className="mt-6 text-lg md:text-xl text-[#A39E96] max-w-2xl leading-relaxed">
-				Nairon is a data-driven technical recruiting startup. We use proprietary
-				benchmarks to match companies with AI-native engineers who build.
+				We turn high-leverage workflows into role-based agentic systems for
+				acquisition, operations, and execution.
 			</p>
 
 			{/* CTAs */}
@@ -82,17 +82,16 @@ export function HeroNew() {
 					onClick={openHireModal}
 					className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-base px-6 py-3 rounded-full transition-colors"
 				>
-					Hire engineers
+					Book discovery
 					<ArrowUpRight className="w-4 h-4" />
 				</button>
-				<button
-					type="button"
-					onClick={openCandidateModal}
+				<a
+					href="/for/real-estate"
 					className="inline-flex items-center gap-2 border border-white/10 text-[#E8E4DE] font-medium text-base px-6 py-3 rounded-full hover:bg-white/5 transition-colors"
 				>
-					I'm a candidate
+					For real estate
 					<ArrowUpRight className="w-4 h-4" />
-				</button>
+				</a>
 			</div>
 		</div>
 	);

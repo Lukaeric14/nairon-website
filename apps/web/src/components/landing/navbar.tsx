@@ -1,8 +1,8 @@
+import type { MouseEvent } from "react";
 import { useState, useEffect } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import { GithubIcon } from "@/components/ui/icons/github-icon";
 import { useModals } from "./modal-provider";
 
 // Universe dropdown constants - commented out until Universe is ready
@@ -27,6 +27,21 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 	useEffect(() => {
 		setMobileOpen(false);
 	}, [location.pathname]);
+
+	const handleSectionClick =
+		(sectionId: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+			if (location.pathname !== "/") return;
+
+			event.preventDefault();
+			setMobileOpen(false);
+
+			document.getElementById(sectionId)?.scrollIntoView({
+				behavior: "smooth",
+				block: "start",
+			});
+
+			window.history.replaceState(null, "", `/#${sectionId}`);
+		};
 
 	return (
 		<nav
@@ -73,30 +88,34 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 				{/* Desktop nav */}
 				{!minimal && (
 				<div className="hidden md:flex items-center gap-1">
+						<a
+							href="/#process"
+							onClick={handleSectionClick("process")}
+							className="px-4 py-2 rounded-full text-sm text-[#E8E4DE] hover:text-[#C9A96E] transition-colors"
+						>
+							How it works
+					</a>
+
+						<a
+							href="/#security"
+							onClick={handleSectionClick("security")}
+							className="px-4 py-2 rounded-full text-sm text-[#E8E4DE] hover:text-[#C9A96E] transition-colors"
+						>
+								Infrastructure
+					</a>
+
 					<a
-						href="/flux"
+						href="/for/real-estate"
 						className="px-4 py-2 rounded-full text-sm text-[#E8E4DE] hover:text-[#C9A96E] transition-colors"
 					>
-						Flux
+						Real estate
 					</a>
-
-
-					<a
-						href="https://github.com/Nairon-AI/flux"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="ml-1 p-2 rounded-full text-[#A39E96] hover:text-[#E8E4DE] transition-colors"
-						aria-label="GitHub"
-					>
-						<GithubIcon size={20} />
-					</a>
-
 					<button
 						type="button"
 						onClick={openHireModal}
 						className="ml-2 inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-sm px-5 py-2.5 rounded-full transition-colors"
 					>
-						Hire engineers
+						Book discovery
 						<ArrowUpRight className="w-3.5 h-3.5" />
 					</button>
 				</div>
@@ -123,25 +142,29 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 			{/* Mobile menu */}
 			{mobileOpen && !minimal && (
 				<div className="md:hidden bg-[#0C0C0C] border-t border-white/6 px-6 py-6 space-y-1">
+						<a
+							href="/#process"
+							className="block px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
+							onClick={handleSectionClick("process")}
+						>
+							How it works
+						</a>
+
+						<a
+							href="/#security"
+							className="block px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
+							onClick={handleSectionClick("security")}
+						>
+								Infrastructure
+						</a>
+
 					<a
-						href="/flux"
+						href="/for/real-estate"
 						className="block px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
 						onClick={() => setMobileOpen(false)}
 					>
-						Flux
+						Real estate
 					</a>
-
-
-					<a
-						href="https://github.com/Nairon-AI/flux"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="flex items-center gap-2 px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
-					>
-						<GithubIcon size={20} />
-						GitHub
-					</a>
-
 					<div className="pt-4">
 						<button
 							type="button"
@@ -151,7 +174,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 							}}
 							className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-base px-6 py-3 rounded-full transition-colors"
 						>
-							Hire engineers
+							Book discovery
 							<ArrowUpRight className="w-4 h-4" />
 						</button>
 					</div>

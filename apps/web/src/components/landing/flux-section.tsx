@@ -10,18 +10,18 @@ export function FluxSection() {
             <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
               <div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
               <span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
-                Open Source Plugin
+                Internal operating system
               </span>
             </div>
             <h2 className="text-2xl md:text-4xl font-normal tracking-[-0.02em] text-[#E8E4DE] mb-3">
-              Your AI workflow has gaps.{" "}
+              Our company uses{" "}
               <span className="font-serif italic text-[#C9A96E]">Flux</span>{" "}
-              finds them.
+              to catch the gaps before they cost you.
             </h2>
             <p className="text-[#A39E96] text-sm md:text-base max-w-xl">
-              Structured scoping, execution, and review for AI-augmented
-              development. Analyze your sessions, detect friction patterns, and
-              get recommendations that actually work.
+              Flux is the workflow and review harness behind how we scope, ship,
+              stress-test, and improve AI employees. It keeps implementation
+              disciplined instead of turning into prompt spaghetti.
             </p>
           </div>
           <a

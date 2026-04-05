@@ -13,6 +13,7 @@ export { HeroNew } from "./hero-new";
 export { LogoStrip } from "./logo-strip";
 export { WhatWeDo } from "./what-we-do";
 export { Process } from "./process";
+export { SecuritySection } from "./security-section";
 export { DataCredibility } from "./data-credibility";
 export { AudienceSplit } from "./audience-split";
 export { Testimonials } from "./testimonials";
@@ -23,6 +24,7 @@ export { DevOutcome } from "./dev-outcome";
 export { FluxSection } from "./flux-section";
 export { PaintingBreak } from "./painting-break";
 export { BuiltByBuilders } from "./built-by-builders";
+export { AIFaqSection } from "./ai-faq-section";
 export { BlogSection } from "./blog-section";
 export {
 	GridSystem,
