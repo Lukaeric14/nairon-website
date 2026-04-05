@@ -35,9 +35,9 @@ const founders = [
 		image: "/assets/framer/Xse9UYp1XHtcxoFdIq5x3WbveBc.webp",
 	},
 	{
-		name: "Abdi",
-		title: "AI Engineer",
-		image: "/abdi.jpg",
+		name: "Luka Erić",
+		title: "CEO",
+		image: "/assets/framer/SSmGx1bjs3koY1aPdILAeuc.webp",
 	},
 ];
 
