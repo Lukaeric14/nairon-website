@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { DISCOVERY_CALL_URL } from "@/lib/links";
 import {
 	Navbar,
 	LogoStrip,
@@ -28,7 +29,9 @@ export const Route = createFileRoute("/for/real-estate")({
 function DiscoveryCTA() {
 	return (
 		<a
-			href="#discovery"
+			href={DISCOVERY_CALL_URL}
+			target="_blank"
+			rel="noopener noreferrer"
 			className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-base px-6 py-3 rounded-full transition-colors"
 		>
 			Book your discovery

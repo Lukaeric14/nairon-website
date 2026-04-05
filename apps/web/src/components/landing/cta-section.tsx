@@ -1,8 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
-import { useModals } from "./modal-provider";
+import { DISCOVERY_CALL_URL } from "@/lib/links";
 
 export function CTASection() {
-	const { openHireModal } = useModals();
 	return (
 		<div className="relative overflow-hidden">
 			{/* Full-bleed painting background */}
@@ -39,14 +38,15 @@ export function CTASection() {
 						<span className="text-[#C9A96E]">?</span>
 					</h2>
 					<div className="flex flex-wrap justify-center gap-4">
-						<button
-							type="button"
-							onClick={openHireModal}
+						<a
+							href={DISCOVERY_CALL_URL}
+							target="_blank"
+							rel="noopener noreferrer"
 							className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-base px-8 py-3.5 rounded-full transition-colors"
 						>
 							Book a call
 							<ArrowUpRight className="w-4 h-4" />
-						</button>
+						</a>
 						<a 
 							href="/for/real-estate"
 							className="inline-flex items-center gap-2 border border-white/10 text-[#E8E4DE] hover:border-[#C9A96E]/50 hover:text-[#C9A96E] font-medium text-base px-6 py-3.5 rounded-full transition-colors"

@@ -246,7 +246,7 @@ function CalBookingStep() {
 			Cal.ns[ns]("inline", {
 				elementOrSelector: el,
 				config: { layout: "month_view", theme: "dark" },
-				calLink: "luka-eric-vuqogn/hiring-partner-call",
+				calLink: "naironai/discovery-call",
 			});
 
 			Cal.ns[ns]("ui", {

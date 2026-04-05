@@ -2,8 +2,8 @@ import type { MouseEvent } from "react";
 import { useState, useEffect } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
+import { DISCOVERY_CALL_URL } from "@/lib/links";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import { useModals } from "./modal-provider";
 
 // Universe dropdown constants - commented out until Universe is ready
 // const UNIVERSE_EXPLORE = [...];
@@ -13,7 +13,6 @@ import { useModals } from "./modal-provider";
 export function Navbar({ minimal = false }: { minimal?: boolean }) {
 	const [scrolled, setScrolled] = useState(false);
 	const [mobileOpen, setMobileOpen] = useState(false);
-	const { openHireModal } = useModals();
 	const location = useLocation();
 	const isFluxPage = location.pathname === "/flux";
 
@@ -110,14 +109,15 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 					>
 						Real estate
 					</a>
-					<button
-						type="button"
-						onClick={openHireModal}
+					<a
+						href={DISCOVERY_CALL_URL}
+						target="_blank"
+						rel="noopener noreferrer"
 						className="ml-2 inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-sm px-5 py-2.5 rounded-full transition-colors"
 					>
 						Book discovery
 						<ArrowUpRight className="w-3.5 h-3.5" />
-					</button>
+					</a>
 				</div>
 				)}
 
@@ -166,17 +166,16 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						Real estate
 					</a>
 					<div className="pt-4">
-						<button
-							type="button"
-							onClick={() => {
-								setMobileOpen(false);
-								openHireModal();
-							}}
+						<a
+							href={DISCOVERY_CALL_URL}
+							target="_blank"
+							rel="noopener noreferrer"
+							onClick={() => setMobileOpen(false)}
 							className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-base px-6 py-3 rounded-full transition-colors"
 						>
 							Book discovery
 							<ArrowUpRight className="w-4 h-4" />
-						</button>
+						</a>
 					</div>
 				</div>
 			)}

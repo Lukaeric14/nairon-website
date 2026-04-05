@@ -1,9 +1,8 @@
 import { ArrowUpRight } from "lucide-react";
+import { DISCOVERY_CALL_URL } from "@/lib/links";
 import { GridSection, GridCell, CornerNotches } from "./grid-system";
-import { useModals } from "./modal-provider";
 
 export function AudienceSplit() {
-	const { openHireModal } = useModals();
 	return (
 		<div>
 			{/* Heading row */}
@@ -49,14 +48,15 @@ export function AudienceSplit() {
 							</li>
 						))}
 					</ul>
-					<button
-						type="button"
-						onClick={openHireModal}
+					<a
+						href={DISCOVERY_CALL_URL}
+						target="_blank"
+						rel="noopener noreferrer"
 						className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-sm px-5 py-2.5 rounded-full transition-colors"
 					>
 						Book discovery
 						<ArrowUpRight className="w-3.5 h-3.5" />
-					</button>
+					</a>
 				</GridCell>
 
 				{/* Real estate ICP */}

@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { useModals } from "./modal-provider";
+import { DISCOVERY_CALL_URL } from "@/lib/links";
 
 const NOTCH_SIZE = 10;
 const NOTCH_COLOR = "rgba(255, 255, 255, 0.12)";
@@ -37,7 +37,6 @@ function CornerNotches() {
 }
 
 export function HeroNew() {
-	const { openHireModal } = useModals();
 	return (
 		<div className="relative flex flex-col justify-center items-center text-center px-5 md:px-12 py-16 md:py-24">
 			<CornerNotches />
@@ -77,14 +76,15 @@ export function HeroNew() {
 
 			{/* CTAs */}
 			<div className="flex flex-wrap justify-center gap-4 mt-10">
-				<button
-					type="button"
-					onClick={openHireModal}
+				<a
+					href={DISCOVERY_CALL_URL}
+					target="_blank"
+					rel="noopener noreferrer"
 					className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-base px-6 py-3 rounded-full transition-colors"
 				>
 					Book discovery
 					<ArrowUpRight className="w-4 h-4" />
-				</button>
+				</a>
 				<a
 					href="/for/real-estate"
 					className="inline-flex items-center gap-2 border border-white/10 text-[#E8E4DE] font-medium text-base px-6 py-3 rounded-full hover:bg-white/5 transition-colors"
