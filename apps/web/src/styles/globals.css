@@ -296,6 +296,69 @@
 	animation: tooltip-fade-in 0.3s ease-out both;
 }
 
+/* ─── Fan-line shoot-out + fade-out (CSS div-based) ────────── */
+
+@keyframes line-grow-y {
+	from {
+		transform: scaleY(0);
+	}
+	to {
+		transform: scaleY(1);
+	}
+}
+
+@keyframes line-grow-x {
+	from {
+		transform: scaleX(0);
+	}
+	to {
+		transform: scaleX(1);
+	}
+}
+
+@keyframes line-fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+.animate-line-grow-y {
+	animation: line-grow-y 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-line-grow-x {
+	animation: line-grow-x 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+	/* Slight delay so the horizontal starts after the vertical reaches the card's Y */
+	animation-delay: 250ms;
+	/* Keep the element at scale(0) during the delay */
+	animation-fill-mode: both;
+}
+
+.animate-line-grow-x-immediate {
+	animation: line-grow-x 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Wrap-around U-shape: fade in from left side to right, via opacity */
+@keyframes wrap-shoot {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.animate-wrap-shoot {
+	animation: wrap-shoot 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-line-fade-out {
+	animation: line-fade-out 800ms ease forwards;
+}
+
 /* ─── Gradient text utilities ────────────────────────────────── */
 
 .text-gradient-accent {

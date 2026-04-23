@@ -19,10 +19,14 @@ const ROLES = [
 const VSL_YOUTUBE_ID = "uLx3ElTJbH0";
 
 const TERMS = [
-	"Strategy sessions to scope your first agentic workflow",
-	"One month of uninterrupted operations, fully done-for-you",
-	"You only cover third-party costs (LLM tokens, tools, infra)",
+	"Free audit",
+	"Free onboarding",
+	"Waived implementation fee",
+	"Bi-weekly strategy sessions",
+	"1 month of uninterrupted operations",
 ] as const;
+
+const FOOTER_NOTE = "You only cover hardware costs & LLM tokens";
 
 const corners = [
 	{ top: 0, left: 0, borderTop: true, borderLeft: true },
@@ -118,19 +122,19 @@ function HowItWorks() {
 	const [open, setOpen] = useState(false);
 
 	return (
-		<div className="mt-6 w-full max-w-xl">
+		<div className="mt-6 w-full max-w-2xl">
 			<button
 				type="button"
 				onClick={() => setOpen((o) => !o)}
 				aria-expanded={open}
-				className="group flex w-full items-center justify-between gap-3 rounded-full border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.02] px-5 py-3 text-left text-sm text-[#1A1916] transition-colors hover:bg-[#0C0C0C]/[0.05]"
+				className="group flex w-full items-center justify-between gap-4 rounded-full border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.02] px-6 py-4 text-left text-base font-bold text-[#1A1916] transition-colors hover:bg-[#0C0C0C]/[0.05]"
 			>
-				<span className="flex items-center gap-2">
-					<span className="h-1.5 w-1.5 rounded-full bg-[#C9A96E]" />
-					How it works
+				<span className="flex items-center gap-2.5">
+					<span className="h-2 w-2 rounded-full bg-[#C9A96E]" />
+					Yes, for free - here's how it works:
 				</span>
 				<ChevronDown
-					className={`h-4 w-4 text-[#5C584F] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+					className={`h-5 w-5 text-[#5C584F] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
 				/>
 			</button>
 
@@ -143,14 +147,21 @@ function HowItWorks() {
 						transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
 						className="overflow-hidden"
 					>
-						<ul className="mt-3 space-y-2 rounded-2xl border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.02] px-5 py-4 text-left text-sm text-[#5C584F]">
-							{TERMS.map((term) => (
-								<li key={term} className="flex items-start gap-3">
-									<span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#C9A96E]" />
-									<span className="leading-relaxed">{term}</span>
-								</li>
-							))}
-						</ul>
+						<div className="mt-3 rounded-2xl border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.02] px-5 py-4 text-left text-sm text-[#5C584F]">
+							<ul className="space-y-2">
+								{TERMS.map((term) => (
+									<li key={term} className="flex items-start gap-3">
+										<span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#C9A96E]" />
+										<span className="leading-relaxed">{term}</span>
+									</li>
+								))}
+							</ul>
+							<div className="mt-3 flex items-center gap-3 font-semibold text-[#1A1916]">
+								<span className="h-1 w-1 shrink-0 rounded-full bg-[#C9A96E]" />
+								Completely done for you
+							</div>
+							<p className="mt-2 pt-3 border-t border-[#0C0C0C]/10 text-[#5C584F]">{FOOTER_NOTE}</p>
+						</div>
 					</motion.div>
 				)}
 			</AnimatePresence>
@@ -217,8 +228,9 @@ export function HeroNew() {
 			{/* Headline — 2 lines, compact */}
 			<h1 className="text-[36px] leading-[42px] md:text-[72px] md:leading-[76px] font-normal tracking-[-1.2px] md:tracking-[-2.2px] text-[#1A1916] max-w-5xl">
 				We'll Deploy Your First AI
-				<br />
-				<RollingRole />
+				<span className="block mt-3 md:mt-4 text-[40px] md:text-[80px] leading-[44px] md:leading-[86px]">
+					<RollingRole />
+				</span>
 			</h1>
 
 			{/* Social proof — partner logos */}
@@ -226,31 +238,24 @@ export function HeroNew() {
 				<LogoStrip />
 			</div>
 
+			{/* How it works dropdown */}
+			<HowItWorks />
+
 			{/* VSL */}
-			<div className="mt-2 w-full max-w-4xl">
+			<div className="mt-6 w-full max-w-4xl">
 				<VSLPlayer />
 			</div>
 
-			{/* How it works dropdown — moved under VSL */}
-			<HowItWorks />
-
 			{/* CTAs */}
-			<div className="flex flex-wrap justify-center gap-4 mt-6">
+			<div className="flex justify-center mt-6">
 				<a
 					href={DISCOVERY_CALL_URL}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-base px-6 py-3 rounded-full transition-colors"
+					className="inline-flex items-center gap-2.5 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-lg px-8 py-4 rounded-full transition-colors"
 				>
-					Book discovery
-					<ArrowUpRight className="w-4 h-4" />
-				</a>
-				<a
-					href="/for/real-estate"
-					className="inline-flex items-center gap-2 border border-[#0C0C0C]/10 text-[#1A1916] font-medium text-base px-6 py-3 rounded-full hover:bg-[#0C0C0C]/5 transition-colors"
-				>
-					For real estate
-					<ArrowUpRight className="w-4 h-4" />
+					BOOK YOUR 15-MINUTE DISCOVERY HERE
+					<ArrowUpRight className="w-5 h-5" />
 				</a>
 			</div>
 		</div>

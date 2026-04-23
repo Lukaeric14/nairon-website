@@ -1,7 +1,7 @@
 import { GridSection, GridCell } from "./grid-system";
 
 // Swap this single string when you have the locked qualifier copy.
-const QUALIFIER_COPY = "For CEOs with a clear AI mandate and no clear place to start.";
+const QUALIFIER_COPY = "For CEOs With a Clear AI Mandate and No Clear Place to Start.";
 
 export function Qualifier() {
 	return (
@@ -15,7 +15,7 @@ export function Qualifier() {
 						</span>
 						<span className="h-1 w-1 rounded-full bg-[#C9A96E]" />
 					</div>
-					<p className="text-lg md:text-2xl font-normal tracking-[-0.3px] text-[#1A1916] max-w-2xl leading-snug">
+					<p className="text-lg md:text-2xl font-normal tracking-[-0.3px] text-[#1A1916] leading-snug whitespace-nowrap">
 						{QUALIFIER_COPY}
 					</p>
 				</div>

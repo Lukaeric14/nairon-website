@@ -4,9 +4,8 @@ import {
 	HeroNew,
 	Qualifier,
 	WhyNairon,
+	WhatWeDo,
 	SecuritySection,
-	DevComparison,
-	Process,
 	BuiltByBuilders,
 	AIFaqSection,
 	CTASection,
@@ -43,10 +42,9 @@ function HomePage() {
 					<Qualifier />
 
 					<WhyNairon />
-					<SecuritySection />
-					<DevComparison />
-					<Process />
+					<WhatWeDo />
 					<BuiltByBuilders />
+					<SecuritySection />
 					<AIFaqSection />
 
 					<GridSection columns="1fr" border={false}>
