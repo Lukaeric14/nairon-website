@@ -149,11 +149,11 @@
 		--brand-gold-light: #D4B87A;
 		--brand-green: #BEFF00;
 
-		/* Landing semantic — warm dark rustic */
-		--landing-text: #E8E4DE;
-		--landing-text-body: #A39E96;
-		--landing-card: #161614;
-		--landing-card-border: #2A2824;
+		/* Landing semantic — warm light */
+		--landing-text: #1A1916;
+		--landing-text-body: #5C584F;
+		--landing-card: #F7F5F0;
+		--landing-card-border: #E5E3DE;
 
 		--background: oklch(1 0 0);
 		--foreground: oklch(0.145 0 0);
@@ -322,8 +322,8 @@
 /* ─── Glass card ─────────────────────────────────────────────── */
 
 .glass-card {
-	background: rgba(255, 255, 255, 0.03);
-	border: 1px solid rgba(255, 255, 255, 0.06);
+	background: rgba(12, 12, 12, 0.03);
+	border: 1px solid rgba(12, 12, 12, 0.08);
 	backdrop-filter: blur(16px);
 }
 

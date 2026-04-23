@@ -10,16 +10,16 @@ import type { StatData } from "@/data/programs";
 
 function StatItem({ stat }: { stat: StatData }) {
 	return (
-		<div className="py-6 border-b border-white/8 last:border-b-0">
+		<div className="py-6 border-b border-[#0C0C0C]/8 last:border-b-0">
 			<div className="flex items-baseline gap-2">
 				<span className="stat-number text-3xl md:text-5xl text-gradient-green">
 					{stat.value}
 				</span>
 				{stat.suffix && (
-					<span className="text-lg text-white/40">{stat.suffix}</span>
+					<span className="text-lg text-[#1A1916]/40">{stat.suffix}</span>
 				)}
 			</div>
-			<p className="text-sm md:text-base text-white/40 mt-1">
+			<p className="text-sm md:text-base text-[#1A1916]/40 mt-1">
 				{stat.label}
 			</p>
 		</div>

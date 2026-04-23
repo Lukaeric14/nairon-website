@@ -15,7 +15,7 @@ export function ProgramHero({ data }: { data: ProgramHeroData }) {
 				{/* Tag */}
 				<div className="flex items-center justify-center gap-3 mb-6">
 					<div className="w-2 h-2 rounded-full bg-green-400" />
-					<span className="text-white/70 text-sm md:text-base uppercase tracking-label">
+					<span className="text-[#1A1916]/70 text-sm md:text-base uppercase tracking-label">
 						{data.tag}
 					</span>
 				</div>
@@ -30,9 +30,9 @@ export function ProgramHero({ data }: { data: ProgramHeroData }) {
 					{data.stats.map((stat) => (
 						<div
 							key={stat.label}
-							className="glass-card bg-white/14 border border-white/24 rounded-full px-4 py-2 flex items-center gap-2"
+							className="glass-card bg-[#0C0C0C]/14 border border-[#0C0C0C]/24 rounded-full px-4 py-2 flex items-center gap-2"
 						>
-							<span className="text-xs text-white/60">
+							<span className="text-xs text-[#1A1916]/60">
 								{stat.label}
 							</span>
 							<span className="text-sm font-semibold text-landing-text">
@@ -60,7 +60,7 @@ export function ProgramHero({ data }: { data: ProgramHeroData }) {
 
 				{/* Subtext */}
 				{data.subtext ? (
-					<p className="text-sm text-white/40">{data.subtext}</p>
+					<p className="text-sm text-[#1A1916]/40">{data.subtext}</p>
 				) : null}
 			</div>
 		</section>

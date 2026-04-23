@@ -36,11 +36,11 @@ export function WhatWeDo() {
 				<GridCell className="px-12 pt-12 pb-10">
 					<div className="flex items-center gap-3 mb-6">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+						<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
 							What we do
 						</span>
 					</div>
-					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE] max-w-3xl">
+					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl">
 						Data-driven technical recruiting,{" "}
 						<span className="text-[#C9A96E]">not guesswork</span>
 					</h2>
@@ -58,10 +58,10 @@ export function WhatWeDo() {
 					>
 						<CornerNotches size={12} />
 						<feature.icon className="w-6 h-6 text-[#C9A96E] mb-5" strokeWidth={1.5} />
-						<h3 className="text-xl font-medium text-[#E8E4DE] mb-3">
+						<h3 className="text-xl font-medium text-[#1A1916] mb-3">
 							{feature.title}
 						</h3>
-						<p className="text-[#A39E96] text-base leading-relaxed">
+						<p className="text-[#5C584F] text-base leading-relaxed">
 							{feature.description}
 						</p>
 					</GridCell>

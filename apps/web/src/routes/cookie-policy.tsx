@@ -29,20 +29,20 @@ export const Route = createFileRoute("/cookie-policy")({
 function CookiePolicyPage() {
 	return (
 		<ModalProvider>
-			<div className="min-h-screen bg-[#0C0C0C] text-[#E8E4DE] font-inter">
+			<div className="min-h-screen bg-white text-[#1A1916] font-inter">
 				<Navbar />
 				<main className="pt-32 pb-20 px-6">
 					<div className="max-w-3xl mx-auto">
-						<h1 className="text-4xl md:text-5xl font-normal tracking-[-1.5px] text-[#E8E4DE] mb-4">
+						<h1 className="text-4xl md:text-5xl font-normal tracking-[-1.5px] text-[#1A1916] mb-4">
 							Cookie Policy
 						</h1>
-						<p className="text-[#A39E96] text-sm mb-12">
+						<p className="text-[#5C584F] text-sm mb-12">
 							Last updated: February 24, 2026
 						</p>
 
-						<div className="space-y-10 text-[#A39E96] text-base leading-relaxed">
+						<div className="space-y-10 text-[#5C584F] text-base leading-relaxed">
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									1. What Are Cookies
 								</h2>
 								<p>
@@ -55,7 +55,7 @@ function CookiePolicyPage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									2. Essential Cookies We Use
 								</h2>
 								<p className="mb-3">
@@ -64,14 +64,14 @@ function CookiePolicyPage() {
 								</p>
 								<ul className="list-disc pl-6 space-y-2">
 									<li>
-										<strong className="text-[#E8E4DE]">Authentication session cookies</strong>{" "}
+										<strong className="text-[#1A1916]">Authentication session cookies</strong>{" "}
 										— used to keep you signed in after logging in with your
 										email/password or Google account via Better-Auth. These
 										cookies are strictly necessary and expire when your session
 										ends or after a set period of inactivity.
 									</li>
 									<li>
-										<strong className="text-[#E8E4DE]">User preference cookies</strong>{" "}
+										<strong className="text-[#1A1916]">User preference cookies</strong>{" "}
 										— used to remember your settings and preferences across
 										visits, such as theme or dismissed notices.
 									</li>
@@ -79,7 +79,7 @@ function CookiePolicyPage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									3. Local Storage Usage
 								</h2>
 								<p className="mb-3">
@@ -88,7 +88,7 @@ function CookiePolicyPage() {
 								</p>
 								<ul className="list-disc pl-6 space-y-2">
 									<li>
-										<strong className="text-[#E8E4DE]">Article view tracking</strong>{" "}
+										<strong className="text-[#1A1916]">Article view tracking</strong>{" "}
 										— we store a count of blog articles you have viewed in
 										localStorage. This powers our free-article gate, which
 										allows you to read up to 3 articles before requiring you to
@@ -99,7 +99,7 @@ function CookiePolicyPage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									4. No Third-Party Tracking Cookies
 								</h2>
 								<p>
@@ -111,7 +111,7 @@ function CookiePolicyPage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									5. Managing and Disabling Cookies
 								</h2>
 								<p className="mb-3">
@@ -123,21 +123,21 @@ function CookiePolicyPage() {
 								</p>
 								<ul className="list-disc pl-6 space-y-2">
 									<li>
-										<strong className="text-[#E8E4DE]">Chrome</strong> —
+										<strong className="text-[#1A1916]">Chrome</strong> —
 										Settings &gt; Privacy and Security &gt; Cookies and other
 										site data.
 									</li>
 									<li>
-										<strong className="text-[#E8E4DE]">Firefox</strong> —
+										<strong className="text-[#1A1916]">Firefox</strong> —
 										Settings &gt; Privacy &amp; Security &gt; Cookies and Site
 										Data.
 									</li>
 									<li>
-										<strong className="text-[#E8E4DE]">Safari</strong> —
+										<strong className="text-[#1A1916]">Safari</strong> —
 										Preferences &gt; Privacy &gt; Manage Website Data.
 									</li>
 									<li>
-										<strong className="text-[#E8E4DE]">Edge</strong> —
+										<strong className="text-[#1A1916]">Edge</strong> —
 										Settings &gt; Cookies and site permissions &gt; Manage and
 										delete cookies and site data.
 									</li>
@@ -150,7 +150,7 @@ function CookiePolicyPage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									6. Changes to This Policy
 								</h2>
 								<p>
@@ -161,7 +161,7 @@ function CookiePolicyPage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									7. Contact
 								</h2>
 								<p>

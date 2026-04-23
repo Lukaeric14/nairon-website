@@ -62,15 +62,15 @@ export function AIFaqSection() {
 					<div className="md:sticky md:top-24">
 						<div className="mb-4 flex items-center gap-3 md:mb-6">
 							<div className="h-1.5 w-1.5 rounded-full bg-[#C9A96E]" />
-							<span className="text-xs font-medium uppercase tracking-[0.16em] text-[#A39E96]">
+							<span className="text-xs font-medium uppercase tracking-[0.16em] text-[#5C584F]">
 								FAQ
 							</span>
 						</div>
-						<h2 className="text-3xl font-normal tracking-[-0.48px] text-[#E8E4DE] md:text-[48px] md:leading-[57.6px]">
+						<h2 className="text-3xl font-normal tracking-[-0.48px] text-[#1A1916] md:text-[48px] md:leading-[57.6px]">
 							Top questions before you{" "}
 							<span className="font-serif italic text-[#C9A96E]">deploy</span>
 						</h2>
-						<p className="mt-5 max-w-md text-sm leading-relaxed text-[#A39E96] md:text-base">
+						<p className="mt-5 max-w-md text-sm leading-relaxed text-[#5C584F] md:text-base">
 							These are the questions that come up most often once teams understand the model
 							and start thinking seriously about putting AI employees into production.
 						</p>
@@ -83,12 +83,12 @@ export function AIFaqSection() {
 							<AccordionItem
 								key={item.question}
 								value={`faq-${index}`}
-								className="rounded-[28px] border border-white/8 bg-white/[0.03] px-5 md:px-6"
+								className="rounded-[28px] border border-[#0C0C0C]/8 bg-[#0C0C0C]/[0.03] px-5 md:px-6"
 							>
-								<AccordionTrigger className="cursor-pointer py-5 text-left text-base font-normal text-[#E8E4DE] transition-none hover:no-underline md:py-6 md:text-[18px]">
+								<AccordionTrigger className="cursor-pointer py-5 text-left text-base font-normal text-[#1A1916] transition-none hover:no-underline md:py-6 md:text-[18px]">
 									{item.question}
 								</AccordionTrigger>
-								<AccordionContent className="pb-5 text-sm leading-relaxed text-[#A39E96] md:pb-6 md:text-base">
+								<AccordionContent className="pb-5 text-sm leading-relaxed text-[#5C584F] md:pb-6 md:text-base">
 									{item.answer}
 								</AccordionContent>
 							</AccordionItem>

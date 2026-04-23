@@ -85,7 +85,7 @@ export function BuiltByBuilders() {
 						{tools.map((tool, i) => (
 							<div
 								key={tool.name}
-								className={`relative bg-white/[0.03] border border-white/[0.06] p-5 flex flex-col justify-between transition-all duration-500 ease-out ${
+								className={`relative bg-[#0C0C0C]/[0.03] border border-[#0C0C0C]/[0.06] p-5 flex flex-col justify-between transition-all duration-500 ease-out ${
 									i < visibleCount
 										? "opacity-100 scale-100"
 										: "opacity-0 scale-95"
@@ -95,12 +95,12 @@ export function BuiltByBuilders() {
 									gridRow: tool.row,
 								}}
 							>
-								<CornerNotches size={8} color="rgba(255, 255, 255, 0.08)" />
+								<CornerNotches size={8} color="rgba(12, 12, 12, 0.08)" />
 								<div>
-									<span className="text-[#E8E4DE] text-sm font-medium leading-tight">
+									<span className="text-[#1A1916] text-sm font-medium leading-tight">
 										{tool.name}
 									</span>
-									<p className="text-[#A39E96] text-xs mt-1.5 leading-relaxed">
+									<p className="text-[#5C584F] text-xs mt-1.5 leading-relaxed">
 										{tool.description}
 									</p>
 								</div>
@@ -122,7 +122,7 @@ export function BuiltByBuilders() {
 						{tools.map((tool, i) => (
 							<div
 								key={`mobile-${tool.name}`}
-								className={`relative bg-white/[0.03] border border-white/[0.06] p-3 flex flex-col justify-between transition-all duration-500 ease-out ${
+								className={`relative bg-[#0C0C0C]/[0.03] border border-[#0C0C0C]/[0.06] p-3 flex flex-col justify-between transition-all duration-500 ease-out ${
 									i < visibleCount
 										? "opacity-100 scale-100"
 										: "opacity-0 scale-95"
@@ -132,12 +132,12 @@ export function BuiltByBuilders() {
 									gridRow: tool.mobileRow || "auto",
 								}}
 							>
-								<CornerNotches size={6} color="rgba(255, 255, 255, 0.08)" />
+								<CornerNotches size={6} color="rgba(12, 12, 12, 0.08)" />
 								<div>
-									<span className="text-[#E8E4DE] text-xs font-medium leading-tight">
+									<span className="text-[#1A1916] text-xs font-medium leading-tight">
 										{tool.name}
 									</span>
-									<p className="text-[#A39E96] text-[10px] mt-1 leading-snug">
+									<p className="text-[#5C584F] text-[10px] mt-1 leading-snug">
 										{tool.description}
 									</p>
 								</div>
@@ -152,12 +152,12 @@ export function BuiltByBuilders() {
 					<div
 						className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none"
 					>
-						{/* Dark overlay from underneath for contrast */}
+						{/* Light overlay from underneath for contrast */}
 						<div
 							className="absolute inset-0"
 							style={{
 								background:
-									"linear-gradient(to top, rgba(12,12,12,0.95) 0%, rgba(12,12,12,0.7) 35%, rgba(12,12,12,0.3) 60%, transparent 100%)",
+									"linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.75) 35%, rgba(255,255,255,0.35) 60%, transparent 100%)",
 							}}
 						/>
 
@@ -166,7 +166,7 @@ export function BuiltByBuilders() {
 							className="absolute inset-0"
 							style={{
 								background:
-									"radial-gradient(ellipse 55% 60% at 50% 55%, rgba(12,12,12,0.85) 0%, transparent 100%)",
+									"radial-gradient(ellipse 55% 60% at 50% 55%, rgba(255,255,255,0.85) 0%, transparent 100%)",
 							}}
 						/>
 
@@ -181,7 +181,7 @@ export function BuiltByBuilders() {
 							{founders.map((founder) => (
 								<div
 									key={founder.name}
-									className="relative w-36 md:w-56 bg-[#141414]/90 border border-white/[0.08] overflow-hidden pointer-events-auto backdrop-blur-sm"
+									className="relative w-36 md:w-56 bg-[#F5F3EE]/90 border border-[#0C0C0C]/[0.08] overflow-hidden pointer-events-auto backdrop-blur-sm"
 								>
 									<CornerNotches size={10} color="rgba(201, 169, 110, 0.2)" />
 									<div
@@ -200,7 +200,7 @@ export function BuiltByBuilders() {
 										/>
 									</div>
 									<div className="px-3 md:px-4 pb-4 md:pb-5 -mt-4 relative">
-										<span className="block text-[#E8E4DE] text-sm md:text-base font-medium">
+										<span className="block text-[#1A1916] text-sm md:text-base font-medium">
 											{founder.name}
 										</span>
 										<span className="block text-[#C9A96E] text-[10px] md:text-xs font-medium tracking-wide mt-0.5">
@@ -219,7 +219,7 @@ export function BuiltByBuilders() {
 									: "opacity-0 translate-y-4"
 							}`}
 						>
-							<h2 className="text-xl md:text-[40px] md:leading-[48px] font-normal tracking-[-0.48px] text-[#E8E4DE]">
+							<h2 className="text-xl md:text-[40px] md:leading-[48px] font-normal tracking-[-0.48px] text-[#1A1916]">
 								Built by builders{" "}
 								<span className="font-serif italic text-[#C9A96E]">builders</span>{" "}
 								and the systems they deploy

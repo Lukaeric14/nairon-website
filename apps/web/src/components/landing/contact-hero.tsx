@@ -10,7 +10,7 @@ export function ContactHero() {
 
 			{/* Large CONTACT text */}
 			<h1
-				className="relative z-10 text-white font-semibold text-center select-none tracking-hero"
+				className="relative z-10 text-[#1A1916] font-semibold text-center select-none tracking-hero"
 				style={{
 					fontSize: "clamp(80px, 12vw, 160px)",
 					lineHeight: 0.75,

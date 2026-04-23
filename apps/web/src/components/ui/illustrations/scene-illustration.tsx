@@ -238,8 +238,8 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="50"
                                 height="18"
                                 rx="4"
-                                fill="rgba(255,255,255,0.08)"
-                                stroke="rgba(255,255,255,0.10)"
+                                fill="rgba(12, 12, 12, 0.08)"
+                                stroke="rgba(12, 12, 12, 0.10)"
                             />
                             <circle
                                 cx="-4"
@@ -253,7 +253,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="14"
                                 height="3"
                                 rx="1.5"
-                                fill="rgba(255,255,255,0.14)"
+                                fill="rgba(12, 12, 12, 0.14)"
                             />
                             <rect
                                 x="1"
@@ -261,7 +261,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="26"
                                 height="2.5"
                                 rx="1.25"
-                                fill="rgba(255,255,255,0.10)"
+                                fill="rgba(12, 12, 12, 0.10)"
                             />
                             <rect
                                 x="30"
@@ -294,14 +294,14 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="48"
                                 height="20"
                                 rx="4"
-                                fill="rgba(255,255,255,0.08)"
-                                stroke="rgba(255,255,255,0.10)"
+                                fill="rgba(12, 12, 12, 0.08)"
+                                stroke="rgba(12, 12, 12, 0.10)"
                             />
                             <circle
                                 cx="-1"
                                 cy="21"
                                 r="2"
-                                fill="rgba(255,255,255,0.16)"
+                                fill="rgba(12, 12, 12, 0.16)"
                             />
                             <rect
                                 x="4"
@@ -309,7 +309,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="17"
                                 height="3"
                                 rx="1.5"
-                                fill="rgba(255,255,255,0.14)"
+                                fill="rgba(12, 12, 12, 0.14)"
                             />
                             <rect
                                 x="4"
@@ -317,7 +317,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="24"
                                 height="2.5"
                                 rx="1.25"
-                                fill="rgba(255,255,255,0.10)"
+                                fill="rgba(12, 12, 12, 0.10)"
                             />
                             <rect
                                 x="31"
@@ -333,7 +333,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="9"
                                 height="3"
                                 rx="1.5"
-                                fill="rgba(255,255,255,0.10)"
+                                fill="rgba(12, 12, 12, 0.10)"
                             />
                         </g>
                         <g opacity="0">
@@ -367,7 +367,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="14"
                                 height="3"
                                 rx="1.5"
-                                fill="rgba(255,255,255,0.14)"
+                                fill="rgba(12, 12, 12, 0.14)"
                             />
                             <rect
                                 x="5"
@@ -375,7 +375,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="20"
                                 height="2.5"
                                 rx="1.25"
-                                fill="rgba(255,255,255,0.10)"
+                                fill="rgba(12, 12, 12, 0.10)"
                             />
                             <rect
                                 x="29"
@@ -432,25 +432,25 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                             y="0"
                             width="100"
                             height="18"
-                            fill="rgba(255,255,255,0.045)"
+                            fill="rgba(12, 12, 12, 0.045)"
                         />
                         <circle
                             cx="8"
                             cy="9"
                             r="1.6"
-                            fill="rgba(255,255,255,0.14)"
+                            fill="rgba(12, 12, 12, 0.14)"
                         />
                         <circle
                             cx="13"
                             cy="9"
                             r="1.6"
-                            fill="rgba(255,255,255,0.10)"
+                            fill="rgba(12, 12, 12, 0.10)"
                         />
                         <circle
                             cx="18"
                             cy="9"
                             r="1.6"
-                            fill="rgba(255,255,255,0.08)"
+                            fill="rgba(12, 12, 12, 0.08)"
                         />
                         <rect
                             x="25"
@@ -458,7 +458,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                             width="20"
                             height="8"
                             rx="4"
-                            fill="rgba(255,255,255,0.08)"
+                            fill="rgba(12, 12, 12, 0.08)"
                         />
                         <rect
                             x="48"
@@ -466,7 +466,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                             width="18"
                             height="8"
                             rx="4"
-                            fill="rgba(255,255,255,0.05)"
+                            fill="rgba(12, 12, 12, 0.05)"
                         />
                         <rect
                             x="25"
@@ -488,7 +488,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                             width="59"
                             height="7"
                             rx="4"
-                            fill="rgba(255,255,255,0.06)"
+                            fill="rgba(12, 12, 12, 0.06)"
                         />
                         <rect
                             x="70"
@@ -496,7 +496,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                             width="20"
                             height="7"
                             rx="3.5"
-                            fill="rgba(255,255,255,0.04)"
+                            fill="rgba(12, 12, 12, 0.04)"
                         />
                         <rect
                             x="11"
@@ -504,7 +504,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                             width="12"
                             height="3"
                             rx="1.5"
-                            fill="rgba(255,255,255,0.12)"
+                            fill="rgba(12, 12, 12, 0.12)"
                         />
                         <rect
                             x="26"
@@ -512,7 +512,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                             width="27"
                             height="3"
                             rx="1.5"
-                            fill="rgba(255,255,255,0.09)"
+                            fill="rgba(12, 12, 12, 0.09)"
                         />
                         <g>
                             <animate
@@ -527,7 +527,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="26"
                                 height="42"
                                 rx="4"
-                                fill="rgba(255,255,255,0.035)"
+                                fill="rgba(12, 12, 12, 0.035)"
                             />
                             <rect
                                 x="11"
@@ -535,7 +535,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="18"
                                 height="4"
                                 rx="2"
-                                fill="rgba(255,255,255,0.10)"
+                                fill="rgba(12, 12, 12, 0.10)"
                             />
                             <rect
                                 x="11"
@@ -543,7 +543,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="14"
                                 height="14"
                                 rx="3"
-                                fill="rgba(255,255,255,0.08)"
+                                fill="rgba(12, 12, 12, 0.08)"
                             />
                             <rect
                                 x="11"
@@ -551,7 +551,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="18"
                                 height="3.5"
                                 rx="1.75"
-                                fill="rgba(255,255,255,0.07)"
+                                fill="rgba(12, 12, 12, 0.07)"
                             />
                             <rect
                                 x="39"
@@ -559,7 +559,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="50"
                                 height="18"
                                 rx="4"
-                                fill="rgba(255,255,255,0.04)"
+                                fill="rgba(12, 12, 12, 0.04)"
                             />
                             <rect
                                 x="42"
@@ -575,7 +575,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="20"
                                 height="3.5"
                                 rx="1.75"
-                                fill="rgba(255,255,255,0.11)"
+                                fill="rgba(12, 12, 12, 0.11)"
                             />
                             <rect
                                 x="63"
@@ -583,7 +583,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="14"
                                 height="3"
                                 rx="1.5"
-                                fill="rgba(255,255,255,0.08)"
+                                fill="rgba(12, 12, 12, 0.08)"
                             />
                             <rect
                                 x="39"
@@ -591,7 +591,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="50"
                                 height="20"
                                 rx="4"
-                                fill="rgba(255,255,255,0.03)"
+                                fill="rgba(12, 12, 12, 0.03)"
                             />
                             <rect
                                 x="43"
@@ -599,7 +599,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="42"
                                 height="4"
                                 rx="2"
-                                fill="rgba(255,255,255,0.09)"
+                                fill="rgba(12, 12, 12, 0.09)"
                             />
                             <rect
                                 x="43"
@@ -607,7 +607,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="31"
                                 height="3"
                                 rx="1.5"
-                                fill="rgba(255,255,255,0.07)"
+                                fill="rgba(12, 12, 12, 0.07)"
                             />
                         </g>
                         <g opacity="0">
@@ -623,7 +623,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="82"
                                 height="10"
                                 rx="4"
-                                fill="rgba(255,255,255,0.04)"
+                                fill="rgba(12, 12, 12, 0.04)"
                             />
                             <rect
                                 x="12"
@@ -631,7 +631,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="15"
                                 height="4"
                                 rx="2"
-                                fill="rgba(255,255,255,0.08)"
+                                fill="rgba(12, 12, 12, 0.08)"
                             />
                             <rect
                                 x="33"
@@ -655,7 +655,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="25"
                                 height="16"
                                 rx="4"
-                                fill="rgba(255,255,255,0.08)"
+                                fill="rgba(12, 12, 12, 0.08)"
                             />
                             <rect
                                 x="37"
@@ -663,7 +663,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="25"
                                 height="16"
                                 rx="4"
-                                fill="rgba(255,255,255,0.05)"
+                                fill="rgba(12, 12, 12, 0.05)"
                             />
                             <rect
                                 x="66"
@@ -671,7 +671,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="24"
                                 height="16"
                                 rx="4"
-                                fill="rgba(255,255,255,0.10)"
+                                fill="rgba(12, 12, 12, 0.10)"
                             />
                         </g>
                         <g opacity="0">
@@ -687,7 +687,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="18"
                                 height="44"
                                 rx="4"
-                                fill="rgba(255,255,255,0.05)"
+                                fill="rgba(12, 12, 12, 0.05)"
                             />
                             <rect
                                 x="30"
@@ -703,7 +703,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="50"
                                 height="4"
                                 rx="2"
-                                fill="rgba(255,255,255,0.09)"
+                                fill="rgba(12, 12, 12, 0.09)"
                             />
                             <rect
                                 x="30"
@@ -711,7 +711,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="37"
                                 height="3.5"
                                 rx="1.75"
-                                fill="rgba(255,255,255,0.07)"
+                                fill="rgba(12, 12, 12, 0.07)"
                             />
                             <rect
                                 x="30"
@@ -719,7 +719,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
                                 width="29"
                                 height="3.5"
                                 rx="1.75"
-                                fill="rgba(255,255,255,0.07)"
+                                fill="rgba(12, 12, 12, 0.07)"
                             />
                         </g>
                         <g>

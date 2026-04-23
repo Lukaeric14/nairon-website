@@ -41,7 +41,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 				content:
 					"Nairon builds and deploys AI employees for modern teams, with industry-specific offers like real estate living under dedicated ICP pages.",
 			},
-			{ name: "theme-color", content: "#000000" },
+			{ name: "theme-color", content: "#FFFFFF" },
 		],
 		links: [
 			{ rel: "icon", href: "/favicon.png", type: "image/png", sizes: "192x192" },
@@ -111,11 +111,11 @@ function RootComponent() {
 	}, []);
 
 	return (
-		<html lang="en" suppressHydrationWarning className="dark" style={{ backgroundColor: "#0C0C0C" }}>
+		<html lang="en" suppressHydrationWarning style={{ backgroundColor: "#FFFFFF" }}>
 			<head>
 				<HeadContent />
 			</head>
-			<body className="min-h-screen bg-background font-sans antialiased" style={{ backgroundColor: "#0C0C0C" }}>
+			<body className="min-h-screen bg-background font-sans antialiased" style={{ backgroundColor: "#FFFFFF" }}>
 				<a
 					href="#main-content"
 					className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-lg focus:bg-[#C9A96E] focus:px-4 focus:py-2 focus:text-[#0C0C0C] focus:font-medium"

@@ -8,29 +8,14 @@ import { Button } from "@/components/ui/button";
 
 const features = [
 	{
-		title: "Mac mini",
+		title: "The House",
 		description:
-			"A physical Mac mini sits in our data centre running 24/7, so your AI employee has a dedicated machine.",
+			"Your AI employees don't live in a prompt window. They'll live in a dedicated Mac mini in our data center — online and working 24/7, even while you're not.",
 	},
 	{
-		title: "Integrations",
+		title: "The Office",
 		description:
-			"We can connect your AI employee into the tools your team already uses, with secure auth, scoped permissions, and controlled access instead of brittle one-off automation.",
-	},
-	{
-		title: "Memory",
-		description:
-			"Runs, context, and outputs stay tied to the system so your AI employee improves over time instead of starting from zero every session.",
-	},
-	{
-		title: "Browser",
-		description:
-			"Warm browser sessions let the AI employee work continuously across web tools and operator tasks without constant manual restarts.",
-	},
-	{
-		title: "Alerts",
-		description:
-			"Operators stay in the loop with alerts, checkpoints, and visibility whenever the system hits an edge case or needs approval.",
+			"Every action, decision, and output happens inside Hive — our proprietary platform built for operating AI employees at scale. It's where you watch them work, message them like any other team member, and track every action they take, in real time.",
 	},
 ];
 
@@ -38,8 +23,8 @@ const SCENE_VARS = {
 	"--color-primary": "#C9A96E",
 	"--color-foreground": "232 228 222",
 	"--color-background": "#0F100E",
-	"--color-border": "rgba(255,255,255,0.12)",
-	"--color-muted": "rgba(255,255,255,0.05)",
+	"--color-border": "rgba(12, 12, 12, 0.12)",
+	"--color-muted": "rgba(12, 12, 12, 0.05)",
 } as CSSProperties;
 
 export default function ExpandableFeatures() {
@@ -52,17 +37,19 @@ export default function ExpandableFeatures() {
 	return (
 		<section className="@container bg-transparent py-24">
 			<div className="mx-auto max-w-5xl px-6" style={SCENE_VARS}>
-				<div className="mb-12 grid items-end gap-4 text-balance md:grid-cols-2">
-					<h2 className="text-3xl font-normal tracking-[-0.48px] text-[#E8E4DE] md:text-[48px] md:leading-[57.6px]">
-						A physical{" "}
-						<span className="font-serif italic text-[#C9A96E]">Mac mini</span>{" "}
-						powers your AI employee 24/7
+				<div className="mb-12 text-balance">
+					<div className="mb-4 flex items-center gap-3">
+						<div className="h-1.5 w-1.5 rounded-full bg-[#C9A96E]" />
+						<span className="text-xs font-medium uppercase tracking-[0.16em] text-[#5C584F]">
+							How it works
+						</span>
+					</div>
+					<h2 className="max-w-3xl text-3xl font-normal tracking-[-0.48px] text-[#1A1916] md:text-[48px] md:leading-[57.6px]">
+						Lives in{" "}
+						<span className="font-serif italic text-[#C9A96E]">your hardware</span>.
+						Works on{" "}
+						<span className="font-serif italic text-[#C9A96E]">our platform</span>.
 					</h2>
-					<p className="text-base leading-relaxed text-[#A39E96] md:text-lg">
-						Your AI employee does not live in a prompt window. It runs on dedicated hardware
-						in our data centre with warm sessions, monitored uptime, and a real operating
-						environment behind it.
-					</p>
 				</div>
 				<div className="grid items-center lg:grid-cols-5">
 					<div className="relative z-10 lg:col-span-2">
@@ -77,7 +64,7 @@ export default function ExpandableFeatures() {
 									<Button
 										size="icon"
 										variant="outline"
-										className="rounded-full border-white/10 bg-white/[0.03] text-[#E8E4DE] hover:bg-white/[0.06] hover:text-[#E8E4DE]"
+										className="rounded-full border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.03] text-[#1A1916] hover:bg-[#0C0C0C]/[0.06] hover:text-[#1A1916]"
 										disabled={expandedIndex === null || expandedIndex === 0}
 										onClick={() =>
 											expandedIndex !== null && handleSelect(expandedIndex - 1)
@@ -88,7 +75,7 @@ export default function ExpandableFeatures() {
 									<Button
 										size="icon"
 										variant="outline"
-										className="rounded-full border-white/10 bg-white/[0.03] text-[#E8E4DE] hover:bg-white/[0.06] hover:text-[#E8E4DE]"
+										className="rounded-full border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.03] text-[#1A1916] hover:bg-[#0C0C0C]/[0.06] hover:text-[#1A1916]"
 										disabled={
 											expandedIndex === null || expandedIndex === features.length - 1
 										}
@@ -128,8 +115,8 @@ export default function ExpandableFeatures() {
 											className={cn(
 												"group relative min-w-0 max-w-xs overflow-hidden rounded-3xl text-left ring transition-colors duration-500 max-md:mx-auto",
 												isActive
-													? "w-full bg-[linear-gradient(180deg,rgba(201,169,110,0.10),rgba(255,255,255,0.04))] text-[#E8E4DE] ring-[#C9A96E]/22 shadow-[0_18px_50px_rgba(0,0,0,0.18)]"
-													: "text-[#A39E96] ring-white/8 hover:text-[#E8E4DE] hover:ring-[#C9A96E]/18",
+													? "w-full bg-[linear-gradient(180deg,rgba(201,169,110,0.10),rgba(12, 12, 12, 0.04))] text-[#1A1916] ring-[#C9A96E]/22 shadow-[0_18px_50px_rgba(0,0,0,0.18)]"
+													: "text-[#5C584F] ring-white/8 hover:text-[#1A1916] hover:ring-[#C9A96E]/18",
 											)}
 										>
 											<AnimatePresence initial={false}>
@@ -178,7 +165,7 @@ export default function ExpandableFeatures() {
 														}}
 															className="px-6"
 														>
-															<p className="max-w-md text-sm leading-relaxed text-[#A39E96] md:text-base">
+															<p className="max-w-md text-sm leading-relaxed text-[#5C584F] md:text-base">
 																<strong className="font-medium text-[#C9A96E]">
 																	{feature.title}.
 																</strong>{" "}

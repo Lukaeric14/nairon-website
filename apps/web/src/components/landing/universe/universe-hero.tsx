@@ -281,7 +281,7 @@ export function UniverseHero() {
 				</div>
 
 				{/* Headline */}
-				<h1 className="text-5xl md:text-[88px] md:leading-[92px] font-normal tracking-[-3px] text-[#E8E4DE] max-w-5xl">
+				<h1 className="text-5xl md:text-[88px] md:leading-[92px] font-normal tracking-[-3px] text-[#1A1916] max-w-5xl">
 					The Nairon
 					<br />
 					<span className="font-serif italic text-[#C9A96E]">
@@ -290,7 +290,7 @@ export function UniverseHero() {
 				</h1>
 
 				{/* Subtitle */}
-				<p className="mt-7 text-lg md:text-xl text-[#A39E96] max-w-xl mx-auto leading-relaxed">
+				<p className="mt-7 text-lg md:text-xl text-[#5C584F] max-w-xl mx-auto leading-relaxed">
 					A daily feed, curated tool directory, and community for
 					engineers building with AI. Powered by data from thousands
 					of Flux assessments.
@@ -298,13 +298,13 @@ export function UniverseHero() {
 
 				{/* CTAs */}
 				<div className="flex flex-wrap justify-center gap-4 mt-10 pointer-events-auto">
-					<span className="inline-flex items-center gap-2 bg-white/[0.06] text-[#A39E96] font-semibold text-base px-7 py-3.5 rounded-full cursor-not-allowed opacity-70">
+					<span className="inline-flex items-center gap-2 bg-[#0C0C0C]/[0.06] text-[#5C584F] font-semibold text-base px-7 py-3.5 rounded-full cursor-not-allowed opacity-70">
 						Coming Soon
 					</span>
 				</div>
 
 				{/* Stats bar */}
-				<div className="flex items-center justify-center gap-8 md:gap-12 mt-14 text-[#A39E96]/50 text-sm">
+				<div className="flex items-center justify-center gap-8 md:gap-12 mt-14 text-[#5C584F]/50 text-sm">
 					<div className="flex items-center gap-2">
 						<div className="w-1.5 h-1.5 rounded-full bg-green-500/60" />
 						<span>Updated daily</span>

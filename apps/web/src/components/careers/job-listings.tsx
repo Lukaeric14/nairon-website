@@ -26,21 +26,21 @@ function LinkedInBanner() {
 function FilterBar() {
 	return (
 		<div className="flex flex-col md:flex-row gap-3 md:gap-4 mt-8 md:mt-10">
-			<div className="flex-1 h-[48px] md:h-[54px] bg-white/5 rounded-xl px-4 flex items-center">
+			<div className="flex-1 h-[48px] md:h-[54px] bg-[#0C0C0C]/5 rounded-xl px-4 flex items-center">
 				<span className={`text-sm md:text-base ${colors.text}`}>Job title</span>
 			</div>
-			<div className="flex-1 h-[48px] md:h-[54px] bg-white/5 rounded-xl px-4 flex items-center">
+			<div className="flex-1 h-[48px] md:h-[54px] bg-[#0C0C0C]/5 rounded-xl px-4 flex items-center">
 				<span className={`text-sm md:text-base ${colors.text}`}>Job type</span>
 			</div>
-			<div className="flex-1 h-[48px] md:h-[54px] bg-white/5 rounded-xl px-4 flex items-center">
+			<div className="flex-1 h-[48px] md:h-[54px] bg-[#0C0C0C]/5 rounded-xl px-4 flex items-center">
 				<span className={`text-sm md:text-base ${colors.text}`}>Location</span>
 			</div>
 			<button
 				type="button"
-				className="h-[44px] md:h-[48px] px-6 bg-white hover:bg-white/90 rounded-xl flex items-center justify-center gap-2 transition-colors"
+				className="h-[44px] md:h-[48px] px-6 bg-[#0C0C0C] hover:bg-[#1A1916] rounded-xl flex items-center justify-center gap-2 transition-colors"
 			>
-				<Search className="w-5 h-5 text-black" />
-				<span className="text-sm md:text-base font-medium text-black">Search</span>
+				<Search className="w-5 h-5 text-white" />
+				<span className="text-sm md:text-base font-medium text-white">Search</span>
 			</button>
 		</div>
 	);
@@ -48,18 +48,18 @@ function FilterBar() {
 
 function Badge({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="px-3 py-1 rounded-lg border border-white/12">
-			<span className="text-sm text-white">{children}</span>
+		<div className="px-3 py-1 rounded-lg border border-[#0C0C0C]/12">
+			<span className="text-sm text-[#1A1916]">{children}</span>
 		</div>
 	);
 }
 
 function ApplyButton() {
 	return (
-		<div className="flex items-center gap-2.5 px-5 pl-6 py-1.5 rounded-full bg-white/[0.01] border border-white/12 backdrop-blur-sm">
-			<span className="text-base text-white">Apply</span>
+		<div className="flex items-center gap-2.5 px-5 pl-6 py-1.5 rounded-full bg-[#0C0C0C]/[0.01] border border-[#0C0C0C]/12 backdrop-blur-sm">
+			<span className="text-base text-[#1A1916]">Apply</span>
 			<div className="w-[38px] h-[38px] rounded-full flex items-center justify-center">
-				<ArrowUpRight className="w-5 h-5 text-white" />
+				<ArrowUpRight className="w-5 h-5 text-[#1A1916]" />
 			</div>
 		</div>
 	);
@@ -69,7 +69,7 @@ function JobCard({ job }: { job: JobListing }) {
 	return (
 		<a
 			href={job.href}
-			className="group flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 px-2 md:px-4 border-b border-white/12 hover:bg-white/[0.02] transition-colors gap-4"
+			className="group flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 px-2 md:px-4 border-b border-[#0C0C0C]/12 hover:bg-[#0C0C0C]/[0.02] transition-colors gap-4"
 		>
 			<div className="flex-1">
 				<h3
@@ -116,7 +116,7 @@ export function JobListings() {
 				<p className={`text-base ${colors.textBody} mb-4`}>
 					{resultsCount} Results
 				</p>
-				<div className="border-t border-white/12">
+				<div className="border-t border-[#0C0C0C]/12">
 					{JOB_LISTINGS.map((job) => (
 						<JobCard key={job.id} job={job} />
 					))}

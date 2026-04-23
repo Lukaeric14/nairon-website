@@ -81,7 +81,7 @@ function AnimatedStat({ value, label, borderRight = false }: { value: string; la
 					? display
 					: `${parsed.prefix}${formatNumber(0, parsed.decimals, parsed.hasCommas)}${parsed.suffix}`}
 			</div>
-			<p className="text-[#A39E96] text-xs md:text-sm leading-snug">{label}</p>
+			<p className="text-[#5C584F] text-xs md:text-sm leading-snug">{label}</p>
 		</GridCell>
 	);
 }
@@ -94,16 +94,16 @@ export function DataCredibility() {
 				<GridCell borderRight className="px-6 md:px-12 py-8 md:py-12">
 					<div className="flex items-center gap-3 mb-4 md:mb-6">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+						<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
 							The engagement model
 						</span>
 					</div>
-					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE]">
+					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916]">
 						Structured around visible delivery data
 					</h2>
 				</GridCell>
 				<GridCell className="px-6 md:px-12 py-4 md:py-12 flex items-end">
-					<p className="text-[#A39E96] text-base md:text-lg leading-relaxed">
+					<p className="text-[#5C584F] text-base md:text-lg leading-relaxed">
 						We operate on a subscription model with weekly touchpoints, quarterly KPI planning,
 						and a transparent usage policy so the AI employee keeps improving after launch.
 					</p>

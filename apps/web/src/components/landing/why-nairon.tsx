@@ -1,29 +1,28 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { GridSection, GridCell, CornerNotches } from "./grid-system";
+import { AsciiRain } from "./ascii-rain";
 
 const points = [
 	{
-		title: "Headcount alone does not scale execution",
+		title: "Using Cursor, ChatGPT, or Claude Code doesn't fix the execution bottleneck",
 		description:
-			"Most teams do not have a strategy problem. They have a capacity problem. Work stacks up in research, follow-up, coordination, and QA long before leadership can hire enough people to keep up.",
+			"Most businesses use AI to get information and generate media — but that barely scratches the surface of what AI can do in 2026. It still leaves every repetitive, multi-step workflow in your business running on human effort.",
 		image: "/backgrounds/pastoral-hills.webp",
 	},
 	{
-		title: "Manual work creates invisible revenue leaks",
+		title: "AI employees close the gap",
 		description:
-			"When the process depends on people doing every handoff manually, follow-up gets missed, turnaround slows down, and opportunities die quietly in the gaps between systems.",
+			"Our AI employees run on real hardware, operate 24/7, and handle end-to-end work independently. These are the kind of tasks that used to require a full-time hire.",
 		image: "/backgrounds/hazy-landscape.webp",
 	},
 	{
-		title: "AI employees give the team leverage without removing control",
+		title: "The competitive edge",
 		description:
-			"Your team stays in charge of decisions, approvals, and edge cases. AI employees take on the repetitive execution layer so humans can focus on judgment instead of busywork.",
+			"The businesses that build AI infrastructure in 2026 will outpace their competition. They'll run leaner, move faster, and get more done with less overhead.",
 		image: "/backgrounds/rolling-hills.webp",
 	},
 ];
 
-const tools = ["Cursor", "ChatGPT", "Claude Code"];
-const TOOL_CYCLE_DURATION = 2500; // ms per tool name
 const CYCLE_DURATION = 5000; // ms per card
 
 export function WhyNairon() {
@@ -32,15 +31,6 @@ export function WhyNairon() {
 	const [paused, setPaused] = useState(false);
 	const startTimeRef = useRef(Date.now());
 	const pausedProgressRef = useRef(0);
-	const [activeTool, setActiveTool] = useState(0);
-
-	// Cycle through tool names
-	useEffect(() => {
-		const timer = setInterval(() => {
-			setActiveTool((prev) => (prev + 1) % tools.length);
-		}, TOOL_CYCLE_DURATION);
-		return () => clearInterval(timer);
-	}, []);
 
 	const advance = useCallback(() => {
 		setActive((prev) => (prev + 1) % points.length);
@@ -108,50 +98,26 @@ export function WhyNairon() {
 				<GridCell className="px-6 md:px-12 py-8 md:py-10">
 					<div className="flex items-center gap-3 mb-4">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
-							Why they need it
+						<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
+							The problem we see
 						</span>
 					</div>
-					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE] max-w-3xl">
-						Using{" "}
-						<span className="inline-block relative font-serif italic text-[#C9A96E]">
-							{/* Invisible sizer — longest tool name reserves width */}
-							<span className="invisible whitespace-nowrap">{tools.reduce((a, b) => a.length >= b.length ? a : b)}</span>
-							{tools.map((tool) => (
-								<span
-									key={tool}
-									className="absolute left-0 top-0 transition-all duration-500 ease-in-out whitespace-nowrap"
-									style={{
-										opacity: tools[activeTool] === tool ? 1 : 0,
-										transform: tools[activeTool] === tool ? "translateY(0)" : "translateY(8px)",
-									}}
-								>
-									{tool}
-								</span>
-							))}
-						</span>
+					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl">
+						<span className="font-serif italic text-[#C9A96E]">1 in 5</span>{" "}
+						businesses use AI in 2026.
 						<br />
-						doesn&#8217;t fix the execution bottleneck
+						Only{" "}
+						<span className="font-serif italic text-[#C9A96E]">1 in 100</span>{" "}
+						use it to its full potential.
 					</h2>
 				</GridCell>
 			</GridSection>
 
 			{/* Mobile: cards first, image second. Desktop: image left + cards right */}
 			<GridSection columns="1fr 1fr" border>
-				{/* Image — order-2 on mobile (below cards), order-1 on md+ (left) */}
-				<GridCell borderRight className="relative min-h-[280px] md:min-h-[480px] overflow-hidden order-2 md:order-1">
-					{points.map((point, i) => (
-						<img
-							key={point.image}
-							src={point.image}
-							alt=""
-							width={800}
-							height={800}
-							className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-							style={{ opacity: active === i ? 1 : 0 }}
-							loading="lazy"
-						/>
-					))}
+				{/* ASCII — order-2 on mobile (below cards), order-1 on md+ (left) */}
+				<GridCell borderRight className="relative min-h-[280px] md:min-h-[480px] overflow-hidden order-2 md:order-1 bg-white">
+					<AsciiRain />
 					<div
 						className="absolute inset-0"
 						style={{
@@ -178,7 +144,7 @@ export function WhyNairon() {
 											? "var(--guide-width) solid var(--guide-color)"
 											: "none",
 									background: isActive
-										? "rgba(255, 255, 255, 0.03)"
+										? "rgba(12, 12, 12, 0.03)"
 										: "transparent",
 								}}
 								onClick={() => handleCardClick(i)}
@@ -191,7 +157,7 @@ export function WhyNairon() {
 									color={
 										isActive
 											? "rgba(201, 169, 110, 0.3)"
-											: "rgba(255, 255, 255, 0.12)"
+											: "rgba(12, 12, 12, 0.12)"
 									}
 								/>
 
@@ -218,7 +184,7 @@ export function WhyNairon() {
 								<h3
 									className="text-lg md:text-2xl font-normal mb-2 md:mb-3 transition-colors duration-300"
 									style={{
-										color: isActive ? "#E8E4DE" : "#A39E96",
+										color: isActive ? "#1A1916" : "#8A857C",
 									}}
 								>
 									{point.title}
@@ -227,8 +193,8 @@ export function WhyNairon() {
 									className="text-sm md:text-base leading-relaxed transition-colors duration-300"
 									style={{
 										color: isActive
-											? "rgba(163, 158, 150, 1)"
-											: "rgba(163, 158, 150, 0.6)",
+											? "rgba(92, 88, 79, 1)"
+											: "rgba(92, 88, 79, 0.6)",
 									}}
 								>
 									{point.description}

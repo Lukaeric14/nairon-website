@@ -80,7 +80,7 @@ export function FluxFriction() {
 								return (
 									<div
 										key={pattern.signal}
-										className="flex items-center gap-4 rounded-xl border border-white/5 bg-card/30 p-4 hover:border-white/10 transition-colors"
+										className="flex items-center gap-4 rounded-xl border border-[#0C0C0C]/5 bg-card/30 p-4 hover:border-[#0C0C0C]/10 transition-colors"
 									>
 										<div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${pattern.bgColor}`}>
 											<Icon className={`h-5 w-5 ${pattern.color}`} />
@@ -111,7 +111,7 @@ export function FluxFriction() {
 							{recommendations.map((rec) => (
 								<div
 									key={rec.category}
-									className="rounded-xl border border-white/5 bg-card/30 p-5"
+									className="rounded-xl border border-[#0C0C0C]/5 bg-card/30 p-5"
 								>
 									<h3 className="text-foreground font-semibold mb-3">{rec.category}</h3>
 									<ul className="space-y-2">

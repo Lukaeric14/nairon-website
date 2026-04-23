@@ -70,7 +70,7 @@ export function LogoStrip() {
 	return (
 		<div className="py-6 md:py-10">
 			<div className="px-6 md:px-12 mb-6">
-				<p className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+				<p className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
 					Trusted by leading companies
 				</p>
 			</div>
@@ -123,7 +123,7 @@ export function LogoStrip() {
 						className="absolute -bottom-8 z-10 pointer-events-none animate-tooltip-fade-in"
 						style={{ left: tooltipPos.x }}
 					>
-						<div className="px-3 py-1.5 rounded-md bg-white/10 backdrop-blur-sm border border-white/10 text-[#E8E4DE] text-xs whitespace-nowrap">
+						<div className="px-3 py-1.5 rounded-md bg-[#0C0C0C]/10 backdrop-blur-sm border border-[#0C0C0C]/10 text-[#1A1916] text-xs whitespace-nowrap">
 							{visibleTagline}
 						</div>
 					</div>

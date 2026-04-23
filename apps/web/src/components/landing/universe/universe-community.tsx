@@ -82,17 +82,17 @@ export function UniverseCommunity() {
 				<GridCell className="px-12 py-10">
 					<div className="flex items-center gap-3 mb-4">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+						<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
 							Community
 						</span>
 					</div>
-					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE] max-w-3xl mb-3">
+					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl mb-3">
 						Learn with the{" "}
 						<span className="font-serif italic text-[#C9A96E]">
 							sharpest engineers
 						</span>
 					</h2>
-					<p className="text-[#A39E96] text-base max-w-xl">
+					<p className="text-[#5C584F] text-base max-w-xl">
 						Join a community of engineers who are actively building
 						with AI tools. Share workflows, get feedback, stay ahead.
 					</p>
@@ -117,7 +117,7 @@ export function UniverseCommunity() {
 							<CornerNotches
 								size={8}
 								corners={["top-left", "bottom-left"]}
-								color="rgba(255, 255, 255, 0.08)"
+								color="rgba(12, 12, 12, 0.08)"
 							/>
 							<div className="text-3xl md:text-4xl font-normal tracking-[-1px] text-[#C9A96E] mb-1 font-urbanist tabular-nums">
 								<AnimatedCounter
@@ -125,7 +125,7 @@ export function UniverseCommunity() {
 									isVisible={isVisible}
 								/>
 							</div>
-							<p className="text-[#A39E96] text-sm">
+							<p className="text-[#5C584F] text-sm">
 								{stat.label}
 							</p>
 						</div>
@@ -134,7 +134,7 @@ export function UniverseCommunity() {
 
 				{/* Recent topics */}
 				<GridCell className="p-8 md:p-10">
-					<h3 className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em] mb-6">
+					<h3 className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em] mb-6">
 						Trending Discussions
 					</h3>
 
@@ -151,14 +151,14 @@ export function UniverseCommunity() {
 									transitionDelay: `${i * 100 + 200}ms`,
 									borderBottom:
 										i < RECENT_TOPICS.length - 1
-											? "1px solid rgba(255, 255, 255, 0.04)"
+											? "1px solid rgba(12, 12, 12, 0.04)"
 											: "none",
 								}}
 							>
 								<span className="text-[#C9A96E]/40 text-xs font-mono tabular-nums">
 									{String(i + 1).padStart(2, "0")}
 								</span>
-								<span className="text-[#E8E4DE] text-sm leading-snug cursor-pointer hover:text-[#C9A96E] transition-colors">
+								<span className="text-[#1A1916] text-sm leading-snug cursor-pointer hover:text-[#C9A96E] transition-colors">
 									{topic}
 								</span>
 							</div>
@@ -187,7 +187,7 @@ export function UniverseCommunity() {
 							href="https://slack.nairon.ai"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="inline-flex items-center gap-2 border border-white/10 text-[#E8E4DE] font-medium text-sm px-5 py-2.5 rounded-full hover:bg-white/5 transition-colors"
+							className="inline-flex items-center gap-2 border border-[#0C0C0C]/10 text-[#1A1916] font-medium text-sm px-5 py-2.5 rounded-full hover:bg-[#0C0C0C]/5 transition-colors"
 						>
 							Join Slack
 						</a>

@@ -34,7 +34,7 @@ function TeamMemberCard({
 					/>
 				) : (
 					<div className="w-full aspect-[380/427] bg-gradient-to-b from-gray-700/50 to-gray-900/50 flex items-center justify-center">
-						<span className="text-6xl text-white/20 font-display font-bold">
+						<span className="text-6xl text-[#1A1916]/20 font-display font-bold">
 							{name.charAt(0)}
 						</span>
 					</div>
@@ -44,7 +44,7 @@ function TeamMemberCard({
 						href={linkedin}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="absolute bottom-4 right-4 w-10 h-10 flex items-center justify-center text-landing-text hover:text-white transition-colors"
+						className="absolute bottom-4 right-4 w-10 h-10 flex items-center justify-center text-landing-text hover:text-[#1A1916] transition-colors"
 						aria-label={`${name} LinkedIn`}
 					>
 						<LinkedInIcon />
@@ -52,11 +52,11 @@ function TeamMemberCard({
 				)}
 			</div>
 			<h4
-				className="font-semibold text-2xl font-display tracking-tighter text-white"
+				className="font-semibold text-2xl font-display tracking-tighter text-[#1A1916]"
 			>
 				{name}
 			</h4>
-			<p className="text-base text-white/55">{role}</p>
+			<p className="text-base text-[#1A1916]/55">{role}</p>
 		</div>
 	);
 }
@@ -64,16 +64,16 @@ function TeamMemberCard({
 function MentorBar() {
 	return (
 		<div className="mt-16 flex items-center gap-3">
-			<span className="text-lg font-normal text-white">20+ Mentors</span>
-			<div className="flex-1 h-px bg-white/55" />
+			<span className="text-lg font-normal text-[#1A1916]">20+ Mentors</span>
+			<div className="flex-1 h-px bg-[#0C0C0C]/55" />
 			<div className="flex items-center gap-2.5">
-				<span className="text-lg font-normal text-white">See All</span>
+				<span className="text-lg font-normal text-[#1A1916]">See All</span>
 				<a
 					href="/team"
-					className="w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-white/90 transition-colors"
+					className="w-12 h-12 rounded-full bg-[#0C0C0C] flex items-center justify-center hover:bg-[#1A1916] transition-colors"
 					aria-label="See all team members"
 				>
-					<ArrowUpRight className="w-5 h-5 text-black" />
+					<ArrowUpRight className="w-5 h-5 text-white" />
 				</a>
 			</div>
 		</div>

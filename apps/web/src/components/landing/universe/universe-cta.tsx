@@ -22,29 +22,29 @@ export function UniverseCTA() {
 				<div
 					className="max-w-3xl w-full rounded-2xl p-10 md:p-14 text-center"
 					style={{
-						background: "rgba(20, 20, 18, 0.55)",
+						background: "rgba(255, 255, 255, 0.55)",
 						backdropFilter: "blur(20px)",
-						border: "1px solid rgba(255, 255, 255, 0.08)",
+						border: "1px solid rgba(12, 12, 12, 0.08)",
 					}}
 				>
-					<h2 className="text-4xl md:text-[56px] md:leading-[60px] font-normal tracking-[-1.5px] text-[#E8E4DE] mb-4">
+					<h2 className="text-4xl md:text-[56px] md:leading-[60px] font-normal tracking-[-1.5px] text-[#1A1916] mb-4">
 						Stay sharp.{" "}
 						<span className="font-serif italic text-[#C9A96E]">
 							Stay ahead
 						</span>
 						<span className="text-[#C9A96E]">.</span>
 					</h2>
-					<p className="text-[#A39E96] text-lg mb-8 max-w-lg mx-auto">
+					<p className="text-[#5C584F] text-lg mb-8 max-w-lg mx-auto">
 						The Universe is coming soon. Engineers who engage will stay at the cutting
 						edge — and get matched to the best opportunities.
 					</p>
 					<div className="flex flex-wrap justify-center gap-4">
-						<span className="inline-flex items-center gap-2 bg-white/[0.06] text-[#A39E96] font-semibold text-base px-8 py-3.5 rounded-full cursor-not-allowed opacity-70">
+						<span className="inline-flex items-center gap-2 bg-[#0C0C0C]/[0.06] text-[#5C584F] font-semibold text-base px-8 py-3.5 rounded-full cursor-not-allowed opacity-70">
 							Coming Soon
 						</span>
 						<a
 							href="/flux"
-							className="inline-flex items-center gap-2 border border-white/10 text-[#E8E4DE] hover:border-[#C9A96E]/50 hover:text-[#C9A96E] font-medium text-base px-6 py-3.5 rounded-full transition-colors"
+							className="inline-flex items-center gap-2 border border-[#0C0C0C]/10 text-[#1A1916] hover:border-[#C9A96E]/50 hover:text-[#C9A96E] font-medium text-base px-6 py-3.5 rounded-full transition-colors"
 						>
 							Explore Flux
 						</a>

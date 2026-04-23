@@ -41,7 +41,7 @@ export const Route = createFileRoute("/universe")({
 function UniversePage() {
 	return (
 		<ModalProvider>
-			<div className="min-h-screen bg-[#0C0C0C] text-[#E8E4DE] font-inter">
+			<div className="min-h-screen bg-white text-[#1A1916] font-inter">
 				<Navbar />
 
 				<GridSystem className="pt-16 mt-12 md:mt-16">

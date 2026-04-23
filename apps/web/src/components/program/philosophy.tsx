@@ -68,7 +68,7 @@ export function ProgramPhilosophy({
 					</div>
 
 					{/* Divider */}
-					<div className="w-16 h-px bg-white/8" />
+					<div className="w-16 h-px bg-[#0C0C0C]/8" />
 
 					{/* Paragraphs */}
 					<div className="flex flex-col gap-6">

@@ -78,9 +78,9 @@ export function MegaDropdown({ item, variant = "green", onOpenChange }: MegaDrop
 						setOpenState(!open);
 					}
 				}}
-				className="group relative flex items-center justify-center h-10 px-4 rounded-full bg-white/12 overflow-hidden transition-colors"
+				className="group relative flex items-center justify-center h-10 px-4 rounded-full bg-[#0C0C0C]/12 overflow-hidden transition-colors"
 			>
-				<span className="text-base text-white transition-transform duration-300 group-hover:-translate-y-10">
+				<span className="text-base text-[#1A1916] transition-transform duration-300 group-hover:-translate-y-10">
 					{item.label}
 					<ChevronDown
 						className={cn(
@@ -92,7 +92,7 @@ export function MegaDropdown({ item, variant = "green", onOpenChange }: MegaDrop
 
 				<span className={cn("absolute inset-x-[-1px] top-full h-[45px] rounded-full transition-all duration-300 group-hover:top-[-3px]", variant === "gold" ? "bg-brand-gold" : "bg-brand")} />
 
-				<span className="absolute text-base text-white top-12 transition-all duration-300 group-hover:top-2">
+				<span className="absolute text-base text-[#1A1916] top-12 transition-all duration-300 group-hover:top-2">
 					{item.label}
 					<ChevronDown
 						className={cn(
@@ -115,13 +115,13 @@ export function MegaDropdown({ item, variant = "green", onOpenChange }: MegaDrop
 				onMouseLeave={handleMouseLeave}
 			>
 				<div className="bg-[#0a0a0c]">
-					<div className="border-t border-white/8">
+					<div className="border-t border-[#0C0C0C]/8">
 						<div className="max-w-5xl mx-auto px-6 md:px-10 py-8">
 							<div className="grid grid-cols-[1.1fr_0.7fr_0.9fr] gap-8">
 								{/* Programs column — large cards with icons */}
 								{programsCol && (
 									<div>
-										<p className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-5">
+										<p className="text-xs font-semibold uppercase tracking-wider text-[#1A1916]/40 mb-5">
 											{programsCol.heading}
 										</p>
 										<div className="space-y-1">
@@ -133,19 +133,19 @@ export function MegaDropdown({ item, variant = "green", onOpenChange }: MegaDrop
 													<a
 														key={link.href}
 														href={link.href}
-														className="flex items-start gap-4 rounded-xl px-4 py-4 transition-colors hover:bg-white/5"
+														className="flex items-start gap-4 rounded-xl px-4 py-4 transition-colors hover:bg-[#0C0C0C]/5"
 													>
 														{Icon && (
-															<span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/8">
-																<Icon className="w-5 h-5 text-white/70" />
+															<span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0C0C0C]/8">
+																<Icon className="w-5 h-5 text-[#1A1916]/70" />
 															</span>
 														)}
 														<div>
-															<span className="text-lg font-semibold text-white">
+															<span className="text-lg font-semibold text-[#1A1916]">
 																{link.label}
 															</span>
 															{link.description && (
-																<span className="block text-sm text-white/50 mt-0.5">
+																<span className="block text-sm text-[#1A1916]/50 mt-0.5">
 																	{link.description}
 																</span>
 															)}
@@ -160,7 +160,7 @@ export function MegaDropdown({ item, variant = "green", onOpenChange }: MegaDrop
 								{/* Resource columns — simple links */}
 								{restCols.map((col) => (
 									<div key={col.heading}>
-										<p className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-5">
+										<p className="text-xs font-semibold uppercase tracking-wider text-[#1A1916]/40 mb-5">
 											{col.heading}
 										</p>
 										<ul className="space-y-0.5">
@@ -168,7 +168,7 @@ export function MegaDropdown({ item, variant = "green", onOpenChange }: MegaDrop
 												<li key={link.href}>
 													<a
 														href={link.href}
-														className="block rounded-lg px-4 py-2 text-[15px] font-medium text-white transition-colors hover:bg-white/5"
+														className="block rounded-lg px-4 py-2 text-[15px] font-medium text-[#1A1916] transition-colors hover:bg-[#0C0C0C]/5"
 													>
 														{link.label}
 													</a>
@@ -182,10 +182,10 @@ export function MegaDropdown({ item, variant = "green", onOpenChange }: MegaDrop
 								{item.cta && (
 									<div className="flex flex-col justify-between rounded-xl bg-brand/10 border border-brand/20 p-5">
 										<div>
-											<p className="text-base font-semibold text-white mb-1.5">
+											<p className="text-base font-semibold text-[#1A1916] mb-1.5">
 												{item.cta.headline}
 											</p>
-											<p className="text-sm text-white/60">
+											<p className="text-sm text-[#1A1916]/60">
 												{item.cta.description}
 											</p>
 										</div>

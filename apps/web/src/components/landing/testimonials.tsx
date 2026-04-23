@@ -32,11 +32,11 @@ export function Testimonials() {
 				<GridCell className="px-6 md:px-12 pt-10 md:pt-12 pb-8 md:pb-10">
 					<div className="flex items-center gap-3 mb-4 md:mb-6">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+						<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
 							Testimonials
 						</span>
 					</div>
-					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE] max-w-3xl">
+					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl">
 						What they say
 					</h2>
 				</GridCell>
@@ -51,7 +51,7 @@ export function Testimonials() {
 						className="p-6 md:p-12 flex flex-col justify-between"
 					>
 						<CornerNotches size={10} />
-						<p className="text-[#E8E4DE] text-sm md:text-base leading-relaxed mb-6 md:mb-8">
+						<p className="text-[#1A1916] text-sm md:text-base leading-relaxed mb-6 md:mb-8">
 							"{t.quote}"
 						</p>
 						<div className="flex items-center gap-3">
@@ -61,10 +61,10 @@ export function Testimonials() {
 								className="w-9 md:w-10 h-9 md:h-10 rounded-full object-cover"
 							/>
 							<div>
-								<p className="text-[#E8E4DE] text-sm font-medium">
+								<p className="text-[#1A1916] text-sm font-medium">
 									{t.name}
 								</p>
-								<p className="text-[#A39E96] text-xs md:text-sm">{t.role}</p>
+								<p className="text-[#5C584F] text-xs md:text-sm">{t.role}</p>
 							</div>
 						</div>
 					</GridCell>

@@ -12,7 +12,7 @@ function GoldCheckIcon({ size = 16 }: { size?: number }) {
 
 function ResumeQuote({ text }: { text: string }) {
 	return (
-		<div className="w-fit bg-white/[0.06] border border-white/10 rounded-full px-5 py-2.5">
+		<div className="w-fit bg-[#0C0C0C]/[0.06] border border-[#0C0C0C]/10 rounded-full px-5 py-2.5">
 			<p className={`text-sm ${colors.textBody}`}>{text}</p>
 		</div>
 	);

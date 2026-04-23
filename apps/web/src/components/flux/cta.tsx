@@ -17,7 +17,7 @@ export function FluxCTA() {
   return (
     <section
       id="flux-cta"
-      className="bg-[#0C0C0C] relative overflow-hidden py-16 md:py-24"
+      className="bg-white relative overflow-hidden py-16 md:py-24"
     >
       {/* Background effects */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(201,169,110,0.08),transparent_60%)]" />
@@ -27,30 +27,30 @@ export function FluxCTA() {
           Get Started
         </div>
 
-        <h2 className="text-[28px] leading-[32px] md:text-[40px] md:leading-[44px] lg:text-[48px] lg:leading-[52px] font-normal tracking-[-1px] text-[#E8E4DE]">
+        <h2 className="text-[28px] leading-[32px] md:text-[40px] md:leading-[44px] lg:text-[48px] lg:leading-[52px] font-normal tracking-[-1px] text-[#1A1916]">
           Find your gaps. <span className="font-serif italic text-[#C9A96E]">Fix them.</span>
         </h2>
 
-        <p className="text-[#A39E96] mt-6 text-lg max-w-xl mx-auto">
+        <p className="text-[#5C584F] mt-6 text-lg max-w-xl mx-auto">
           Copy this prompt into your current agent session. Flux will detect the environment and run the right install flow.
         </p>
 
         {/* Install prompt card */}
         <div
           onClick={handleCopy}
-          className="bg-white/[0.03] ring-white/10 rounded-2xl p-8 ring-1 cursor-pointer transition-all hover:bg-white/[0.05] hover:ring-white/20 max-w-2xl mx-auto mt-8 text-left"
+          className="bg-[#0C0C0C]/[0.03] ring-white/10 rounded-2xl p-8 ring-1 cursor-pointer transition-all hover:bg-[#0C0C0C]/[0.05] hover:ring-white/20 max-w-2xl mx-auto mt-8 text-left"
         >
-          <p className="text-[#A39E96] text-sm mb-2">
+          <p className="text-[#5C584F] text-sm mb-2">
             Install Flux in your agent
           </p>
-          <h3 className="text-[#E8E4DE] text-xl md:text-2xl font-medium mb-6">
+          <h3 className="text-[#1A1916] text-xl md:text-2xl font-medium mb-6">
             {copied
               ? "Copied to clipboard!"
               : "Copy this prompt and paste it in your agent"}
           </h3>
 
-          <div className="bg-[#0C0C0C] ring-white/10 rounded-xl px-6 py-4 font-mono text-sm ring-1 relative">
-            <pre className="text-[#A39E96] whitespace-pre-wrap text-left">
+          <div className="bg-white ring-white/10 rounded-xl px-6 py-4 font-mono text-sm ring-1 relative">
+            <pre className="text-[#5C584F] whitespace-pre-wrap text-left">
               {installPrompt}
             </pre>
             <span className="absolute top-4 right-4 size-5">
@@ -69,13 +69,13 @@ export function FluxCTA() {
         </div>
 
         {/* Requirements note */}
-        <p className="text-[#A39E96] text-sm mt-4">
+        <p className="text-[#5C584F] text-sm mt-4">
           Bring your own model plans. Codex is the primary driver, and Claude is optional for adversarial review or transcript import workflows.
         </p>
 
         {/* CTAs */}
         <div className="flex flex-wrap justify-center gap-4 mt-8">
-          <Button asChild size="lg" className="bg-white text-[#0C0C0C] hover:bg-white/90">
+          <Button asChild size="lg" className="bg-white text-[#0C0C0C] hover:bg-[#0C0C0C]/90">
             <a
               href="https://github.com/Nairon-AI/flux"
               target="_blank"
@@ -89,7 +89,7 @@ export function FluxCTA() {
             asChild
             size="lg"
             variant="outline"
-            className="border-white/20 hover:bg-white/5"
+            className="border-[#0C0C0C]/20 hover:bg-[#0C0C0C]/5"
           >
             <a
               href="https://discord.gg/CEQMd6fmXk"
@@ -103,7 +103,7 @@ export function FluxCTA() {
         </div>
 
         {/* Philosophy quote */}
-        <div className="mt-16 pt-8 border-t border-white/10">
+        <div className="mt-16 pt-8 border-t border-[#0C0C0C]/10">
           <blockquote className="text-muted-foreground italic text-lg">
             "These aren't model failures. They're process failures."
           </blockquote>

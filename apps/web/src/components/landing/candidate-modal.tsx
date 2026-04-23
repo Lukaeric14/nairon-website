@@ -33,7 +33,7 @@ export function CandidateModal() {
 		}}>
 			<DialogPrimitive.Portal>
 				<DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-				<DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-50 w-[calc(100%-2rem)] max-w-4xl translate-x-[-50%] translate-y-[-50%] border border-white/[0.08] bg-[#141414] text-[#E8E4DE] rounded-2xl overflow-hidden shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
+				<DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-50 w-[calc(100%-2rem)] max-w-4xl translate-x-[-50%] translate-y-[-50%] border border-[#0C0C0C]/[0.08] bg-[#F5F3EE] text-[#1A1916] rounded-2xl overflow-hidden shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
 					<div className="grid grid-cols-1 md:grid-cols-2 min-h-[480px]">
 						{/* Left — Image + Glass Cards */}
 						<div className="hidden md:block relative">
@@ -46,7 +46,7 @@ export function CandidateModal() {
 								className="absolute inset-0"
 								style={{
 									background:
-										"linear-gradient(to left, rgba(20,20,20,0.5) 0%, rgba(20,20,20,0.2) 50%, rgba(20,20,20,0.3) 100%)",
+										"linear-gradient(to left, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.3) 100%)",
 								}}
 							/>
 							<div className="relative z-10 flex flex-col gap-3 p-6 h-full justify-center">
@@ -57,17 +57,17 @@ export function CandidateModal() {
 								].map(({ icon: Icon, title, desc }) => (
 									<div
 										key={title}
-										className="rounded-xl px-4 py-3.5 border border-white/[0.1]"
+										className="rounded-xl px-4 py-3.5 border border-[#0C0C0C]/[0.1]"
 										style={{
-											background: "rgba(20, 20, 18, 0.45)",
+											background: "rgba(255, 255, 255, 0.45)",
 											backdropFilter: "blur(16px)",
 										}}
 									>
 										<div className="flex items-center gap-2.5 mb-1">
 											<Icon className="w-4 h-4 text-[#C9A96E]" />
-											<span className="text-sm font-medium text-[#E8E4DE]">{title}</span>
+											<span className="text-sm font-medium text-[#1A1916]">{title}</span>
 										</div>
-										<p className="text-xs text-[#A39E96] leading-relaxed pl-[26px]">{desc}</p>
+										<p className="text-xs text-[#5C584F] leading-relaxed pl-[26px]">{desc}</p>
 									</div>
 								))}
 							</div>
@@ -76,10 +76,10 @@ export function CandidateModal() {
 						{/* Right — Quick qualifier */}
 						<div className="p-8 md:p-10 flex flex-col justify-center">
 							<div className="mb-6">
-								<h2 className="text-2xl font-normal text-[#E8E4DE]">
+								<h2 className="text-2xl font-normal text-[#1A1916]">
 									Join the Nairon network
 								</h2>
-								<p className="text-[#A39E96] text-sm mt-1.5">
+								<p className="text-[#5C584F] text-sm mt-1.5">
 									Tap everything that sounds like you.
 								</p>
 							</div>
@@ -95,7 +95,7 @@ export function CandidateModal() {
 											className={`px-4 py-2 rounded-full text-sm transition-all border ${
 												isSelected
 													? "bg-[#C9A96E]/15 border-[#C9A96E]/40 text-[#C9A96E]"
-													: "bg-white/[0.03] border-white/[0.08] text-[#A39E96] hover:border-white/15 hover:text-[#E8E4DE]"
+													: "bg-[#0C0C0C]/[0.03] border-[#0C0C0C]/[0.08] text-[#5C584F] hover:border-[#0C0C0C]/15 hover:text-[#1A1916]"
 											}`}
 										>
 											{pill}
@@ -105,7 +105,7 @@ export function CandidateModal() {
 							</div>
 
 							<span
-								className="mt-8 w-full inline-flex items-center justify-center gap-2 font-semibold text-sm px-6 py-3 rounded-full bg-white/[0.06] text-[#A39E96] cursor-not-allowed opacity-60"
+								className="mt-8 w-full inline-flex items-center justify-center gap-2 font-semibold text-sm px-6 py-3 rounded-full bg-[#0C0C0C]/[0.06] text-[#5C584F] cursor-not-allowed opacity-60"
 								aria-disabled="true"
 							>
 								Enter Nairon Universe — Coming Soon

@@ -4,27 +4,27 @@ import { GridSection, GridCell } from "./grid-system";
 const steps = [
 	{
 		number: "01",
-		title: "Week 1: Audit",
+		title: "Step 1: Identify",
 		description:
-			"We map your workflows, identify the highest-leverage AI employee opportunity, and define the KPI, constraints, and handoffs before anything gets built.",
+			"We do a deep dive into your daily operations to map every workflow, surface the highest-leverage opportunities, and define the exact scope of what your first AI employee will take on.",
 	},
 	{
 		number: "02",
-		title: "Week 2: Build and deploy v1",
+		title: "Step 2: Audit",
 		description:
-			"Our team builds the first working version and deploys it into your real stack so the system starts operating where it actually needs to live.",
+			"We run a technical audit of your existing stack and design the AI infrastructure your business needs — so what we build integrates cleanly and empowers your team, without adding complexity to your operations.",
 	},
 	{
 		number: "03",
-		title: "Week 3: Stress-test",
+		title: "Step 3: Implement",
 		description:
-			"We probe edge cases, tighten permissions, validate exception handling, and make sure nothing important is leaking through the cracks.",
+			"Our engineers build, test, and deploy your AI employee directly into your environment — running on real hardware, integrated with your tools, and ready to operate end-to-end.",
 	},
 	{
 		number: "04",
-		title: "Week 4: Go operational",
+		title: "Step 4: Optimize",
 		description:
-			"We move from pilot mode into a working operating rhythm with reporting, weekly touchpoints, and a backlog for the next optimization cycle.",
+			"We move from deployment into a weekly operating rhythm — monitoring performance, refining output, and continuously improving your AI employees so they only get better over time.",
 	},
 ];
 
@@ -60,14 +60,14 @@ export function Process() {
 					<div className="md:sticky md:top-24">
 						<div className="flex items-center gap-3 mb-4 md:mb-6">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
-							How it works
+						<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
+							What we do
 						</span>
 					</div>
-					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE]">
-						From audit to{" "}
-						<span className="font-serif italic text-[#C9A96E]">deployment</span>{" "}
-						in four weeks
+					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916]">
+						We deploy your AI{" "}
+						<span className="font-serif italic text-[#C9A96E]">employee</span>{" "}
+						in 4 steps
 					</h2>
 				</div>
 			</GridCell>
@@ -77,7 +77,7 @@ export function Process() {
 					{steps.map((step, i) => (
 						<div
 							key={step.number}
-							className={`py-6 md:py-8 ${i > 0 ? "border-t border-white/6" : ""} transition-all duration-500 ease-out ${
+							className={`py-6 md:py-8 ${i > 0 ? "border-t border-[#0C0C0C]/6" : ""} transition-all duration-500 ease-out ${
 								i < visibleCount
 									? "opacity-100 translate-y-0"
 									: "opacity-0 translate-y-4"
@@ -86,10 +86,10 @@ export function Process() {
 							<span className="text-[#C9A96E] text-sm font-medium tracking-[0.16em] block mb-2 md:mb-3">
 								{step.number}
 							</span>
-							<h3 className="text-xl md:text-2xl font-normal text-[#E8E4DE] mb-2 md:mb-3">
+							<h3 className="text-xl md:text-2xl font-normal text-[#1A1916] mb-2 md:mb-3">
 								{step.title}
 							</h3>
-							<p className="text-[#A39E96] text-sm md:text-base leading-relaxed">
+							<p className="text-[#5C584F] text-sm md:text-base leading-relaxed">
 								{step.description}
 							</p>
 						</div>

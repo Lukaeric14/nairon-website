@@ -9,8 +9,8 @@ import { cn } from "@/lib/utils";
 const GRID_VARS = {
 	"--grid-max-width": "1080px",
 	"--guide-width": "1px",
-	"--guide-color": "rgba(255, 255, 255, 0.06)",
-	"--cross-color": "rgba(255, 255, 255, 0.20)",
+	"--guide-color": "rgba(12, 12, 12, 0.06)",
+	"--cross-color": "rgba(12, 12, 12, 0.20)",
 	"--cross-size": "21px",
 } as CSSProperties;
 
@@ -183,7 +183,7 @@ export function GridCell({
 // Adds a rustic blueprint feel. Place inside any relatively-positioned element.
 export function CornerNotches({
 	size = 10,
-	color = "rgba(255, 255, 255, 0.12)",
+	color = "rgba(12, 12, 12, 0.12)",
 	corners = ["top-left", "top-right", "bottom-left", "bottom-right"] as const,
 }: {
 	size?: number;

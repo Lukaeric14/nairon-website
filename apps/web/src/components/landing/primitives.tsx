@@ -6,37 +6,37 @@ import { cn } from "@/lib/utils";
 // Dark rustic palette inspired by Warp.dev — warm tones, gold accents
 export const colors = {
 	/** Primary text — warm off-white (Warp: rgba(250,249,246,0.9)) */
-	text: "text-[#E8E4DE]",
+	text: "text-[#1A1916]",
 	/** Dimmed heading text — warm white at 55% */
-	textDim: "text-[#E8E4DE]/55",
+	textDim: "text-[#1A1916]/55",
 	/** Body / secondary text — warm gray */
-	textBody: "text-[#A39E96]",
+	textBody: "text-[#5C584F]",
 	/** Muted text — warm white at 40% */
-	textMuted: "text-[#E8E4DE]/40",
+	textMuted: "text-[#1A1916]/40",
 	/** Secondary text — warm white at 50% */
-	textSecondary: "text-[#E8E4DE]/50",
+	textSecondary: "text-[#1A1916]/50",
 	/** Gold accent text */
 	textGold: "text-[#C9A96E]",
 	/** Card/glass border — warm white at 6% */
-	border: "border-white/6",
+	border: "border-[#0C0C0C]/6",
 	/** Interactive border — warm white at 10% */
-	borderInteractive: "border-white/10",
+	borderInteractive: "border-[#0C0C0C]/10",
 	/** Emphasis border — warm white at 14% (tags, badges) */
-	borderEmphasis: "border-white/14",
+	borderEmphasis: "border-[#0C0C0C]/14",
 	/** Glass background — white at 3% */
-	glassBg: "bg-white/[0.03]",
+	glassBg: "bg-[#0C0C0C]/[0.03]",
 	/** Secondary surface — white at 5% */
-	secondaryBg: "bg-white/[0.05]",
+	secondaryBg: "bg-[#0C0C0C]/[0.05]",
 	/** Hover surface — white at 8% */
-	hoverBg: "bg-white/8",
+	hoverBg: "bg-[#0C0C0C]/8",
 	/** Page background — near black */
-	pageBg: "bg-[#0C0C0C]",
+	pageBg: "bg-white",
 } as const;
 
 // Typography class bundles for reuse across pages
 export const typography = {
 	/** Serif section heading base — tracking + leading + color only */
-	serif: "font-serif tracking-serif leading-serif text-[#E8E4DE]",
+	serif: "font-serif tracking-serif leading-serif text-[#1A1916]",
 	/** Uppercase label — tight */
 	label: "uppercase tracking-label",
 	/** Uppercase label — wide */
@@ -61,7 +61,7 @@ export function SectionEyebrow({ label }: { label: string }) {
 	return (
 		<div className="flex items-center gap-3 mb-6">
 			<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-			<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+			<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
 				{label}
 			</span>
 		</div>
@@ -73,7 +73,7 @@ export function SectionTag({ label }: { label: string }) {
 	return (
 		<div className="flex items-center gap-4 mb-6">
 			<div className="w-10 h-[2px] bg-[#C9A96E]" />
-			<span className="text-[#E8E4DE] text-lg">{label}</span>
+			<span className="text-[#1A1916] text-lg">{label}</span>
 		</div>
 	);
 }
@@ -121,7 +121,7 @@ export function GlassCard({
 		<div
 			className={cn(
 				"glass-card rounded-2xl",
-				hover && "hover:bg-white/[0.05] transition-colors",
+				hover && "hover:bg-[#0C0C0C]/[0.05] transition-colors",
 				className,
 			)}
 		>
@@ -148,8 +148,8 @@ export function OutlineButton({
 			target={target}
 			rel={target === "_blank" ? "noopener noreferrer" : undefined}
 			className={cn(
-				"inline-flex items-center gap-2 border border-white/10",
-				"text-[#E8E4DE] font-medium text-base px-5 py-2.5 rounded-full hover:bg-white/5 transition-colors",
+				"inline-flex items-center gap-2 border border-[#0C0C0C]/10",
+				"text-[#1A1916] font-medium text-base px-5 py-2.5 rounded-full hover:bg-[#0C0C0C]/5 transition-colors",
 				className,
 			)}
 		>
@@ -205,7 +205,7 @@ export function SecondaryButton({
 			target={target}
 			rel={target === "_blank" ? "noopener noreferrer" : undefined}
 			className={cn(
-				"inline-flex items-center gap-2 bg-[#353534] hover:bg-[#454544] text-[#AFAEAC] font-medium text-base px-5 py-2.5 rounded-full transition-colors",
+				"inline-flex items-center gap-2 bg-[#353534] hover:bg-[#454544] text-[#5C584F] font-medium text-base px-5 py-2.5 rounded-full transition-colors",
 				className,
 			)}
 		>

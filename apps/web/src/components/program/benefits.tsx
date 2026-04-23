@@ -11,7 +11,7 @@ import { PROGRAM_BENEFIT_CARDS } from "@/data/landing";
 function Tag({ label }: { label: string }) {
 	return (
 		<span
-			className={`inline-block text-xs border ${colors.borderInteractive} rounded-full px-3 py-1 text-white/70 mb-4`}
+			className={`inline-block text-xs border ${colors.borderInteractive} rounded-full px-3 py-1 text-[#1A1916]/70 mb-4`}
 		>
 			{label}
 		</span>
@@ -89,7 +89,7 @@ function GuaranteedCard() {
 		<div className="pricing-gradient-green rounded-2xl overflow-hidden p-6 md:p-8 lg:p-10 relative">
 			<Tag label={card.tag} />
 			<h2
-				className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mt-3 md:mt-4"
+				className="text-4xl md:text-5xl lg:text-7xl font-bold text-[#1A1916] mt-3 md:mt-4"
 				style={{ letterSpacing: "-2px" }}
 			>
 				{card.heading}

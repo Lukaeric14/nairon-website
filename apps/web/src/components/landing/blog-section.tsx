@@ -122,18 +122,18 @@ function PostCard({ post, large }: { post: BlogPost; large?: boolean }) {
 				<span className="text-[#C9A96E] text-xs font-medium uppercase tracking-[0.16em]">
 					{post.category}
 				</span>
-				<span className="text-[#A39E96]/40 text-xs">·</span>
-				<span className="text-[#A39E96] text-xs">{post.date}</span>
+				<span className="text-[#5C584F]/40 text-xs">·</span>
+				<span className="text-[#5C584F] text-xs">{post.date}</span>
 			</div>
 			<h3
-				className={`text-[#E8E4DE] font-normal leading-snug tracking-[-0.24px] ${
+				className={`text-[#1A1916] font-normal leading-snug tracking-[-0.24px] ${
 					large ? "text-xl md:text-2xl" : "text-sm md:text-base"
 				}`}
 			>
 				{post.title}
 			</h3>
 			{post.subtitle && large && (
-				<p className="text-[#A39E96] text-sm leading-relaxed">
+				<p className="text-[#5C584F] text-sm leading-relaxed">
 					{post.subtitle}
 				</p>
 			)}
@@ -141,9 +141,9 @@ function PostCard({ post, large }: { post: BlogPost; large?: boolean }) {
 				<img
 					src={post.author.avatar}
 					alt={post.author.name}
-					className="w-7 h-7 rounded-full object-cover object-top border border-white/[0.08]"
+					className="w-7 h-7 rounded-full object-cover object-top border border-[#0C0C0C]/[0.08]"
 				/>
-				<span className="text-[#A39E96] text-xs font-medium">
+				<span className="text-[#5C584F] text-xs font-medium">
 					{post.author.name}
 				</span>
 			</div>
@@ -164,16 +164,16 @@ function CompactPost({ post }: { post: BlogPost }) {
 				<span className="text-[#C9A96E] text-[10px] font-medium uppercase tracking-[0.16em]">
 					{post.category}
 				</span>
-				<h4 className="text-[#E8E4DE] text-sm font-normal leading-snug line-clamp-2 tracking-[-0.12px]">
+				<h4 className="text-[#1A1916] text-sm font-normal leading-snug line-clamp-2 tracking-[-0.12px]">
 					{post.title}
 				</h4>
 				<div className="flex items-center gap-2 mt-auto">
 					<img
 						src={post.author.avatar}
 						alt={post.author.name}
-						className="w-5 h-5 rounded-full object-cover object-top border border-white/[0.06]"
+						className="w-5 h-5 rounded-full object-cover object-top border border-[#0C0C0C]/[0.06]"
 					/>
-					<span className="text-[#A39E96] text-xs">
+					<span className="text-[#5C584F] text-xs">
 						{post.author.name}
 					</span>
 				</div>
@@ -195,11 +195,11 @@ export function BlogSection() {
 				<GridCell className="px-8 md:px-12 pt-12 pb-10">
 					<div className="flex items-center gap-3 mb-6">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+						<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
 							From the Blog
 						</span>
 					</div>
-					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE] max-w-3xl">
+					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl">
 						Essays &{" "}
 						<span className="font-serif italic text-[#C9A96E]">
 							insights
@@ -239,7 +239,7 @@ export function BlogSection() {
 					<CornerNotches size={10} />
 					<div className="flex items-center gap-3 mb-8">
 						<div className="w-1 h-1 rounded-full bg-[#C9A96E]/60" />
-						<h3 className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+						<h3 className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
 							Recent Essays
 						</h3>
 					</div>

@@ -18,8 +18,8 @@ export function NavCtaButton({ cta }: NavCtaButtonProps) {
 			className={cn(
 				"inline-flex items-center gap-2.5 font-semibold text-base pl-4 pr-1.5 py-1.5 rounded-full transition-colors",
 				isGreen
-					? "bg-brand text-white hover:bg-brand-hover"
-					: "bg-brand-gold text-white hover:bg-brand-gold-light",
+					? "bg-brand text-[#1A1916] hover:bg-brand-hover"
+					: "bg-brand-gold text-[#1A1916] hover:bg-brand-gold-light",
 			)}
 		>
 			{cta.label}

@@ -25,12 +25,12 @@ export function CTASection() {
 				<div
 					className="max-w-3xl w-full rounded-2xl p-10 md:p-14 text-center"
 					style={{
-						background: "rgba(20, 20, 18, 0.55)",
+						background: "rgba(255, 255, 255, 0.55)",
 						backdropFilter: "blur(20px)",
-						border: "1px solid rgba(255, 255, 255, 0.08)",
+						border: "1px solid rgba(12, 12, 12, 0.08)",
 					}}
 				>
-					<h2 className="text-3xl md:text-[56px] md:leading-[60px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#E8E4DE] mb-6">
+					<h2 className="text-3xl md:text-[56px] md:leading-[60px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#1A1916] mb-6">
 						Ready to deploy your{" "}
 						<span className="font-serif italic text-[#C9A96E]">
 							first AI employee
@@ -49,7 +49,7 @@ export function CTASection() {
 						</a>
 						<a 
 							href="/for/real-estate"
-							className="inline-flex items-center gap-2 border border-white/10 text-[#E8E4DE] hover:border-[#C9A96E]/50 hover:text-[#C9A96E] font-medium text-base px-6 py-3.5 rounded-full transition-colors"
+							className="inline-flex items-center gap-2 border border-[#0C0C0C]/10 text-[#1A1916] hover:border-[#C9A96E]/50 hover:text-[#C9A96E] font-medium text-base px-6 py-3.5 rounded-full transition-colors"
 						>
 							See real estate
 						</a>

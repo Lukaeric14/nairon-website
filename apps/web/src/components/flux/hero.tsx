@@ -63,51 +63,51 @@ function TerminalDemo() {
 	return (
 		<div
 			ref={containerRef}
-			className="relative overflow-hidden rounded-xl border border-white/10 bg-[#0a0a0a] shadow-2xl shadow-black/50"
+			className="relative overflow-hidden rounded-xl border border-[#0C0C0C]/10 bg-white shadow-2xl shadow-black/50"
 		>
 			{/* Terminal header */}
-			<div className="flex items-center gap-2 border-b border-white/5 bg-white/[0.02] px-4 py-3">
+			<div className="flex items-center gap-2 border-b border-[#0C0C0C]/5 bg-[#0C0C0C]/[0.02] px-4 py-3">
 				<div className="flex gap-1.5">
 					<div className="h-3 w-3 rounded-full bg-[#ff5f57]" />
 					<div className="h-3 w-3 rounded-full bg-[#febc2e]" />
 					<div className="h-3 w-3 rounded-full bg-[#28c840]" />
 				</div>
-				<span className="ml-2 text-xs text-white/40 font-mono">claude code</span>
+				<span className="ml-2 text-xs text-[#1A1916]/40 font-mono">claude code</span>
 			</div>
 
 			{/* Terminal content */}
 			<div className="p-5 font-mono text-sm leading-relaxed min-h-[420px]">
 				{TERMINAL_LINES.slice(0, visibleLines).map((line, i) => {
 					if (line.type === "blank") return <div key={i} className="h-4" />;
-					if (line.type === "command") return <div key={i} className="text-white/90">{line.text}</div>;
-					if (line.type === "text") return <div key={i} className="text-white/50">{line.text}</div>;
-					if (line.type === "header") return <div key={i} className="text-white/70 font-medium">{line.text}</div>;
+					if (line.type === "command") return <div key={i} className="text-[#1A1916]/90">{line.text}</div>;
+					if (line.type === "text") return <div key={i} className="text-[#1A1916]/50">{line.text}</div>;
+					if (line.type === "header") return <div key={i} className="text-[#1A1916]/70 font-medium">{line.text}</div>;
 					if (line.type === "friction") {
 						return (
 							<div key={i} className="flex items-start gap-3 pl-2">
 								<span className="text-red-400/80">{line.label}</span>
-								<span className="text-white/30">({line.count})</span>
-								<span className="text-white/40">{line.desc}</span>
+								<span className="text-[#1A1916]/30">({line.count})</span>
+								<span className="text-[#1A1916]/40">{line.desc}</span>
 							</div>
 						);
 					}
 					if (line.type === "score") return <div key={i} className="text-amber-400 font-medium">Your Score: {line.value}/{line.max}</div>;
-					if (line.type === "insight") return <div key={i} className="text-white/40 italic">{line.text}</div>;
+					if (line.type === "insight") return <div key={i} className="text-[#1A1916]/40 italic">{line.text}</div>;
 					if (line.type === "rec") {
 						return (
 							<div key={i} className="flex items-center gap-2 pl-2">
 								<span className="text-emerald-400">{line.name}</span>
-								<span className="text-white/30">→</span>
-								<span className="text-white/50">{line.desc}</span>
+								<span className="text-[#1A1916]/30">→</span>
+								<span className="text-[#1A1916]/50">{line.desc}</span>
 							</div>
 						);
 					}
-					if (line.type === "prompt") return <div key={i} className="text-white/60">{line.text}</div>;
+					if (line.type === "prompt") return <div key={i} className="text-[#1A1916]/60">{line.text}</div>;
 					if (line.type === "success") return <div key={i} className="text-emerald-400">{line.text}</div>;
 					return null;
 				})}
 				{visibleLines < TERMINAL_LINES.length && (
-					<span className="inline-block w-2 h-4 bg-white/70 animate-pulse" />
+					<span className="inline-block w-2 h-4 bg-[#0C0C0C]/70 animate-pulse" />
 				)}
 			</div>
 		</div>
@@ -151,23 +151,23 @@ export function FluxHero() {
 						</p>
 
 						{/* Install command */}
-						<div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 p-1.5 max-w-xl">
-							<code className="flex-1 px-4 py-2.5 font-mono text-sm text-white/80 overflow-x-auto">
+						<div className="flex items-center gap-2 rounded-xl border border-[#0C0C0C]/10 bg-[#0C0C0C]/5 p-1.5 max-w-xl">
+							<code className="flex-1 px-4 py-2.5 font-mono text-sm text-[#1A1916]/80 overflow-x-auto">
 								{installCommand}
 							</code>
 							<button
 								onClick={handleCopy}
-								className="flex items-center justify-center h-10 w-10 rounded-lg bg-white/10 hover:bg-white/20 transition-colors shrink-0"
+								className="flex items-center justify-center h-10 w-10 rounded-lg bg-[#0C0C0C]/10 hover:bg-[#0C0C0C]/20 transition-colors shrink-0"
 								aria-label="Copy install command"
 							>
 								{copied ? (
 									<Check className="h-4 w-4 text-emerald-400" />
 								) : (
-									<Copy className="h-4 w-4 text-white/60" />
+									<Copy className="h-4 w-4 text-[#1A1916]/60" />
 								)}
 							</button>
 						</div>
-						<p className="mt-2 text-xs text-white/45">Run in Claude Code chat input (slash command), not terminal bash.</p>
+						<p className="mt-2 text-xs text-[#1A1916]/45">Run in Claude Code chat input (slash command), not terminal bash.</p>
 
 						{/* CTAs */}
 						<div className="flex flex-wrap gap-4">
@@ -177,7 +177,7 @@ export function FluxHero() {
 									Star on GitHub
 								</a>
 							</Button>
-							<Button asChild size="lg" variant="outline" className="border-white/20 hover:bg-white/5">
+							<Button asChild size="lg" variant="outline" className="border-[#0C0C0C]/20 hover:bg-[#0C0C0C]/5">
 								<a href="#workflow">
 									How it works
 									<ArrowRight className="ml-2 h-4 w-4" />
@@ -186,7 +186,7 @@ export function FluxHero() {
 						</div>
 
 						{/* Stats */}
-						<div className="flex gap-8 pt-6 border-t border-white/10">
+						<div className="flex gap-8 pt-6 border-t border-[#0C0C0C]/10">
 							<div>
 								<div className="text-2xl font-bold text-foreground">30+</div>
 								<div className="text-sm text-muted-foreground">Curated tools</div>

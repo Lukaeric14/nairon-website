@@ -21,12 +21,12 @@ function MobileAccordion({ item }: { item: NavLinkDropdown }) {
 			<button
 				type="button"
 				onClick={() => setExpanded((e) => !e)}
-				className="flex items-center justify-between w-full py-3 text-base font-medium text-white"
+				className="flex items-center justify-between w-full py-3 text-base font-medium text-[#1A1916]"
 			>
 				{item.label}
 				<ChevronDown
 					className={cn(
-						"w-5 h-5 text-white/50 transition-transform duration-200",
+						"w-5 h-5 text-[#1A1916]/50 transition-transform duration-200",
 						expanded && "rotate-180",
 					)}
 				/>
@@ -43,7 +43,7 @@ function MobileAccordion({ item }: { item: NavLinkDropdown }) {
 						<a
 							key={link.href}
 							href={link.href}
-							className="block py-2 text-sm text-white/70 hover:text-white transition-colors"
+							className="block py-2 text-sm text-[#1A1916]/70 hover:text-[#1A1916] transition-colors"
 						>
 							{link.label}
 						</a>
@@ -99,7 +99,7 @@ export function MobileMenu({ nav }: MobileMenuProps) {
 			<button
 				type="button"
 				onClick={toggle}
-				className="relative z-50 flex items-center justify-center w-10 h-10 rounded-full bg-white/12 text-white"
+				className="relative z-50 flex items-center justify-center w-10 h-10 rounded-full bg-[#0C0C0C]/12 text-[#1A1916]"
 				aria-label={open ? "Close menu" : "Open menu"}
 			>
 				{open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -114,7 +114,7 @@ export function MobileMenu({ nav }: MobileMenuProps) {
 						: "opacity-0 max-h-0 pointer-events-none",
 				)}
 			>
-				<div className="bg-black/95 backdrop-blur-xl border-t border-white/5 overflow-y-auto max-h-[calc(100dvh-72px)]">
+				<div className="bg-black/95 backdrop-blur-xl border-t border-[#0C0C0C]/5 overflow-y-auto max-h-[calc(100dvh-72px)]">
 					<div className="px-6 py-4">
 						{/* Nav items */}
 						<div className="space-y-1">
@@ -125,7 +125,7 @@ export function MobileMenu({ nav }: MobileMenuProps) {
 									<a
 										key={item.href}
 										href={item.href}
-										className="block py-3 text-base font-medium text-white hover:text-white/80 transition-colors"
+										className="block py-3 text-base font-medium text-[#1A1916] hover:text-[#1A1916]/80 transition-colors"
 									>
 										{item.label}
 									</a>
@@ -134,7 +134,7 @@ export function MobileMenu({ nav }: MobileMenuProps) {
 						</div>
 
 						{/* Separator + CTA */}
-						<div className="mt-4 pt-4 border-t border-white/10">
+						<div className="mt-4 pt-4 border-t border-[#0C0C0C]/10">
 							<a
 								href={nav.cta.href}
 								{...(nav.cta.external
@@ -143,8 +143,8 @@ export function MobileMenu({ nav }: MobileMenuProps) {
 								className={cn(
 									"inline-flex items-center gap-2.5 font-semibold text-base pl-4 pr-1.5 py-1.5 rounded-full transition-colors w-full justify-center",
 									isGreen
-										? "bg-brand text-white hover:bg-brand-hover"
-										: "bg-brand-gold text-white hover:bg-brand-gold-light",
+										? "bg-brand text-[#1A1916] hover:bg-brand-hover"
+										: "bg-brand-gold text-[#1A1916] hover:bg-brand-gold-light",
 								)}
 							>
 								{nav.cta.label}

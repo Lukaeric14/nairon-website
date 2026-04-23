@@ -13,7 +13,7 @@ import { useViewMode } from "@/contexts/view-mode-context";
 
 function PlusIcon({ open }: { open: boolean }) {
 	return (
-		<div className="w-9 h-9 rounded-full bg-white/12 flex items-center justify-center shrink-0 relative">
+		<div className="w-9 h-9 rounded-full bg-[#0C0C0C]/12 flex items-center justify-center shrink-0 relative">
 			<div className="w-0.5 h-5 bg-landing-text rounded-full" />
 			<div
 				className="absolute w-0.5 h-5 bg-landing-text rounded-full transition-transform duration-300"

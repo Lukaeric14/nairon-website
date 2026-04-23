@@ -15,10 +15,10 @@ function PhoneMockup() {
 				<div className="phone-notch" />
 				{/* Application form mockup */}
 				<div className="p-6 pt-12 flex flex-col gap-4">
-					<h4 className="text-white text-lg font-semibold text-center mt-4">
+					<h4 className="text-[#1A1916] text-lg font-semibold text-center mt-4">
 						Apply to Nairon
 					</h4>
-					<p className="text-white/40 text-xs text-center mb-2">
+					<p className="text-[#1A1916]/40 text-xs text-center mb-2">
 						Start your application
 					</p>
 
@@ -26,29 +26,29 @@ function PhoneMockup() {
 					{["Full Name", "Email Address", "LinkedIn URL"].map(
 						(label) => (
 							<div key={label}>
-								<label className="text-white/40 text-micro block mb-1">
+								<label className="text-[#1A1916]/40 text-micro block mb-1">
 									{label}
 								</label>
-								<div className="h-8 rounded-lg bg-white/[0.05] border border-white/8" />
+								<div className="h-8 rounded-lg bg-[#0C0C0C]/[0.05] border border-[#0C0C0C]/8" />
 							</div>
 						),
 					)}
 
 					{/* Program selector */}
 					<div>
-						<label className="text-white/40 text-micro block mb-1">
+						<label className="text-[#1A1916]/40 text-micro block mb-1">
 							Choose Program
 						</label>
-						<div className="h-8 rounded-lg bg-white/[0.05] border border-white/8 flex items-center px-3">
-							<span className="text-white/60 text-micro">
+						<div className="h-8 rounded-lg bg-[#0C0C0C]/[0.05] border border-[#0C0C0C]/8 flex items-center px-3">
+							<span className="text-[#1A1916]/60 text-micro">
 								Residence / Apprenticeship
 							</span>
 						</div>
 					</div>
 
 					{/* Submit button */}
-					<div className="mt-2 h-9 rounded-full bg-white flex items-center justify-center">
-						<span className="text-black text-xs font-semibold">
+					<div className="mt-2 h-9 rounded-full bg-[#0C0C0C] flex items-center justify-center">
+						<span className="text-white text-xs font-semibold">
 							Submit Application
 						</span>
 					</div>

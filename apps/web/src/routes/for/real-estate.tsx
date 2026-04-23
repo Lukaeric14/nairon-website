@@ -45,7 +45,7 @@ function HeroSection() {
 	return (
 		<div className="relative flex flex-col justify-center items-center text-center px-4 md:px-6 py-24 md:py-40">
 			<h1
-				className="font-normal tracking-[-2px] md:tracking-[-3px] text-[#E8E4DE] w-full whitespace-nowrap"
+				className="font-normal tracking-[-2px] md:tracking-[-3px] text-[#1A1916] w-full whitespace-nowrap"
 				style={{ fontSize: "clamp(24px, 5.2vw, 62px)", lineHeight: 1.2 }}
 			>
 				<span className="block">We Power Real Estate Brokerages</span>
@@ -65,13 +65,13 @@ function HeroSection() {
 function CustomSolutions() {
 	return (
 		<div className="px-6 md:px-12 py-16 md:py-24">
-			<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#E8E4DE] max-w-3xl">
+			<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#1A1916] max-w-3xl">
 				Every Brokerage Is Different.{" "}
 				<span className="font-serif italic text-[#C9A96E] whitespace-nowrap">
 					We Build Custom Solutions to Match
 				</span>
 			</h2>
-			<p className="mt-6 text-lg md:text-xl text-[#A39E96] max-w-3xl leading-relaxed">
+			<p className="mt-6 text-lg md:text-xl text-[#5C584F] max-w-3xl leading-relaxed">
 				Nairon works with Real Estate Brokerages to design and build custom AI
 				Infrastructure across all aspects of their operations.
 			</p>
@@ -164,7 +164,7 @@ const SERVICES = [
 function WhatWeDo() {
 	return (
 		<div className="px-6 md:px-12 py-16 md:py-24">
-			<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#E8E4DE] max-w-3xl">
+			<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#1A1916] max-w-3xl">
 				What We Do For{" "}
 				<span className="font-serif italic text-[#C9A96E]">
 					Real Estate Brokerages
@@ -178,10 +178,10 @@ function WhatWeDo() {
 							{s.num} —
 						</span>
 						<div>
-							<h3 className="text-lg md:text-xl font-semibold text-[#E8E4DE] uppercase tracking-wide">
+							<h3 className="text-lg md:text-xl font-semibold text-[#1A1916] uppercase tracking-wide">
 								{s.label}
 							</h3>
-							<p className="mt-2 text-[#A39E96] text-base md:text-lg leading-relaxed max-w-2xl">
+							<p className="mt-2 text-[#5C584F] text-base md:text-lg leading-relaxed max-w-2xl">
 								{s.description}
 							</p>
 						</div>
@@ -206,14 +206,14 @@ const PAIN_POINTS = [
 function TheGap() {
 	return (
 		<div className="px-6 md:px-12 py-16 md:py-24">
-			<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#E8E4DE] max-w-4xl">
+			<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#1A1916] max-w-4xl">
 				Most Brokerages Are Still Using AI{" "}
 				<span className="font-serif italic text-[#C9A96E]">
 					Like It's 2022.
 				</span>
 			</h2>
 
-			<div className="mt-8 space-y-4 text-[#A39E96] text-base md:text-lg leading-relaxed max-w-3xl">
+			<div className="mt-8 space-y-4 text-[#5C584F] text-base md:text-lg leading-relaxed max-w-3xl">
 				<p>Remember when ChatGPT first came out?</p>
 				<p>95% of business owners are still using AI the same way.</p>
 				<p>
@@ -223,14 +223,14 @@ function TheGap() {
 			</div>
 
 			<div className="mt-12">
-				<h3 className="text-sm font-medium text-[#A39E96] uppercase tracking-[0.16em] mb-6">
+				<h3 className="text-sm font-medium text-[#5C584F] uppercase tracking-[0.16em] mb-6">
 					Most Business Owners:
 				</h3>
 				<ul className="space-y-4">
 					{PAIN_POINTS.map((point) => (
 						<li
 							key={point}
-							className="flex items-start gap-3 text-[#E8E4DE] text-base md:text-lg"
+							className="flex items-start gap-3 text-[#1A1916] text-base md:text-lg"
 						>
 							<span className="text-[#C9A96E] mt-1.5 shrink-0">•</span>
 							{point}
@@ -239,7 +239,7 @@ function TheGap() {
 				</ul>
 			</div>
 
-			<p className="mt-12 text-xl md:text-2xl font-normal text-[#E8E4DE]">
+			<p className="mt-12 text-xl md:text-2xl font-normal text-[#1A1916]">
 				We're here to bridge the gap.
 			</p>
 		</div>
@@ -554,7 +554,7 @@ function FeedbackLoopDiagram() {
 			{/* ── Step 01 — Identify (top-left) ── */}
 			<g>
 				<rect ref={(el) => { glowRectRefs.current[0] = el; }} x="90" y="90" width="160" height="110" rx="6" stroke="#C9A96E" strokeWidth="1" fill="none" opacity="0" filter="url(#card-glow)" />
-				<rect x="90" y="90" width="160" height="110" rx="6" fill="#0C0C0C" />
+				<rect x="90" y="90" width="160" height="110" rx="6" fill="#FFFFFF" />
 				<rect ref={(el) => { fillRefs.current[0] = el; }} x="90" y="90" width="160" height="110" rx="6" fill="#C9A96E" opacity="0" />
 				<rect ref={(el) => { borderRefs.current[0] = el; }} x="90" y="90" width="160" height="110" rx="6" fill="none" stroke="#A39E96" strokeWidth="1" strokeOpacity="0.15" />
 				<g transform="translate(152, 100)" stroke="#C9A96E" strokeWidth="1.5" fill="none">
@@ -569,7 +569,7 @@ function FeedbackLoopDiagram() {
 			{/* ── Step 02 — Audit (top-right) ── */}
 			<g>
 				<rect ref={(el) => { glowRectRefs.current[1] = el; }} x="450" y="90" width="160" height="110" rx="6" stroke="#C9A96E" strokeWidth="1" fill="none" opacity="0" filter="url(#card-glow)" />
-				<rect x="450" y="90" width="160" height="110" rx="6" fill="#0C0C0C" />
+				<rect x="450" y="90" width="160" height="110" rx="6" fill="#FFFFFF" />
 				<rect ref={(el) => { fillRefs.current[1] = el; }} x="450" y="90" width="160" height="110" rx="6" fill="#C9A96E" opacity="0" />
 				<rect ref={(el) => { borderRefs.current[1] = el; }} x="450" y="90" width="160" height="110" rx="6" fill="none" stroke="#A39E96" strokeWidth="1" strokeOpacity="0.15" />
 				<g transform="translate(514, 100)" stroke="#C9A96E" strokeWidth="1.5" fill="none">
@@ -586,7 +586,7 @@ function FeedbackLoopDiagram() {
 			{/* ── Step 03 — Implement (bottom-right) ── */}
 			<g>
 				<rect ref={(el) => { glowRectRefs.current[2] = el; }} x="450" y="350" width="160" height="110" rx="6" stroke="#C9A96E" strokeWidth="1" fill="none" opacity="0" filter="url(#card-glow)" />
-				<rect x="450" y="350" width="160" height="110" rx="6" fill="#0C0C0C" />
+				<rect x="450" y="350" width="160" height="110" rx="6" fill="#FFFFFF" />
 				<rect ref={(el) => { fillRefs.current[2] = el; }} x="450" y="350" width="160" height="110" rx="6" fill="#C9A96E" opacity="0" />
 				<rect ref={(el) => { borderRefs.current[2] = el; }} x="450" y="350" width="160" height="110" rx="6" fill="none" stroke="#A39E96" strokeWidth="1" strokeOpacity="0.15" />
 				<g transform="translate(514, 360)" stroke="#C9A96E" strokeWidth="1.5" fill="none">
@@ -605,7 +605,7 @@ function FeedbackLoopDiagram() {
 			{/* ── Step 04 — Optimize (bottom-left) ── */}
 			<g>
 				<rect ref={(el) => { glowRectRefs.current[3] = el; }} x="90" y="350" width="160" height="110" rx="6" stroke="#C9A96E" strokeWidth="1" fill="none" opacity="0" filter="url(#card-glow)" />
-				<rect x="90" y="350" width="160" height="110" rx="6" fill="#0C0C0C" />
+				<rect x="90" y="350" width="160" height="110" rx="6" fill="#FFFFFF" />
 				<rect ref={(el) => { fillRefs.current[3] = el; }} x="90" y="350" width="160" height="110" rx="6" fill="#C9A96E" opacity="0" />
 				<rect ref={(el) => { borderRefs.current[3] = el; }} x="90" y="350" width="160" height="110" rx="6" fill="none" stroke="#A39E96" strokeWidth="1" strokeOpacity="0.15" />
 				<g transform="translate(152, 360)" stroke="#C9A96E" strokeWidth="1.5" fill="none">
@@ -623,7 +623,7 @@ function FeedbackLoopDiagram() {
 function FeedbackLoop() {
 	return (
 		<div className="px-6 md:px-12 py-16 md:py-24">
-			<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#E8E4DE] max-w-3xl">
+			<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#1A1916] max-w-3xl">
 				Our AI Implementation{" "}
 				<span className="font-serif italic text-[#C9A96E]">
 					Feedback Loop
@@ -643,10 +643,10 @@ function FeedbackLoop() {
 							{step.num}
 						</span>
 						<div>
-							<h3 className="text-base font-semibold text-[#E8E4DE] uppercase tracking-wide">
+							<h3 className="text-base font-semibold text-[#1A1916] uppercase tracking-wide">
 								{step.label}
 							</h3>
-							<p className="mt-1.5 text-[#A39E96] text-sm leading-relaxed">
+							<p className="mt-1.5 text-[#5C584F] text-sm leading-relaxed">
 								{step.description}
 							</p>
 						</div>
@@ -665,10 +665,10 @@ function FeedbackLoop() {
 							<div className="w-px flex-1 bg-[#C9A96E]/20 mt-2" />
 						</div>
 						<div>
-							<h3 className="text-lg font-semibold text-[#E8E4DE] uppercase tracking-wide">
+							<h3 className="text-lg font-semibold text-[#1A1916] uppercase tracking-wide">
 								{step.label}
 							</h3>
-							<p className="mt-2 text-[#A39E96] text-base leading-relaxed">
+							<p className="mt-2 text-[#5C584F] text-base leading-relaxed">
 								{step.description}
 							</p>
 						</div>
@@ -695,7 +695,7 @@ function Testimonial() {
 				<div className="flex flex-col md:flex-row gap-10 md:gap-16 items-start">
 					{/* Quote */}
 					<div className="flex-1 min-w-0">
-						<blockquote className="text-xl md:text-2xl leading-relaxed md:leading-[1.6] text-[#E8E4DE] font-normal tracking-[-0.3px]">
+						<blockquote className="text-xl md:text-2xl leading-relaxed md:leading-[1.6] text-[#1A1916] font-normal tracking-[-0.3px]">
 							Nairon&apos;s team didn&apos;t just build us a tool — they
 							embedded AI into how we operate. Lead qualification that used
 							to take our agents hours now happens in seconds, and the
@@ -709,14 +709,14 @@ function Testimonial() {
 								alt="Nima Ghassemi"
 								width={56}
 								height={56}
-								className="w-14 h-14 rounded-full object-cover border border-white/10"
+								className="w-14 h-14 rounded-full object-cover border border-[#0C0C0C]/10"
 								loading="lazy"
 							/>
 							<div>
-								<p className="text-[#E8E4DE] font-semibold text-base">
+								<p className="text-[#1A1916] font-semibold text-base">
 									Nima Ghassemi
 								</p>
-								<p className="text-[#A39E96] text-sm mt-0.5">
+								<p className="text-[#5C584F] text-sm mt-0.5">
 									8-Figure Real Estate Marketing Tech Entrepreneur
 								</p>
 								<p className="text-[#C9A96E] text-xs font-medium tracking-wide mt-1">
@@ -944,13 +944,13 @@ function LeadResponseCalculator() {
 						exit={{ opacity: 0, y: -8 }}
 						transition={{ duration: 0.25, ease: "easeOut" }}
 					>
-						<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#E8E4DE] max-w-3xl">
+						<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#1A1916] max-w-3xl">
 							{config.headline}{" "}
 							<span className="font-serif italic text-[#C9A96E]">
 								{config.headlineAccent}
 							</span>
 						</h2>
-						<p className="mt-4 text-[#A39E96] text-base md:text-lg leading-relaxed max-w-2xl">
+						<p className="mt-4 text-[#5C584F] text-base md:text-lg leading-relaxed max-w-2xl">
 							{config.subtitle}
 						</p>
 					</motion.div>
@@ -959,7 +959,7 @@ function LeadResponseCalculator() {
 				{/* Department tabs — horizontally scrollable on mobile */}
 				<div
 					ref={tabsRef}
-					className="mt-8 relative flex gap-1 p-1 rounded-xl bg-white/[0.03] border border-white/[0.06] w-fit max-w-full overflow-x-auto scrollbar-none"
+					className="mt-8 relative flex gap-1 p-1 rounded-xl bg-[#0C0C0C]/[0.03] border border-[#0C0C0C]/[0.06] w-fit max-w-full overflow-x-auto scrollbar-none"
 					style={{ WebkitOverflowScrolling: "touch" }}
 				>
 					{DEPT_KEYS.map((key) => (
@@ -970,7 +970,7 @@ function LeadResponseCalculator() {
 							className={`relative shrink-0 px-4 sm:px-5 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 ${
 								dept === key
 									? "text-[#0C0C0C]"
-									: "text-[#A39E96] hover:text-[#E8E4DE]"
+									: "text-[#5C584F] hover:text-[#1A1916]"
 							}`}
 						>
 							{dept === key && (
@@ -997,8 +997,8 @@ function LeadResponseCalculator() {
 					className="mt-12 grid md:grid-cols-[1fr_1fr] gap-8 md:gap-16 items-start"
 				>
 					{/* ── Inputs ── */}
-					<div className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-6 md:p-8 space-y-7">
-						<p className="text-[#A39E96] text-[10px] uppercase tracking-[0.2em] font-medium mb-1">
+					<div className="rounded-xl border border-[#0C0C0C]/[0.06] bg-[#0C0C0C]/[0.015] p-6 md:p-8 space-y-7">
+						<p className="text-[#5C584F] text-[10px] uppercase tracking-[0.2em] font-medium mb-1">
 							Your Numbers
 						</p>
 						{config.inputs.map((field, idx) => (
@@ -1028,7 +1028,7 @@ function LeadResponseCalculator() {
 						<div className="relative overflow-hidden rounded-xl border border-[#C9A96E]/20 bg-gradient-to-br from-[#C9A96E]/[0.04] to-transparent p-7 md:p-9">
 							<div className="absolute -top-12 -right-12 w-40 h-40 bg-[#C9A96E]/[0.06] rounded-full blur-3xl" />
 							<div className="absolute bottom-0 left-0 w-24 h-24 bg-[#C9A96E]/[0.03] rounded-full blur-2xl" />
-							<p className="relative text-[#A39E96] text-[10px] uppercase tracking-[0.2em] font-medium mb-3">
+							<p className="relative text-[#5C584F] text-[10px] uppercase tracking-[0.2em] font-medium mb-3">
 								{config.lostLabel}
 							</p>
 							<motion.p
@@ -1040,27 +1040,27 @@ function LeadResponseCalculator() {
 							>
 								{formatUsd(results.lost)}
 							</motion.p>
-							<p className="relative text-[#A39E96] text-sm mt-3 tracking-wide">per month</p>
+							<p className="relative text-[#5C584F] text-sm mt-3 tracking-wide">per month</p>
 						</div>
 
 						{/* Comparison */}
 						<div className="grid grid-cols-2 gap-3 sm:gap-4">
-							<div className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-4 sm:p-5 md:p-6">
-								<p className="text-[#A39E96] text-[10px] uppercase tracking-[0.16em] mb-2 leading-tight">
+							<div className="rounded-xl border border-[#0C0C0C]/[0.06] bg-[#0C0C0C]/[0.015] p-4 sm:p-5 md:p-6">
+								<p className="text-[#5C584F] text-[10px] uppercase tracking-[0.16em] mb-2 leading-tight">
 									{config.currentLabel}<br />
-									<span className="text-[#A39E96]/60">{config.currentSublabel(inputs)}</span>
+									<span className="text-[#5C584F]/60">{config.currentSublabel(inputs)}</span>
 								</p>
-								<p className="text-lg sm:text-xl md:text-2xl font-light tracking-[-1px] text-[#E8E4DE] tabular-nums font-mono">
+								<p className="text-lg sm:text-xl md:text-2xl font-light tracking-[-1px] text-[#1A1916] tabular-nums font-mono">
 									{formatUsd(results.current)}
 								</p>
-								<p className="text-[#A39E96]/50 text-xs mt-1.5">/month</p>
+								<p className="text-[#5C584F]/50 text-xs mt-1.5">/month</p>
 							</div>
 							<div className="rounded-xl border border-[#C9A96E]/15 bg-[#C9A96E]/[0.025] p-4 sm:p-5 md:p-6">
 								<p className="text-[#C9A96E] text-[10px] uppercase tracking-[0.16em] mb-2 leading-tight">
 									{config.aiLabel}<br />
 									<span className="text-[#C9A96E]/60">{config.aiSublabel}</span>
 								</p>
-								<p className="text-lg sm:text-xl md:text-2xl font-light tracking-[-1px] text-[#E8E4DE] tabular-nums font-mono">
+								<p className="text-lg sm:text-xl md:text-2xl font-light tracking-[-1px] text-[#1A1916] tabular-nums font-mono">
 									{formatUsd(results.ai)}
 								</p>
 								<p className="text-[#C9A96E] text-xs mt-1.5 font-medium">
@@ -1106,15 +1106,15 @@ function InputField({
 	return (
 		<div className="group">
 			<div className="flex items-baseline justify-between mb-3">
-				<label className="text-[#A39E96] text-sm tracking-wide">{label}</label>
-				<span className="text-[#E8E4DE] text-base font-medium tabular-nums font-mono">
+				<label className="text-[#5C584F] text-sm tracking-wide">{label}</label>
+				<span className="text-[#1A1916] text-base font-medium tabular-nums font-mono">
 					{prefix}
 					{value.toLocaleString()}
-					{suffix ? <span className="text-[#A39E96] text-xs ml-1">{suffix}</span> : ""}
+					{suffix ? <span className="text-[#5C584F] text-xs ml-1">{suffix}</span> : ""}
 				</span>
 			</div>
 			<div className="relative h-8 sm:h-6 flex items-center">
-				<div className="absolute inset-x-0 h-[3px] rounded-full bg-white/[0.06]" />
+				<div className="absolute inset-x-0 h-[3px] rounded-full bg-[#0C0C0C]/[0.06]" />
 				<div
 					className="absolute left-0 h-[3px] rounded-full bg-gradient-to-r from-[#C9A96E]/60 to-[#C9A96E] transition-[width] duration-75"
 					style={{ width: `${pct}%` }}
@@ -1150,7 +1150,7 @@ function FinalCTA() {
 			id="discovery"
 			className="flex flex-col items-center text-center px-6 md:px-12 py-20 md:py-32"
 		>
-			<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#E8E4DE] max-w-3xl">
+			<h2 className="text-[28px] leading-[34px] md:text-[48px] md:leading-[54px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#1A1916] max-w-3xl">
 				Ready to power your Real Estate Brokerage{" "}
 				<span className="font-serif italic text-[#C9A96E]">with AI?</span>
 			</h2>
@@ -1165,7 +1165,7 @@ function FinalCTA() {
 function RealEstatePage() {
 	return (
 		<ModalProvider>
-			<div className="min-h-screen bg-[#0C0C0C] text-[#E8E4DE] font-inter">
+			<div className="min-h-screen bg-white text-[#1A1916] font-inter">
 				<Navbar minimal />
 
 				<GridSystem className="pt-16 mt-12 md:mt-16">

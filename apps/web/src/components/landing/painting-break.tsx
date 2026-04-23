@@ -37,21 +37,21 @@ export function PaintingBreak({
 				<div className="absolute inset-0 flex items-center justify-center px-6">
 					<div className="max-w-2xl w-full rounded-2xl p-8 md:p-10 text-center"
 						style={{
-							background: "rgba(20, 20, 18, 0.55)",
+							background: "rgba(255, 255, 255, 0.55)",
 							backdropFilter: "blur(20px)",
-							border: "1px solid rgba(255, 255, 255, 0.08)",
+							border: "1px solid rgba(12, 12, 12, 0.08)",
 						}}
 					>
-						<p className="text-[#E8E4DE] text-lg md:text-xl leading-relaxed font-serif italic mb-6">
+						<p className="text-[#1A1916] text-lg md:text-xl leading-relaxed font-serif italic mb-6">
 							"{quote}"
 						</p>
 						{attribution && (
 							<div>
-								<p className="text-[#E8E4DE] text-sm font-medium">
+								<p className="text-[#1A1916] text-sm font-medium">
 									{attribution}
 								</p>
 								{attributionRole && (
-									<p className="text-[#A39E96] text-sm">{attributionRole}</p>
+									<p className="text-[#5C584F] text-sm">{attributionRole}</p>
 								)}
 							</div>
 						)}

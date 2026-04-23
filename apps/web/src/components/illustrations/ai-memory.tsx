@@ -19,7 +19,7 @@ export const AiMemoryIllustration = () => {
                                 <div className="bg-muted relative h-3 overflow-hidden rounded-full">
                                     <div className="bg-primary/40 absolute inset-y-0 left-0 w-[30%] rounded-full"></div>
                                     <div className="bg-primary absolute inset-y-0 left-[30%] w-[45%] rounded-full"></div>
-                                    <div className="absolute inset-0 flex items-center justify-center text-[8px] font-medium text-white">12K / 16K tokens</div>
+                                    <div className="absolute inset-0 flex items-center justify-center text-[8px] font-medium text-[#1A1916]">12K / 16K tokens</div>
                                 </div>
                             </div>
 

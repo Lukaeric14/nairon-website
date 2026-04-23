@@ -47,7 +47,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 			className={cn(
 				"fixed top-0 left-0 right-0 z-50 transition-all duration-300",
 				scrolled
-					? "backdrop-blur-xl bg-[#0C0C0C]/80 border-b border-white/6"
+					? "backdrop-blur-xl bg-white/80 border-b border-[#0C0C0C]/6"
 					: "bg-transparent",
 			)}
 		>
@@ -56,10 +56,10 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 				<a href="/" className="flex items-center shrink-0">
 					{isFluxPage ? (
 						<div className="flex items-center gap-3">
-							<span className="font-mono text-2xl font-bold tracking-tight text-white">
+							<span className="font-mono text-2xl font-bold tracking-tight text-[#1A1916]">
 								Flux
 							</span>
-							<span className="font-inter text-[12px] tracking-[0.02em] text-white/48">
+							<span className="font-inter text-[12px] tracking-[0.02em] text-[#1A1916]/48">
 								by
 							</span>
 							<span className="group/nairon relative inline-flex items-center overflow-hidden rounded-[5px]">
@@ -68,7 +68,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 									alt="Nairon"
 									width={600}
 									height={120}
-									className="h-6 w-auto"
+									className="h-6 w-auto [filter:brightness(0)]"
 								/>
 								<span className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-200 group-hover/nairon:bg-black/20" />
 							</span>
@@ -79,7 +79,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 							alt="nairon."
 							width={600}
 							height={120}
-							className="h-7 md:h-9 w-auto"
+							className="h-7 md:h-9 w-auto [filter:brightness(0)]"
 						/>
 					)}
 				</a>
@@ -90,7 +90,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						<a
 							href="/#process"
 							onClick={handleSectionClick("process")}
-							className="px-4 py-2 rounded-full text-sm text-[#E8E4DE] hover:text-[#C9A96E] transition-colors"
+							className="px-4 py-2 rounded-full text-sm text-[#1A1916] hover:text-[#C9A96E] transition-colors"
 						>
 							How it works
 					</a>
@@ -98,14 +98,14 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						<a
 							href="/#security"
 							onClick={handleSectionClick("security")}
-							className="px-4 py-2 rounded-full text-sm text-[#E8E4DE] hover:text-[#C9A96E] transition-colors"
+							className="px-4 py-2 rounded-full text-sm text-[#1A1916] hover:text-[#C9A96E] transition-colors"
 						>
 								Infrastructure
 					</a>
 
 					<a
 						href="/for/real-estate"
-						className="px-4 py-2 rounded-full text-sm text-[#E8E4DE] hover:text-[#C9A96E] transition-colors"
+						className="px-4 py-2 rounded-full text-sm text-[#1A1916] hover:text-[#C9A96E] transition-colors"
 					>
 						Real estate
 					</a>
@@ -124,7 +124,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 				<div className={cn("md:hidden flex items-center gap-2", minimal && "hidden")}>
 					<button
 						type="button"
-						className="w-10 h-10 flex items-center justify-center text-[#E8E4DE]"
+						className="w-10 h-10 flex items-center justify-center text-[#1A1916]"
 						onClick={() => setMobileOpen(!mobileOpen)}
 						aria-label={mobileOpen ? "Close menu" : "Open menu"}
 					>
@@ -141,10 +141,10 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 
 			{/* Mobile menu */}
 			{mobileOpen && !minimal && (
-				<div className="md:hidden bg-[#0C0C0C] border-t border-white/6 px-6 py-6 space-y-1">
+				<div className="md:hidden bg-white border-t border-[#0C0C0C]/6 px-6 py-6 space-y-1">
 						<a
 							href="/#process"
-							className="block px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
+							className="block px-4 py-3 rounded-xl text-base text-[#1A1916] hover:bg-[#0C0C0C]/5 transition-colors"
 							onClick={handleSectionClick("process")}
 						>
 							How it works
@@ -152,7 +152,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 
 						<a
 							href="/#security"
-							className="block px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
+							className="block px-4 py-3 rounded-xl text-base text-[#1A1916] hover:bg-[#0C0C0C]/5 transition-colors"
 							onClick={handleSectionClick("security")}
 						>
 								Infrastructure
@@ -160,7 +160,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 
 					<a
 						href="/for/real-estate"
-						className="block px-4 py-3 rounded-xl text-base text-[#E8E4DE] hover:bg-white/5 transition-colors"
+						className="block px-4 py-3 rounded-xl text-base text-[#1A1916] hover:bg-[#0C0C0C]/5 transition-colors"
 						onClick={() => setMobileOpen(false)}
 					>
 						Real estate

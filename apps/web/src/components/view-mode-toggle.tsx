@@ -200,7 +200,7 @@ export function ViewModeToggle() {
 						left: spotlightPos.x,
 						top: spotlightPos.y,
 						transformOrigin: "left center",
-						background: "linear-gradient(90deg, rgba(255,255,255,0.3), transparent)",
+						background: "linear-gradient(90deg, rgba(12, 12, 12, 0.3), transparent)",
 					}}
 				/>
 				<div
@@ -226,14 +226,14 @@ export function ViewModeToggle() {
 				<div
 					className={cn(
 						"flex items-center gap-4 pl-5 pr-1.5 py-1.5 rounded-full",
-						"bg-white/[0.03] backdrop-blur-md",
-						"border border-white/8",
+						"bg-[#0C0C0C]/[0.03] backdrop-blur-md",
+						"border border-[#0C0C0C]/8",
 						"shadow-lg shadow-black/20",
 						"transition-all duration-300",
 						isTransitioning && `scale-105 ${COLOR_PALETTES[targetMode].glowBorder} ${COLOR_PALETTES[targetMode].glowShadow}`,
 					)}
 				>
-					<span className="text-white/40 text-base font-medium">View as:</span>
+					<span className="text-[#1A1916]/40 text-base font-medium">View as:</span>
 					<div className="flex items-center gap-1">
 						<button
 							type="button"
@@ -242,8 +242,8 @@ export function ViewModeToggle() {
 							className={cn(
 								"flex items-center gap-2 px-5 py-2.5 rounded-full text-base font-medium transition-all duration-300",
 								viewMode === "engineer"
-									? "bg-white text-black shadow-lg"
-									: "text-white/60 hover:text-white hover:bg-white/5",
+									? "bg-[#0C0C0C] text-white shadow-lg"
+									: "text-[#1A1916]/60 hover:text-[#1A1916] hover:bg-[#0C0C0C]/5",
 								isTransitioning && "cursor-wait",
 							)}
 						>
@@ -257,8 +257,8 @@ export function ViewModeToggle() {
 							className={cn(
 								"flex items-center gap-2 px-5 py-2.5 rounded-full text-base font-medium transition-all duration-300",
 								viewMode === "hiring-manager"
-									? "bg-white text-black shadow-lg"
-									: "text-white/60 hover:text-white hover:bg-white/5",
+									? "bg-[#0C0C0C] text-white shadow-lg"
+									: "text-[#1A1916]/60 hover:text-[#1A1916] hover:bg-[#0C0C0C]/5",
 								isTransitioning && "cursor-wait",
 							)}
 						>

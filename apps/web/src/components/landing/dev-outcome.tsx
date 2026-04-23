@@ -50,8 +50,8 @@ function CompareRow({
 		tone === "gold"
 			? "border-[#C9A96E]/22 bg-[#C9A96E]/9 text-[#EFDDB7]"
 			: tone === "neutral"
-				? "border-white/8 bg-white/[0.035] text-[#CDC6BC]"
-				: "border-white/6 bg-white/[0.025] text-[#9D968D]";
+				? "border-[#0C0C0C]/8 bg-[#0C0C0C]/[0.035] text-[#1A1916]"
+				: "border-[#0C0C0C]/6 bg-[#0C0C0C]/[0.025] text-[#5C584F]";
 
 	return (
 		<div className={`flex items-center justify-between rounded-full border px-3 py-2 ${styles}`}>
@@ -70,17 +70,17 @@ function MetricCard({
 }) {
 	return (
 		<div
-			className="relative overflow-hidden rounded-[26px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.015))] p-5 shadow-[0_24px_48px_rgba(0,0,0,0.16)] transition-all duration-500 ease-out md:p-6"
+			className="relative overflow-hidden rounded-[26px] border border-[#0C0C0C]/8 bg-[linear-gradient(180deg,rgba(12, 12, 12, 0.035),rgba(12, 12, 12, 0.015))] p-5 shadow-[0_24px_48px_rgba(0,0,0,0.16)] transition-all duration-500 ease-out md:p-6"
 			style={{
 				opacity: active ? 1 : 0,
 				transform: active ? "translateY(0)" : "translateY(14px)",
 			}}
 		>
 			<div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-			<p className="text-[10px] uppercase tracking-[0.16em] text-[#A39E96]">{metric.label}</p>
+			<p className="text-[10px] uppercase tracking-[0.16em] text-[#5C584F]">{metric.label}</p>
 
 			<div className="mt-5 flex items-end gap-2">
-				<span className="text-[54px] leading-none tracking-[-0.04em] text-[#ECE7E0] md:text-[64px]">
+				<span className="text-[54px] leading-none tracking-[-0.04em] text-[#1A1916] md:text-[64px]">
 					{metric.hero}
 				</span>
 				<span className="mb-2 text-sm uppercase tracking-[0.14em] text-[#C9A96E]">
@@ -88,7 +88,7 @@ function MetricCard({
 				</span>
 			</div>
 
-			<p className="mt-2 text-sm text-[#A39E96]">{metric.kicker}</p>
+			<p className="mt-2 text-sm text-[#5C584F]">{metric.kicker}</p>
 
 			<div className="mt-6 space-y-2.5">
 				{metric.comparisons.map((item) => (
@@ -135,16 +135,16 @@ export function DevOutcome() {
 				<GridCell className="px-6 py-8 md:px-12 md:py-10">
 					<div className="mb-4 flex items-center gap-3">
 						<div className="h-1.5 w-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-xs font-medium uppercase tracking-[0.16em] text-[#A39E96]">
+						<span className="text-xs font-medium uppercase tracking-[0.16em] text-[#5C584F]">
 							The advantage
 						</span>
 					</div>
 					<div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
 						<div className="max-w-2xl">
-							<h2 className="text-3xl font-normal tracking-[-0.48px] text-[#E8E4DE] md:text-[48px] md:leading-[57.6px]">
+							<h2 className="text-3xl font-normal tracking-[-0.48px] text-[#1A1916] md:text-[48px] md:leading-[57.6px]">
 								Measurable where it counts
 							</h2>
-							<p className="mt-3 max-w-xl text-sm leading-relaxed text-[#A39E96] md:text-base">
+							<p className="mt-3 max-w-xl text-sm leading-relaxed text-[#5C584F] md:text-base">
 								We track business outcomes, not demo metrics.
 							</p>
 						</div>
@@ -167,7 +167,7 @@ export function DevOutcome() {
 						))}
 					</div>
 
-					<p className="mt-5 text-[10px] text-[#A39E96]/45">
+					<p className="mt-5 text-[10px] text-[#5C584F]/45">
 						Actual KPIs are set per deployment during discovery and audit.
 					</p>
 				</GridCell>

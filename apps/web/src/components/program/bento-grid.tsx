@@ -38,13 +38,13 @@ const iconMap: Record<string, React.ElementType> = {
 
 function ChartVisual() {
 	return (
-		<div className="mt-6 rounded-xl overflow-hidden bg-white/[0.02] p-4 min-h-[140px] relative">
+		<div className="mt-6 rounded-xl overflow-hidden bg-[#0C0C0C]/[0.02] p-4 min-h-[140px] relative">
 			{/* Grid background */}
 			<div
 				className="absolute inset-0 opacity-[0.02]"
 				style={{
 					backgroundImage:
-						"linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+						"linear-gradient(rgba(12, 12, 12, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(12, 12, 12, 0.5) 1px, transparent 1px)",
 					backgroundSize: "20px 20px",
 				}}
 			/>
@@ -110,7 +110,7 @@ function ChartVisual() {
 
 function DubaiVisual() {
 	return (
-		<div className="mt-6 rounded-xl overflow-hidden bg-white/[0.02] min-h-[140px] relative flex items-end justify-center px-4 pb-4">
+		<div className="mt-6 rounded-xl overflow-hidden bg-[#0C0C0C]/[0.02] min-h-[140px] relative flex items-end justify-center px-4 pb-4">
 			{/* Abstract skyline silhouette */}
 			<div className="flex items-end gap-1.5 opacity-20">
 				{[60, 90, 45, 120, 70, 55, 100, 40, 80, 65, 50, 110, 75].map(
@@ -149,7 +149,7 @@ function AvatarsVisual() {
 					loading="lazy"
 				/>
 			))}
-			<span className="text-white/40 text-sm ml-2">+5 more</span>
+			<span className="text-[#1A1916]/40 text-sm ml-2">+5 more</span>
 		</div>
 	);
 }
@@ -160,7 +160,7 @@ function LogosVisual() {
 			{PARTNERS.slice(0, 3).map((partner) => (
 				<div
 					key={partner.name}
-					className="bg-white/[0.02] rounded-lg p-2 flex items-center justify-center"
+					className="bg-[#0C0C0C]/[0.02] rounded-lg p-2 flex items-center justify-center"
 				>
 					<img
 						src={partner.logo}
@@ -186,7 +186,7 @@ function CommunityVisual() {
 					key={msg.text}
 					className={`glass-card rounded-xl px-3 py-2 max-w-[70%] ${msg.align}`}
 				>
-					<span className="text-xs text-white/60">{msg.text}</span>
+					<span className="text-xs text-[#1A1916]/60">{msg.text}</span>
 				</div>
 			))}
 		</div>
@@ -195,7 +195,7 @@ function CommunityVisual() {
 
 function CodeVisual() {
 	return (
-		<div className="mt-6 rounded-xl overflow-hidden bg-white/[0.02] p-4 min-h-[140px] font-mono text-xs text-white/30 space-y-1">
+		<div className="mt-6 rounded-xl overflow-hidden bg-[#0C0C0C]/[0.02] p-4 min-h-[140px] font-mono text-xs text-[#1A1916]/30 space-y-1">
 			<div>
 				<span className="text-green-400/50">const</span> agent ={" "}
 				<span className="text-green-400/50">await</span>{" "}
@@ -219,7 +219,7 @@ function CodeVisual() {
 
 function DefaultVisual() {
 	return (
-		<div className="mt-6 rounded-xl bg-white/[0.02] min-h-[80px]" />
+		<div className="mt-6 rounded-xl bg-[#0C0C0C]/[0.02] min-h-[80px]" />
 	);
 }
 
@@ -248,11 +248,11 @@ function VisualCard({ card }: { card: BentoCardData }) {
 		<GlassCard
 			className={`p-6 md:p-8 ${card.size === "large" ? "lg:p-10 md:col-span-2" : ""}`}
 		>
-			<Icon className="w-6 h-6 text-white/70 mb-4" />
+			<Icon className="w-6 h-6 text-[#1A1916]/70 mb-4" />
 			<CardTitle>{card.title}</CardTitle>
 			<BodyText className="mt-2">{card.description}</BodyText>
 			{card.footnote && (
-				<p className="text-xs text-white/40 italic mt-3">
+				<p className="text-xs text-[#1A1916]/40 italic mt-3">
 					{card.footnote}
 				</p>
 			)}

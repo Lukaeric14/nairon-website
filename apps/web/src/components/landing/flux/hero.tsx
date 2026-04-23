@@ -351,33 +351,33 @@ export function FluxHero() {
 		<FluxSection className="overflow-hidden pb-0 pt-36 md:pt-44">
 			<div className="pointer-events-none absolute inset-0 -z-10 bg-[rgb(8,8,8)]" />
 			<div className="pointer-events-none absolute inset-x-0 top-[-24rem] -z-10 mx-auto h-[44rem] w-[44rem] rounded-full bg-[radial-gradient(circle,rgba(49,255,103,0.08)_0%,rgba(49,255,103,0.03)_28%,transparent_72%)] blur-3xl" />
-			<div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_10%,rgba(255,255,255,0.06),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(34,219,24,0.05),transparent_34%)]" />
+			<div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_10%,rgba(12, 12, 12, 0.06),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(34,219,24,0.05),transparent_34%)]" />
 
 			<div className="md:px-4">
-				<div className="inline-flex items-center rounded-full border border-white/12 bg-white/[0.03] px-4 py-1.5 font-inter text-[11px] uppercase tracking-[0.16em] text-white/70">
+				<div className="inline-flex items-center rounded-full border border-[#0C0C0C]/12 bg-[#0C0C0C]/[0.03] px-4 py-1.5 font-inter text-[11px] uppercase tracking-[0.16em] text-[#1A1916]/70">
 					{FLUX_HERO.badge}
 				</div>
 				<GradientHeading className="mt-8 max-w-[18ch] overflow-visible pb-[0.08em] text-center text-[2rem] leading-[1.06] sm:max-w-none sm:text-[2.65rem] md:text-left md:text-[3.5rem] lg:text-[3.75rem]">
 					{FLUX_HERO.headline}
 				</GradientHeading>
-				<p className="mt-6 max-w-xl text-center font-inter text-[17px] leading-[1.6] text-[#8f8f8f] md:max-w-none md:text-left md:whitespace-nowrap">
+				<p className="mt-6 max-w-xl text-center font-inter text-[17px] leading-[1.6] text-[#5C584F] md:max-w-none md:text-left md:whitespace-nowrap">
 					{FLUX_HERO.description}
 				</p>
 				<div className="mx-auto mt-8 w-full max-w-[680px] md:mx-0">
-					<div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] px-5 py-4 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
-						<p className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap font-mono text-[16px] text-white/85 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+					<div className="flex items-center gap-3 rounded-2xl border border-[#0C0C0C]/10 bg-[linear-gradient(180deg,rgba(12, 12, 12, 0.04),rgba(12, 12, 12, 0.015))] px-5 py-4 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
+						<p className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap font-mono text-[16px] text-[#1A1916]/85 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
 							{installCommand}
 						</p>
 						<button
 							type="button"
 							onClick={handleCopy}
-							className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/12 bg-black/25 text-white/80 transition hover:text-white"
+							className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[#0C0C0C]/12 bg-black/25 text-[#1A1916]/80 transition hover:text-[#1A1916]"
 							aria-label={copied ? "Command copied" : "Copy install command"}
 						>
 							{copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
 						</button>
 					</div>
-					<p className="mt-2 text-xs text-white/45">Run this slash command in Claude chat input, not in terminal bash.</p>
+					<p className="mt-2 text-xs text-[#1A1916]/45">Run this slash command in Claude chat input, not in terminal bash.</p>
 				</div>
 			</div>
 
@@ -401,13 +401,13 @@ export function FluxHero() {
 												animateLines={isDesktop && !showComparison}
 												showStatic={!isDesktop || showComparison}
 												revealProgress={terminalTextProgress}
-												className="before:pointer-events-none before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(160deg,rgba(255,255,255,0.10)_0%,transparent_30%)] before:content-['']"
+												className="before:pointer-events-none before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(160deg,rgba(12, 12, 12, 0.10)_0%,transparent_30%)] before:content-['']"
 											/>
 										</div>
 										<div
 											className={`overflow-hidden transition-all duration-700 ease-out ${showComparison ? "w-[42%] opacity-100 translate-x-0" : "w-0 opacity-0 translate-x-6 pointer-events-none"}`}
 										>
-											<div className="mb-2 inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-inter text-[11px] uppercase tracking-[0.14em] text-white/55">
+											<div className="mb-2 inline-flex items-center rounded-full border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.03] px-3 py-1 font-inter text-[11px] uppercase tracking-[0.14em] text-[#1A1916]/55">
 												Without Flux
 											</div>
 											<TerminalWindow
@@ -420,7 +420,7 @@ export function FluxHero() {
 										</div>
 									</div>
 								) : (
-									<div className="h-[620px] w-full rounded-[10px] border border-white/[0.04] bg-[rgba(14,14,14,0.98)]" />
+									<div className="h-[620px] w-full rounded-[10px] border border-[#0C0C0C]/[0.04] bg-[rgba(14,14,14,0.98)]" />
 								)}
 							</div>
 						</div>

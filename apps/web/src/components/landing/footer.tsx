@@ -41,7 +41,7 @@ function SocialLinks() {
 				href="https://www.linkedin.com/company/nairon-ai"
 				target="_blank"
 				rel="noopener noreferrer"
-				className="w-9 h-9 rounded-lg border border-white/8 flex items-center justify-center text-[#A39E96] hover:text-[#E8E4DE] hover:bg-white/5 transition-colors"
+				className="w-9 h-9 rounded-lg border border-[#0C0C0C]/8 flex items-center justify-center text-[#5C584F] hover:text-[#1A1916] hover:bg-[#0C0C0C]/5 transition-colors"
 				aria-label="LinkedIn"
 			>
 				<svg
@@ -57,7 +57,7 @@ function SocialLinks() {
 				href="https://x.com/nairon__ai"
 				target="_blank"
 				rel="noopener noreferrer"
-				className="w-9 h-9 rounded-lg border border-white/8 flex items-center justify-center text-[#A39E96] hover:text-[#E8E4DE] hover:bg-white/5 transition-colors"
+				className="w-9 h-9 rounded-lg border border-[#0C0C0C]/8 flex items-center justify-center text-[#5C584F] hover:text-[#1A1916] hover:bg-[#0C0C0C]/5 transition-colors"
 				aria-label="X / Twitter"
 			>
 				<svg
@@ -87,7 +87,7 @@ export function Footer({ variant = "default" }: { variant?: "default" | "real-es
 			: "Company for building and deploying AI employees.";
 
 	return (
-		<footer className="bg-[#0C0C0C] border-t border-white/6">
+		<footer className="bg-white border-t border-[#0C0C0C]/6">
 			<div className="max-w-7xl mx-auto px-6 py-16">
 				{/* Top: Logo + columns */}
 				<div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-12 md:gap-16">
@@ -98,9 +98,9 @@ export function Footer({ variant = "default" }: { variant?: "default" | "real-es
 							alt="nairon."
 							width={600}
 							height={120}
-							className="h-8 w-auto mb-4"
+							className="h-8 w-auto mb-4 [filter:brightness(0)]"
 						/>
-						<p className="text-[#A39E96] text-sm leading-relaxed max-w-xs">
+						<p className="text-[#5C584F] text-sm leading-relaxed max-w-xs">
 							{tagline}
 						</p>
 						{variant !== "real-estate" && (
@@ -113,7 +113,7 @@ export function Footer({ variant = "default" }: { variant?: "default" | "real-es
 					{/* Nav columns */}
 					{cols.map((col) => (
 						<div key={col.heading}>
-							<h4 className="text-[#E8E4DE] text-xs font-medium uppercase tracking-[0.16em] mb-4">
+							<h4 className="text-[#1A1916] text-xs font-medium uppercase tracking-[0.16em] mb-4">
 								{col.heading}
 							</h4>
 							<ul className="space-y-3">
@@ -123,19 +123,19 @@ export function Footer({ variant = "default" }: { variant?: "default" | "real-es
 											<button
 												type="button"
 												onClick={() => handleAction(link.action)}
-												className="text-[#A39E96] text-sm hover:text-[#E8E4DE] transition-colors"
+												className="text-[#5C584F] text-sm hover:text-[#1A1916] transition-colors"
 											>
 												{link.label}
 											</button>
 									) : link.disabled ? (
-										<span className="text-[#A39E96]/40 text-sm cursor-not-allowed">
+										<span className="text-[#5C584F]/40 text-sm cursor-not-allowed">
 											{link.label}
 										</span>
 									) : (
 										<a
 											href={link.href}
 											{...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-											className="text-[#A39E96] text-sm hover:text-[#E8E4DE] transition-colors"
+											className="text-[#5C584F] text-sm hover:text-[#1A1916] transition-colors"
 										>
 											{link.label}
 										</a>
@@ -148,14 +148,14 @@ export function Footer({ variant = "default" }: { variant?: "default" | "real-es
 				</div>
 
 				{/* Bottom */}
-				<div className="mt-16 pt-8 border-t border-white/6 flex flex-col md:flex-row items-center justify-between gap-4">
-					<p className="text-[#A39E96] text-xs">
+				<div className="mt-16 pt-8 border-t border-[#0C0C0C]/6 flex flex-col md:flex-row items-center justify-between gap-4">
+					<p className="text-[#5C584F] text-xs">
 						&copy; {new Date().getFullYear()} Nairon. All rights reserved.
 					</p>
 					<button
 						type="button"
 						onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-						className="flex items-center gap-2 text-[#A39E96] hover:text-[#E8E4DE] transition-colors text-xs"
+						className="flex items-center gap-2 text-[#5C584F] hover:text-[#1A1916] transition-colors text-xs"
 						aria-label="Back to top"
 					>
 						Back to top

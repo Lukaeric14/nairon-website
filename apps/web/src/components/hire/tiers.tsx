@@ -8,7 +8,7 @@ function TierCard({ tier }: { tier: HireTier }) {
 		<div className="flex flex-col relative">
 			{/* "Most Popular" badge above card */}
 			{tier.popular && (
-				<span className="absolute -top-4 left-1/2 -translate-x-1/2 z-10 text-xs uppercase tracking-wider bg-white/24 backdrop-blur-sm text-white px-4 py-1.5 rounded-lg whitespace-nowrap">
+				<span className="absolute -top-4 left-1/2 -translate-x-1/2 z-10 text-xs uppercase tracking-wider bg-[#0C0C0C]/24 backdrop-blur-sm text-[#1A1916] px-4 py-1.5 rounded-lg whitespace-nowrap">
 					Most Popular
 				</span>
 			)}
@@ -24,11 +24,11 @@ function TierCard({ tier }: { tier: HireTier }) {
 					loading="lazy"
 				/>
 				<div className="relative z-10 flex flex-col flex-1">
-					<span className="text-xs bg-black/30 text-white/80 px-3 py-1 rounded-md w-fit mb-4">
+					<span className="text-xs bg-black/30 text-[#1A1916]/80 px-3 py-1 rounded-md w-fit mb-4">
 						{tier.badge}
 					</span>
 					<h3
-						className="text-4xl md:text-5xl font-medium text-white"
+						className="text-4xl md:text-5xl font-medium text-[#1A1916]"
 						style={{ letterSpacing: "-2px" }}
 					>
 						{tier.name}
@@ -42,7 +42,7 @@ function TierCard({ tier }: { tier: HireTier }) {
 					{/* CTA — full width */}
 					<a
 						href="/bookacall"
-						className="flex items-center justify-between bg-white/10 border border-white/20 text-white font-semibold text-sm px-5 py-3 rounded-xl hover:bg-white/20 transition-colors mt-auto"
+						className="flex items-center justify-between bg-[#0C0C0C]/10 border border-[#0C0C0C]/20 text-[#1A1916] font-semibold text-sm px-5 py-3 rounded-xl hover:bg-[#0C0C0C]/20 transition-colors mt-auto"
 					>
 						Book a hiring call
 						<ArrowUpRight className="w-4 h-4" />
@@ -65,7 +65,7 @@ function TierCard({ tier }: { tier: HireTier }) {
 				<div className="space-y-3">
 					{tier.features.map((feature) => (
 						<div key={feature} className="flex items-start gap-3">
-							<div className="w-1 h-6 bg-white/12 shrink-0" />
+							<div className="w-1 h-6 bg-[#0C0C0C]/12 shrink-0" />
 							<p className={`text-sm ${colors.textBody}`}>{feature}</p>
 						</div>
 					))}
@@ -82,7 +82,7 @@ function ComparisonTable() {
 				<table className="w-full">
 					{/* Header */}
 					<thead>
-						<tr className="border-b border-white/8">
+						<tr className="border-b border-[#0C0C0C]/8">
 							<th className={`text-left p-6 text-base font-semibold ${colors.text}`}>
 								Features
 							</th>
@@ -105,12 +105,12 @@ function ComparisonTable() {
 							<ComparisonSectionRows key={section.title} section={section} />
 						))}
 						{/* Bottom CTAs */}
-						<tr className="border-t border-white/8">
+						<tr className="border-t border-[#0C0C0C]/8">
 							<td className="p-6" />
 							<td className="p-6 text-center">
 								<a
 									href="/bookacall"
-									className="inline-flex items-center gap-2 bg-white/10 border border-white/12 text-white font-semibold text-sm px-4 py-2 rounded-full hover:bg-white/15 transition-colors"
+									className="inline-flex items-center gap-2 bg-[#0C0C0C]/10 border border-[#0C0C0C]/12 text-[#1A1916] font-semibold text-sm px-4 py-2 rounded-full hover:bg-[#0C0C0C]/15 transition-colors"
 								>
 									Book a call
 									<ArrowUpRight className="w-3 h-3" />
@@ -119,7 +119,7 @@ function ComparisonTable() {
 							<td className="p-6 text-center">
 								<a
 									href="/bookacall"
-									className="inline-flex items-center gap-2 bg-white/10 border border-white/12 text-white font-semibold text-sm px-4 py-2 rounded-full hover:bg-white/15 transition-colors"
+									className="inline-flex items-center gap-2 bg-[#0C0C0C]/10 border border-[#0C0C0C]/12 text-[#1A1916] font-semibold text-sm px-4 py-2 rounded-full hover:bg-[#0C0C0C]/15 transition-colors"
 								>
 									Book a call
 									<ArrowUpRight className="w-3 h-3" />
@@ -128,7 +128,7 @@ function ComparisonTable() {
 							<td className="p-6 text-center">
 								<a
 									href="/bookacall"
-									className="inline-flex items-center gap-2 bg-white/10 border border-white/12 text-white font-semibold text-sm px-4 py-2 rounded-full hover:bg-white/15 transition-colors"
+									className="inline-flex items-center gap-2 bg-[#0C0C0C]/10 border border-[#0C0C0C]/12 text-[#1A1916] font-semibold text-sm px-4 py-2 rounded-full hover:bg-[#0C0C0C]/15 transition-colors"
 								>
 									Book a call
 									<ArrowUpRight className="w-3 h-3" />
@@ -146,17 +146,17 @@ function ComparisonSectionRows({ section }: { section: ComparisonSection }) {
 	return (
 		<>
 			{/* Section header */}
-			<tr className="border-t border-white/8">
+			<tr className="border-t border-[#0C0C0C]/8">
 				<td
 					colSpan={4}
-					className={`px-6 py-4 text-sm font-semibold ${colors.text} bg-white/[0.02]`}
+					className={`px-6 py-4 text-sm font-semibold ${colors.text} bg-[#0C0C0C]/[0.02]`}
 				>
 					{section.title}
 				</td>
 			</tr>
 			{/* Rows */}
 			{section.rows.map((row) => (
-				<tr key={row.feature} className="border-t border-white/5">
+				<tr key={row.feature} className="border-t border-[#0C0C0C]/5">
 					<td className={`px-6 py-4 text-sm ${colors.textBody}`}>{row.feature}</td>
 					<td className={`px-6 py-4 text-sm text-center ${colors.textBody}`}>
 						{row.starter}

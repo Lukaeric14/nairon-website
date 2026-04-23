@@ -61,11 +61,11 @@ export function FluxPlatforms() {
 									"rounded-xl border p-5 transition-colors",
 									platform.status === "recommended"
 										? "border-emerald-500/30 bg-emerald-500/5"
-										: "border-white/10 bg-card/30 hover:border-white/20"
+										: "border-[#0C0C0C]/10 bg-card/30 hover:border-[#0C0C0C]/20"
 								)}
 							>
 								<div className="flex items-center gap-3 mb-3">
-									<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5">
+									<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0C0C0C]/5">
 										<Icon className="h-5 w-5" />
 									</div>
 									<div>
@@ -88,7 +88,7 @@ export function FluxPlatforms() {
 									</div>
 								</div>
 								{platform.install && (
-									<code className="block rounded-lg bg-black/30 px-3 py-2 font-mono text-xs text-white/60 overflow-x-auto">
+									<code className="block rounded-lg bg-black/30 px-3 py-2 font-mono text-xs text-[#1A1916]/60 overflow-x-auto">
 										{platform.install}
 									</code>
 								)}

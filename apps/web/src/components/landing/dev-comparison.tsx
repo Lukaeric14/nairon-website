@@ -14,7 +14,7 @@ function SectionLabel({
 			className={`inline-flex rounded-full px-3 py-1 text-[10px] font-medium uppercase tracking-[0.16em] md:text-[11px] ${
 				tone === "gold"
 					? "border border-[#C9A96E]/25 bg-[#C9A96E]/12 text-[#C9A96E]"
-					: "border border-white/8 bg-white/[0.06] text-[#B3ACA2]"
+					: "border border-[#0C0C0C]/8 bg-[#0C0C0C]/[0.06] text-[#5C584F]"
 			}`}
 		>
 			{label}
@@ -30,13 +30,13 @@ function HumanCard({
 	detail?: string;
 }) {
 	return (
-		<div className="rounded-[20px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.02))] p-3 shadow-[0_18px_40px_rgba(0,0,0,0.16)] md:p-3.5">
-			<div className="mb-2.5 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.045] text-white/60 md:h-9 md:w-9">
+		<div className="rounded-[20px] border border-[#0C0C0C]/10 bg-[linear-gradient(180deg,rgba(12, 12, 12, 0.045),rgba(12, 12, 12, 0.02))] p-3 shadow-[0_18px_40px_rgba(0,0,0,0.16)] md:p-3.5">
+			<div className="mb-2.5 flex h-8 w-8 items-center justify-center rounded-full border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.045] text-[#1A1916]/60 md:h-9 md:w-9">
 				<UserRound className="h-3.5 w-3.5" />
 			</div>
-			<p className="text-[9px] uppercase tracking-[0.14em] text-white/40 md:text-[10px]">Human employee</p>
-			<p className="mt-1.5 text-sm leading-tight text-[#ECE7E0] md:text-[15px]">{title}</p>
-			<p className="mt-1.5 text-[11px] leading-relaxed text-[#9D968D]">{detail}</p>
+			<p className="text-[9px] uppercase tracking-[0.14em] text-[#1A1916]/40 md:text-[10px]">Human employee</p>
+			<p className="mt-1.5 text-sm leading-tight text-[#1A1916] md:text-[15px]">{title}</p>
+			<p className="mt-1.5 text-[11px] leading-relaxed text-[#5C584F]">{detail}</p>
 		</div>
 	);
 }
@@ -72,11 +72,11 @@ function OrgStage({
 			className={`relative overflow-hidden rounded-[24px] border p-3.5 md:p-4.5 ${
 				theme === "after"
 					? "border-[#C9A96E]/18 bg-[linear-gradient(180deg,rgba(15,16,14,0.98),rgba(11,11,11,0.94))]"
-					: "border-white/10 bg-[linear-gradient(180deg,rgba(18,18,18,0.98),rgba(12,12,12,0.94))]"
+					: "border-[#0C0C0C]/10 bg-[linear-gradient(180deg,rgba(18,18,18,0.98),rgba(12,12,12,0.94))]"
 			}`}
 		>
-			<div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_38%)]" />
-			<div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(255,255,255,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.22)_1px,transparent_1px)] [background-size:28px_28px]" />
+			<div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(12, 12, 12, 0.06),transparent_38%)]" />
+			<div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(12, 12, 12, 0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(12, 12, 12, 0.22)_1px,transparent_1px)] [background-size:28px_28px]" />
 			<div className="relative">{children}</div>
 		</div>
 	);
@@ -93,7 +93,7 @@ function BeforeVisual() {
 					/>
 				</div>
 
-				<div className="mx-auto h-5 w-px bg-white/12 md:h-6" />
+				<div className="mx-auto h-5 w-px bg-[#0C0C0C]/12 md:h-6" />
 
 				<div className="grid gap-2.5 md:grid-cols-3 md:gap-3">
 					<HumanCard
@@ -210,7 +210,7 @@ function ComparisonCard({
 	tone?: "before" | "after";
 }) {
 	return (
-		<div className="relative overflow-hidden border-b border-white/6 bg-[#0C0C0C] md:border-b-0">
+		<div className="relative overflow-hidden border-b border-[#0C0C0C]/6 bg-white md:border-b-0">
 			<div className="absolute inset-0">
 				<img
 					src={tone === "after" ? "/backgrounds/pastoral-hills.webp" : "/backgrounds/hazy-landscape.webp"}
@@ -230,10 +230,10 @@ function ComparisonCard({
 
 			<div className="relative z-10 p-5 md:p-6">
 				<SectionLabel label={label} tone={tone === "after" ? "gold" : "muted"} />
-				<h3 className="mt-4 max-w-[285px] text-[26px] leading-tight text-[#ECE7E0] md:text-[28px]">
+				<h3 className="mt-4 max-w-[285px] text-[26px] leading-tight text-[#1A1916] md:text-[28px]">
 					{title}
 				</h3>
-				<p className="mt-2.5 max-w-[360px] text-[13px] leading-relaxed text-[#AAA398] md:text-[14px]">
+				<p className="mt-2.5 max-w-[360px] text-[13px] leading-relaxed text-[#5C584F] md:text-[14px]">
 					{description}
 				</p>
 				<div className="mt-6">{visual}</div>
@@ -246,13 +246,13 @@ function ComparisonSummary() {
 	return (
 		<GridSection columns="1fr 1fr" border className="hidden md:grid">
 			<GridCell borderRight className="px-6 py-5 md:px-8">
-				<p className="text-sm leading-relaxed text-[#A39E96]">
+				<p className="text-sm leading-relaxed text-[#5C584F]">
 					Before, growth means hiring more people to absorb repetitive work, follow-up, and
 					admin overhead.
 				</p>
 			</GridCell>
 			<GridCell className="px-6 py-5 md:px-8">
-				<p className="text-sm leading-relaxed text-[#A39E96]">
+				<p className="text-sm leading-relaxed text-[#5C584F]">
 					After, the same leaders stay accountable, but AI employees absorb the heavy execution
 					layer underneath them.
 				</p>
@@ -292,11 +292,11 @@ export function DevComparison() {
 				<GridCell className="px-6 pt-10 pb-8 md:px-12 md:pt-12 md:pb-10">
 					<div className="mb-4 flex items-center gap-3">
 						<div className="h-1.5 w-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-xs font-medium uppercase tracking-[0.16em] text-[#A39E96]">
+						<span className="text-xs font-medium uppercase tracking-[0.16em] text-[#5C584F]">
 							The shift
 						</span>
 					</div>
-					<h2 className="max-w-4xl text-3xl font-normal tracking-[-0.48px] text-[#E8E4DE] md:text-[48px] md:leading-[57.6px]">
+					<h2 className="max-w-4xl text-3xl font-normal tracking-[-0.48px] text-[#1A1916] md:text-[48px] md:leading-[57.6px]">
 						From human bottlenecks to{" "}
 						<span className="font-serif italic text-[#C9A96E]">AI employees inside the org</span>
 					</h2>
@@ -393,7 +393,7 @@ export function DevComparison() {
 								style={{
 									width: 1,
 									transform: "translateX(-0.5px)",
-									background: "rgba(255, 255, 255, 0.3)",
+									background: "rgba(12, 12, 12, 0.3)",
 								}}
 							/>
 							<div
@@ -403,7 +403,7 @@ export function DevComparison() {
 									height: 36,
 									transform: "translate(-50%, -50%)",
 									borderRadius: "50%",
-									background: "#0C0C0C",
+									background: "#FFFFFF",
 									border: "2px solid #C9A96E",
 									cursor: "ew-resize",
 									touchAction: "none",
