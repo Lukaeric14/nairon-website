@@ -30,14 +30,24 @@ const tools: {
 
 const founders = [
 	{
+		name: "Luka Erić",
+		title: "CEO",
+		image: "/assets/framer/SSmGx1bjs3koY1aPdILAeuc.webp",
+	},
+	{
 		name: "Obaid Ur-Rahmaan",
 		title: "CTO / Head of Product",
 		image: "/assets/framer/Xse9UYp1XHtcxoFdIq5x3WbveBc.webp",
 	},
 	{
-		name: "Luka Erić",
-		title: "CEO",
-		image: "/assets/framer/SSmGx1bjs3koY1aPdILAeuc.webp",
+		name: "Mahan Javaheri",
+		title: "CMO",
+		image: "/team/founder-2.png",
+	},
+	{
+		name: "Filip Kocanovic",
+		title: "COO",
+		image: "/team/founder-1.jpeg",
 	},
 ];
 
@@ -220,9 +230,8 @@ export function BuiltByBuilders() {
 							}`}
 						>
 							<h2 className="text-xl md:text-[40px] md:leading-[48px] font-normal tracking-[-0.48px] text-[#1A1916]">
-								Built by builders{" "}
-								<span className="font-serif italic text-[#C9A96E]">builders</span>{" "}
-								and the systems they deploy
+								Built by builders and the{" "}
+								<span className="font-serif italic text-[#C9A96E] text-[1.1em]">systems they deploy</span>
 							</h2>
 						</div>
 					</div>
