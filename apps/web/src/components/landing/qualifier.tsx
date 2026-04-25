@@ -15,7 +15,7 @@ export function Qualifier() {
 						</span>
 						<span className="h-1 w-1 rounded-full bg-[#C9A96E]" />
 					</div>
-					<p className="text-lg md:text-2xl font-normal tracking-[-0.3px] text-[#1A1916] leading-snug whitespace-nowrap">
+					<p className="max-w-[28rem] text-lg font-normal leading-snug tracking-[-0.3px] text-[#1A1916] md:max-w-none md:whitespace-nowrap md:text-2xl">
 						{QUALIFIER_COPY}
 					</p>
 				</div>

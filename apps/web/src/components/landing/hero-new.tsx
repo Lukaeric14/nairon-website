@@ -101,12 +101,12 @@ function RollingRole() {
 	const suffixPart = length > role.length ? full.slice(role.length, length) : "";
 
 	return (
-		<span className="relative inline-block align-baseline">
+		<span className="relative block min-h-[92px] w-full max-w-full align-baseline md:inline-block md:min-h-0 md:w-auto">
 			{/* Invisible sizer locks width to the longest role+suffix so layout doesn't jump */}
-			<span aria-hidden className="invisible whitespace-nowrap font-serif italic">
+			<span aria-hidden className="invisible hidden whitespace-nowrap font-serif italic md:inline">
 				{longest + SUFFIX}
 			</span>
-			<span className="absolute inset-0 flex items-center justify-center whitespace-pre font-serif italic">
+			<span className="absolute inset-0 flex flex-wrap items-center justify-center gap-x-2 whitespace-normal text-center font-serif italic md:gap-x-0 md:whitespace-pre">
 				<span className="text-[#C9A96E]">{rolePart}</span>
 				<span className="text-[#1A1916]">{suffixPart}</span>
 				<span
@@ -127,9 +127,9 @@ function HowItWorks() {
 				type="button"
 				onClick={() => setOpen((o) => !o)}
 				aria-expanded={open}
-				className="group relative flex w-full items-center justify-center gap-4 rounded-full border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.02] px-6 py-4 text-center text-sm font-bold text-[#1A1916] transition-colors hover:bg-[#0C0C0C]/[0.05] md:py-5 md:text-base"
+				className="group relative flex w-full min-w-0 items-center justify-center gap-4 rounded-full border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.02] px-5 py-4 pr-12 text-center text-sm font-bold text-[#1A1916] transition-colors hover:bg-[#0C0C0C]/[0.05] md:px-6 md:py-5 md:text-base"
 			>
-				<span className="flex items-center gap-2.5">
+				<span className="flex min-w-0 flex-wrap items-center justify-center gap-x-2.5 gap-y-1 leading-tight">
 					<span className="h-2 w-2 rounded-full bg-[#C9A96E]" />
 					Yes, For Free - Here's How It Works
 				</span>
@@ -222,19 +222,19 @@ function VSLPlayer() {
 
 export function HeroNew() {
 	return (
-		<div className="relative flex flex-col justify-center items-center text-center px-5 md:px-12 py-8 md:py-12">
+		<div className="relative flex w-full max-w-full flex-col items-center justify-center overflow-hidden px-4 py-8 text-center md:px-12 md:py-12">
 			<CornerNotches />
 
 			{/* Headline — 2 lines, compact */}
-			<h1 className="text-[36px] leading-[42px] md:text-[72px] md:leading-[76px] font-normal tracking-[-1.2px] md:tracking-[-2.2px] text-[#1A1916] max-w-5xl">
+			<h1 className="w-full max-w-5xl text-[32px] leading-[36px] font-normal tracking-[-0.8px] text-[#1A1916] md:text-[72px] md:leading-[76px] md:tracking-[-2.2px]">
 				We'll Deploy Your First AI
-				<span className="block mt-3 md:mt-4 text-[40px] md:text-[80px] leading-[44px] md:leading-[86px]">
+				<span className="mt-3 block text-[38px] leading-[42px] md:mt-4 md:text-[80px] md:leading-[86px]">
 					<RollingRole />
 				</span>
 			</h1>
 
 			{/* Social proof — partner logos */}
-			<div className="w-full mt-6">
+			<div className="mt-4 w-full max-w-full md:mt-6">
 				<LogoStrip />
 			</div>
 
@@ -252,10 +252,10 @@ export function HeroNew() {
 					href={DISCOVERY_CALL_URL}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="inline-flex items-center gap-2.5 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-lg px-8 py-4 rounded-full transition-colors"
+					className="inline-flex w-full max-w-sm items-center justify-center gap-2.5 rounded-full bg-[#C9A96E] px-5 py-4 text-center text-sm font-semibold leading-tight text-[#0C0C0C] transition-colors hover:bg-[#B8944F] md:w-auto md:max-w-none md:px-8 md:text-lg"
 				>
-					BOOK YOUR 15-MINUTE DISCOVERY HERE
-					<ArrowUpRight className="w-5 h-5" />
+					<span>BOOK YOUR 15-MINUTE DISCOVERY HERE</span>
+					<ArrowUpRight className="h-5 w-5 shrink-0" />
 				</a>
 			</div>
 		</div>
