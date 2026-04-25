@@ -81,8 +81,20 @@ export function BuiltByBuilders() {
 
 	return (
 		<div ref={sectionRef}>
-			{/* Mosaic wall + Founders + Title — all in one section */}
-			<GridSection columns="1fr" border>
+			{/* Header */}
+			<GridSection columns="1fr" border={false}>
+				<GridCell className="px-6 md:px-12 pt-10 pb-5 md:pt-16 md:pb-8 text-center">
+					<h2 className="text-xl md:text-[40px] md:leading-[48px] font-normal tracking-[-0.48px] text-[#1A1916]">
+						Limitless Scale With{" "}
+						<span className="font-serif italic text-[#C9A96E] text-[1.1em]">an Autonomous Workforce</span>
+					</h2>
+				</GridCell>
+			</GridSection>
+
+			{/* Mosaic wall + Founders + Title — all in one section.
+			    Outer wrapper crops ~20% of the bottom whitespace without moving any inner content. */}
+			<div className="max-h-[840px] overflow-hidden border-b border-[rgba(12,12,12,0.06)]">
+			<GridSection columns="1fr" border={false}>
 				<GridCell className="relative overflow-hidden">
 					{/* ── Tool mosaic — 6-col desktop, 3-col mobile ── */}
 					<div
@@ -237,6 +249,7 @@ export function BuiltByBuilders() {
 					</div>
 				</GridCell>
 			</GridSection>
+			</div>
 		</div>
 	);
 }

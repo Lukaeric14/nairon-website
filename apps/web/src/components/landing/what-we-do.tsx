@@ -1,27 +1,27 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, Fragment } from "react";
 import { GridSection, GridCell } from "./grid-system";
 
 const steps = [
 	{
-		num: "1.0",
+		num: "Step 1:",
 		title: "Identify",
 		description:
 			"We do a deep dive into your daily operations to map every workflow, surface the highest-leverage opportunities, and define the exact scope of what your first AI employee will take on.",
 	},
 	{
-		num: "2.0",
+		num: "Step 2:",
 		title: "Audit",
 		description:
 			"We run a technical audit of your existing stack and design the AI infrastructure your business needs - so what we build integrates cleanly and empowers your team, without adding complexity to your operations.",
 	},
 	{
-		num: "3.0",
+		num: "Step 3:",
 		title: "Implement",
 		description:
 			"Our engineers build, test, and deploy your AI employees directly into your environment - running on real hardware, integrated with your tools, and ready to operate end-to-end.",
 	},
 	{
-		num: "4.0",
+		num: "Step 4:",
 		title: "Optimize",
 		description:
 			"We move from deployment into a weekly operating rhythm - monitoring performance, refining output, and continuously improving your AI employees so they only get better over time.",
@@ -30,122 +30,188 @@ const steps = [
 
 const CYCLE_MS = 7000;
 const FADE_MS = 800;
+// Arrow grow animation duration (must match .animate-line-grow-* in globals.css)
+const ARROW_REACH_MS = 500;
+// Fraction of the cycle reserved for the arm reaching the card before the border starts drawing
+const REACH_FRAC = ARROW_REACH_MS / CYCLE_MS;
 
-/**
- * Edge i connects box i → box (i+1) % 4, going clockwise around the perimeter:
- *   0: top     (box 0 Identify  → box 1 Audit)        — left → right
- *   1: right   (box 1 Audit     → box 2 Implement)    — top → bottom
- *   2: bottom  (box 2 Implement → box 3 Optimize)     — right → left
- *   3: left    (box 3 Optimize  → box 0 Identify)     — bottom → top
- *
- * Edge leading INTO active box N is edge (N - 1 + 4) % 4.
- */
+const COLOR = "#C9A96E";
+const LINE_THICKNESS = 1.5;
+
+type ArrowDir = "right" | "down" | "left" | "up";
+const edgeDirections: ArrowDir[] = ["right", "down", "left", "up"];
+
 function edgeLeadingTo(boxIdx: number): number {
 	return (boxIdx - 1 + steps.length) % steps.length;
 }
 
-function EdgeLine({
-	edge,
+// Positioning for each arrow within the container.
+// Layout: 2x2 with 15% gap (horizontal and vertical), boxes are 42.5% wide/tall.
+// Box centers sit at 21.25% and 78.75% of the container in each axis.
+function arrowWrapperStyle(direction: ArrowDir): React.CSSProperties {
+	const half = LINE_THICKNESS / 2;
+	switch (direction) {
+		case "right":
+			return {
+				top: `calc(21.25% - ${half}px)`,
+				left: "42.5%",
+				width: "15%",
+				height: `${LINE_THICKNESS}px`,
+			};
+		case "down":
+			return {
+				left: `calc(78.75% - ${half}px)`,
+				top: "42.5%",
+				height: "15%",
+				width: `${LINE_THICKNESS}px`,
+			};
+		case "left":
+			return {
+				top: `calc(78.75% - ${half}px)`,
+				left: "42.5%",
+				width: "15%",
+				height: `${LINE_THICKNESS}px`,
+			};
+		case "up":
+			return {
+				left: `calc(21.25% - ${half}px)`,
+				top: "42.5%",
+				height: "15%",
+				width: `${LINE_THICKNESS}px`,
+			};
+	}
+}
+
+function transformOrigin(direction: ArrowDir): string {
+	switch (direction) {
+		case "right":
+			return "left center";
+		case "down":
+			return "center top";
+		case "left":
+			return "right center";
+		case "up":
+			return "center bottom";
+	}
+}
+
+function FlowArrow({
+	direction,
 	variant,
 }: {
-	edge: number;
+	direction: ArrowDir;
 	variant: "active" | "fading";
 }) {
-	const color = "#C9A96E";
-	const thickness = 1.5;
-
-	// Each edge occupies the middle 50% of an outer side of the square.
-	// transformOrigin determines the direction of shoot-out.
-	const configs: Array<{
-		style: React.CSSProperties;
-		origin: string;
-		axis: "x" | "y";
-	}> = [
-		// edge 0: top, left → right
-		{
-			style: {
-				top: 0,
-				left: "25%",
-				right: "25%",
-				height: `${thickness}px`,
-				marginTop: `-${thickness / 2}px`,
-			},
-			origin: "left center",
-			axis: "x",
-		},
-		// edge 1: right, top → bottom
-		{
-			style: {
-				right: 0,
-				top: "25%",
-				bottom: "25%",
-				width: `${thickness}px`,
-				marginRight: `-${thickness / 2}px`,
-			},
-			origin: "top center",
-			axis: "y",
-		},
-		// edge 2: bottom, right → left
-		{
-			style: {
-				bottom: 0,
-				left: "25%",
-				right: "25%",
-				height: `${thickness}px`,
-				marginBottom: `-${thickness / 2}px`,
-			},
-			origin: "right center",
-			axis: "x",
-		},
-		// edge 3: left, bottom → top
-		{
-			style: {
-				left: 0,
-				top: "25%",
-				bottom: "25%",
-				width: `${thickness}px`,
-				marginLeft: `-${thickness / 2}px`,
-			},
-			origin: "bottom center",
-			axis: "y",
-		},
-	];
-
-	const config = configs[edge];
-	const growClass =
-		config.axis === "x" ? "animate-line-grow-x-immediate" : "animate-line-grow-y";
+	const isAxisX = direction === "right" || direction === "left";
+	const growClass = isAxisX ? "animate-line-grow-x-immediate" : "animate-line-grow-y";
 	const animationClass = variant === "active" ? growClass : "animate-line-fade-out";
 
 	return (
 		<div
 			className={`absolute pointer-events-none ${animationClass}`}
 			style={{
-				...config.style,
-				background: color,
-				transformOrigin: config.origin,
+				...arrowWrapperStyle(direction),
+				background: COLOR,
+				transformOrigin: transformOrigin(direction),
 			}}
 		/>
 	);
 }
 
+type EntrySide = "top" | "right" | "bottom" | "left";
+
+// SVG viewBox is sized to the box's 2:1 aspect ratio so percentage-based
+// border-radius on the button scales identically to the arcs here.
+const VIEW_W = 200;
+const VIEW_H = 100;
+const STROKE = 1;
+const INSET = STROKE / 2;
+const CORNER_R = 7.5;
+
+function borderPath(entrySide: EntrySide): string {
+	const x1 = INSET;
+	const y1 = INSET;
+	const x2 = VIEW_W - INSET;
+	const y2 = VIEW_H - INSET;
+	const r = CORNER_R;
+	const mx = (x1 + x2) / 2;
+	const my = (y1 + y2) / 2;
+
+	switch (entrySide) {
+		case "top":
+			return `M ${mx} ${y1} L ${x2 - r} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y1 + r} L ${x2} ${y2 - r} A ${r} ${r} 0 0 1 ${x2 - r} ${y2} L ${x1 + r} ${y2} A ${r} ${r} 0 0 1 ${x1} ${y2 - r} L ${x1} ${y1 + r} A ${r} ${r} 0 0 1 ${x1 + r} ${y1} L ${mx} ${y1}`;
+		case "right":
+			return `M ${x2} ${my} L ${x2} ${y2 - r} A ${r} ${r} 0 0 1 ${x2 - r} ${y2} L ${x1 + r} ${y2} A ${r} ${r} 0 0 1 ${x1} ${y2 - r} L ${x1} ${y1 + r} A ${r} ${r} 0 0 1 ${x1 + r} ${y1} L ${x2 - r} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y1 + r} L ${x2} ${my}`;
+		case "bottom":
+			return `M ${mx} ${y2} L ${x1 + r} ${y2} A ${r} ${r} 0 0 1 ${x1} ${y2 - r} L ${x1} ${y1 + r} A ${r} ${r} 0 0 1 ${x1 + r} ${y1} L ${x2 - r} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y1 + r} L ${x2} ${y2 - r} A ${r} ${r} 0 0 1 ${x2 - r} ${y2} L ${mx} ${y2}`;
+		case "left":
+			return `M ${x1} ${my} L ${x1} ${y1 + r} A ${r} ${r} 0 0 1 ${x1 + r} ${y1} L ${x2 - r} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y1 + r} L ${x2} ${y2 - r} A ${r} ${r} 0 0 1 ${x2 - r} ${y2} L ${x1 + r} ${y2} A ${r} ${r} 0 0 1 ${x1} ${y2 - r} L ${x1} ${my}`;
+	}
+}
+
+const PATH_LEN = (() => {
+	const w = VIEW_W - 2 * INSET;
+	const h = VIEW_H - 2 * INSET;
+	return 2 * (w - 2 * CORNER_R) + 2 * (h - 2 * CORNER_R) + 2 * Math.PI * CORNER_R;
+})();
+
+/** Progressive rounded-rect border that draws clockwise from the entry midpoint. */
+function CardBorder({ progress, entrySide }: { progress: number; entrySide: EntrySide }) {
+	const p = Math.max(0, Math.min((progress - REACH_FRAC) / (1 - REACH_FRAC), 1));
+	const d = borderPath(entrySide);
+	const dash = `${p * PATH_LEN} ${PATH_LEN + 1}`;
+
+	return (
+		<svg
+			className="absolute inset-0 w-full h-full pointer-events-none"
+			viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+			preserveAspectRatio="none"
+		>
+			<path
+				d={d}
+				fill="none"
+				stroke={COLOR}
+				strokeWidth={STROKE}
+				strokeDasharray={dash}
+			/>
+		</svg>
+	);
+}
+
+// Entry side per box (arrow flow 0 → 1 → 2 → 3 → 0).
+const BOX_ENTRY: EntrySide[] = ["bottom", "left", "top", "right"];
+
 export function WhatWeDo() {
 	const [active, setActive] = useState(0);
+	const [progress, setProgress] = useState(0);
 	const [activeEdge, setActiveEdge] = useState<number | null>(null);
 	const [fadingEdge, setFadingEdge] = useState<number | null>(null);
+	const [fadingIdx, setFadingIdx] = useState<number | null>(null);
 	const activeRef = useRef(0);
-	const fadeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+	const startRef = useRef(Date.now());
+	const rafRef = useRef<number>(0);
+	const fadeEdgeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+	const fadeBoxTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
 	const goTo = useCallback(
 		(idx: number) => {
 			const prev = activeRef.current;
 			if (prev === idx) return;
 			const newEdge = edgeLeadingTo(idx);
+
 			setFadingEdge(activeEdge);
 			setActiveEdge(newEdge);
-			if (fadeTimerRef.current) clearTimeout(fadeTimerRef.current);
-			fadeTimerRef.current = setTimeout(() => setFadingEdge(null), FADE_MS);
+			if (fadeEdgeTimerRef.current) clearTimeout(fadeEdgeTimerRef.current);
+			fadeEdgeTimerRef.current = setTimeout(() => setFadingEdge(null), FADE_MS);
+
+			setFadingIdx(prev);
+			if (fadeBoxTimerRef.current) clearTimeout(fadeBoxTimerRef.current);
+			fadeBoxTimerRef.current = setTimeout(() => setFadingIdx(null), FADE_MS);
+
 			activeRef.current = idx;
 			setActive(idx);
+			setProgress(0);
+			startRef.current = Date.now();
 		},
 		[activeEdge],
 	);
@@ -159,10 +225,19 @@ export function WhatWeDo() {
 		return () => clearTimeout(timer);
 	}, [active, advance]);
 
+	useEffect(() => {
+		const tick = () => {
+			setProgress(Math.min((Date.now() - startRef.current) / CYCLE_MS, 1));
+			rafRef.current = requestAnimationFrame(tick);
+		};
+		rafRef.current = requestAnimationFrame(tick);
+		return () => cancelAnimationFrame(rafRef.current);
+	}, [active]);
+
 	return (
 		<div id="what-we-do">
 			{/* Header */}
-			<GridSection columns="1fr" border>
+			<GridSection columns="1fr" border={false}>
 				<GridCell className="px-6 md:px-12 py-10 md:py-14">
 					<div className="flex items-center gap-3 mb-6">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
@@ -177,83 +252,101 @@ export function WhatWeDo() {
 				</GridCell>
 			</GridSection>
 
-			{/* Description area with fade-in on change */}
-			<GridSection columns="1fr" border>
-				<GridCell className="px-6 md:px-12 py-10 md:py-14 min-h-[200px] flex items-center justify-center">
-					<p
-						key={active}
-						className="max-w-3xl text-center text-base md:text-lg text-[#5C584F] leading-relaxed animate-fade-in"
+			{/* 2x2 feedback loop — wider/shorter container, shorter boxes with border-draw animation */}
+			<GridSection columns="1fr" border={false}>
+				<GridCell className="px-6 md:px-12 py-8 md:py-12 flex items-center justify-center">
+					<div
+						className="relative w-full"
+						style={{ maxWidth: "720px", aspectRatio: "2 / 1" }}
 					>
-						{steps[active].description}
-					</p>
+						{/* Boxes */}
+						{steps.map((step, i) => {
+							const isActive = active === i;
+							const isFading = fadingIdx === i;
+							const cardProgress = isActive ? progress : isFading ? 1 : 0;
+							const showBorder = isActive || isFading;
+							const positions = [
+								{ left: "0%", top: "0%" },
+								{ left: "57.5%", top: "0%" },
+								{ left: "57.5%", top: "57.5%" },
+								{ left: "0%", top: "57.5%" },
+							];
+							return (
+								<button
+									key={step.num}
+									type="button"
+									onClick={() => goTo(i)}
+									className="absolute flex items-center justify-center p-3 md:p-4 cursor-pointer transition-colors duration-700 overflow-hidden"
+									style={{
+										...positions[i],
+										width: "42.5%",
+										height: "42.5%",
+										borderRadius: "4% / 8%",
+										boxShadow: "inset 0 0 0 1px rgba(12,12,12,0.06)",
+										background: isActive
+											? "rgba(201,169,110,0.04)"
+											: "transparent",
+									}}
+								>
+									{/* Animated clockwise border draw — only on active/fading, wrapped in opacity container */}
+									{showBorder && (
+										<div
+											className="absolute inset-0 pointer-events-none"
+											style={{
+												opacity: isActive ? 1 : 0,
+												transition: `opacity ${FADE_MS}ms ease`,
+											}}
+										>
+											<CardBorder progress={cardProgress} entrySide={BOX_ENTRY[i]} />
+										</div>
+									)}
+
+									<h3
+										className="text-[1.2rem] md:text-[1.35rem] font-semibold whitespace-nowrap transition-all duration-700 relative"
+										style={{
+											color: isActive ? "#1A1916" : "#8A857C",
+											opacity: isActive ? 1 : 0.55,
+										}}
+									>
+										<span className="font-serif italic text-[#C9A96E] mr-2">{step.num}</span>
+										{step.title}
+									</h3>
+								</button>
+							);
+						})}
+
+						{/* Arrows between boxes — only active + fading */}
+						{edgeDirections.map((dir, i) => (
+							<Fragment key={`arrow-${dir}`}>
+								{activeEdge === i && (
+									<FlowArrow
+										key={`active-${dir}-${activeEdge}`}
+										direction={dir}
+										variant="active"
+									/>
+								)}
+								{fadingEdge === i && fadingEdge !== activeEdge && (
+									<FlowArrow
+										key={`fading-${dir}`}
+										direction={dir}
+										variant="fading"
+									/>
+								)}
+							</Fragment>
+						))}
+					</div>
 				</GridCell>
 			</GridSection>
 
-			{/* 2x2 grid of step boxes with edge lines on the perimeter */}
+			{/* Description */}
 			<GridSection columns="1fr" border>
-				<GridCell className="px-6 md:px-12 py-10 md:py-14 flex items-center justify-center">
-					<div className="relative w-full max-w-[640px] aspect-square">
-						{/* 2x2 box grid */}
-						<div className="grid grid-cols-2 grid-rows-2 w-full h-full">
-							{steps.map((step, i) => {
-								const isActive = active === i;
-								const gridPos = [
-									{ col: 1, row: 1 },
-									{ col: 2, row: 1 },
-									{ col: 2, row: 2 },
-									{ col: 1, row: 2 },
-								][i];
-								return (
-									<button
-										key={step.num}
-										type="button"
-										onClick={() => goTo(i)}
-										className="relative flex items-center justify-center p-6 md:p-10 cursor-pointer transition-all duration-700"
-										style={{
-											gridColumnStart: gridPos.col,
-											gridRowStart: gridPos.row,
-											borderRight:
-												gridPos.col === 1
-													? "var(--guide-width) solid var(--guide-color)"
-													: undefined,
-											borderBottom:
-												gridPos.row === 1
-													? "var(--guide-width) solid var(--guide-color)"
-													: undefined,
-											background: isActive ? "rgba(201,169,110,0.03)" : "transparent",
-										}}
-									>
-										<h3
-											className="text-base md:text-lg font-semibold whitespace-nowrap transition-all duration-700"
-											style={{
-												color: isActive ? "#1A1916" : "#8A857C",
-												opacity: isActive ? 1 : 0.45,
-											}}
-										>
-											<span className="text-[#C9A96E] mr-2">{step.num}</span>
-											{step.title}
-										</h3>
-									</button>
-								);
-							})}
-						</div>
-
-						{/* Edge lines — shoot out along the perimeter, box → box */}
-						{activeEdge !== null && (
-							<EdgeLine
-								key={`active-edge-${activeEdge}`}
-								edge={activeEdge}
-								variant="active"
-							/>
-						)}
-						{fadingEdge !== null && fadingEdge !== activeEdge && (
-							<EdgeLine
-								key={`fading-edge-${fadingEdge}`}
-								edge={fadingEdge}
-								variant="fading"
-							/>
-						)}
-					</div>
+				<GridCell className="px-6 md:px-12 pt-0 pb-8 md:pb-12 min-h-[120px] flex items-center justify-center">
+					<p
+						key={active}
+						className="max-w-5xl text-center text-base md:text-lg text-[#5C584F] leading-relaxed animate-fade-in"
+					>
+						{steps[active].description}
+					</p>
 				</GridCell>
 			</GridSection>
 		</div>

@@ -1,21 +1,18 @@
 import type { CSSProperties } from "react";
-import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { AnimatePresence, LayoutGroup, motion } from "motion/react";
-import { SceneIllustration } from "@/components/ui/illustrations/scene-illustration";
-import { ChevronDown, ChevronUp, PlusCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import KanbanIllustration from "@/components/ui/illustrations/kanban";
+import { ServerIllustration } from "@/components/ui/illustrations/server-illustration";
 
 const features = [
 	{
-		title: "The House",
+		title: "",
 		description:
-			"Your AI employees don't live in a prompt window. They'll live in a dedicated Mac mini in our data center — online and working 24/7, even while you're not.",
+			"Your AI employees don't live in a prompt window. They'll live in a dedicated Mac mini in our data center - online and working 24/7, even while you're not.",
 	},
 	{
-		title: "The Office",
+		title: "",
 		description:
-			"Every action, decision, and output happens inside Hive — our proprietary platform built for operating AI employees at scale. It's where you watch them work, message them like any other team member, and track every action they take, in real time.",
+			"Every action, decision, and output happens inside Hive - our proprietary platform built for operating AI employees at scale. It's where you watch them work, message them like any other team member, and track every action they take, in real time.",
 	},
 ];
 
@@ -28,162 +25,118 @@ const SCENE_VARS = {
 } as CSSProperties;
 
 export default function ExpandableFeatures() {
-	const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+	const [activeIndex, setActiveIndex] = useState(0);
 
-	const handleSelect = (index: number) => {
-		setExpandedIndex(expandedIndex === index ? null : index);
-	};
+	const isLeftActive = activeIndex === 0;
+	const isRightActive = activeIndex === 1;
 
 	return (
-		<section className="@container bg-transparent py-24">
+		<section className="@container border-b border-[rgba(12,12,12,0.06)] bg-transparent pt-10 pb-24 md:pt-12">
 			<div className="mx-auto max-w-5xl px-6" style={SCENE_VARS}>
-				<div className="mb-12 text-balance">
-					<div className="mb-4 flex items-center gap-3">
-						<div className="h-1.5 w-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-xs font-medium uppercase tracking-[0.16em] text-[#5C584F]">
-							How it works
-						</span>
-					</div>
-					<h2 className="max-w-3xl text-3xl font-normal tracking-[-0.48px] text-[#1A1916] md:text-[48px] md:leading-[57.6px]">
-						Lives in{" "}
-						<span className="font-serif italic text-[#C9A96E]">your hardware</span>.
-						Works on{" "}
-						<span className="font-serif italic text-[#C9A96E]">our platform</span>.
-					</h2>
-				</div>
-				<div className="grid items-center lg:grid-cols-5">
-					<div className="relative z-10 lg:col-span-2">
-						<AnimatePresence>
-							{typeof expandedIndex === "number" && (
-								<motion.div
-									initial={{ opacity: 0, scale: 0.75, y: 44, filter: "blur(4px)" }}
-									animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
-									exit={{ opacity: 0, scale: 0.75, y: 44, filter: "blur(4px)" }}
-									className="absolute inset-y-0 flex items-center justify-center gap-3 max-sm:-inset-x-4 max-sm:justify-between sm:flex-col lg:-left-8 lg:-translate-x-full"
-								>
-									<Button
-										size="icon"
-										variant="outline"
-										className="rounded-full border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.03] text-[#1A1916] hover:bg-[#0C0C0C]/[0.06] hover:text-[#1A1916]"
-										disabled={expandedIndex === null || expandedIndex === 0}
-										onClick={() =>
-											expandedIndex !== null && handleSelect(expandedIndex - 1)
-										}
-									>
-										<ChevronUp />
-									</Button>
-									<Button
-										size="icon"
-										variant="outline"
-										className="rounded-full border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.03] text-[#1A1916] hover:bg-[#0C0C0C]/[0.06] hover:text-[#1A1916]"
-										disabled={
-											expandedIndex === null || expandedIndex === features.length - 1
-										}
-										onClick={() =>
-											expandedIndex !== null && handleSelect(expandedIndex + 1)
-										}
-									>
-										<ChevronDown />
-									</Button>
-								</motion.div>
-							)}
-						</AnimatePresence>
-
-						<div className="space-y-3 max-lg:px-16 max-sm:px-9">
-							<LayoutGroup>
-								{features.map((feature, index) => {
-									const isActive = expandedIndex === index;
-									return (
-										<motion.div
-											layout
-											layoutDependency={expandedIndex}
-											layoutId={feature.title}
-											key={feature.title}
-											data-expanded={isActive}
-											initial={false}
-											animate={{
-												paddingTop: isActive ? 18 : 0,
-												paddingBottom: isActive ? 18 : 0,
-												width: isActive ? "100%" : "fit-content",
-											}}
-											transition={{
-												layout: { type: "spring", bounce: 0.2, duration: 0.5 },
-												type: "spring",
-												bounce: 0.2,
-												duration: 0.6,
-											}}
-											className={cn(
-												"group relative min-w-0 max-w-xs overflow-hidden rounded-3xl text-left ring transition-colors duration-500 max-md:mx-auto",
-												isActive
-													? "w-full bg-[linear-gradient(180deg,rgba(201,169,110,0.10),rgba(12, 12, 12, 0.04))] text-[#1A1916] ring-[#C9A96E]/22 shadow-[0_18px_50px_rgba(0,0,0,0.18)]"
-													: "text-[#5C584F] ring-white/8 hover:text-[#1A1916] hover:ring-[#C9A96E]/18",
-											)}
-										>
-											<AnimatePresence initial={false}>
-												{!isActive && (
-													<motion.button
-														layout="position"
-														onClick={() => handleSelect(index)}
-														initial={{ opacity: 0, filter: "blur(4px)", y: 4 }}
-														animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-														exit={{ opacity: 0, filter: "blur(4px)", y: -4 }}
-														transition={{ duration: 0.5 }}
-															className="flex h-10 cursor-pointer items-center gap-2 px-4"
-														>
-															<PlusCircle className="size-3.5 text-[#C9A96E]" />
-															<h3 className="text-nowrap text-sm font-medium">
-																{feature.title}
-															</h3>
-													</motion.button>
-												)}
-
-												{isActive && (
-													<motion.div
-														layout="position"
-														initial={{
-															opacity: 0,
-															height: 0,
-															filter: "blur(4px)",
-															y: 4,
-														}}
-														animate={{
-															opacity: 1,
-															height: "auto",
-															filter: "blur(0px)",
-															y: 0,
-														}}
-														exit={{
-															opacity: 0,
-															height: 0,
-															filter: "blur(4px)",
-															y: -4,
-														}}
-														transition={{
-															duration: 0.6,
-															type: "spring",
-															bounce: 0.2,
-														}}
-															className="px-6"
-														>
-															<p className="max-w-md text-sm leading-relaxed text-[#5C584F] md:text-base">
-																<strong className="font-medium text-[#C9A96E]">
-																	{feature.title}.
-																</strong>{" "}
-																{feature.description}
-														</p>
-													</motion.div>
-												)}
-											</AnimatePresence>
-										</motion.div>
-									);
-								})}
-							</LayoutGroup>
+				<div className="flex flex-col md:flex-row md:items-stretch md:gap-10">
+					{/* Left column — box containing title + server illustration */}
+					<div
+						className="flex flex-1 flex-col cursor-pointer rounded-2xl border p-6 transition-colors duration-700 md:p-10"
+						style={{
+							"--color-shell": "#E5DFD2",
+							"--color-background": "#F5F2EB",
+							"--color-illustration": "#FFFFFF",
+							borderColor: isLeftActive
+								? "rgba(201,169,110,0.4)"
+								: "rgba(12,12,12,0.08)",
+							background: isLeftActive
+								? "rgba(201,169,110,0.04)"
+								: "transparent",
+							boxShadow: isLeftActive
+								? "0 0 0 4px rgba(201,169,110,0.06)"
+								: "none",
+						} as CSSProperties}
+						onMouseEnter={() => setActiveIndex(0)}
+						onFocus={() => setActiveIndex(0)}
+					>
+						<h2
+							className="mb-8 text-center text-2xl font-normal tracking-[-0.48px] text-[#1A1916] transition-all duration-500 md:mb-10 md:text-[36px] md:leading-[44px]"
+							style={{
+								opacity: isLeftActive ? 1 : 0.45,
+							}}
+						>
+							Live In{" "}
+							<span className="font-serif italic text-[#C9A96E] text-[1.1em]">Your Hardware</span>
+						</h2>
+						<div
+							className="flex flex-1 items-center justify-center transition-all duration-500"
+							style={{
+								opacity: isLeftActive ? 1 : 0.4,
+								transform: isLeftActive ? "scale(1)" : "scale(0.97)",
+							}}
+						>
+							<ServerIllustration isActive />
 						</div>
 					</div>
 
-					<div className="max-lg:row-start-1 lg:col-span-3 lg:-translate-x-20">
-						<SceneIllustration activeDevice={expandedIndex} />
+					{/* Full-height divider */}
+					<div className="hidden md:block w-px self-stretch bg-[rgba(12,12,12,0.06)]" />
+
+					{/* Right column — box containing title + illustration */}
+					<div
+						className="flex flex-1 flex-col cursor-pointer rounded-2xl border p-6 transition-colors duration-700 md:p-10"
+						style={{
+							borderColor: isRightActive
+								? "rgba(201,169,110,0.4)"
+								: "rgba(12,12,12,0.08)",
+							background: isRightActive
+								? "rgba(201,169,110,0.04)"
+								: "transparent",
+							boxShadow: isRightActive
+								? "0 0 0 4px rgba(201,169,110,0.06)"
+								: "none",
+						}}
+						onMouseEnter={() => setActiveIndex(1)}
+						onFocus={() => setActiveIndex(1)}
+					>
+						<h2
+							className="mt-0 mb-8 text-center text-2xl font-normal tracking-[-0.48px] text-[#1A1916] transition-all duration-500 md:mb-10 md:text-[36px] md:leading-[44px]"
+							style={{
+								opacity: isRightActive ? 1 : 0.45,
+							}}
+						>
+							Work On{" "}
+							<span className="font-serif italic text-[#C9A96E] text-[1.1em]">Our Platform</span>
+						</h2>
+						<div
+							className="flex flex-1 flex-col items-center justify-start gap-3 overflow-hidden transition-all duration-500 md:gap-4"
+							style={{
+								opacity: isRightActive ? 1 : 0.4,
+								transform: isRightActive ? "scale(1)" : "scale(0.97)",
+							}}
+						>
+							<img
+								src="/hive-logo.png"
+								alt="Hive"
+								className="h-10 w-auto md:h-14"
+							/>
+							<div className="w-80 md:w-[380px]">
+								<KanbanIllustration />
+							</div>
+						</div>
 					</div>
+				</div>
+
+				{/* Description under the entire split — switches on hover */}
+				<div className="mt-12 md:mt-16 flex justify-center">
+					<p
+						key={activeIndex}
+						className="max-w-3xl text-center text-sm leading-relaxed text-[#5C584F] md:text-base animate-fade-in"
+					>
+						{features[activeIndex].title && (
+							<>
+								<strong className="font-medium text-[#C9A96E]">
+									{features[activeIndex].title}.
+								</strong>{" "}
+							</>
+						)}
+						{features[activeIndex].description}
+					</p>
 				</div>
 			</div>
 		</section>

@@ -122,19 +122,19 @@ function HowItWorks() {
 	const [open, setOpen] = useState(false);
 
 	return (
-		<div className="mt-6 w-full max-w-2xl">
+		<div className="mt-6 w-full max-w-4xl">
 			<button
 				type="button"
 				onClick={() => setOpen((o) => !o)}
 				aria-expanded={open}
-				className="group flex w-full items-center justify-between gap-4 rounded-full border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.02] px-6 py-4 text-left text-base font-bold text-[#1A1916] transition-colors hover:bg-[#0C0C0C]/[0.05]"
+				className="group relative flex w-full items-center justify-center gap-4 rounded-full border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.02] px-6 py-4 text-center text-sm font-bold text-[#1A1916] transition-colors hover:bg-[#0C0C0C]/[0.05] md:py-5 md:text-base"
 			>
 				<span className="flex items-center gap-2.5">
 					<span className="h-2 w-2 rounded-full bg-[#C9A96E]" />
-					Yes, for free - here's how it works:
+					Yes, For Free - Here's How It Works
 				</span>
 				<ChevronDown
-					className={`h-5 w-5 text-[#5C584F] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+					className={`absolute right-6 h-5 w-5 text-[#5C584F] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
 				/>
 			</button>
 
@@ -242,7 +242,7 @@ export function HeroNew() {
 			<HowItWorks />
 
 			{/* VSL */}
-			<div className="mt-6 w-full max-w-4xl">
+			<div id="vsl" className="mt-6 w-full max-w-4xl scroll-mt-24 md:scroll-mt-28">
 				<VSLPlayer />
 			</div>
 

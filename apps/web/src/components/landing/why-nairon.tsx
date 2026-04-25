@@ -21,8 +21,12 @@ const points = [
 
 const CYCLE_MS = 7000;
 const FADE_MS = 800;
-// How much of the progress cycle is spent "reaching" the box vs "drawing" the border
-const REACH_FRAC = 0.12;
+// Arrow grow durations in ms. Middle card: horizontal only (500ms). Top/bottom: vertical
+// (0-500ms) + horizontal with 250ms delay (250-750ms), so the line hits the card at 750ms.
+const ARROW_REACH_IMMEDIATE_MS = 500;
+const ARROW_REACH_DELAYED_MS = 750;
+const reachFracFor = (idx: number) =>
+	(idx === 1 ? ARROW_REACH_IMMEDIATE_MS : ARROW_REACH_DELAYED_MS) / CYCLE_MS;
 
 function FanLines({ active, fadingIdx }: { active: number; fadingIdx: number | null }) {
 	// Card vertical centers (as % of section height). Cards are equal height (1/3 each).
@@ -63,13 +67,14 @@ function FanLines({ active, fadingIdx }: { active: number; fadingIdx: number | n
 						}}
 					/>
 				)}
-				{/* Horizontal segment — grows from origin X to target X at the card's Y */}
+				{/* Horizontal segment — grows from origin X to target X at the card's Y.
+				    Slight overshoot so it meets the card's animated vertical border without a sub-pixel gap. */}
 				<div
 					className={`absolute ${isActive ? (hasVertical ? "animate-line-grow-x" : "animate-line-grow-x-immediate") : ""}`}
 					style={{
 						left: `${originX}%`,
 						top: `${cy}%`,
-						width: `${targetX - originX}%`,
+						width: `calc(${targetX - originX}% + 2px)`,
 						height: `${thickness}px`,
 						marginTop: `-${thickness / 2}px`,
 						background: color,
@@ -125,22 +130,27 @@ function FanLines({ active, fadingIdx }: { active: number; fadingIdx: number | n
 	);
 }
 
-function CardBorder({ progress }: { progress: number }) {
-	const p = Math.max(0, Math.min((progress - REACH_FRAC) / (1 - REACH_FRAC), 1));
+function CardBorder({ progress, reachFrac }: { progress: number; reachFrac: number }) {
+	const p = Math.max(0, Math.min((progress - reachFrac) / (1 - reachFrac), 1));
 
-	const top    = Math.min(p / 0.25, 1) * 100;
-	const right  = Math.max(Math.min((p - 0.25) / 0.25, 1), 0) * 100;
-	const bottom = Math.max(Math.min((p - 0.50) / 0.25, 1), 0) * 100;
-	const left   = Math.max(Math.min((p - 0.75) / 0.25, 1), 0) * 100;
+	// Arrow lands at the midpoint of the left edge. Draw clockwise from there:
+	// [0, 0.125] up half of left edge → [0.125, 0.375] top → [0.375, 0.625] right
+	// → [0.625, 0.875] bottom → [0.875, 1] up from bottom-left corner back to midpoint.
+	const leftTop    = Math.min(p / 0.125, 1) * 50;
+	const top        = Math.max(Math.min((p - 0.125) / 0.25, 1), 0) * 100;
+	const right      = Math.max(Math.min((p - 0.375) / 0.25, 1), 0) * 100;
+	const bottom     = Math.max(Math.min((p - 0.625) / 0.25, 1), 0) * 100;
+	const leftBottom = Math.max(Math.min((p - 0.875) / 0.125, 1), 0) * 50;
 
 	const c = "#C9A96E";
 
 	return (
 		<>
+			<div className="absolute left-0 w-[1.5px] pointer-events-none" style={{ bottom: "50%", height: `${leftTop}%`, background: c, transition: "none" }} />
 			<div className="absolute top-0 left-0 h-[1.5px] pointer-events-none" style={{ width: `${top}%`, background: c, transition: "none" }} />
 			<div className="absolute top-0 right-0 w-[1.5px] pointer-events-none" style={{ height: `${right}%`, background: c, transition: "none" }} />
 			<div className="absolute bottom-0 right-0 h-[1.5px] pointer-events-none" style={{ width: `${bottom}%`, background: c, transition: "none" }} />
-			<div className="absolute bottom-0 left-0 w-[1.5px] pointer-events-none" style={{ height: `${left}%`, background: c, transition: "none" }} />
+			<div className="absolute bottom-0 left-0 w-[1.5px] pointer-events-none" style={{ height: `${leftBottom}%`, background: c, transition: "none" }} />
 		</>
 	);
 }
@@ -242,7 +252,7 @@ export function WhyNairon() {
 											transition: `opacity ${FADE_MS}ms ease`,
 										}}
 									>
-										<CardBorder progress={cardProgress} />
+										<CardBorder progress={cardProgress} reachFrac={reachFracFor(i)} />
 									</div>
 								)}
 

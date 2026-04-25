@@ -42,9 +42,9 @@ function HomePage() {
 					<Qualifier />
 
 					<WhyNairon />
+					<SecuritySection />
 					<WhatWeDo />
 					<BuiltByBuilders />
-					<SecuritySection />
 					<AIFaqSection />
 
 					<GridSection columns="1fr" border={false}>

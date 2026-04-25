@@ -88,8 +88,8 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 				{!minimal && (
 				<div className="hidden md:flex items-center gap-1">
 						<a
-							href="/#process"
-							onClick={handleSectionClick("process")}
+							href="/#vsl"
+							onClick={handleSectionClick("vsl")}
 							className="px-4 py-2 rounded-full text-sm text-[#1A1916] hover:text-[#C9A96E] transition-colors"
 						>
 							How it works
@@ -104,10 +104,11 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 					</a>
 
 					<a
-						href="/for/real-estate"
+						href="/#faq"
+						onClick={handleSectionClick("faq")}
 						className="px-4 py-2 rounded-full text-sm text-[#1A1916] hover:text-[#C9A96E] transition-colors"
 					>
-						Real estate
+						FAQ
 					</a>
 					<a
 						href={DISCOVERY_CALL_URL}
@@ -115,7 +116,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						rel="noopener noreferrer"
 						className="ml-2 inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-sm px-5 py-2.5 rounded-full transition-colors"
 					>
-						Book discovery
+						Book Discovery
 						<ArrowUpRight className="w-3.5 h-3.5" />
 					</a>
 				</div>
@@ -143,9 +144,9 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 			{mobileOpen && !minimal && (
 				<div className="md:hidden bg-white border-t border-[#0C0C0C]/6 px-6 py-6 space-y-1">
 						<a
-							href="/#process"
+							href="/#vsl"
 							className="block px-4 py-3 rounded-xl text-base text-[#1A1916] hover:bg-[#0C0C0C]/5 transition-colors"
-							onClick={handleSectionClick("process")}
+							onClick={handleSectionClick("vsl")}
 						>
 							How it works
 						</a>
@@ -159,11 +160,11 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						</a>
 
 					<a
-						href="/for/real-estate"
+						href="/#faq"
 						className="block px-4 py-3 rounded-xl text-base text-[#1A1916] hover:bg-[#0C0C0C]/5 transition-colors"
-						onClick={() => setMobileOpen(false)}
+						onClick={handleSectionClick("faq")}
 					>
-						Real estate
+						FAQ
 					</a>
 					<div className="pt-4">
 						<a
@@ -173,7 +174,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 							onClick={() => setMobileOpen(false)}
 							className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-base px-6 py-3 rounded-full transition-colors"
 						>
-							Book discovery
+							Book Discovery
 							<ArrowUpRight className="w-4 h-4" />
 						</a>
 					</div>

@@ -6,7 +6,7 @@ const deviceGroups = [
     { id: 'device-tab', cx: 100, cy: 328 },
 ] as const
 
-export const SceneIllustration = ({ activeDevice }: { activeDevice: number | null }) => {
+export const SceneIllustration = ({ activeDevice, className }: { activeDevice: number | null; className?: string }) => {
     const getGroupStyle = (index: number) => {
         const { cx, cy } = deviceGroups[index]
         const isActive = activeDevice === index
@@ -28,7 +28,7 @@ export const SceneIllustration = ({ activeDevice }: { activeDevice: number | nul
             viewBox="0 0 627 441"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="lg:w-164 h-full [--color-layer-border-2:--alpha(var(--color-foreground)/60%)] [--color-layer-border:--alpha(var(--color-foreground)/18%)]">
+            className={className ?? "lg:w-164 h-full [--color-layer-border-2:--alpha(var(--color-foreground)/60%)] [--color-layer-border:--alpha(var(--color-foreground)/18%)]"}>
             <g
                 id="scene-frame"
                 style={platformStyle}>
