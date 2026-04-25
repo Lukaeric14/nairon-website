@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { GridSection, GridCell, CornerNotches } from "./grid-system";
 
 /* ─── Tool tiles — fill the wall ───────────────────── */
@@ -33,21 +34,25 @@ const founders = [
 		name: "Luka Erić",
 		title: "CEO",
 		image: "/assets/framer/SSmGx1bjs3koY1aPdILAeuc.webp",
+		linkedin: "https://www.linkedin.com/in/lukaeric/",
 	},
 	{
 		name: "Obaid Ur-Rahmaan",
 		title: "CTO / Head of Product",
 		image: "/assets/framer/Xse9UYp1XHtcxoFdIq5x3WbveBc.webp",
+		linkedin: "https://www.linkedin.com/in/obaid-ur-rahmaan-5bb29814b/",
 	},
 	{
 		name: "Mahan Javaheri",
 		title: "CMO",
 		image: "/team/founder-2.png",
+		linkedin: "https://www.linkedin.com/in/mahan-javaheri-b70430173/",
 	},
 	{
 		name: "Filip Kocanovic",
 		title: "COO",
 		image: "/team/founder-1.jpeg",
+		linkedin: "https://www.linkedin.com/in/filip-kocanovic/",
 	},
 ];
 
@@ -194,7 +199,7 @@ export function BuiltByBuilders() {
 
 						{/* Founder cards */}
 						<div
-							className={`relative flex items-end gap-3 md:gap-6 transition-all duration-700 ease-out ${
+							className={`relative grid grid-cols-2 items-end gap-3 md:flex md:gap-6 transition-all duration-700 ease-out ${
 								showFounders
 									? "opacity-100 translate-y-0"
 									: "opacity-0 translate-y-8"
@@ -203,9 +208,18 @@ export function BuiltByBuilders() {
 							{founders.map((founder) => (
 								<div
 									key={founder.name}
-									className="relative w-36 md:w-56 bg-[#F5F3EE]/90 border border-[#0C0C0C]/[0.08] overflow-hidden pointer-events-auto backdrop-blur-sm"
+									className="group relative w-36 md:w-56 bg-[#F5F3EE]/90 border border-[#0C0C0C]/[0.08] overflow-hidden pointer-events-auto backdrop-blur-sm"
 								>
 									<CornerNotches size={10} color="rgba(201, 169, 110, 0.2)" />
+									<a
+										href={founder.linkedin}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label={`Open ${founder.name}'s LinkedIn profile`}
+										className="absolute right-3 top-3 z-20 flex size-9 translate-y-0 items-center justify-center rounded-full border border-[#0C0C0C]/10 bg-[#F8F7F2]/90 text-[#1A1916] opacity-100 shadow-[0_10px_30px_rgba(12,12,12,0.14)] backdrop-blur-sm transition-all duration-300 ease-out hover:bg-[#1A1916] hover:text-white focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A96E] md:translate-y-1 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-focus-within:translate-y-0 md:group-focus-within:opacity-100"
+									>
+										<ArrowUpRight className="size-4" strokeWidth={2.25} />
+									</a>
 									<div
 										className="w-full h-44 md:h-72"
 										style={{
