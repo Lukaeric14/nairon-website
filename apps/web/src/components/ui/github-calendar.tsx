@@ -183,7 +183,7 @@ export function GithubCalendar({
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 5, scale: 0.9 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute z-50 pointer-events-none px-3 py-1.5 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-xs rounded-md shadow-xl whitespace-nowrap"
+                            className="absolute z-50 pointer-events-none px-3 py-1.5 bg-zinc-900 text-[#1A1916] dark:bg-white dark:text-zinc-900 text-xs rounded-md shadow-xl whitespace-nowrap"
                             style={{
                                 left: mousePos.x,
                                 top: mousePos.y - 40,

@@ -39,13 +39,13 @@ export function PricingCard({
 						{data.price}
 					</div>
 					{data.priceSubtext && (
-						<p className="text-sm text-white/40 mt-2">
+						<p className="text-sm text-[#1A1916]/40 mt-2">
 							{data.priceSubtext}
 						</p>
 					)}
 
 					{/* Included */}
-					<p className="text-sm text-white/40 uppercase tracking-label mt-8 mb-4">
+					<p className="text-sm text-[#1A1916]/40 uppercase tracking-label mt-8 mb-4">
 						What&apos;s covered:
 					</p>
 					<div className="space-y-3">
@@ -59,8 +59,8 @@ export function PricingCard({
 					{/* Commitment (Residence only) */}
 					{data.commitment && data.commitment.length > 0 && (
 						<>
-							<div className="h-px bg-white/8 my-8" />
-							<p className="text-sm text-white/40 uppercase tracking-label mb-4">
+							<div className="h-px bg-[#0C0C0C]/8 my-8" />
+							<p className="text-sm text-[#1A1916]/40 uppercase tracking-label mb-4">
 								What we ask in return:
 							</p>
 							<div className="space-y-3">

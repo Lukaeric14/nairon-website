@@ -21,17 +21,17 @@ export const Route = createFileRoute("/$")({
 function NotFoundPage() {
 	return (
 		<ModalProvider>
-			<div className="min-h-screen bg-[#0C0C0C] text-[#E8E4DE] font-inter">
+			<div className="min-h-screen bg-white text-[#1A1916] font-inter">
 				<Navbar />
 				<main className="pt-32 pb-20 px-6">
 					<div className="max-w-2xl mx-auto text-center">
 						<p className="text-[#C9A96E] text-sm font-medium uppercase tracking-[0.16em] mb-4">
 							404
 						</p>
-						<h1 className="text-4xl md:text-6xl font-normal tracking-[-1.5px] text-[#E8E4DE] mb-6">
+						<h1 className="text-4xl md:text-6xl font-normal tracking-[-1.5px] text-[#1A1916] mb-6">
 							Page not found
 						</h1>
-						<p className="text-[#A39E96] text-lg leading-relaxed mb-10 max-w-md mx-auto">
+						<p className="text-[#5C584F] text-lg leading-relaxed mb-10 max-w-md mx-auto">
 							The page you're looking for doesn't exist or has been moved.
 						</p>
 
@@ -45,7 +45,7 @@ function NotFoundPage() {
 							</a>
 							<a 
 								href="/flux"
-								className="inline-flex items-center gap-2 border border-white/10 text-[#E8E4DE] hover:border-[#C9A96E]/50 hover:text-[#C9A96E] font-medium text-base px-6 py-3 rounded-full transition-colors"
+								className="inline-flex items-center gap-2 border border-[#0C0C0C]/10 text-[#1A1916] hover:border-[#C9A96E]/50 hover:text-[#C9A96E] font-medium text-base px-6 py-3 rounded-full transition-colors"
 							>
 								Explore Flux
 							</a>

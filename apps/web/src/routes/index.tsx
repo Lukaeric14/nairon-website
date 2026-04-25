@@ -2,17 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
 	Navbar,
 	HeroNew,
-	LogoStrip,
+	Qualifier,
 	WhyNairon,
-	DevComparison,
-	DevOutcome,
-	Process,
+	WhatWeDo,
 	SecuritySection,
-	DataCredibility,
-	AudienceSplit,
 	BuiltByBuilders,
 	AIFaqSection,
-	Testimonials,
 	CTASection,
 	Footer,
 	GridSystem,
@@ -36,7 +31,7 @@ export const Route = createFileRoute("/")({
 function HomePage() {
 	return (
 		<ModalProvider>
-			<div className="min-h-screen bg-[#0C0C0C] text-[#E8E4DE] font-inter">
+			<div className="min-h-screen bg-white text-[#1A1916] font-inter">
 				<Navbar />
 
 				<GridSystem className="pt-16 mt-12 md:mt-16">
@@ -44,23 +39,16 @@ function HomePage() {
 						<HeroNew />
 					</GridSection>
 
-						<GridSection columns="1fr" border>
-							<LogoStrip />
-						</GridSection>
+					<Qualifier />
 
-						<WhyNairon />
-						<Process />
-						<SecuritySection />
-						<DevComparison />
-						<DevOutcome />
-						<DataCredibility />
-						<BuiltByBuilders />
-						{/* <AudienceSplit /> */}
-						<Testimonials />
-						<AIFaqSection />
+					<WhyNairon />
+					<SecuritySection />
+					<WhatWeDo />
+					<BuiltByBuilders />
+					<AIFaqSection />
 
-						<GridSection columns="1fr" border={false}>
-							<CTASection />
+					<GridSection columns="1fr" border={false}>
+						<CTASection />
 					</GridSection>
 				</GridSystem>
 

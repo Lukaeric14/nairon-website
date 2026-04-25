@@ -11,7 +11,7 @@ export function HireHero() {
 			</div>
 			<div className="relative z-10 w-full max-w-[1440px]">
 				<h1
-					className="font-semibold text-white text-center text-4xl md:text-7xl lg:text-display-2xl tracking-tight-2xl"
+					className="font-semibold text-[#1A1916] text-center text-4xl md:text-7xl lg:text-display-2xl tracking-tight-2xl"
 					style={{
 						lineHeight: "1",
 					}}

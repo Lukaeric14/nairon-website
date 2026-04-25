@@ -1,6 +1,6 @@
 export function Marquee() {
 	return (
-		<section className="py-2.5 bg-black overflow-hidden">
+		<section className="py-2.5 bg-white overflow-hidden">
 			<div className="animate-marquee flex whitespace-nowrap">
 				{[1, 2, 3].map((i) => (
 					<span

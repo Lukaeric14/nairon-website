@@ -93,7 +93,7 @@ function TweetCard({
 }) {
 	return (
 		<div
-			className="relative bg-white/[0.02] border border-white/[0.06] rounded-xl p-5 transition-all duration-500 ease-out hover:border-white/[0.1]"
+			className="relative bg-[#0C0C0C]/[0.02] border border-[#0C0C0C]/[0.06] rounded-xl p-5 transition-all duration-500 ease-out hover:border-[#0C0C0C]/[0.1]"
 			style={{
 				opacity: isVisible ? 1 : 0,
 				transform: isVisible ? "translateY(0)" : "translateY(16px)",
@@ -112,26 +112,26 @@ function TweetCard({
 					/>
 					<div>
 						<div className="flex items-center gap-1.5">
-							<span className="text-[#E8E4DE] text-sm font-bold">
+							<span className="text-[#1A1916] text-sm font-bold">
 								{tweet.name}
 							</span>
 							{tweet.verified && <VerifiedBadge />}
 						</div>
-						<span className="text-[#A39E96]/60 text-[13px]">
+						<span className="text-[#5C584F]/60 text-[13px]">
 							{tweet.handle} &middot; {tweet.time}
 						</span>
 					</div>
 				</div>
-				<XIcon className="w-4 h-4 text-[#A39E96]/40" />
+				<XIcon className="w-4 h-4 text-[#5C584F]/40" />
 			</div>
 
 			{/* Tweet body */}
-			<p className="text-[#E8E4DE]/90 text-[14px] leading-[1.55] whitespace-pre-line mb-4">
+			<p className="text-[#1A1916]/90 text-[14px] leading-[1.55] whitespace-pre-line mb-4">
 				{tweet.text}
 			</p>
 
 			{/* Tweet engagement bar */}
-			<div className="flex items-center gap-6 text-[#A39E96]/40 pt-3 border-t border-white/[0.04]">
+			<div className="flex items-center gap-6 text-[#5C584F]/40 pt-3 border-t border-[#0C0C0C]/[0.04]">
 				{/* Replies */}
 				<div className="flex items-center gap-1.5 group cursor-pointer">
 					<svg
@@ -243,24 +243,24 @@ export function UniverseFeed() {
 						<div>
 							<div className="flex items-center gap-3 mb-4">
 								<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-								<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+								<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
 									Daily Feed
 								</span>
 							</div>
-							<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE] max-w-3xl mb-3">
+							<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl mb-3">
 								The pulse of{" "}
 								<span className="font-serif italic text-[#C9A96E]">
 									AI-native
 								</span>{" "}
 								engineering
 							</h2>
-							<p className="text-[#A39E96] text-base max-w-xl">
+							<p className="text-[#5C584F] text-base max-w-xl">
 								Curated daily from the engineers, researchers, and
 								builders shaping how software gets made. Every item
 								links to the tools that matter.
 							</p>
 						</div>
-						<div className="hidden md:flex items-center gap-2 text-[#A39E96] text-sm">
+						<div className="hidden md:flex items-center gap-2 text-[#5C584F] text-sm">
 							<div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
 							Live — refreshed every hour
 						</div>
@@ -273,7 +273,7 @@ export function UniverseFeed() {
 				{/* Left: Trending — styled sidebar */}
 				<GridCell borderRight className="py-6">
 					<div className="px-6 mb-5">
-						<h3 className="text-[#E8E4DE] text-sm font-semibold">
+						<h3 className="text-[#1A1916] text-sm font-semibold">
 							Trending Now
 						</h3>
 					</div>
@@ -281,7 +281,7 @@ export function UniverseFeed() {
 					{TRENDING.map((item, i) => (
 						<div
 							key={item.title}
-							className="group cursor-pointer px-6 py-4 transition-all duration-500 ease-out hover:bg-white/[0.03]"
+							className="group cursor-pointer px-6 py-4 transition-all duration-500 ease-out hover:bg-[#0C0C0C]/[0.03]"
 							style={{
 								opacity: isVisible ? 1 : 0,
 								transform: isVisible
@@ -290,17 +290,17 @@ export function UniverseFeed() {
 								transitionDelay: `${i * 120}ms`,
 								borderBottom:
 									i < TRENDING.length - 1
-										? "1px solid rgba(255, 255, 255, 0.04)"
+										? "1px solid rgba(12, 12, 12, 0.04)"
 										: "none",
 							}}
 						>
-							<span className="text-[#A39E96]/30 text-[11px] block mb-1">
+							<span className="text-[#5C584F]/30 text-[11px] block mb-1">
 								Trending in AI Engineering
 							</span>
-							<h4 className="text-[#E8E4DE] text-[15px] font-bold leading-snug group-hover:text-[#C9A96E] transition-colors">
+							<h4 className="text-[#1A1916] text-[15px] font-bold leading-snug group-hover:text-[#C9A96E] transition-colors">
 								{item.title}
 							</h4>
-							<span className="text-[#A39E96]/40 text-[12px] mt-0.5 block">
+							<span className="text-[#5C584F]/40 text-[12px] mt-0.5 block">
 								{item.posts}
 							</span>
 						</div>
@@ -317,12 +317,12 @@ export function UniverseFeed() {
 				<GridCell className="px-6 py-6 relative overflow-hidden">
 					<div className="flex items-center justify-between mb-4">
 						<div className="flex items-center gap-2">
-							<XIcon className="w-4 h-4 text-[#A39E96]/60" />
-							<h3 className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+							<XIcon className="w-4 h-4 text-[#5C584F]/60" />
+							<h3 className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
 								From the timeline
 							</h3>
 						</div>
-						<span className="text-[#A39E96]/40 text-xs">
+						<span className="text-[#5C584F]/40 text-xs">
 							Sourced from X
 						</span>
 					</div>

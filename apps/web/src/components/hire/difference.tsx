@@ -121,7 +121,7 @@ export function HireDifference() {
 				</p>
 				<a
 					href="/bookacall"
-					className="inline-flex items-center gap-2 bg-white/10 border border-white/12 text-white font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-white/15 transition-colors shrink-0"
+					className="inline-flex items-center gap-2 bg-[#0C0C0C]/10 border border-[#0C0C0C]/12 text-[#1A1916] font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-[#0C0C0C]/15 transition-colors shrink-0"
 				>
 					Meet the Engineers
 					<ArrowUpRight className="w-4 h-4" />
@@ -159,7 +159,7 @@ export function HireDifference() {
 			<div className="flex justify-center mt-12">
 				<a
 					href="/bookacall"
-					className="inline-flex items-center gap-2 bg-white/10 border border-white/12 text-white font-semibold text-base px-6 py-3 rounded-full hover:bg-white/15 transition-colors"
+					className="inline-flex items-center gap-2 bg-[#0C0C0C]/10 border border-[#0C0C0C]/12 text-[#1A1916] font-semibold text-base px-6 py-3 rounded-full hover:bg-[#0C0C0C]/15 transition-colors"
 				>
 					Meet the Engineers
 					<ArrowUpRight className="w-4 h-4" />

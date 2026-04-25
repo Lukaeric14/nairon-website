@@ -13,7 +13,7 @@ import type { ProgramData } from "@/data/programs";
 
 export function ProgramPage({ data }: { data: ProgramData }) {
 	return (
-		<div className="bg-[#0C0C0C] text-[#E8E4DE] min-h-screen font-inter">
+		<div className="bg-white text-[#1A1916] min-h-screen font-inter">
 			<Navbar />
 			<ProgramHero data={data.hero} />
 			<BentoGrid cards={data.bentoCards} />

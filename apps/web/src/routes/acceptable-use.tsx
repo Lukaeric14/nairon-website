@@ -29,20 +29,20 @@ export const Route = createFileRoute("/acceptable-use")({
 function AcceptableUsePage() {
 	return (
 		<ModalProvider>
-			<div className="min-h-screen bg-[#0C0C0C] text-[#E8E4DE] font-inter">
+			<div className="min-h-screen bg-white text-[#1A1916] font-inter">
 				<Navbar />
 				<main className="pt-32 pb-20 px-6">
 					<div className="max-w-3xl mx-auto">
-						<h1 className="text-4xl md:text-5xl font-normal tracking-[-1.5px] text-[#E8E4DE] mb-4">
+						<h1 className="text-4xl md:text-5xl font-normal tracking-[-1.5px] text-[#1A1916] mb-4">
 							Acceptable Use Policy
 						</h1>
-						<p className="text-[#A39E96] text-sm mb-12">
+						<p className="text-[#5C584F] text-sm mb-12">
 							Last updated: February 24, 2026
 						</p>
 
-						<div className="space-y-10 text-[#A39E96] text-base leading-relaxed">
+						<div className="space-y-10 text-[#5C584F] text-base leading-relaxed">
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									1. Purpose
 								</h2>
 								<p>
@@ -55,7 +55,7 @@ function AcceptableUsePage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									2. Prohibited Conduct
 								</h2>
 								<p className="mb-3">
@@ -64,43 +64,43 @@ function AcceptableUsePage() {
 								</p>
 								<ul className="list-disc pl-6 space-y-2">
 									<li>
-										<strong className="text-[#E8E4DE]">Misrepresentation</strong>{" "}
+										<strong className="text-[#1A1916]">Misrepresentation</strong>{" "}
 										— providing false, misleading, or fraudulent information in
 										your profile, resume, or any communication with Nairon AI
 										or prospective employers.
 									</li>
 									<li>
-										<strong className="text-[#E8E4DE]">Scraping and data harvesting</strong>{" "}
+										<strong className="text-[#1A1916]">Scraping and data harvesting</strong>{" "}
 										— using automated tools, bots, or scripts to scrape,
 										crawl, or extract data from our website, APIs, or platform
 										without prior written consent.
 									</li>
 									<li>
-										<strong className="text-[#E8E4DE]">Unauthorized access</strong>{" "}
+										<strong className="text-[#1A1916]">Unauthorized access</strong>{" "}
 										— attempting to gain access to accounts, systems, or data
 										that you are not authorized to access, including bypassing
 										authentication or security measures.
 									</li>
 									<li>
-										<strong className="text-[#E8E4DE]">Abuse of the benchmarking system</strong>{" "}
+										<strong className="text-[#1A1916]">Abuse of the benchmarking system</strong>{" "}
 										— manipulating, gaming, or falsifying NBench assessment
 										results, including but not limited to using unauthorized
 										assistance, submitting work completed by others, or
 										exploiting technical vulnerabilities.
 									</li>
 									<li>
-										<strong className="text-[#E8E4DE]">Spam and unsolicited communications</strong>{" "}
+										<strong className="text-[#1A1916]">Spam and unsolicited communications</strong>{" "}
 										— using our platform to send bulk unsolicited messages,
 										advertisements, or promotional content to other users.
 									</li>
 									<li>
-										<strong className="text-[#E8E4DE]">Illegal activity</strong>{" "}
+										<strong className="text-[#1A1916]">Illegal activity</strong>{" "}
 										— using our services for any purpose that violates
 										applicable laws or regulations, including those of the
 										United Arab Emirates.
 									</li>
 									<li>
-										<strong className="text-[#E8E4DE]">Disruption of services</strong>{" "}
+										<strong className="text-[#1A1916]">Disruption of services</strong>{" "}
 										— interfering with the availability, performance, or
 										security of our platform, including denial-of-service
 										attacks or introducing malicious code.
@@ -109,7 +109,7 @@ function AcceptableUsePage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									3. User-Generated Content
 								</h2>
 								<p className="mb-3">
@@ -140,7 +140,7 @@ function AcceptableUsePage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									4. Blog and Editorial Content
 								</h2>
 								<p>
@@ -154,7 +154,7 @@ function AcceptableUsePage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									5. Enforcement
 								</h2>
 								<p className="mb-3">
@@ -189,7 +189,7 @@ function AcceptableUsePage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									6. Reporting Violations
 								</h2>
 								<p>
@@ -200,7 +200,7 @@ function AcceptableUsePage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									7. Contact
 								</h2>
 								<p>

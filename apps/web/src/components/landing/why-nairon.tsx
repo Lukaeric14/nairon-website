@@ -1,243 +1,287 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { GridSection, GridCell, CornerNotches } from "./grid-system";
+import { GridSection, GridCell } from "./grid-system";
 
 const points = [
 	{
-		title: "Headcount alone does not scale execution",
+		title: "A ChatGPT Subscription Isn't Enough",
 		description:
-			"Most teams do not have a strategy problem. They have a capacity problem. Work stacks up in research, follow-up, coordination, and QA long before leadership can hire enough people to keep up.",
-		image: "/backgrounds/pastoral-hills.webp",
+			"Most businesses use AI to get information and generate media - but that barely scratches the surface of what AI can do in 2026. It still leaves every repetitive, multi-step workflow in your business still running on human effort.",
 	},
 	{
-		title: "Manual work creates invisible revenue leaks",
+		title: "AI Employees Close the Gap",
 		description:
-			"When the process depends on people doing every handoff manually, follow-up gets missed, turnaround slows down, and opportunities die quietly in the gaps between systems.",
-		image: "/backgrounds/hazy-landscape.webp",
+			"Our AI employees run on real hardware, operate 24/7, and handle end-to-end work independently. These are the kind of tasks that used to require a full-time hire.",
 	},
 	{
-		title: "AI employees give the team leverage without removing control",
+		title: "The Competitive Edge",
 		description:
-			"Your team stays in charge of decisions, approvals, and edge cases. AI employees take on the repetitive execution layer so humans can focus on judgment instead of busywork.",
-		image: "/backgrounds/rolling-hills.webp",
+			"The businesses that build AI infrastructure in 2026 will outpace their competition. They'll run leaner, move faster, and get more done with less overhead.",
 	},
 ];
 
-const tools = ["Cursor", "ChatGPT", "Claude Code"];
-const TOOL_CYCLE_DURATION = 2500; // ms per tool name
-const CYCLE_DURATION = 5000; // ms per card
+const CYCLE_MS = 7000;
+const FADE_MS = 800;
+// Arrow grow durations in ms. Middle card: horizontal only (500ms). Top/bottom: vertical
+// (0-500ms) + horizontal with 250ms delay (250-750ms), so the line hits the card at 750ms.
+const ARROW_REACH_IMMEDIATE_MS = 500;
+const ARROW_REACH_DELAYED_MS = 750;
+const reachFracFor = (idx: number) =>
+	(idx === 1 ? ARROW_REACH_IMMEDIATE_MS : ARROW_REACH_DELAYED_MS) / CYCLE_MS;
+
+function FanLines({ active, fadingIdx }: { active: number; fadingIdx: number | null }) {
+	// Card vertical centers (as % of section height). Cards are equal height (1/3 each).
+	const cardCenters = [100 / 6, 50, (5 * 100) / 6];
+	// Origin: branching point — right side of the title area, vertically centered
+	const originX = 52;
+	const originY = 50;
+	// Target: just past the column boundary (which is at 60% for a 3fr/2fr split)
+	const targetX = 60;
+	const color = "#C9A96E";
+	const thickness = 1.5; // px
+
+	const renderArrow = (cy: number, isActive: boolean, key: string) => {
+		const vTop = Math.min(originY, cy);
+		const vHeight = Math.abs(cy - originY);
+		const hasVertical = vHeight > 0.5;
+		// For the vertical segment, it grows from the origin toward the card
+		const vOrigin = cy < originY ? "bottom center" : "top center";
+
+		const wrapperClass = isActive
+			? "absolute inset-0 pointer-events-none"
+			: "absolute inset-0 pointer-events-none animate-line-fade-out";
+
+		return (
+			<div key={key} className={wrapperClass}>
+				{/* Vertical segment — grows from origin toward card's Y */}
+				{hasVertical && (
+					<div
+						className={`absolute ${isActive ? "animate-line-grow-y" : ""}`}
+						style={{
+							left: `${originX}%`,
+							top: `${vTop}%`,
+							width: `${thickness}px`,
+							marginLeft: `-${thickness / 2}px`,
+							height: `${vHeight}%`,
+							background: color,
+							transformOrigin: vOrigin,
+						}}
+					/>
+				)}
+				{/* Horizontal segment — grows from origin X to target X at the card's Y.
+				    Slight overshoot so it meets the card's animated vertical border without a sub-pixel gap. */}
+				<div
+					className={`absolute ${isActive ? (hasVertical ? "animate-line-grow-x" : "animate-line-grow-x-immediate") : ""}`}
+					style={{
+						left: `${originX}%`,
+						top: `${cy}%`,
+						width: `calc(${targetX - originX}% + 2px)`,
+						height: `${thickness}px`,
+						marginTop: `-${thickness / 2}px`,
+						background: color,
+						transformOrigin: "left center",
+					}}
+				/>
+			</div>
+		);
+	};
+
+	return (
+		<>
+			{/* Subtle origin marker — a small filled circle */}
+			<div
+				className="absolute z-10"
+				style={{
+					left: `${originX}%`,
+					top: `${originY}%`,
+					transform: "translate(-50%, -50%)",
+					width: "5px",
+					height: "5px",
+					borderRadius: "50%",
+					background: color,
+				}}
+			/>
+			{/* Faint origin halo for a softer feel */}
+			<div
+				className="absolute"
+				style={{
+					left: `${originX}%`,
+					top: `${originY}%`,
+					transform: "translate(-50%, -50%)",
+					width: "14px",
+					height: "14px",
+					borderRadius: "50%",
+					background: color,
+					opacity: 0.15,
+				}}
+			/>
+
+			{/* Active arrow — shoots out from the origin */}
+			{cardCenters.map((cy, i) =>
+				i === active ? renderArrow(cy, true, `active-${i}-${active}`) : null,
+			)}
+
+			{/* Fading arrow — stays drawn while opacity fades out */}
+			{cardCenters.map((cy, i) =>
+				i === fadingIdx && i !== active
+					? renderArrow(cy, false, `fading-${i}`)
+					: null,
+			)}
+		</>
+	);
+}
+
+function CardBorder({ progress, reachFrac }: { progress: number; reachFrac: number }) {
+	const p = Math.max(0, Math.min((progress - reachFrac) / (1 - reachFrac), 1));
+
+	// Arrow lands at the midpoint of the left edge. Draw clockwise from there:
+	// [0, 0.125] up half of left edge → [0.125, 0.375] top → [0.375, 0.625] right
+	// → [0.625, 0.875] bottom → [0.875, 1] up from bottom-left corner back to midpoint.
+	const leftTop    = Math.min(p / 0.125, 1) * 50;
+	const top        = Math.max(Math.min((p - 0.125) / 0.25, 1), 0) * 100;
+	const right      = Math.max(Math.min((p - 0.375) / 0.25, 1), 0) * 100;
+	const bottom     = Math.max(Math.min((p - 0.625) / 0.25, 1), 0) * 100;
+	const leftBottom = Math.max(Math.min((p - 0.875) / 0.125, 1), 0) * 50;
+
+	const c = "#C9A96E";
+
+	return (
+		<>
+			<div className="absolute left-0 w-[1.5px] pointer-events-none" style={{ bottom: "50%", height: `${leftTop}%`, background: c, transition: "none" }} />
+			<div className="absolute top-0 left-0 h-[1.5px] pointer-events-none" style={{ width: `${top}%`, background: c, transition: "none" }} />
+			<div className="absolute top-0 right-0 w-[1.5px] pointer-events-none" style={{ height: `${right}%`, background: c, transition: "none" }} />
+			<div className="absolute bottom-0 right-0 h-[1.5px] pointer-events-none" style={{ width: `${bottom}%`, background: c, transition: "none" }} />
+			<div className="absolute bottom-0 left-0 w-[1.5px] pointer-events-none" style={{ height: `${leftBottom}%`, background: c, transition: "none" }} />
+		</>
+	);
+}
 
 export function WhyNairon() {
 	const [active, setActive] = useState(0);
 	const [progress, setProgress] = useState(0);
-	const [paused, setPaused] = useState(false);
-	const startTimeRef = useRef(Date.now());
-	const pausedProgressRef = useRef(0);
-	const [activeTool, setActiveTool] = useState(0);
+	const [fadingIdx, setFadingIdx] = useState<number | null>(null);
+	const activeRef = useRef(0);
+	const startRef = useRef(Date.now());
+	const rafRef = useRef<number>(0);
+	const fadeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-	// Cycle through tool names
-	useEffect(() => {
-		const timer = setInterval(() => {
-			setActiveTool((prev) => (prev + 1) % tools.length);
-		}, TOOL_CYCLE_DURATION);
-		return () => clearInterval(timer);
+	const goTo = useCallback((idx: number) => {
+		const prev = activeRef.current;
+		if (prev !== idx) {
+			setFadingIdx(prev);
+			if (fadeTimerRef.current) clearTimeout(fadeTimerRef.current);
+			fadeTimerRef.current = setTimeout(() => setFadingIdx(null), FADE_MS);
+		}
+		activeRef.current = idx;
+		setActive(idx);
+		setProgress(0);
+		startRef.current = Date.now();
 	}, []);
 
 	const advance = useCallback(() => {
-		setActive((prev) => (prev + 1) % points.length);
-		setProgress(0);
-		startTimeRef.current = Date.now();
-		pausedProgressRef.current = 0;
-	}, []);
+		goTo((activeRef.current + 1) % points.length);
+	}, [goTo]);
 
-	// Auto-cycle timer
 	useEffect(() => {
-		if (paused) return;
-
-		startTimeRef.current = Date.now();
-		const remaining = CYCLE_DURATION * (1 - pausedProgressRef.current);
-
-		const timer = setTimeout(() => {
-			advance();
-		}, remaining);
-
+		const timer = setTimeout(advance, CYCLE_MS);
 		return () => clearTimeout(timer);
-	}, [active, paused, advance]);
+	}, [active, advance]);
 
-	// Progress animation frame
 	useEffect(() => {
-		if (paused) return;
-
-		let raf: number;
-		const baseProgress = pausedProgressRef.current;
-		const start = Date.now();
-		const remaining = CYCLE_DURATION * (1 - baseProgress);
-
 		const tick = () => {
-			const elapsed = Date.now() - start;
-			const p = Math.min(baseProgress + (elapsed / remaining) * (1 - baseProgress), 1);
-			setProgress(p);
-			if (p < 1) raf = requestAnimationFrame(tick);
+			setProgress(Math.min((Date.now() - startRef.current) / CYCLE_MS, 1));
+			rafRef.current = requestAnimationFrame(tick);
 		};
-
-		raf = requestAnimationFrame(tick);
-		return () => cancelAnimationFrame(raf);
-	}, [active, paused]);
-
-	const handleCardClick = (index: number) => {
-		if (index === active) return;
-		setActive(index);
-		setProgress(0);
-		startTimeRef.current = Date.now();
-		pausedProgressRef.current = 0;
-	};
-
-	const handleMouseEnter = () => {
-		setPaused(true);
-		pausedProgressRef.current = progress;
-	};
-
-	const handleMouseLeave = () => {
-		pausedProgressRef.current = progress;
-		setPaused(false);
-	};
+		rafRef.current = requestAnimationFrame(tick);
+		return () => cancelAnimationFrame(rafRef.current);
+	}, [active]);
 
 	return (
-		<div>
-			{/* Title row */}
-			<GridSection columns="1fr" border>
-				<GridCell className="px-6 md:px-12 py-8 md:py-10">
-					<div className="flex items-center gap-3 mb-4">
-						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
-							Why they need it
-						</span>
+		<div className="relative">
+			{/* Unified 2-column layout: title on left (wider), cards on right (narrower) */}
+			<GridSection columns="3fr 2fr" border>
+				{/* Left — title */}
+				<GridCell borderRight className="relative overflow-hidden flex flex-col justify-center">
+					<div className="relative px-6 md:px-12 py-10 md:py-16">
+						<div className="flex items-center gap-3 mb-6">
+							<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
+							<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
+								The problem we see
+							</span>
+						</div>
+						<h2 className="text-2xl md:text-[36px] md:leading-[44px] font-normal tracking-[-0.48px] text-[#1A1916]">
+							1 in 5 Businesses{" "}
+							<span className="font-serif italic text-[#C9A96E] text-[1.1em]">Use AI in 2026</span>
+							<br />
+							Only 1 in 100 to its{" "}
+							<span className="font-serif italic text-[#C9A96E] text-[1.1em]">Full Potential</span>
+						</h2>
 					</div>
-					<h2 className="text-3xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE] max-w-3xl">
-						Using{" "}
-						<span className="inline-block relative font-serif italic text-[#C9A96E]">
-							{/* Invisible sizer — longest tool name reserves width */}
-							<span className="invisible whitespace-nowrap">{tools.reduce((a, b) => a.length >= b.length ? a : b)}</span>
-							{tools.map((tool) => (
-								<span
-									key={tool}
-									className="absolute left-0 top-0 transition-all duration-500 ease-in-out whitespace-nowrap"
-									style={{
-										opacity: tools[activeTool] === tool ? 1 : 0,
-										transform: tools[activeTool] === tool ? "translateY(0)" : "translateY(8px)",
-									}}
-								>
-									{tool}
-								</span>
-							))}
-						</span>
-						<br />
-						doesn&#8217;t fix the execution bottleneck
-					</h2>
-				</GridCell>
-			</GridSection>
-
-			{/* Mobile: cards first, image second. Desktop: image left + cards right */}
-			<GridSection columns="1fr 1fr" border>
-				{/* Image — order-2 on mobile (below cards), order-1 on md+ (left) */}
-				<GridCell borderRight className="relative min-h-[280px] md:min-h-[480px] overflow-hidden order-2 md:order-1">
-					{points.map((point, i) => (
-						<img
-							key={point.image}
-							src={point.image}
-							alt=""
-							width={800}
-							height={800}
-							className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-							style={{ opacity: active === i ? 1 : 0 }}
-							loading="lazy"
-						/>
-					))}
-					<div
-						className="absolute inset-0"
-						style={{
-							background:
-								"linear-gradient(to bottom, rgba(12,12,12,0.1) 0%, rgba(12,12,12,0.25) 100%)",
-						}}
-					/>
 				</GridCell>
 
-				{/* Cards — order-1 on mobile (above image), order-2 on md+ (right) */}
-				<GridCell className="flex flex-col order-1 md:order-2">
+				{/* Right — stacked cards */}
+				<GridCell className="flex flex-col">
 					{points.map((point, i) => {
 						const isActive = active === i;
-						const cardProgress = isActive ? progress : i < active ? 1 : 0;
+						const isFading = fadingIdx === i;
+						// When fading, freeze progress at 1 so the fully-drawn border fades out
+						const cardProgress = isActive ? progress : isFading ? 1 : 0;
+						const showBorder = isActive || isFading;
 
 						return (
 							<button
 								type="button"
 								key={point.title}
-								className="relative flex-1 px-6 py-6 md:px-12 md:py-10 flex flex-col justify-center text-left transition-colors duration-300 cursor-pointer"
+								onClick={() => goTo(i)}
+								className="relative flex-1 px-8 md:px-10 py-10 md:py-14 text-left transition-colors duration-700 cursor-pointer overflow-hidden flex items-center justify-start"
 								style={{
 									borderBottom:
 										i < points.length - 1
 											? "var(--guide-width) solid var(--guide-color)"
 											: "none",
 									background: isActive
-										? "rgba(255, 255, 255, 0.03)"
+										? "rgba(201,169,110,0.03)"
 										: "transparent",
 								}}
-								onClick={() => handleCardClick(i)}
-								onMouseEnter={handleMouseEnter}
-								onMouseLeave={handleMouseLeave}
 							>
-								<CornerNotches
-									size={10}
-									corners={["top-right", "bottom-right"]}
-									color={
-										isActive
-											? "rgba(201, 169, 110, 0.3)"
-											: "rgba(255, 255, 255, 0.12)"
-									}
-								/>
-
-								{/* Gold progress line on the left */}
-								<div
-									className="absolute left-0 top-0 w-[2px] transition-colors duration-300"
-									style={{
-										height: `${cardProgress * 100}%`,
-										background:
-											cardProgress > 0
-												? "linear-gradient(to bottom, rgba(201, 169, 110, 0.1), #C9A96E)"
-												: "transparent",
-									}}
-								/>
-
-								{/* Static left border hint for inactive cards */}
-								{!isActive && i < active && (
+								{/* Animated border drawing — wrapped in opacity container for fade-out */}
+								{showBorder && (
 									<div
-										className="absolute left-0 top-0 w-[2px] h-full"
-										style={{ background: "rgba(201, 169, 110, 0.15)" }}
-									/>
+										className="absolute inset-0 pointer-events-none"
+										style={{
+											opacity: isActive ? 1 : 0,
+											transition: `opacity ${FADE_MS}ms ease`,
+										}}
+									>
+										<CardBorder progress={cardProgress} reachFrac={reachFracFor(i)} />
+									</div>
 								)}
 
-								<h3
-									className="text-lg md:text-2xl font-normal mb-2 md:mb-3 transition-colors duration-300"
+								<div
+									className="w-full transition-all duration-500"
 									style={{
-										color: isActive ? "#E8E4DE" : "#A39E96",
+										opacity: isActive ? 1 : 0.35,
+										transform: isActive ? "scale(1)" : "scale(0.97)",
+										transformOrigin: "center left",
 									}}
 								>
-									{point.title}
-								</h3>
-								<p
-									className="text-sm md:text-base leading-relaxed transition-colors duration-300"
-									style={{
-										color: isActive
-											? "rgba(163, 158, 150, 1)"
-											: "rgba(163, 158, 150, 0.6)",
-									}}
-								>
-									{point.description}
-								</p>
+									<h3 className="text-base md:text-[17px] font-semibold text-[#1A1916] mb-3 leading-snug whitespace-nowrap">
+										<span className="text-[#C9A96E] mr-2">{i + 1}.0</span>
+										{point.title}
+									</h3>
+									<p className="text-sm text-[#5C584F] leading-relaxed">
+										{point.description}
+									</p>
+								</div>
 							</button>
 						);
 					})}
 				</GridCell>
 			</GridSection>
+
+			{/* Fan of arrows emanating from the title area out to each card — only active arrow visible */}
+			<div className="hidden md:block absolute inset-0 pointer-events-none z-10">
+				<FanLines active={active} fadingIdx={fadingIdx} />
+			</div>
 		</div>
 	);
 }

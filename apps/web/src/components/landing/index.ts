@@ -24,6 +24,8 @@ export { DevOutcome } from "./dev-outcome";
 export { FluxSection } from "./flux-section";
 export { PaintingBreak } from "./painting-break";
 export { BuiltByBuilders } from "./built-by-builders";
+export { Qualifier } from "./qualifier";
+export { LivesAndWorks } from "./lives-and-works";
 export { AIFaqSection } from "./ai-faq-section";
 export { BlogSection } from "./blog-section";
 export {

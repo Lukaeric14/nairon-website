@@ -13,7 +13,7 @@ function StepItem({
 	title,
 }: { number: string; title: string }) {
 	return (
-		<div className="flex items-center gap-4 md:gap-6 py-4 md:py-6 border-b border-white/8">
+		<div className="flex items-center gap-4 md:gap-6 py-4 md:py-6 border-b border-[#0C0C0C]/8">
 			<span className={`text-base md:text-lg font-medium ${colors.textMuted}`}>
 				{number}
 			</span>
@@ -34,12 +34,12 @@ function ReviewSection() {
 				{PROGRAM_REVIEW.intro}
 				{PROGRAM_REVIEW.boldWords.map((word, i) => (
 					<span key={word}>
-						<strong className="text-white font-bold">{word}</strong>
+						<strong className="text-[#1A1916] font-bold">{word}</strong>
 						{i < PROGRAM_REVIEW.boldWords.length - 1 ? ", " : ""}
 					</span>
 				))}
 				{PROGRAM_REVIEW.suffix}
-				<strong className="text-white font-bold">
+				<strong className="text-[#1A1916] font-bold">
 					{PROGRAM_REVIEW.boldEnd}
 				</strong>{" "}
 				{PROGRAM_REVIEW.afterBold}
@@ -51,7 +51,7 @@ function ReviewSection() {
 						key={item}
 						className="flex items-start gap-3"
 					>
-						<span className="text-white/40 mt-1">&#x2022;</span>
+						<span className="text-[#1A1916]/40 mt-1">&#x2022;</span>
 						<p className={`text-sm md:text-base ${colors.textBody}`}>{item}</p>
 					</li>
 				))}

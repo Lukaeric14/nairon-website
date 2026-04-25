@@ -51,18 +51,18 @@ function TeamMemberCard({
 					href={linkedin}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="absolute bottom-4 right-4 w-10 h-10 flex items-center justify-center text-white hover:text-white/80 transition-colors"
+					className="absolute bottom-4 right-4 w-10 h-10 flex items-center justify-center text-[#1A1916] hover:text-[#1A1916]/80 transition-colors"
 					aria-label={`${name} LinkedIn`}
 				>
 					<LinkedInIcon className="w-6 h-6" />
 				</a>
 			</div>
 			<h4
-				className="font-semibold text-sm md:text-xl text-white tracking-tighter"
+				className="font-semibold text-sm md:text-xl text-[#1A1916] tracking-tighter"
 			>
 				{name}
 			</h4>
-			<p className="text-xs md:text-base text-white/55">{role}</p>
+			<p className="text-xs md:text-base text-[#1A1916]/55">{role}</p>
 		</div>
 	);
 }
@@ -78,13 +78,13 @@ function FeaturedMemberCard() {
 					className="w-full aspect-square object-cover rounded-2xl mb-6"
 					loading="lazy"
 				/>
-				<p className="text-base text-white/55 mb-3">Get in touch</p>
+				<p className="text-base text-[#1A1916]/55 mb-3">Get in touch</p>
 				<div className="flex gap-3">
 					<a
 						href={FEATURED_MEMBER.linkedin}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="w-10 h-10 rounded-lg border border-white/10 flex items-center justify-center text-landing-text hover:bg-white/5 transition-colors"
+						className="w-10 h-10 rounded-lg border border-[#0C0C0C]/10 flex items-center justify-center text-landing-text hover:bg-[#0C0C0C]/5 transition-colors"
 						aria-label="LinkedIn"
 					>
 						<LinkedInIcon className="w-5 h-5" />
@@ -93,7 +93,7 @@ function FeaturedMemberCard() {
 						href={FEATURED_MEMBER.twitter}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="w-10 h-10 rounded-lg border border-white/10 flex items-center justify-center text-landing-text hover:bg-white/5 transition-colors"
+						className="w-10 h-10 rounded-lg border border-[#0C0C0C]/10 flex items-center justify-center text-landing-text hover:bg-[#0C0C0C]/5 transition-colors"
 						aria-label="X / Twitter"
 					>
 						<XIcon className="w-5 h-5" />
@@ -105,12 +105,12 @@ function FeaturedMemberCard() {
 			<div className="flex-1 flex flex-col">
 				<div className="mb-6">
 					<h2
-						className="text-4xl md:text-[56px] font-medium text-white leading-tight tracking-tight-xl"
+						className="text-4xl md:text-[56px] font-medium text-[#1A1916] leading-tight tracking-tight-xl"
 					>
 						{FEATURED_MEMBER.name}
 					</h2>
 					<h3
-						className="text-xl md:text-2xl font-medium text-white/55 mt-2 tracking-tighter"
+						className="text-xl md:text-2xl font-medium text-[#1A1916]/55 mt-2 tracking-tighter"
 					>
 						{FEATURED_MEMBER.title}
 					</h3>

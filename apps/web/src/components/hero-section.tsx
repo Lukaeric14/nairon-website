@@ -76,7 +76,7 @@ export default function HeroSection() {
   return (
     <main role="main" className="overflow-hidden">
       <section>
-        <div className="bg-[#0C0C0C] pt-24 sm:pt-32 lg:pt-44">
+        <div className="bg-white pt-24 sm:pt-32 lg:pt-44">
           <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-12">
             <div className="text-center">
               {/* Version pill */}
@@ -127,7 +127,7 @@ export default function HeroSection() {
                 ))}
               </div>
 
-              <h1 className="mx-auto text-balance text-[32px] leading-[36px] sm:text-[40px] sm:leading-[44px] md:text-[56px] md:leading-[60px] lg:text-[72px] lg:leading-[76px] font-normal tracking-[-1.5px] md:tracking-[-2.4px] text-[#E8E4DE]">
+              <h1 className="mx-auto text-balance text-[32px] leading-[36px] sm:text-[40px] sm:leading-[44px] md:text-[56px] md:leading-[60px] lg:text-[72px] lg:leading-[76px] font-normal tracking-[-1.5px] md:tracking-[-2.4px] text-[#1A1916]">
                 Build software{" "}
                 <span className="font-serif italic text-[#C9A96E]">
                   reliably
@@ -136,7 +136,7 @@ export default function HeroSection() {
               </h1>
 
               <div className="mx-auto mb-8 sm:mb-12 mt-6 max-w-2xl">
-                <p className="text-lg md:text-xl text-[#A39E96] leading-relaxed mb-6 sm:mb-8 px-2 sm:px-0">
+                <p className="text-lg md:text-xl text-[#5C584F] leading-relaxed mb-6 sm:mb-8 px-2 sm:px-0">
                   Flux is the missing (self-improving) harness for Coding Agents. Build software{" "}
                   <span className="font-serif italic text-[#C9A96E]">
                     deterministically
@@ -183,10 +183,10 @@ export default function HeroSection() {
                 <div className="bg-card ring-border flex size-8 items-center justify-center rounded-md shadow ring-1 *:size-4">
                   {feature.icon}
                 </div>
-                <h2 className="text-base sm:text-lg font-medium text-[#E8E4DE]">
+                <h2 className="text-base sm:text-lg font-medium text-[#1A1916]">
                   {feature.title}
                 </h2>
-                <p className="text-[#A39E96] text-sm">{feature.description}</p>
+                <p className="text-[#5C584F] text-sm">{feature.description}</p>
               </div>
             ))}
           </div>

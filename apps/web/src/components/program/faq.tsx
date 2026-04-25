@@ -14,7 +14,7 @@ function FAQItemComponent({ item }: { item: FAQItem }) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
-		<div className="border-b border-white/8">
+		<div className="border-b border-[#0C0C0C]/8">
 			<button
 				type="button"
 				onClick={() => setIsOpen(!isOpen)}
@@ -26,9 +26,9 @@ function FAQItemComponent({ item }: { item: FAQItem }) {
 					{item.question}
 				</h3>
 				{isOpen ? (
-					<Minus className="w-5 h-5 text-white/40 shrink-0" />
+					<Minus className="w-5 h-5 text-[#1A1916]/40 shrink-0" />
 				) : (
-					<Plus className="w-5 h-5 text-white/40 shrink-0" />
+					<Plus className="w-5 h-5 text-[#1A1916]/40 shrink-0" />
 				)}
 			</button>
 			<div className="faq-answer" data-open={isOpen}>

@@ -57,14 +57,14 @@ export default function ExpandableFeatures() {
   return (
     <section
       id="flux-architecture"
-      className="bg-[#0C0C0C] @container scroll-mt-28 pt-24"
+      className="bg-white @container scroll-mt-28 pt-24"
     >
       <div className="mx-auto max-w-5xl px-6">
         <div className="max-w-lg">
-          <h2 className="text-[28px] leading-[32px] md:text-[40px] md:leading-[44px] font-normal tracking-[-1px] text-[#E8E4DE]">
+          <h2 className="text-[28px] leading-[32px] md:text-[40px] md:leading-[44px] font-normal tracking-[-1px] text-[#1A1916]">
             <span className="font-serif italic text-[#C9A96E]">Architecture</span>
           </h2>
-          <p className="text-[#A39E96] mx-auto mt-3 max-w-lg text-lg">
+          <p className="text-[#5C584F] mx-auto mt-3 max-w-lg text-lg">
             Three connected layers: project-local runtime, recommendation engine, and
             enterprise observability.
           </p>
@@ -195,8 +195,8 @@ export default function ExpandableFeatures() {
                                   Coming Soon
                                 </span>
                               )}
-                              <p className="text-[#A39E96] max-w-md">
-                                <strong className="text-[#E8E4DE] font-medium">
+                              <p className="text-[#5C584F] max-w-md">
+                                <strong className="text-[#1A1916] font-medium">
                                   {feature.title}.
                                 </strong>{" "}
                                 {feature.description}
@@ -289,7 +289,7 @@ export default function ExpandableFeatures() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.25 }}
-                      className="text-[#A39E96] text-balance text-xs mt-3"
+                      className="text-[#5C584F] text-balance text-xs mt-3"
                     >
                       {features[expandedIndex].callout}
                     </motion.p>

@@ -464,15 +464,15 @@ function CircuitDiagram({ item }: { item: CommandItem }) {
 	};
 
 	return (
-		<div ref={rootRef} className="rounded-2xl border border-white/[0.08] bg-[rgba(12,12,12,0.6)] p-4 md:p-6">
+		<div ref={rootRef} className="rounded-2xl border border-[#0C0C0C]/[0.08] bg-[rgba(12,12,12,0.6)] p-4 md:p-6">
 			{/* Header */}
 			<div className="mb-6">
-				<h3 className="text-base font-medium text-white/90 md:text-lg">{item.scenarioTitle}</h3>
-				<p className="mt-1 text-sm text-white/50">{item.scenarioSubtitle}</p>
+				<h3 className="text-base font-medium text-[#1A1916]/90 md:text-lg">{item.scenarioTitle}</h3>
+				<p className="mt-1 text-sm text-[#1A1916]/50">{item.scenarioSubtitle}</p>
 			</div>
 
 			{/* Circuit Board SVG */}
-			<div className="relative overflow-hidden rounded-xl border border-white/[0.06] bg-[rgba(8,8,8,0.8)] p-4">
+			<div className="relative overflow-hidden rounded-xl border border-[#0C0C0C]/[0.06] bg-[rgba(8,8,8,0.8)] p-4">
 				<svg viewBox="0 0 660 230" className="w-full" style={{ overflow: "visible" }}>
 					<defs>
 						{/* Grid pattern */}
@@ -666,7 +666,7 @@ function CircuitDiagram({ item }: { item: CommandItem }) {
 									height={size - 4}
 									rx={6}
 									fill="none"
-									stroke="rgba(255,255,255,0.05)"
+									stroke="rgba(12, 12, 12, 0.05)"
 									strokeWidth="1"
 								/>
 
@@ -696,27 +696,27 @@ function CircuitDiagram({ item }: { item: CommandItem }) {
 							key={step.label}
 							className={`flow-row rounded-lg border px-3 py-2.5 transition-all duration-300 ${
 								isActive
-									? "border-white/[0.12] bg-white/[0.04]"
-									: "border-white/[0.06] bg-transparent"
+									? "border-[#0C0C0C]/[0.12] bg-[#0C0C0C]/[0.04]"
+									: "border-[#0C0C0C]/[0.06] bg-transparent"
 							}`}
 						>
 							<div className="flex items-center gap-2">
 								<span
 									className={`flex h-5 w-5 items-center justify-center rounded font-mono text-[10px] ${
-										isActive ? "bg-white/10 text-white/80" : "bg-white/[0.04] text-white/40"
+										isActive ? "bg-[#0C0C0C]/10 text-[#1A1916]/80" : "bg-[#0C0C0C]/[0.04] text-[#1A1916]/40"
 									}`}
 								>
 									{i + 1}
 								</span>
 								<p
 									className={`font-mono text-[11px] ${
-										isActive ? "text-white/80" : "text-white/40"
+										isActive ? "text-[#1A1916]/80" : "text-[#1A1916]/40"
 									}`}
 								>
 									{step.label}
 								</p>
 							</div>
-							<p className="mt-1 pl-7 text-[11px] text-white/40">{step.detail}</p>
+							<p className="mt-1 pl-7 text-[11px] text-[#1A1916]/40">{step.detail}</p>
 						</div>
 					);
 				})}
@@ -734,17 +734,17 @@ export function FluxWorkflow() {
 	);
 
 	return (
-		<section id="workflow" className="bg-[#0C0C0C] @container py-16 md:py-24 lg:py-32">
+		<section id="workflow" className="bg-white @container py-16 md:py-24 lg:py-32">
 			<div className="mx-auto max-w-5xl px-6">
 				<div className="mx-auto mb-12 max-w-2xl text-center">
 					<div className="mx-auto mb-6 w-fit rounded-full border border-[#C9A96E]/20 bg-[#C9A96E]/10 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-[#C9A96E]">
 						Deterministic SDLC Layer
 					</div>
-					<h2 className="text-[28px] leading-[32px] md:text-[40px] md:leading-[44px] font-normal tracking-[-1px] text-[#E8E4DE]">
+					<h2 className="text-[28px] leading-[32px] md:text-[40px] md:leading-[44px] font-normal tracking-[-1px] text-[#1A1916]">
 						Flux steers the agent with{" "}
 						<span className="font-serif italic text-[#C9A96E]">flow</span>
 					</h2>
-					<p className="mt-4 text-lg text-[#A39E96]">
+					<p className="mt-4 text-lg text-[#5C584F]">
 						You should not have to remember slash commands. Flux reads repo state, primes first, routes natural-language intent, and keeps the software loop aligned over time.
 					</p>
 				</div>
@@ -761,24 +761,24 @@ export function FluxWorkflow() {
 								onClick={() => setActiveCommand(item.command)}
 								className={`group rounded-xl border p-4 text-left transition-all duration-200 ${
 									active
-										? "border-white/20 bg-white/[0.06]"
-										: "border-white/[0.06] bg-white/[0.02] hover:border-white/[0.12] hover:bg-white/[0.04]"
+										? "border-[#0C0C0C]/20 bg-[#0C0C0C]/[0.06]"
+										: "border-[#0C0C0C]/[0.06] bg-[#0C0C0C]/[0.02] hover:border-[#0C0C0C]/[0.12] hover:bg-[#0C0C0C]/[0.04]"
 								}`}
 							>
 								<div className="mb-3 flex items-center gap-2">
 									<div
 										className={`flex h-7 w-7 items-center justify-center rounded-lg border ${
-											active ? "border-white/20 bg-white/10" : "border-white/[0.08] bg-white/[0.04]"
+											active ? "border-[#0C0C0C]/20 bg-[#0C0C0C]/10" : "border-[#0C0C0C]/[0.08] bg-[#0C0C0C]/[0.04]"
 										}`}
 									>
-										<Icon className={`h-3.5 w-3.5 ${active ? "text-white/80" : "text-white/50"}`} />
+										<Icon className={`h-3.5 w-3.5 ${active ? "text-[#1A1916]/80" : "text-[#1A1916]/50"}`} />
 									</div>
-									<span className="font-mono text-[11px] text-white/40">{item.number}.</span>
+									<span className="font-mono text-[11px] text-[#1A1916]/40">{item.number}.</span>
 								</div>
-								<p className={`text-sm font-medium ${active ? "text-white/90" : "text-white/70"}`}>
+								<p className={`text-sm font-medium ${active ? "text-[#1A1916]/90" : "text-[#1A1916]/70"}`}>
 									{item.title}
 								</p>
-								<p className={`mt-2 text-[11px] leading-5 ${active ? "text-white/55" : "text-white/40"}`}>
+								<p className={`mt-2 text-[11px] leading-5 ${active ? "text-[#1A1916]/55" : "text-[#1A1916]/40"}`}>
 									{item.command}
 								</p>
 							</button>
@@ -793,12 +793,12 @@ export function FluxWorkflow() {
 
 				{/* Footer info */}
 				<div className="mt-6 grid gap-3 md:grid-cols-[1.2fr_1fr]">
-					<div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-						<p className="text-sm text-white/50">{activeItem.description}</p>
+					<div className="rounded-xl border border-[#0C0C0C]/[0.06] bg-[#0C0C0C]/[0.02] p-4">
+						<p className="text-sm text-[#1A1916]/50">{activeItem.description}</p>
 					</div>
-					<div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-						<p className="font-mono text-[10px] uppercase tracking-wider text-white/40">Current behavior</p>
-						<p className="mt-2 rounded border border-white/[0.08] bg-white/[0.04] px-3 py-2 text-sm text-white/70">
+					<div className="rounded-xl border border-[#0C0C0C]/[0.06] bg-[#0C0C0C]/[0.02] p-4">
+						<p className="font-mono text-[10px] uppercase tracking-wider text-[#1A1916]/40">Current behavior</p>
+						<p className="mt-2 rounded border border-[#0C0C0C]/[0.08] bg-[#0C0C0C]/[0.04] px-3 py-2 text-sm text-[#1A1916]/70">
 							{activeItem.command}
 						</p>
 					</div>

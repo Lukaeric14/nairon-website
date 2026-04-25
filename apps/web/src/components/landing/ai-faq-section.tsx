@@ -57,42 +57,48 @@ const FAQ_ITEMS = [
 export function AIFaqSection() {
 	return (
 		<div id="faq" className="scroll-mt-24 md:scroll-mt-28">
-			<GridSection columns="5fr 7fr" border>
-				<GridCell borderRight className="px-6 py-8 md:px-12 md:py-12">
-					<div className="md:sticky md:top-24">
-						<div className="mb-4 flex items-center gap-3 md:mb-6">
-							<div className="h-1.5 w-1.5 rounded-full bg-[#C9A96E]" />
-							<span className="text-xs font-medium uppercase tracking-[0.16em] text-[#A39E96]">
-								FAQ
-							</span>
-						</div>
-						<h2 className="text-3xl font-normal tracking-[-0.48px] text-[#E8E4DE] md:text-[48px] md:leading-[57.6px]">
-							Top questions before you{" "}
-							<span className="font-serif italic text-[#C9A96E]">deploy</span>
-						</h2>
-						<p className="mt-5 max-w-md text-sm leading-relaxed text-[#A39E96] md:text-base">
-							These are the questions that come up most often once teams understand the model
-							and start thinking seriously about putting AI employees into production.
-						</p>
+			<GridSection columns="1fr" border>
+				<GridCell className="px-6 pt-8 pb-4 md:px-12 md:pt-14 md:pb-6">
+					<div className="mb-4 flex items-center gap-3 md:mb-6">
+						<div className="h-1.5 w-1.5 rounded-full bg-[#C9A96E]" />
+						<span className="text-xs font-medium uppercase tracking-[0.16em] text-[#5C584F]">
+							FAQ
+						</span>
 					</div>
+					<h2 className="text-3xl font-normal tracking-[-0.48px] text-[#1A1916] md:text-[48px] md:leading-[57.6px]">
+						Top Questions Before{" "}
+						<span className="font-serif italic text-[#C9A96E] text-[1.1em]">You Deploy</span>
+					</h2>
 				</GridCell>
 
-				<GridCell className="px-6 py-4 md:px-12 md:py-12">
-					<Accordion type="single" collapsible className="space-y-3">
-						{FAQ_ITEMS.map((item, index) => (
-							<AccordionItem
-								key={item.question}
-								value={`faq-${index}`}
-								className="rounded-[28px] border border-white/8 bg-white/[0.03] px-5 md:px-6"
-							>
-								<AccordionTrigger className="cursor-pointer py-5 text-left text-base font-normal text-[#E8E4DE] transition-none hover:no-underline md:py-6 md:text-[18px]">
-									{item.question}
-								</AccordionTrigger>
-								<AccordionContent className="pb-5 text-sm leading-relaxed text-[#A39E96] md:pb-6 md:text-base">
-									{item.answer}
-								</AccordionContent>
-							</AccordionItem>
-						))}
+				<GridCell className="px-6 pt-4 pb-10 md:px-12 md:pt-6 md:pb-14">
+					<Accordion type="single" collapsible>
+						<AccordionItem
+							value="faq-all"
+							className="rounded-[28px] border border-[#0C0C0C]/8 bg-[#0C0C0C]/[0.03] px-5 md:px-6"
+						>
+							<AccordionTrigger className="cursor-pointer py-5 text-left text-base font-medium text-[#1A1916] transition-none hover:no-underline md:py-6 md:text-[18px]">
+								Frequently Asked Questions
+							</AccordionTrigger>
+							<AccordionContent className="pb-5 md:pb-6">
+								<Accordion type="single" collapsible className="space-y-3">
+									{FAQ_ITEMS.map((item, index) => (
+										<AccordionItem
+											key={item.question}
+											value={`faq-${index}`}
+											className="rounded-[20px] border border-[#0C0C0C]/8 bg-white/60 px-4 md:px-5"
+										>
+											<AccordionTrigger className="cursor-pointer py-4 text-left text-sm font-normal text-[#1A1916] transition-none hover:no-underline md:py-5 md:text-base">
+												{item.question}
+											</AccordionTrigger>
+											<AccordionContent className="pb-4 text-sm leading-relaxed text-[#5C584F] md:pb-5 md:text-base">
+												{item.answer}
+											</AccordionContent>
+										</AccordionItem>
+									))}
+								</Accordion>
+							</AccordionContent>
+						</AccordionItem>
 					</Accordion>
 				</GridCell>
 			</GridSection>

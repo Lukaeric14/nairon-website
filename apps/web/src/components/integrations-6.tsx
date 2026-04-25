@@ -15,7 +15,7 @@ import { MistralAi } from '@/components/ui/svgs/mistral-ai'
 
 export default function IntegrationsSection() {
     return (
-        <section className="bg-[#0C0C0C] py-24">
+        <section className="bg-white py-24">
             <div className="perspective-dramatic group mx-auto max-w-5xl px-6">
                 <div className="rotate-x-6 hover:rotate-x-0 mask-radial-from-70% mask-radial-[50%_90%] group relative mx-auto max-w-2xl scale-y-90 items-center justify-between space-y-6 from-transparent pb-1 transition-transform duration-1000 hover:scale-y-100">
                     <div className="mask-radial-to-55% absolute inset-0 bg-[radial-gradient(var(--color-foreground)_1px,transparent_1px)] opacity-25 [background-size:16px_16px]" />
@@ -98,18 +98,18 @@ export default function IntegrationsSection() {
                     </div>
                     <div className="absolute inset-0 m-auto flex size-fit -translate-y-3.5 justify-center gap-2">
                         <IntegrationCard
-                            className="relative size-24 rounded-2xl border border-white/20 bg-zinc-700/50 shadow-xl shadow-black/20 ring-1 ring-black/50 backdrop-blur-lg"
+                            className="relative size-24 rounded-2xl border border-[#0C0C0C]/20 bg-zinc-700/50 shadow-xl shadow-black/20 ring-1 ring-black/50 backdrop-blur-lg"
                             isCenter={true}>
                             <LogoIcon
                                 uniColor
-                                className="text-white drop-shadow-sm"
+                                className="text-[#1A1916] drop-shadow-sm"
                             />
                         </IntegrationCard>
                     </div>
                 </div>
                 <div className="mx-auto mt-12 max-w-xl text-center">
-                    <h2 className="text-balance text-[28px] leading-[32px] md:text-[44px] md:leading-[48px] font-normal tracking-[-1px] text-[#E8E4DE]">Runs across your <span className="font-serif italic text-[#C9A96E]">AI coding stack</span></h2>
-                    <p className="text-[#A39E96] mb-6 mt-4 text-balance text-lg">Claude Code first, plus Factory Droid and OpenAI Codex workflows, with shared process intelligence across tools.</p>
+                    <h2 className="text-balance text-[28px] leading-[32px] md:text-[44px] md:leading-[48px] font-normal tracking-[-1px] text-[#1A1916]">Runs across your <span className="font-serif italic text-[#C9A96E]">AI coding stack</span></h2>
+                    <p className="text-[#5C584F] mb-6 mt-4 text-balance text-lg">Claude Code first, plus Factory Droid and OpenAI Codex workflows, with shared process intelligence across tools.</p>
 
                     <Button
                         size="sm"

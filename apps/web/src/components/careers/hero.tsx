@@ -9,7 +9,7 @@ export function CareersHero() {
 			</div>
 			{/* Large "Careers" text */}
 			<h1
-				className="relative z-10 text-6xl md:text-[100px] lg:text-display-3xl font-semibold text-white text-center tracking-tight-2xl"
+				className="relative z-10 text-6xl md:text-[100px] lg:text-display-3xl font-semibold text-[#1A1916] text-center tracking-tight-2xl"
 			>
 				Careers
 			</h1>

@@ -25,12 +25,12 @@ function PromptBlock({ text, label }: { text: string; label: string }) {
   };
 
   return (
-    <div className="mt-3 rounded-xl border border-white/10 bg-black/35 p-4">
+    <div className="mt-3 rounded-xl border border-[#0C0C0C]/10 bg-black/35 p-4">
       <div className="mb-3 flex justify-end">
         <button
           type="button"
           onClick={handleCopy}
-          className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/5 px-2.5 py-1.5 text-xs text-[#CFCAC2] transition-colors hover:bg-white/10"
+          className="inline-flex items-center gap-1.5 rounded-md border border-[#0C0C0C]/15 bg-[#0C0C0C]/5 px-2.5 py-1.5 text-xs text-[#1A1916] transition-colors hover:bg-[#0C0C0C]/10"
           aria-label={`Copy ${label} prompt to clipboard`}
         >
           {copied ? (
@@ -46,7 +46,7 @@ function PromptBlock({ text, label }: { text: string; label: string }) {
           )}
         </button>
       </div>
-      <pre className="whitespace-pre-wrap font-mono text-xs leading-relaxed text-[#CFCAC2]">
+      <pre className="whitespace-pre-wrap font-mono text-xs leading-relaxed text-[#1A1916]">
         {text}
       </pre>
     </div>
@@ -102,7 +102,7 @@ const faqItems: {
               href="https://github.com/Nairon-AI/flux-opencode"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#C9A96E] underline underline-offset-2 hover:text-[#E8E4DE]"
+              className="text-[#C9A96E] underline underline-offset-2 hover:text-[#1A1916]"
             >
               OpenCode port
             </a>{" "}
@@ -116,33 +116,33 @@ const faqItems: {
         answer: (
           <div className="space-y-3">
             <p>
-              <span className="font-medium text-[#E8E4DE]">1. Install Flux (once)</span>{" "}
+              <span className="font-medium text-[#1A1916]">1. Install Flux (once)</span>{" "}
               Paste the install prompt into your current agent session and let Flux choose the right platform-specific path.
             </p>
             <p>
-              <span className="font-medium text-[#E8E4DE]">2. Setup Flux (once)</span>{" "}
+              <span className="font-medium text-[#1A1916]">2. Setup Flux (once)</span>{" "}
               Let your agent finish the first-run setup for this environment.
             </p>
             <p>
-              <span className="font-medium text-[#E8E4DE]">3. Prime automatically</span>{" "}
+              <span className="font-medium text-[#1A1916]">3. Prime automatically</span>{" "}
               Once setup is done, the agent should check whether this repository has already been primed. If not, Flux should run prime first automatically before any scoping or implementation work.
             </p>
             <p>
-              <span className="font-medium text-[#E8E4DE]">4. Work by intent</span>{" "}
-              After prime, just tell the agent what you want to do. Flux keeps the active objective in <code className="rounded bg-white/5 px-1.5 py-0.5 font-mono text-xs text-[#E8E4DE]">.flux/</code>, so natural requests like “fix this bug” or “continue this feature” can realign to the correct workflow state.
+              <span className="font-medium text-[#1A1916]">4. Work by intent</span>{" "}
+              After prime, just tell the agent what you want to do. Flux keeps the active objective in <code className="rounded bg-[#0C0C0C]/5 px-1.5 py-0.5 font-mono text-xs text-[#1A1916]">.flux/</code>, so natural requests like “fix this bug” or “continue this feature” can realign to the correct workflow state.
             </p>
             <p>
-              <span className="font-medium text-[#E8E4DE]">5. Use explicit commands when needed</span>{" "}
+              <span className="font-medium text-[#1A1916]">5. Use explicit commands when needed</span>{" "}
               During{" "}
-              <code className="rounded bg-white/5 px-1.5 py-0.5 font-mono text-xs text-[#E8E4DE]">
+              <code className="rounded bg-[#0C0C0C]/5 px-1.5 py-0.5 font-mono text-xs text-[#1A1916]">
                 /flux:scope
               </code>{" "}
               Flux shows phase progress so you always know whether you are in Start, Discover, Define, Develop, Deliver, or Handoff, but natural-language requests remain the default day-to-day UX.
             </p>
             <p>
-              <span className="font-medium text-[#E8E4DE]">6. End each session with Reflect</span>{" "}
+              <span className="font-medium text-[#1A1916]">6. End each session with Reflect</span>{" "}
               Run{" "}
-              <code className="rounded bg-white/5 px-1.5 py-0.5 font-mono text-xs text-[#E8E4DE]">
+              <code className="rounded bg-[#0C0C0C]/5 px-1.5 py-0.5 font-mono text-xs text-[#1A1916]">
                 /flux:reflect
               </code>{" "}
               to capture learnings and continuously improve your agent workflow.
@@ -188,7 +188,7 @@ const faqItems: {
               href="https://github.com/Nairon-AI/flux/blob/main/CONTRIBUTING.md"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#C9A96E] underline underline-offset-2 hover:text-[#E8E4DE]"
+              className="text-[#C9A96E] underline underline-offset-2 hover:text-[#1A1916]"
             >
               contributing guidelines
             </a>{" "}
@@ -201,14 +201,14 @@ const faqItems: {
 ];
 export default function FAQs() {
   return (
-    <section className="bg-[#0C0C0C] py-16 md:py-24">
+    <section className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-5xl px-1 md:px-6">
         <div className="grid gap-8 md:grid-cols-5 md:gap-12">
           <div className="max-w-lg max-md:px-6 md:col-span-2">
-            <h2 className="text-[32px] leading-[36px] md:text-[40px] md:leading-[44px] font-normal tracking-[-1px] text-[#E8E4DE]">
+            <h2 className="text-[32px] leading-[36px] md:text-[40px] md:leading-[44px] font-normal tracking-[-1px] text-[#1A1916]">
               <span className="font-serif italic text-[#C9A96E]">FAQs</span>
             </h2>
-            <p className="text-[#A39E96] mt-4 text-balance text-lg">
+            <p className="text-[#5C584F] mt-4 text-balance text-lg">
               Answers for engineers and engineering leaders
             </p>
           </div>
@@ -216,7 +216,7 @@ export default function FAQs() {
           <div className="space-y-12 md:col-span-3">
             {faqItems.map((item) => (
               <div className="space-y-4" key={item.group}>
-                <h3 className="text-[#E8E4DE] pl-6 text-lg font-medium">
+                <h3 className="text-[#1A1916] pl-6 text-lg font-medium">
                   {item.group}
                 </h3>
                 <Accordion type="single" collapsible className="-space-y-1">
@@ -230,7 +230,7 @@ export default function FAQs() {
                         {item.question}
                       </AccordionTrigger>
                       <AccordionContent>
-                        <div className="text-[#A39E96] text-base">
+                        <div className="text-[#5C584F] text-base">
                           {item.answer}
                         </div>
                       </AccordionContent>

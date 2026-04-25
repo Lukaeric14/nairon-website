@@ -6,5 +6,5 @@ export function AnimatedGradient({
 	children,
 	variant: _variant,
 }: { children?: ReactNode; variant?: string }) {
-	return <div className="bg-[#0C0C0C] fixed inset-0 -z-10">{children}</div>;
+	return <div className="bg-white fixed inset-0 -z-10">{children}</div>;
 }

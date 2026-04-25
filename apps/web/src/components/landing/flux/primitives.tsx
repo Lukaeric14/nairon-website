@@ -16,7 +16,7 @@ export function FluxSection({
 }
 
 export function SectionDivider({ className }: { className?: string }) {
-	return <div className={cn("mx-auto h-px w-full max-w-7xl bg-white/[0.06]", className)} />;
+	return <div className={cn("mx-auto h-px w-full max-w-7xl bg-[#0C0C0C]/[0.06]", className)} />;
 }
 
 export function GradientHeading({
@@ -56,7 +56,7 @@ export function LinearGlassCard({
 		>
 			<div
 				className={cn(
-					"rounded-[9px] border border-white/[0.05] bg-[rgba(14,14,14,0.98)] backdrop-blur-xl",
+					"rounded-[9px] border border-[#0C0C0C]/[0.05] bg-[rgba(14,14,14,0.98)] backdrop-blur-xl",
 					innerClassName,
 				)}
 			>
@@ -166,18 +166,18 @@ export function TerminalWindow({
 			className={cn("relative shadow-[0_42px_120px_rgba(0,0,0,0.72)]", className)}
 			innerClassName="overflow-hidden"
 		>
-			<div className="flex items-center justify-between border-b border-white/[0.07] bg-black/30 px-6 py-4">
+			<div className="flex items-center justify-between border-b border-[#0C0C0C]/[0.07] bg-black/30 px-6 py-4">
 				<div className="flex items-center gap-2.5">
 					<span className="size-3.5 rounded-full bg-[#ff5f57]" />
 					<span className="size-3.5 rounded-full bg-[#febc2e]" />
 					<span className="size-3.5 rounded-full bg-[#28c840]" />
 				</div>
-				<p className="font-inter text-[13px] text-white/45">{title}</p>
+				<p className="font-inter text-[13px] text-[#1A1916]/45">{title}</p>
 				<div className="w-12" />
 			</div>
 			<div
 				ref={outputRef}
-				className="h-[500px] overflow-y-auto bg-[linear-gradient(180deg,#0b0b0b_0%,#090909_100%)] px-7 pb-24 pt-6 font-mono text-[16px] leading-[1.7] text-[#d2d2d2] md:h-[640px] md:pb-32 md:text-[18px]"
+				className="h-[500px] overflow-y-auto bg-[linear-gradient(180deg,#0b0b0b_0%,#090909_100%)] px-7 pb-24 pt-6 font-mono text-[16px] leading-[1.7] text-[#5C584F] md:h-[640px] md:pb-32 md:text-[18px]"
 			>
 				{visibleLines.map((line, index) => (
 					<div
@@ -198,7 +198,7 @@ export function TerminalWindow({
 							(line.startsWith("Tokens wasted:") ||
 								line.startsWith("API hallucinations:") ||
 								line.startsWith("Sanity remaining:")) &&
-								"text-[#9ca3b8]",
+								"text-[#5C584F]",
 						)}
 					>
 						{index === 0 && !showStatic && animateLines ? firstLineText || "\u00a0" : line || "\u00a0"}

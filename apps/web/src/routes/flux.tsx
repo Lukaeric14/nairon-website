@@ -46,7 +46,7 @@ export const Route = createFileRoute("/flux")({
 function FluxPage() {
 	return (
 		<ModalProvider>
-			<div className="dark min-h-screen bg-[#0C0C0C] font-inter text-[#E8E4DE]">
+			<div className="dark min-h-screen bg-white font-inter text-[#1A1916]">
 				<Navbar />
 
 				{/* Hero Section - hero-section-16 */}

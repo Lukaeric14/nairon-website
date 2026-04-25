@@ -19,7 +19,7 @@ export const AIIllustration1 = () => {
                             <Apple className="size-3.5 opacity-75" />
                             <span className="text-xs">Professional</span>
                         </span>
-                        <div className="bg-primary before:border-foreground/20 relative flex size-6 rounded-md text-white shadow before:absolute before:inset-0 before:rounded-md before:border">
+                        <div className="bg-primary before:border-foreground/20 relative flex size-6 rounded-md text-[#1A1916] shadow before:absolute before:inset-0 before:rounded-md before:border">
                             <CornerDownLeft className="m-auto size-3.5 drop-shadow" />
                         </div>
                     </div>

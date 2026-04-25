@@ -5,7 +5,7 @@ import { HIRE_FAQ_ITEMS } from "@/data/hire";
 
 function PlusIcon({ isOpen }: { isOpen: boolean }) {
 	return (
-		<div className="w-9 h-9 rounded-full bg-white/12 flex items-center justify-center shrink-0 relative">
+		<div className="w-9 h-9 rounded-full bg-[#0C0C0C]/12 flex items-center justify-center shrink-0 relative">
 			{/* Horizontal bar */}
 			<div className="absolute w-3.5 h-[2px] bg-landing-text rounded-full" />
 			{/* Vertical bar (hidden when open) */}
@@ -71,7 +71,7 @@ export function HireFAQ() {
 					</SectionHeading>
 					<a
 						href="/bookacall"
-						className={`inline-flex items-center gap-2 text-sm ${colors.textBody} hover:text-white transition-colors mt-8`}
+						className={`inline-flex items-center gap-2 text-sm ${colors.textBody} hover:text-[#1A1916] transition-colors mt-8`}
 					>
 						Got more questions? Speak to a Partnership Manager
 						<ArrowUpRight className="w-4 h-4" />

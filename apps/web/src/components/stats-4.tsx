@@ -64,7 +64,7 @@ function WaitlistForm() {
                         if (status === 'error') setStatus('idle')
                     }}
                     placeholder="Enter your work email"
-                    className="flex-1 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-[#C9A96E]/50 focus:outline-none focus:ring-1 focus:ring-[#C9A96E]/50"
+                    className="flex-1 rounded-lg border border-[#0C0C0C]/10 bg-[#0C0C0C]/5 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-[#C9A96E]/50 focus:outline-none focus:ring-1 focus:ring-[#C9A96E]/50"
                     disabled={status === 'loading'}
                 />
                 <button
@@ -91,13 +91,13 @@ function WaitlistForm() {
 
 export default function StatsSection() {
     return (
-        <section className="bg-[#0C0C0C] @container py-16 md:py-24">
+        <section className="bg-white @container py-16 md:py-24">
             <div className="mx-auto max-w-5xl px-6">
                 <div className="bg-[#C9A96E]/10 text-[#C9A96E] border border-[#C9A96E]/20 w-fit mx-auto rounded-full px-4 py-1.5 text-sm font-medium mb-6">
                     Coming Soon
                 </div>
-                <h2 className="mx-auto max-w-2xl text-balance text-center text-[28px] leading-[32px] md:text-[40px] md:leading-[44px] font-normal tracking-[-1px] text-[#E8E4DE]">CTO-level <span className="font-serif italic text-[#C9A96E]">observability</span></h2>
-                <p className="text-[#A39E96] mx-auto mt-6 max-w-xl text-pretty text-center text-lg">
+                <h2 className="mx-auto max-w-2xl text-balance text-center text-[28px] leading-[32px] md:text-[40px] md:leading-[44px] font-normal tracking-[-1px] text-[#1A1916]">CTO-level <span className="font-serif italic text-[#C9A96E]">observability</span></h2>
+                <p className="text-[#5C584F] mx-auto mt-6 max-w-xl text-pretty text-center text-lg">
                     See which engineers are actually leveraging AI effectively, where the team needs development, and which workflows produce the highest quality output.
                 </p>
 
@@ -109,18 +109,18 @@ export default function StatsSection() {
                     <PlusDecorator className="bottom-0 right-0 translate-x-[calc(50%-0.5px)] translate-y-[calc(50%-0.5px)]" />
                     <PlusDecorator className="bottom-0 -translate-x-[calc(50%-0.5px)] translate-y-[calc(50%-0.5px)]" />
 
-                    <div className="**:text-center bg-card *:hover:bg-white/[0.02] @xl:grid-cols-3 grid grid-cols-2 divide-x border border-white/10 *:p-8">
+                    <div className="**:text-center bg-card *:hover:bg-[#0C0C0C]/[0.02] @xl:grid-cols-3 grid grid-cols-2 divide-x border border-[#0C0C0C]/10 *:p-8">
                         <div className="space-y-2">
-                            <div className="bg-gradient-to-t from-[#E8E4DE] to-[#A39E96] bg-clip-text text-3xl font-medium text-transparent md:text-5xl">Team</div>
-                            <p className="text-[#A39E96] text-sm">Benchmarks and improvement trends across your engineering org</p>
+                            <div className="bg-gradient-to-t from-[#1A1916] to-[#5C584F] bg-clip-text text-3xl font-medium text-transparent md:text-5xl">Team</div>
+                            <p className="text-[#5C584F] text-sm">Benchmarks and improvement trends across your engineering org</p>
                         </div>
                         <div className="@max-xl:border-0 space-y-2">
-                            <div className="bg-gradient-to-t from-[#E8E4DE] to-[#A39E96] bg-clip-text text-3xl font-medium text-transparent md:text-5xl">Quality</div>
-                            <p className="text-[#A39E96] text-sm">Thinking metrics, not just velocity — measure how engineers collaborate with AI</p>
+                            <div className="bg-gradient-to-t from-[#1A1916] to-[#5C584F] bg-clip-text text-3xl font-medium text-transparent md:text-5xl">Quality</div>
+                            <p className="text-[#5C584F] text-sm">Thinking metrics, not just velocity — measure how engineers collaborate with AI</p>
                         </div>
                         <div className="@max-xl:hidden space-y-2">
-                            <div className="bg-gradient-to-t from-[#E8E4DE] to-[#A39E96] bg-clip-text text-3xl font-medium text-transparent md:text-5xl">Hiring</div>
-                            <p className="text-[#A39E96] text-sm">Recruiting signals: identify candidates with sophisticated AI collaboration patterns</p>
+                            <div className="bg-gradient-to-t from-[#1A1916] to-[#5C584F] bg-clip-text text-3xl font-medium text-transparent md:text-5xl">Hiring</div>
+                            <p className="text-[#5C584F] text-sm">Recruiting signals: identify candidates with sophisticated AI collaboration patterns</p>
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ function LogoMarquee() {
 	const logos = [...PARTNERS, ...PARTNERS, ...PARTNERS];
 	return (
 		<div className="mt-8">
-			<p className="text-sm text-white/40 mb-4">Partnered with</p>
+			<p className="text-sm text-[#1A1916]/40 mb-4">Partnered with</p>
 			<div className="overflow-hidden">
 				<div className="flex gap-12 animate-marquee">
 					{logos.map((partner, i) => (
@@ -52,21 +52,21 @@ function TestimonialCard({
 			</p>
 
 			{/* Divider */}
-			<div className="w-16 h-px bg-white/8 my-6" />
+			<div className="w-16 h-px bg-[#0C0C0C]/8 my-6" />
 
 			{/* Attribution */}
 			<div className="flex items-center gap-4">
 				<img
 					src={testimonial.image}
 					alt={testimonial.name}
-					className="w-12 h-12 rounded-full object-cover border-2 border-white/12"
+					className="w-12 h-12 rounded-full object-cover border-2 border-[#0C0C0C]/12"
 					loading="lazy"
 				/>
 				<div>
 					<p className={`text-base font-bold ${colors.text}`}>
 						{testimonial.name}
 					</p>
-					<p className="text-sm text-white/40">
+					<p className="text-sm text-[#1A1916]/40">
 						{testimonial.role}
 						{testimonial.company &&
 							` at ${testimonial.company}`}

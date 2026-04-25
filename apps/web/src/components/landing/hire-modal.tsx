@@ -45,22 +45,22 @@ export function HireModal() {
 		setForm((prev) => ({ ...prev, [field]: e.target.value }));
 
 	const inputClass =
-		"w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-[#E8E4DE] placeholder:text-[#A39E96]/60 focus:outline-none focus:ring-1 focus:ring-[#C9A96E]/50 focus:border-[#C9A96E]/50 transition-colors";
+		"w-full bg-[#0C0C0C]/5 border border-[#0C0C0C]/10 rounded-lg px-4 py-3 text-sm text-[#1A1916] placeholder:text-[#5C584F]/60 focus:outline-none focus:ring-1 focus:ring-[#C9A96E]/50 focus:border-[#C9A96E]/50 transition-colors";
 
 	return (
 		<DialogPrimitive.Root open={hireModalOpen} onOpenChange={handleClose}>
 			<DialogPrimitive.Portal>
 				<DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-				<DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-50 w-[calc(100%-2rem)] max-w-4xl translate-x-[-50%] translate-y-[-50%] border border-white/[0.08] bg-[#141414] text-[#E8E4DE] rounded-2xl overflow-hidden shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
+				<DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-50 w-[calc(100%-2rem)] max-w-4xl translate-x-[-50%] translate-y-[-50%] border border-[#0C0C0C]/[0.08] bg-[#F5F3EE] text-[#1A1916] rounded-2xl overflow-hidden shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
 					{step === "form" ? (
 						<div className="grid grid-cols-1 md:grid-cols-2 min-h-[520px]">
 							{/* Left — Form */}
 							<div className="p-8 md:p-10 flex flex-col justify-center">
 								<div className="mb-6">
-									<h2 className="text-2xl font-normal text-[#E8E4DE]">
+									<h2 className="text-2xl font-normal text-[#1A1916]">
 										Book an AI employee discovery
 									</h2>
-									<p className="text-[#A39E96] text-sm mt-1.5">
+									<p className="text-[#5C584F] text-sm mt-1.5">
 										Tell us which role you want AI to own and book a call with our team.
 									</p>
 								</div>
@@ -68,7 +68,7 @@ export function HireModal() {
 								<form onSubmit={handleSubmit} className="space-y-4">
 									<div className="grid grid-cols-2 gap-4">
 										<div>
-											<label htmlFor="hire-name" className="block text-xs text-[#A39E96] mb-1.5">
+											<label htmlFor="hire-name" className="block text-xs text-[#5C584F] mb-1.5">
 												Name *
 											</label>
 											<input
@@ -82,7 +82,7 @@ export function HireModal() {
 											/>
 										</div>
 										<div>
-											<label htmlFor="hire-company" className="block text-xs text-[#A39E96] mb-1.5">
+											<label htmlFor="hire-company" className="block text-xs text-[#5C584F] mb-1.5">
 												Company *
 											</label>
 											<input
@@ -98,7 +98,7 @@ export function HireModal() {
 									</div>
 
 									<div>
-										<label htmlFor="hire-email" className="block text-xs text-[#A39E96] mb-1.5">
+										<label htmlFor="hire-email" className="block text-xs text-[#5C584F] mb-1.5">
 											Work email *
 										</label>
 										<input
@@ -113,7 +113,7 @@ export function HireModal() {
 									</div>
 
 									<div>
-										<label htmlFor="hire-role" className="block text-xs text-[#A39E96] mb-1.5">
+										<label htmlFor="hire-role" className="block text-xs text-[#5C584F] mb-1.5">
 											What should your first AI employee own? *
 										</label>
 										<input
@@ -128,7 +128,7 @@ export function HireModal() {
 									</div>
 
 									<div>
-										<label htmlFor="hire-team-size" className="block text-xs text-[#A39E96] mb-1.5">
+										<label htmlFor="hire-team-size" className="block text-xs text-[#5C584F] mb-1.5">
 											Team size
 										</label>
 										<select
@@ -174,7 +174,7 @@ export function HireModal() {
 									className="absolute inset-0"
 									style={{
 										background:
-											"linear-gradient(to right, rgba(20,20,20,0.5) 0%, rgba(20,20,20,0.2) 50%, rgba(20,20,20,0.3) 100%)",
+											"linear-gradient(to right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.3) 100%)",
 									}}
 								/>
 								<div className="relative z-10 flex flex-col gap-3 p-6 h-full justify-center">
@@ -185,17 +185,17 @@ export function HireModal() {
 									].map(({ icon: Icon, title, desc }) => (
 										<div
 											key={title}
-											className="rounded-xl px-4 py-3.5 border border-white/[0.1]"
+											className="rounded-xl px-4 py-3.5 border border-[#0C0C0C]/[0.1]"
 											style={{
-												background: "rgba(20, 20, 18, 0.45)",
+												background: "rgba(255, 255, 255, 0.45)",
 												backdropFilter: "blur(16px)",
 											}}
 										>
 											<div className="flex items-center gap-2.5 mb-1">
 												<Icon className="w-4 h-4 text-[#C9A96E]" />
-												<span className="text-sm font-medium text-[#E8E4DE]">{title}</span>
+												<span className="text-sm font-medium text-[#1A1916]">{title}</span>
 											</div>
-											<p className="text-xs text-[#A39E96] leading-relaxed pl-[26px]">{desc}</p>
+											<p className="text-xs text-[#5C584F] leading-relaxed pl-[26px]">{desc}</p>
 										</div>
 									))}
 								</div>
@@ -260,10 +260,10 @@ function CalBookingStep() {
 	return (
 		<div className="flex flex-col">
 			<div className="px-8 pt-8 pb-4">
-				<h2 className="text-2xl font-normal text-[#E8E4DE]">
+				<h2 className="text-2xl font-normal text-[#1A1916]">
 					Book your intro call
 				</h2>
-				<p className="text-[#A39E96] text-sm mt-1">
+				<p className="text-[#5C584F] text-sm mt-1">
 					Pick a time that works for you.
 				</p>
 			</div>

@@ -22,9 +22,9 @@
 		"zod": "^4.0.0"
 	},
 	"devDependencies": {
-		"@react-grab/claude-code": "^0.1.7",
+		"@react-grab/claude-code": "^0.1.29",
 		"convex": "catalog:",
-		"react-grab": "^0.1.7",
+		"react-grab": "^0.1.32",
 		"turbo": "^2.4.0",
 		"typescript": "catalog:"
 	},

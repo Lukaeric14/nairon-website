@@ -43,7 +43,7 @@ function ContactInfoCard({
 			</div>
 			<div className="flex flex-col">
 				<h4
-					className={`text-2xl font-semibold ${colors.text} group-hover:text-white/80 transition-colors tracking-tighter`}
+					className={`text-2xl font-semibold ${colors.text} group-hover:text-[#1A1916]/80 transition-colors tracking-tighter`}
 				>
 					{title}
 				</h4>
@@ -87,7 +87,7 @@ function CommunityCard() {
 							href={COMMUNITY_SECTION.buttonHref}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="inline-flex items-center gap-2 bg-white/12 hover:bg-white/20 text-white text-base pl-4 pr-1.5 py-1.5 rounded-full transition-colors"
+							className="inline-flex items-center gap-2 bg-[#0C0C0C]/12 hover:bg-[#0C0C0C]/20 text-[#1A1916] text-base pl-4 pr-1.5 py-1.5 rounded-full transition-colors"
 						>
 							<span>{COMMUNITY_SECTION.buttonText}</span>
 							<span className="w-8 h-8 rounded-full bg-brand flex items-center justify-center shrink-0">
@@ -127,7 +127,7 @@ function FormInput({
 	onChange: (value: string) => void;
 	disabled?: boolean;
 }) {
-	const inputClasses = `w-full bg-transparent border-b border-white/20 text-landing-text text-base py-3 px-0 focus:outline-none focus:border-white/40 transition-colors placeholder:text-white/30 disabled:opacity-50`;
+	const inputClasses = `w-full bg-transparent border-b border-[#0C0C0C]/20 text-landing-text text-base py-3 px-0 focus:outline-none focus:border-[#0C0C0C]/40 transition-colors placeholder:text-[#1A1916]/30 disabled:opacity-50`;
 
 	return (
 		<div className="flex flex-col gap-1">
@@ -274,7 +274,7 @@ function ContactFormCard() {
 				<button
 					type="submit"
 					disabled={isSubmitting || isSubmitted}
-					className="w-full flex items-center justify-center gap-2 bg-white hover:bg-white/90 disabled:bg-white/70 text-black text-base font-medium py-3 px-6 rounded-full transition-colors disabled:cursor-not-allowed"
+					className="w-full flex items-center justify-center gap-2 bg-[#0C0C0C] hover:bg-[#0C0C0C]/85 disabled:bg-[#0C0C0C]/60 text-white text-base font-medium py-3 px-6 rounded-full transition-colors disabled:cursor-not-allowed"
 				>
 					{isSubmitting ? (
 						<>

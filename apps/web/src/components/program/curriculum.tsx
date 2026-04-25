@@ -18,7 +18,7 @@ function GuestCard({ guest, role }: { guest: string; role: string }) {
 				loading="lazy"
 			/>
 			<div className="pt-2">
-				<h4 className="text-base font-normal text-white">{guest}</h4>
+				<h4 className="text-base font-normal text-[#1A1916]">{guest}</h4>
 				<p className={`text-sm font-normal ${colors.textBody}`}>
 					{role}
 				</p>
@@ -59,11 +59,11 @@ function PhaseHeader({ phase }: { phase: PhaseData }) {
 	return (
 		<div className="flex overflow-hidden">
 			<div className="bg-brand-dark rounded-l-2xl px-5 py-3.5 min-w-[120px] md:min-w-[200px] flex items-center">
-				<h3 className="text-lg md:text-2xl font-medium font-display text-white tracking-tight-lg">
+				<h3 className="text-lg md:text-2xl font-medium font-display text-[#1A1916] tracking-tight-lg">
 					{phase.phase}
 				</h3>
 			</div>
-			<div className="bg-white/12 rounded-r-2xl flex-1 flex items-center px-6 md:px-10">
+			<div className="bg-[#0C0C0C]/12 rounded-r-2xl flex-1 flex items-center px-6 md:px-10">
 				<h3
 					className={`text-lg md:text-2xl font-medium font-display ${colors.text} tracking-tight-lg`}
 				>

@@ -106,26 +106,26 @@ const renderPlanColumn = (plan: Plan) => {
 
 export default function ComparatorSection() {
     return (
-        <section className="bg-[#0C0C0C] py-16 md:py-24">
+        <section className="bg-white py-16 md:py-24">
             <div className="mx-auto max-w-5xl md:px-6">
                 <div className="grid gap-12 lg:grid-cols-2">
                     <div className="max-w-lg max-md:px-6">
                         <div className="text-balance lg:max-w-xs">
-                            <h2 className="text-[28px] leading-[32px] md:text-[36px] md:leading-[40px] lg:text-[44px] lg:leading-[48px] font-normal tracking-[-1px] text-[#E8E4DE]">Coding Agents vs Coding Agents + <span className="font-serif italic text-[#C9A96E]">Flux</span></h2>
-                            <p className="text-[#A39E96] mt-4 text-balance lg:mt-6">Flux keeps coding agents in the same dev flow, but adds deterministic workflow state, evidence-based quality gates, adversarial review, and self-improving recommendations.</p>
+                            <h2 className="text-[28px] leading-[32px] md:text-[36px] md:leading-[40px] lg:text-[44px] lg:leading-[48px] font-normal tracking-[-1px] text-[#1A1916]">Coding Agents vs Coding Agents + <span className="font-serif italic text-[#C9A96E]">Flux</span></h2>
+                            <p className="text-[#5C584F] mt-4 text-balance lg:mt-6">Flux keeps coding agents in the same dev flow, but adds deterministic workflow state, evidence-based quality gates, adversarial review, and self-improving recommendations.</p>
                         </div>
                     </div>
 
                     <div className="grid grid-cols-2">
                         <div>
                             <div className="z-1 sticky top-0 flex h-14 items-end gap-1.5 px-6 py-2">
-                                <div className="text-[#A39E96] text-sm font-medium">Features</div>
+                                <div className="text-[#5C584F] text-sm font-medium">Features</div>
                             </div>
 
                             {features.map((feature, index) => (
                                 <div
                                     key={index}
-                                    className="text-[#A39E96] md:nth-2:rounded-tl-xl even:bg-card flex h-14 items-center rounded-l-lg px-6 last:h-[calc(3.5rem+1px)] md:last:rounded-bl-xl">
+                                    className="text-[#5C584F] md:nth-2:rounded-tl-xl even:bg-card flex h-14 items-center rounded-l-lg px-6 last:h-[calc(3.5rem+1px)] md:last:rounded-bl-xl">
                                     <div className="text-sm">{feature.name}</div>{' '}
                                     {feature.description && (
                                         <TooltipProvider>
@@ -158,7 +158,7 @@ export default function ComparatorSection() {
 }
 
 const Indicator = ({ checked = false }: { checked?: boolean }) => {
-    return <span className={cn('flex size-4 items-center justify-center rounded-full bg-rose-500 font-sans text-xs font-semibold text-white', checked && 'bg-emerald-600 text-white')}>{checked ? <CheckIcon /> : '✗'}</span>
+    return <span className={cn('flex size-4 items-center justify-center rounded-full bg-rose-500 font-sans text-xs font-semibold text-[#1A1916]', checked && 'bg-emerald-600 text-[#1A1916]')}>{checked ? <CheckIcon /> : '✗'}</span>
 }
 
 const CheckIcon = () => {

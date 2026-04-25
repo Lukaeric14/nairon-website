@@ -170,7 +170,7 @@ const s = StyleSheet.create({
 		left: 0,
 		width: "100%",
 		height: "100%",
-		backgroundColor: "rgba(20,16,10,0.68)",
+		backgroundColor: "rgba(255, 250, 240, 0.68)",
 	},
 	coverContent: {
 		position: "absolute",
@@ -208,7 +208,7 @@ const s = StyleSheet.create({
 	coverLocation: {
 		fontFamily: SANS,
 		fontSize: 12,
-		color: "rgba(255,255,255,0.55)",
+		color: "rgba(12, 12, 12, 0.55)",
 		textAlign: "center",
 	},
 	coverBrand: {
@@ -235,7 +235,7 @@ const s = StyleSheet.create({
 	coverBottomText: {
 		fontFamily: SANS,
 		fontSize: 8,
-		color: "rgba(255,255,255,0.35)",
+		color: "rgba(12, 12, 12, 0.35)",
 		letterSpacing: 1,
 	},
 

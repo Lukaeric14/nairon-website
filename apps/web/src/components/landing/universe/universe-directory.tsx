@@ -153,14 +153,14 @@ function ToolTile({
 }) {
 	return (
 		<div
-			className="flex flex-col items-center gap-2 py-3 px-2 rounded-lg transition-all duration-400 ease-out cursor-pointer hover:bg-white/[0.04] group"
+			className="flex flex-col items-center gap-2 py-3 px-2 rounded-lg transition-all duration-400 ease-out cursor-pointer hover:bg-[#0C0C0C]/[0.04] group"
 			style={{
 				opacity: isActive ? 1 : 0,
 				transform: isActive ? "scale(1)" : "scale(0.9)",
 				transitionDelay: `${index * 30}ms`,
 			}}
 		>
-			<div className="w-9 h-9 flex items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06] group-hover:border-white/[0.12] transition-colors">
+			<div className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#0C0C0C]/[0.04] border border-[#0C0C0C]/[0.06] group-hover:border-[#0C0C0C]/[0.12] transition-colors">
 				<img
 					src={tool.logo}
 					alt={tool.name}
@@ -170,7 +170,7 @@ function ToolTile({
 					loading="lazy"
 				/>
 			</div>
-			<span className="text-[11px] text-[#A39E96]/70 group-hover:text-[#E8E4DE] transition-colors text-center leading-tight truncate max-w-full">
+			<span className="text-[11px] text-[#5C584F]/70 group-hover:text-[#1A1916] transition-colors text-center leading-tight truncate max-w-full">
 				{tool.name}
 			</span>
 		</div>
@@ -219,17 +219,17 @@ export function UniverseDirectory() {
 				<GridCell className="px-12 py-10">
 					<div className="flex items-center gap-3 mb-4">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+						<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
 							Tool Directory
 						</span>
 					</div>
-					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE] max-w-3xl mb-3">
+					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl mb-3">
 						Every tool,{" "}
 						<span className="font-serif italic text-[#C9A96E]">
 							mapped to your workflow
 						</span>
 					</h2>
-					<p className="text-[#A39E96] text-base max-w-xl">
+					<p className="text-[#5C584F] text-base max-w-xl">
 						Auto-curated from Flux assessment data. Organized by
 						SDLC phase so you find the right tool for every stage of
 						development.
@@ -241,7 +241,7 @@ export function UniverseDirectory() {
 			<GridSection columns="1fr" border>
 				<GridCell>
 					{/* Phase tabs */}
-					<div className="flex border-b border-white/[0.06] overflow-x-auto">
+					<div className="flex border-b border-[#0C0C0C]/[0.06] overflow-x-auto">
 						{SDLC_PHASES.map((p, i) => (
 							<button
 								key={p.id}
@@ -296,7 +296,7 @@ export function UniverseDirectory() {
 
 					{/* Browse all link */}
 					<div className="px-8 pb-6 text-center">
-						<span className="text-[#A39E96]/60 text-sm">
+						<span className="text-[#5C584F]/60 text-sm">
 							{phase.tools.length} tools &middot;{" "}
 							<span className="text-[#C9A96E] cursor-pointer hover:text-[#D4B87A] transition-colors">
 								Browse all {phase.label.toLowerCase()} tools

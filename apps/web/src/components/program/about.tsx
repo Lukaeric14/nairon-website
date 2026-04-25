@@ -28,12 +28,12 @@ function QuoteCard() {
 			/>
 			<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 			<div className="relative h-full flex flex-col justify-end p-6 md:p-8">
-				<p className="text-white text-base md:text-lg leading-relaxed mb-4 md:mb-6">
+				<p className="text-[#1A1916] text-base md:text-lg leading-relaxed mb-4 md:mb-6">
 					{PROGRAM_QUOTE.text}
 				</p>
 				<div className="flex items-center gap-2">
 					<div>
-						<span className="text-white font-semibold text-sm md:text-base">
+						<span className="text-[#1A1916] font-semibold text-sm md:text-base">
 							{PROGRAM_QUOTE.author}
 						</span>
 						<span className={`${colors.textMuted} ml-1`}>,</span>
@@ -63,7 +63,7 @@ function MissionSection() {
 					return (
 						<BodyText key={i}>
 							{item.before}
-							<strong className="text-white font-bold">
+							<strong className="text-[#1A1916] font-bold">
 								{item.bold}
 							</strong>
 							{item.after}
@@ -115,11 +115,11 @@ function StatCard({
 			</h4>
 			<div className="flex items-end justify-between mt-auto">
 				<div className="flex items-baseline gap-1">
-					<span className="text-4xl md:text-6xl font-bold text-white leading-none">
+					<span className="text-4xl md:text-6xl font-bold text-[#1A1916] leading-none">
 						{value}
 					</span>
 					{suffix && (
-						<span className="text-lg md:text-2xl text-white/70 italic">
+						<span className="text-lg md:text-2xl text-[#1A1916]/70 italic">
 							{suffix}
 						</span>
 					)}
@@ -155,7 +155,7 @@ function StatsRow() {
 								loading="lazy"
 							/>
 						))}
-						<span className="text-white/70 text-xs md:text-sm ml-1 font-medium">
+						<span className="text-[#1A1916]/70 text-xs md:text-sm ml-1 font-medium">
 							{PROGRAM_STATS.clients.value}
 						</span>
 					</div>
@@ -173,7 +173,7 @@ function StatsRow() {
 				</div>
 				<div className="flex items-end justify-between mt-auto">
 					<div className="flex items-baseline gap-1">
-						<span className="text-4xl md:text-6xl font-bold text-white leading-none">
+						<span className="text-4xl md:text-6xl font-bold text-[#1A1916] leading-none">
 							{PROGRAM_STATS.partners.value}
 						</span>
 					</div>

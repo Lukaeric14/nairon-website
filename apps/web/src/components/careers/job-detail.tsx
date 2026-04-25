@@ -12,7 +12,7 @@ function JobDetailHero({ title }: { title: string }) {
 				<AnimatedGradient />
 			</div>
 			<h1
-				className="relative z-10 text-display-md md:text-display-2xl lg:text-display-3xl font-semibold text-white text-center px-4 tracking-hero"
+				className="relative z-10 text-display-md md:text-display-2xl lg:text-display-3xl font-semibold text-[#1A1916] text-center px-4 tracking-hero"
 			>
 				{title}
 			</h1>
@@ -26,7 +26,7 @@ function InfoBadge({
 	text,
 }: { icon: React.ElementType; text: string }) {
 	return (
-		<div className="flex items-center gap-2 text-white/70">
+		<div className="flex items-center gap-2 text-[#1A1916]/70">
 			<Icon className="w-4 h-4" />
 			<span className="text-base">{text}</span>
 		</div>
@@ -40,7 +40,7 @@ function ApplyButton({ className }: { className?: string }) {
 			href="https://apply.naironai.com"
 			target="_blank"
 			rel="noopener noreferrer"
-			className={`inline-flex items-center justify-center gap-2 bg-white hover:bg-white/90 text-black font-medium text-base px-6 py-3 rounded-full transition-colors ${className || ""}`}
+			className={`inline-flex items-center justify-center gap-2 bg-[#0C0C0C] hover:bg-[#0C0C0C]/85 text-white font-medium text-base px-6 py-3 rounded-full transition-colors ${className || ""}`}
 		>
 			Apply for this position
 		</a>
@@ -77,7 +77,7 @@ function JobHeader({ job }: { job: JobDetail }) {
 			</h2>
 			<div className="flex items-center gap-4 mb-6">
 				<InfoBadge icon={MapPin} text={locationText} />
-				<div className="w-px h-4 bg-white/20" />
+				<div className="w-px h-4 bg-[#0C0C0C]/20" />
 				<InfoBadge icon={Clock} text={typeText} />
 			</div>
 			<ApplyButton />
@@ -109,7 +109,7 @@ function BulletList({ items }: { items: string[] }) {
 		<ul className="space-y-3">
 			{items.map((item, index) => (
 				<li key={index} className="flex items-start gap-3">
-					<span className="w-1.5 h-1.5 rounded-full bg-white/40 mt-2.5 shrink-0" />
+					<span className="w-1.5 h-1.5 rounded-full bg-[#0C0C0C]/40 mt-2.5 shrink-0" />
 					<span className={`text-base leading-relaxed ${colors.textBody}`}>
 						{item}
 					</span>
@@ -125,7 +125,7 @@ function NumberedList({ items }: { items: string[] }) {
 		<ul className="space-y-3">
 			{items.map((item, index) => (
 				<li key={index} className="flex items-start gap-3">
-					<span className="w-1.5 h-1.5 rounded-full bg-white/40 mt-2.5 shrink-0" />
+					<span className="w-1.5 h-1.5 rounded-full bg-[#0C0C0C]/40 mt-2.5 shrink-0" />
 					<span className={`text-base leading-relaxed ${colors.textBody}`}>
 						{index + 1}. {item}
 					</span>
@@ -217,22 +217,22 @@ export function JobDetailLoading() {
 				<div className="absolute inset-0 z-0">
 					<AnimatedGradient />
 				</div>
-				<div className="relative z-10 w-64 h-16 bg-white/10 rounded animate-pulse" />
+				<div className="relative z-10 w-64 h-16 bg-[#0C0C0C]/10 rounded animate-pulse" />
 			</header>
 			<Section className={colors.pageBg}>
 				<div className="space-y-4 mb-8">
-					<div className="w-32 h-6 bg-white/10 rounded animate-pulse" />
-					<div className="w-48 h-12 bg-white/10 rounded animate-pulse" />
-					<div className="w-64 h-8 bg-white/10 rounded animate-pulse" />
+					<div className="w-32 h-6 bg-[#0C0C0C]/10 rounded animate-pulse" />
+					<div className="w-48 h-12 bg-[#0C0C0C]/10 rounded animate-pulse" />
+					<div className="w-64 h-8 bg-[#0C0C0C]/10 rounded animate-pulse" />
 				</div>
 				<div className="space-y-8">
 					{[1, 2, 3, 4].map((i) => (
 						<div key={i} className="space-y-4">
-							<div className="w-40 h-8 bg-white/10 rounded animate-pulse" />
+							<div className="w-40 h-8 bg-[#0C0C0C]/10 rounded animate-pulse" />
 							<div className="space-y-2">
-								<div className="w-full h-4 bg-white/10 rounded animate-pulse" />
-								<div className="w-3/4 h-4 bg-white/10 rounded animate-pulse" />
-								<div className="w-5/6 h-4 bg-white/10 rounded animate-pulse" />
+								<div className="w-full h-4 bg-[#0C0C0C]/10 rounded animate-pulse" />
+								<div className="w-3/4 h-4 bg-[#0C0C0C]/10 rounded animate-pulse" />
+								<div className="w-5/6 h-4 bg-[#0C0C0C]/10 rounded animate-pulse" />
 							</div>
 						</div>
 					))}
@@ -251,7 +251,7 @@ export function JobDetailNotFound() {
 					<AnimatedGradient />
 				</div>
 				<h1
-					className="relative z-10 text-display-md md:text-display-2xl font-semibold text-white text-center tracking-hero"
+					className="relative z-10 text-display-md md:text-display-2xl font-semibold text-[#1A1916] text-center tracking-hero"
 				>
 					Not Found
 				</h1>
@@ -266,7 +266,7 @@ export function JobDetailNotFound() {
 					</p>
 					<a
 						href="/careers"
-						className="inline-flex items-center gap-2 bg-white hover:bg-white/90 text-black font-medium text-base px-6 py-3 rounded-full transition-colors"
+						className="inline-flex items-center gap-2 bg-[#0C0C0C] hover:bg-[#0C0C0C]/85 text-white font-medium text-base px-6 py-3 rounded-full transition-colors"
 					>
 						View all positions
 						<ArrowUpRight className="w-4 h-4" />

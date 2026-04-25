@@ -87,7 +87,7 @@ function PostRow({
 }) {
 	return (
 		<div
-			className="flex items-baseline gap-3 px-6 md:px-8 py-2.5 transition-all duration-400 ease-out hover:bg-white/[0.02] group"
+			className="flex items-baseline gap-3 px-6 md:px-8 py-2.5 transition-all duration-400 ease-out hover:bg-[#0C0C0C]/[0.02] group"
 			style={{
 				opacity: isVisible ? 1 : 0,
 				transform: isVisible ? "translateY(0)" : "translateY(8px)",
@@ -95,14 +95,14 @@ function PostRow({
 			}}
 		>
 			{/* Rank */}
-			<span className="text-[#A39E96]/30 text-sm tabular-nums w-5 text-right shrink-0">
+			<span className="text-[#5C584F]/30 text-sm tabular-nums w-5 text-right shrink-0">
 				{rank}.
 			</span>
 
 			{/* Upvote arrow */}
 			<button
 				type="button"
-				className="text-[#A39E96]/30 hover:text-[#C9A96E] transition-colors shrink-0 mt-0.5"
+				className="text-[#5C584F]/30 hover:text-[#C9A96E] transition-colors shrink-0 mt-0.5"
 				aria-label="Upvote"
 			>
 				<svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor">
@@ -115,20 +115,20 @@ function PostRow({
 				<div className="flex items-baseline gap-2 flex-wrap">
 					<a
 						href={post.url}
-						className="text-[#E8E4DE] text-[14px] font-medium leading-snug group-hover:text-[#C9A96E] transition-colors"
+						className="text-[#1A1916] text-[14px] font-medium leading-snug group-hover:text-[#C9A96E] transition-colors"
 					>
 						{post.title}
 					</a>
-					<span className="text-[#A39E96]/30 text-[11px] shrink-0">
+					<span className="text-[#5C584F]/30 text-[11px] shrink-0">
 						({post.domain})
 					</span>
 				</div>
-				<div className="flex items-center gap-1.5 mt-0.5 text-[#A39E96]/40 text-[11px]">
+				<div className="flex items-center gap-1.5 mt-0.5 text-[#5C584F]/40 text-[11px]">
 					<span>{post.points} points</span>
 					<span>by {post.author}</span>
 					<span>{post.time}</span>
 					<span className="mx-0.5">|</span>
-					<a href={post.url} className="hover:text-[#E8E4DE] transition-colors">
+					<a href={post.url} className="hover:text-[#1A1916] transition-colors">
 						{post.comments} comments
 					</a>
 				</div>
@@ -165,17 +165,17 @@ export function UniverseBlog() {
 				<GridCell className="px-12 py-10">
 					<div className="flex items-center gap-3 mb-4">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-						<span className="text-[#A39E96] text-xs font-medium uppercase tracking-[0.16em]">
+						<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
 							Blog
 						</span>
 					</div>
-					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#E8E4DE] max-w-3xl mb-3">
+					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl mb-3">
 						Essays &{" "}
 						<span className="font-serif italic text-[#C9A96E]">
 							insights
 						</span>
 					</h2>
-					<p className="text-[#A39E96] text-base max-w-xl">
+					<p className="text-[#5C584F] text-base max-w-xl">
 						Long-form thinking on AI-native engineering, recruiting,
 						and building with agents — from the Nairon team.
 					</p>
@@ -196,7 +196,7 @@ export function UniverseBlog() {
 
 					{/* More link */}
 					<div className="px-8 py-4 flex items-center gap-3">
-						<span className="text-[#A39E96]/30 text-sm w-5 text-right">
+						<span className="text-[#5C584F]/30 text-sm w-5 text-right">
 							&nbsp;
 						</span>
 						<span className="w-[10px]" />

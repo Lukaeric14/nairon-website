@@ -19,20 +19,20 @@ export const Route = createFileRoute("/privacy")({
 function PrivacyPage() {
 	return (
 		<ModalProvider>
-			<div className="min-h-screen bg-[#0C0C0C] text-[#E8E4DE] font-inter">
+			<div className="min-h-screen bg-white text-[#1A1916] font-inter">
 				<Navbar />
 				<main className="pt-32 pb-20 px-6">
 					<div className="max-w-3xl mx-auto">
-						<h1 className="text-4xl md:text-5xl font-normal tracking-[-1.5px] text-[#E8E4DE] mb-4">
+						<h1 className="text-4xl md:text-5xl font-normal tracking-[-1.5px] text-[#1A1916] mb-4">
 							Privacy Policy
 						</h1>
-						<p className="text-[#A39E96] text-sm mb-12">
+						<p className="text-[#5C584F] text-sm mb-12">
 							Last updated: February 24, 2026
 						</p>
 
-						<div className="space-y-10 text-[#A39E96] text-base leading-relaxed">
+						<div className="space-y-10 text-[#5C584F] text-base leading-relaxed">
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									1. Information We Collect
 								</h2>
 								<p className="mb-3">
@@ -41,24 +41,24 @@ function PrivacyPage() {
 								</p>
 								<ul className="list-disc pl-6 space-y-2">
 									<li>
-										<strong className="text-[#E8E4DE]">Contact information</strong>{" "}
+										<strong className="text-[#1A1916]">Contact information</strong>{" "}
 										— name, email address, phone number, and company name provided
 										through our forms.
 									</li>
 									<li>
-										<strong className="text-[#E8E4DE]">Professional information</strong>{" "}
+										<strong className="text-[#1A1916]">Professional information</strong>{" "}
 										— resume, portfolio links, GitHub profile, and technical
 										assessment results (Flux scores).
 									</li>
 									<li>
-										<strong className="text-[#E8E4DE]">Usage data</strong> — pages
+										<strong className="text-[#1A1916]">Usage data</strong> — pages
 										visited, time spent, and interaction patterns on our website.
 									</li>
 								</ul>
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									2. How We Use Your Information
 								</h2>
 								<p>We use collected information to:</p>
@@ -71,7 +71,7 @@ function PrivacyPage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									3. Data Sharing
 								</h2>
 								<p>
@@ -83,7 +83,7 @@ function PrivacyPage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									4. Data Security
 								</h2>
 								<p>
@@ -94,7 +94,7 @@ function PrivacyPage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									5. Your Rights
 								</h2>
 								<p>You have the right to:</p>
@@ -107,7 +107,7 @@ function PrivacyPage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									6. Cookies
 								</h2>
 								<p>
@@ -118,7 +118,7 @@ function PrivacyPage() {
 							</section>
 
 							<section>
-								<h2 className="text-xl font-normal text-[#E8E4DE] mb-4">
+								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
 									7. Contact
 								</h2>
 								<p>

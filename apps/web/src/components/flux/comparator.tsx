@@ -64,7 +64,7 @@ const Indicator = ({ checked = false }: { checked?: boolean }) => {
 		<span
 			className={cn(
 				"flex size-5 items-center justify-center rounded-full font-sans text-xs font-semibold",
-				checked ? "bg-emerald-600 text-white" : "bg-rose-500/80 text-white"
+				checked ? "bg-emerald-600 text-[#1A1916]" : "bg-rose-500/80 text-[#1A1916]"
 			)}
 		>
 			{checked ? <CheckIcon /> : "✗"}
