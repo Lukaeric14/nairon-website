@@ -177,7 +177,7 @@ export function TerminalWindow({
 			</div>
 			<div
 				ref={outputRef}
-				className="h-[500px] overflow-y-auto bg-[linear-gradient(180deg,#0b0b0b_0%,#090909_100%)] px-7 pb-24 pt-6 font-mono text-[16px] leading-[1.7] text-[#5C584F] md:h-[640px] md:pb-32 md:text-[18px]"
+				className="scroll-fade-y scrollbar-thin h-[500px] overflow-y-auto bg-[linear-gradient(180deg,#0b0b0b_0%,#090909_100%)] px-7 pb-24 pt-6 font-mono text-[16px] leading-[1.7] text-[#5C584F] md:h-[640px] md:pb-32 md:text-[18px]"
 			>
 				{visibleLines.map((line, index) => (
 					<div

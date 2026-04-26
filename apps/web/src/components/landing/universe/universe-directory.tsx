@@ -241,7 +241,7 @@ export function UniverseDirectory() {
 			<GridSection columns="1fr" border>
 				<GridCell>
 					{/* Phase tabs */}
-					<div className="flex border-b border-[#0C0C0C]/[0.06] overflow-x-auto">
+					<div className="scroll-fade-x scrollbar-thin flex overflow-x-auto border-b border-[#0C0C0C]/[0.06]">
 						{SDLC_PHASES.map((p, i) => (
 							<button
 								key={p.id}

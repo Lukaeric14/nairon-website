@@ -56,7 +56,7 @@ export default function CodeBlock({ code, lang, initial, maxHeight, preHighlight
 
     return (
         <div
-            className={cn('[&_pre]:max-h-(--pre-max-height) *:text-[11px]/5! [&_code]:font-mono [&_pre]:min-h-[32rem] [&_pre]:overflow-auto [&_pre]:border-l [&_pre]:!bg-transparent [&_pre]:py-3 [&_pre]:leading-snug', className)}
+            className={cn('[&_pre]:scroll-fade-y [&_pre]:scrollbar-thin [&_pre]:max-h-(--pre-max-height) *:text-[11px]/5! [&_code]:font-mono [&_pre]:min-h-[32rem] [&_pre]:overflow-auto [&_pre]:border-l [&_pre]:!bg-transparent [&_pre]:py-3 [&_pre]:leading-snug', className)}
             style={{ '--pre-max-height': `${maxHeight}px` } as React.CSSProperties}>
             {content ? content : <pre className="flex size-full items-center justify-center p-4">Loading...</pre>}
         </div>

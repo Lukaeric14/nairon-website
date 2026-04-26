@@ -88,7 +88,7 @@ export function FluxPlatforms() {
 									</div>
 								</div>
 								{platform.install && (
-									<code className="block rounded-lg bg-black/30 px-3 py-2 font-mono text-xs text-[#1A1916]/60 overflow-x-auto">
+									<code className="scroll-fade-x scrollbar-thin block overflow-x-auto rounded-lg bg-black/30 px-3 py-2 font-mono text-xs text-[#1A1916]/60">
 										{platform.install}
 									</code>
 								)}
