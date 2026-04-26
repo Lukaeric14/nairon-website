@@ -152,7 +152,7 @@ export function FluxHero() {
 
 						{/* Install command */}
 						<div className="flex items-center gap-2 rounded-xl border border-[#0C0C0C]/10 bg-[#0C0C0C]/5 p-1.5 max-w-xl">
-							<code className="flex-1 px-4 py-2.5 font-mono text-sm text-[#1A1916]/80 overflow-x-auto">
+							<code className="scroll-fade-x scrollbar-thin flex-1 overflow-x-auto px-4 py-2.5 font-mono text-sm text-[#1A1916]/80">
 								{installCommand}
 							</code>
 							<button

@@ -959,7 +959,7 @@ function LeadResponseCalculator() {
 				{/* Department tabs — horizontally scrollable on mobile */}
 				<div
 					ref={tabsRef}
-					className="mt-8 relative flex gap-1 p-1 rounded-xl bg-[#0C0C0C]/[0.03] border border-[#0C0C0C]/[0.06] w-fit max-w-full overflow-x-auto scrollbar-none"
+					className="scroll-fade-x scrollbar-none relative mt-8 flex w-fit max-w-full gap-1 overflow-x-auto rounded-xl border border-[#0C0C0C]/[0.06] bg-[#0C0C0C]/[0.03] p-1"
 					style={{ WebkitOverflowScrolling: "touch" }}
 				>
 					{DEPT_KEYS.map((key) => (

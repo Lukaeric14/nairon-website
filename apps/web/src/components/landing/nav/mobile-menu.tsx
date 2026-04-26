@@ -114,7 +114,7 @@ export function MobileMenu({ nav }: MobileMenuProps) {
 						: "opacity-0 max-h-0 pointer-events-none",
 				)}
 			>
-				<div className="bg-black/95 backdrop-blur-xl border-t border-[#0C0C0C]/5 overflow-y-auto max-h-[calc(100dvh-72px)]">
+				<div className="scroll-fade-y scrollbar-thin max-h-[calc(100dvh-72px)] overflow-y-auto border-t border-[#0C0C0C]/5 bg-black/95 backdrop-blur-xl">
 					<div className="px-6 py-4">
 						{/* Nav items */}
 						<div className="space-y-1">

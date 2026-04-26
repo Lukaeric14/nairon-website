@@ -267,7 +267,11 @@ function CalBookingStep() {
 					Pick a time that works for you.
 				</p>
 			</div>
-			<div ref={calRef} className="w-full overflow-auto" style={{ minHeight: 500 }} />
+			<div
+				ref={calRef}
+				className="scroll-fade-y scrollbar-thin w-full overflow-auto"
+				style={{ minHeight: 500 }}
+			/>
 		</div>
 	);
 }

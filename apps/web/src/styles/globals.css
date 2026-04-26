@@ -396,6 +396,192 @@
 	box-shadow: 0 0 40px rgba(201, 169, 110, 0.15);
 }
 
+/* ─── Scroll affordances ─────────────────────────────────────── */
+
+.scrollbar-thin {
+	scrollbar-width: thin;
+	scrollbar-color: color-mix(in oklab, var(--foreground) 28%, transparent)
+		transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+	background: color-mix(in oklab, var(--foreground) 28%, transparent);
+	border: 2px solid transparent;
+	border-radius: 999px;
+	background-clip: content-box;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+	background: color-mix(in oklab, var(--foreground) 42%, transparent);
+	background-clip: content-box;
+}
+
+.scrollbar-none {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+	display: none;
+}
+
+.scroll-mask-y,
+.scroll-fade-y {
+	--scroll-mask-size: 44px;
+	--scroll-mask-top: 0px;
+	--scroll-mask-bottom: 0px;
+	-webkit-mask-image: linear-gradient(
+		to bottom,
+		transparent 0,
+		#000 var(--scroll-mask-top),
+		#000 calc(100% - var(--scroll-mask-bottom)),
+		transparent 100%
+	);
+	mask-image: linear-gradient(
+		to bottom,
+		transparent 0,
+		#000 var(--scroll-mask-top),
+		#000 calc(100% - var(--scroll-mask-bottom)),
+		transparent 100%
+	);
+}
+
+.scroll-mask-y[data-overflow-top="true"] {
+	--scroll-mask-top: var(--scroll-mask-size);
+}
+
+.scroll-mask-y[data-overflow-bottom="true"] {
+	--scroll-mask-bottom: var(--scroll-mask-size);
+}
+
+.scroll-fade-y {
+	--scroll-mask-top: 0px;
+	--scroll-mask-bottom: var(--scroll-mask-size);
+}
+
+.scroll-mask-x,
+.scroll-fade-x {
+	--scroll-mask-size: 44px;
+	--scroll-mask-left: 0px;
+	--scroll-mask-right: 0px;
+	-webkit-mask-image: linear-gradient(
+		to right,
+		transparent 0,
+		#000 var(--scroll-mask-left),
+		#000 calc(100% - var(--scroll-mask-right)),
+		transparent 100%
+	);
+	mask-image: linear-gradient(
+		to right,
+		transparent 0,
+		#000 var(--scroll-mask-left),
+		#000 calc(100% - var(--scroll-mask-right)),
+		transparent 100%
+	);
+}
+
+.scroll-mask-x[data-overflow-left="true"] {
+	--scroll-mask-left: var(--scroll-mask-size);
+}
+
+.scroll-mask-x[data-overflow-right="true"] {
+	--scroll-mask-right: var(--scroll-mask-size);
+}
+
+.scroll-fade-x {
+	--scroll-mask-left: 0px;
+	--scroll-mask-right: var(--scroll-mask-size);
+}
+
+@property --scroll-mask-top {
+	syntax: "<length>";
+	inherits: false;
+	initial-value: 0px;
+}
+
+@property --scroll-mask-bottom {
+	syntax: "<length>";
+	inherits: false;
+	initial-value: 0px;
+}
+
+@property --scroll-mask-left {
+	syntax: "<length>";
+	inherits: false;
+	initial-value: 0px;
+}
+
+@property --scroll-mask-right {
+	syntax: "<length>";
+	inherits: false;
+	initial-value: 0px;
+}
+
+@keyframes scroll-mask-y-top {
+	0%,
+	2% {
+		--scroll-mask-top: 0px;
+	}
+	12%,
+	100% {
+		--scroll-mask-top: var(--scroll-mask-size);
+	}
+}
+
+@keyframes scroll-mask-y-bottom {
+	0%,
+	88% {
+		--scroll-mask-bottom: var(--scroll-mask-size);
+	}
+	98%,
+	100% {
+		--scroll-mask-bottom: 0px;
+	}
+}
+
+@keyframes scroll-mask-x-left {
+	0%,
+	2% {
+		--scroll-mask-left: 0px;
+	}
+	12%,
+	100% {
+		--scroll-mask-left: var(--scroll-mask-size);
+	}
+}
+
+@keyframes scroll-mask-x-right {
+	0%,
+	88% {
+		--scroll-mask-right: var(--scroll-mask-size);
+	}
+	98%,
+	100% {
+		--scroll-mask-right: 0px;
+	}
+}
+
+@supports (animation-timeline: scroll()) {
+	.scroll-fade-y {
+		animation: scroll-mask-y-top linear both, scroll-mask-y-bottom linear both;
+		animation-timeline: scroll(self y);
+	}
+
+	.scroll-fade-x {
+		animation: scroll-mask-x-left linear both, scroll-mask-x-right linear both;
+		animation-timeline: scroll(self x);
+	}
+}
+
 /* ─── Stat number highlight ──────────────────────────────────── */
 
 .stat-number {
