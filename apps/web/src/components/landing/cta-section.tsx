@@ -14,7 +14,7 @@ export function CTASection() {
 					}}
 				>
 					<h2 className="text-3xl md:text-[56px] md:leading-[60px] font-normal tracking-[-1px] md:tracking-[-1.5px] text-[#1A1916] mb-8 md:whitespace-nowrap">
-						Ready To Deploy Your{" "}
+						Ready To Launch Your{" "}
 						<span className="font-serif italic text-[#C9A96E] text-[1.1em]">
 							First AI Employee
 						</span>
@@ -27,7 +27,7 @@ export function CTASection() {
 							rel="noopener noreferrer"
 							className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-base px-8 py-3.5 rounded-full transition-colors"
 						>
-							BOOK YOUR 15-MINUTE DISCOVERY HERE
+							APPLY FOR THE 1-MONTH PILOT
 							<ArrowUpRight className="w-4 h-4" />
 						</a>
 					</div>

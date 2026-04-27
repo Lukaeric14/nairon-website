@@ -8,25 +8,25 @@ const NOTCH_SIZE = 10;
 const NOTCH_COLOR = "rgba(12, 12, 12, 0.12)";
 
 const ROLES = [
-	"Marketing Assistant",
-	"Creative Director",
-	"Content Manager",
-	"Customer Service",
-	"Operations Manager",
+	"Sales Assistant",
+	"Operations Assistant",
+	"Support Assistant",
 	"Appointment Setter",
+	"Research Assistant",
+	"CRM Assistant",
 ] as const;
 
 const VSL_YOUTUBE_ID = "uLx3ElTJbH0";
 
 const TERMS = [
-	"Free audit",
-	"Free onboarding",
-	"Waived implementation fee",
-	"Bi-weekly strategy sessions",
-	"1 month of uninterrupted operations",
+	"1 AI employee",
+	"1 workflow",
+	"1 measurable business outcome",
+	"Built concierge-style by Nairon",
+	"WhatsApp or Telegram pilot access while Hive rolls out",
 ] as const;
 
-const FOOTER_NOTE = "You only cover hardware costs & LLM tokens";
+const FOOTER_NOTE = "First month is free. You cover the Mac Mini/hardware cost and AI tokens.";
 
 const corners = [
 	{ top: 0, left: 0, borderTop: true, borderLeft: true },
@@ -63,7 +63,7 @@ function CornerNotches() {
 const TYPE_SPEED_MS = 70;
 const DELETE_SPEED_MS = 40;
 const HOLD_MS = 2000;
-const SUFFIX = " for Free";
+const SUFFIX = " in 30 Days";
 
 function RollingRole() {
 	const [index, setIndex] = useState(0);
@@ -131,7 +131,7 @@ function HowItWorks() {
 			>
 				<span className="flex min-w-0 flex-wrap items-center justify-center gap-x-2.5 gap-y-1 leading-tight">
 					<span className="h-2 w-2 rounded-full bg-[#C9A96E]" />
-					Yes, For Free - Here's How It Works
+					The 1-Month AI Employee Pilot - Here's How It Works
 				</span>
 				<ChevronDown
 					className={`absolute right-6 h-5 w-5 text-[#5C584F] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
@@ -158,7 +158,7 @@ function HowItWorks() {
 							</ul>
 							<div className="mt-3 flex items-center gap-3 font-semibold text-[#1A1916]">
 								<span className="h-1 w-1 shrink-0 rounded-full bg-[#C9A96E]" />
-								Completely done for you
+								Completely done for you by our team
 							</div>
 							<p className="mt-2 pt-3 border-t border-[#0C0C0C]/10 text-[#5C584F]">{FOOTER_NOTE}</p>
 						</div>
@@ -227,11 +227,16 @@ export function HeroNew() {
 
 			{/* Headline — 2 lines, compact */}
 			<h1 className="w-full max-w-5xl text-[32px] leading-[36px] font-normal tracking-[-0.8px] text-[#1A1916] md:text-[72px] md:leading-[76px] md:tracking-[-2.2px]">
-				We'll Deploy Your First AI
+				Launch Your First AI
 				<span className="mt-3 block text-[38px] leading-[42px] md:mt-4 md:text-[80px] md:leading-[86px]">
 					<RollingRole />
 				</span>
 			</h1>
+
+			<p className="mt-5 max-w-3xl text-base leading-relaxed text-[#5C584F] md:text-lg">
+				We build one AI employee for one painful workflow, prove one measurable result, then help
+				you decide whether to keep scaling with Nairon.
+			</p>
 
 			{/* Social proof — partner logos */}
 			<div className="mt-4 w-full max-w-full md:mt-6">
@@ -254,7 +259,7 @@ export function HeroNew() {
 					rel="noopener noreferrer"
 					className="inline-flex w-full max-w-sm items-center justify-center gap-2.5 rounded-full bg-[#C9A96E] px-5 py-4 text-center text-sm font-semibold leading-tight text-[#0C0C0C] transition-colors hover:bg-[#B8944F] md:w-auto md:max-w-none md:px-8 md:text-lg"
 				>
-					<span>BOOK YOUR 15-MINUTE DISCOVERY HERE</span>
+					<span>APPLY FOR THE 1-MONTH PILOT</span>
 					<ArrowUpRight className="h-5 w-5 shrink-0" />
 				</a>
 			</div>
