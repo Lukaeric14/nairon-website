@@ -1,7 +1,6 @@
 import { GridSection, GridCell } from "./grid-system";
 
-// Swap this single string when you have the locked qualifier copy.
-const QUALIFIER_COPY = "For CEOs With a Clear AI Mandate and No Clear Place to Start.";
+const QUALIFIER_COPY = "For owners with one painful workflow they want solved in 30 days.";
 
 export function Qualifier() {
 	return (

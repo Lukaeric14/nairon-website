@@ -4,27 +4,27 @@ import { GridSection, GridCell } from "./grid-system";
 const steps = [
 	{
 		num: "Step 1:",
-		title: "Identify",
+		title: "Pick",
 		description:
-			"We do a deep dive into your daily operations to map every workflow, surface the highest-leverage opportunities, and define the exact scope of what your first AI employee will take on.",
+			"We pick one painful workflow, agree what success looks like, and define the exact job your first AI employee needs to own.",
 	},
 	{
 		num: "Step 2:",
-		title: "Audit",
+		title: "Setup",
 		description:
-			"We run a technical audit of your existing stack and design the AI infrastructure your business needs - so what we build integrates cleanly and empowers your team, without adding complexity to your operations.",
+			"We set up the dedicated runtime, accounts, tools, and safe access the AI employee needs to work without exposing the rest of your business.",
 	},
 	{
 		num: "Step 3:",
-		title: "Implement",
+		title: "Build",
 		description:
-			"Our engineers build, test, and deploy your AI employees directly into your environment - running on real hardware, integrated with your tools, and ready to operate end-to-end.",
+			"Our engineers build, test, and deploy the AI employee into the real workflow, usually through WhatsApp or Telegram first while the Hive workspace rolls out.",
 	},
 	{
 		num: "Step 4:",
-		title: "Optimize",
+		title: "Prove",
 		description:
-			"We move from deployment into a weekly operating rhythm - monitoring performance, refining output, and continuously improving your AI employees so they only get better over time.",
+			"We measure the result, improve the workflow, and decide the next step together: scale with Nairon, keep a lighter platform plan, or stop after the pilot.",
 	},
 ];
 
@@ -246,7 +246,7 @@ export function WhatWeDo() {
 						</span>
 					</div>
 					<h2 className="text-2xl md:text-[36px] md:leading-[44px] font-normal tracking-[-0.48px] text-[#1A1916]">
-						We Deploy Your AI Employee{" "}
+						Your Pilot Goes Live{" "}
 						<span className="font-serif italic text-[#C9A96E] text-[1.1em]">in 4 Steps</span>
 					</h2>
 				</GridCell>

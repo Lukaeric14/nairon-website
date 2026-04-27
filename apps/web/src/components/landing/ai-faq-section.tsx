@@ -3,6 +3,16 @@ import { GridCell, GridSection } from "./grid-system";
 
 const FAQ_ITEMS = [
 	{
+		question: "What is the 1-Month AI Employee Pilot?",
+		answer:
+			"We build one AI employee for one workflow inside your business. The goal is not a demo. The goal is one measurable business result in the first month, with Nairon doing the build and your team helping us understand the real workflow.",
+	},
+	{
+		question: "What do we pay in the first month?",
+		answer:
+			"For early pilot clients, the first month can be free except the Mac Mini/hardware cost and AI tokens. The exact contract can vary by client, but we make the costs clear before anything starts.",
+	},
+	{
 		question: "We have spoken to AI companies before. Why is Nairon different?",
 		answer:
 			"Most AI companies stop at demos or one-off automations. We build an AI employee around a real job inside your business, deploy it into the way your team already works, and keep improving it after launch so it becomes useful in day-to-day operations.",
@@ -10,7 +20,7 @@ const FAQ_ITEMS = [
 	{
 		question: "What does working with you actually look like?",
 		answer:
-			"We start by understanding the workflow, the bottleneck, and what success should look like. Then we build the first version, put it into the real workflow, test it under pressure, and keep refining it until it becomes a dependable part of how the team operates.",
+			"We start by picking one workflow, one success metric, and the exact tools the AI employee needs. Then we build the first version, put it into the real workflow, test it under pressure, and keep refining it until it becomes dependable.",
 	},
 	{
 		question: "Can this work with the tools our team already uses?",
@@ -30,7 +40,12 @@ const FAQ_ITEMS = [
 	{
 		question: "How is pricing handled, including AI usage costs?",
 		answer:
-			"We keep pricing clear. We cover the first $500 per month in AI usage, and anything above that is billed directly to you so costs stay transparent as usage grows. We also scope the engagement properly up front so you know what is being built and what success looks like.",
+			"After the pilot, we agree the next contract based on the value created and the level of support you need. Some clients continue with Nairon as a hands-on AI build partner. Others may move to a lighter platform plan once Hive is ready. AI usage costs stay transparent and are billed separately when usage grows.",
+	},
+	{
+		question: "Is WhatsApp or Telegram the final product?",
+		answer:
+			"No. For early clients, WhatsApp or Telegram can be the fastest way to start using the AI employee while Hive rolls out. Hive is the long-term workspace where your team, AI employees, workflows, knowledge, and activity live together.",
 	},
 	{
 		question: "What happens to our team after the AI employee is live?",

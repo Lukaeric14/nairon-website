@@ -21,9 +21,9 @@ export const Route = createFileRoute("/")({
 	component: HomePage,
 	head: () =>
 		seoHead({
-			title: "Nairon — Company for AI Employees",
+			title: "Nairon — 1-Month AI Employee Pilot",
 			description:
-				"Nairon builds and deploys AI employees for modern teams, then keeps them improving inside your operations, acquisition, and delivery workflows.",
+				"Nairon builds your first AI employee around one workflow, one measurable business outcome, and a clear path from pilot to Hive workspace.",
 			path: "/",
 		}),
 });
