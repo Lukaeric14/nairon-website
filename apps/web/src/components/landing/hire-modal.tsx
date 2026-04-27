@@ -246,7 +246,7 @@ function CalBookingStep() {
 			Cal.ns[ns]("inline", {
 				elementOrSelector: el,
 				config: { layout: "month_view", theme: "dark" },
-				calLink: "naironai/discovery-call",
+				calLink: "mahan-javaheri-aswf9u/15min",
 			});
 
 			Cal.ns[ns]("ui", {
