@@ -43,11 +43,6 @@ const FAQ_ITEMS = [
 			"After the pilot, we agree the next contract based on the value created and the level of support you need. Some clients continue with Nairon as a hands-on AI build partner. Others may move to a lighter platform plan once Hive is ready. AI usage costs stay transparent and are billed separately when usage grows.",
 	},
 	{
-		question: "Is WhatsApp or Telegram the final product?",
-		answer:
-			"No. For early clients, WhatsApp or Telegram can be the fastest way to start using the AI employee while Hive rolls out. Hive is the long-term workspace where your team, AI employees, workflows, knowledge, and activity live together.",
-	},
-	{
 		question: "What happens to our team after the AI employee is live?",
 		answer:
 			"Your team does not get pushed out. Their role becomes higher leverage. Instead of doing every repetitive step themselves, they guide the system, review important decisions, and step in when human judgment is needed.",
