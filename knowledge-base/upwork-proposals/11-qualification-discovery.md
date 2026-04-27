@@ -34,7 +34,7 @@ If any two of these are solid, book the call.
 
 > Happy to. Quick qualifier so we use the time well — what's the specific workflow you want the AI to own first, and is there a named human on your team who'll be the owner of that system once it's live?
 >
-> If you'd rather just hop on 15 minutes, grab a slot here: https://cal.com/naironai/discovery-call
+> If you'd rather just hop on 15 minutes, grab a slot here: https://cal.com/mahan-javaheri-aswf9u/15min
 
 ### Script 2 — Lead asks for pricing
 
@@ -58,7 +58,7 @@ If any two of these are solid, book the call.
 
 > This is exactly what I do. Skipping the back-and-forth — want to grab 15 minutes this week? I can come prepped with a sketch of how I'd scope v1 for [their specific workflow].
 >
-> https://cal.com/naironai/discovery-call
+> https://cal.com/mahan-javaheri-aswf9u/15min
 
 ## Discovery questions for the 15-minute call
 

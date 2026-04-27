@@ -20,7 +20,7 @@ Quick context on me: I'm an ex-founder of a Techstars-backed AI startup (Rhetora
 One qualifier before I waste your time: is brand voice already captured somewhere (style guide, sample posts) the writer/QA agents can ground in? Makes a big difference to how fast v1 is useful.
 
 If this looks aligned, grab a 15-minute slot and I'll come prepped with a sketch of the architecture:
-https://cal.com/naironai/discovery-call
+https://cal.com/mahan-javaheri-aswf9u/15min
 
 — Luka
 ```
@@ -48,7 +48,7 @@ Integrating Claude against SOPs + MS365 + Appfolio + Laserfiche is squarely my z
 
 One question: which of your SOPs is the most painful today? That's usually where v1 should live.
 
-15-min to scope: https://cal.com/naironai/discovery-call
+15-min to scope: https://cal.com/mahan-javaheri-aswf9u/15min
 
 — Luka
 ```
@@ -67,7 +67,7 @@ Quick context on me: ex-founder of a Techstars-backed AI startup (Rhetora AI), c
 For a short-scope engagement with you, I'd run a 30-minute working session on your current ops, come back with 3–5 candidate workflows ranked by leverage, and a one-pager you can execute with me or anyone else.
 
 Want to grab 15 minutes and see if it's a fit?
-https://cal.com/naironai/discovery-call
+https://cal.com/mahan-javaheri-aswf9u/15min
 
 — Luka
 ```
@@ -88,7 +88,7 @@ Before I scope, three questions:
 
 For context: I'm an ex-founder of a Techstars-backed AI startup (Rhetora AI) and advise the AI teams at CodeGPT and Smartsy AI. 100% Job Success on Upwork with 5-star reviews.
 
-Want to grab 15? https://cal.com/naironai/discovery-call
+Want to grab 15? https://cal.com/mahan-javaheri-aswf9u/15min
 
 — Luka
 ```
@@ -109,7 +109,7 @@ Typical shape of what I'd run:
 
 Can run onsite (I'm based in Dubai, comfortable traveling) or remote.
 
-15 minutes to align on objectives and audience? https://cal.com/naironai/discovery-call
+15 minutes to align on objectives and audience? https://cal.com/mahan-javaheri-aswf9u/15min
 
 — Luka
 ```
@@ -128,7 +128,7 @@ Context on me: I'm an ex-founder of a Techstars-backed AI startup (Rhetora AI) a
 One qualifier: are you already using [Follow Up Boss / kvCORE / Sierra / whatever they mentioned], or still on MLS + email? That shapes the integration path.
 
 15-min call to look at your setup specifically:
-https://cal.com/naironai/discovery-call
+https://cal.com/mahan-javaheri-aswf9u/15min
 
 — Luka
 ```
@@ -182,5 +182,5 @@ Before sending any template, replace the opener with one that specifically echoe
 3. Swap in one concrete past-project detail from `05-proof-case-studies.md` — don't reuse the same project across all proposals.
 4. Trim. Every template above can be shortened by 30%.
 5. Answer any numbered requirements the post lists, in order, without being asked twice.
-6. Verify the CTA link is `https://cal.com/naironai/discovery-call`.
+6. Verify the CTA link is `https://cal.com/mahan-javaheri-aswf9u/15min`.
 7. Remove anything that pitches Nairon's methodology, timelines, hardware, Hive, or OpenClaw. That's call material.

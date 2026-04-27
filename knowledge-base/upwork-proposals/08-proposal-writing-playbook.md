@@ -94,8 +94,8 @@ Many of the jobs we target (see `12-target-jobs.md`) require specific things —
 
 Always end on a specific, low-friction ask. Rank in order of preference:
 
-1. **Direct ask for the call:** "Worth 15 minutes to talk through it? https://cal.com/naironai/discovery-call"
-2. **Ask them to confirm fit:** "If this looks aligned, happy to jump on a short call — grab a slot here: https://cal.com/naironai/discovery-call"
+1. **Direct ask for the call:** "Worth 15 minutes to talk through it? https://cal.com/mahan-javaheri-aswf9u/15min"
+2. **Ask them to confirm fit:** "If this looks aligned, happy to jump on a short call — grab a slot here: https://cal.com/mahan-javaheri-aswf9u/15min"
 3. **Offer to send examples:** "Happy to DM two past examples if useful."
 
 **Never leave the close generic** ("Let me know if interested!"). That's the kiss of death on Upwork.

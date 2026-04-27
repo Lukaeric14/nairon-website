@@ -46,7 +46,7 @@ Always read `06-ceo-profile-luka.md` when writing in Luka's voice — it defines
 2. **Mirror their requirements, don't broadcast ours.** Lean into the exact language and requirements the lead put in their post. Answer any numbered/specific asks directly. Show we read it carefully.
 3. **Never invent metrics, clients, or case studies.** Only cite numbers from `05-proof-case-studies.md`.
 4. **Default tone: direct, confident, pragmatic.** No fluff, no hype, no emojis unless the lead uses them first.
-5. **Always end with a specific next step** — usually a 15-minute discovery call via [cal.com/naironai/discovery-call](https://cal.com/naironai/discovery-call).
+5. **Always end with a specific next step** — usually a 15-minute discovery call via [cal.com/mahan-javaheri-aswf9u/15min](https://cal.com/mahan-javaheri-aswf9u/15min).
 6. **Stay in Luka's voice.** First person. Opinions allowed. Not a corporate brochure.
 7. **If the job is a hard disqualifier, decline politely** — don't waste connects or reputation. If the job is borderline, still push for the call; Luka will qualify or redirect live.
 8. **If, on the call, the lead insists on something that doesn't fit our business model, we pass.** That's fine. One bad-fit closed is better than a bad-fit engagement.
