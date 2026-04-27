@@ -1,68 +1,92 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+	VideoPlayer,
+	VideoPlayerContent,
+	VideoPlayerControlBar,
+	VideoPlayerMuteButton,
+	VideoPlayerPlayButton,
+	VideoPlayerTimeDisplay,
+	VideoPlayerTimeRange,
+} from "@/components/kibo-ui/video-player";
 import { GridCell, GridSection } from "./grid-system";
 
 const FAQ_ITEMS = [
 	{
-		question: "What is the 1-Month AI Employee Pilot?",
-		answer:
-			"We build one AI employee for one workflow inside your business. The goal is not a demo. The goal is one measurable business result in the first month, with Nairon doing the build and your team helping us understand the real workflow.",
+		question: "What does month 1 look like with Nairon?",
+		videoSrc: "/faq-videos/faq-1-mahan.mp4",
 	},
 	{
-		question: "What do we pay in the first month?",
-		answer:
-			"For early pilot clients, the first month can be free except the Mac Mini/hardware cost and AI tokens. The exact contract can vary by client, but we make the costs clear before anything starts.",
+		question: "How does Nairon tackle security?",
+		videoSrc: "/faq-videos/faq-1-obaid.mp4",
 	},
 	{
-		question: "We have spoken to AI companies before. Why is Nairon different?",
-		answer:
-			"Most AI companies stop at demos or one-off automations. We build an AI employee around a real job inside your business, deploy it into the way your team already works, and keep improving it after launch so it becomes useful in day-to-day operations.",
+		question: "How much does it cost to work with Nairon?",
+		videoSrc: "/faq-videos/faq-2-mahan.mp4",
 	},
 	{
-		question: "What does working with you actually look like?",
-		answer:
-			"We start by picking one workflow, one success metric, and the exact tools the AI employee needs. Then we build the first version, put it into the real workflow, test it under pressure, and keep refining it until it becomes dependable.",
+		question: "How do you create AI employees for companies?",
+		videoSrc: "/faq-videos/faq-2-obaid.mp4",
 	},
 	{
-		question: "Can this work with the tools our team already uses?",
-		answer:
-			"Usually yes. In most cases, we build around your current tools and workflows rather than asking your team to change everything. The goal is to make the AI employee useful inside your business as it exists today.",
+		question: "What's the investment structure for Nairon clients?",
+		videoSrc: "/faq-videos/faq-3-mahan.mp4",
 	},
 	{
-		question: "How do you make sure this is safe and reliable?",
-		answer:
-			"We do not give AI open-ended access and hope for the best. We set clear boundaries around what it can do, keep humans involved for sensitive decisions, monitor what happens, and run the system on dedicated infrastructure so it stays stable and accountable.",
+		question: "Why do I need to work with a company like Nairon?",
+		videoSrc: "/faq-videos/faq-3-obaid.mp4",
 	},
 	{
-		question: "Is your team in-house?",
-		answer:
-			"Yes. Our team is in-house. As we grow, we hire from a broader network of AI engineers we already know to be talented and strong communicators, but the work stays under our team, standards, and accountability.",
+		question: "What do touchpoints look like with Nairon?",
+		videoSrc: "/faq-videos/faq-4-mahan.mp4",
 	},
 	{
-		question: "How is pricing handled, including AI usage costs?",
-		answer:
-			"After the pilot, we agree the next contract based on the value created and the level of support you need. Some clients continue with Nairon as a hands-on AI build partner. Others may move to a lighter platform plan once Hive is ready. AI usage costs stay transparent and are billed separately when usage grows.",
+		question: "How are costs allocated between us?",
+		videoSrc: "/faq-videos/faq-4-obaid.mp4",
 	},
 	{
-		question: "What happens to our team after the AI employee is live?",
-		answer:
-			"Your team does not get pushed out. Their role becomes higher leverage. Instead of doing every repetitive step themselves, they guide the system, review important decisions, and step in when human judgment is needed.",
+		question: "What do you need from me to get started?",
+		videoSrc: "/faq-videos/faq-5-mahan.mp4",
 	},
 	{
-		question: "How is this different from a normal automation?",
-		answer:
-			"A normal automation follows a fixed script. An AI employee works more like a role inside the business. It can handle context, deal with variation, and ask for help when something needs a human decision.",
+		question: "What makes you different from other automation agencies?",
+		videoSrc: "/faq-videos/faq-6-mahan.mp4",
 	},
 	{
-		question: "Where does an AI employee fit inside a business?",
-		answer:
-			"It should sit inside a specific function where there is clear repeatable work to own. We do not position it like some all-knowing system at the top. We place it into a real lane with clear goals, limits, and human oversight.",
+		question: "What can AI employees do for my business?",
+		videoSrc: "/faq-videos/faq-7-mahan.mp4",
 	},
 	{
-		question: "Can this still work if we handle sensitive data or have compliance requirements?",
-		answer:
-			"Yes, if the workflow is designed properly. We work around the real constraint instead of ignoring it, which means tighter permissions, human approvals where needed, and a setup that respects the boundaries your business already has to operate within.",
+		question: "What size businesses does your team work with?",
+		videoSrc: "/faq-videos/faq-8-mahan.mp4",
 	},
 ];
+
+function FAQVideoPlayer({ src }: { src: string }) {
+	return (
+		<div
+			className="mx-auto rounded-[30px] border border-white/8 bg-[#0C0C0C] p-2 shadow-[0_24px_70px_rgba(12,12,12,0.18)] ring-1 ring-[#0C0C0C]/8"
+			style={{
+				width: "min(100%, calc(min(620px, 68vh) * 9 / 16))",
+			}}
+		>
+			<VideoPlayer className="relative block aspect-[9/16] overflow-hidden rounded-[24px] bg-[#0C0C0C] text-white">
+				<VideoPlayerContent
+					className="h-full w-full object-cover"
+					playsInline
+					preload="metadata"
+					slot="media"
+					src={src}
+				/>
+				<VideoPlayerControlBar className="absolute inset-x-0 bottom-0 z-10 h-12 border-t border-white/10 bg-gradient-to-t from-black/90 to-black/35 text-white backdrop-blur-sm">
+					<VideoPlayerPlayButton className="p-2.5" />
+					<VideoPlayerTimeRange className="p-2" />
+					<VideoPlayerTimeDisplay className="min-w-[76px] p-2 text-xs" showDuration />
+					<VideoPlayerMuteButton className="p-2.5" />
+				</VideoPlayerControlBar>
+			</VideoPlayer>
+		</div>
+	);
+}
 
 export function AIFaqSection() {
 	return (
@@ -81,35 +105,28 @@ export function AIFaqSection() {
 					</h2>
 				</GridCell>
 
-				<GridCell className="px-6 pt-4 pb-10 md:px-12 md:pt-6 md:pb-14">
-					<Accordion type="single" collapsible>
-						<AccordionItem
-							value="faq-all"
-							className="rounded-[28px] border border-[#0C0C0C]/8 bg-[#0C0C0C]/[0.03] px-5 md:px-6"
-						>
-							<AccordionTrigger className="cursor-pointer py-5 text-left text-base font-medium text-[#1A1916] transition-none hover:no-underline md:py-6 md:text-[18px]">
-								Frequently Asked Questions
-							</AccordionTrigger>
-							<AccordionContent className="pb-5 md:pb-6">
-								<Accordion type="single" collapsible className="space-y-3">
-									{FAQ_ITEMS.map((item, index) => (
-										<AccordionItem
-											key={item.question}
-											value={`faq-${index}`}
-											className="rounded-[20px] border border-[#0C0C0C]/8 bg-white/60 px-4 md:px-5"
-										>
-											<AccordionTrigger className="cursor-pointer py-4 text-left text-sm font-normal text-[#1A1916] transition-none hover:no-underline md:py-5 md:text-base">
-												{item.question}
-											</AccordionTrigger>
-											<AccordionContent className="pb-4 text-sm leading-relaxed text-[#5C584F] md:pb-5 md:text-base">
-												{item.answer}
-											</AccordionContent>
-										</AccordionItem>
-									))}
-								</Accordion>
-							</AccordionContent>
-						</AccordionItem>
-					</Accordion>
+				<GridCell className="px-4 pt-4 pb-10 sm:px-6 md:px-12 md:pt-6 md:pb-14">
+					<div className="mx-auto w-full max-w-3xl rounded-[24px] border border-[#0C0C0C]/8 bg-[#0C0C0C]/[0.03] p-3 sm:p-4 md:rounded-[28px] md:p-5">
+						<h3 className="px-2 pt-2 pb-4 text-lg font-medium text-[#1A1916] sm:px-3 md:px-4 md:pt-3 md:pb-5 md:text-[22px]">
+							Frequently Asked Questions
+						</h3>
+						<Accordion type="single" collapsible className="space-y-3">
+							{FAQ_ITEMS.map((item, index) => (
+								<AccordionItem
+									key={item.question}
+									value={`faq-${index}`}
+									className="rounded-[18px] border border-[#0C0C0C]/8 bg-white/70 px-4 shadow-sm shadow-black/[0.02] md:rounded-[20px] md:px-5"
+								>
+									<AccordionTrigger className="min-h-16 cursor-pointer gap-4 py-4 text-left text-sm font-normal text-[#1A1916] transition-none hover:no-underline md:py-5 md:text-base [&>svg]:shrink-0">
+										{item.question}
+									</AccordionTrigger>
+									<AccordionContent className="pb-4 md:pb-5">
+										<FAQVideoPlayer src={item.videoSrc} />
+									</AccordionContent>
+								</AccordionItem>
+							))}
+						</Accordion>
+					</div>
 				</GridCell>
 			</GridSection>
 		</div>
