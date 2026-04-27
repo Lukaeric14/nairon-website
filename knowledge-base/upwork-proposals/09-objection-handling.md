@@ -14,7 +14,7 @@ Pre-written answers the agent can draw from. Use them as *material*, not boilerp
 
 > For scoped consulting or training, I bill at $150/hr — that's my profile rate.
 >
-> For a custom AI build, I don't quote a number before we've talked — scope and engagement model depend on which workflow you're trying to own first. Most of my engagements start with a free 15-minute call where we pick the first target, and I can give you a real number on that call. Want to grab 15 minutes? [cal.com/naironai/discovery-call](https://cal.com/naironai/discovery-call)
+> For a custom AI build, I don't quote a number before we've talked — scope and engagement model depend on which workflow you're trying to own first. Most of my engagements start with a free 15-minute call where we pick the first target, and I can give you a real number on that call. Want to grab 15 minutes? [cal.com/mahan-javaheri-aswf9u/15min](https://cal.com/mahan-javaheri-aswf9u/15min)
 
 ---
 

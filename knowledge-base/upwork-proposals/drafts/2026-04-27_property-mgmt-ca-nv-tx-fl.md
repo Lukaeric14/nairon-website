@@ -49,7 +49,7 @@ status_updated: 2026-04-27
 response: No
 interview: No
 contract_value:
-notes: "Hit all 3 hard proposal requirements. Low competition (<5 proposals when post was seen). Cited CodeGPT + Keylead. One qualifying question on most-painful SOP. Closed with cal.com/naironai/discovery-call."
+notes: "Hit all 3 hard proposal requirements. Low competition (<5 proposals when post was seen). Cited CodeGPT + Keylead. One qualifying question on most-painful SOP. Closed with cal.com/mahan-javaheri-aswf9u/15min."
 ---
 
 ## Job post
@@ -90,7 +90,7 @@ Integrating Claude against documented SOPs + Microsoft 365, Appfolio, and Laserf
 
 One question back: which of your SOPs is the most painful for the team today? That's usually where v1 should live.
 
-15-min to talk through it: https://cal.com/naironai/discovery-call
+15-min to talk through it: https://cal.com/mahan-javaheri-aswf9u/15min
 
 — Luka
 
