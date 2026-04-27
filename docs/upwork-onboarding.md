@@ -9,7 +9,7 @@ Estimated time: **15–25 minutes** (most of it waiting for one Homebrew install
 ## What you'll have when you're done
 
 - A local clone of `nairon-website` with the Upwork knowledge base
-- The `google-sheets` MCP server running locally, authenticated to the team's shared `Upwork_Proposal_Tracker`
+- The `google-sheets` MCP server running locally, authenticated to the team's shared `Official Upwork Tracker`
 - Two project-scoped Claude Code skills available inside this repo:
   - `upwork-proposal` — drafts proposals from the knowledge base in Luka's voice
   - `upwork-pipeline` — reads/writes the team tracker
@@ -49,18 +49,18 @@ cd nairon-website
 bun install
 ```
 
-The repo's `.mcp.json` is checked in — you don't need to configure the MCP server, just supply credentials in Step 4.
+The repo's `.mcp.json` is checked in and points the MCP server at `~/.config/nairon/sheets-key.json` — you don't need to set any env vars yourself, just place the credential file in the right spot in Step 4.
 
 ---
 
 ## Step 2 — Get the service account JSON from Luka
 
-The Nairon Upwork tracker is shared with a single Google Cloud service account (`nairon-sheets-bot@naironai-hive.iam.gserviceaccount.com`). All three team members use the **same** JSON key — Luka shares it via 1Password.
+The Nairon Upwork tracker is shared with a single Google Cloud service account (`nairon-sheets-bot@naironai-hive.iam.gserviceaccount.com`). Every team member uses the **same** JSON key — Luka shares it via 1Password.
 
 **Ask Luka for:**
 
 1. The **`Nairon Sheets Bot.json`** file in 1Password (or whichever secure location the team is using)
-2. Your **Team Member slot** — Member 1, Member 2, or Member 3. This is the value that goes in the sheet's "Submitted By" column for proposals you submit. (Until Luka renames the slots to real names, this stays as `Member 1/2/3`.)
+2. Your **Submitted By name** added to `Settings!C4:C` of the tracker. Current values: `Luka Eric`, `Filip Kocanovic`, `Mahan Javaheri`. If you're not in that list, Luka needs to add you before you can log proposals (the dropdown will reject unknown names).
 
 **Do not:**
 - Email the JSON
@@ -90,9 +90,7 @@ If that prints help text, `uv` is wired up. (First run will download the package
 
 ---
 
-## Step 4 — Place the credential + set env vars
-
-### 4a. Save the JSON locally (outside the repo)
+## Step 4 — Place the credential file
 
 ```bash
 mkdir -p ~/.config/nairon
@@ -103,36 +101,18 @@ chmod 600 ~/.config/nairon/sheets-key.json
 
 That `chmod 600` makes the file readable only by you. Do not skip it.
 
-### 4b. Add env vars to `~/.zshenv` (NOT `.zshrc`)
-
-This is the gotcha that bit us during initial setup. **Use `.zshenv`** because Claude Code's MCP servers run in non-interactive shells, which only load `.zshenv`, not `.zshrc`.
+That's all you need. The repo's `.mcp.json` already references this exact path — no shell env vars to set.
 
 ```bash
-cat >> ~/.zshenv << 'EOF'
-
-# Nairon — Google Sheets MCP
-export NAIRON_SHEETS_KEY_PATH="$HOME/.config/nairon/sheets-key.json"
-export NAIRON_SHEETS_DRIVE_FOLDER_ID=""
-EOF
+ls -l ~/.config/nairon/sheets-key.json
+# Should show: -rw-------  1 <you>  staff  ...
 ```
-
-`NAIRON_SHEETS_DRIVE_FOLDER_ID` is currently blank — Luka may share a folder ID later for scoping which sheets the agent sees. Until then, leave it empty.
-
-### 4c. Reload your shell
-
-```bash
-source ~/.zshenv
-echo $NAIRON_SHEETS_KEY_PATH    # should print: /Users/<you>/.config/nairon/sheets-key.json
-ls -l "$NAIRON_SHEETS_KEY_PATH" # should show -rw------- and the file size
-```
-
-If either of those is wrong, **stop and fix before launching Claude Code** — otherwise the MCP server will spawn but fail auth silently.
 
 ---
 
 ## Step 5 — First Claude Code launch
 
-Open a fresh terminal (so it sources `.zshenv`):
+Open a fresh terminal:
 
 ```bash
 cd ~/Projects/Work/Nairon/nairon-website
@@ -144,7 +124,6 @@ Claude Code will detect the project's `.mcp.json` and prompt you to approve the 
 Then verify the connection:
 
 ```bash
-# Inside Claude Code, run this in the chat to delegate to Bash:
 claude mcp list
 ```
 
@@ -164,25 +143,57 @@ Inside Claude Code, ask:
 
 > "Use google-sheets to list spreadsheets I have access to."
 
-You should see one entry: `Upwork_Proposal_Tracker` with the v2 ID `1oX47YUr2aCdcdjCJXo6s4JmZAa9kVel4KTVuyIthRos`.
+You should see one entry: **`Official Upwork Tracker`** with the ID `1GVv3V3ZAU6fXhLHM-yjFnS0qTWldze2sp_6jMh-Eu6w`.
 
-> ⚠️ A v1 archived sheet (`1XCb08y5kLqCEerv97oNcZ6--YXeySBownL2tcjOPIOk`) may also be visible. **Never write to it.** The skills know to ignore it.
+> ⚠️ Older retired trackers (`1oX47YUr...` v2, `1XCb08y5kLqCEerv97oNcZ6...` v1) may still appear if the bot wasn't fully de-listed. **Never write to them** — the skills know to ignore those IDs.
 
 Now ask:
 
-> "Read the Dashboard tab of the v2 tracker."
+> "Read the Dashboard tab of the Official Upwork Tracker."
 
-You should see the team's current pipeline metrics (total proposals, win rate, revenue won, connects spent, ROI, etc.).
+You should see the team's current pipeline metrics (total proposals, win rate, revenue won, drafts queued, ROI, etc.).
 
 If both reads succeed, you're online.
 
 ---
 
+## The current sheet at a glance
+
+The tracker has **5 tabs**:
+
+| Tab | Mode | What it does |
+|---|---|---|
+| `Proposals` | Read + write | The proposal log — 40 columns, headers on row 5, data starts row 6 |
+| `Dashboard` | Read-only | Auto-calculating metrics: Total / Win Rate / Revenue / Connects / Drafts queued / Status breakdown / Targets / Cost & Forecast |
+| `Targets` | Read-only (rarely write) | KPI targets, cost assumptions, **Opportunity Score weights** |
+| `Settings` | Read-only | Reference data: Statuses, Team Members, Pricing Type, Yes/No, Periods, Country tiers |
+| `Helpers` | **Never write** | Feeds the daily-proposals chart on Dashboard — editing breaks the chart |
+
+The full 40-column schema lives in `.claude/skills/upwork-pipeline/SKILL.md`. Highlights:
+
+- `A` = Date Submitted (blank for drafts — that's how counters auto-exclude them)
+- `V` = Opportunity Score (formula — never overwrite)
+- `W` = Status: `Draft` / `Submitted` / `Viewed` / `Replied` / `Interview` / `Won` / `Lost`
+- `AB` = Cover Letter (full proposal text)
+- `AC`–`AL` = Q1/A1 … Q5/A5 (verbatim screening questions + our answers)
+- `AM` = Notes (short, operational)
+- `AN` = Job Link
+
+---
+
 ## Daily workflow
 
-### Drafting a new proposal
+### Saving a job as a draft (haven't applied yet)
 
-When you find an Upwork post worth bidding on, paste it into Claude Code and ask:
+When you find an Upwork post worth considering:
+
+> "Save this Upwork post as a draft: <paste>"
+
+The `upwork-pipeline` skill creates a row with `Status=Draft`, blank Date Submitted (so dashboards don't count it), client signals from the listing page, the job link, any verbatim screening questions, and a Notes line capturing activity intel + bid range.
+
+### Drafting a proposal
+
+When you're ready to write a proposal:
 
 > "Draft a proposal for this Upwork post: <paste>"
 
@@ -197,21 +208,26 @@ The `upwork-proposal` skill will:
 
 Say "yes, log it" and the row appears in the `Proposals` tab.
 
+### Promoting a draft to submitted
+
+When you actually click Submit on Upwork:
+
+> "Promote the [client] draft to submitted"
+
+The pipeline skill flips `Status` from `Draft` to `Submitted`, fills `Date Submitted` with today, records actual `Connects Spent`, and updates the paired draft file's frontmatter.
+
 ### Updating a proposal's status
 
 When a lead replies / you get an interview / you win or lose:
 
 > "Update the status of the [client] proposal to Interview"
 
-The `upwork-pipeline` skill will:
-
-1. Find the row in the sheet
-2. Update Status, Status Updated, Response?, Interview?
-3. Sync the corresponding draft file in `drafts/` (frontmatter + outcome log)
+The pipeline skill finds the row, updates `Status`, `Status Updated`, `Response?`, `Interview?`, and syncs the corresponding draft file (frontmatter + outcome log).
 
 ### Looking up pipeline state
 
 > "How are we doing this month?"
+> "How many drafts are queued?"
 > "Show all open proposals."
 > "Did we ever bid on Lumen Studios?"
 
@@ -226,7 +242,7 @@ Both live at `.claude/skills/` and only load inside this repo.
 | Skill | Triggers | Reads | Writes |
 |---|---|---|---|
 | `upwork-proposal` | "draft a proposal", "reply to this lead", "is this job worth bidding on" | KB files, target job patterns | The drafts archive |
-| `upwork-pipeline` | "log this proposal", "update status", "show me pipeline metrics" | The sheet (all 4 tabs) | `Proposals` tab + the matching draft frontmatter |
+| `upwork-pipeline` | "log this proposal", "save as draft", "update status", "show me pipeline metrics" | The sheet (all 5 tabs) | `Proposals` tab + the matching draft frontmatter |
 
 The proposal skill always offers the handoff to the pipeline skill at the end of a draft. You don't have to switch manually.
 
@@ -239,9 +255,12 @@ These are baked into the skills, but knowing them helps you spot when something'
 1. **Proposals do NOT pitch Nairon's offering.** Mirror the lead's language, drive to a 15-min call. Save the methodology / 3-day timeline / Hive / hardware / OpenClaw / "AI employees" framing for the discovery call.
 2. **Never invent metrics, clients, or case studies.** Only what's in `05-proof-case-studies.md`.
 3. **Service-account writes show as the bot, not as you.** Sheets' "edited by" history won't show which teammate did what — the `Submitted By` column is the source of truth.
-4. **Never write to the v1 sheet** (`1XCb08y5kLqCEerv97oNcZ6...`). The skill knows; just don't override.
-5. **Never delete a draft file** in `drafts/` — even Lost / void proposals stay. The corpus needs the negative examples.
-6. **Never commit the service account JSON** or anything matching `*service-account*.json` or `secrets/`. The `.gitignore` already excludes these, but be aware.
+4. **Never write to the column V Opportunity Score formula.** When writing a full row, split into two ranges (`A:U` and `W:AN`) — passing `""` at column V in a single 40-cell write erases the formula.
+5. **For numeric signal columns, use `0` when a value isn't shown.** Brand-new clients with no spend or no reviews get `0`, not blank or `-`. Exception: `A` (Date Submitted) stays BLANK for drafts (that's the trigger for date-filtered counters).
+6. **Hire Rate (column N) is percent-formatted** — write `0.61`, not `61`, or it renders as `6100%`.
+7. **Never delete a draft file** in `knowledge-base/upwork-proposals/drafts/` — even Lost / void proposals stay. The corpus needs the negative examples.
+8. **Never commit the service account JSON** or anything matching `*service-account*.json` or `secrets/`. The `.gitignore` already excludes these, but be aware.
+9. **Never write to retired trackers.** Only `Official Upwork Tracker` (`1GVv3V3ZAU6fXhLHM-yjFnS0qTWldze2sp_6jMh-Eu6w`) is canonical.
 
 ---
 
@@ -251,10 +270,10 @@ These are baked into the skills, but knowing them helps you spot when something'
 
 Almost always one of these:
 
-1. **Env var missing** — open a fresh terminal and check `echo $NAIRON_SHEETS_KEY_PATH`. Empty? You added it to `.zshrc` instead of `.zshenv`. Move it.
-2. **Credential file missing or wrong path** — `ls -l ~/.config/nairon/sheets-key.json` should show the file with `-rw-------`.
-3. **`uv` not installed or not on PATH** — `which uvx` should print a path.
-4. **First-time package download** — `uvx mcp-google-sheets --help` once manually to warm the cache.
+1. **Credential file missing or wrong path** — `ls -l ~/.config/nairon/sheets-key.json` should show the file with `-rw-------` and a real size. The path in `.mcp.json` is hardcoded, so the file MUST be at exactly that location.
+2. **`uv` not installed or not on PATH** — `which uvx` should print a path.
+3. **First-time package download** — run `uvx mcp-google-sheets --help` once manually to warm the cache.
+4. **JSON is malformed or expired** — try opening it; it should be valid JSON with `"client_email"` set to `nairon-sheets-bot@naironai-hive.iam.gserviceaccount.com`.
 
 ### MCP "connected" but tools don't show up in Claude Code
 
@@ -264,13 +283,17 @@ Claude Code caches the MCP tool index per session. If the server crashed once at
 
 The sheet wasn't shared with `nairon-sheets-bot@naironai-hive.iam.gserviceaccount.com`. Ping Luka — only he can grant access since he owns the service account.
 
+### Can't find my name in the Submitted By dropdown
+
+Your name needs to be added to `Settings!C4:C` first. Ask Luka to add it. Until then, you can't log proposals attributed to you.
+
 ### macOS won't let me access `~/Downloads`
 
 If you see "Operation not permitted" moving the JSON, do the move in your own terminal (not via Claude Code) — macOS sandboxing blocks shells launched by other apps from touching `~/Downloads` by default.
 
 ### I want to know more
 
-- **Sheet schema deep dive:** `.claude/skills/upwork-pipeline/SKILL.md`
+- **Sheet schema deep dive (40 columns, all conventions):** `.claude/skills/upwork-pipeline/SKILL.md`
 - **Proposal-writing rules:** `.claude/skills/upwork-proposal/SKILL.md` and `knowledge-base/upwork-proposals/08-proposal-writing-playbook.md`
 - **Service account / GCP setup (admin only):** `docs/sheets-setup.md`
 
@@ -278,10 +301,9 @@ If you see "Operation not permitted" moving the JSON, do the move in your own te
 
 ## Things to ask Luka
 
-1. **Your Team Member slot** (Member 1, 2, or 3 — until renamed)
-2. The **Drive folder ID** if/when scoping is added (sets `NAIRON_SHEETS_DRIVE_FOLDER_ID`)
-3. **Credentials access** in 1Password
-4. **OpenClaw GitHub access** if you'll be working on the OpenClaw contribution credibility play
+1. **Your Submitted By name** — Luka needs to add it to `Settings!C4:C` of the tracker
+2. **Credentials access** in 1Password
+3. **OpenClaw GitHub access** if you'll be working on the OpenClaw contribution credibility play
 
 ---
 
@@ -292,6 +314,6 @@ Test the round trip end-to-end before considering yourself onboarded:
 1. Ask the agent to draft a proposal for a real or fictional Upwork post
 2. Confirm the draft appears in `knowledge-base/upwork-proposals/drafts/`
 3. Ask the agent to log it to the tracker
-4. Open the sheet in your browser and confirm the row shows up in the `Proposals` tab
+4. Open the sheet in your browser and confirm the row shows up in the `Proposals` tab with the correct Opportunity Score in column V
 
-If all four work, you have parity with Luka's setup. Welcome aboard.
+If all four work, you have parity with the rest of the team. Welcome aboard.
