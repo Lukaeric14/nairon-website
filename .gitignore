@@ -12,3 +12,8 @@ app.config.timestamp_*
 tmp/
 .vercel
 .env*.local
+
+# Google Sheets service account keys (kept locally per user)
+*.gcp-service-account.json
+*-service-account.json
+secrets/
