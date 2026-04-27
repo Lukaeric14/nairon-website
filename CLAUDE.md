@@ -102,7 +102,7 @@ Compose them: draft a proposal with `upwork-proposal`, then log it with `upwork-
 
 Every drafted proposal is also saved to `knowledge-base/upwork-proposals/drafts/` as a structured markdown file (frontmatter + sections). This builds an A/B testable corpus over time — never skip the archive step, never delete a file. When a status changes, both the sheet row and the draft file must be updated together.
 
-The Google Sheets MCP server is configured in `.mcp.json` and authenticates via a service account (`nairon-sheets-bot@naironai-hive.iam.gserviceaccount.com`). Setup details are in `docs/sheets-setup.md`.
+The Google Sheets MCP server is configured in `.mcp.json` and authenticates via a service account (`nairon-sheets-bot@naironai-hive.iam.gserviceaccount.com`). New teammates: follow `docs/upwork-onboarding.md` for end-to-end setup. The deeper service-account / GCP details (admin-only) live in `docs/sheets-setup.md`.
 
 ## Supermemory
 
