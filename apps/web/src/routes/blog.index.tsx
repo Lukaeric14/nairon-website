@@ -69,7 +69,7 @@ function BlogHero() {
 						Nairon field notes
 					</div>
 					<h1 className="max-w-4xl text-[48px] font-normal leading-[0.95] tracking-[-0.03em] text-[#171612] md:text-[86px]">
-						Data-backed lessons from client AI agents and Hive.
+						Data-backed lessons from building Agents.
 					</h1>
 					<p className="mt-8 max-w-2xl text-lg leading-8 text-[#5F5A50] md:text-xl">
 						We use this space to share what we are learning while building AI
