@@ -130,18 +130,51 @@ function FeaturedArticle() {
 					href={featuredPost.href}
 					className="group grid grid-cols-1 border border-[#171612]/10 bg-[#FBFAF6] md:grid-cols-[0.85fr_1.15fr]"
 				>
-					<div className="relative min-h-[300px] overflow-hidden bg-[#171612] p-6 text-white md:min-h-[440px]">
-						<div className="absolute inset-0 opacity-50 [background-image:radial-gradient(circle_at_20%_20%,rgba(201,169,110,0.34),transparent_28%),linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:100%_100%,42px_42px,42px_42px]" />
+					<div
+						aria-hidden="true"
+						className="relative min-h-[300px] overflow-hidden bg-[#171612] p-6 text-white md:min-h-[440px]"
+					>
+						<div className="absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:42px_42px]" />
+						<div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_18%,rgba(201,169,110,0.22),transparent_28%),radial-gradient(circle_at_70%_62%,rgba(188,255,0,0.08),transparent_30%)]" />
+						<div className="absolute left-1/2 top-[46%] h-px w-[58%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#C9A96E]/55 to-transparent" />
+						<div className="absolute left-[25%] top-[25%] h-[44%] w-px bg-gradient-to-b from-transparent via-white/18 to-transparent" />
+						<div className="absolute left-[75%] top-[25%] h-[44%] w-px bg-gradient-to-b from-transparent via-white/18 to-transparent" />
 						<div className="relative flex h-full flex-col justify-between">
-							<div className="inline-flex w-fit items-center gap-2 border border-white/15 px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#D8C497]">
+							<div className="inline-flex w-fit items-center gap-2 border border-white/15 bg-[#171612]/70 px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#D8C497] backdrop-blur">
 								<Sparkles className="h-4 w-4" />
 								First field note
 							</div>
+							<div className="mx-auto grid w-full max-w-[420px] grid-cols-[1fr_auto_1fr] items-center gap-3 py-8">
+								<div className="space-y-3">
+									{["Docs", "Calls", "CRM"].map((source) => (
+										<div
+											key={source}
+											className="border border-white/10 bg-white/[0.035] px-3 py-2 text-xs uppercase tracking-[0.14em] text-white/58"
+										>
+											{source}
+										</div>
+									))}
+								</div>
+								<div className="relative flex h-28 w-28 items-center justify-center rounded-full border border-[#C9A96E]/45 bg-[#C9A96E]/10 shadow-[0_0_42px_rgba(201,169,110,0.16)] transition-transform duration-500 group-hover:scale-105">
+									<div className="absolute inset-3 rounded-full border border-white/10" />
+									<BrainCircuit className="h-10 w-10 text-[#D8C497]" />
+								</div>
+								<div className="space-y-3">
+									{["Memory", "Policy", "Context"].map((output) => (
+										<div
+											key={output}
+											className="border border-[#C9A96E]/22 bg-[#C9A96E]/[0.08] px-3 py-2 text-xs uppercase tracking-[0.14em] text-[#D8C497]"
+										>
+											{output}
+										</div>
+									))}
+								</div>
+							</div>
 							<div className="grid grid-cols-2 gap-3 text-sm text-white/72">
-								<span className="border border-white/10 p-3">Memory APIs</span>
-								<span className="border border-white/10 p-3">Company brain</span>
-								<span className="border border-white/10 p-3">Hive beta</span>
-								<span className="border border-white/10 p-3">Agent context</span>
+								<span className="border border-white/10 bg-white/[0.03] p-3">Memory APIs</span>
+								<span className="border border-white/10 bg-white/[0.03] p-3">Company brain</span>
+								<span className="border border-white/10 bg-white/[0.03] p-3">Security model</span>
+								<span className="border border-white/10 bg-white/[0.03] p-3">Agent context</span>
 							</div>
 						</div>
 					</div>
