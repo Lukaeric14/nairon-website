@@ -200,9 +200,9 @@ export function BlogSection() {
 						</span>
 					</div>
 					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl">
-						Essays &{" "}
+						Agent build{" "}
 						<span className="font-serif italic text-[#C9A96E]">
-							insights
+							notes
 						</span>
 					</h2>
 				</GridCell>
@@ -234,13 +234,13 @@ export function BlogSection() {
 					<PostCard post={featured} large />
 				</GridCell>
 
-				{/* Right column — recent essays list */}
+				{/* Right column — recent notes list */}
 				<GridCell className="p-8 md:p-10">
 					<CornerNotches size={10} />
 					<div className="flex items-center gap-3 mb-8">
 						<div className="w-1 h-1 rounded-full bg-[#C9A96E]/60" />
 						<h3 className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
-							Recent Essays
+							Recent Notes
 						</h3>
 					</div>
 					<div className="flex flex-col gap-6">

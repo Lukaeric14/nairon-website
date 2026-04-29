@@ -170,14 +170,14 @@ export function UniverseBlog() {
 						</span>
 					</div>
 					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl mb-3">
-						Essays &{" "}
+						Agent build{" "}
 						<span className="font-serif italic text-[#C9A96E]">
-							insights
+							notes
 						</span>
 					</h2>
 					<p className="text-[#5C584F] text-base max-w-xl">
-						Long-form thinking on AI-native engineering, recruiting,
-						and building with agents — from the Nairon team.
+						Data-backed lessons from client AI agent builds and our internal
+						Hive automation work.
 					</p>
 				</GridCell>
 			</GridSection>

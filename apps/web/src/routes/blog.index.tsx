@@ -69,12 +69,13 @@ function BlogHero() {
 						Nairon field notes
 					</div>
 					<h1 className="max-w-4xl text-[48px] font-normal leading-[0.95] tracking-[-0.03em] text-[#171612] md:text-[86px]">
-						Essays on AI employees, memory, and Hive.
+						Data-backed lessons from client AI agents and Hive.
 					</h1>
 					<p className="mt-8 max-w-2xl text-lg leading-8 text-[#5F5A50] md:text-xl">
-						We use this space to write down the problems we keep seeing while
-						building AI employees for clients and while running Hive internally.
-						The first topic is memory because it is the layer that decides
+						We use this space to share what we are learning while building AI
+						agents for clients, backed by the patterns we see in real
+						deployments and by our internal work using Hive to automate Nairon's
+						own company processes. The first topic is memory because it decides
 						whether agents understand the business or just follow instructions.
 					</p>
 					<div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -142,7 +143,7 @@ function FeaturedArticle() {
 						<div className="relative flex h-full flex-col justify-between">
 							<div className="inline-flex w-fit items-center gap-2 border border-white/15 px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#D8C497]">
 								<Sparkles className="h-4 w-4" />
-								First essay
+								First field note
 							</div>
 							<div className="grid grid-cols-2 gap-3 text-sm text-white/72">
 								<span className="border border-white/10 p-3">Memory APIs</span>
@@ -235,7 +236,7 @@ function HiveWaitlistSection() {
 						Hive beta
 					</p>
 					<h2 className="mt-4 text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
-						Join the waitlist for the platform behind the essays.
+						Join the waitlist for the platform behind the learnings.
 					</h2>
 					<p className="mt-5 max-w-xl text-base leading-7 text-[#5F5A50]">
 						Hive is a workspace for humans and AI employees. Think persistent
