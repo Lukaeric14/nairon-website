@@ -20,6 +20,13 @@ import { CandidateModal } from "@/components/landing/candidate-modal";
 import { HireModal } from "@/components/landing/hire-modal";
 import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
 import { ModalProvider } from "@/components/landing/modal-provider";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { DISCOVERY_CALL_URL } from "@/lib/links";
 import { blogPostJsonLd, breadcrumbJsonLd, seoHead } from "@/lib/seo";
 import { cn } from "@/lib/utils";
@@ -923,22 +930,30 @@ function SelectControl({
 	onChange: (value: string) => void;
 }) {
 	return (
-		<label className="block">
+		<div className="block">
 			<span className="mb-2 block text-xs font-medium uppercase tracking-[0.16em] text-white/52">
 				{label}
 			</span>
-			<select
+			<Select
 				value={value}
-				onChange={(event) => onChange(event.target.value)}
-				className="h-12 w-full border border-white/15 bg-white px-3 text-sm text-[#171612] outline-none focus:border-[#BEFF00]"
+				onValueChange={onChange}
 			>
-				{options.map((option) => (
-					<option key={option.value} value={option.value}>
-						{option.label}
-					</option>
-				))}
-			</select>
-		</label>
+				<SelectTrigger className="h-12 rounded-none border-white/15 bg-white px-3 text-sm text-[#171612] shadow-none ring-offset-transparent focus:ring-1 focus:ring-[#BEFF00] focus:ring-offset-0 data-[placeholder]:text-[#6D675C] [&>svg]:text-[#171612] [&>svg]:opacity-70">
+					<SelectValue />
+				</SelectTrigger>
+				<SelectContent className="z-[70] rounded-none border-[#171612]/10 bg-white text-[#171612] shadow-xl">
+					{options.map((option) => (
+						<SelectItem
+							key={option.value}
+							value={option.value}
+							className="rounded-none text-sm text-[#171612] focus:bg-[#F2E8D6] focus:text-[#171612]"
+						>
+							{option.label}
+						</SelectItem>
+					))}
+				</SelectContent>
+			</Select>
+		</div>
 	);
 }
 
