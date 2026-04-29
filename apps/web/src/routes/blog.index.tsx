@@ -28,7 +28,7 @@ const featuredPost = {
 		"A practical look at Supermemory, Mem0, Zep, Letta, LangMem, company-brain tools, and the memory layer we need for Hive.",
 };
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog/")({
 	component: BlogPage,
 	head: () =>
 		seoHead({
