@@ -19,6 +19,7 @@ import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ForRealEstateRouteImport } from './routes/for/real-estate'
+import { Route as BlogSolvingTheAgentMemoryProblemRouteImport } from './routes/blog/solving-the-agent-memory-problem'
 import { Route as ForRealEstatePropertyPdfRouteImport } from './routes/for/real-estate_.property-pdf'
 
 const UniverseRoute = UniverseRouteImport.update({
@@ -71,6 +72,12 @@ const ForRealEstateRoute = ForRealEstateRouteImport.update({
   path: '/for/real-estate',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSolvingTheAgentMemoryProblemRoute =
+  BlogSolvingTheAgentMemoryProblemRouteImport.update({
+    id: '/blog/solving-the-agent-memory-problem',
+    path: '/blog/solving-the-agent-memory-problem',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ForRealEstatePropertyPdfRoute =
   ForRealEstatePropertyPdfRouteImport.update({
     id: '/for/real-estate_/property-pdf',
@@ -88,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
+  '/blog/solving-the-agent-memory-problem': typeof BlogSolvingTheAgentMemoryProblemRoute
   '/for/real-estate': typeof ForRealEstateRoute
   '/for/real-estate/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
@@ -101,6 +109,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
+  '/blog/solving-the-agent-memory-problem': typeof BlogSolvingTheAgentMemoryProblemRoute
   '/for/real-estate': typeof ForRealEstateRoute
   '/for/real-estate/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
@@ -115,6 +124,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
+  '/blog/solving-the-agent-memory-problem': typeof BlogSolvingTheAgentMemoryProblemRoute
   '/for/real-estate': typeof ForRealEstateRoute
   '/for/real-estate_/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
+    | '/blog/solving-the-agent-memory-problem'
     | '/for/real-estate'
     | '/for/real-estate/property-pdf'
   fileRoutesByTo: FileRoutesByTo
@@ -143,6 +154,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
+    | '/blog/solving-the-agent-memory-problem'
     | '/for/real-estate'
     | '/for/real-estate/property-pdf'
   id:
@@ -156,6 +168,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
+    | '/blog/solving-the-agent-memory-problem'
     | '/for/real-estate'
     | '/for/real-estate_/property-pdf'
   fileRoutesById: FileRoutesById
@@ -170,6 +183,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   UniverseRoute: typeof UniverseRoute
+  BlogSolvingTheAgentMemoryProblemRoute: typeof BlogSolvingTheAgentMemoryProblemRoute
   ForRealEstateRoute: typeof ForRealEstateRoute
   ForRealEstatePropertyPdfRoute: typeof ForRealEstatePropertyPdfRoute
 }
@@ -246,6 +260,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForRealEstateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/solving-the-agent-memory-problem': {
+      id: '/blog/solving-the-agent-memory-problem'
+      path: '/blog/solving-the-agent-memory-problem'
+      fullPath: '/blog/solving-the-agent-memory-problem'
+      preLoaderRoute: typeof BlogSolvingTheAgentMemoryProblemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/for/real-estate_/property-pdf': {
       id: '/for/real-estate_/property-pdf'
       path: '/for/real-estate/property-pdf'
@@ -266,6 +287,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   UniverseRoute: UniverseRoute,
+  BlogSolvingTheAgentMemoryProblemRoute: BlogSolvingTheAgentMemoryProblemRoute,
   ForRealEstateRoute: ForRealEstateRoute,
   ForRealEstatePropertyPdfRoute: ForRealEstatePropertyPdfRoute,
 }
