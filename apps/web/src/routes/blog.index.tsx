@@ -109,12 +109,6 @@ function BlogHero() {
 								<SignalRow icon={Network} label="Integrations and interoperability" />
 							</div>
 						</div>
-						<p className="mt-10 border-t border-white/10 pt-5 text-[13px] leading-6 text-white/68">
-							Hive is still in beta, but we are already using it internally to
-							give AI employees governed access to company memory, business
-							context, tool permissions, and the operating decisions they need
-							to reason well.
-						</p>
 					</div>
 				</div>
 			</div>
