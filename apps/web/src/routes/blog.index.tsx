@@ -13,6 +13,7 @@ import {
 import { CandidateModal } from "@/components/landing/candidate-modal";
 import { Footer, Navbar } from "@/components/landing";
 import { HireModal } from "@/components/landing/hire-modal";
+import { HivePlatformPreview } from "@/components/landing/hive-platform-preview";
 import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
 import { ModalProvider } from "@/components/landing/modal-provider";
 import { DISCOVERY_CALL_URL } from "@/lib/links";
@@ -266,9 +267,9 @@ function HiveWaitlistSection() {
 					<p className="mt-5 max-w-xl text-base leading-7 text-[#5F5A50]">
 						Hive is a workspace for humans and AI employees. Think persistent
 						memory, business context, security policy, tool access, and
-						reliability loops in one place. We are not launching the lander yet,
-						but we should know who wants early access.
+						reliability loops in one place.
 					</p>
+					<HivePlatformPreview className="mt-8 max-w-xl" />
 					<a
 						href={DISCOVERY_CALL_URL}
 						target="_blank"

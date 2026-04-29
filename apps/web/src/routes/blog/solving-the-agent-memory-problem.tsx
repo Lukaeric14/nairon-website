@@ -17,6 +17,7 @@ import { useMemo, useState } from "react";
 import { Footer, Navbar } from "@/components/landing";
 import { CandidateModal } from "@/components/landing/candidate-modal";
 import { HireModal } from "@/components/landing/hire-modal";
+import { HivePlatformPreview } from "@/components/landing/hive-platform-preview";
 import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
 import { ModalProvider } from "@/components/landing/modal-provider";
 import {
@@ -716,6 +717,7 @@ function HiveSection() {
 						<SignalPill icon={Layers} label="Reliability loops" />
 						<SignalPill icon={GitBranch} label="Business context" />
 					</div>
+					<HivePlatformPreview className="mt-8" context="memory" />
 				</div>
 				<div className="border border-[#171612]/10 bg-white p-6">
 					<h3 className="text-2xl font-normal tracking-[-0.02em] text-[#171612]">
@@ -1042,7 +1044,7 @@ function SignalPill({
 	icon: Icon,
 	label,
 }: {
-	icon: typeof Mic;
+	icon: typeof AlertTriangle;
 	label: string;
 }) {
 	return (
