@@ -72,11 +72,9 @@ function BlogHero() {
 						Data-backed lessons from building Agents.
 					</h1>
 					<p className="mt-8 max-w-2xl text-lg leading-8 text-[#5F5A50] md:text-xl">
-						We use this space to share what we are learning while building AI
-						agents for clients, backed by the patterns we see in real
-						deployments and by our internal work using Hive to automate Nairon's
-						own company processes. The first topic is memory because it decides
-						whether agents understand the business or just follow instructions.
+						What we are learning from client agent deployments and from using
+						Hive inside Nairon. First up: memory, because agents need business
+						context before they can do useful work.
 					</p>
 					<div className="mt-8 flex flex-col gap-3 sm:flex-row">
 						<a
