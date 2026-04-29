@@ -13,7 +13,7 @@ const FOOTER_COLS: FooterCol[] = [
 		links: [
 			{ label: "About", href: "/#what-we-do" },
 			{ label: "Process", href: "/#process" },
-			{ label: "Blog", href: "/blog/solving-the-agent-memory-problem" },
+			{ label: "Blog", href: "/blog" },
 			{ label: "Contact", action: "hire" },
 		],
 	},

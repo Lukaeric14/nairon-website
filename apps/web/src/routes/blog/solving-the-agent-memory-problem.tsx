@@ -18,7 +18,9 @@ import { useMemo, useState } from "react";
 import { Footer, Navbar } from "@/components/landing";
 import { CandidateModal } from "@/components/landing/candidate-modal";
 import { HireModal } from "@/components/landing/hire-modal";
+import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
 import { ModalProvider } from "@/components/landing/modal-provider";
+import { DISCOVERY_CALL_URL } from "@/lib/links";
 import { blogPostJsonLd, breadcrumbJsonLd, seoHead } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
@@ -441,7 +443,7 @@ function AgentMemoryArticlePage() {
 	return (
 		<ModalProvider>
 			<div className="min-h-screen bg-[#FBFAF6] font-inter text-[#171612]">
-				<Navbar minimal />
+				<Navbar />
 				<article>
 					<Hero />
 					<ProblemSection />
@@ -449,6 +451,7 @@ function AgentMemoryArticlePage() {
 					<ProviderSection />
 					<HiveSection />
 					<DecisionTool />
+					<ArticleCTA />
 					<SourcesSection />
 				</article>
 				<Footer />
@@ -718,6 +721,13 @@ function HiveSection() {
 						understand the company, while sensitive data stays permissioned and
 						auditable.
 					</p>
+					<p className="mt-4 text-sm leading-7 text-[#5F5A50]">
+						That is the platform we are using internally now: a Slack-like
+						workspace with voice channels, AI employees, workflows, and a
+						memory layer that turns transcripts and decisions into useful
+						operating context. It is still beta, but the internal wins are why
+						we are writing about the problem publicly.
+					</p>
 					<ul className="mt-6 space-y-4">
 						{hivePrinciples.map((principle) => (
 							<li key={principle} className="flex gap-3 text-sm leading-6">
@@ -726,6 +736,53 @@ function HiveSection() {
 							</li>
 						))}
 					</ul>
+				</div>
+			</div>
+		</section>
+	);
+}
+
+function ArticleCTA() {
+	return (
+		<section className="border-b border-[#171612]/10 bg-white">
+			<div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-5 py-16 md:grid-cols-[0.9fr_1.1fr] md:px-8 md:py-20">
+				<div>
+					<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
+						Where this goes
+					</p>
+					<h2 className="mt-4 text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
+						Memory is one piece of Hive.
+					</h2>
+					<p className="mt-5 max-w-xl text-base leading-7 text-[#5F5A50]">
+						Hive is the proprietary platform we are building so companies can
+						talk to AI employees, build workflows, keep voice-channel context,
+						and give agents permissioned access to the company memory they need.
+					</p>
+					<p className="mt-4 max-w-xl text-base leading-7 text-[#5F5A50]">
+						If you want Nairon to build your first AI employee now, book the
+						one-month pilot. If you want early access to Hive when we open the
+						beta wider, join the waitlist.
+					</p>
+					<a
+						href={DISCOVERY_CALL_URL}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="mt-7 inline-flex h-12 items-center justify-center gap-2 bg-[#171612] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#2A2822]"
+					>
+						Book the one-month pilot
+						<ArrowUpRight className="h-4 w-4" />
+					</a>
+				</div>
+				<div className="border border-[#171612]/10 bg-[#FBFAF6] p-5 md:p-6">
+					<div className="mb-5">
+						<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
+							Hive waitlist
+						</p>
+						<h3 className="mt-2 text-2xl font-normal tracking-[-0.02em] text-[#171612]">
+							Get notified when Hive opens.
+						</h3>
+					</div>
+					<HiveWaitlistForm source="Agent memory article" />
 				</div>
 			</div>
 		</section>

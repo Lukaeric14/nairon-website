@@ -15,6 +15,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PitchDeckRouteImport } from './routes/pitch-deck'
 import { Route as FluxRouteImport } from './routes/flux'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
@@ -52,6 +53,11 @@ const CookiePolicyRoute = CookiePolicyRouteImport.update({
   path: '/cookie-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AcceptableUseRoute = AcceptableUseRouteImport.update({
   id: '/acceptable-use',
   path: '/acceptable-use',
@@ -74,9 +80,9 @@ const ForRealEstateRoute = ForRealEstateRouteImport.update({
 } as any)
 const BlogSolvingTheAgentMemoryProblemRoute =
   BlogSolvingTheAgentMemoryProblemRouteImport.update({
-    id: '/blog/solving-the-agent-memory-problem',
-    path: '/blog/solving-the-agent-memory-problem',
-    getParentRoute: () => rootRouteImport,
+    id: '/solving-the-agent-memory-problem',
+    path: '/solving-the-agent-memory-problem',
+    getParentRoute: () => BlogRoute,
   } as any)
 const ForRealEstatePropertyPdfRoute =
   ForRealEstatePropertyPdfRouteImport.update({
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/acceptable-use': typeof AcceptableUseRoute
+  '/blog': typeof BlogRouteWithChildren
   '/cookie-policy': typeof CookiePolicyRoute
   '/flux': typeof FluxRoute
   '/pitch-deck': typeof PitchDeckRoute
@@ -103,6 +110,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/acceptable-use': typeof AcceptableUseRoute
+  '/blog': typeof BlogRouteWithChildren
   '/cookie-policy': typeof CookiePolicyRoute
   '/flux': typeof FluxRoute
   '/pitch-deck': typeof PitchDeckRoute
@@ -118,6 +126,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/acceptable-use': typeof AcceptableUseRoute
+  '/blog': typeof BlogRouteWithChildren
   '/cookie-policy': typeof CookiePolicyRoute
   '/flux': typeof FluxRoute
   '/pitch-deck': typeof PitchDeckRoute
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/acceptable-use'
+    | '/blog'
     | '/cookie-policy'
     | '/flux'
     | '/pitch-deck'
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/acceptable-use'
+    | '/blog'
     | '/cookie-policy'
     | '/flux'
     | '/pitch-deck'
@@ -162,6 +173,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/acceptable-use'
+    | '/blog'
     | '/cookie-policy'
     | '/flux'
     | '/pitch-deck'
@@ -177,13 +189,13 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
   AcceptableUseRoute: typeof AcceptableUseRoute
+  BlogRoute: typeof BlogRouteWithChildren
   CookiePolicyRoute: typeof CookiePolicyRoute
   FluxRoute: typeof FluxRoute
   PitchDeckRoute: typeof PitchDeckRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   UniverseRoute: typeof UniverseRoute
-  BlogSolvingTheAgentMemoryProblemRoute: typeof BlogSolvingTheAgentMemoryProblemRoute
   ForRealEstateRoute: typeof ForRealEstateRoute
   ForRealEstatePropertyPdfRoute: typeof ForRealEstatePropertyPdfRoute
 }
@@ -232,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CookiePolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/acceptable-use': {
       id: '/acceptable-use'
       path: '/acceptable-use'
@@ -262,10 +281,10 @@ declare module '@tanstack/react-router' {
     }
     '/blog/solving-the-agent-memory-problem': {
       id: '/blog/solving-the-agent-memory-problem'
-      path: '/blog/solving-the-agent-memory-problem'
+      path: '/solving-the-agent-memory-problem'
       fullPath: '/blog/solving-the-agent-memory-problem'
       preLoaderRoute: typeof BlogSolvingTheAgentMemoryProblemRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof BlogRoute
     }
     '/for/real-estate_/property-pdf': {
       id: '/for/real-estate_/property-pdf'
@@ -277,17 +296,27 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface BlogRouteChildren {
+  BlogSolvingTheAgentMemoryProblemRoute: typeof BlogSolvingTheAgentMemoryProblemRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSolvingTheAgentMemoryProblemRoute: BlogSolvingTheAgentMemoryProblemRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
   AcceptableUseRoute: AcceptableUseRoute,
+  BlogRoute: BlogRouteWithChildren,
   CookiePolicyRoute: CookiePolicyRoute,
   FluxRoute: FluxRoute,
   PitchDeckRoute: PitchDeckRoute,
   PrivacyRoute: PrivacyRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   UniverseRoute: UniverseRoute,
-  BlogSolvingTheAgentMemoryProblemRoute: BlogSolvingTheAgentMemoryProblemRoute,
   ForRealEstateRoute: ForRealEstateRoute,
   ForRealEstatePropertyPdfRoute: ForRealEstatePropertyPdfRoute,
 }
