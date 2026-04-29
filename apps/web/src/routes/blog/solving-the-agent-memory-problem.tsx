@@ -9,7 +9,6 @@ import {
 	GitBranch,
 	Layers,
 	LockKeyhole,
-	Mic,
 	Network,
 	ShieldCheck,
 	Sparkles,
@@ -242,7 +241,7 @@ const landscape = [
 	{
 		icon: Building2,
 		title: "Company brain",
-		body: "The platform maps how a company works: decisions, workflows, docs, transcripts, people, permissions, and constraints.",
+		body: "The platform maps how a company works: decisions, docs, transcripts, people, permissions, constraints, and operating context.",
 	},
 ];
 
@@ -497,11 +496,11 @@ function Hero() {
 								Hive memory model
 							</p>
 							<div className="mt-8 space-y-4">
-								<MemoryRow label="Voice transcripts" value="source material" />
+								<MemoryRow label="Knowledge sources" value="source material" />
 								<MemoryRow label="Decisions" value="durable context" />
-								<MemoryRow label="Budgets" value="permissioned facts" />
-								<MemoryRow label="Workflows" value="agent operating context" />
-								<MemoryRow label="Client constraints" value="pushback signal" />
+								<MemoryRow label="Constraints" value="permissioned facts" />
+								<MemoryRow label="Security policy" value="access boundaries" />
+								<MemoryRow label="Evaluations" value="pushback signal" />
 							</div>
 						</div>
 						<div className="mt-10 border-t border-white/10 pt-5">
@@ -709,13 +708,13 @@ function HiveSection() {
 					<SectionHeading
 						kicker="How Hive uses this"
 						title="Hive should be memory-provider aware, not memory-provider dependent."
-						body="Internally, Hive already treats memory as part of the workspace runtime: AI employees, voice channels, transcripts, tasks, approvals, credentials, and runtime environments all need to converge into one permissioned context layer."
+						body="Internally, Hive already treats memory as part of the workspace runtime: company knowledge, decisions, transcripts, tasks, approvals, credentials, and agent actions all need to converge into one governed context layer."
 					/>
 					<div className="mt-8 flex flex-wrap gap-3">
-						<SignalPill icon={Mic} label="Voice channels" />
-						<SignalPill icon={Layers} label="Runtime scopes" />
-						<SignalPill icon={ShieldCheck} label="Access policy" />
-						<SignalPill icon={GitBranch} label="Decision history" />
+						<SignalPill icon={BrainCircuit} label="Memory architecture" />
+						<SignalPill icon={ShieldCheck} label="Security model" />
+						<SignalPill icon={Layers} label="Reliability loops" />
+						<SignalPill icon={GitBranch} label="Business context" />
 					</div>
 				</div>
 				<div className="border border-[#171612]/10 bg-white p-6">
@@ -730,10 +729,11 @@ function HiveSection() {
 					</p>
 					<p className="mt-4 text-sm leading-7 text-[#5F5A50]">
 						That is the platform we are using internally now: a Slack-like
-						workspace with voice channels, AI employees, workflows, and a
-						memory layer that turns transcripts and decisions into useful
-						operating context. It is still beta, but the internal wins are why
-						we are writing about the problem publicly.
+						workspace where AI employees can use the right company knowledge,
+						permissions, tools, and decision history to reason with the
+						business instead of acting from a narrow prompt. It is still beta,
+						but the internal wins are why we are writing about the problem
+						publicly.
 					</p>
 					<ul className="mt-6 space-y-4">
 						{hivePrinciples.map((principle) => (
@@ -762,8 +762,9 @@ function ArticleCTA() {
 					</h2>
 					<p className="mt-5 max-w-xl text-base leading-7 text-[#5F5A50]">
 						Hive is the proprietary platform we are building so companies can
-						talk to AI employees, build workflows, keep voice-channel context,
-						and give agents permissioned access to the company memory they need.
+						talk to AI employees, preserve business context, enforce security
+						policy, and give agents governed access to the company memory they
+						need.
 					</p>
 					<p className="mt-4 max-w-xl text-base leading-7 text-[#5F5A50]">
 						If you want Nairon to build your first AI employee now, book the

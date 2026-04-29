@@ -4,9 +4,9 @@ import {
 	BookOpenText,
 	BrainCircuit,
 	Calendar,
+	CheckCircle2,
 	Clock3,
 	LockKeyhole,
-	Mic,
 	Network,
 	Sparkles,
 } from "lucide-react";
@@ -105,15 +105,16 @@ function BlogHero() {
 							</p>
 							<div className="mt-8 grid grid-cols-1 gap-3">
 								<SignalRow icon={BrainCircuit} label="Agent memory" />
-								<SignalRow icon={Mic} label="Voice channels and transcripts" />
-								<SignalRow icon={Network} label="Workflows and AI employees" />
-								<SignalRow icon={LockKeyhole} label="Permissioned company context" />
+								<SignalRow icon={LockKeyhole} label="Security and access control" />
+								<SignalRow icon={CheckCircle2} label="Reliability and evaluation" />
+								<SignalRow icon={Network} label="Integrations and interoperability" />
 							</div>
 						</div>
 						<p className="mt-10 border-t border-white/10 pt-5 text-[13px] leading-6 text-white/68">
 							Hive is still in beta, but we are already using it internally to
-							give AI employees a shared workspace, voice context, workflow
-							context, and persistent company memory.
+							give AI employees governed access to company memory, business
+							context, tool permissions, and the operating decisions they need
+							to reason well.
 						</p>
 					</div>
 				</div>
@@ -199,7 +200,7 @@ function WhyThisBlogExists() {
 					{[
 						{
 							title: "Client patterns",
-							body: "The same bottlenecks show up across operations, sales, support, recruiting, and engineering workflows.",
+							body: "The same bottlenecks show up across operations, sales, support, recruiting, and engineering agent systems.",
 						},
 						{
 							title: "Hive lessons",
@@ -207,7 +208,7 @@ function WhyThisBlogExists() {
 						},
 						{
 							title: "Practical choices",
-							body: "We want buyers and builders to understand the tradeoffs before they pick memory tools, agents, or workflows.",
+							body: "We want buyers and builders to understand the tradeoffs before they pick memory tools, agent platforms, or security models.",
 						},
 					].map((item) => (
 						<div key={item.title} className="border border-[#171612]/10 bg-white p-5">
@@ -237,10 +238,10 @@ function HiveWaitlistSection() {
 						Join the waitlist for the platform behind the essays.
 					</h2>
 					<p className="mt-5 max-w-xl text-base leading-7 text-[#5F5A50]">
-						Hive is a workspace for humans and AI employees. Think voice
-						channels, AI teammates, workflows, memory, and company context in
-						one place. We are not launching the lander yet, but we should know
-						who wants early access.
+						Hive is a workspace for humans and AI employees. Think persistent
+						memory, business context, security policy, tool access, and
+						reliability loops in one place. We are not launching the lander yet,
+						but we should know who wants early access.
 					</p>
 					<a
 						href={DISCOVERY_CALL_URL}
