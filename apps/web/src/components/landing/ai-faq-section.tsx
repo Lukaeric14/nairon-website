@@ -1,67 +1,63 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import {
-	VideoPlayer,
-	VideoPlayerContent,
-	VideoPlayerControlBar,
-	VideoPlayerMuteButton,
-	VideoPlayerPlayButton,
-	VideoPlayerTimeDisplay,
-	VideoPlayerTimeRange,
-} from "@/components/kibo-ui/video-player";
 import { GridCell, GridSection } from "./grid-system";
 
-const FAQ_ITEMS = [
+type FAQItem = {
+	question: string;
+	streamEmbedSrc: string;
+};
+
+const FAQ_ITEMS: FAQItem[] = [
 	{
 		question: "What does month 1 look like with Nairon?",
-		videoSrc: "/faq-videos/faq-1-mahan.mp4",
+		streamEmbedSrc: "https://iframe.videodelivery.net/67a303a3e6b9f823e029a35e38e1b75a",
 	},
 	{
 		question: "How does Nairon tackle security?",
-		videoSrc: "/faq-videos/faq-1-obaid.mp4",
+		streamEmbedSrc: "https://iframe.videodelivery.net/502e5c688fe196cb853416a6737b994c",
 	},
 	{
 		question: "How much does it cost to work with Nairon?",
-		videoSrc: "/faq-videos/faq-2-mahan.mp4",
+		streamEmbedSrc: "https://iframe.videodelivery.net/831c2c3154357b8ef84b47369f9d4c07",
 	},
 	{
 		question: "How do you create AI employees for companies?",
-		videoSrc: "/faq-videos/faq-2-obaid.mp4",
+		streamEmbedSrc: "https://iframe.videodelivery.net/0a4b3985b998ea91d492db4833b0a7e2",
 	},
 	{
 		question: "What's the investment structure for Nairon clients?",
-		videoSrc: "/faq-videos/faq-3-mahan.mp4",
+		streamEmbedSrc: "https://iframe.videodelivery.net/3b63dbf13426df80f36f644dcee27632",
 	},
 	{
 		question: "Why do I need to work with a company like Nairon?",
-		videoSrc: "/faq-videos/faq-3-obaid.mp4",
+		streamEmbedSrc: "https://iframe.videodelivery.net/859ec3c300a985f40eb65a9b8483bcf0",
 	},
 	{
 		question: "What do touchpoints look like with Nairon?",
-		videoSrc: "/faq-videos/faq-4-mahan.mp4",
+		streamEmbedSrc: "https://iframe.videodelivery.net/6e3c270c8f0b4f655092e6aaa3890616",
 	},
 	{
 		question: "How are costs allocated between us?",
-		videoSrc: "/faq-videos/faq-4-obaid.mp4",
+		streamEmbedSrc: "https://iframe.videodelivery.net/cf92404d9def5c43085df531af676c30",
 	},
 	{
 		question: "What do you need from me to get started?",
-		videoSrc: "/faq-videos/faq-5-mahan.mp4",
+		streamEmbedSrc: "https://iframe.videodelivery.net/37c52b8c9cdfa97115c311f203331db1",
 	},
 	{
 		question: "What makes you different from other automation agencies?",
-		videoSrc: "/faq-videos/faq-6-mahan.mp4",
+		streamEmbedSrc: "https://iframe.videodelivery.net/c30804c9a9c097d64b03f5052ed2db31",
 	},
 	{
 		question: "What can AI employees do for my business?",
-		videoSrc: "/faq-videos/faq-7-mahan.mp4",
+		streamEmbedSrc: "https://iframe.videodelivery.net/5a9d27bf76be1a4402b82a82730b9b99",
 	},
 	{
 		question: "What size businesses does your team work with?",
-		videoSrc: "/faq-videos/faq-8-mahan.mp4",
+		streamEmbedSrc: "https://iframe.videodelivery.net/f3391bf010e8589416350798d5dfe9b4",
 	},
 ];
 
-function FAQVideoPlayer({ src }: { src: string }) {
+function FAQVideoPlayer({ item }: { item: FAQItem }) {
 	return (
 		<div
 			className="mx-auto rounded-[30px] border border-white/8 bg-[#0C0C0C] p-2 shadow-[0_24px_70px_rgba(12,12,12,0.18)] ring-1 ring-[#0C0C0C]/8"
@@ -69,21 +65,13 @@ function FAQVideoPlayer({ src }: { src: string }) {
 				width: "min(100%, calc(min(620px, 68vh) * 9 / 16))",
 			}}
 		>
-			<VideoPlayer className="relative block aspect-[9/16] overflow-hidden rounded-[24px] bg-[#0C0C0C] text-white">
-				<VideoPlayerContent
-					className="h-full w-full object-cover"
-					playsInline
-					preload="metadata"
-					slot="media"
-					src={src}
-				/>
-				<VideoPlayerControlBar className="absolute inset-x-0 bottom-0 z-10 h-12 border-t border-white/10 bg-gradient-to-t from-black/90 to-black/35 text-white backdrop-blur-sm">
-					<VideoPlayerPlayButton className="p-2.5" />
-					<VideoPlayerTimeRange className="p-2" />
-					<VideoPlayerTimeDisplay className="min-w-[76px] p-2 text-xs" showDuration />
-					<VideoPlayerMuteButton className="p-2.5" />
-				</VideoPlayerControlBar>
-			</VideoPlayer>
+			<iframe
+				allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+				allowFullScreen
+				className="block aspect-[9/16] w-full overflow-hidden rounded-[24px] border-0 bg-[#0C0C0C]"
+				src={item.streamEmbedSrc}
+				title={item.question}
+			/>
 		</div>
 	);
 }
@@ -121,7 +109,7 @@ export function AIFaqSection() {
 										{item.question}
 									</AccordionTrigger>
 									<AccordionContent className="pb-4 md:pb-5">
-										<FAQVideoPlayer src={item.videoSrc} />
+										<FAQVideoPlayer item={item} />
 									</AccordionContent>
 								</AccordionItem>
 							))}
