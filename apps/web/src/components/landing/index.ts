@@ -27,7 +27,7 @@ export { BuiltByBuilders } from "./built-by-builders";
 export { Qualifier } from "./qualifier";
 export { LivesAndWorks } from "./lives-and-works";
 export { AIFaqSection } from "./ai-faq-section";
-export { BlogSection } from "./blog-section";
+export { SignalsSection } from "./signals-section";
 export {
 	GridSystem,
 	GridSpacer,

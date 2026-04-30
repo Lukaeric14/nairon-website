@@ -111,10 +111,10 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						FAQ
 					</a>
 					<a
-						href="/blog"
+						href="/signals"
 						className={cn(
 							"px-4 py-2 rounded-full text-sm transition-colors",
-							location.pathname.startsWith("/blog")
+							location.pathname.startsWith("/signals")
 								? "text-[#C9A96E]"
 								: "text-[#1A1916] hover:text-[#C9A96E]",
 						)}
@@ -178,7 +178,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						FAQ
 					</a>
 					<a
-						href="/blog"
+						href="/signals"
 						className="block px-4 py-3 rounded-xl text-base text-[#1A1916] hover:bg-[#0C0C0C]/5 transition-colors"
 						onClick={() => setMobileOpen(false)}
 					>

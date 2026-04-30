@@ -32,7 +32,7 @@ import { DISCOVERY_CALL_URL } from "@/lib/links";
 import { blogPostJsonLd, breadcrumbJsonLd, seoHead } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-const ARTICLE_PATH = "/blog/solving-the-agent-memory-problem";
+const ARTICLE_PATH = "/signals/solving-the-agent-memory-problem";
 const ARTICLE_TITLE = "Solving the Agent Memory problem";
 const ARTICLE_DESCRIPTION =
 	"A practical look at Supermemory, Mem0, Zep, Letta, LangMem, and company-brain memory layers for AI employees inside Hive.";
@@ -55,7 +55,7 @@ const breadcrumbsJsonLd = JSON.stringify(
 	]),
 );
 
-export const Route = createFileRoute("/blog/solving-the-agent-memory-problem")({
+export const Route = createFileRoute("/signals/solving-the-agent-memory-problem")({
 	component: AgentMemoryArticlePage,
 	head: () => {
 		const base = seoHead({

@@ -25,7 +25,7 @@ import { seoHead } from "@/lib/seo";
 
 const featuredPost = {
 	title: "Solving the Agent Memory problem",
-	href: "/blog/solving-the-agent-memory-problem",
+	href: "/signals/solving-the-agent-memory-problem",
 	category: "Company memory",
 	date: "Apr 30, 2026",
 	readTime: "12 min read",
@@ -82,18 +82,18 @@ const signalTopics = [
 	},
 ];
 
-export const Route = createFileRoute("/blog/")({
-	component: BlogPage,
+export const Route = createFileRoute("/signals/")({
+	component: SignalsPage,
 	head: () =>
 		seoHead({
 			title: "Signals | Nairon AI",
 			description:
 				"Nairon Signals on AI employees, company memory, agent infrastructure, and how we're building Hive.",
-			path: "/blog",
+			path: "/signals",
 		}),
 });
 
-function BlogPage() {
+function SignalsPage() {
 	return (
 		<ModalProvider>
 			<div className="min-h-screen bg-[#FBFAF6] font-inter text-[#171612]">

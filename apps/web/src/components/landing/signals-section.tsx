@@ -1,6 +1,6 @@
 import { GridSection, GridCell, CornerNotches } from "./grid-system";
 
-interface BlogPost {
+interface SignalPost {
 	title: string;
 	subtitle?: string;
 	category: string;
@@ -9,7 +9,7 @@ interface BlogPost {
 	image: string;
 }
 
-const blogPosts: BlogPost[] = [
+const signalPosts: SignalPost[] = [
 	{
 		title: "Why AI-Native Engineers Ship 3x Faster",
 		subtitle:
@@ -110,7 +110,7 @@ function PostImage({
 }
 
 /* ─── Left / center post card ─────────────────────────────────── */
-function PostCard({ post, large }: { post: BlogPost; large?: boolean }) {
+function PostCard({ post, large }: { post: SignalPost; large?: boolean }) {
 	return (
 		<article className="relative flex flex-col gap-4 group">
 			<PostImage
@@ -152,7 +152,7 @@ function PostCard({ post, large }: { post: BlogPost; large?: boolean }) {
 }
 
 /* ─── Compact list item (right column) ────────────────────────── */
-function CompactPost({ post }: { post: BlogPost }) {
+function CompactPost({ post }: { post: SignalPost }) {
 	return (
 		<article className="relative flex gap-4 items-start group">
 			<PostImage
@@ -183,10 +183,10 @@ function CompactPost({ post }: { post: BlogPost }) {
 }
 
 /* ─── Signals Section ─────────────────────────────────────────── */
-export function BlogSection() {
-	const featured = blogPosts[0];
-	const secondary = blogPosts.slice(1, 3);
-	const recent = blogPosts.slice(3, 7);
+export function SignalsSection() {
+	const featured = signalPosts[0];
+	const secondary = signalPosts.slice(1, 3);
+	const recent = signalPosts.slice(3, 7);
 
 	return (
 		<div>
