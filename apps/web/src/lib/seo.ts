@@ -199,7 +199,7 @@ export function breadcrumbJsonLd(
 }
 
 /**
- * JSON-LD BlogPosting schema for blog articles.
+ * JSON-LD BlogPosting schema for Signals articles.
  */
 export function blogPostJsonLd(config: {
 	title: string;

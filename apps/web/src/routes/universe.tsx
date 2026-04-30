@@ -59,7 +59,7 @@ function UniversePage() {
 					{/* Community */}
 					<UniverseCommunity />
 
-					{/* Blog */}
+					{/* Signals */}
 					<UniverseBlog />
 
 					{/* CTA */}

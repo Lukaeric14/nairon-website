@@ -127,7 +127,7 @@ const useCases: FeatureLink[] = [
 const contentLinks: FeatureLink[] = [
     { name: 'Announcements', href: '#link', icon: <BookOpen className="stroke-foreground fill-purple-500/15" /> },
     { name: 'Resources', href: '#link', icon: <Croissant className="stroke-foreground fill-red-500/15" /> },
-    { name: 'Blog', href: '#link', icon: <Notebook className="stroke-foreground fill-zinc-500/15" /> },
+    { name: 'Signals', href: '#link', icon: <Notebook className="stroke-foreground fill-zinc-500/15" /> },
 ]
 
 const mobileLinks: MobileLink[] = [

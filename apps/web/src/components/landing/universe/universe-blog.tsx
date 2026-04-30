@@ -166,7 +166,7 @@ export function UniverseBlog() {
 					<div className="flex items-center gap-3 mb-4">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
 						<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
-							Blog
+							Signals
 						</span>
 					</div>
 					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl mb-3">

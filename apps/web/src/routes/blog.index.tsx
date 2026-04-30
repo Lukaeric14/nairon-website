@@ -33,9 +33,9 @@ export const Route = createFileRoute("/blog/")({
 	component: BlogPage,
 	head: () =>
 		seoHead({
-			title: "Blog | Nairon AI",
+			title: "Signals | Nairon AI",
 			description:
-				"Field notes from Nairon on AI employees, company memory, agent infrastructure, and how we are building Hive.",
+				"Nairon Signals on AI employees, company memory, agent infrastructure, and how we are building Hive.",
 			path: "/blog",
 		}),
 });
@@ -67,7 +67,7 @@ function BlogHero() {
 				<div>
 					<div className="mb-7 inline-flex items-center gap-2 border border-[#171612]/10 bg-white/70 px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#6D675C]">
 						<BookOpenText className="h-4 w-4 text-[#A77A15]" />
-						Nairon field notes
+						Nairon Signals
 					</div>
 					<h1 className="max-w-4xl text-[48px] font-normal leading-[0.95] tracking-[-0.03em] text-[#171612] md:text-[86px]">
 						Data-backed lessons from building Agents.
@@ -281,7 +281,7 @@ function HiveWaitlistSection() {
 					</a>
 				</div>
 				<div className="border border-[#171612]/10 bg-[#FBFAF6] p-5 md:p-6">
-					<HiveWaitlistForm source="Blog index" />
+					<HiveWaitlistForm source="Signals index" />
 				</div>
 			</div>
 		</section>

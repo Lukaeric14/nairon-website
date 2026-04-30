@@ -89,7 +89,7 @@ function CookiePolicyPage() {
 								<ul className="list-disc pl-6 space-y-2">
 									<li>
 										<strong className="text-[#1A1916]">Article view tracking</strong>{" "}
-										— we store a count of blog articles you have viewed in
+										— we store a count of Signals articles you have viewed in
 										localStorage. This powers our free-article gate, which
 										allows you to read up to 3 articles before requiring you to
 										create an account or sign in. This data never leaves your

@@ -119,7 +119,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 								: "text-[#1A1916] hover:text-[#C9A96E]",
 						)}
 					>
-						Blog
+						Signals
 					</a>
 					<a
 						href={DISCOVERY_CALL_URL}
@@ -182,7 +182,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						className="block px-4 py-3 rounded-xl text-base text-[#1A1916] hover:bg-[#0C0C0C]/5 transition-colors"
 						onClick={() => setMobileOpen(false)}
 					>
-						Blog
+						Signals
 					</a>
 					<div className="pt-4">
 						<a
