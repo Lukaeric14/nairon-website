@@ -570,11 +570,19 @@ function ProblemSection() {
 						))}
 					</div>
 					<p>
-						This is why the YC "Company Brain" request matters. The frontier is
-						not another search box. It is a living map of how a company works,
-						kept current from docs, email, Slack, tickets, code, transcripts,
-						and decisions, then made executable by AI systems with the right
-						permissions.
+						This is why the{" "}
+						<a
+							href="https://www.ycombinator.com/rfs?year=2025"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-[#171612] underline decoration-[#A77A15]/45 underline-offset-4 transition-colors hover:decoration-[#A77A15]"
+						>
+							YC "Company Brain" request
+						</a>{" "}
+						matters. The frontier is not another search box. It is a living map
+						of how a company works, kept current from docs, email, Slack,
+						tickets, code, transcripts, and decisions, then made executable by
+						AI systems with the right permissions.
 					</p>
 				</div>
 			</div>
@@ -962,7 +970,7 @@ function SelectControl({
 
 function SourcesSection() {
 	const sources = [
-		["YC Company Brain request", "https://www.ycombinator.com/rfs"],
+		["YC Company Brain request", "https://www.ycombinator.com/rfs?year=2025"],
 		["Supermemory documentation", "https://docs.supermemory.ai/"],
 		["Mem0 documentation", "https://docs.mem0.ai/openmemory/overview"],
 		["Graphiti documentation", "https://help.getzep.com/graphiti/getting-started/overview"],
