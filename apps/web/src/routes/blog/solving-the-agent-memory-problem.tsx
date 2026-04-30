@@ -473,39 +473,38 @@ function Hero() {
 	return (
 		<header className="relative overflow-hidden border-b border-[#171612]/10 pt-28">
 			<div className="absolute inset-0 opacity-[0.45] [background-image:linear-gradient(rgba(23,22,18,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(23,22,18,0.08)_1px,transparent_1px)] [background-size:48px_48px]" />
-			<div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 pb-16 md:grid-cols-[1.1fr_0.9fr] md:px-8 md:pb-20">
+			<div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 pb-16 md:grid-cols-[1.1fr_0.9fr] md:items-start md:px-8 md:pb-20">
 				<div>
 					<div className="mb-8 inline-flex items-center gap-2 border border-[#171612]/10 bg-white/70 px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#6D675C]">
 						<BrainCircuit className="h-4 w-4 text-[#A77A15]" />
 						Company memory
 					</div>
-					<h1 className="max-w-4xl text-[46px] font-normal leading-[0.95] tracking-[-0.03em] text-[#171612] md:text-[82px]">
+					<h1 className="max-w-4xl text-balance text-[46px] font-normal leading-[0.95] tracking-[-0.03em] text-[#171612] md:text-[82px]">
 						Solving the Agent Memory problem
 					</h1>
-					<p className="mt-8 max-w-2xl text-lg leading-8 text-[#5F5A50] md:text-xl">
+					<p className="mt-8 max-w-2xl text-pretty text-lg leading-8 text-[#5F5A50] md:text-xl">
 						We often get asked.... which memory layer should we trust for AI
 						employees: Supermemory, Mem0, Zep, Letta, LangMem, or something
 						closer to a company brain?
 					</p>
 				</div>
 
-				<div className="relative min-h-[420px] border border-[#171612]/10 bg-[#171612] p-4 text-white shadow-[18px_18px_0_rgba(201,169,110,0.28)]">
-					<div className="absolute inset-4 border border-white/10" />
-					<div className="relative flex h-full flex-col justify-between">
-						<div>
+				<div className="relative min-h-[420px] border border-[#171612]/10 bg-[#171612] p-3 text-white shadow-[14px_14px_0_rgba(201,169,110,0.24)] md:p-4">
+					<div className="relative flex h-full min-h-[392px] flex-col border border-white/10">
+						<div className="border-b border-white/10 px-4 py-4 sm:px-5">
 							<p className="text-xs uppercase tracking-[0.18em] text-[#D8C497]">
 								Hive memory model
 							</p>
-							<div className="mt-8 space-y-4">
-								<MemoryRow label="Knowledge sources" value="source material" />
-								<MemoryRow label="Decisions" value="durable context" />
-								<MemoryRow label="Constraints" value="permissioned facts" />
-								<MemoryRow label="Security policy" value="access boundaries" />
-								<MemoryRow label="Evaluations" value="pushback signal" />
-							</div>
 						</div>
-						<div className="mt-10 border-t border-white/10 pt-5">
-							<p className="text-[13px] leading-6 text-white/68">
+						<div className="divide-y divide-white/10">
+							<MemoryRow label="Knowledge sources" value="source material" />
+							<MemoryRow label="Decisions" value="durable context" />
+							<MemoryRow label="Constraints" value="permissioned facts" />
+							<MemoryRow label="Security policy" value="access boundaries" />
+							<MemoryRow label="Evaluations" value="pushback signal" />
+						</div>
+						<div className="mt-auto border-t border-white/10 px-4 py-4 sm:px-5">
+							<p className="text-pretty text-[13px] leading-6 text-white/68">
 								The goal is not a chatbot over documents. The goal is that every
 								allowed AI employee can understand the company well enough to do
 								work, ask better questions, and push back when a request conflicts
@@ -521,9 +520,9 @@ function Hero() {
 
 function MemoryRow({ label, value }: { label: string; value: string }) {
 	return (
-		<div className="grid grid-cols-[1fr_auto] gap-4 border-b border-white/10 pb-3">
-			<span className="text-sm text-white/82">{label}</span>
-			<span className="text-right font-mono text-xs uppercase tracking-[0.12em] text-[#BEFF00]">
+		<div className="grid min-h-14 grid-cols-1 gap-1 px-4 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-4 sm:px-5">
+			<span className="min-w-0 text-sm text-white/82">{label}</span>
+			<span className="min-w-0 font-mono text-xs uppercase tracking-[0.12em] text-[#BEFF00] sm:text-right">
 				{value}
 			</span>
 		</div>
@@ -535,7 +534,7 @@ function ProblemSection() {
 		<section className="border-b border-[#171612]/10 bg-white">
 			<div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-16 md:grid-cols-[0.8fr_1.2fr] md:px-8 md:py-20">
 				<SectionKicker icon={AlertTriangle} label="The actual bottleneck" />
-				<div className="space-y-7 text-[17px] leading-8 text-[#474239]">
+				<div className="space-y-7 text-pretty text-[17px] leading-8 text-[#474239]">
 					<p>
 						The memory problem is not that agents forget your name. That is the
 						small version. The business version is harder: agents do not know
@@ -728,16 +727,16 @@ function HiveSection() {
 					<HivePlatformPreview className="mt-8" context="memory" />
 				</div>
 				<div className="border border-[#171612]/10 bg-white p-6">
-					<h3 className="text-2xl font-normal tracking-[-0.02em] text-[#171612]">
+					<h3 className="text-balance text-2xl font-normal tracking-[-0.02em] text-[#171612]">
 						The principle
 					</h3>
-					<p className="mt-4 text-sm leading-7 text-[#5F5A50]">
+					<p className="mt-4 text-pretty text-sm leading-7 text-[#5F5A50]">
 						Whatever provider sits underneath, Hive needs to expose the same
 						product promise: every human teammate can talk to AI employees that
 						understand the company, while sensitive data stays permissioned and
 						auditable.
 					</p>
-					<p className="mt-4 text-sm leading-7 text-[#5F5A50]">
+					<p className="mt-4 text-pretty text-sm leading-7 text-[#5F5A50]">
 						That is the platform we're using internally now: a Slack-like
 						workspace where AI employees can use the right company knowledge,
 						permissions, tools, and decision history to reason with the
@@ -767,16 +766,16 @@ function ArticleCTA() {
 					<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
 						Where this goes
 					</p>
-					<h2 className="mt-4 text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
+					<h2 className="mt-4 text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
 						Memory is one piece of Hive.
 					</h2>
-					<p className="mt-5 max-w-xl text-base leading-7 text-[#5F5A50]">
+					<p className="mt-5 max-w-xl text-pretty text-base leading-7 text-[#5F5A50]">
 						Hive is the proprietary platform we're building so companies can
 						talk to AI employees, preserve business context, enforce security
 						policy, and give agents governed access to the company memory they
 						need.
 					</p>
-					<p className="mt-4 max-w-xl text-base leading-7 text-[#5F5A50]">
+					<p className="mt-4 max-w-xl text-pretty text-base leading-7 text-[#5F5A50]">
 						If you want Nairon to build your first AI employee now, book the
 						one-month pilot. If you want early access to Hive when we open the
 						beta wider, join the waitlist.
@@ -792,11 +791,11 @@ function ArticleCTA() {
 					</a>
 				</div>
 				<div className="border border-[#171612]/10 bg-[#FBFAF6] p-5 md:p-6">
-					<div className="mb-5">
+					<div className="mb-5 border-b border-[#171612]/10 pb-5">
 						<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
 							Hive waitlist
 						</p>
-						<h3 className="mt-2 text-2xl font-normal tracking-[-0.02em] text-[#171612]">
+						<h3 className="mt-2 text-balance text-2xl font-normal tracking-[-0.02em] text-[#171612]">
 							Get notified when Hive opens.
 						</h3>
 					</div>
@@ -826,10 +825,10 @@ function DecisionTool() {
 							<Sparkles className="h-4 w-4" />
 							Memory picker
 						</div>
-						<h2 className="mt-6 text-4xl font-normal leading-tight tracking-[-0.03em] md:text-6xl">
+						<h2 className="mt-6 text-balance text-4xl font-normal leading-tight tracking-[-0.03em] md:text-6xl">
 							Which memory layer should your company test first?
 						</h2>
-						<p className="mt-6 max-w-xl text-base leading-7 text-white/68">
+						<p className="mt-6 max-w-xl text-pretty text-base leading-7 text-white/68">
 							This is a directional picker, not procurement advice. It encodes
 							the tradeoffs above so a founder or operator can get to the first
 							serious pilot faster.
@@ -1022,11 +1021,11 @@ function SectionHeading({
 			<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
 				{kicker}
 			</p>
-			<h2 className="mt-4 max-w-3xl text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
+			<h2 className="mt-4 max-w-3xl text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
 				{title}
 			</h2>
 			{body && (
-				<p className="mt-5 max-w-2xl text-base leading-7 text-[#5F5A50]">
+				<p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-[#5F5A50]">
 					{body}
 				</p>
 			)}

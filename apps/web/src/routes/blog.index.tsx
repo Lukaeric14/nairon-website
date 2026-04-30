@@ -117,16 +117,16 @@ function BlogHero() {
 	return (
 		<header className="relative overflow-hidden border-b border-[#171612]/10 pt-28">
 			<div className="absolute inset-0 opacity-[0.35] [background-image:linear-gradient(rgba(23,22,18,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(23,22,18,0.08)_1px,transparent_1px)] [background-size:44px_44px]" />
-			<div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 pb-16 md:grid-cols-[1.05fr_0.95fr] md:px-10 md:pb-20">
+			<div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 pb-16 md:grid-cols-[1.05fr_0.95fr] md:items-start md:px-10 md:pb-20">
 				<div>
 					<div className="mb-7 inline-flex items-center gap-2 border border-[#171612]/10 bg-white/70 px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#6D675C]">
 						<BookOpenText className="h-4 w-4 text-[#A77A15]" />
 						Nairon Signals
 					</div>
-					<h1 className="max-w-4xl text-[48px] font-normal leading-[0.95] tracking-[-0.03em] text-[#171612] md:text-[86px]">
+					<h1 className="max-w-4xl text-balance text-[48px] font-normal leading-[0.95] tracking-[-0.03em] text-[#171612] md:text-[86px]">
 						Data-backed lessons from building Agents.
 					</h1>
-					<p className="mt-8 max-w-2xl text-lg leading-8 text-[#5F5A50] md:text-xl">
+					<p className="mt-8 max-w-2xl text-pretty text-lg leading-8 text-[#5F5A50] md:text-xl">
 						What we're learning from client agent deployments and from using
 						Hive inside Nairon.
 					</p>
@@ -149,17 +149,26 @@ function BlogHero() {
 					</div>
 				</div>
 
-				<div className="relative border border-[#171612]/10 bg-[#171612] p-4 text-white shadow-[18px_18px_0_rgba(201,169,110,0.28)] md:min-h-[520px] md:p-5">
-					<div className="relative flex h-full flex-col border border-white/10 px-4 py-5 sm:px-5 md:px-6 md:py-6">
-						<div>
+				<div className="relative border border-[#171612]/10 bg-[#171612] p-3 text-white shadow-[14px_14px_0_rgba(201,169,110,0.24)] md:min-h-[520px] md:p-4">
+					<div className="relative flex h-full min-h-[500px] flex-col border border-white/10">
+						<div className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-4 sm:px-5">
 							<p className="text-xs uppercase tracking-[0.18em] text-[#D8C497]">
 								What we're documenting
 							</p>
-							<div className="mt-6 grid grid-cols-1">
-								{signalTopics.map((topic) => (
-									<SignalRow key={topic.label} {...topic} />
-								))}
-							</div>
+							<span className="shrink-0 text-xs text-white/40">
+								1 live / {signalTopics.length - 1} queued
+							</span>
+						</div>
+						<div className="divide-y divide-white/10">
+							{signalTopics.map((topic) => (
+								<SignalRow key={topic.label} {...topic} />
+							))}
+						</div>
+						<div className="mt-auto border-t border-white/10 px-4 py-4 sm:px-5">
+							<p className="max-w-md text-pretty text-[13px] leading-6 text-white/52">
+								We publish a Signal when the pattern shows up in client work or
+								in our own Hive operating system.
+							</p>
 						</div>
 					</div>
 				</div>
@@ -182,54 +191,7 @@ function FeaturedArticle() {
 					href={featuredPost.href}
 					className="group grid grid-cols-1 border border-[#171612]/10 bg-[#FBFAF6] md:grid-cols-[0.85fr_1.15fr]"
 				>
-					<div
-						aria-hidden="true"
-						className="relative min-h-[300px] overflow-hidden bg-[#171612] p-6 text-white md:min-h-[440px]"
-					>
-						<div className="absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:42px_42px]" />
-						<div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_18%,rgba(201,169,110,0.22),transparent_28%),radial-gradient(circle_at_70%_62%,rgba(188,255,0,0.08),transparent_30%)]" />
-						<div className="absolute left-1/2 top-[46%] h-px w-[58%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#C9A96E]/55 to-transparent" />
-						<div className="absolute left-[25%] top-[25%] h-[44%] w-px bg-gradient-to-b from-transparent via-white/18 to-transparent" />
-						<div className="absolute left-[75%] top-[25%] h-[44%] w-px bg-gradient-to-b from-transparent via-white/18 to-transparent" />
-						<div className="relative flex h-full flex-col justify-between">
-							<div className="inline-flex w-fit items-center gap-2 border border-white/15 bg-[#171612]/70 px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#D8C497] backdrop-blur">
-								<Sparkles className="h-4 w-4" />
-								First field note
-							</div>
-							<div className="mx-auto grid w-full max-w-[420px] grid-cols-[1fr_auto_1fr] items-center gap-3 py-8">
-								<div className="space-y-3">
-									{["Docs", "Calls", "CRM"].map((source) => (
-										<div
-											key={source}
-											className="border border-white/10 bg-white/[0.035] px-3 py-2 text-xs uppercase tracking-[0.14em] text-white/58"
-										>
-											{source}
-										</div>
-									))}
-								</div>
-								<div className="relative flex h-28 w-28 items-center justify-center rounded-full border border-[#C9A96E]/45 bg-[#C9A96E]/10 shadow-[0_0_42px_rgba(201,169,110,0.16)] transition-transform duration-500 group-hover:scale-105">
-									<div className="absolute inset-3 rounded-full border border-white/10" />
-									<BrainCircuit className="h-10 w-10 text-[#D8C497]" />
-								</div>
-								<div className="space-y-3">
-									{["Memory", "Policy", "Context"].map((output) => (
-										<div
-											key={output}
-											className="border border-[#C9A96E]/22 bg-[#C9A96E]/[0.08] px-3 py-2 text-xs uppercase tracking-[0.14em] text-[#D8C497]"
-										>
-											{output}
-										</div>
-									))}
-								</div>
-							</div>
-							<div className="grid grid-cols-2 gap-3 text-sm text-white/72">
-								<span className="border border-white/10 bg-white/[0.03] p-3">Memory APIs</span>
-								<span className="border border-white/10 bg-white/[0.03] p-3">Company brain</span>
-								<span className="border border-white/10 bg-white/[0.03] p-3">Security model</span>
-								<span className="border border-white/10 bg-white/[0.03] p-3">Agent context</span>
-							</div>
-						</div>
-					</div>
+					<ArticleThumbnail />
 					<div className="flex flex-col justify-between p-6 md:p-8">
 						<div>
 							<div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.14em] text-[#8B806F]">
@@ -244,10 +206,10 @@ function FeaturedArticle() {
 									{featuredPost.readTime}
 								</span>
 							</div>
-							<h2 className="mt-6 max-w-3xl text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
+							<h2 className="mt-6 max-w-3xl text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
 								{featuredPost.title}
 							</h2>
-							<p className="mt-6 max-w-2xl text-base leading-7 text-[#5F5A50]">
+							<p className="mt-6 max-w-2xl text-pretty text-base leading-7 text-[#5F5A50]">
 								{featuredPost.description}
 							</p>
 						</div>
@@ -270,7 +232,7 @@ function WhyThisBlogExists() {
 					<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
 						Why publish this
 					</p>
-					<h2 className="mt-4 text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
+					<h2 className="mt-4 text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
 						The useful parts of our internal learning loop.
 					</h2>
 				</div>
@@ -293,7 +255,7 @@ function WhyThisBlogExists() {
 							<h3 className="text-xl font-normal tracking-[-0.02em] text-[#171612]">
 								{item.title}
 							</h3>
-							<p className="mt-3 text-sm leading-6 text-[#5F5A50]">
+							<p className="mt-3 text-pretty text-sm leading-6 text-[#5F5A50]">
 								{item.body}
 							</p>
 						</div>
@@ -312,10 +274,10 @@ function HiveWaitlistSection() {
 					<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
 						Hive beta
 					</p>
-					<h2 className="mt-4 text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
+					<h2 className="mt-4 text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
 						Join the waitlist for the platform behind the learnings.
 					</h2>
-					<p className="mt-5 max-w-xl text-base leading-7 text-[#5F5A50]">
+					<p className="mt-5 max-w-xl text-pretty text-base leading-7 text-[#5F5A50]">
 						Hive is a workspace for humans and AI employees. Think persistent
 						memory, business context, security policy, tool access, and
 						reliability loops in one place.
@@ -352,15 +314,15 @@ function SignalRow({
 }) {
 	const content = (
 		<>
-			<Icon className="h-4 w-4 shrink-0 text-[#BEFF00]" />
-			<span className="min-w-0 flex-1 text-sm leading-5 text-white/82">
+			<Icon className="size-4 shrink-0 text-[#BEFF00]" />
+			<span className="min-w-0 text-sm leading-5 text-white/82">
 				{label}
 			</span>
 			<span
 				className={
 					status === "Available"
-						? "inline-flex h-8 w-[116px] shrink-0 items-center justify-center border border-[#BEFF00]/30 bg-[#BEFF00]/10 px-2 text-[11px] font-medium tracking-[0.04em] text-[#BEFF00]"
-						: "inline-flex h-8 w-[116px] shrink-0 items-center justify-center border border-white/10 bg-white/[0.03] px-2 text-[11px] font-medium tracking-[0.04em] text-white/46"
+						? "col-start-2 inline-flex h-8 w-[118px] shrink-0 items-center justify-center border border-[#BEFF00]/30 bg-[#BEFF00]/10 px-2 text-[11px] font-medium tracking-[0.04em] text-[#BEFF00] sm:col-start-auto"
+						: "col-start-2 inline-flex h-8 w-[118px] shrink-0 items-center justify-center border border-white/10 bg-white/[0.03] px-2 text-[11px] font-medium tracking-[0.04em] text-white/46 sm:col-start-auto"
 				}
 			>
 				{status}
@@ -372,7 +334,7 @@ function SignalRow({
 		return (
 			<a
 				href={href}
-				className="flex min-h-14 items-center gap-3 border-b border-white/10 py-3 transition-colors hover:border-[#BEFF00]/35 hover:bg-white/[0.03] [&:last-child]:border-b-0"
+				className="grid min-h-16 grid-cols-[1rem_minmax(0,1fr)] items-center gap-x-4 gap-y-2 px-4 py-3 transition-colors hover:bg-white/[0.03] sm:grid-cols-[1rem_minmax(0,1fr)_auto] sm:px-5"
 			>
 				{content}
 			</a>
@@ -380,8 +342,67 @@ function SignalRow({
 	}
 
 	return (
-		<div className="flex min-h-14 items-center gap-3 border-b border-white/10 py-3 [&:last-child]:border-b-0">
+		<div className="grid min-h-16 grid-cols-[1rem_minmax(0,1fr)] items-center gap-x-4 gap-y-2 px-4 py-3 sm:grid-cols-[1rem_minmax(0,1fr)_auto] sm:px-5">
 			{content}
+		</div>
+	);
+}
+
+function ArticleThumbnail() {
+	return (
+		<div
+			aria-hidden="true"
+			className="relative min-h-[320px] overflow-hidden bg-[#171612] p-5 text-white md:min-h-[440px] md:p-6"
+		>
+			<div className="absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:42px_42px]" />
+			<div className="relative flex h-full flex-col justify-between border border-white/10 p-4 md:p-5">
+				<div className="flex items-center justify-between gap-4">
+					<div className="inline-flex w-fit items-center gap-2 border border-white/15 bg-white/[0.04] px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#D8C497]">
+						<Sparkles className="size-4" />
+						First Signal
+					</div>
+					<span className="font-mono text-xs uppercase tracking-[0.14em] text-white/38">
+						001
+					</span>
+				</div>
+
+				<div className="my-8 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+					<div className="space-y-3">
+						{["Docs", "Calls", "CRM"].map((source) => (
+							<div
+								key={source}
+								className="border border-white/10 bg-white/[0.035] px-3 py-2 text-xs uppercase tracking-[0.14em] text-white/58"
+							>
+								{source}
+							</div>
+						))}
+					</div>
+					<div className="relative flex size-24 items-center justify-center rounded-full border border-[#C9A96E]/45 bg-[#C9A96E]/10 transition-transform duration-200 group-hover:scale-[1.03] sm:size-28">
+						<div className="absolute inset-3 rounded-full border border-white/10" />
+						<BrainCircuit className="size-9 text-[#D8C497]" />
+					</div>
+					<div className="space-y-3">
+						{["Memory", "Policy", "Context"].map((output) => (
+							<div
+								key={output}
+								className="border border-[#C9A96E]/22 bg-[#C9A96E]/[0.08] px-3 py-2 text-xs uppercase tracking-[0.14em] text-[#D8C497]"
+							>
+								{output}
+							</div>
+						))}
+					</div>
+				</div>
+
+				<div className="grid grid-cols-2 gap-3 text-sm text-white/72">
+					{["Memory APIs", "Company brain", "Security model", "Agent context"].map(
+						(item) => (
+							<span key={item} className="border border-white/10 bg-white/[0.03] p-3">
+								{item}
+							</span>
+						),
+					)}
+				</div>
+			</div>
 		</div>
 	);
 }
