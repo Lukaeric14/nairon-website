@@ -35,7 +35,7 @@ const ARTICLE_PATH = "/blog/solving-the-agent-memory-problem";
 const ARTICLE_TITLE = "Solving the Agent Memory problem";
 const ARTICLE_DESCRIPTION =
 	"A practical look at Supermemory, Mem0, Zep, Letta, LangMem, and company-brain memory layers for AI employees inside Hive.";
-const PUBLISHED_DATE = "2026-04-29";
+const PUBLISHED_DATE = "2026-04-30";
 
 const articleJsonLd = JSON.stringify(
 	blogPostJsonLd({

@@ -28,7 +28,7 @@ const featuredPost = {
 	title: "Solving the Agent Memory problem",
 	href: "/blog/solving-the-agent-memory-problem",
 	category: "Company memory",
-	date: "Apr 29, 2026",
+	date: "Apr 30, 2026",
 	readTime: "12 min read",
 	description:
 		"A practical look at Supermemory, Mem0, Zep, Letta, LangMem, company-brain tools, and the memory layer we need for Hive.",
