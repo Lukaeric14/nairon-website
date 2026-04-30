@@ -89,7 +89,7 @@ export const Route = createFileRoute("/blog/")({
 		seoHead({
 			title: "Signals | Nairon AI",
 			description:
-				"Nairon Signals on AI employees, company memory, agent infrastructure, and how we are building Hive.",
+				"Nairon Signals on AI employees, company memory, agent infrastructure, and how we're building Hive.",
 			path: "/blog",
 		}),
 });
@@ -154,7 +154,7 @@ function BlogHero() {
 					<div className="relative flex h-full flex-col justify-between">
 						<div>
 							<p className="text-xs uppercase tracking-[0.18em] text-[#D8C497]">
-								What we are documenting
+								What we're documenting
 							</p>
 							<div className="mt-7 grid grid-cols-1">
 								{signalTopics.map((topic) => (
@@ -283,7 +283,7 @@ function WhyThisBlogExists() {
 						},
 						{
 							title: "Hive lessons",
-							body: "We are using Hive internally while the platform is still in beta, so the writing is grounded in our own operating system.",
+							body: "We're using Hive internally while the platform is still in beta, so the writing is grounded in our own operating system.",
 						},
 						{
 							title: "Practical choices",

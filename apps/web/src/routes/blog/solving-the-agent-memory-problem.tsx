@@ -738,11 +738,11 @@ function HiveSection() {
 						auditable.
 					</p>
 					<p className="mt-4 text-sm leading-7 text-[#5F5A50]">
-						That is the platform we are using internally now: a Slack-like
+						That is the platform we're using internally now: a Slack-like
 						workspace where AI employees can use the right company knowledge,
 						permissions, tools, and decision history to reason with the
 						business instead of acting from a narrow prompt. It is still beta,
-						but the internal wins are why we are writing about the problem
+						but the internal wins are why we're writing about the problem
 						publicly.
 					</p>
 					<ul className="mt-6 space-y-4">
@@ -771,7 +771,7 @@ function ArticleCTA() {
 						Memory is one piece of Hive.
 					</h2>
 					<p className="mt-5 max-w-xl text-base leading-7 text-[#5F5A50]">
-						Hive is the proprietary platform we are building so companies can
+						Hive is the proprietary platform we're building so companies can
 						talk to AI employees, preserve business context, enforce security
 						policy, and give agents governed access to the company memory they
 						need.
