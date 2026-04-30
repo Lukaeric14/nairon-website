@@ -60,8 +60,8 @@ export default function ExpandableFeatures() {
 								opacity: isLeftActive ? 1 : 0.45,
 							}}
 						>
-							Lives In{" "}
-							<span className="font-serif italic text-[#C9A96E] text-[1.1em]">Your Hardware</span>
+							Lives on{" "}
+							<span className="font-serif italic text-[#C9A96E] text-[1.1em]">your hardware</span>
 						</h2>
 						<div
 							className="flex flex-1 items-center justify-center transition-all duration-500"
@@ -100,8 +100,8 @@ export default function ExpandableFeatures() {
 								opacity: isRightActive ? 1 : 0.45,
 							}}
 						>
-							Works on{" "}
-							<span className="font-serif italic text-[#C9A96E] text-[1.1em]">your platform</span>
+							Runs on{" "}
+							<span className="font-serif italic text-[#C9A96E] text-[1.1em]">our platform</span>
 						</h2>
 						<div
 							className="flex flex-1 flex-col items-center justify-start gap-3 overflow-hidden transition-all duration-500 md:gap-4"
