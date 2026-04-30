@@ -693,7 +693,6 @@ function HiveSection() {
 						<SignalPill icon={Layers} label="Reliability loops" />
 						<SignalPill icon={GitBranch} label="Business context" />
 					</div>
-					<SignalMemoryArtwork className="mt-8 h-[420px] border-0 md:h-[520px]" />
 				</div>
 				<div className="border border-[#171612]/10 bg-white p-6">
 					<h3 className="text-balance text-2xl font-normal tracking-[-0.02em] text-[#171612]">
