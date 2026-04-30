@@ -149,14 +149,13 @@ function BlogHero() {
 					</div>
 				</div>
 
-				<div className="relative min-h-[420px] border border-[#171612]/10 bg-[#171612] p-5 text-white shadow-[18px_18px_0_rgba(201,169,110,0.28)]">
-					<div className="absolute inset-5 border border-white/10" />
-					<div className="relative flex h-full flex-col justify-between">
+				<div className="relative border border-[#171612]/10 bg-[#171612] p-4 text-white shadow-[18px_18px_0_rgba(201,169,110,0.28)] md:min-h-[520px] md:p-5">
+					<div className="relative flex h-full flex-col border border-white/10 px-4 py-5 sm:px-5 md:px-6 md:py-6">
 						<div>
 							<p className="text-xs uppercase tracking-[0.18em] text-[#D8C497]">
 								What we're documenting
 							</p>
-							<div className="mt-7 grid grid-cols-1">
+							<div className="mt-6 grid grid-cols-1">
 								{signalTopics.map((topic) => (
 									<SignalRow key={topic.label} {...topic} />
 								))}
@@ -354,12 +353,14 @@ function SignalRow({
 	const content = (
 		<>
 			<Icon className="h-4 w-4 shrink-0 text-[#BEFF00]" />
-			<span className="min-w-0 flex-1 text-sm text-white/82">{label}</span>
+			<span className="min-w-0 flex-1 text-sm leading-5 text-white/82">
+				{label}
+			</span>
 			<span
 				className={
 					status === "Available"
-						? "shrink-0 border border-[#BEFF00]/30 bg-[#BEFF00]/10 px-2 py-1 text-[10px] font-medium tracking-[0.08em] text-[#BEFF00]"
-						: "shrink-0 border border-white/10 bg-white/[0.03] px-2 py-1 text-[10px] font-medium tracking-[0.08em] text-white/46"
+						? "inline-flex h-8 w-[116px] shrink-0 items-center justify-center border border-[#BEFF00]/30 bg-[#BEFF00]/10 px-2 text-[11px] font-medium tracking-[0.04em] text-[#BEFF00]"
+						: "inline-flex h-8 w-[116px] shrink-0 items-center justify-center border border-white/10 bg-white/[0.03] px-2 text-[11px] font-medium tracking-[0.04em] text-white/46"
 				}
 			>
 				{status}
@@ -371,7 +372,7 @@ function SignalRow({
 		return (
 			<a
 				href={href}
-				className="flex items-center gap-3 border-b border-white/10 py-3 transition-colors hover:border-[#BEFF00]/35 hover:bg-white/[0.03]"
+				className="flex min-h-14 items-center gap-3 border-b border-white/10 py-3 transition-colors hover:border-[#BEFF00]/35 hover:bg-white/[0.03] [&:last-child]:border-b-0"
 			>
 				{content}
 			</a>
@@ -379,7 +380,7 @@ function SignalRow({
 	}
 
 	return (
-		<div className="flex items-center gap-3 border-b border-white/10 py-3">
+		<div className="flex min-h-14 items-center gap-3 border-b border-white/10 py-3 [&:last-child]:border-b-0">
 			{content}
 		</div>
 	);
