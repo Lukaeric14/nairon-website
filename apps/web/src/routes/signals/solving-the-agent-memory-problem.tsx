@@ -101,19 +101,19 @@ const providers: ProviderProfile[] = [
 		name: "Supermemory",
 		short: "Managed context stack",
 		bestFor:
-			"Teams that want a fast API for memory, retrieval, connectors, profiles, extraction, and MCP delivery.",
+			"Teams that want memory working quickly without building the whole stack.",
 		pros: [
-			"Good default when you need to ship quickly without building your own ingestion stack.",
-			"Connectors and multimodal extraction matter when company knowledge lives in Slack, Drive, Gmail, files, and calls.",
-			"Strong fit for coding-agent workflows because the MCP story is already part of the product.",
+			"Fastest path to a managed memory layer.",
+			"Good connectors for messy company knowledge.",
+			"Strong fit for coding agents through MCP.",
 		],
 		cons: [
-			"Capture still needs policy. If you save every tiny implementation detail, retrieval gets noisy and token-heavy.",
-			"Teams should validate governance, tenant isolation, redaction, and export needs before treating it as the system of record.",
-			"Vendor-reported benchmarks are useful signals, not a substitute for testing on your own transcripts and docs.",
+			"Bad capture rules can make memory noisy.",
+			"Governance still needs careful testing.",
+			"Test it on your own docs and transcripts.",
 		],
 		signal:
-			"Best as the first managed memory layer to evaluate for Hive because it covers more of the context stack out of the box.",
+			"Best first option to test because it covers a lot out of the box.",
 		source: "https://docs.supermemory.ai/",
 		sourceLabel: "Supermemory docs",
 	},
@@ -122,19 +122,19 @@ const providers: ProviderProfile[] = [
 		name: "Mem0",
 		short: "Open-source friendly memory",
 		bestFor:
-			"Teams that want a widely adopted memory layer with managed and self-hosted paths.",
+			"Teams that want a popular memory layer with hosted and self-hosted options.",
 		pros: [
-			"Strong community gravity and a simple mental model for persistent user, agent, and run-level memory.",
-			"Self-hosting and configurable storage are attractive when data control matters.",
-			"Good candidate for personalization-heavy agents that need recurring facts and preferences.",
+			"Easy mental model for persistent memory.",
+			"Self-hosting helps with data control.",
+			"Good for personalization-heavy agents.",
 		],
 		cons: [
-			"Platform and open-source capabilities differ, so graph, filtering, and managed features need plan-by-plan verification.",
-			"Self-hosting moves reliability, pruning, observability, and retrieval tuning onto your team.",
-			"Great memory APIs do not automatically create a company brain. You still need source ownership, permissioning, and curation.",
+			"Hosted and open-source features can differ.",
+			"Self-hosting adds ops work.",
+			"It doesn't create a company brain by itself.",
 		],
 		signal:
-			"Best if portability and self-hosting are more important than a fully managed connector stack.",
+			"Best when portability matters more than a fully managed stack.",
 		source: "https://docs.mem0.ai/openmemory/overview",
 		sourceLabel: "Mem0 docs",
 	},
@@ -143,19 +143,19 @@ const providers: ProviderProfile[] = [
 		name: "Zep / Graphiti",
 		short: "Temporal graph memory",
 		bestFor:
-			"Agents that need to know when a fact became true, when it stopped being true, and how relationships changed.",
+			"Agents that need to know what changed, when it changed, and why.",
 		pros: [
-			"Temporal knowledge graphs are the cleanest model for evolving business truth.",
-			"Strong fit for CRM, support, compliance, account ownership, budget changes, and decision history.",
-			"Graphiti can ingest structured and unstructured data and query across semantic, keyword, graph, and time signals.",
+			"Great for facts that change over time.",
+			"Useful for CRM, support, and decisions.",
+			"Combines graph, keyword, and semantic search.",
 		],
 		cons: [
-			"Graph infrastructure asks for more data modeling discipline than a drop-in memory API.",
-			"Self-hosting Graphiti means owning graph database operations and migration complexity.",
-			"It is not the fastest path if your main problem is connecting every company tool and filtering raw capture.",
+			"Needs more data modeling discipline.",
+			"Self-hosting adds database complexity.",
+			"Not the fastest connector-first option.",
 		],
 		signal:
-			"Best when the hard question is not what the business knows, but what was true at a specific point in time.",
+			"Best when the question is what was true at the time.",
 		source: "https://help.getzep.com/graphiti/getting-started/overview",
 		sourceLabel: "Graphiti docs",
 	},
@@ -164,19 +164,19 @@ const providers: ProviderProfile[] = [
 		name: "Letta",
 		short: "Stateful agent runtime",
 		bestFor:
-			"Teams building memory-first agents where the agent actively manages core, archival, and conversation memory.",
+			"Teams building agents where memory is part of how the agent runs.",
 		pros: [
-			"Treats memory as part of the agent runtime, not as a bolt-on search call.",
-			"Core memory blocks are always visible, archival memory is searched on demand, and conversation history persists.",
-			"Useful when an agent should curate its own identity, preferences, and operating state over long horizons.",
+			"Memory is built into the agent runtime.",
+			"Good split between core and archived memory.",
+			"Useful for long-running agents.",
 		],
 		cons: [
-			"Adopting Letta is more architectural than swapping in a memory provider.",
-			"Company-brain governance still has to be layered around the runtime.",
-			"Agent-managed memory requires good guardrails so it does not memorialize low-value noise.",
+			"More of an architecture choice.",
+			"Still needs company-level governance.",
+			"Agents can save low-value noise.",
 		],
 		signal:
-			"Best for new agent systems where memory architecture is allowed to shape the runtime.",
+			"Best when you can design the agent system around memory.",
 		source: "https://docs.letta.com/guides/agents/memory/",
 		sourceLabel: "Letta docs",
 	},
@@ -185,19 +185,19 @@ const providers: ProviderProfile[] = [
 		name: "LangMem / LangGraph Store",
 		short: "Framework-native primitives",
 		bestFor:
-			"Teams already committed to LangGraph who want semantic, episodic, and procedural memory primitives.",
+			"Teams already building agents with LangGraph.",
 		pros: [
-			"Fits naturally into LangGraph systems without adopting an external memory platform.",
-			"Procedural memory is valuable when agents should improve prompts or behavior from experience.",
-			"Namespaces give developers a practical way to scope memory by user, team, route, or application context.",
+			"Fits naturally into LangGraph.",
+			"Good for agents that learn procedures.",
+			"Namespaces make scoping practical.",
 		],
 		cons: [
-			"You still own ingestion, connectors, governance, permissioning, and evals.",
-			"More of a developer toolkit than a complete company knowledge layer.",
-			"Best results require careful schemas and background memory management.",
+			"You own connectors and governance.",
+			"More toolkit than full platform.",
+			"Needs careful schemas and maintenance.",
 		],
 		signal:
-			"Best when your agent stack is already LangGraph and you want control over every memory decision.",
+			"Best when LangGraph is already your core agent stack.",
 		source: "https://langchain-ai.github.io/langmem/",
 		sourceLabel: "LangMem docs",
 	},
@@ -206,19 +206,19 @@ const providers: ProviderProfile[] = [
 		name: "Knowledge Plane / company-brain tools",
 		short: "Shared memory for teams",
 		bestFor:
-			"Teams whose real problem is organizational context, source traceability, and shared agent access.",
+			"Teams trying to give agents shared company context.",
 		pros: [
-			"Closer to the YC company-brain request than a personal memory API.",
-			"Graph plus vector search can preserve relationships like ownership, dependency, decision, and source.",
-			"MCP and HTTP interfaces make it easier to give multiple tools the same company memory.",
+			"Closest to the company-brain idea.",
+			"Can connect decisions, owners, and sources.",
+			"Can serve the same memory to many tools.",
 		],
 		cons: [
-			"The category is early, so maturity, enterprise support, and operating limits need real diligence.",
-			"Provider choice matters less than the policy layer around redaction, access, approvals, and source freshness.",
-			"Company-brain systems require organizational process change, not just a database.",
+			"The category is still early.",
+			"Permissions matter more than the database.",
+			"Teams still need process change.",
 		],
 		signal:
-			"Best directionally for Hive's long-term goal, even if we integrate multiple providers underneath.",
+			"Best directionally for Hive, even if multiple providers sit underneath.",
 		source: "https://knowledgeplane.io/",
 		sourceLabel: "Knowledge Plane",
 	},
@@ -595,7 +595,7 @@ function ProviderSection() {
 				<SectionHeading
 					kicker="Provider notes"
 					title="The practical tradeoffs"
-					body="The right layer depends on what you need memory to do. Do not pick from a benchmark table alone. Pick from your ingestion reality, governance requirements, and retrieval failure modes."
+					body="The right layer depends on what memory needs to do for your team. Don't pick from benchmarks alone. Pick based on your data sources, permissions, and how bad retrieval can fail."
 				/>
 				<div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
 					{providers.map((provider) => (
