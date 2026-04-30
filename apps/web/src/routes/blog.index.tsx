@@ -73,7 +73,7 @@ function BlogHero() {
 						Data-backed lessons from building Agents.
 					</h1>
 					<p className="mt-8 max-w-2xl text-lg leading-8 text-[#5F5A50] md:text-xl">
-						What we are learning from client agent deployments and from using
+						What we're learning from client agent deployments and from using
 						Hive inside Nairon.
 					</p>
 					<div className="mt-8 flex flex-col gap-3 sm:flex-row">
