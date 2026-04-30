@@ -20,6 +20,7 @@ import { HireModal } from "@/components/landing/hire-modal";
 import { HivePlatformPreview } from "@/components/landing/hive-platform-preview";
 import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
 import { ModalProvider } from "@/components/landing/modal-provider";
+import { SignalMemoryArtwork } from "@/components/landing/signal-memory-artwork";
 import {
 	Select,
 	SelectContent,
@@ -489,43 +490,12 @@ function Hero() {
 					</p>
 				</div>
 
-				<div className="relative min-h-[420px] border border-[#171612]/10 bg-[#171612] p-3 text-white shadow-[14px_14px_0_rgba(201,169,110,0.24)] md:p-4">
-					<div className="relative flex h-full min-h-[392px] flex-col border border-white/10">
-						<div className="border-b border-white/10 px-4 py-4 sm:px-5">
-							<p className="text-xs uppercase tracking-[0.18em] text-[#D8C497]">
-								Hive memory model
-							</p>
-						</div>
-						<div className="divide-y divide-white/10">
-							<MemoryRow label="Knowledge sources" value="source material" />
-							<MemoryRow label="Decisions" value="durable context" />
-							<MemoryRow label="Constraints" value="permissioned facts" />
-							<MemoryRow label="Security policy" value="access boundaries" />
-							<MemoryRow label="Evaluations" value="pushback signal" />
-						</div>
-						<div className="mt-auto border-t border-white/10 px-4 py-4 sm:px-5">
-							<p className="text-pretty text-[13px] leading-6 text-white/68">
-								The goal is not a chatbot over documents. The goal is that every
-								allowed AI employee can understand the company well enough to do
-								work, ask better questions, and push back when a request conflicts
-								with business reality.
-							</p>
-						</div>
-					</div>
-				</div>
+				<SignalMemoryArtwork
+					className="min-h-[420px] shadow-[14px_14px_0_rgba(201,169,110,0.18)]"
+					tone="green"
+				/>
 			</div>
 		</header>
-	);
-}
-
-function MemoryRow({ label, value }: { label: string; value: string }) {
-	return (
-		<div className="grid min-h-14 grid-cols-1 gap-1 px-4 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-4 sm:px-5">
-			<span className="min-w-0 text-sm text-white/82">{label}</span>
-			<span className="min-w-0 font-mono text-xs uppercase tracking-[0.12em] text-[#BEFF00] sm:text-right">
-				{value}
-			</span>
-		</div>
 	);
 }
 

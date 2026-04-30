@@ -12,7 +12,6 @@ import {
 	GitBranch,
 	LockKeyhole,
 	Network,
-	Sparkles,
 	UsersRound,
 } from "lucide-react";
 import { CandidateModal } from "@/components/landing/candidate-modal";
@@ -21,6 +20,7 @@ import { HireModal } from "@/components/landing/hire-modal";
 import { HivePlatformPreview } from "@/components/landing/hive-platform-preview";
 import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
 import { ModalProvider } from "@/components/landing/modal-provider";
+import { SignalMemoryArtwork } from "@/components/landing/signal-memory-artwork";
 import { DISCOVERY_CALL_URL } from "@/lib/links";
 import { seoHead } from "@/lib/seo";
 
@@ -350,59 +350,10 @@ function SignalRow({
 
 function ArticleThumbnail() {
 	return (
-		<div
-			aria-hidden="true"
-			className="relative min-h-[320px] overflow-hidden bg-[#171612] p-5 text-white md:min-h-[440px] md:p-6"
-		>
-			<div className="absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:42px_42px]" />
-			<div className="relative flex h-full flex-col justify-between border border-white/10 p-4 md:p-5">
-				<div className="flex items-center justify-between gap-4">
-					<div className="inline-flex w-fit items-center gap-2 border border-white/15 bg-white/[0.04] px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#D8C497]">
-						<Sparkles className="size-4" />
-						First Signal
-					</div>
-					<span className="font-mono text-xs uppercase tracking-[0.14em] text-white/38">
-						001
-					</span>
-				</div>
-
-				<div className="my-8 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
-					<div className="space-y-3">
-						{["Docs", "Calls", "CRM"].map((source) => (
-							<div
-								key={source}
-								className="border border-white/10 bg-white/[0.035] px-3 py-2 text-xs uppercase tracking-[0.14em] text-white/58"
-							>
-								{source}
-							</div>
-						))}
-					</div>
-					<div className="relative flex size-24 items-center justify-center rounded-full border border-[#C9A96E]/45 bg-[#C9A96E]/10 transition-transform duration-200 group-hover:scale-[1.03] sm:size-28">
-						<div className="absolute inset-3 rounded-full border border-white/10" />
-						<BrainCircuit className="size-9 text-[#D8C497]" />
-					</div>
-					<div className="space-y-3">
-						{["Memory", "Policy", "Context"].map((output) => (
-							<div
-								key={output}
-								className="border border-[#C9A96E]/22 bg-[#C9A96E]/[0.08] px-3 py-2 text-xs uppercase tracking-[0.14em] text-[#D8C497]"
-							>
-								{output}
-							</div>
-						))}
-					</div>
-				</div>
-
-				<div className="grid grid-cols-2 gap-3 text-sm text-white/72">
-					{["Memory APIs", "Company brain", "Security model", "Agent context"].map(
-						(item) => (
-							<span key={item} className="border border-white/10 bg-white/[0.03] p-3">
-								{item}
-							</span>
-						),
-					)}
-				</div>
-			</div>
-		</div>
+		<SignalMemoryArtwork
+			className="min-h-[340px] rounded-none border-0 md:min-h-[440px] md:border-r"
+			tone="blue"
+			compact
+		/>
 	);
 }
