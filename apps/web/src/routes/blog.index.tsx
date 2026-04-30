@@ -17,7 +17,6 @@ import {
 import { CandidateModal } from "@/components/landing/candidate-modal";
 import { Footer, Navbar } from "@/components/landing";
 import { HireModal } from "@/components/landing/hire-modal";
-import { HivePlatformPreview } from "@/components/landing/hive-platform-preview";
 import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
 import { ModalProvider } from "@/components/landing/modal-provider";
 import { SignalMemoryArtwork } from "@/components/landing/signal-memory-artwork";
@@ -269,35 +268,65 @@ function WhyThisBlogExists() {
 function HiveWaitlistSection() {
 	return (
 		<section className="bg-white">
-			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 py-16 md:grid-cols-[0.9fr_1.1fr] md:px-10 md:py-20">
-				<div>
-					<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
-						Hive beta
-					</p>
-					<h2 className="mt-4 text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
-						Join the waitlist for the platform behind the learnings.
-					</h2>
-					<p className="mt-5 max-w-xl text-pretty text-base leading-7 text-[#5F5A50]">
-						Hive is a workspace for humans and AI employees. Think persistent
-						memory, business context, security policy, tool access, and
-						reliability loops in one place.
-					</p>
-					<HivePlatformPreview className="mt-8 max-w-xl" />
-					<a
-						href={DISCOVERY_CALL_URL}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="mt-7 inline-flex h-12 items-center justify-center gap-2 border border-[#171612]/12 bg-[#FBFAF6] px-5 text-sm font-semibold text-[#171612] transition-colors hover:border-[#A77A15]/50"
-					>
-						Need agents now? Book the pilot
-						<ArrowUpRight className="h-4 w-4" />
-					</a>
-				</div>
-				<div className="border border-[#171612]/10 bg-[#FBFAF6] p-5 md:p-6">
-					<HiveWaitlistForm source="Signals index" />
+			<div className="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-20">
+				<HiveScreenshotStrip />
+				<div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-[0.9fr_1.1fr]">
+					<div>
+						<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
+							Hive beta
+						</p>
+						<h2 className="mt-4 text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
+							Join the waitlist for the platform behind the learnings.
+						</h2>
+						<p className="mt-5 max-w-xl text-pretty text-base leading-7 text-[#5F5A50]">
+							Hive is a workspace for humans and AI employees. Think persistent
+							memory, business context, security policy, tool access, and
+							reliability loops in one place.
+						</p>
+						<a
+							href={DISCOVERY_CALL_URL}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="mt-7 inline-flex h-12 items-center justify-center gap-2 border border-[#171612]/12 bg-[#FBFAF6] px-5 text-sm font-semibold text-[#171612] transition-colors hover:border-[#A77A15]/50"
+						>
+							Need agents now? Book the pilot
+							<ArrowUpRight className="h-4 w-4" />
+						</a>
+					</div>
+					<div className="border border-[#171612]/10 bg-[#FBFAF6] p-5 md:p-6">
+						<HiveWaitlistForm source="Signals index" />
+					</div>
 				</div>
 			</div>
 		</section>
+	);
+}
+
+function HiveScreenshotStrip() {
+	return (
+		<div className="relative overflow-hidden border border-[#171612]/10 bg-[#171612] p-3 shadow-[14px_14px_0_rgba(201,169,110,0.14)] md:p-4">
+			<div className="absolute inset-0 opacity-[0.18] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:42px_42px]" />
+			<div className="relative grid grid-cols-1 gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.48fr)] lg:items-end">
+				<div className="border border-white/10 bg-[#FBFAF6] p-2">
+					<img
+						src="/hive-dashboard-board.png"
+						alt="Hive dashboard with AI employees, assignments, sessions, and workflow columns"
+						className="block aspect-[1.43] w-full object-contain"
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+				<div className="border border-white/10 bg-[#FBFAF6] p-2 lg:mb-8">
+					<img
+						src="/hive-channel.png"
+						alt="Hive channel with agent mentions and threaded company context"
+						className="block aspect-[1.73] w-full object-contain"
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+			</div>
+		</div>
 	);
 }
 
