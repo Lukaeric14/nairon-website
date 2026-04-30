@@ -188,10 +188,10 @@ function FeaturedArticle() {
 				</div>
 				<a
 					href={featuredPost.href}
-					className="group grid grid-cols-1 border border-[#171612]/10 bg-[#FBFAF6] md:grid-cols-[0.85fr_1.15fr]"
+					className="group grid grid-cols-1 border border-[#171612]/10 bg-[#FBFAF6] md:grid-cols-[0.72fr_1.28fr]"
 				>
 					<ArticleThumbnail />
-					<div className="flex flex-col justify-between p-6 md:p-8">
+					<div className="flex flex-col justify-between p-6 md:min-h-[360px] md:p-8">
 						<div>
 							<div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.14em] text-[#8B806F]">
 								<span>{featuredPost.category}</span>
@@ -205,7 +205,7 @@ function FeaturedArticle() {
 									{featuredPost.readTime}
 								</span>
 							</div>
-							<h2 className="mt-6 max-w-3xl text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
+							<h2 className="mt-6 max-w-3xl text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-5xl lg:text-6xl">
 								{featuredPost.title}
 							</h2>
 							<p className="mt-6 max-w-2xl text-pretty text-base leading-7 text-[#5F5A50]">
@@ -382,7 +382,7 @@ function SignalRow({
 function ArticleThumbnail() {
 	return (
 		<SignalMemoryArtwork
-			className="min-h-[340px] rounded-none border-0 md:min-h-[440px] md:border-r"
+			className="h-[280px] rounded-none border-0 md:h-full md:min-h-[360px] md:border-r"
 			tone="pink"
 			compact
 		/>

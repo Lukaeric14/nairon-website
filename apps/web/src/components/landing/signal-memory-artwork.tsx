@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-const signalAsciiArt = String.raw`
+const referenceAsciiArt = String.raw`
                                                                                                              ...............
                                                                                                        ...::-------======--:....
                                                                                                 ..:---===++++++++++============-...
@@ -81,6 +81,67 @@ const signalAsciiArt = String.raw`
     .*-...
      ..
 `;
+
+const ASCII_WIDTH = 92;
+const ASCII_HEIGHT = 48;
+const ASCII_RAMP = " .:-=+*#%@";
+
+function ellipse(x: number, y: number, cx: number, cy: number, rx: number, ry: number) {
+	return ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2;
+}
+
+function buildSignalAsciiBrain() {
+	const rows: string[] = [];
+
+	for (let y = 0; y < ASCII_HEIGHT; y++) {
+		let row = "";
+		const ny = (y / (ASCII_HEIGHT - 1)) * 2 - 1;
+
+		for (let x = 0; x < ASCII_WIDTH; x++) {
+			const nx = (x / (ASCII_WIDTH - 1)) * 2 - 1;
+			const left = ellipse(nx, ny, -0.32, -0.2, 0.55, 0.48);
+			const right = ellipse(nx, ny, 0.32, -0.2, 0.55, 0.48);
+			const crown = ellipse(nx, ny, 0, -0.48, 0.68, 0.28);
+			const base = ellipse(nx, ny, 0, 0.08, 0.64, 0.36);
+			const brain = left < 1 || right < 1 || crown < 1 || base < 1;
+			const centerFold = Math.abs(nx) < 0.08 && ny < 0.2 && ny > -0.56;
+			const lowerGap = ellipse(nx, ny, 0, 0.16, 0.17, 0.36) < 1 && ny > -0.2;
+			const stem = ny > 0.26 && ny < 0.96 && Math.abs(nx) < 0.045 + (ny - 0.26) * 0.018;
+			const foot = ny > 0.82 && ellipse(nx, ny, 0, 0.92, 0.22, 0.08) < 1;
+			const halo = !brain && Math.min(left, right, crown, base) < 1.08;
+			const inside = (brain && !lowerGap) || stem || foot || halo;
+
+			if (!inside) {
+				row += " ";
+				continue;
+			}
+
+			const folds =
+				Math.sin(nx * 20 + ny * 8) * 0.14 +
+				Math.cos(nx * 10 - ny * 17) * 0.13 +
+				Math.sin((x + y) * 0.46) * 0.06;
+			const edge = Math.min(left, right, crown, base) > 0.83;
+			const split = centerFold ? -0.28 : 0;
+			const stemShade = stem || foot ? -0.22 + (1 - ny) * 0.2 : 0;
+			let density = 0.55 - ny * 0.18 + folds + split + stemShade;
+
+			if (edge) density -= 0.18;
+			if (halo) density -= 0.46;
+
+			const index = Math.max(
+				0,
+				Math.min(ASCII_RAMP.length - 1, Math.round(density * (ASCII_RAMP.length - 1))),
+			);
+			row += ASCII_RAMP[index];
+		}
+
+		rows.push(row.trimEnd());
+	}
+
+	return rows.join("\n");
+}
+
+const signalAsciiArt = buildSignalAsciiBrain() || referenceAsciiArt;
 
 type SignalMemoryArtworkProps = {
 	className?: string;
