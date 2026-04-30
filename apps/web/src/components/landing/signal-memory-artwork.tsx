@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const ASCII_WIDTH = 96;
 const ASCII_HEIGHT = 54;
 const ASCII_RAMP = " .:-=+*#%@";
+const ASCII_FRAME_COUNT = 14;
 
 function ellipse(x: number, y: number, cx: number, cy: number, rx: number, ry: number) {
 	return ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2;
@@ -72,8 +74,9 @@ function buildAsciiBrainFrame(phase: number) {
 	return rows.join("\n");
 }
 
-const asciiBrainFrameA = buildAsciiBrainFrame(0);
-const asciiBrainFrameB = buildAsciiBrainFrame(1.6);
+const asciiBrainFrames = Array.from({ length: ASCII_FRAME_COUNT }, (_, index) =>
+	buildAsciiBrainFrame(index * 0.46),
+);
 
 type SignalMemoryArtworkProps = {
 	className?: string;
@@ -86,6 +89,7 @@ export function SignalMemoryArtwork({
 	tone = "pink",
 	compact = false,
 }: SignalMemoryArtworkProps) {
+	const [frameIndex, setFrameIndex] = useState(0);
 	const accents = {
 		pink: {
 			text: "text-[#D9367F]",
@@ -107,6 +111,20 @@ export function SignalMemoryArtwork({
 		},
 	}[tone];
 
+	useEffect(() => {
+		const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+		if (reduceMotion.matches) {
+			return;
+		}
+
+		const interval = window.setInterval(() => {
+			setFrameIndex((current) => (current + 1) % asciiBrainFrames.length);
+		}, 140);
+
+		return () => window.clearInterval(interval);
+	}, []);
+
 	return (
 		<div
 			aria-hidden="true"
@@ -121,18 +139,6 @@ export function SignalMemoryArtwork({
 					50% { transform: translate3d(-50%, -50%, 0) scale(1.025); }
 				}
 
-				@keyframes signalAsciiFrameA {
-					0%, 46% { opacity: 1; }
-					47%, 96% { opacity: 0; }
-					97%, 100% { opacity: 1; }
-				}
-
-				@keyframes signalAsciiFrameB {
-					0%, 46% { opacity: 0; }
-					47%, 96% { opacity: 1; }
-					97%, 100% { opacity: 0; }
-				}
-
 				@keyframes signalAsciiScan {
 					0% { transform: translateY(-120%); opacity: 0; }
 					12% { opacity: 0.5; }
@@ -142,14 +148,9 @@ export function SignalMemoryArtwork({
 
 				@media (prefers-reduced-motion: reduce) {
 					.signal-ascii-brain,
-					.signal-ascii-frame-a,
-					.signal-ascii-frame-b,
 					.signal-ascii-scan {
 						animation: none !important;
 					}
-
-					.signal-ascii-frame-a { opacity: 1 !important; }
-					.signal-ascii-frame-b { opacity: 0 !important; }
 				}
 			`}</style>
 			<div className="absolute inset-0 opacity-[0.55] [background-image:linear-gradient(rgba(217,54,127,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(217,54,127,0.08)_1px,transparent_1px)] [background-size:36px_36px]" />
@@ -171,33 +172,15 @@ export function SignalMemoryArtwork({
 			>
 				<pre
 					className={cn(
-						"signal-ascii-frame-a select-none whitespace-pre font-mono font-semibold leading-[0.72]",
+						"signal-ascii-frame select-none whitespace-pre font-mono font-semibold leading-[0.72]",
 						compact
 							? "text-[3.8px] sm:text-[4.3px] md:text-[4.8px]"
 							: "text-[4.8px] sm:text-[5.4px] md:text-[6px]",
 						accents.text,
 						accents.shadow,
 					)}
-					style={{
-						animation: "signalAsciiFrameA 1.15s steps(1, end) infinite",
-					}}
 				>
-					{asciiBrainFrameA}
-				</pre>
-				<pre
-					className={cn(
-						"signal-ascii-frame-b absolute select-none whitespace-pre font-mono font-semibold leading-[0.72]",
-						compact
-							? "text-[3.8px] sm:text-[4.3px] md:text-[4.8px]"
-							: "text-[4.8px] sm:text-[5.4px] md:text-[6px]",
-						accents.text,
-						accents.shadow,
-					)}
-					style={{
-						animation: "signalAsciiFrameB 1.15s steps(1, end) infinite",
-					}}
-				>
-					{asciiBrainFrameB}
+					{asciiBrainFrames[frameIndex]}
 				</pre>
 			</div>
 			<div
