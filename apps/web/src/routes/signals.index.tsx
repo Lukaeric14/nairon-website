@@ -304,28 +304,30 @@ function HiveWaitlistSection() {
 
 function HiveScreenshotStrip() {
 	return (
-		<div className="relative overflow-hidden border border-[#171612]/10 bg-[#171612] p-3 shadow-[14px_14px_0_rgba(201,169,110,0.14)] md:p-4">
-			<div className="absolute inset-0 opacity-[0.18] [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:42px_42px]" />
-			<div className="relative grid grid-cols-1 gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.48fr)] lg:items-end">
-				<div className="border border-white/10 bg-[#FBFAF6] p-2">
+		<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+			{[
+				{
+					src: "/hive-dashboard.png",
+					alt: "Hive dashboard with AI employees, assignments, sessions, and workflow columns",
+				},
+				{
+					src: "/hive-channel.png",
+					alt: "Hive channel with agent mentions and threaded company context",
+				},
+			].map((screenshot) => (
+				<div
+					key={screenshot.src}
+					className="overflow-hidden border border-[#171612]/10 bg-white shadow-[10px_10px_0_rgba(201,169,110,0.12)]"
+				>
 					<img
-						src="/hive-dashboard-board.png"
-						alt="Hive dashboard with AI employees, assignments, sessions, and workflow columns"
-						className="block aspect-[1.43] w-full object-contain"
+						src={screenshot.src}
+						alt={screenshot.alt}
+						className="block aspect-[1.735] w-full bg-white object-cover object-left-top"
 						loading="lazy"
 						decoding="async"
 					/>
 				</div>
-				<div className="border border-white/10 bg-[#FBFAF6] p-2 lg:mb-8">
-					<img
-						src="/hive-channel.png"
-						alt="Hive channel with agent mentions and threaded company context"
-						className="block aspect-[1.73] w-full object-contain"
-						loading="lazy"
-						decoding="async"
-					/>
-				</div>
-			</div>
+			))}
 		</div>
 	);
 }
