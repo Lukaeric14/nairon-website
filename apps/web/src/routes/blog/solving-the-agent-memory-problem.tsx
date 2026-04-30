@@ -572,7 +572,7 @@ function ProblemSection() {
 					<p>
 						This is why the{" "}
 						<a
-							href="https://www.ycombinator.com/rfs?year=2025"
+							href="https://www.ycombinator.com/rfs?year=2026#company-brain"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-[#171612] underline decoration-[#A77A15]/45 underline-offset-4 transition-colors hover:decoration-[#A77A15]"
@@ -970,7 +970,10 @@ function SelectControl({
 
 function SourcesSection() {
 	const sources = [
-		["YC Company Brain request", "https://www.ycombinator.com/rfs?year=2025"],
+		[
+			"YC Company Brain request",
+			"https://www.ycombinator.com/rfs?year=2026#company-brain",
+		],
 		["Supermemory documentation", "https://docs.supermemory.ai/"],
 		["Mem0 documentation", "https://docs.mem0.ai/openmemory/overview"],
 		["Graphiti documentation", "https://help.getzep.com/graphiti/getting-started/overview"],
