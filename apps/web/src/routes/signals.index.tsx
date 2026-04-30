@@ -383,7 +383,7 @@ function ArticleThumbnail() {
 	return (
 		<SignalMemoryArtwork
 			className="min-h-[340px] rounded-none border-0 md:min-h-[440px] md:border-r"
-			tone="blue"
+			tone="pink"
 			compact
 		/>
 	);

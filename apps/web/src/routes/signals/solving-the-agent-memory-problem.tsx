@@ -492,7 +492,7 @@ function Hero() {
 
 				<SignalMemoryArtwork
 					className="min-h-[420px] shadow-[14px_14px_0_rgba(201,169,110,0.18)]"
-					tone="green"
+					tone="pink"
 				/>
 			</div>
 		</header>
