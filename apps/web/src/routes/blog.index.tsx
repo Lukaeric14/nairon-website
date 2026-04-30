@@ -1,14 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
+	Activity,
 	ArrowUpRight,
+	BadgeDollarSign,
 	BookOpenText,
 	BrainCircuit,
 	Calendar,
 	CheckCircle2,
 	Clock3,
+	Database,
+	GitBranch,
 	LockKeyhole,
 	Network,
 	Sparkles,
+	UsersRound,
 } from "lucide-react";
 import { CandidateModal } from "@/components/landing/candidate-modal";
 import { Footer, Navbar } from "@/components/landing";
@@ -28,6 +33,55 @@ const featuredPost = {
 	description:
 		"A practical look at Supermemory, Mem0, Zep, Letta, LangMem, company-brain tools, and the memory layer we need for Hive.",
 };
+
+const signalTopics = [
+	{
+		icon: BrainCircuit,
+		label: "Agent memory",
+		status: "Available",
+		href: featuredPost.href,
+	},
+	{
+		icon: LockKeyhole,
+		label: "Security and access control",
+		status: "coming soon...",
+	},
+	{
+		icon: CheckCircle2,
+		label: "Reliability and evaluation",
+		status: "coming soon...",
+	},
+	{
+		icon: Network,
+		label: "Integrations and interoperability",
+		status: "coming soon...",
+	},
+	{
+		icon: Database,
+		label: "Data quality and grounding",
+		status: "coming soon...",
+	},
+	{
+		icon: GitBranch,
+		label: "Workflow design",
+		status: "coming soon...",
+	},
+	{
+		icon: Activity,
+		label: "Observability and debugging",
+		status: "coming soon...",
+	},
+	{
+		icon: BadgeDollarSign,
+		label: "Cost, ROI, and runway",
+		status: "coming soon...",
+	},
+	{
+		icon: UsersRound,
+		label: "Human handoffs and approvals",
+		status: "coming soon...",
+	},
+];
 
 export const Route = createFileRoute("/blog/")({
 	component: BlogPage,
@@ -102,11 +156,10 @@ function BlogHero() {
 							<p className="text-xs uppercase tracking-[0.18em] text-[#D8C497]">
 								What we are documenting
 							</p>
-							<div className="mt-8 grid grid-cols-1 gap-3">
-								<SignalRow icon={BrainCircuit} label="Agent memory" />
-								<SignalRow icon={LockKeyhole} label="Security and access control" />
-								<SignalRow icon={CheckCircle2} label="Reliability and evaluation" />
-								<SignalRow icon={Network} label="Integrations and interoperability" />
+							<div className="mt-7 grid grid-cols-1">
+								{signalTopics.map((topic) => (
+									<SignalRow key={topic.label} {...topic} />
+								))}
 							</div>
 						</div>
 					</div>
@@ -290,14 +343,44 @@ function HiveWaitlistSection() {
 function SignalRow({
 	icon: Icon,
 	label,
+	status,
+	href,
 }: {
 	icon: typeof BrainCircuit;
 	label: string;
+	status: string;
+	href?: string;
 }) {
+	const content = (
+		<>
+			<Icon className="h-4 w-4 shrink-0 text-[#BEFF00]" />
+			<span className="min-w-0 flex-1 text-sm text-white/82">{label}</span>
+			<span
+				className={
+					status === "Available"
+						? "shrink-0 border border-[#BEFF00]/30 bg-[#BEFF00]/10 px-2 py-1 text-[10px] font-medium tracking-[0.08em] text-[#BEFF00]"
+						: "shrink-0 border border-white/10 bg-white/[0.03] px-2 py-1 text-[10px] font-medium tracking-[0.08em] text-white/46"
+				}
+			>
+				{status}
+			</span>
+		</>
+	);
+
+	if (href) {
+		return (
+			<a
+				href={href}
+				className="flex items-center gap-3 border-b border-white/10 py-3 transition-colors hover:border-[#BEFF00]/35 hover:bg-white/[0.03]"
+			>
+				{content}
+			</a>
+		);
+	}
+
 	return (
-		<div className="flex items-center gap-3 border-b border-white/10 pb-3">
-			<Icon className="h-4 w-4 text-[#BEFF00]" />
-			<span className="text-sm text-white/82">{label}</span>
+		<div className="flex items-center gap-3 border-b border-white/10 py-3">
+			{content}
 		</div>
 	);
 }
