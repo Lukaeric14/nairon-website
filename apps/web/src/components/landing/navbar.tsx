@@ -111,17 +111,6 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						FAQ
 					</a>
 					<a
-						href="/signals"
-						className={cn(
-							"px-4 py-2 rounded-full text-sm transition-colors",
-							location.pathname.startsWith("/signals")
-								? "text-[#C9A96E]"
-								: "text-[#1A1916] hover:text-[#C9A96E]",
-						)}
-					>
-						Signals
-					</a>
-					<a
 						href={DISCOVERY_CALL_URL}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -176,13 +165,6 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						onClick={handleSectionClick("faq")}
 					>
 						FAQ
-					</a>
-					<a
-						href="/signals"
-						className="block px-4 py-3 rounded-xl text-base text-[#1A1916] hover:bg-[#0C0C0C]/5 transition-colors"
-						onClick={() => setMobileOpen(false)}
-					>
-						Signals
 					</a>
 					<div className="pt-4">
 						<a
