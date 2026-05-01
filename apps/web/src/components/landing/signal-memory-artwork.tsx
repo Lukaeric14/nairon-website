@@ -57,15 +57,15 @@ export function SignalMemoryArtwork({
 			/>
 			<DelicateAsciiDots
 				backgroundColor={colors.background}
-				textColor={colors.text}
-				gridSize={compact ? 42 : 54}
+				textColor="226, 38, 126"
+				gridSize={compact ? 46 : 58}
 				animationSpeed={0.86}
 				className="contrast-[1.22] saturate-[1.12]"
 				playOnHover
 				burstDurationMs={980}
+				shape="brain"
 			/>
-			<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_48%_46%,transparent_0%,transparent_46%,rgba(255,248,251,0.34)_74%,rgba(255,248,251,0.72)_100%)]" />
-			<div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#FFF8FB] to-transparent" />
+			<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_46%,transparent_0%,transparent_64%,rgba(255,248,251,0.18)_86%,rgba(255,248,251,0.52)_100%)]" />
 		</div>
 	);
 }

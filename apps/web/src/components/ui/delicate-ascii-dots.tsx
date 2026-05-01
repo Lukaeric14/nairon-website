@@ -12,6 +12,7 @@ interface DelicateAsciiDotsProps {
 	className?: string;
 	playOnHover?: boolean;
 	burstDurationMs?: number;
+	shape?: "field" | "brain";
 }
 
 interface Wave {
@@ -31,6 +32,44 @@ interface GridCell {
 const CHARS =
 	"⣧⣩⣪⣫⣬⣭⣮⣯⣱⣲⣳⣴⣵⣶⣷⣹⣺⣻⣼⣽⣾⣿⣧⣩⣪⣫⣬⣭⣮⣯⣱⣲⣳⣴⣵⣶⣷⣹⣺⣻⣼⣽⣾⣿⣧⣩⣪⣫⣬⣭⣮⣯⣱⣲⣳⣴⣵⣶⣷⣹⣺⣻⣼⣽⣾⣿⠁⠂⠄⠈⠐⠠⡀⢀⠃⠅⠘⠨⠊⠋⠌⠍⠎⠏⠑⠒⠓⠔⠕⠖⠗⠙⠚⠛⠜⠝⠞⠟⠡⠢⠣⠤⠥⠦⠧⠩⠪⠫⠬⠭⠮⠯⠱⠲⠳⠴⠵⠶⠷⠹⠺⠻⠼⠽⠾⠿⡁⡂⡃⡄⡅⡆⡇⡉⡊⡋⡌⡍⡎⡏⡑⡒⡓⡔⡕⡖⡗⡙⡚⡛⡜⡝⡞⡟⡡⡢⡣⡤⡥⡦⡧⡩⡪⡫⡬⡭⡮⡯⡱⡲⡳⡴⡵⡶⡷⡹⡺⡻⡼⡽⡾⡿⢁⢂⢃⢄⢅⢆⢇⢉⢊⢋⢌⢍⢎⢏⢑⢒⢓⢔⢕⢖⢗⢙⢚⢛⢜⢝⢞⢟⢡⢢⢣⢤⢥⢦⢧⢩⢪⢫⢬⢭⢮⢯⢱⢲⢳⢴⢵⢶⢷⢹⢺⢻⢼⢽⢾⢿";
 
+function ellipse(
+	x: number,
+	y: number,
+	cx: number,
+	cy: number,
+	rx: number,
+	ry: number,
+) {
+	return ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2;
+}
+
+function getBrainShape(x: number, y: number, width: number, height: number) {
+	const size = Math.min(width, height);
+	const nx = (x - width * 0.5) / (size * 0.43);
+	const ny = (y - height * 0.46) / (size * 0.42);
+
+	const lobes = [
+		ellipse(nx, ny, -0.46, -0.42, 0.46, 0.34),
+		ellipse(nx, ny, 0.46, -0.42, 0.46, 0.34),
+		ellipse(nx, ny, -0.42, -0.03, 0.56, 0.48),
+		ellipse(nx, ny, 0.42, -0.03, 0.56, 0.48),
+		ellipse(nx, ny, 0, -0.58, 0.5, 0.3),
+		ellipse(nx, ny, 0, 0.28, 0.66, 0.42),
+	];
+	const brainDistance = Math.min(...lobes);
+	const lowerNotch = ellipse(nx, ny, 0, 0.52, 0.09, 0.18) < 1 && ny > 0.34;
+	const insideBrain = brainDistance < 1 && !lowerNotch;
+	const inside = insideBrain;
+	const edge = insideBrain && brainDistance > 0.78;
+	const centerSplit = Math.abs(nx) < 0.055 && ny > -0.64 && ny < 0.34;
+	const fold =
+		Math.abs(Math.sin(nx * 10.5 + ny * 6.2)) < 0.1 ||
+		Math.abs(Math.cos(nx * 7.5 - ny * 9.5)) < 0.08 ||
+		centerSplit;
+
+	return { edge, fold, inside, nx, ny };
+}
+
 export function DelicateAsciiDots({
 	backgroundColor = "#FFF8FB",
 	textColor = "217, 54, 127",
@@ -40,6 +79,7 @@ export function DelicateAsciiDots({
 	className,
 	playOnHover = false,
 	burstDurationMs = 980,
+	shape = "field",
 }: DelicateAsciiDotsProps) {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -186,6 +226,13 @@ export function DelicateAsciiDots({
 
 		for (let y = 0; y < gridSize; y++) {
 			for (let x = 0; x < gridSize; x++) {
+				const posX = x * cellWidth + cellWidth / 2;
+				const posY = y * cellHeight + cellHeight / 2;
+				const brain =
+					shape === "brain" ? getBrainShape(posX, posY, width, height) : null;
+
+				if (brain && !brain.inside) continue;
+
 				let totalWave = 0;
 
 				for (const wave of wavesRef.current.concat([mouseWave])) {
@@ -213,15 +260,42 @@ export function DelicateAsciiDots({
 						Math.sin(timeRef.current * 3);
 				}
 
-				const normalizedWave = (totalWave + 2) / 4;
-				if (Math.abs(totalWave) > 0.12) {
+				let normalizedWave = (totalWave + 2) / 4;
+				if (brain) {
+					const leftRightShade = Math.abs(brain.nx) * 0.12;
+					const topShade = Math.max(0, -brain.ny) * 0.08;
+					const foldCut = brain.fold ? -0.25 : 0;
+					const edgeBoost = brain.edge ? 0.08 : 0;
+					normalizedWave = Math.max(
+						0,
+						Math.min(
+							1,
+							normalizedWave + leftRightShade + topShade + foldCut + edgeBoost,
+						),
+					);
+					totalWave += brain.fold ? -0.34 : 0.22;
+				}
+
+				const threshold = brain ? -0.05 : 0.12;
+				if (brain || Math.abs(totalWave) > threshold) {
 					const charIndex = Math.min(
 						CHARS.length - 1,
 						Math.max(0, Math.floor(normalizedWave * (CHARS.length - 1))),
 					);
 					newGrid[y][x] = {
 						char: CHARS[charIndex] || CHARS[0],
-						opacity: Math.min(0.96, Math.max(0.5, 0.48 + normalizedWave * 0.54)),
+						opacity: brain
+							? Math.min(
+									0.98,
+									Math.max(
+										0.5,
+										0.68 + normalizedWave * 0.3 - (brain.fold ? 0.18 : 0),
+									),
+								)
+							: Math.min(
+									0.96,
+									Math.max(0.5, 0.48 + normalizedWave * 0.54),
+								),
 					};
 				}
 			}
@@ -269,6 +343,7 @@ export function DelicateAsciiDots({
 		getClickWaveInfluence,
 		gridSize,
 		removeWaveLine,
+		shape,
 		textColor,
 	]);
 
