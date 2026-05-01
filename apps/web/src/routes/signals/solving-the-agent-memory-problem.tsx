@@ -512,12 +512,14 @@ function ProblemSection() {
 						or which constraints should block a feature from being built.
 					</p>
 					<p>
-						That missing context makes agents too agreeable. A developer asks
-						for a feature, an agent starts coding, and nobody in the loop has
-						the operating history required to say: this violates our ICP, this
-						is outside the current budget, this conflicts with an active client
-						promise, or this should wait because a higher-leverage workflow is
-						already planned.
+						That missing context makes AI employees too agreeable. Someone on
+						the team asks an agent to do something, the agent starts helping,
+						and nobody in the loop has the operating history required to say:
+						this violates our ICP, this is outside the current budget, this
+						conflicts with an active client promise, or this should wait because
+						a higher-leverage workflow is already planned. That is the frontier
+						problem: agents need full business context before they can push back
+						well.
 					</p>
 					<div className="grid grid-cols-1 gap-3 md:grid-cols-2">
 						{[
