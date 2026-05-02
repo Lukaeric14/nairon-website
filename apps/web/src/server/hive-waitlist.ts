@@ -1,21 +1,36 @@
 import { createServerFn } from "@tanstack/react-start";
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "@convex/_generated/api";
 
 interface HiveWaitlistData {
-	name: string;
-	company: string;
+	firstName: string;
 	email: string;
-	role: string;
-	source: string;
 }
 
 export const submitHiveWaitlist = createServerFn({ method: "POST" })
 	.inputValidator((data: HiveWaitlistData) => data)
 	.handler(async ({ data }) => {
-		const { name, company, email, role, source } = data;
+		const firstName = data.firstName.trim();
+		const email = data.email.trim().toLowerCase();
 
-		if (!name || !company || !email) {
+		if (!firstName || !email) {
 			throw new Error("Missing required fields");
 		}
+
+		const convexUrl =
+			process.env.CONVEX_URL ??
+			process.env.VITE_CONVEX_URL ??
+			import.meta.env.VITE_CONVEX_URL;
+
+		if (!convexUrl) {
+			throw new Error("Convex URL is not configured");
+		}
+
+		const convex = new ConvexHttpClient(convexUrl);
+		const result = await convex.action(api.hiveWaitlist.joinHiveWaitlist, {
+			firstName,
+			email,
+		});
 
 		const webhookUrl = process.env.SLACK_WEBHOOK_URL;
 
@@ -33,11 +48,12 @@ export const submitHiveWaitlist = createServerFn({ method: "POST" })
 					{
 						type: "section",
 						fields: [
-							{ type: "mrkdwn", text: `*Name:*\n${name}` },
-							{ type: "mrkdwn", text: `*Company:*\n${company}` },
+							{ type: "mrkdwn", text: `*First name:*\n${firstName}` },
 							{ type: "mrkdwn", text: `*Email:*\n${email}` },
-							{ type: "mrkdwn", text: `*Role:*\n${role || "Not provided"}` },
-							{ type: "mrkdwn", text: `*Source:*\n${source || "Not provided"}` },
+							{
+								type: "mrkdwn",
+								text: `*Status:*\n${result.alreadyExists ? "Already existed" : "New signup"}`,
+							},
 						],
 					},
 					{
@@ -69,5 +85,5 @@ export const submitHiveWaitlist = createServerFn({ method: "POST" })
 			console.warn("SLACK_WEBHOOK_URL not configured");
 		}
 
-		return { success: true };
+		return result;
 	});

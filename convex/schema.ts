@@ -67,6 +67,15 @@ export default defineSchema({
 		createdAt: v.number(),
 	}).index("by_email", ["email"]),
 
+	// Hive platform waitlist
+	hiveWaitlist: defineTable({
+		firstName: v.string(),
+		email: v.string(),
+		confirmationEmailSent: v.optional(v.boolean()),
+		createdAt: v.number(),
+		updatedAt: v.number(),
+	}).index("by_email", ["email"]),
+
 	// Property PDF generation jobs
 	pdfJobs: defineTable({
 		zillowUrl: v.string(),

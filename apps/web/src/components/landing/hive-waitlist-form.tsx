@@ -1,6 +1,5 @@
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { useState } from "react";
-import { HIVE_WAITLIST_SOURCE } from "@/lib/links";
 import { submitHiveWaitlist } from "@/server/hive-waitlist";
 
 type HiveWaitlistFormProps = {
@@ -9,17 +8,13 @@ type HiveWaitlistFormProps = {
 };
 
 export function HiveWaitlistForm({
-	source = HIVE_WAITLIST_SOURCE,
 	compact = false,
 }: HiveWaitlistFormProps) {
 	const [submitting, setSubmitting] = useState(false);
 	const [submitted, setSubmitted] = useState(false);
 	const [form, setForm] = useState({
-		name: "",
-		company: "",
+		firstName: "",
 		email: "",
-		role: "",
-		source,
 	});
 
 	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -62,30 +57,19 @@ export function HiveWaitlistForm({
 			onSubmit={handleSubmit}
 			className={compact ? "grid grid-cols-1 gap-3" : "grid grid-cols-1 gap-4"}
 		>
-			<div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-				<label className="block">
-					<span className="mb-1.5 block text-xs text-[#5C584F]">Name *</span>
-					<input
-						type="text"
-						required
-						value={form.name}
-						onChange={update("name")}
-						placeholder="Jane Smith"
-						className={inputClass}
-					/>
-				</label>
-				<label className="block">
-					<span className="mb-1.5 block text-xs text-[#5C584F]">Company *</span>
-					<input
-						type="text"
-						required
-						value={form.company}
-						onChange={update("company")}
-						placeholder="Acme"
-						className={inputClass}
-					/>
-				</label>
-			</div>
+			<label className="block">
+				<span className="mb-1.5 block text-xs text-[#5C584F]">
+					First name *
+				</span>
+				<input
+					type="text"
+					required
+					value={form.firstName}
+					onChange={update("firstName")}
+					placeholder="Jane"
+					className={inputClass}
+				/>
+			</label>
 			<label className="block">
 				<span className="mb-1.5 block text-xs text-[#5C584F]">Work email *</span>
 				<input
@@ -94,18 +78,6 @@ export function HiveWaitlistForm({
 					value={form.email}
 					onChange={update("email")}
 					placeholder="jane@acme.com"
-					className={inputClass}
-				/>
-			</label>
-			<label className="block">
-				<span className="mb-1.5 block text-xs text-[#5C584F]">
-					Role or team
-				</span>
-				<input
-					type="text"
-					value={form.role}
-					onChange={update("role")}
-					placeholder="Founder, ops, engineering, revenue"
 					className={inputClass}
 				/>
 			</label>

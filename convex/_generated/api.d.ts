@@ -11,6 +11,7 @@
 import type * as contact from "../contact.js";
 import type * as email from "../email.js";
 import type * as healthCheck from "../healthCheck.js";
+import type * as hiveWaitlist from "../hiveWaitlist.js";
 import type * as http from "../http.js";
 import type * as pdfJob from "../pdfJob.js";
 import type * as users from "../users.js";
@@ -26,6 +27,7 @@ declare const fullApi: ApiFromModules<{
   contact: typeof contact;
   email: typeof email;
   healthCheck: typeof healthCheck;
+  hiveWaitlist: typeof hiveWaitlist;
   http: typeof http;
   pdfJob: typeof pdfJob;
   users: typeof users;
