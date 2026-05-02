@@ -1,5 +1,6 @@
-import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { submitHiveWaitlist } from "@/server/hive-waitlist";
 
 type HiveWaitlistFormProps = {
@@ -11,19 +12,38 @@ export function HiveWaitlistForm({
 	compact = false,
 }: HiveWaitlistFormProps) {
 	const [submitting, setSubmitting] = useState(false);
-	const [submitted, setSubmitted] = useState(false);
 	const [form, setForm] = useState({
 		firstName: "",
 		email: "",
 	});
+
+	const toastStyle = {
+		background: "#F2F1EC",
+		border: "1px solid rgba(23, 22, 18, 0.12)",
+		color: "#171612",
+	};
 
 	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		setSubmitting(true);
 
 		try {
-			await submitHiveWaitlist({ data: form });
-			setSubmitted(true);
+			const result = await submitHiveWaitlist({ data: form });
+			setForm({ firstName: "", email: "" });
+			toast(
+				result.alreadyExists
+					? "You're already on the Hive waitlist."
+					: "You're on the Hive waitlist.",
+				{
+					description: "We'll email you when Hive is ready.",
+					style: toastStyle,
+				},
+			);
+		} catch {
+			toast("Could not join the Hive waitlist.", {
+				description: "Please try again in a moment.",
+				style: toastStyle,
+			});
 		} finally {
 			setSubmitting(false);
 		}
@@ -35,22 +55,6 @@ export function HiveWaitlistForm({
 
 	const inputClass =
 		"h-12 w-full border border-[#171612]/10 bg-white px-3 text-sm text-[#171612] outline-none transition-colors placeholder:text-[#8B806F]/70 focus:border-[#A77A15]";
-
-	if (submitted) {
-		return (
-			<div className="border border-[#A77A15]/30 bg-[#FBFAF6] p-5">
-				<div className="flex items-start gap-3">
-					<CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#A77A15]" />
-					<div>
-						<p className="font-medium text-[#171612]">You are on the Hive list.</p>
-						<p className="mt-1 text-sm leading-6 text-[#5F5A50]">
-							We will reach out when we open the next beta cohort.
-						</p>
-					</div>
-				</div>
-			</div>
-		);
-	}
 
 	return (
 		<form

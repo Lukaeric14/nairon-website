@@ -72,6 +72,7 @@ export default defineSchema({
 		firstName: v.string(),
 		email: v.string(),
 		confirmationEmailSent: v.optional(v.boolean()),
+		confirmationEmailError: v.optional(v.string()),
 		createdAt: v.number(),
 		updatedAt: v.number(),
 	}).index("by_email", ["email"]),

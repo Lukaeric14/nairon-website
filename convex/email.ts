@@ -110,16 +110,25 @@ export const sendHiveWaitlistConfirmation = internalAction({
 </html>
 		`;
 
-    await resend.sendEmail(
-      ctx,
-      "Nairon <hello@naironai.com>",
-      email,
-      "You're on the Hive waitlist",
-      emailHtml,
-    );
+    try {
+      await resend.sendEmail(
+        ctx,
+        "Nairon <hello@naironai.com>",
+        email,
+        "You're on the Hive waitlist",
+        emailHtml,
+      );
 
-    await ctx.runMutation(internal.hiveWaitlist.markConfirmationEmailSent, {
-      email,
-    });
+      await ctx.runMutation(internal.hiveWaitlist.markConfirmationEmailSent, {
+        email,
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown email error";
+      console.error("Hive waitlist confirmation email failed:", message);
+      await ctx.runMutation(internal.hiveWaitlist.markConfirmationEmailFailed, {
+        email,
+        error: message,
+      });
+    }
   },
 });

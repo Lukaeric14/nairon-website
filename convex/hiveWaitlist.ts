@@ -26,6 +26,7 @@ export const storeHiveWaitlistEntry = internalMutation({
 			firstName,
 			email,
 			confirmationEmailSent: false,
+			confirmationEmailError: undefined,
 			createdAt: Date.now(),
 			updatedAt: Date.now(),
 		});
@@ -49,6 +50,29 @@ export const markConfirmationEmailSent = internalMutation({
 
 		await ctx.db.patch(existing._id, {
 			confirmationEmailSent: true,
+			confirmationEmailError: undefined,
+			updatedAt: Date.now(),
+		});
+	},
+});
+
+export const markConfirmationEmailFailed = internalMutation({
+	args: {
+		email: v.string(),
+		error: v.string(),
+	},
+	handler: async (ctx, args) => {
+		const email = normalizeEmail(args.email);
+		const existing = await ctx.db
+			.query("hiveWaitlist")
+			.withIndex("by_email", (q) => q.eq("email", email))
+			.first();
+
+		if (!existing) return;
+
+		await ctx.db.patch(existing._id, {
+			confirmationEmailSent: false,
+			confirmationEmailError: args.error,
 			updatedAt: Date.now(),
 		});
 	},
