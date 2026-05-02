@@ -18,7 +18,7 @@ import { Button } from '@/components/ui/button'
 import React from 'react'
 import { useScroll, useMotionValueEvent } from 'motion/react'
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
-import { Menu, X, Shield, SquareActivity, Sparkles, Cpu, Gem, ShoppingBag, BookOpen, Notebook, Croissant, Smartphone, Rocket, Cloud, Bot, Github } from 'lucide-react'
+import { Menu, X, Shield, SquareActivity, Sparkles, Cpu, Gem, ShoppingBag, BookOpen, Notebook, Croissant, Smartphone, Rocket, Cloud, Bot } from 'lucide-react'
 import { useMedia } from '@/hooks/use-media'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { cn } from '@/lib/utils'
@@ -198,14 +198,15 @@ export default function HeaderOne() {
 
                         <div className="max-lg:in-data-[state=active]:mt-6 in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
                             <div className="flex w-full flex-col space-y-3 sm:flex-row sm:items-center sm:gap-3 sm:space-y-0 md:w-fit">
-                                <a 
+                                {/* DEPRECATED: Flux GitHub link removed from the old header. */}
+                                {/* <a 
                                     href="https://github.com/Nairon-AI/flux"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-muted-foreground hover:text-foreground transition-colors"
                                 >
                                     <Github className="size-5" />
-                                </a>
+                                </a> */}
                                 <Button
                                     asChild
                                     variant="outline"

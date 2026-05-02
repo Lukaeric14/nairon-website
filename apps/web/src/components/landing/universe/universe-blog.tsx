@@ -30,7 +30,7 @@ const POSTS = [
 		time: "8 hours ago",
 	},
 	{
-		title: "How We Built Flux: Measuring What Actually Matters",
+		title: "How We Measure What Actually Matters",
 		url: "#",
 		domain: "naironai.com",
 		points: 198,

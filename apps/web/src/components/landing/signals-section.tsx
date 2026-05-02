@@ -43,7 +43,7 @@ const signalPosts: SignalPost[] = [
 		image: "/backgrounds/rolling-hills.webp",
 	},
 	{
-		title: "How We Built Flux: Measuring What Matters",
+		title: "How We Measure What Matters in AI Workflows",
 		category: "Product",
 		date: "Jan 15, 2026",
 		author: {

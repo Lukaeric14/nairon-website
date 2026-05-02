@@ -51,7 +51,7 @@ export function CandidateModal() {
 							/>
 							<div className="relative z-10 flex flex-col gap-3 p-6 h-full justify-center">
 								{[
-									{ icon: Award, title: "Free AI-nativeness score", desc: "Benchmark yourself with Flux — used by top companies" },
+									{ icon: Award, title: "AI-native profile review", desc: "Show how you work with agents, tools, and real delivery loops" },
 									{ icon: Users, title: "Confidential matching", desc: "We connect you with roles that fit your skills and style" },
 									{ icon: TrendingUp, title: "Career acceleration", desc: "Level up with our AI-native curriculum and community" },
 								].map(({ icon: Icon, title, desc }) => (

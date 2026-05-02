@@ -230,8 +230,8 @@ export function UniverseDirectory() {
 						</span>
 					</h2>
 					<p className="text-[#5C584F] text-base max-w-xl">
-						Auto-curated from Flux assessment data. Organized by
-						SDLC phase so you find the right tool for every stage of
+						Auto-curated from practical agent-building patterns. Organized
+						by SDLC phase so you find the right tool for every stage of
 						development.
 					</p>
 				</GridCell>

@@ -42,12 +42,8 @@ export function UniverseCTA() {
 						<span className="inline-flex items-center gap-2 bg-[#0C0C0C]/[0.06] text-[#5C584F] font-semibold text-base px-8 py-3.5 rounded-full cursor-not-allowed opacity-70">
 							Coming Soon
 						</span>
-						<a
-							href="/flux"
-							className="inline-flex items-center gap-2 border border-[#0C0C0C]/10 text-[#1A1916] hover:border-[#C9A96E]/50 hover:text-[#C9A96E] font-medium text-base px-6 py-3.5 rounded-full transition-colors"
-						>
-							Explore Flux
-						</a>
+						{/* DEPRECATED: Flux CTA removed from Universe while Flux is retired. */}
+						{/* <a href="/flux">Explore Flux</a> */}
 					</div>
 				</div>
 			</div>

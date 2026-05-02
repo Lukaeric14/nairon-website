@@ -13,6 +13,8 @@ export const sendWaitlistConfirmation = internalAction({
     email: v.string(),
   },
   handler: async (ctx, { email }) => {
+    // DEPRECATED: legacy Flux/observability waitlist confirmation.
+    // Kept for compatibility with the historical /waitlist endpoint.
     const emailHtml = `
 <!DOCTYPE html>
 <html>
@@ -35,7 +37,7 @@ export const sendWaitlistConfirmation = internalAction({
     </p>
 
     <p style="font-size: 16px; line-height: 1.7; color: #A39E96; margin-bottom: 32px;">
-      In the meantime, your engineers can use <a href="https://github.com/Nairon-AI/flux" style="color: #C9A96E; text-decoration: none;">Flux</a> (our free Claude Code plugin) to start working with AI in a structured deterministic way, without producing slop.
+      Nairon is now focused on AI employees, Hive, and client automation work.
     </p>
 
     <p style="font-size: 16px; line-height: 1.7; color: #A39E96; margin-bottom: 32px;">

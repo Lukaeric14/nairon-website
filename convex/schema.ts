@@ -92,7 +92,7 @@ export default defineSchema({
 		completedAt: v.optional(v.number()),
 	}).index("by_url", ["zillowUrl"]),
 
-	// Flux CTO observability waitlist
+	// DEPRECATED: legacy Flux/observability waitlist. Kept for existing data.
 	fluxWaitlist: defineTable({
 		email: v.string(),
 		source: v.optional(v.string()), // e.g., "cto-observability", "landing-page"
