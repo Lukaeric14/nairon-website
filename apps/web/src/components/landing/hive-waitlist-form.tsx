@@ -1,7 +1,8 @@
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useState } from "react";
+import { useAction } from "convex/react";
 import { toast } from "sonner";
-import { submitHiveWaitlist } from "@/server/hive-waitlist";
+import { api } from "@convex/_generated/api";
 
 type HiveWaitlistFormProps = {
 	source?: string;
@@ -11,6 +12,7 @@ type HiveWaitlistFormProps = {
 export function HiveWaitlistForm({
 	compact = false,
 }: HiveWaitlistFormProps) {
+	const joinHiveWaitlist = useAction(api.hiveWaitlist.joinHiveWaitlist);
 	const [submitting, setSubmitting] = useState(false);
 	const [form, setForm] = useState({
 		firstName: "",
@@ -28,7 +30,7 @@ export function HiveWaitlistForm({
 		setSubmitting(true);
 
 		try {
-			const result = await submitHiveWaitlist({ data: form });
+			const result = await joinHiveWaitlist(form);
 			setForm({ firstName: "", email: "" });
 			toast(
 				result.alreadyExists
