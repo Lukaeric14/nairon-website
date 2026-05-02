@@ -292,8 +292,8 @@ export function UniverseHero() {
 				{/* Subtitle */}
 				<p className="mt-7 text-lg md:text-xl text-[#5C584F] max-w-xl mx-auto leading-relaxed">
 					A daily feed, curated tool directory, and community for
-					engineers building with AI. Powered by data from thousands
-					of Flux assessments.
+					engineers building with AI. Built from the patterns we see
+					while shipping real AI systems.
 				</p>
 
 				{/* CTAs */}

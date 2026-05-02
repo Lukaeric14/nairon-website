@@ -1,4 +1,11 @@
 {
+	"$schema": "https://openapi.vercel.sh/vercel.json",
+	"git": {
+		"deploymentEnabled": {
+			"main": true,
+			"*": false
+		}
+	},
 	"installCommand": "bun install",
 	"buildCommand": "bunx turbo build --filter=@nairon-website/web",
 	"outputDirectory": "apps/web/.vercel/output",

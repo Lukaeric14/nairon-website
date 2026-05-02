@@ -11,7 +11,7 @@ export const Route = createFileRoute("/acceptable-use")({
 		...seoHead({
 			title: "Acceptable Use Policy — Nairon AI",
 			description:
-				"Rules and guidelines for using the Nairon AI platform, NBench tool, and blog content.",
+				"Rules and guidelines for using the Nairon AI platform, NBench tool, and Signals content.",
 			path: "/acceptable-use",
 		}),
 		scripts: [
@@ -49,7 +49,7 @@ function AcceptableUsePage() {
 									This Acceptable Use Policy outlines the rules and expectations
 									for using the Nairon AI platform (naironai.com), including our
 									recruiting services, the NBench open-source benchmarking tool,
-									and all blog and editorial content. By accessing or using our
+									and all Signals and editorial content. By accessing or using our
 									services, you agree to comply with this policy.
 								</p>
 							</section>
@@ -141,10 +141,10 @@ function AcceptableUsePage() {
 
 							<section>
 								<h2 className="text-xl font-normal text-[#1A1916] mb-4">
-									4. Blog and Editorial Content
+									4. Signals and Editorial Content
 								</h2>
 								<p>
-									Our blog content is provided for informational purposes. You
+									Our Signals content is provided for informational purposes. You
 									may share and reference our articles with proper attribution.
 									Reproducing, republishing, or redistributing our content in
 									full without written permission is prohibited. The 3-article

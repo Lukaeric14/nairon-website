@@ -18,6 +18,8 @@ import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SignalsIndexRouteImport } from './routes/signals.index'
+import { Route as SignalsSolvingTheAgentMemoryProblemRouteImport } from './routes/signals/solving-the-agent-memory-problem'
 import { Route as ForRealEstateRouteImport } from './routes/for/real-estate'
 import { Route as ForRealEstatePropertyPdfRouteImport } from './routes/for/real-estate_.property-pdf'
 
@@ -66,6 +68,17 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SignalsIndexRoute = SignalsIndexRouteImport.update({
+  id: '/signals/',
+  path: '/signals/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignalsSolvingTheAgentMemoryProblemRoute =
+  SignalsSolvingTheAgentMemoryProblemRouteImport.update({
+    id: '/signals/solving-the-agent-memory-problem',
+    path: '/signals/solving-the-agent-memory-problem',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ForRealEstateRoute = ForRealEstateRouteImport.update({
   id: '/for/real-estate',
   path: '/for/real-estate',
@@ -89,6 +102,8 @@ export interface FileRoutesByFullPath {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
   '/for/real-estate': typeof ForRealEstateRoute
+  '/signals/solving-the-agent-memory-problem': typeof SignalsSolvingTheAgentMemoryProblemRoute
+  '/signals/': typeof SignalsIndexRoute
   '/for/real-estate/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
 export interface FileRoutesByTo {
@@ -102,6 +117,8 @@ export interface FileRoutesByTo {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
   '/for/real-estate': typeof ForRealEstateRoute
+  '/signals/solving-the-agent-memory-problem': typeof SignalsSolvingTheAgentMemoryProblemRoute
+  '/signals': typeof SignalsIndexRoute
   '/for/real-estate/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
 export interface FileRoutesById {
@@ -116,6 +133,8 @@ export interface FileRoutesById {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
   '/for/real-estate': typeof ForRealEstateRoute
+  '/signals/solving-the-agent-memory-problem': typeof SignalsSolvingTheAgentMemoryProblemRoute
+  '/signals/': typeof SignalsIndexRoute
   '/for/real-estate_/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
 export interface FileRouteTypes {
@@ -131,6 +150,8 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/universe'
     | '/for/real-estate'
+    | '/signals/solving-the-agent-memory-problem'
+    | '/signals/'
     | '/for/real-estate/property-pdf'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -144,6 +165,8 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/universe'
     | '/for/real-estate'
+    | '/signals/solving-the-agent-memory-problem'
+    | '/signals'
     | '/for/real-estate/property-pdf'
   id:
     | '__root__'
@@ -157,6 +180,8 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/universe'
     | '/for/real-estate'
+    | '/signals/solving-the-agent-memory-problem'
+    | '/signals/'
     | '/for/real-estate_/property-pdf'
   fileRoutesById: FileRoutesById
 }
@@ -171,6 +196,8 @@ export interface RootRouteChildren {
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   UniverseRoute: typeof UniverseRoute
   ForRealEstateRoute: typeof ForRealEstateRoute
+  SignalsSolvingTheAgentMemoryProblemRoute: typeof SignalsSolvingTheAgentMemoryProblemRoute
+  SignalsIndexRoute: typeof SignalsIndexRoute
   ForRealEstatePropertyPdfRoute: typeof ForRealEstatePropertyPdfRoute
 }
 
@@ -239,6 +266,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/signals/': {
+      id: '/signals/'
+      path: '/signals'
+      fullPath: '/signals/'
+      preLoaderRoute: typeof SignalsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signals/solving-the-agent-memory-problem': {
+      id: '/signals/solving-the-agent-memory-problem'
+      path: '/signals/solving-the-agent-memory-problem'
+      fullPath: '/signals/solving-the-agent-memory-problem'
+      preLoaderRoute: typeof SignalsSolvingTheAgentMemoryProblemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/for/real-estate': {
       id: '/for/real-estate'
       path: '/for/real-estate'
@@ -267,6 +308,9 @@ const rootRouteChildren: RootRouteChildren = {
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   UniverseRoute: UniverseRoute,
   ForRealEstateRoute: ForRealEstateRoute,
+  SignalsSolvingTheAgentMemoryProblemRoute:
+    SignalsSolvingTheAgentMemoryProblemRoute,
+  SignalsIndexRoute: SignalsIndexRoute,
   ForRealEstatePropertyPdfRoute: ForRealEstatePropertyPdfRoute,
 }
 export const routeTree = rootRouteImport

@@ -30,7 +30,7 @@ const POSTS = [
 		time: "8 hours ago",
 	},
 	{
-		title: "How We Built Flux: Measuring What Actually Matters",
+		title: "How We Measure What Actually Matters",
 		url: "#",
 		domain: "naironai.com",
 		points: 198,
@@ -166,18 +166,18 @@ export function UniverseBlog() {
 					<div className="flex items-center gap-3 mb-4">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
 						<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
-							Blog
+							Signals
 						</span>
 					</div>
 					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl mb-3">
-						Essays &{" "}
+						Agent build{" "}
 						<span className="font-serif italic text-[#C9A96E]">
-							insights
+							notes
 						</span>
 					</h2>
 					<p className="text-[#5C584F] text-base max-w-xl">
-						Long-form thinking on AI-native engineering, recruiting,
-						and building with agents — from the Nairon team.
+						Data-backed lessons from client AI agent builds and our internal
+						Hive automation work.
 					</p>
 				</GridCell>
 			</GridSection>

@@ -14,7 +14,8 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 	const [scrolled, setScrolled] = useState(false);
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const location = useLocation();
-	const isFluxPage = location.pathname === "/flux";
+	// DEPRECATED: Flux-specific navbar treatment is disabled with the Flux page.
+	// const isFluxPage = location.pathname === "/flux";
 
 	useEffect(() => {
 		const handler = () => setScrolled(window.scrollY > 50);
@@ -54,7 +55,8 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 			<div className="max-w-7xl mx-auto px-4 md:px-10 py-4 flex items-center justify-between">
 				{/* Logo */}
 				<a href="/" className="flex items-center shrink-0">
-					{isFluxPage ? (
+					{/* DEPRECATED: Flux logo lockup removed while Flux is retired. */}
+					{/* {isFluxPage ? (
 						<div className="flex items-center gap-3">
 							<span className="font-mono text-2xl font-bold tracking-tight text-[#1A1916]">
 								Flux
@@ -73,7 +75,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 								<span className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-200 group-hover/nairon:bg-black/20" />
 							</span>
 						</div>
-					) : (
+					) : ( */}
 						<img
 							src="/nairon-logo.png"
 							alt="nairon."
@@ -81,7 +83,7 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 							height={120}
 							className="h-7 md:h-9 w-auto [filter:brightness(0)]"
 						/>
-					)}
+					{/* )} */}
 				</a>
 
 				{/* Desktop nav */}
@@ -109,6 +111,17 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						className="px-4 py-2 rounded-full text-sm text-[#1A1916] hover:text-[#C9A96E] transition-colors"
 					>
 						FAQ
+					</a>
+					<a
+						href="/signals"
+						className={cn(
+							"px-4 py-2 rounded-full text-sm transition-colors",
+							location.pathname.startsWith("/signals")
+								? "text-[#C9A96E]"
+								: "text-[#1A1916] hover:text-[#C9A96E]",
+						)}
+					>
+						Signals
 					</a>
 					<a
 						href={DISCOVERY_CALL_URL}
@@ -165,6 +178,13 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						onClick={handleSectionClick("faq")}
 					>
 						FAQ
+					</a>
+					<a
+						href="/signals"
+						className="block px-4 py-3 rounded-xl text-base text-[#1A1916] hover:bg-[#0C0C0C]/5 transition-colors"
+						onClick={() => setMobileOpen(false)}
+					>
+						Signals
 					</a>
 					<div className="pt-4">
 						<a

@@ -420,7 +420,7 @@ function SlideContent({ index }: { index: number }) {
 						{
 							step: "02",
 							title: "Content & thought leadership",
-							desc: "Blog, podcast, events, and benchmark publications establishing authority on AI-native talent",
+							desc: "Signals, podcast, events, and benchmark publications establishing authority on AI-native talent",
 						},
 						{
 							step: "03",

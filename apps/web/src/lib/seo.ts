@@ -109,7 +109,8 @@ export function serviceJsonLd() {
 }
 
 /**
- * JSON-LD SoftwareApplication schema for Flux.
+ * @deprecated Flux is retired from the public website. Keep this only for old
+ * pages that have not been deleted yet.
  */
 export function fluxProductJsonLd() {
 	return {
@@ -199,7 +200,7 @@ export function breadcrumbJsonLd(
 }
 
 /**
- * JSON-LD BlogPosting schema for blog articles.
+ * JSON-LD BlogPosting schema for Signals articles.
  */
 export function blogPostJsonLd(config: {
 	title: string;

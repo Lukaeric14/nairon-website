@@ -2,7 +2,7 @@
 
 import { ReactLenis, useLenis } from "lenis/react";
 import Snap from "lenis/snap";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 /**
  * Uses the Lenis Snap plugin for reliable proximity snapping,
@@ -200,19 +200,16 @@ function SnapHandler() {
 }
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
-	const [isFluxPage, setIsFluxPage] = useState(false);
-	
-	useEffect(() => {
-		// Check on mount and on route changes
-		const checkRoute = () => {
-			setIsFluxPage(window.location.pathname.startsWith("/flux"));
-		};
-		checkRoute();
-		
-		// Listen for route changes (popstate for back/forward)
-		window.addEventListener("popstate", checkRoute);
-		return () => window.removeEventListener("popstate", checkRoute);
-	}, []);
+	// DEPRECATED: Flux route-specific scroll handling is disabled with Flux.
+	// const [isFluxPage, setIsFluxPage] = useState(false);
+	// useEffect(() => {
+	// 	const checkRoute = () => {
+	// 		setIsFluxPage(window.location.pathname.startsWith("/flux"));
+	// 	};
+	// 	checkRoute();
+	// 	window.addEventListener("popstate", checkRoute);
+	// 	return () => window.removeEventListener("popstate", checkRoute);
+	// }, []);
 	
 	return (
 		<ReactLenis
@@ -226,7 +223,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 				infinite: false,
 			}}
 		>
-			{!isFluxPage && <SnapHandler />}
+			<SnapHandler />
 			{children}
 		</ReactLenis>
 	);

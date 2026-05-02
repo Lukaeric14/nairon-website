@@ -11,7 +11,8 @@ http.route({
 	handler: healthCheck,
 });
 
-// Waitlist signup endpoint
+// DEPRECATED: legacy Flux/observability waitlist endpoint.
+// Kept active for compatibility, but new Hive waitlist work should not use it.
 http.route({
 	path: "/waitlist",
 	method: "POST",

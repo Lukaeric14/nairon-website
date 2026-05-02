@@ -2,6 +2,9 @@ import { v } from "convex/values";
 import { action, internalMutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
 
+// DEPRECATED: legacy Flux/observability waitlist actions.
+// Kept for compatibility with historical /waitlist submissions and existing data.
+
 // Check if email already exists
 export const checkEmail = query({
 	args: { email: v.string() },
@@ -71,7 +74,7 @@ export const joinWaitlist = action({
 						type: "header",
 						text: {
 							type: "plain_text",
-							text: "🚀 New Flux CTO Waitlist Signup",
+							text: "Deprecated Flux/Observability Waitlist Signup",
 							emoji: true,
 						},
 					},

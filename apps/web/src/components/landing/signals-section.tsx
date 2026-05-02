@@ -1,6 +1,6 @@
 import { GridSection, GridCell, CornerNotches } from "./grid-system";
 
-interface BlogPost {
+interface SignalPost {
 	title: string;
 	subtitle?: string;
 	category: string;
@@ -9,7 +9,7 @@ interface BlogPost {
 	image: string;
 }
 
-const blogPosts: BlogPost[] = [
+const signalPosts: SignalPost[] = [
 	{
 		title: "Why AI-Native Engineers Ship 3x Faster",
 		subtitle:
@@ -43,7 +43,7 @@ const blogPosts: BlogPost[] = [
 		image: "/backgrounds/rolling-hills.webp",
 	},
 	{
-		title: "How We Built Flux: Measuring What Matters",
+		title: "How We Measure What Matters in AI Workflows",
 		category: "Product",
 		date: "Jan 15, 2026",
 		author: {
@@ -110,7 +110,7 @@ function PostImage({
 }
 
 /* ─── Left / center post card ─────────────────────────────────── */
-function PostCard({ post, large }: { post: BlogPost; large?: boolean }) {
+function PostCard({ post, large }: { post: SignalPost; large?: boolean }) {
 	return (
 		<article className="relative flex flex-col gap-4 group">
 			<PostImage
@@ -152,7 +152,7 @@ function PostCard({ post, large }: { post: BlogPost; large?: boolean }) {
 }
 
 /* ─── Compact list item (right column) ────────────────────────── */
-function CompactPost({ post }: { post: BlogPost }) {
+function CompactPost({ post }: { post: SignalPost }) {
 	return (
 		<article className="relative flex gap-4 items-start group">
 			<PostImage
@@ -182,11 +182,11 @@ function CompactPost({ post }: { post: BlogPost }) {
 	);
 }
 
-/* ─── Blog Section ────────────────────────────────────────────── */
-export function BlogSection() {
-	const featured = blogPosts[0];
-	const secondary = blogPosts.slice(1, 3);
-	const recent = blogPosts.slice(3, 7);
+/* ─── Signals Section ─────────────────────────────────────────── */
+export function SignalsSection() {
+	const featured = signalPosts[0];
+	const secondary = signalPosts.slice(1, 3);
+	const recent = signalPosts.slice(3, 7);
 
 	return (
 		<div>
@@ -196,13 +196,13 @@ export function BlogSection() {
 					<div className="flex items-center gap-3 mb-6">
 						<div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
 						<span className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
-							From the Blog
+							From Signals
 						</span>
 					</div>
 					<h2 className="text-4xl md:text-[48px] md:leading-[57.6px] font-normal tracking-[-0.48px] text-[#1A1916] max-w-3xl">
-						Essays &{" "}
+						Agent build{" "}
 						<span className="font-serif italic text-[#C9A96E]">
-							insights
+							notes
 						</span>
 					</h2>
 				</GridCell>
@@ -234,13 +234,13 @@ export function BlogSection() {
 					<PostCard post={featured} large />
 				</GridCell>
 
-				{/* Right column — recent essays list */}
+				{/* Right column — recent notes list */}
 				<GridCell className="p-8 md:p-10">
 					<CornerNotches size={10} />
 					<div className="flex items-center gap-3 mb-8">
 						<div className="w-1 h-1 rounded-full bg-[#C9A96E]/60" />
 						<h3 className="text-[#5C584F] text-xs font-medium uppercase tracking-[0.16em]">
-							Recent Essays
+							Recent Notes
 						</h3>
 					</div>
 					<div className="flex flex-col gap-6">

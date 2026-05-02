@@ -67,6 +67,16 @@ export default defineSchema({
 		createdAt: v.number(),
 	}).index("by_email", ["email"]),
 
+	// Hive platform waitlist
+	hiveWaitlist: defineTable({
+		firstName: v.string(),
+		email: v.string(),
+		confirmationEmailSent: v.optional(v.boolean()),
+		confirmationEmailError: v.optional(v.string()),
+		createdAt: v.number(),
+		updatedAt: v.number(),
+	}).index("by_email", ["email"]),
+
 	// Property PDF generation jobs
 	pdfJobs: defineTable({
 		zillowUrl: v.string(),
@@ -92,7 +102,7 @@ export default defineSchema({
 		completedAt: v.optional(v.number()),
 	}).index("by_url", ["zillowUrl"]),
 
-	// Flux CTO observability waitlist
+	// DEPRECATED: legacy Flux/observability waitlist. Kept for existing data.
 	fluxWaitlist: defineTable({
 		email: v.string(),
 		source: v.optional(v.string()), // e.g., "cto-observability", "landing-page"

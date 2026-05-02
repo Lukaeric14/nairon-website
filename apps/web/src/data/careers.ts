@@ -85,7 +85,7 @@ export const JOB_DETAILS: Record<string, JobDetail> = {
 		type: "Full-time",
 		location: "Remote",
 		aboutTheRole:
-			"We are looking for an AI Engineer who can turn real product problems into working AI features. You will design, build, and ship systems powered by modern language models and other AI models, working closely with product and engineering to get things into production, not just into slide decks.",
+			"We're looking for an AI Engineer who can turn real product problems into working AI features. You will design, build, and ship systems powered by modern language models and other AI models, working closely with product and engineering to get things into production, not just into slide decks.",
 		responsibilities: [
 			"Design and implement AI powered features such as agents, chat interfaces, retrieval and search, summarization, and automation.",
 			"Work with product and engineering teams to translate business requirements into concrete technical solutions.",
@@ -128,7 +128,7 @@ export const JOB_DETAILS: Record<string, JobDetail> = {
 		type: "Full-time",
 		location: "Remote",
 		aboutTheRole:
-			"We are looking for an ML Engineer who can design and deploy robust machine learning systems at scale. You will build end-to-end ML pipelines, optimize model performance, and collaborate with cross-functional teams to deliver impactful solutions.",
+			"We're looking for an ML Engineer who can design and deploy robust machine learning systems at scale. You will build end-to-end ML pipelines, optimize model performance, and collaborate with cross-functional teams to deliver impactful solutions.",
 		responsibilities: [
 			"Design, develop, and deploy machine learning models for production systems.",
 			"Build and maintain ML pipelines for training, evaluation, and inference.",
@@ -171,7 +171,7 @@ export const JOB_DETAILS: Record<string, JobDetail> = {
 		type: "Full-time",
 		location: "Remote",
 		aboutTheRole:
-			"We are looking for a Full Stack Engineer who can build beautiful, performant web applications. You will work across the entire stack with modern technologies and collaborate closely with design and product teams to deliver exceptional user experiences.",
+			"We're looking for a Full Stack Engineer who can build beautiful, performant web applications. You will work across the entire stack with modern technologies and collaborate closely with design and product teams to deliver exceptional user experiences.",
 		responsibilities: [
 			"Build and maintain full-stack web applications using modern frameworks.",
 			"Design and implement APIs and backend services.",

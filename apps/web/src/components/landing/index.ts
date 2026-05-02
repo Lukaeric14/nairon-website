@@ -21,13 +21,14 @@ export { CTASection } from "./cta-section";
 export { WhyNairon } from "./why-nairon";
 export { DevComparison } from "./dev-comparison";
 export { DevOutcome } from "./dev-outcome";
-export { FluxSection } from "./flux-section";
+// DEPRECATED: Flux is retired from the public website.
+// export { FluxSection } from "./flux-section";
 export { PaintingBreak } from "./painting-break";
 export { BuiltByBuilders } from "./built-by-builders";
 export { Qualifier } from "./qualifier";
 export { LivesAndWorks } from "./lives-and-works";
 export { AIFaqSection } from "./ai-faq-section";
-export { BlogSection } from "./blog-section";
+export { SignalsSection } from "./signals-section";
 export {
 	GridSystem,
 	GridSpacer,

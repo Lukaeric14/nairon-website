@@ -88,7 +88,7 @@ export const ENGINEER_NAV: NavConfig = {
 				{
 					heading: "Resources",
 					items: [
-						{ label: "Blog", href: "/blog" },
+						{ label: "Signals", href: "/signals" },
 						{ label: "FAQ", href: "/faq" },
 						{ label: "Alumni", href: "/alumni" },
 						{ label: "Design by Nairon", href: "/design" },
@@ -415,7 +415,7 @@ export const FOOTER_LINKS = {
 		{ label: "Alumni", href: "/alumni" },
 		{ label: "Careers", href: "/careers" },
 		{ label: "Contact", href: "/contact" },
-		{ label: "Blog", href: "/blog" },
+		{ label: "Signals", href: "/signals" },
 	],
 	hiringManager: [
 		{ label: "Our Approach", href: "/hire" },
