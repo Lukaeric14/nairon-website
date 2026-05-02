@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
 	AlertTriangle,
+	ArrowRight,
 	ArrowUpRight,
 	BrainCircuit,
 	Building2,
@@ -19,7 +20,6 @@ import { CandidateModal } from "@/components/landing/candidate-modal";
 import { HireModal } from "@/components/landing/hire-modal";
 import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
 import { ModalProvider } from "@/components/landing/modal-provider";
-import { SignalMemoryArtwork } from "@/components/landing/signal-memory-artwork";
 import {
 	Select,
 	SelectContent,
@@ -449,9 +449,9 @@ function scoreProviders(state: ToolState) {
 function AgentMemoryArticlePage() {
 	return (
 		<ModalProvider>
-			<div className="min-h-screen bg-[#FBFAF6] font-inter text-[#171612]">
+			<div className="min-h-screen bg-[#F7F7F8] font-inter text-[#101014]">
 				<Navbar />
-				<article>
+				<article className="mx-auto max-w-[980px] border-x border-[#101014]/10 pt-24">
 					<Hero />
 					<ProblemSection />
 					<LandscapeSection />
@@ -471,28 +471,36 @@ function AgentMemoryArticlePage() {
 
 function Hero() {
 	return (
-		<header className="relative overflow-hidden border-b border-[#171612]/10 pt-28">
-			<div className="absolute inset-0 opacity-[0.45] [background-image:linear-gradient(rgba(23,22,18,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(23,22,18,0.08)_1px,transparent_1px)] [background-size:48px_48px]" />
-			<div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 pb-16 md:grid-cols-[1.1fr_0.9fr] md:items-start md:px-8 md:pb-20">
-				<div>
-					<div className="mb-8 inline-flex items-center gap-2 border border-[#171612]/10 bg-white/70 px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#6D675C]">
-						<BrainCircuit className="h-4 w-4 text-[#A77A15]" />
-						Company memory
-					</div>
-					<h1 className="max-w-4xl text-balance text-[46px] font-normal leading-[0.95] tracking-[-0.03em] text-[#171612] md:text-[82px]">
-						Solving the Agent Memory problem
-					</h1>
-					<p className="mt-8 max-w-2xl text-pretty text-lg leading-8 text-[#5F5A50] md:text-xl">
+		<header className="relative overflow-hidden border-b border-[#101014]/10">
+			<div className="absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(16,16,20,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(16,16,20,0.045)_1px,transparent_1px)] [background-size:76px_76px]" />
+			<div className="relative px-8 py-12 md:px-[148px] md:py-16">
+				<div className="flex items-center gap-2 text-xs text-[#606069]">
+					<a href="/signals" className="transition-colors hover:text-[#101014]">
+						Blog
+					</a>
+					<ArrowRight className="size-3" />
+					<span>Company</span>
+				</div>
+				<h1 className="mt-6 max-w-2xl text-balance text-4xl font-semibold leading-[1.03] tracking-[-0.04em] text-[#101014] md:text-5xl">
+					Solving the Agent Memory problem
+				</h1>
+				<p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-[#303036]">
 						We often get asked.... which memory layer should we trust for AI
 						employees: Supermemory, Mem0, Zep, Letta, LangMem, or something
 						closer to a company brain?
-					</p>
+				</p>
+			</div>
+			<div className="relative grid border-t border-[#101014]/10 px-8 py-5 text-xs text-[#606069] md:grid-cols-[1fr_auto] md:px-[148px]">
+				<div className="flex items-center gap-3">
+					<span className="grid size-5 place-items-center rounded-full bg-[#101014] text-[10px] font-semibold text-white">
+						N
+					</span>
+					<span>Nairon</span>
 				</div>
-
-				<SignalMemoryArtwork
-					className="min-h-[420px] shadow-[14px_14px_0_rgba(201,169,110,0.18)]"
-					tone="pink"
-				/>
+				<span className="mt-3 md:mt-0">Apr 30, 2026</span>
+			</div>
+			<div className="relative border-t border-[#101014]/10 px-8 py-10 md:px-[148px]">
+				<ArticleSignalArt />
 			</div>
 		</header>
 	);
@@ -500,10 +508,10 @@ function Hero() {
 
 function ProblemSection() {
 	return (
-		<section className="border-b border-[#171612]/10 bg-white">
-			<div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-16 md:grid-cols-[0.8fr_1.2fr] md:px-8 md:py-20">
+		<section className="border-b border-[#101014]/10 bg-white">
+			<div className="px-8 py-12 md:px-[148px] md:py-16">
 				<SectionKicker icon={AlertTriangle} label="The actual bottleneck" />
-				<div className="space-y-7 text-pretty text-[17px] leading-8 text-[#474239]">
+				<div className="mt-8 space-y-7 text-pretty text-[15px] leading-7 text-[#303036]">
 					<p>
 						The memory problem is not that agents forget your name. That is the
 						small version. The business version is harder: agents do not know
@@ -532,10 +540,10 @@ function ProblemSection() {
 						].map((item) => (
 							<div
 								key={item}
-								className="flex items-start gap-3 border border-[#171612]/10 bg-[#FBFAF6] p-4"
+								className="flex items-start gap-3 border border-[#101014]/10 bg-[#F7F7F8] p-4"
 							>
-								<CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#A77A15]" />
-								<span className="text-sm leading-6 text-[#474239]">{item}</span>
+								<CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#3D3DFF]" />
+								<span className="text-sm leading-6 text-[#303036]">{item}</span>
 							</div>
 						))}
 					</div>
@@ -545,7 +553,7 @@ function ProblemSection() {
 							href="https://www.ycombinator.com/rfs?year=2026#company-brain"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="text-[#171612] underline decoration-[#A77A15]/45 underline-offset-4 transition-colors hover:decoration-[#A77A15]"
+							className="text-[#101014] underline decoration-[#3D3DFF]/45 underline-offset-4 transition-colors hover:decoration-[#3D3DFF]"
 						>
 							YC "Company Brain" request
 						</a>{" "}
@@ -562,23 +570,23 @@ function ProblemSection() {
 
 function LandscapeSection() {
 	return (
-		<section className="border-b border-[#171612]/10">
-			<div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+		<section className="border-b border-[#101014]/10">
+			<div className="px-8 py-12 md:px-10 md:py-16">
 				<SectionHeading
 					kicker="The market"
 					title="There is no winner yet because the category is really four categories."
 				/>
-				<div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-4">
+				<div className="mt-10 grid grid-cols-1 border border-[#101014]/10 bg-white md:grid-cols-4">
 					{landscape.map((item) => (
 						<div
 							key={item.title}
-							className="border border-[#171612]/10 bg-white p-5"
+							className="border-b border-[#101014]/10 p-5 last:border-b-0 md:border-r md:border-b-0 md:last:border-r-0"
 						>
-							<item.icon className="h-5 w-5 text-[#A77A15]" />
-							<h3 className="mt-5 text-lg font-medium text-[#171612]">
+							<item.icon className="h-5 w-5 text-[#3D3DFF]" />
+							<h3 className="mt-5 text-lg font-medium text-[#101014]">
 								{item.title}
 							</h3>
-							<p className="mt-3 text-sm leading-6 text-[#5F5A50]">
+							<p className="mt-3 text-sm leading-6 text-[#5F6068]">
 								{item.body}
 							</p>
 						</div>
@@ -591,8 +599,8 @@ function LandscapeSection() {
 
 function ProviderSection() {
 	return (
-		<section className="border-b border-[#171612]/10 bg-white">
-			<div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+		<section className="border-b border-[#101014]/10 bg-white">
+			<div className="px-8 py-12 md:px-10 md:py-16">
 				<SectionHeading
 					kicker="Provider notes"
 					title="The practical tradeoffs"
@@ -610,13 +618,13 @@ function ProviderSection() {
 
 function ProviderCard({ provider }: { provider: ProviderProfile }) {
 	return (
-		<section className="border border-[#171612]/10 bg-[#FBFAF6] p-5">
+		<section className="rounded-lg border border-[#101014]/10 bg-[#F7F7F8] p-5">
 			<div className="flex items-start justify-between gap-5">
 				<div>
-					<p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#8B806F]">
+					<p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#606069]">
 						{provider.short}
 					</p>
-					<h3 className="mt-2 text-2xl font-normal tracking-[-0.02em] text-[#171612]">
+					<h3 className="mt-2 text-2xl font-normal tracking-[-0.02em] text-[#101014]">
 						{provider.name}
 					</h3>
 				</div>
@@ -624,23 +632,23 @@ function ProviderCard({ provider }: { provider: ProviderProfile }) {
 					href={provider.source}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="inline-flex h-9 w-9 shrink-0 items-center justify-center border border-[#171612]/12 bg-white text-[#171612] transition-colors hover:bg-[#171612] hover:text-white"
+					className="inline-flex h-9 w-9 shrink-0 items-center justify-center border border-[#101014]/12 bg-white text-[#101014] transition-colors hover:bg-[#101014] hover:text-white"
 					aria-label={`Open ${provider.sourceLabel}`}
 				>
 					<ArrowUpRight className="h-4 w-4" />
 				</a>
 			</div>
-			<p className="mt-5 text-sm leading-6 text-[#474239]">
-				<strong className="font-medium text-[#171612]">Best for: </strong>
+			<p className="mt-5 text-sm leading-6 text-[#303036]">
+				<strong className="font-medium text-[#101014]">Best for: </strong>
 				{provider.bestFor}
 			</p>
 			<div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
 				<TradeoffList title="Pros" items={provider.pros} positive />
 				<TradeoffList title="Cons" items={provider.cons} />
 			</div>
-			<div className="mt-6 border-t border-[#171612]/10 pt-4">
-				<p className="text-sm leading-6 text-[#5F5A50]">
-					<strong className="font-medium text-[#171612]">Nairon read: </strong>
+			<div className="mt-6 border-t border-[#101014]/10 pt-4">
+				<p className="text-sm leading-6 text-[#5F6068]">
+					<strong className="font-medium text-[#101014]">Nairon read: </strong>
 					{provider.signal}
 				</p>
 			</div>
@@ -659,16 +667,16 @@ function TradeoffList({
 }) {
 	return (
 		<div>
-			<h4 className="mb-3 text-xs font-medium uppercase tracking-[0.16em] text-[#8B806F]">
+			<h4 className="mb-3 text-xs font-medium uppercase tracking-[0.16em] text-[#606069]">
 				{title}
 			</h4>
 			<ul className="space-y-3">
 				{items.map((item) => (
-					<li key={item} className="flex gap-2 text-sm leading-6 text-[#5F5A50]">
+					<li key={item} className="flex gap-2 text-sm leading-6 text-[#5F6068]">
 						<span
 							className={cn(
 								"mt-2 h-1.5 w-1.5 shrink-0",
-								positive ? "bg-[#A77A15]" : "bg-[#171612]/45",
+								positive ? "bg-[#3D3DFF]" : "bg-[#101014]/45",
 							)}
 						/>
 						<span>{item}</span>
@@ -681,8 +689,8 @@ function TradeoffList({
 
 function HiveSection() {
 	return (
-		<section className="border-b border-[#171612]/10">
-			<div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-5 py-16 md:grid-cols-[1fr_1fr] md:px-8 md:py-20">
+		<section className="border-b border-[#101014]/10">
+			<div className="grid grid-cols-1 gap-8 px-8 py-12 md:grid-cols-[1fr_1fr] md:px-10 md:py-16">
 				<div>
 					<SectionHeading
 						kicker="How Hive uses this"
@@ -696,17 +704,17 @@ function HiveSection() {
 						<SignalPill icon={GitBranch} label="Business context" />
 					</div>
 				</div>
-				<div className="border border-[#171612]/10 bg-white p-6">
-					<h3 className="text-balance text-2xl font-normal tracking-[-0.02em] text-[#171612]">
+				<div className="rounded-lg border border-[#101014]/10 bg-white p-6">
+					<h3 className="text-balance text-2xl font-normal tracking-[-0.02em] text-[#101014]">
 						The principle
 					</h3>
-					<p className="mt-4 text-pretty text-sm leading-7 text-[#5F5A50]">
+					<p className="mt-4 text-pretty text-sm leading-7 text-[#5F6068]">
 						Whatever provider sits underneath, Hive needs to expose the same
 						product promise: every human teammate can talk to AI employees that
 						understand the company, while sensitive data stays permissioned and
 						auditable.
 					</p>
-					<p className="mt-4 text-pretty text-sm leading-7 text-[#5F5A50]">
+					<p className="mt-4 text-pretty text-sm leading-7 text-[#5F6068]">
 						That is the platform we're using internally now: a Slack-like
 						workspace where AI employees can use the right company knowledge,
 						permissions, tools, and decision history to reason with the
@@ -717,8 +725,8 @@ function HiveSection() {
 					<ul className="mt-6 space-y-4">
 						{hivePrinciples.map((principle) => (
 							<li key={principle} className="flex gap-3 text-sm leading-6">
-								<LockKeyhole className="mt-0.5 h-4 w-4 shrink-0 text-[#A77A15]" />
-								<span className="text-[#474239]">{principle}</span>
+								<LockKeyhole className="mt-0.5 h-4 w-4 shrink-0 text-[#3D3DFF]" />
+								<span className="text-[#303036]">{principle}</span>
 							</li>
 						))}
 					</ul>
@@ -730,22 +738,22 @@ function HiveSection() {
 
 function ArticleCTA() {
 	return (
-		<section className="border-b border-[#171612]/10 bg-white">
-			<div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-5 py-16 md:grid-cols-[0.9fr_1.1fr] md:px-8 md:py-20">
+		<section className="border-b border-[#101014]/10 bg-white">
+			<div className="grid grid-cols-1 gap-8 px-8 py-12 md:grid-cols-[0.9fr_1.1fr] md:px-10 md:py-16">
 				<div>
-					<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
+					<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#3D3DFF]">
 						Where this goes
 					</p>
-					<h2 className="mt-4 text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
+					<h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-[-0.03em] text-[#101014] md:text-5xl">
 						Memory is one piece of Hive.
 					</h2>
-					<p className="mt-5 max-w-xl text-pretty text-base leading-7 text-[#5F5A50]">
+					<p className="mt-5 max-w-xl text-pretty text-base leading-7 text-[#5F6068]">
 						Hive is the proprietary platform we're building so companies can
 						talk to AI employees, preserve business context, enforce security
 						policy, and give agents governed access to the company memory they
 						need.
 					</p>
-					<p className="mt-4 max-w-xl text-pretty text-base leading-7 text-[#5F5A50]">
+					<p className="mt-4 max-w-xl text-pretty text-base leading-7 text-[#5F6068]">
 						If you want Nairon to build your first AI employee now, book the
 						one-month pilot. If you want early access to Hive when we open the
 						beta wider, join the waitlist.
@@ -754,18 +762,18 @@ function ArticleCTA() {
 						href={DISCOVERY_CALL_URL}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="mt-7 inline-flex h-12 items-center justify-center gap-2 bg-[#171612] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#2A2822]"
+						className="mt-7 inline-flex h-10 items-center justify-center gap-2 rounded-md bg-[#101014] px-4 text-sm font-medium text-white transition-colors hover:bg-[#2A2A33]"
 					>
 						Book the one-month pilot
 						<ArrowUpRight className="h-4 w-4" />
 					</a>
 				</div>
-				<div className="border border-[#171612]/10 bg-[#FBFAF6] p-5 md:p-6">
-					<div className="mb-5 border-b border-[#171612]/10 pb-5">
-						<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
+				<div className="rounded-lg border border-[#101014]/10 bg-[#F7F7F8] p-5 md:p-6">
+					<div className="mb-5 border-b border-[#101014]/10 pb-5">
+						<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#3D3DFF]">
 							Hive waitlist
 						</p>
-						<h3 className="mt-2 text-balance text-2xl font-normal tracking-[-0.02em] text-[#171612]">
+						<h3 className="mt-2 text-balance text-2xl font-normal tracking-[-0.02em] text-[#101014]">
 							Get notified when Hive opens.
 						</h3>
 					</div>
@@ -787,11 +795,11 @@ function DecisionTool() {
 	}
 
 	return (
-		<section className="border-b border-[#171612]/10 bg-[#171612] text-white">
-			<div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+		<section className="border-b border-[#101014]/10 bg-[#101014] text-white">
+			<div className="px-8 py-12 md:px-10 md:py-16">
 				<div className="grid grid-cols-1 gap-10 md:grid-cols-[0.9fr_1.1fr]">
 					<div>
-						<div className="inline-flex items-center gap-2 border border-white/15 px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#D8C497]">
+						<div className="inline-flex items-center gap-2 border border-white/15 px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#DCDCFD]">
 							<Sparkles className="h-4 w-4" />
 							Memory picker
 						</div>
@@ -854,25 +862,25 @@ function DecisionTool() {
 				</div>
 
 				<div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-[1.25fr_0.75fr]">
-					<div className="border border-white/15 bg-white p-6 text-[#171612]">
-						<p className="font-mono text-xs uppercase tracking-[0.18em] text-[#8B806F]">
+					<div className="border border-white/15 bg-white p-6 text-[#101014]">
+						<p className="font-mono text-xs uppercase tracking-[0.18em] text-[#606069]">
 							Recommended first pilot
 						</p>
 						<h3 className="mt-3 text-4xl font-normal tracking-[-0.03em]">
 							{winner.provider.name}
 						</h3>
-						<p className="mt-5 text-base leading-7 text-[#474239]">
+						<p className="mt-5 text-base leading-7 text-[#303036]">
 							{providerCopy[winner.provider.id].decision}
 						</p>
-						<div className="mt-6 border-t border-[#171612]/10 pt-5">
-							<p className="text-sm leading-6 text-[#5F5A50]">
-								<strong className="font-medium text-[#171612]">Caution: </strong>
+						<div className="mt-6 border-t border-[#101014]/10 pt-5">
+							<p className="text-sm leading-6 text-[#5F6068]">
+								<strong className="font-medium text-[#101014]">Caution: </strong>
 								{providerCopy[winner.provider.id].caution}
 							</p>
 						</div>
 					</div>
 					<div className="border border-white/15 bg-white/5 p-6">
-						<p className="font-mono text-xs uppercase tracking-[0.18em] text-[#D8C497]">
+						<p className="font-mono text-xs uppercase tracking-[0.18em] text-[#DCDCFD]">
 							Also compare
 						</p>
 						<div className="mt-5 space-y-4">
@@ -885,7 +893,7 @@ function DecisionTool() {
 										<p className="text-base text-white">{provider.name}</p>
 										<p className="mt-1 text-xs text-white/50">{provider.short}</p>
 									</div>
-									<span className="font-mono text-sm text-[#BEFF00]">
+									<span className="font-mono text-sm text-[#7B7BFF]">
 										{score}
 									</span>
 								</div>
@@ -918,15 +926,15 @@ function SelectControl({
 				value={value}
 				onValueChange={onChange}
 			>
-				<SelectTrigger className="h-12 rounded-none border-white/15 bg-white px-3 text-sm text-[#171612] shadow-none ring-offset-transparent focus:ring-1 focus:ring-[#BEFF00] focus:ring-offset-0 data-[placeholder]:text-[#6D675C] [&>svg]:text-[#171612] [&>svg]:opacity-70">
+				<SelectTrigger className="h-12 rounded-none border-white/15 bg-white px-3 text-sm text-[#101014] shadow-none ring-offset-transparent focus:ring-1 focus:ring-[#7B7BFF] focus:ring-offset-0 data-[placeholder]:text-[#606069] [&>svg]:text-[#101014] [&>svg]:opacity-70">
 					<SelectValue />
 				</SelectTrigger>
-				<SelectContent className="z-[70] rounded-none border-[#171612]/10 bg-white text-[#171612] shadow-xl">
+				<SelectContent className="z-[70] rounded-none border-[#101014]/10 bg-white text-[#101014] shadow-xl">
 					{options.map((option) => (
 						<SelectItem
 							key={option.value}
 							value={option.value}
-							className="rounded-none text-sm text-[#171612] focus:bg-[#F2E8D6] focus:text-[#171612]"
+							className="rounded-none text-sm text-[#101014] focus:bg-[#F2E8D6] focus:text-[#101014]"
 						>
 							{option.label}
 						</SelectItem>
@@ -954,8 +962,8 @@ function SourcesSection() {
 
 	return (
 		<section className="bg-white">
-			<div className="mx-auto max-w-6xl px-5 py-14 md:px-8">
-				<h2 className="text-2xl font-normal tracking-[-0.02em] text-[#171612]">
+			<div className="px-8 py-12 md:px-10">
+				<h2 className="text-2xl font-normal tracking-[-0.02em] text-[#101014]">
 					Sources
 				</h2>
 				<div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -965,7 +973,7 @@ function SourcesSection() {
 							href={href}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="flex items-center justify-between gap-4 border border-[#171612]/10 bg-[#FBFAF6] p-4 text-sm text-[#474239] transition-colors hover:border-[#A77A15]/40 hover:text-[#171612]"
+							className="flex items-center justify-between gap-4 border border-[#101014]/10 bg-[#F7F7F8] p-4 text-sm text-[#303036] transition-colors hover:border-[#3D3DFF]/40 hover:text-[#101014]"
 						>
 							<span>{label}</span>
 							<ArrowUpRight className="h-4 w-4 shrink-0" />
@@ -988,14 +996,14 @@ function SectionHeading({
 }) {
 	return (
 		<div>
-			<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
+			<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#3D3DFF]">
 				{kicker}
 			</p>
-			<h2 className="mt-4 max-w-3xl text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
+			<h2 className="mt-4 max-w-3xl text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#101014] md:text-6xl">
 				{title}
 			</h2>
 			{body && (
-				<p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-[#5F5A50]">
+				<p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-[#5F6068]">
 					{body}
 				</p>
 			)}
@@ -1012,8 +1020,8 @@ function SectionKicker({
 }) {
 	return (
 		<div>
-			<div className="inline-flex items-center gap-2 border border-[#171612]/10 bg-[#FBFAF6] px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#6D675C]">
-				<Icon className="h-4 w-4 text-[#A77A15]" />
+			<div className="inline-flex items-center gap-2 border border-[#101014]/10 bg-[#F7F7F8] px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#606069]">
+				<Icon className="h-4 w-4 text-[#3D3DFF]" />
 				{label}
 			</div>
 		</div>
@@ -1028,9 +1036,25 @@ function SignalPill({
 	label: string;
 }) {
 	return (
-		<div className="inline-flex items-center gap-2 border border-[#171612]/10 bg-white px-3 py-2 text-sm text-[#474239]">
-			<Icon className="h-4 w-4 text-[#A77A15]" />
+		<div className="inline-flex items-center gap-2 border border-[#101014]/10 bg-white px-3 py-2 text-sm text-[#303036]">
+			<Icon className="h-4 w-4 text-[#3D3DFF]" />
 			{label}
+		</div>
+	);
+}
+
+function ArticleSignalArt() {
+	return (
+		<div
+			aria-hidden="true"
+			className="relative h-[260px] overflow-hidden rounded-lg border border-[#101014]/10 bg-white md:h-[360px]"
+		>
+			<div className="absolute inset-0 [background-image:radial-gradient(#101014_0.8px,transparent_0.8px)] [background-size:8px_8px]" />
+			<div className="absolute inset-x-0 top-1/2 h-40 -translate-y-1/2 bg-[radial-gradient(ellipse_at_50%_50%,rgba(123,123,255,0.24),transparent_62%)] blur-2xl" />
+			<div className="absolute left-1/2 top-[42%] h-52 w-[150%] -translate-x-1/2 -translate-y-1/2 rotate-[8deg] rounded-[50%] bg-white" />
+			<div className="absolute left-1/2 top-[60%] h-44 w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] rounded-[50%] border-t border-[#101014]/35" />
+			<div className="absolute left-1/2 top-[54%] h-36 w-[126%] -translate-x-1/2 -translate-y-1/2 rotate-[6deg] rounded-[50%] border-t border-[#101014]/24" />
+			<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,transparent_0,transparent_54%,rgba(255,255,255,0.76)_86%)]" />
 		</div>
 	);
 }

@@ -1,25 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-	Activity,
+	ArrowRight,
 	ArrowUpRight,
 	BadgeDollarSign,
-	BookOpenText,
 	BrainCircuit,
-	Calendar,
 	CheckCircle2,
-	Clock3,
 	Database,
 	GitBranch,
 	LockKeyhole,
 	Network,
+	Rss,
+	Search,
 	UsersRound,
+	type LucideIcon,
 } from "lucide-react";
 import { CandidateModal } from "@/components/landing/candidate-modal";
 import { Footer, Navbar } from "@/components/landing";
 import { HireModal } from "@/components/landing/hire-modal";
 import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
 import { ModalProvider } from "@/components/landing/modal-provider";
-import { SignalMemoryArtwork } from "@/components/landing/signal-memory-artwork";
 import { DISCOVERY_CALL_URL } from "@/lib/links";
 import { seoHead } from "@/lib/seo";
 
@@ -31,56 +30,97 @@ const featuredPost = {
 	readTime: "12 min read",
 	description:
 		"A practical look at Supermemory, Mem0, Zep, Letta, LangMem, company-brain tools, and the memory layer we need for Hive.",
+	author: "Nairon",
 };
 
-const signalTopics = [
+type SignalPost = {
+	icon: LucideIcon;
+	title: string;
+	category: string;
+	date: string;
+	description: string;
+	status: string;
+	author?: string;
+	href?: string;
+};
+
+const signalPosts: SignalPost[] = [
 	{
 		icon: BrainCircuit,
-		label: "Agent memory",
-		status: "Available",
+		title: featuredPost.title,
+		category: featuredPost.category,
+		date: featuredPost.date,
+		description: featuredPost.description,
+		author: featuredPost.author,
 		href: featuredPost.href,
+		status: "Read",
 	},
 	{
 		icon: LockKeyhole,
-		label: "Security and access control",
-		status: "coming soon...",
+		title: "Security and access control for AI employees",
+		category: "Security",
+		date: "Queued",
+		description:
+			"Permission boundaries, credential handling, and the access model every deployed agent eventually needs.",
+		status: "Queued",
 	},
 	{
 		icon: CheckCircle2,
-		label: "Reliability and evaluation",
-		status: "coming soon...",
+		title: "Reliability and evaluation loops",
+		category: "Evaluation",
+		date: "Queued",
+		description:
+			"How we decide whether an agent is ready to act without turning every workflow into manual review.",
+		status: "Queued",
 	},
 	{
 		icon: Network,
-		label: "Integrations and interoperability",
-		status: "coming soon...",
+		title: "Integrations and interoperability",
+		category: "Tools",
+		date: "Queued",
+		description:
+			"What breaks when agents need to move between Slack, CRM, documents, browser sessions, and internal systems.",
+		status: "Queued",
 	},
 	{
 		icon: Database,
-		label: "Data quality and grounding",
-		status: "coming soon...",
+		title: "Data quality and grounding",
+		category: "Context",
+		date: "Queued",
+		description:
+			"The unglamorous work behind useful retrieval: freshness, sources, duplication, and stale business truth.",
+		status: "Queued",
 	},
 	{
 		icon: GitBranch,
-		label: "Workflow design",
-		status: "coming soon...",
-	},
-	{
-		icon: Activity,
-		label: "Observability and debugging",
-		status: "coming soon...",
+		title: "Workflow design for agent teams",
+		category: "Operations",
+		date: "Queued",
+		description:
+			"Why the best agent deployments look more like operating systems than prompt libraries.",
+		status: "Queued",
 	},
 	{
 		icon: BadgeDollarSign,
-		label: "Cost, ROI, and runway",
-		status: "coming soon...",
+		title: "Cost, ROI, and runway",
+		category: "Finance",
+		date: "Queued",
+		description:
+			"Where AI employee projects create leverage, where they burn time, and how to measure the difference.",
+		status: "Queued",
 	},
 	{
 		icon: UsersRound,
-		label: "Human handoffs and approvals",
-		status: "coming soon...",
+		title: "Human handoffs and approvals",
+		category: "Teams",
+		date: "Queued",
+		description:
+			"The practical approval patterns that keep agents fast without pretending every action should be autonomous.",
+		status: "Queued",
 	},
 ];
+
+const filters = ["All", "Company", "Security", "Evaluation", "Operations"];
 
 export const Route = createFileRoute("/signals/")({
 	component: SignalsPage,
@@ -96,12 +136,13 @@ export const Route = createFileRoute("/signals/")({
 function SignalsPage() {
 	return (
 		<ModalProvider>
-			<div className="min-h-screen bg-[#FBFAF6] font-inter text-[#171612]">
+			<div className="min-h-screen bg-[#F7F7F8] font-inter text-[#101014]">
 				<Navbar />
-				<main>
-					<BlogHero />
-					<FeaturedArticle />
-					<WhyThisBlogExists />
+				<main className="mx-auto max-w-[980px] border-x border-[#101014]/10 pt-24">
+					<PageTitle />
+					<FeaturedGrid />
+					<FilterRow />
+					<ArticleGrid />
 					<HiveWaitlistSection />
 				</main>
 				<Footer />
@@ -112,279 +153,256 @@ function SignalsPage() {
 	);
 }
 
-function BlogHero() {
+function PageTitle() {
 	return (
-		<header className="relative overflow-hidden border-b border-[#171612]/10 pt-28">
-			<div className="absolute inset-0 opacity-[0.35] [background-image:linear-gradient(rgba(23,22,18,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(23,22,18,0.08)_1px,transparent_1px)] [background-size:44px_44px]" />
-			<div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 pb-16 md:grid-cols-[1.05fr_0.95fr] md:items-start md:px-10 md:pb-20">
-				<div>
-					<div className="mb-7 inline-flex items-center gap-2 border border-[#171612]/10 bg-white/70 px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#6D675C]">
-						<BookOpenText className="h-4 w-4 text-[#A77A15]" />
-						Nairon Signals
-					</div>
-					<h1 className="max-w-4xl text-balance text-[48px] font-normal leading-[0.95] tracking-[-0.03em] text-[#171612] md:text-[86px]">
-						Data-backed lessons from building Agents.
-					</h1>
-					<p className="mt-8 max-w-2xl text-pretty text-lg leading-8 text-[#5F5A50] md:text-xl">
-						What we're learning from client agent deployments and from using
-						Hive inside Nairon.
-					</p>
-					<div className="mt-8 flex flex-col gap-3 sm:flex-row">
-						<a
-							href={featuredPost.href}
-							className="inline-flex h-12 items-center justify-center gap-2 bg-[#171612] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#2A2822]"
-						>
-							Read the first article
-							<ArrowUpRight className="h-4 w-4" />
-						</a>
-						<a
-							href={DISCOVERY_CALL_URL}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="inline-flex h-12 items-center justify-center gap-2 border border-[#171612]/12 bg-white px-5 text-sm font-semibold text-[#171612] transition-colors hover:border-[#A77A15]/50"
-						>
-							Book a one-month pilot
-						</a>
-					</div>
-				</div>
-
-				<div className="relative border border-[#171612]/10 bg-[#171612] p-3 text-white shadow-[14px_14px_0_rgba(201,169,110,0.24)] md:min-h-[520px] md:p-4">
-					<div className="relative flex h-full min-h-[500px] flex-col border border-white/10">
-						<div className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-4 sm:px-5">
-							<p className="text-xs uppercase tracking-[0.18em] text-[#D8C497]">
-								What we're documenting
-							</p>
-							<span className="shrink-0 text-xs text-white/40">
-								1 live / {signalTopics.length - 1} queued
-							</span>
-						</div>
-						<div className="divide-y divide-white/10">
-							{signalTopics.map((topic) => (
-								<SignalRow key={topic.label} {...topic} />
-							))}
-						</div>
-						<div className="mt-auto border-t border-white/10 px-4 py-4 sm:px-5">
-							<p className="max-w-md text-pretty text-[13px] leading-6 text-white/52">
-								We publish a Signal when the pattern shows up in client work or
-								in our own Hive operating system.
-							</p>
-						</div>
-					</div>
-				</div>
+		<header className="relative border-b border-[#101014]/10 px-8 py-12 md:px-10 md:py-16">
+			<GridTexture />
+			<div className="relative">
+				<p className="text-xs font-medium text-[#606069]">Signals</p>
+				<h1 className="mt-4 max-w-2xl text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.04em] text-[#101014] md:text-7xl">
+					Notes from building AI employees.
+				</h1>
+				<p className="mt-5 max-w-xl text-pretty text-base leading-7 text-[#5F6068]">
+					Practical field notes from client deployments and from using Hive
+					inside Nairon.
+				</p>
 			</div>
 		</header>
 	);
 }
 
-function FeaturedArticle() {
+function FeaturedGrid() {
 	return (
-		<section className="border-b border-[#171612]/10 bg-white">
-			<div className="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-20">
-				<div className="mb-8 flex items-center gap-3">
-					<div className="h-1.5 w-1.5 bg-[#C9A96E]" />
-					<p className="text-xs font-medium uppercase tracking-[0.16em] text-[#6D675C]">
-						Published
-					</p>
-				</div>
-				<a
-					href={featuredPost.href}
-					className="group grid grid-cols-1 border border-[#171612]/10 bg-[#FBFAF6] md:grid-cols-[0.72fr_1.28fr]"
-				>
-					<ArticleThumbnail />
-					<div className="flex flex-col justify-between p-6 md:min-h-[360px] md:p-8">
-						<div>
-							<div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.14em] text-[#8B806F]">
-								<span>{featuredPost.category}</span>
-								<span className="text-[#171612]/25">/</span>
-								<span className="inline-flex items-center gap-1.5">
-									<Calendar className="h-3.5 w-3.5" />
-									{featuredPost.date}
-								</span>
-								<span className="inline-flex items-center gap-1.5">
-									<Clock3 className="h-3.5 w-3.5" />
-									{featuredPost.readTime}
-								</span>
-							</div>
-							<h2 className="mt-6 max-w-3xl text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-5xl lg:text-6xl">
-								{featuredPost.title}
-							</h2>
-							<p className="mt-6 max-w-2xl text-pretty text-base leading-7 text-[#5F5A50]">
-								{featuredPost.description}
-							</p>
-						</div>
-						<div className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-[#171612] transition-colors group-hover:text-[#A77A15]">
-							Read article
-							<ArrowUpRight className="h-4 w-4" />
-						</div>
-					</div>
-				</a>
+		<section className="grid border-b border-[#101014]/10 md:grid-cols-2">
+			<FeaturedCard
+				title={featuredPost.title}
+				description={featuredPost.description}
+				date={featuredPost.date}
+				author={featuredPost.author}
+				href={featuredPost.href}
+			/>
+			<FeaturedCard
+				title="How we decide what becomes a Signal"
+				description="We publish when a pattern repeats across client work, Hive usage, or agent infrastructure decisions."
+				date="Editorial note"
+				author="Nairon"
+				reverseArtwork
+			/>
+		</section>
+	);
+}
+
+function FeaturedCard({
+	title,
+	description,
+	date,
+	author,
+	href,
+	reverseArtwork = false,
+}: {
+	title: string;
+	description: string;
+	date: string;
+	author: string;
+	href?: string;
+	reverseArtwork?: boolean;
+}) {
+	const content = (
+		<>
+			<div className="overflow-hidden rounded-lg border border-[#101014]/10 bg-white">
+				{reverseArtwork ? (
+					<SignalWave className="h-[180px] md:h-[210px]" />
+				) : (
+					<SignalDither className="h-[180px] md:h-[210px]" />
+				)}
+			</div>
+			<p className="mt-5 text-xs text-[#606069]">{date}</p>
+			<h2 className="mt-3 text-balance text-2xl font-semibold leading-tight tracking-[-0.03em] text-[#101014]">
+				{title}
+			</h2>
+			<p className="mt-4 text-pretty text-sm leading-6 text-[#5F6068]">
+				{description}
+			</p>
+			<div className="mt-auto flex items-center justify-between gap-4 pt-8">
+				<AuthorStack author={author} />
+				<span className="inline-flex items-center gap-1 text-xs font-medium text-[#3D3DFF]">
+					{href ? "Read" : "Soon"}
+					<ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+				</span>
+			</div>
+		</>
+	);
+
+	const className =
+		"group flex min-h-[420px] flex-col border-[#101014]/10 p-8 transition-colors first:border-b md:first:border-r md:first:border-b-0 md:p-10";
+
+	return href ? (
+		<a href={href} className={className}>
+			{content}
+		</a>
+	) : (
+		<div className={className}>{content}</div>
+	);
+}
+
+function FilterRow() {
+	return (
+		<section className="flex flex-col gap-4 border-b border-[#101014]/10 px-8 py-6 md:flex-row md:items-center md:justify-between md:px-10">
+			<div className="flex flex-wrap items-center gap-2">
+				{filters.map((filter) => (
+					<button
+						key={filter}
+						type="button"
+						className="inline-flex h-8 items-center rounded-full border border-transparent px-3 text-xs text-[#606069] transition-colors first:border-[#101014]/10 first:bg-white first:text-[#101014] hover:text-[#101014]"
+					>
+						{filter}
+					</button>
+				))}
+			</div>
+			<div className="flex items-center gap-3">
+				<label className="flex h-8 w-full items-center gap-2 rounded-full border border-[#101014]/10 bg-white px-3 text-xs text-[#606069] md:w-[172px]">
+					<Search className="size-3.5" />
+					<span>Search...</span>
+					<span className="ml-auto rounded border border-[#101014]/10 px-1 text-[10px]">
+						K
+					</span>
+				</label>
+				<Rss className="size-4 text-[#606069]" />
 			</div>
 		</section>
 	);
 }
 
-function WhyThisBlogExists() {
+function ArticleGrid() {
 	return (
-		<section className="border-b border-[#171612]/10">
-			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 py-16 md:grid-cols-[0.8fr_1.2fr] md:px-10 md:py-20">
-				<div>
-					<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
-						Why publish this
-					</p>
-					<h2 className="mt-4 text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
-						The useful parts of our internal learning loop.
-					</h2>
-				</div>
-				<div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-					{[
-						{
-							title: "Client patterns",
-							body: "The same bottlenecks show up across operations, sales, support, recruiting, and engineering agent systems.",
-						},
-						{
-							title: "Hive lessons",
-							body: "We're using Hive internally while the platform is still in beta, so the writing is grounded in our own operating system.",
-						},
-						{
-							title: "Practical choices",
-							body: "We want buyers and builders to understand the tradeoffs before they pick memory tools, agent platforms, or security models.",
-						},
-					].map((item) => (
-						<div key={item.title} className="border border-[#171612]/10 bg-white p-5">
-							<h3 className="text-xl font-normal tracking-[-0.02em] text-[#171612]">
-								{item.title}
-							</h3>
-							<p className="mt-3 text-pretty text-sm leading-6 text-[#5F5A50]">
-								{item.body}
-							</p>
-						</div>
-					))}
-				</div>
-			</div>
+		<section className="grid border-b border-[#101014]/10 md:grid-cols-3">
+			{signalPosts.map((post) => (
+				<ArticleCard key={post.title} post={post} />
+			))}
 		</section>
+	);
+}
+
+function ArticleCard({ post }: { post: SignalPost }) {
+	const Icon = post.icon;
+	const content = (
+		<>
+			<div className="flex items-center justify-between gap-4">
+				<p className="text-xs text-[#606069]">{post.date}</p>
+				<Icon className="size-4 text-[#7B7BFF]" />
+			</div>
+			<p className="mt-6 text-xs text-[#606069]">{post.category}</p>
+			<h3 className="mt-3 text-balance text-base font-semibold leading-snug tracking-[-0.02em] text-[#101014]">
+				{post.title}
+			</h3>
+			<p className="mt-4 text-pretty text-sm leading-6 text-[#5F6068]">
+				{post.description}
+			</p>
+			<div className="mt-auto flex items-center justify-between gap-4 pt-8">
+				<AuthorStack author={post.author ?? "Nairon"} compact />
+				<span className="inline-flex items-center gap-1 text-xs font-medium text-[#3D3DFF]">
+					{post.status}
+					<ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+				</span>
+			</div>
+		</>
+	);
+	const className =
+		"group flex min-h-[262px] flex-col border-b border-[#101014]/10 p-8 transition-colors hover:bg-white md:border-r md:[&:nth-child(3n)]:border-r-0";
+
+	return post.href ? (
+		<a href={post.href} className={className}>
+			{content}
+		</a>
+	) : (
+		<article className={className}>{content}</article>
 	);
 }
 
 function HiveWaitlistSection() {
 	return (
-		<section className="bg-white">
-			<div className="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-20">
-				<HiveScreenshotStrip />
-				<div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-[0.9fr_1.1fr]">
-					<div>
-						<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#A77A15]">
-							Hive beta
-						</p>
-						<h2 className="mt-4 text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#171612] md:text-6xl">
-							Join the waitlist for the platform behind the learnings.
-						</h2>
-						<p className="mt-5 max-w-xl text-pretty text-base leading-7 text-[#5F5A50]">
-							Hive is a workspace for humans and AI employees. Think persistent
-							memory, business context, security policy, tool access, and
-							reliability loops in one place.
-						</p>
-						<a
-							href={DISCOVERY_CALL_URL}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="mt-7 inline-flex h-12 items-center justify-center gap-2 border border-[#171612]/12 bg-[#FBFAF6] px-5 text-sm font-semibold text-[#171612] transition-colors hover:border-[#A77A15]/50"
-						>
-							Need agents now? Book the pilot
-							<ArrowUpRight className="h-4 w-4" />
-						</a>
-					</div>
-					<div className="border border-[#171612]/10 bg-[#FBFAF6] p-5 md:p-6">
-						<HiveWaitlistForm source="Signals index" />
-					</div>
-				</div>
+		<section className="grid border-b border-[#101014]/10 bg-white md:grid-cols-[0.9fr_1.1fr]">
+			<div className="border-b border-[#101014]/10 p-8 md:border-r md:border-b-0 md:p-10">
+				<p className="text-xs font-medium text-[#606069]">Hive beta</p>
+				<h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-[-0.03em] text-[#101014] md:text-5xl">
+					The operating system behind the learnings.
+				</h2>
+				<p className="mt-5 max-w-md text-pretty text-sm leading-6 text-[#5F6068]">
+					Hive is a workspace for humans and AI employees: persistent memory,
+					business context, security policy, tool access, and reliability loops
+					in one place.
+				</p>
+				<a
+					href={DISCOVERY_CALL_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="mt-7 inline-flex h-10 items-center justify-center gap-2 rounded-md bg-[#101014] px-4 text-sm font-medium text-white transition-colors hover:bg-[#2A2A33]"
+				>
+					Book a one-month pilot
+					<ArrowUpRight className="size-4" />
+				</a>
+			</div>
+			<div className="p-8 md:p-10">
+				<HiveWaitlistForm source="Signals index" />
 			</div>
 		</section>
 	);
 }
 
-function HiveScreenshotStrip() {
-	return (
-		<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-			{[
-				{
-					src: "/hive-dashboard.png",
-					alt: "Hive dashboard with AI employees, assignments, sessions, and workflow columns",
-				},
-				{
-					src: "/hive-channel.png",
-					alt: "Hive channel with agent mentions and threaded company context",
-				},
-			].map((screenshot) => (
-				<div
-					key={screenshot.src}
-					className="overflow-hidden border border-[#171612]/10 bg-white shadow-[10px_10px_0_rgba(201,169,110,0.12)]"
-				>
-					<img
-						src={screenshot.src}
-						alt={screenshot.alt}
-						className="block aspect-[1.735] w-full bg-white object-cover object-left-top"
-						loading="lazy"
-						decoding="async"
-					/>
-				</div>
-			))}
-		</div>
-	);
-}
-
-function SignalRow({
-	icon: Icon,
-	label,
-	status,
-	href,
+function AuthorStack({
+	author,
+	compact = false,
 }: {
-	icon: typeof BrainCircuit;
-	label: string;
-	status: string;
-	href?: string;
+	author: string;
+	compact?: boolean;
 }) {
-	const content = (
-		<>
-			<Icon className="size-4 shrink-0 text-[#BEFF00]" />
-			<span className="min-w-0 text-sm leading-5 text-white/82">
-				{label}
-			</span>
-			<span
-				className={
-					status === "Available"
-						? "col-start-2 inline-flex h-8 w-[118px] shrink-0 items-center justify-center border border-[#BEFF00]/30 bg-[#BEFF00]/10 px-2 text-[11px] font-medium tracking-[0.04em] text-[#BEFF00] sm:col-start-auto"
-						: "col-start-2 inline-flex h-8 w-[118px] shrink-0 items-center justify-center border border-white/10 bg-white/[0.03] px-2 text-[11px] font-medium tracking-[0.04em] text-white/46 sm:col-start-auto"
-				}
-			>
-				{status}
-			</span>
-		</>
-	);
-
-	if (href) {
-		return (
-			<a
-				href={href}
-				className="grid min-h-16 grid-cols-[1rem_minmax(0,1fr)] items-center gap-x-4 gap-y-2 px-4 py-3 transition-colors hover:bg-white/[0.03] sm:grid-cols-[1rem_minmax(0,1fr)_auto] sm:px-5"
-			>
-				{content}
-			</a>
-		);
-	}
-
 	return (
-		<div className="grid min-h-16 grid-cols-[1rem_minmax(0,1fr)] items-center gap-x-4 gap-y-2 px-4 py-3 sm:grid-cols-[1rem_minmax(0,1fr)_auto] sm:px-5">
-			{content}
+		<div className="flex items-center gap-2">
+			<span className="grid size-5 place-items-center rounded-full bg-[#101014] text-[10px] font-semibold text-white">
+				N
+			</span>
+			<span className={compact ? "text-xs text-[#606069]" : "text-sm text-[#303036]"}>
+				{author}
+			</span>
 		</div>
 	);
 }
 
-function ArticleThumbnail() {
+function SignalWave({ className }: { className?: string }) {
 	return (
-		<SignalMemoryArtwork
-			className="h-[280px] rounded-none border-0 md:h-full md:min-h-[360px] md:border-r"
-			tone="pink"
-			compact
+		<div
+			aria-hidden="true"
+			className={`relative overflow-hidden bg-white ${className ?? ""}`}
+		>
+			<div className="absolute inset-0 opacity-[0.45] [background-image:radial-gradient(#101014_0.8px,transparent_0.8px)] [background-size:8px_8px]" />
+			<div className="absolute inset-x-0 top-1/2 h-36 -translate-y-1/2 bg-[radial-gradient(ellipse_at_50%_50%,rgba(61,61,255,0.28),transparent_62%)] blur-2xl" />
+			<div className="absolute left-1/2 top-1/2 h-36 w-[150%] -translate-x-1/2 -translate-y-1/2 rotate-[-7deg] rounded-[50%] border-t border-[#101014]/35" />
+			<div className="absolute left-1/2 top-[58%] h-28 w-[128%] -translate-x-1/2 -translate-y-1/2 rotate-[5deg] rounded-[50%] border-t border-[#101014]/25" />
+		</div>
+	);
+}
+
+function SignalDither({ className }: { className?: string }) {
+	return (
+		<div
+			aria-hidden="true"
+			className={`relative overflow-hidden bg-white ${className ?? ""}`}
+		>
+			<div className="absolute inset-0 [background-image:radial-gradient(#101014_0.75px,transparent_0.75px)] [background-size:7px_7px]" />
+			<div className="absolute -left-10 -top-8 h-44 w-[120%] rotate-[-6deg] rounded-[50%] bg-white" />
+			<div className="absolute inset-x-0 top-1/2 h-28 -translate-y-1/2 bg-[radial-gradient(ellipse_at_50%_50%,rgba(123,123,255,0.24),transparent_64%)] blur-xl" />
+			<div className="absolute left-1/2 top-[47%] h-40 w-[135%] -translate-x-1/2 -translate-y-1/2 rotate-[8deg] rounded-[50%] border-t border-[#101014]/30" />
+			<div className="absolute left-1/2 top-[52%] h-32 w-[120%] -translate-x-1/2 -translate-y-1/2 rotate-[-4deg] rounded-[50%] border-t border-[#101014]/20" />
+			<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,transparent_0,transparent_48%,rgba(255,255,255,0.72)_78%)]" />
+		</div>
+	);
+}
+
+function GridTexture() {
+	return (
+		<div
+			aria-hidden="true"
+			className="absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(16,16,20,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(16,16,20,0.045)_1px,transparent_1px)] [background-size:76px_76px]"
 		/>
 	);
 }
