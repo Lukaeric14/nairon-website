@@ -36,6 +36,8 @@ const ARTICLE_TITLE = "Solving the Agent Memory problem";
 const ARTICLE_DESCRIPTION =
 	"A practical look at Supermemory, Mem0, Zep, Letta, LangMem, and company-brain memory layers for AI employees inside Hive.";
 const PUBLISHED_DATE = "2026-04-30";
+const ARTICLE_AUTHOR = "Obaid Ur-Rahmaan";
+const ARTICLE_AUTHOR_AVATAR = "/avatars/obaid-ur-rahmaan.png";
 
 const articleJsonLd = JSON.stringify(
 	blogPostJsonLd({
@@ -43,7 +45,7 @@ const articleJsonLd = JSON.stringify(
 		description: ARTICLE_DESCRIPTION,
 		path: ARTICLE_PATH,
 		datePublished: PUBLISHED_DATE,
-		authorName: "Nairon",
+		authorName: ARTICLE_AUTHOR,
 	}),
 );
 
@@ -492,10 +494,16 @@ function Hero() {
 			</div>
 			<div className="relative grid border-t border-[#101014]/10 px-8 py-5 text-xs text-[#606069] md:grid-cols-[1fr_auto] md:px-[148px]">
 				<div className="flex items-center gap-3">
-					<span className="grid size-5 place-items-center rounded-full bg-[#101014] text-[10px] font-semibold text-white">
-						N
+					<span className="grid size-5 place-items-center overflow-hidden rounded-full bg-[#101014] text-[10px] font-semibold text-white ring-1 ring-[#101014]/10">
+						<img
+							src={ARTICLE_AUTHOR_AVATAR}
+							alt=""
+							className="size-full object-cover"
+							loading="eager"
+							decoding="async"
+						/>
 					</span>
-					<span>Nairon</span>
+					<span>{ARTICLE_AUTHOR}</span>
 				</div>
 				<span className="mt-3 md:mt-0">Apr 30, 2026</span>
 			</div>

@@ -30,7 +30,8 @@ const featuredPost = {
 	readTime: "12 min read",
 	description:
 		"A practical look at Supermemory, Mem0, Zep, Letta, LangMem, company-brain tools, and the memory layer we need for Hive.",
-	author: "Nairon",
+	author: "Obaid Ur-Rahmaan",
+	authorAvatar: "/avatars/obaid-ur-rahmaan.png",
 };
 
 type SignalPost = {
@@ -41,7 +42,9 @@ type SignalPost = {
 	description: string;
 	status: string;
 	author?: string;
+	authorAvatar?: string;
 	href?: string;
+	isReady?: boolean;
 };
 
 const signalPosts: SignalPost[] = [
@@ -52,8 +55,10 @@ const signalPosts: SignalPost[] = [
 		date: featuredPost.date,
 		description: featuredPost.description,
 		author: featuredPost.author,
+		authorAvatar: featuredPost.authorAvatar,
 		href: featuredPost.href,
 		status: "Read",
+		isReady: true,
 	},
 	{
 		icon: LockKeyhole,
@@ -179,13 +184,13 @@ function FeaturedGrid() {
 				description={featuredPost.description}
 				date={featuredPost.date}
 				author={featuredPost.author}
+				authorAvatar={featuredPost.authorAvatar}
 				href={featuredPost.href}
 			/>
 			<FeaturedCard
 				title="How we decide what becomes a Signal"
 				description="We publish when a pattern repeats across client work, Hive usage, or agent infrastructure decisions."
 				date="Editorial note"
-				author="Nairon"
 				reverseArtwork
 			/>
 		</section>
@@ -197,16 +202,19 @@ function FeaturedCard({
 	description,
 	date,
 	author,
+	authorAvatar,
 	href,
 	reverseArtwork = false,
 }: {
 	title: string;
 	description: string;
 	date: string;
-	author: string;
+	author?: string;
+	authorAvatar?: string;
 	href?: string;
 	reverseArtwork?: boolean;
 }) {
+	const isReady = Boolean(href);
 	const content = (
 		<>
 			<div className="overflow-hidden rounded-lg border border-[#101014]/10 bg-white">
@@ -224,9 +232,13 @@ function FeaturedCard({
 				{description}
 			</p>
 			<div className="mt-auto flex items-center justify-between gap-4 pt-8">
-				<AuthorStack author={author} />
+				{author ? (
+					<AuthorStack author={author} avatarSrc={authorAvatar} />
+				) : (
+					<span />
+				)}
 				<span className="inline-flex items-center gap-1 text-xs font-medium text-[#3D3DFF]">
-					{href ? "Read" : "Soon"}
+					{isReady ? "Read" : "Soon"}
 					<ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
 				</span>
 			</div>
@@ -235,13 +247,16 @@ function FeaturedCard({
 
 	const className =
 		"group flex min-h-[420px] flex-col border-[#101014]/10 p-8 transition-colors first:border-b md:first:border-r md:first:border-b-0 md:p-10";
+	const mutedClassName = `${className} bg-[#F0F0F2]/45 opacity-60 grayscale`;
 
 	return href ? (
 		<a href={href} className={className}>
 			{content}
 		</a>
 	) : (
-		<div className={className}>{content}</div>
+		<div className={mutedClassName} aria-disabled="true">
+			{content}
+		</div>
 	);
 }
 
@@ -285,22 +300,45 @@ function ArticleGrid() {
 
 function ArticleCard({ post }: { post: SignalPost }) {
 	const Icon = post.icon;
+	const isReady = Boolean(post.href || post.isReady);
 	const content = (
 		<>
 			<div className="flex items-center justify-between gap-4">
 				<p className="text-xs text-[#606069]">{post.date}</p>
-				<Icon className="size-4 text-[#7B7BFF]" />
+				<Icon
+					className={isReady ? "size-4 text-[#7B7BFF]" : "size-4 text-[#9C9DA5]"}
+				/>
 			</div>
 			<p className="mt-6 text-xs text-[#606069]">{post.category}</p>
-			<h3 className="mt-3 text-balance text-base font-semibold leading-snug tracking-[-0.02em] text-[#101014]">
+			<h3
+				className={
+					isReady
+						? "mt-3 text-balance text-base font-semibold leading-snug tracking-[-0.02em] text-[#101014]"
+						: "mt-3 text-balance text-base font-semibold leading-snug tracking-[-0.02em] text-[#4D4E56]"
+				}
+			>
 				{post.title}
 			</h3>
 			<p className="mt-4 text-pretty text-sm leading-6 text-[#5F6068]">
 				{post.description}
 			</p>
 			<div className="mt-auto flex items-center justify-between gap-4 pt-8">
-				<AuthorStack author={post.author ?? "Nairon"} compact />
-				<span className="inline-flex items-center gap-1 text-xs font-medium text-[#3D3DFF]">
+				{isReady && post.author ? (
+					<AuthorStack
+						author={post.author}
+						avatarSrc={post.authorAvatar}
+						compact
+					/>
+				) : (
+					<span />
+				)}
+				<span
+					className={
+						isReady
+							? "inline-flex items-center gap-1 text-xs font-medium text-[#3D3DFF]"
+							: "inline-flex items-center gap-1 text-xs font-medium text-[#8F9098]"
+					}
+				>
 					{post.status}
 					<ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
 				</span>
@@ -309,13 +347,17 @@ function ArticleCard({ post }: { post: SignalPost }) {
 	);
 	const className =
 		"group flex min-h-[262px] flex-col border-b border-[#101014]/10 p-8 transition-colors hover:bg-white md:border-r md:[&:nth-child(3n)]:border-r-0";
+	const mutedClassName =
+		"group flex min-h-[262px] flex-col border-b border-[#101014]/10 bg-[#F0F0F2]/45 p-8 opacity-60 grayscale md:border-r md:[&:nth-child(3n)]:border-r-0";
 
 	return post.href ? (
 		<a href={post.href} className={className}>
 			{content}
 		</a>
 	) : (
-		<article className={className}>{content}</article>
+		<article className={mutedClassName} aria-disabled="true">
+			{content}
+		</article>
 	);
 }
 
@@ -351,17 +393,31 @@ function HiveWaitlistSection() {
 
 function AuthorStack({
 	author,
+	avatarSrc,
 	compact = false,
 }: {
 	author: string;
+	avatarSrc?: string;
 	compact?: boolean;
 }) {
 	return (
 		<div className="flex items-center gap-2">
-			<span className="grid size-5 place-items-center rounded-full bg-[#101014] text-[10px] font-semibold text-white">
-				N
+			<span className="grid size-5 place-items-center overflow-hidden rounded-full bg-[#101014] text-[10px] font-semibold text-white ring-1 ring-[#101014]/10">
+				{avatarSrc ? (
+					<img
+						src={avatarSrc}
+						alt=""
+						className="size-full object-cover"
+						loading="lazy"
+						decoding="async"
+					/>
+				) : (
+					"O"
+				)}
 			</span>
-			<span className={compact ? "text-xs text-[#606069]" : "text-sm text-[#303036]"}>
+			<span
+				className={compact ? "text-xs text-[#606069]" : "text-sm text-[#303036]"}
+			>
 				{author}
 			</span>
 		</div>
