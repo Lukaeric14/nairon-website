@@ -1,9 +1,11 @@
 {
-	"name": "@nairon-website/config",
-	"type": "module",
-	"private": true,
-	"exports": {
-		"./tsconfig.base.json": "./tsconfig.base.json"
-	},
-	"files": ["tsconfig.base.json"]
+  "name": "@nairon-website/config",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./tsconfig.base.json": "./tsconfig.base.json"
+  },
+  "files": [
+    "tsconfig.base.json"
+  ]
 }

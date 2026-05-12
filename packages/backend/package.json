@@ -1,22 +1,22 @@
 {
-	"name": "@nairon-website/backend",
-	"type": "module",
-	"private": true,
-	"exports": {
-		"./auth": "./src/auth.ts"
-	},
-	"scripts": {
-		"dev": "cd ../.. && convex dev",
-		"deploy": "cd ../.. && convex deploy"
-	},
-	"dependencies": {
-		"convex": "catalog:",
-		"better-auth": "1.4.9",
-		"@convex-dev/better-auth": "^0.10.0",
-		"@convex-dev/react-query": "^0.1.0"
-	},
-	"devDependencies": {
-		"@types/node": "^22.0.0",
-		"typescript": "catalog:"
-	}
+  "name": "@nairon-website/backend",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./auth": "./src/auth.ts"
+  },
+  "scripts": {
+    "dev": "cd ../.. && convex dev",
+    "deploy": "cd ../.. && convex deploy"
+  },
+  "dependencies": {
+    "convex": "catalog:",
+    "better-auth": "1.4.9",
+    "@convex-dev/better-auth": "0.10.10",
+    "@convex-dev/react-query": "0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.8",
+    "typescript": "catalog:"
+  }
 }

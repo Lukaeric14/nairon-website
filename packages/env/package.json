@@ -1,15 +1,15 @@
 {
-	"name": "@nairon-website/env",
-	"type": "module",
-	"private": true,
-	"exports": {
-		".": "./src/index.ts"
-	},
-	"dependencies": {
-		"@t3-oss/env-core": "^0.12.0",
-		"zod": "catalog:"
-	},
-	"devDependencies": {
-		"typescript": "catalog:"
-	}
+  "name": "@nairon-website/env",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@t3-oss/env-core": "0.12.0",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
+  }
 }
