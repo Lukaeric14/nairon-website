@@ -95,6 +95,15 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 				type: "application/ld+json",
 				children: jsonLdService,
 			},
+			// Google Analytics (gtag.js) — GA4 property G-VKNPNM07L5
+			{
+				src: "https://www.googletagmanager.com/gtag/js?id=G-VKNPNM07L5",
+				async: true,
+			},
+			{
+				children:
+					"window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VKNPNM07L5');",
+			},
 		],
 	}),
 });
