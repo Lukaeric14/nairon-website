@@ -29,6 +29,21 @@ const jsonLdOrg = JSON.stringify(organizationJsonLd());
 const jsonLdSite = JSON.stringify(websiteJsonLd());
 const jsonLdService = JSON.stringify(serviceJsonLd());
 
+// Google Analytics (gtag.js) — GA4 property G-VKNPNM07L5.
+// Production-only so local dev traffic doesn't pollute the GA property.
+const gaScripts = import.meta.env.PROD
+	? [
+			{
+				src: "https://www.googletagmanager.com/gtag/js?id=G-VKNPNM07L5",
+				async: true,
+			},
+			{
+				children:
+					"window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VKNPNM07L5');",
+			},
+		]
+	: [];
+
 export const Route = createRootRouteWithContext<RouterContext>()({
 	component: RootComponent,
 	head: () => ({
@@ -95,15 +110,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 				type: "application/ld+json",
 				children: jsonLdService,
 			},
-			// Google Analytics (gtag.js) — GA4 property G-VKNPNM07L5
-			{
-				src: "https://www.googletagmanager.com/gtag/js?id=G-VKNPNM07L5",
-				async: true,
-			},
-			{
-				children:
-					"window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VKNPNM07L5');",
-			},
+			...gaScripts,
 		],
 	}),
 });
