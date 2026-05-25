@@ -15,6 +15,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PitchDeckRouteImport } from './routes/pitch-deck'
 import { Route as FluxRouteImport } from './routes/flux'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
+import { Route as CareersRouteImport } from './routes/careers'
 import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
@@ -51,6 +52,11 @@ const FluxRoute = FluxRouteImport.update({
 const CookiePolicyRoute = CookiePolicyRouteImport.update({
   id: '/cookie-policy',
   path: '/cookie-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AcceptableUseRoute = AcceptableUseRouteImport.update({
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/acceptable-use': typeof AcceptableUseRoute
+  '/careers': typeof CareersRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/flux': typeof FluxRoute
   '/pitch-deck': typeof PitchDeckRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/acceptable-use': typeof AcceptableUseRoute
+  '/careers': typeof CareersRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/flux': typeof FluxRoute
   '/pitch-deck': typeof PitchDeckRoute
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/acceptable-use': typeof AcceptableUseRoute
+  '/careers': typeof CareersRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/flux': typeof FluxRoute
   '/pitch-deck': typeof PitchDeckRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/acceptable-use'
+    | '/careers'
     | '/cookie-policy'
     | '/flux'
     | '/pitch-deck'
@@ -158,6 +168,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/acceptable-use'
+    | '/careers'
     | '/cookie-policy'
     | '/flux'
     | '/pitch-deck'
@@ -173,6 +184,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/acceptable-use'
+    | '/careers'
     | '/cookie-policy'
     | '/flux'
     | '/pitch-deck'
@@ -189,6 +201,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
   AcceptableUseRoute: typeof AcceptableUseRoute
+  CareersRoute: typeof CareersRoute
   CookiePolicyRoute: typeof CookiePolicyRoute
   FluxRoute: typeof FluxRoute
   PitchDeckRoute: typeof PitchDeckRoute
@@ -243,6 +256,13 @@ declare module '@tanstack/react-router' {
       path: '/cookie-policy'
       fullPath: '/cookie-policy'
       preLoaderRoute: typeof CookiePolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/acceptable-use': {
@@ -301,6 +321,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
   AcceptableUseRoute: AcceptableUseRoute,
+  CareersRoute: CareersRoute,
   CookiePolicyRoute: CookiePolicyRoute,
   FluxRoute: FluxRoute,
   PitchDeckRoute: PitchDeckRoute,
