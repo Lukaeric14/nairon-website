@@ -1,60 +1,64 @@
+/* Hallmark · genre: modern-minimal · macrostructure: grid-led role brief · theme: Nairon warm-light · nav: site · footer: site */
 import {
 	ArrowDown,
 	ArrowRight,
-	BadgeCheck,
 	BriefcaseBusiness,
 	Calendar,
 	Clock3,
-	Code2,
 	MapPin,
-	PenTool,
-	Sparkles,
 } from "lucide-react";
 import type { ElementType, ReactNode } from "react";
 import { DESIGN_ENGINEER_ROLE } from "@/data/careers";
+import {
+	Footer,
+	GridCell,
+	GridSection,
+	GridSystem,
+	Navbar,
+} from "@/components/landing";
+import { HireModal } from "@/components/landing/hire-modal";
+import { ModalProvider } from "@/components/landing/modal-provider";
 
 const mailtoHref =
 	"mailto:hello@naironai.com?subject=Design%20Engineer%20Internship%20Interest";
 
-function CareersNav() {
+function Pill({ children }: { children: ReactNode }) {
 	return (
-		<header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#050505]/80 backdrop-blur-xl">
-			<div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
-				<a href="/" aria-label="Nairon home" className="shrink-0">
-					<img
-						src="/nairon-logo.png"
-						alt="nairon."
-						width={600}
-						height={120}
-						className="h-7 w-auto"
-					/>
-				</a>
-
-				<nav className="hidden items-center gap-6 text-sm text-white/60 md:flex">
-					<a href="#role" className="transition-colors hover:text-white">
-						Role
-					</a>
-					<a href="#details" className="transition-colors hover:text-white">
-						Details
-					</a>
-					<a href="#apply" className="transition-colors hover:text-white">
-						Apply
-					</a>
-				</nav>
-
-				<a
-					href={mailtoHref}
-					className="inline-flex h-10 items-center gap-2 rounded-full bg-[#E8C878] px-4 text-sm font-semibold text-[#090806] transition-colors hover:bg-[#F4DA91]"
-				>
-					Get notified
-					<ArrowRight className="size-4" />
-				</a>
-			</div>
-		</header>
+		<span className="inline-flex h-8 items-center rounded-full border border-[#0C0C0C]/10 bg-white px-3 text-xs font-medium text-[#5C584F]">
+			{children}
+		</span>
 	);
 }
 
-function MetaItem({
+function PrimaryLink({ href, children }: { href: string; children: ReactNode }) {
+	return (
+		<a
+			href={href}
+			className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#0C0C0C] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#1A1916] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A96E]"
+		>
+			{children}
+		</a>
+	);
+}
+
+function SecondaryLink({
+	href,
+	children,
+}: {
+	href: string;
+	children: ReactNode;
+}) {
+	return (
+		<a
+			href={href}
+			className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#0C0C0C]/12 bg-white px-5 text-sm font-semibold text-[#1A1916] transition-colors hover:bg-[#0C0C0C]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A96E]"
+		>
+			{children}
+		</a>
+	);
+}
+
+function RoleMeta({
 	icon: Icon,
 	label,
 	value,
@@ -64,43 +68,40 @@ function MetaItem({
 	value: string;
 }) {
 	return (
-		<div className="border-t border-white/10 py-5">
-			<div className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-[0.16em] text-white/40">
-				<Icon className="size-4 text-[#E8C878]" />
-				{label}
+		<div className="flex items-start gap-3 border-t border-[#0C0C0C]/8 py-4 first:border-t-0">
+			<Icon className="mt-0.5 size-4 shrink-0 text-[#C9A96E]" />
+			<div>
+				<p className="text-[11px] font-medium uppercase tracking-[0.16em] text-[#5C584F]">
+					{label}
+				</p>
+				<p className="mt-1 text-sm font-medium text-[#1A1916]">{value}</p>
 			</div>
-			<p className="text-base font-medium text-white">{value}</p>
 		</div>
 	);
 }
 
-function RolePill({ children }: { children: ReactNode }) {
-	return (
-		<span className="inline-flex rounded-full border border-white/12 bg-white/[0.04] px-3 py-1 text-sm text-white/72">
-			{children}
-		</span>
-	);
-}
-
-function SectionHeading({
-	kicker,
+function SectionIntro({
+	label,
 	title,
 	children,
 }: {
-	kicker: string;
+	label: string;
 	title: string;
 	children?: ReactNode;
 }) {
 	return (
-		<div className="mx-auto mb-12 max-w-3xl text-center">
-			<p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-[#E8C878]">
-				{kicker}
-			</p>
-			<h2 className="text-4xl font-semibold tracking-[-0.04em] text-white md:text-6xl">
+		<div>
+			<div className="mb-4 flex items-center gap-3">
+				<span className="h-1.5 w-1.5 rounded-full bg-[#C9A96E]" />
+				<p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#5C584F]">
+					{label}
+				</p>
+			</div>
+			<h2 className="max-w-3xl text-3xl font-normal leading-tight tracking-[-0.03em] text-[#1A1916] md:text-[48px] md:leading-[54px]">
 				{title}
 			</h2>
 			{children && (
-				<p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/55 md:text-lg">
+				<p className="mt-5 max-w-2xl text-base leading-7 text-[#5C584F] md:text-lg">
 					{children}
 				</p>
 			)}
@@ -112,8 +113,8 @@ function BulletList({ items }: { items: string[] }) {
 	return (
 		<ul className="space-y-4">
 			{items.map((item) => (
-				<li key={item} className="flex gap-3 text-base leading-7 text-white/70">
-					<span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-[#E8C878]" />
+				<li key={item} className="flex gap-3 text-sm leading-6 text-[#5C584F] md:text-base md:leading-7">
+					<span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#C9A96E]" />
 					<span>{item}</span>
 				</li>
 			))}
@@ -121,20 +122,29 @@ function BulletList({ items }: { items: string[] }) {
 	);
 }
 
-function DetailSection({
-	title,
-	children,
+function ValueItem({
+	label,
+	text,
+	index,
 }: {
-	title: string;
-	children: ReactNode;
+	label: string;
+	text: string;
+	index: number;
 }) {
 	return (
-		<section className="border-t border-white/10 py-10 first:border-t-0 first:pt-0">
-			<h3 className="mb-5 text-2xl font-semibold tracking-[-0.03em] text-white">
-				{title}
-			</h3>
-			{children}
-		</section>
+		<div className="border-t border-[#0C0C0C]/8 py-6 first:border-t-0">
+			<div className="mb-3 flex items-center gap-3">
+				<span className="text-xs font-semibold text-[#C9A96E]">
+					{String(index + 1).padStart(2, "0")}
+				</span>
+				<h3 className="text-lg font-semibold tracking-[-0.02em] text-[#1A1916]">
+					{label}
+				</h3>
+			</div>
+			<p className="text-sm leading-6 text-[#5C584F] md:text-base md:leading-7">
+				{text}
+			</p>
+		</div>
 	);
 }
 
@@ -142,181 +152,158 @@ export function CareersPage() {
 	const role = DESIGN_ENGINEER_ROLE;
 
 	return (
-		<div className="min-h-screen bg-[#050505] font-inter text-white">
-			<CareersNav />
+		<ModalProvider>
+			<div className="min-h-screen bg-white font-inter text-[#1A1916]">
+				<Navbar />
 
-			<main>
-				<section className="relative isolate overflow-hidden px-5 pb-28 pt-36 md:px-8 md:pb-36 md:pt-44">
-					<div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(232,200,120,0.16),transparent_34%),linear-gradient(180deg,#0B0B0A_0%,#050505_72%)]" />
-					<div className="absolute inset-x-0 bottom-0 -z-10 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
+				<GridSystem className="pt-16 mt-12 md:mt-16">
+					<GridSection columns="7fr 5fr" border>
+						<GridCell borderRight className="px-6 py-12 md:px-12 md:py-20">
+							<div className="flex flex-wrap gap-2">
+								<Pill>{role.opening}</Pill>
+								<Pill>{role.duration}</Pill>
+								<Pill>{role.type}</Pill>
+							</div>
+							<h1 className="mt-8 max-w-4xl text-[48px] font-normal leading-[0.98] tracking-[-0.055em] text-[#1A1916] md:text-[84px]">
+								Design Engineer Internship
+							</h1>
+							<p className="mt-6 max-w-2xl text-base leading-7 text-[#5C584F] md:text-xl md:leading-8">
+								{role.summary}
+							</p>
+							<div className="mt-9 flex flex-col gap-3 sm:flex-row">
+								<PrimaryLink href={mailtoHref}>
+									Register interest
+									<ArrowRight className="size-4" />
+								</PrimaryLink>
+								<SecondaryLink href="#details">
+									Read the role
+									<ArrowDown className="size-4" />
+								</SecondaryLink>
+							</div>
+						</GridCell>
 
-					<div className="mx-auto max-w-5xl text-center">
-						<div className="mb-8 flex flex-wrap items-center justify-center gap-3">
-							<RolePill>{role.opening}</RolePill>
-							<RolePill>{role.duration}</RolePill>
-							<RolePill>{role.type}</RolePill>
-						</div>
-
-						<h1 className="text-5xl font-semibold leading-[0.95] tracking-[-0.06em] text-white md:text-7xl lg:text-8xl">
-							Design Engineer Internship
-						</h1>
-						<p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-white/60 md:text-xl">
-							{role.summary}
-						</p>
-
-						<div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-							<a
-								href="#role"
-								className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#080807] transition-colors hover:bg-[#E8C878]"
-							>
-								View role
-								<ArrowDown className="size-4" />
-							</a>
-							<a
-								href={mailtoHref}
-								className="inline-flex h-12 items-center gap-2 rounded-full border border-white/15 px-5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-							>
-								Register interest
-								<ArrowRight className="size-4" />
-							</a>
-						</div>
-					</div>
-				</section>
-
-				<section className="px-5 py-24 md:px-8" id="role">
-					<div className="mx-auto max-w-6xl">
-						<SectionHeading
-							kicker="Why Nairon"
-							title="For builders with taste."
-						>
-							This is not a traditional developer internship and it is not a
-							"write prompts all day" role. It is for someone who wants to make
-							AI-powered work feel clear, useful, and well designed.
-						</SectionHeading>
-
-						<div className="grid gap-4 md:grid-cols-3">
-							{role.whyNairon.map((item, index) => {
-								const icons = [Sparkles, Code2, BadgeCheck];
-								const Icon = icons[index] ?? Sparkles;
-
-								return (
-									<article
-										key={item.label}
-										className="rounded-lg border border-white/10 bg-white/[0.035] p-7"
-									>
-										<Icon className="mb-10 size-6 text-[#E8C878]" />
-										<h3 className="text-xl font-semibold tracking-[-0.03em] text-white">
-											{item.label}
-										</h3>
-										<p className="mt-4 text-base leading-7 text-white/55">
-											{item.text}
-										</p>
-									</article>
-								);
-							})}
-						</div>
-					</div>
-				</section>
-
-				<section className="border-y border-white/10 bg-[#10100F] px-5 py-20 md:px-8">
-					<div className="mx-auto grid max-w-6xl gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 md:grid-cols-4">
-						<MetaItem icon={Clock3} label="Duration" value={role.duration} />
-						<MetaItem icon={Calendar} label="Opening" value={role.opening} />
-						<MetaItem icon={MapPin} label="Location" value={role.location} />
-						<MetaItem icon={BriefcaseBusiness} label="Compensation" value={role.compensation} />
-					</div>
-				</section>
-
-				<section className="px-5 py-24 md:px-8" id="details">
-					<div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[320px_1fr]">
-						<aside className="lg:sticky lg:top-28 lg:self-start">
-							<div className="rounded-lg border border-white/10 bg-white/[0.035] p-6">
-								<p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E8C878]">
-									Open role
-								</p>
-								<h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">
-									{role.title}
-								</h2>
-								<p className="mt-3 text-sm leading-6 text-white/50">
+						<GridCell className="flex items-end px-6 py-10 md:px-10 md:py-12">
+							<div className="w-full">
+								<p className="mb-6 max-w-sm text-sm leading-6 text-[#5C584F]">
 									Applications open in {role.opening}. Compensation will be
 									announced before applications open.
 								</p>
-
-								<div className="mt-8">
-									<MetaItem icon={PenTool} label="Department" value={role.department} />
-									<MetaItem icon={BriefcaseBusiness} label="Type" value={role.type} />
-									<MetaItem icon={Clock3} label="Duration" value={role.duration} />
-									<MetaItem icon={MapPin} label="Location" value={role.location} />
-								</div>
+								<RoleMeta icon={Clock3} label="Duration" value={role.duration} />
+								<RoleMeta icon={Calendar} label="Opening" value={role.opening} />
+								<RoleMeta icon={MapPin} label="Location" value={role.location} />
+								<RoleMeta
+									icon={BriefcaseBusiness}
+									label="Compensation"
+									value={role.compensation}
+								/>
 							</div>
-						</aside>
+						</GridCell>
+					</GridSection>
 
-						<div>
-							<DetailSection title="What you'll work on here">
-								<BulletList items={role.work} />
-							</DetailSection>
+					<GridSection columns="4fr 8fr" border>
+						<GridCell borderRight className="px-6 py-10 md:px-12 md:py-16">
+							<SectionIntro label="Why Nairon" title="For builders with taste." />
+						</GridCell>
+						<GridCell className="px-6 py-8 md:px-12 md:py-12">
+							<p className="mb-8 max-w-2xl text-base leading-7 text-[#5C584F]">
+								This is not a traditional developer internship, and it is not a
+								write-prompts-all-day role. It is for someone who wants to make
+								AI-powered work feel clear, useful, and well designed.
+							</p>
+							<div>
+								{role.whyNairon.map((item, index) => (
+									<ValueItem
+										key={item.label}
+										label={item.label}
+										text={item.text}
+										index={index}
+									/>
+								))}
+							</div>
+						</GridCell>
+					</GridSection>
 
-							<DetailSection title="What you bring to the table">
-								<BulletList items={role.bring} />
-							</DetailSection>
-
-							<DetailSection title="Why you should join the engineering team">
-								<div className="space-y-5 text-base leading-7 text-white/70">
-									{role.teamReasons.map((reason) => (
-										<p key={reason}>{reason}</p>
-									))}
+					<div id="details" className="scroll-mt-24">
+						<GridSection columns="1fr 1fr" border>
+							<GridCell borderRight className="px-6 py-10 md:px-12 md:py-16">
+								<SectionIntro label="The work" title="What you'll work on here">
+									You will build at the point where product thinking, frontend
+									engineering, and AI-native workflows meet.
+								</SectionIntro>
+								<div className="mt-8">
+									<BulletList items={role.work} />
 								</div>
-							</DetailSection>
+							</GridCell>
+							<GridCell className="px-6 py-10 md:px-12 md:py-16">
+								<SectionIntro label="The profile" title="What you bring" />
+								<div className="mt-8">
+									<BulletList items={role.bring} />
+								</div>
+							</GridCell>
+						</GridSection>
+					</div>
 
-							<DetailSection title="Internship benefits">
+					<GridSection columns="5fr 7fr" border>
+						<GridCell borderRight className="px-6 py-10 md:px-12 md:py-16">
+							<SectionIntro label="Engineering team" title="Why join" />
+						</GridCell>
+						<GridCell className="px-6 py-10 md:px-12 md:py-16">
+							<div className="space-y-5 text-base leading-7 text-[#5C584F]">
+								{role.teamReasons.map((reason) => (
+									<p key={reason}>{reason}</p>
+								))}
+							</div>
+							<div className="mt-10 border-t border-[#0C0C0C]/8 pt-8">
+								<h3 className="mb-5 text-xl font-semibold tracking-[-0.02em]">
+									Internship benefits
+								</h3>
 								<BulletList items={role.benefits} />
-							</DetailSection>
+							</div>
+						</GridCell>
+					</GridSection>
 
-							<DetailSection title="When applications open">
-								<p className="mb-6 text-base leading-7 text-white/70">
-									We will ask for a short note, a portfolio or project links, and
-									answers to these prompts:
+					<div id="apply" className="scroll-mt-24">
+						<GridSection columns="4fr 8fr" border={false}>
+							<GridCell borderRight className="px-6 py-10 md:px-12 md:py-16">
+								<SectionIntro
+									label="Apply"
+									title="Want the first application link?"
+								/>
+								<div className="mt-8">
+									<PrimaryLink href={mailtoHref}>
+										Register interest
+										<ArrowRight className="size-4" />
+									</PrimaryLink>
+								</div>
+							</GridCell>
+							<GridCell className="px-6 py-10 md:px-12 md:py-16">
+								<p className="mb-6 max-w-2xl text-base leading-7 text-[#5C584F]">
+									When applications open, we will ask for a short note, a
+									portfolio or project links, and answers to these prompts:
 								</p>
-								<ol className="space-y-4">
+								<ol className="divide-y divide-[#0C0C0C]/8 border-y border-[#0C0C0C]/8">
 									{role.applicationPrompts.map((prompt, index) => (
 										<li
 											key={prompt}
-											className="flex gap-4 rounded-lg border border-white/10 bg-white/[0.03] p-4 text-base leading-7 text-white/70"
+											className="grid gap-3 py-5 md:grid-cols-[48px_1fr]"
 										>
-											<span className="font-semibold text-[#E8C878]">
+											<span className="text-sm font-semibold text-[#C9A96E]">
 												{index + 1}
 											</span>
-											<span>{prompt}</span>
+											<span className="text-base leading-7 text-[#1A1916]">
+												{prompt}
+											</span>
 										</li>
 									))}
 								</ol>
-							</DetailSection>
-						</div>
+							</GridCell>
+						</GridSection>
 					</div>
-				</section>
+				</GridSystem>
 
-				<section id="apply" className="px-5 pb-28 md:px-8">
-					<div className="mx-auto max-w-4xl rounded-lg border border-[#E8C878]/24 bg-[#E8C878] p-8 text-center text-[#090806] md:p-12">
-						<p className="text-xs font-semibold uppercase tracking-[0.2em] opacity-70">
-							Opening Summer 2026
-						</p>
-						<h2 className="mt-4 text-4xl font-semibold tracking-[-0.05em] md:text-6xl">
-							Want the first application link?
-						</h2>
-						<p className="mx-auto mt-5 max-w-2xl text-base leading-7 opacity-75 md:text-lg">
-							Send a short note now and we will reach out when the Design
-							Engineer internship opens.
-						</p>
-						<a
-							href={mailtoHref}
-							className="mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-[#080807] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#1B1A17]"
-						>
-							Register interest
-							<ArrowRight className="size-4" />
-						</a>
-					</div>
-				</section>
-			</main>
-		</div>
+				<Footer />
+			</div>
+			<HireModal />
+		</ModalProvider>
 	);
 }
