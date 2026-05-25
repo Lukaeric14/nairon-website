@@ -22,6 +22,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SignalsIndexRouteImport } from './routes/signals.index'
 import { Route as SignalsSolvingTheAgentMemoryProblemRouteImport } from './routes/signals/solving-the-agent-memory-problem'
 import { Route as ForRealEstateRouteImport } from './routes/for/real-estate'
+import { Route as AdminCareersRouteImport } from './routes/admin.careers'
 import { Route as ForRealEstatePropertyPdfRouteImport } from './routes/for/real-estate_.property-pdf'
 
 const UniverseRoute = UniverseRouteImport.update({
@@ -90,6 +91,11 @@ const ForRealEstateRoute = ForRealEstateRouteImport.update({
   path: '/for/real-estate',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminCareersRoute = AdminCareersRouteImport.update({
+  id: '/admin/careers',
+  path: '/admin/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ForRealEstatePropertyPdfRoute =
   ForRealEstatePropertyPdfRouteImport.update({
     id: '/for/real-estate_/property-pdf',
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
+  '/admin/careers': typeof AdminCareersRoute
   '/for/real-estate': typeof ForRealEstateRoute
   '/signals/solving-the-agent-memory-problem': typeof SignalsSolvingTheAgentMemoryProblemRoute
   '/signals/': typeof SignalsIndexRoute
@@ -124,6 +131,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
+  '/admin/careers': typeof AdminCareersRoute
   '/for/real-estate': typeof ForRealEstateRoute
   '/signals/solving-the-agent-memory-problem': typeof SignalsSolvingTheAgentMemoryProblemRoute
   '/signals': typeof SignalsIndexRoute
@@ -141,6 +149,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
+  '/admin/careers': typeof AdminCareersRoute
   '/for/real-estate': typeof ForRealEstateRoute
   '/signals/solving-the-agent-memory-problem': typeof SignalsSolvingTheAgentMemoryProblemRoute
   '/signals/': typeof SignalsIndexRoute
@@ -159,6 +168,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
+    | '/admin/careers'
     | '/for/real-estate'
     | '/signals/solving-the-agent-memory-problem'
     | '/signals/'
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
+    | '/admin/careers'
     | '/for/real-estate'
     | '/signals/solving-the-agent-memory-problem'
     | '/signals'
@@ -191,6 +202,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
+    | '/admin/careers'
     | '/for/real-estate'
     | '/signals/solving-the-agent-memory-problem'
     | '/signals/'
@@ -208,6 +220,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   UniverseRoute: typeof UniverseRoute
+  AdminCareersRoute: typeof AdminCareersRoute
   ForRealEstateRoute: typeof ForRealEstateRoute
   SignalsSolvingTheAgentMemoryProblemRoute: typeof SignalsSolvingTheAgentMemoryProblemRoute
   SignalsIndexRoute: typeof SignalsIndexRoute
@@ -307,6 +320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForRealEstateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/careers': {
+      id: '/admin/careers'
+      path: '/admin/careers'
+      fullPath: '/admin/careers'
+      preLoaderRoute: typeof AdminCareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/for/real-estate_/property-pdf': {
       id: '/for/real-estate_/property-pdf'
       path: '/for/real-estate/property-pdf'
@@ -328,6 +348,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   UniverseRoute: UniverseRoute,
+  AdminCareersRoute: AdminCareersRoute,
   ForRealEstateRoute: ForRealEstateRoute,
   SignalsSolvingTheAgentMemoryProblemRoute:
     SignalsSolvingTheAgentMemoryProblemRoute,

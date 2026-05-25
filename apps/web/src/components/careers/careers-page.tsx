@@ -8,6 +8,7 @@ import {
 	MapPin,
 } from "lucide-react";
 import type { ElementType, ReactNode } from "react";
+import { useState } from "react";
 import { DESIGN_ENGINEER_ROLE } from "@/data/careers";
 import {
 	Footer,
@@ -16,11 +17,9 @@ import {
 	GridSystem,
 	Navbar,
 } from "@/components/landing";
+import { CareerApplicationModal } from "./career-application-modal";
 import { HireModal } from "@/components/landing/hire-modal";
 import { ModalProvider } from "@/components/landing/modal-provider";
-
-const mailtoHref =
-	"mailto:hello@naironai.com?subject=Design%20Engineer%20Internship%20Interest";
 
 function Pill({ children }: { children: ReactNode }) {
 	return (
@@ -30,14 +29,21 @@ function Pill({ children }: { children: ReactNode }) {
 	);
 }
 
-function PrimaryLink({ href, children }: { href: string; children: ReactNode }) {
+function PrimaryButton({
+	onClick,
+	children,
+}: {
+	onClick: () => void;
+	children: ReactNode;
+}) {
 	return (
-		<a
-			href={href}
+		<button
+			type="button"
+			onClick={onClick}
 			className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#0C0C0C] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#1A1916] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A96E]"
 		>
 			{children}
-		</a>
+		</button>
 	);
 }
 
@@ -150,6 +156,7 @@ function ValueItem({
 
 export function CareersPage() {
 	const role = DESIGN_ENGINEER_ROLE;
+	const [applicationModalOpen, setApplicationModalOpen] = useState(false);
 
 	return (
 		<ModalProvider>
@@ -171,10 +178,10 @@ export function CareersPage() {
 								{role.summary}
 							</p>
 							<div className="mt-9 flex flex-col gap-3 sm:flex-row">
-								<PrimaryLink href={mailtoHref}>
+								<PrimaryButton onClick={() => setApplicationModalOpen(true)}>
 									Register interest
 									<ArrowRight className="size-4" />
-								</PrimaryLink>
+								</PrimaryButton>
 								<SecondaryLink href="#details">
 									Read the role
 									<ArrowDown className="size-4" />
@@ -270,10 +277,10 @@ export function CareersPage() {
 									title="Want the first application link?"
 								/>
 								<div className="mt-8">
-									<PrimaryLink href={mailtoHref}>
+									<PrimaryButton onClick={() => setApplicationModalOpen(true)}>
 										Register interest
 										<ArrowRight className="size-4" />
-									</PrimaryLink>
+									</PrimaryButton>
 								</div>
 							</GridCell>
 							<GridCell className="px-6 py-10 md:px-12 md:py-16">
@@ -303,6 +310,10 @@ export function CareersPage() {
 
 				<Footer />
 			</div>
+			<CareerApplicationModal
+				open={applicationModalOpen}
+				onOpenChange={setApplicationModalOpen}
+			/>
 			<HireModal />
 		</ModalProvider>
 	);

@@ -77,6 +77,20 @@ export default defineSchema({
 		updatedAt: v.number(),
 	}).index("by_email", ["email"]),
 
+	// Career role applications
+	careerApplications: defineTable({
+		roleId: v.string(),
+		roleTitle: v.string(),
+		name: v.string(),
+		email: v.string(),
+		portfolioUrl: v.string(),
+		source: v.optional(v.string()),
+		createdAt: v.number(),
+		updatedAt: v.number(),
+	})
+		.index("by_email_role", ["email", "roleId"])
+		.index("by_created_at", ["createdAt"]),
+
 	// Property PDF generation jobs
 	pdfJobs: defineTable({
 		zillowUrl: v.string(),

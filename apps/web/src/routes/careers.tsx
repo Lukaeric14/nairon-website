@@ -8,7 +8,7 @@ export const Route = createFileRoute("/careers")({
 		seoHead({
 			title: "Careers at Nairon — Design Engineer Internship",
 			description:
-				"Apply interest for Nairon's Summer 2026 Design Engineer internship, a 3-month role for frontend builders with strong UI taste and AI-native product instincts.",
+				"Register interest for Nairon's Summer 2026 Design Engineer internship, a 3-month role for building intuitive interfaces where agents and humans work well together.",
 			path: "/careers",
 		}),
 });
