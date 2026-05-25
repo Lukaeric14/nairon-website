@@ -38,7 +38,7 @@ export const DESIGN_ENGINEER_ROLE: CareerRole = {
 		},
 		{
 			label: "Slope over credentials",
-			text: "We care about learning velocity, taste, curiosity, and what you have actually built more than a perfect CV.",
+			text: "We care about learning velocity, taste, curiosity, and what you have actually built more than a perfect CV. This role is based on how effective you are with agents and how strong your UI taste is for human-AI interactions.",
 		},
 	],
 	work: [
