@@ -1,14 +1,69 @@
 ---
 name: grill-with-docs
-description: Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. Use when user wants to stress-test a plan against their project's language and documented decisions.
-disable-model-invocation: true
+description: Default grilling skill for coding work in an existing repo/codebase. Challenges the plan against code, sharpens shared domain language, and updates CONTEXT.md/ADRs inline. Prefer over grill-me whenever durable repo context, domain terms, implementation behavior, or architectural decisions matter.
 ---
+
+<what-to-do>
 
 Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
 
 Ask the questions one at a time, waiting for feedback on each question before continuing.
 
 If a question can be answered by exploring the codebase, explore the codebase instead.
+
+Before asking any real question, scan the repository to confirm current behavior, implementation shape, existing glossary terms, and relevant ADRs.
+
+That scan should:
+- identify the files, modules, routes, components, schemas, tests, context docs, or ADRs most relevant to the topic
+- confirm what the system appears to do today rather than relying on assumptions
+- note gaps where behavior, terminology, or decision history is unclear
+
+Do not start grilling from pure speculation if the repo can answer part of the question first.
+
+Before the first real question, estimate:
+- total questions currently expected
+- estimated time to finish the grilling
+
+Also briefly summarize what you found in the codebase, glossary, and ADRs that is most relevant to the grilling.
+
+When you start asking questions, every question must include progress in this format:
+
+```text
+Question: 12 / 23
+Estimated time left: ~6 minutes
+```
+
+If the decision tree expands and the total question count changes, say so explicitly and update the progress numbers rather than pretending the original estimate was fixed.
+
+Along with each question, strongly prefer including a small diagram that helps the developer visualize the options. Use either:
+- a simple ASCII diagram
+- a compact flow diagram
+- a branch diagram showing the current decision and downstream consequences
+
+Keep diagrams tight and decision-oriented. They should clarify the choice, not decorate the answer.
+
+For every question that relates to existing code or docs, include a short context block that names the relevant file and shows a short snippet. Keep snippets short and only include the minimum needed to orient the developer.
+
+Use a structure like:
+
+```text
+Question: 4 / 17
+Estimated time left: ~5 minutes
+
+Context: src/billing/checkout.ts
+Snippet:
+  if (plan === "pro") {
+    return createStripeCheckoutSession(...)
+  }
+```
+
+If the question is tied to multiple implementation or documentation points, mention the primary file first and optionally list 1-2 secondary files, tests, context docs, or ADRs.
+
+Each question should make it obvious which part of the codebase or domain model it is about. Name the file or doc, the behavior or term, and the design tension being resolved.
+
+</what-to-do>
+
+<supporting-info>
 
 ## Domain awareness
 
@@ -68,7 +123,7 @@ When the user states how something works, check whether the code agrees. If you 
 
 When a term is resolved, update `CONTEXT.md` right there. Don't batch these up — capture them as they happen. Use the format in [CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md).
 
-Don't couple `CONTEXT.md` to implementation details. Only include terms that are meaningful to domain experts.
+`CONTEXT.md` should be totally devoid of implementation details. Do not treat `CONTEXT.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.
 
 ### Offer ADRs sparingly
 
@@ -79,3 +134,5 @@ Only offer to create an ADR when all three are true:
 3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
 
 If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).
+
+</supporting-info>

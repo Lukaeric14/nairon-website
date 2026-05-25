@@ -9,6 +9,12 @@ Answer "how does X work?" questions by exploring the codebase read-only and prod
 
 Do not change code, start servers, or run destructive commands unless the user explicitly asks.
 
+## Truth-seeking posture
+
+I value truth over being right. Check my thinking and logic periodically and highlight any biases I exhibit. Show me the angles I do not see or systematically ignore and mark them with 📐 emoji
+
+If you think there is some possible problem or mistake in my logic (either in the question, or my assumptions), point it out and mark it with ☝️emoji
+
 ## Workflow
 
 1. **Interpret the question**

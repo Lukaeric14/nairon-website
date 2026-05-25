@@ -54,7 +54,7 @@ description: Brief description of capability. Use when [specific triggers].
 
 ## Advanced features
 
-[Link to a separate reference file when needed, for example `REFERENCE.md`]
+[Link to separate files: See [REFERENCE.md](REFERENCE.md)]
 ```
 
 ## Description Requirements

@@ -1,11 +1,11 @@
 ---
 name: scaffold-exercises
-description: Create exercise directory structures with sections, problems, solutions, and explainers that validate cleanly in the current repo. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.
+description: Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.
 ---
 
 # Scaffold Exercises
 
-Create exercise directory structures with sections, problems, solutions, and explainers, then validate them against the current repo's own checks.
+Create exercise directory structures that pass `pnpm ai-hero-cli internal lint`, then commit with `git commit`.
 
 ## Directory naming
 
@@ -46,20 +46,20 @@ If the subfolder has code, it also needs a `main.ts` (>1 line). But for stubs, a
 1. **Parse the plan** - extract section names, exercise names, and variant types
 2. **Create directories** - `mkdir -p` for each path
 3. **Create stub readmes** - one `readme.md` per variant folder with a title
-4. **Run validation** - use the repo's existing lint or validation command if one exists
-5. **Fallback validation** - if no validation command exists, manually confirm the required structure below
-6. **Fix any errors** - iterate until validation passes
+4. **Run lint** - `pnpm ai-hero-cli internal lint` to validate
+5. **Fix any errors** - iterate until lint passes
 
-## Validation rules summary
+## Lint rules summary
 
-At minimum, verify:
+The linter (`pnpm ai-hero-cli internal lint`) checks:
 
 - Each exercise has subfolders (`problem/`, `solution/`, `explainer/`)
 - At least one of `problem/`, `explainer/`, or `explainer.1/` exists
 - `readme.md` exists and is non-empty in the primary subfolder
 - No `.gitkeep` files
 - No `speaker-notes.md` files
-- Links in readmes resolve within the repo
+- No broken links in readmes
+- No `pnpm run exercise` commands in readmes
 - `main.ts` required per subfolder unless it's readme-only
 
 ## Moving/renaming exercises
@@ -68,7 +68,7 @@ When renumbering or moving exercises:
 
 1. Use `git mv` (not `mv`) to rename directories - preserves git history
 2. Update the numeric prefix to maintain order
-3. Re-run validation after moves
+3. Re-run lint after moves
 
 Example:
 
@@ -104,5 +104,3 @@ exercises/05-memory-skill-building/05.02-short-term-memory/problem/readme.md -> 
 exercises/05-memory-skill-building/05.02-short-term-memory/solution/readme.md -> "# Short-term Memory"
 exercises/05-memory-skill-building/05.03-long-term-memory/explainer/readme.md -> "# Long-term Memory"
 ```
-
-Do not auto-commit unless the user explicitly asked for a commit as part of the scaffolding task.

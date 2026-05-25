@@ -1,102 +1,88 @@
 ---
 name: feature-deep-dive
-description: Perform a technical end-to-end deep dive on one specific feature, grill the design, and produce a debug-grade map of how it actually works. Use when the user wants to deeply understand one subsystem, trace a feature from UI to data to jobs to providers, stress-test assumptions, or create a technical explainer for a single area.
+description: Build a code-verified mental model of one feature or subsystem. Use before owning, debugging, changing, reviewing, or redesigning a complex area that needs a technical trace from entry point to data, jobs, providers, failures, and tests.
 ---
 
 # Feature Deep Dive
 
-Take one feature or subsystem and understand it deeply enough to debug, change, review, or redesign it with confidence. This is the technical layer that comes after a high-level tour.
+Build debug-grade understanding of one feature or subsystem. Do not change code unless the user asks.
 
-Do not change code unless the user explicitly asks. Start with understanding.
+One responsibility: make a developer understand one area well enough to debug/change it without guessing.
 
-## Quick Start
+## Scope
 
-1. **Choose one feature only**
-   - Narrow the scope to a single vertical slice or subsystem.
-   - Examples:
-     - invite claim
-     - promotion scheduling
-     - content generation callback flow
-     - search ranking
+Choose one vertical slice or subsystem only: invite claim, promotion scheduling, content generation callback flow, search ranking, billing checkout, etc.
 
-2. **Choose the doc home**
-   - If the repo has a convention, follow it.
-   - Otherwise create `docs/feature-deep-dives/<feature-slug>.md`.
+If the user needs the whole-system map first, use `rebuild-mental-model`. If this trace changes the global model, update or hand off to `rebuild-mental-model`.
 
-3. **Frame the feature before tracing**
-   - user goal
-   - trigger
-   - success condition
-   - core business object(s)
-   - boundaries
+## Output
 
-## Deep-Dive Workflow
+Follow repo conventions first. If none exist, create/update:
 
-1. **Trace end-to-end**
-   - UI or entry point
-   - API or command boundary
-   - services/helpers
-   - persistence
-   - jobs/events/background work
-   - external integrations
-   - tests and fixtures
+- `docs/feature-deep-dives/<feature-slug>.md`
+- `CONTEXT.md` if domain language changes and it exists; otherwise `docs/ubiquitous-language.md`
 
-2. **Build the technical map**
-   - runtime path
-   - state machine
-   - important types/contracts
-   - invariants and assumptions
-   - hidden branches
-   - retries, idempotency, race conditions
-   - permissions and role gates
-   - observability and debug handles
+Never include secrets or env values. Provider/env var names are fine.
 
-3. **Grill the feature**
-   - Why is state owned here and not elsewhere?
-   - What is the source of truth?
-   - What happens on duplicate requests?
-   - What happens on partial failure?
-   - What behavior is legacy/backcompat?
-   - What manual ops step exists because code is weak?
-   - What tests would catch the most important regressions?
+## Workflow
 
-4. **Separate intended from accidental behavior**
-   - intended design
-   - current actual behavior
-   - bugs
-   - product debt
-   - risky ambiguity
+1. **Frame** - user/business goal, trigger, success condition, core object/state, in/out boundaries.
+2. **Trace** - entry point, API/service/helper path, persistence/source of truth, jobs/events, providers/webhooks, permissions, tests.
+3. **Pressure-test** - state transitions, idempotency, partial failure, retries, races, legacy behavior, observability, first debug handles.
+4. **Update docs** - write the feature doc, update ubiquitous language when terms drift, record global architecture impacts.
+5. **Teach/verify** - explain layer by layer, ask for restatement when useful, correct gaps before calling the area understood.
 
-## Recommended Output
+## Feature Doc Contract
 
-Use sections like:
+- Verification coverage
+- Overview
+- Actor and boundary map
+- Runtime path
+- State transitions
+- Source of truth
+- Providers and external effects
+- Permissions and security notes
+- Failure modes, retries, and idempotency
+- Observability/debug playbook
+- Test surface
+- Global architecture impact
+- Open questions and follow-ups
+- Quick recall
 
-- overview
-- actor and boundary map
-- runtime path
-- state transitions
-- contracts and important types
-- failure modes and retries
-- permissions and security notes
-- observability/debug playbook
-- test surface
-- questions to ask the team
-- top risks / recommended fixes
+## Verification Labels
 
-## Writing Rules
+Mark claims explicitly:
 
-- Be technical, but organized.
-- Cite specific files, functions, tables, and tests when useful.
-- Prefer diagrams and state tables over long prose.
-- Do not confuse "how it should work" with "what the code does today".
-- When unsure, verify with code rather than infer.
+- `verified` - confirmed from code/config/schema/tests.
+- `partial` - traced but not end-to-end.
+- `not verified` - plausible or doc-derived only.
+- `drift` - docs and code disagree.
+
+Never present intended future behavior as current code.
+
+## Quick Recall Contract
+
+End every feature doc with:
+
+```md
+## Quick Recall
+- What this feature does:
+- Main trigger:
+- Source of truth:
+- Top files/boundaries:
+- Top tables/models:
+- Providers:
+- First debug checks:
+- Biggest trap:
+- Global architecture impact:
+```
 
 ## Completion Standard
 
-The deep dive should let a strong engineer answer:
+Before finishing:
 
-- What exactly happens, in order?
-- Which files and boundaries matter most?
-- What can fail, race, or drift?
-- Which assumptions are safe vs shaky?
-- What should be tested before changing it?
+- One feature doc is updated.
+- Verification labels are present.
+- Ubiquitous language is updated or explicitly unchanged.
+- Debug handles and tests are named.
+- Global architecture impacts are listed, even when the answer is `None`.
