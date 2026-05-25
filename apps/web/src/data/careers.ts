@@ -6,7 +6,6 @@ export interface CareerRole {
 	duration: string;
 	location: string;
 	opening: string;
-	compensation: string;
 	summary: string;
 	whyNairon: Array<{
 		label: string;
@@ -16,7 +15,6 @@ export interface CareerRole {
 	bring: string[];
 	teamReasons: string[];
 	benefits: string[];
-	applicationPrompts: string[];
 }
 
 export const DESIGN_ENGINEER_ROLE: CareerRole = {
@@ -27,7 +25,6 @@ export const DESIGN_ENGINEER_ROLE: CareerRole = {
 	duration: "3 months",
 	location: "Remote / Dubai overlap",
 	opening: "Summer 2026",
-	compensation: "TBD",
 	summary:
 		"A 3-month internship for frontend builders who care about making agents and humans interact through interfaces that feel intuitive, useful, and trustworthy.",
 	whyNairon: [
@@ -71,11 +68,6 @@ export const DESIGN_ENGINEER_ROLE: CareerRole = {
 		"Founder and engineering mentorship",
 		"Hands-on AI tooling and workflow design",
 		"Portfolio-worthy shipped work",
-		"Compensation to be announced before applications open",
-	],
-	applicationPrompts: [
-		"How you would make an agent-human workflow easier to understand",
-		"Something you have built, automated, designed, or improved",
-		"A product or interface you think is beautifully designed, and why",
+		"Direct feedback and review cycles",
 	],
 };

@@ -2,7 +2,6 @@
 import {
 	ArrowDown,
 	ArrowRight,
-	BriefcaseBusiness,
 	Calendar,
 	Clock3,
 	MapPin,
@@ -192,17 +191,12 @@ export function CareersPage() {
 						<GridCell className="flex items-end px-6 py-10 md:px-10 md:py-12">
 							<div className="w-full">
 								<p className="mb-6 max-w-sm text-sm leading-6 text-[#5C584F]">
-									Applications open in {role.opening}. Compensation will be
-									announced before applications open.
+									Applications open in {role.opening}. Register interest and we
+									will review portfolios as the internship gets closer.
 								</p>
 								<RoleMeta icon={Clock3} label="Duration" value={role.duration} />
 								<RoleMeta icon={Calendar} label="Opening" value={role.opening} />
 								<RoleMeta icon={MapPin} label="Location" value={role.location} />
-								<RoleMeta
-									icon={BriefcaseBusiness}
-									label="Compensation"
-									value={role.compensation}
-								/>
 							</div>
 						</GridCell>
 					</GridSection>
@@ -272,10 +266,7 @@ export function CareersPage() {
 					<div id="apply" className="scroll-mt-24">
 						<GridSection columns="4fr 8fr" border={false}>
 							<GridCell borderRight className="px-6 py-10 md:px-12 md:py-16">
-								<SectionIntro
-									label="Apply"
-									title="Want the first application link?"
-								/>
+								<SectionIntro label="Apply" title="Register interest" />
 								<div className="mt-8">
 									<PrimaryButton onClick={() => setApplicationModalOpen(true)}>
 										Register interest
@@ -284,25 +275,10 @@ export function CareersPage() {
 								</div>
 							</GridCell>
 							<GridCell className="px-6 py-10 md:px-12 md:py-16">
-								<p className="mb-6 max-w-2xl text-base leading-7 text-[#5C584F]">
-									When applications open, we will ask for a short note, a
-									portfolio or project links, and answers to these prompts:
+								<p className="max-w-2xl text-base leading-7 text-[#5C584F] md:text-lg">
+									Leave your name, email, and portfolio link. We will review the
+									work and reach out when the Summer 2026 internship opens.
 								</p>
-								<ol className="divide-y divide-[#0C0C0C]/8 border-y border-[#0C0C0C]/8">
-									{role.applicationPrompts.map((prompt, index) => (
-										<li
-											key={prompt}
-											className="grid gap-3 py-5 md:grid-cols-[48px_1fr]"
-										>
-											<span className="text-sm font-semibold text-[#C9A96E]">
-												{index + 1}
-											</span>
-											<span className="text-base leading-7 text-[#1A1916]">
-												{prompt}
-											</span>
-										</li>
-									))}
-								</ol>
 							</GridCell>
 						</GridSection>
 					</div>
