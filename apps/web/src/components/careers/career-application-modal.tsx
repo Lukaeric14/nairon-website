@@ -187,7 +187,8 @@ export function CareerApplicationModal({
 									<p className="text-xs leading-5 text-[#5C584F]">
 										No resume needed right now. We are primarily looking for
 										evidence of product taste, frontend craft, and thoughtful
-										agent-human interface work.
+										agent-human interface work. Shortlisted candidates will get a
+										focused take-home project.
 									</p>
 								</form>
 							)}

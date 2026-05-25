@@ -278,6 +278,8 @@ export function CareersPage() {
 								<p className="max-w-2xl text-base leading-7 text-[#5C584F] md:text-lg">
 									Leave your name, email, and portfolio link. We will review the
 									work and reach out when the Summer 2026 internship opens.
+									Shortlisted candidates will get a focused take-home project
+									designed to be built in a few hours.
 								</p>
 							</GridCell>
 						</GridSection>
