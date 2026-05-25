@@ -23,15 +23,17 @@ export function CareerApplicationModal({
 		name: "",
 		email: "",
 		portfolioUrl: "",
+		toolingWorkflow: "",
 	});
 
 	const update =
-		(field: keyof typeof form) => (event: ChangeEvent<HTMLInputElement>) =>
+		(field: keyof typeof form) =>
+		(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
 			setForm((current) => ({ ...current, [field]: event.target.value }));
 
 	function reset() {
 		setSubmitted(false);
-		setForm({ name: "", email: "", portfolioUrl: "" });
+		setForm({ name: "", email: "", portfolioUrl: "", toolingWorkflow: "" });
 	}
 
 	function handleOpenChange(nextOpen: boolean) {
@@ -77,7 +79,7 @@ export function CareerApplicationModal({
 		<DialogPrimitive.Root open={open} onOpenChange={handleOpenChange}>
 			<DialogPrimitive.Portal>
 				<DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-[#0C0C0C]/55 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-				<DialogPrimitive.Content className="fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] max-w-[760px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-[#0C0C0C]/10 bg-[#F7F5EF] text-[#1A1916] shadow-2xl duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
+				<DialogPrimitive.Content className="fixed left-1/2 top-1/2 z-50 max-h-[calc(100vh-2rem)] w-[calc(100%-2rem)] max-w-[760px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl border border-[#0C0C0C]/10 bg-[#F7F5EF] text-[#1A1916] shadow-2xl duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
 					<div className="grid md:grid-cols-[0.85fr_1.15fr]">
 						<div className="border-b border-[#0C0C0C]/10 bg-white px-6 py-7 md:border-b-0 md:border-r md:px-8 md:py-9">
 							<DialogPrimitive.Title className="text-2xl font-normal leading-tight tracking-[-0.035em] md:text-4xl">
@@ -169,6 +171,20 @@ export function CareerApplicationModal({
 										/>
 									</label>
 
+									<label className="block">
+										<span className="mb-1.5 block text-xs text-[#5C584F]">
+											How do you build with coding agents? *
+										</span>
+										<textarea
+											required
+											value={form.toolingWorkflow}
+											onChange={update("toolingWorkflow")}
+											placeholder="Tell us what coding agents, models, editors, review loops, and workflows you use. We are looking for agent-first builders who know how to direct, inspect, and ship with AI."
+											className={`${inputClass} min-h-28 resize-y`}
+											disabled={submitting}
+										/>
+									</label>
+
 									<button
 										type="submit"
 										disabled={submitting}
@@ -187,8 +203,9 @@ export function CareerApplicationModal({
 									<p className="text-xs leading-5 text-[#5C584F]">
 										No resume needed right now. We are primarily looking for
 										evidence of product taste, frontend craft, and thoughtful
-										agent-human interface work. Shortlisted candidates will get a
-										focused take-home project.
+										agent-human interface work. Tell us how you use agents,
+										because agent-first building is core to how Nairon works.
+										Shortlisted candidates will get a focused take-home project.
 									</p>
 								</form>
 							)}

@@ -84,6 +84,7 @@ export default defineSchema({
 		name: v.string(),
 		email: v.string(),
 		portfolioUrl: v.string(),
+		toolingWorkflow: v.optional(v.string()),
 		source: v.optional(v.string()),
 		createdAt: v.number(),
 		updatedAt: v.number(),

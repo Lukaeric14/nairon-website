@@ -8,6 +8,7 @@ interface CareerApplicationData {
 	name: string;
 	email: string;
 	portfolioUrl: string;
+	toolingWorkflow: string;
 	source?: string;
 }
 
@@ -42,6 +43,7 @@ function normalizeApplication(data: CareerApplicationData) {
 		name: data.name.trim(),
 		email: data.email.trim().toLowerCase(),
 		portfolioUrl: data.portfolioUrl.trim(),
+		toolingWorkflow: data.toolingWorkflow.trim(),
 		source: data.source?.trim() || "careers-page",
 	};
 
@@ -50,7 +52,8 @@ function normalizeApplication(data: CareerApplicationData) {
 		!normalized.roleTitle ||
 		!normalized.name ||
 		!normalized.email ||
-		!normalized.portfolioUrl
+		!normalized.portfolioUrl ||
+		!normalized.toolingWorkflow
 	) {
 		throw new Error("Missing required fields");
 	}
@@ -97,6 +100,10 @@ async function notifySlack(application: CareerApplicationData, alreadyExists: bo
 					{
 						type: "mrkdwn",
 						text: `*Portfolio:*\n${application.portfolioUrl}`,
+					},
+					{
+						type: "mrkdwn",
+						text: `*AI workflow:*\n${application.toolingWorkflow}`,
 					},
 				],
 			},

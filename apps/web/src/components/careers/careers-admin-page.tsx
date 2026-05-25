@@ -9,6 +9,7 @@ interface CareerApplicationRecord {
 	name: string;
 	email: string;
 	portfolioUrl: string;
+	toolingWorkflow?: string;
 	source?: string;
 	createdAt: number;
 	updatedAt: number;
@@ -111,7 +112,8 @@ export function CareersAdminPage() {
 						</h1>
 						<p className="mt-4 max-w-xl text-base leading-7 text-[#5C584F]">
 							Review candidates by portfolio quality, interface taste, and
-							evidence that they can design for agent-human collaboration.
+							evidence that they can design for agent-human collaboration. Pay
+							close attention to how they use coding agents and models.
 						</p>
 					</div>
 
@@ -218,6 +220,15 @@ export function CareersAdminPage() {
 									<p className="text-sm text-[#5C584F]">
 										{application.source ?? "careers-page"}
 									</p>
+
+									<div className="lg:col-span-4">
+										<p className="mb-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-[#8A6418]">
+											AI tooling workflow
+										</p>
+										<p className="max-w-4xl whitespace-pre-wrap text-sm leading-6 text-[#5C584F]">
+											{application.toolingWorkflow || "Not provided"}
+										</p>
+									</div>
 								</article>
 							))}
 						</div>

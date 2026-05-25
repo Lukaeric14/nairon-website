@@ -27,6 +27,7 @@ export const submitApplication = mutation({
 		name: v.string(),
 		email: v.string(),
 		portfolioUrl: v.string(),
+		toolingWorkflow: v.string(),
 		source: v.optional(v.string()),
 	},
 	handler: async (ctx, args) => {
@@ -35,8 +36,16 @@ export const submitApplication = mutation({
 		const name = args.name.trim();
 		const email = normalizeEmail(args.email);
 		const portfolioUrl = args.portfolioUrl.trim();
+		const toolingWorkflow = args.toolingWorkflow.trim();
 
-		if (!roleId || !roleTitle || !name || !email || !portfolioUrl) {
+		if (
+			!roleId ||
+			!roleTitle ||
+			!name ||
+			!email ||
+			!portfolioUrl ||
+			!toolingWorkflow
+		) {
 			throw new Error("Missing required fields");
 		}
 
@@ -68,6 +77,7 @@ export const submitApplication = mutation({
 				roleTitle,
 				name,
 				portfolioUrl,
+				toolingWorkflow,
 				source: args.source,
 				updatedAt: now,
 			});
@@ -81,6 +91,7 @@ export const submitApplication = mutation({
 			name,
 			email,
 			portfolioUrl,
+			toolingWorkflow,
 			source: args.source,
 			createdAt: now,
 			updatedAt: now,
