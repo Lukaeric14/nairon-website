@@ -18,8 +18,8 @@ if [[ ! -d node_modules ]]; then
   bun install
 fi
 if [[ ! -f apps/web/.env.local ]]; then
-  echo "==> Env missing; creating env files"
-  bash scripts/setup-env.sh
+  echo "==> Env missing; pulling from Vercel"
+  bash scripts/pull-env-vercel.sh || bash scripts/setup-env.sh
 fi
 
 echo "==> Starting nairon-website frontend on http://127.0.0.1:$PORT"
