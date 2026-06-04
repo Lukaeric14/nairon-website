@@ -13,6 +13,7 @@ import { Route as UniverseRouteImport } from './routes/universe'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PitchDeckRouteImport } from './routes/pitch-deck'
+import { Route as IsoLabRouteImport } from './routes/iso-lab'
 import { Route as FluxRouteImport } from './routes/flux'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as CareersRouteImport } from './routes/careers'
@@ -43,6 +44,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const PitchDeckRoute = PitchDeckRouteImport.update({
   id: '/pitch-deck',
   path: '/pitch-deck',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IsoLabRoute = IsoLabRouteImport.update({
+  id: '/iso-lab',
+  path: '/iso-lab',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FluxRoute = FluxRouteImport.update({
@@ -110,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/careers': typeof CareersRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/flux': typeof FluxRoute
+  '/iso-lab': typeof IsoLabRoute
   '/pitch-deck': typeof PitchDeckRoute
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByTo {
   '/careers': typeof CareersRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/flux': typeof FluxRoute
+  '/iso-lab': typeof IsoLabRoute
   '/pitch-deck': typeof PitchDeckRoute
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -145,6 +153,7 @@ export interface FileRoutesById {
   '/careers': typeof CareersRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/flux': typeof FluxRoute
+  '/iso-lab': typeof IsoLabRoute
   '/pitch-deck': typeof PitchDeckRoute
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -164,6 +173,7 @@ export interface FileRouteTypes {
     | '/careers'
     | '/cookie-policy'
     | '/flux'
+    | '/iso-lab'
     | '/pitch-deck'
     | '/privacy'
     | '/terms-and-conditions'
@@ -181,6 +191,7 @@ export interface FileRouteTypes {
     | '/careers'
     | '/cookie-policy'
     | '/flux'
+    | '/iso-lab'
     | '/pitch-deck'
     | '/privacy'
     | '/terms-and-conditions'
@@ -198,6 +209,7 @@ export interface FileRouteTypes {
     | '/careers'
     | '/cookie-policy'
     | '/flux'
+    | '/iso-lab'
     | '/pitch-deck'
     | '/privacy'
     | '/terms-and-conditions'
@@ -216,6 +228,7 @@ export interface RootRouteChildren {
   CareersRoute: typeof CareersRoute
   CookiePolicyRoute: typeof CookiePolicyRoute
   FluxRoute: typeof FluxRoute
+  IsoLabRoute: typeof IsoLabRoute
   PitchDeckRoute: typeof PitchDeckRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
@@ -255,6 +268,13 @@ declare module '@tanstack/react-router' {
       path: '/pitch-deck'
       fullPath: '/pitch-deck'
       preLoaderRoute: typeof PitchDeckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/iso-lab': {
+      id: '/iso-lab'
+      path: '/iso-lab'
+      fullPath: '/iso-lab'
+      preLoaderRoute: typeof IsoLabRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/flux': {
@@ -344,6 +364,7 @@ const rootRouteChildren: RootRouteChildren = {
   CareersRoute: CareersRoute,
   CookiePolicyRoute: CookiePolicyRoute,
   FluxRoute: FluxRoute,
+  IsoLabRoute: IsoLabRoute,
   PitchDeckRoute: PitchDeckRoute,
   PrivacyRoute: PrivacyRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
