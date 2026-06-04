@@ -27,7 +27,7 @@
   "devDependencies": {
     "@react-grab/claude-code": "0.1.29",
     "convex": "catalog:",
-    "react-grab": "0.1.29",
+    "react-grab": "0.1.44",
     "turbo": "2.8.3",
     "typescript": "catalog:"
   },

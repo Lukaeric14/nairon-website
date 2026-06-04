@@ -33,6 +33,24 @@
 	font-display: swap;
 }
 
+/* Geist — new design-system typeface (pulled from Hive). Variable woff2,
+   weights 100–900; the system only ever uses 400 (regular) and 500 (medium). */
+@font-face {
+	font-family: "Geist";
+	src: url("/fonts/geist-variable.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Geist Mono";
+	src: url("/fonts/geist-mono-variable.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -93,6 +111,34 @@
 	--font-body: "Inter", sans-serif;
 	--font-sans: "Inter", sans-serif;
 
+	/* New design system (Hive-derived): Geist sans + mono */
+	--font-geist: "Geist", system-ui, -apple-system, sans-serif;
+	--font-geist-mono: "Geist Mono", ui-monospace, monospace;
+
+	/* Design-system neutral surface ladder + text + semantic tokens.
+	   Namespaced as --color-ds-* so they register as Tailwind utilities
+	   (bg-ds-surface, text-ds-text-primary, …) without colliding with the
+	   legacy shadcn token mapping above. Light values; dark in .dark below. */
+	--color-ds-shell: var(--ds-shell);
+	--color-ds-surface: var(--ds-surface);
+	--color-ds-surface-raised: var(--ds-surface-raised);
+	--color-ds-surface-hover: var(--ds-surface-hover);
+	--color-ds-border: var(--ds-border);
+	--color-ds-border-subtle: var(--ds-border-subtle);
+	--color-ds-text-primary: var(--ds-text-primary);
+	--color-ds-text-secondary: var(--ds-text-secondary);
+	--color-ds-text-tertiary: var(--ds-text-tertiary);
+	--color-ds-icon: var(--ds-icon-secondary);
+	--color-ds-success: var(--ds-success);
+	--color-ds-warning: var(--ds-warning);
+	--color-ds-error: var(--ds-error);
+
+	/* Brand blue trio — driven at runtime by the active palette (the brandkit
+	   page swaps these on a wrapper). Defaults below = palette "Electric". */
+	--color-brand-blue: var(--brand-blue);
+	--color-brand-deep: var(--brand-deep);
+	--color-brand-mid: var(--brand-mid);
+
 	/* Letter spacing */
 	--tracking-tighter: -0.72px;
 	--tracking-tight-lg: -1.36px;
@@ -140,6 +186,25 @@
 	}
 
 		:root {
+		/* ── New design system tokens (Hive-derived neutral ladder) ── */
+		--ds-shell: #F1F1F1;
+		--ds-surface: #FBFBFB;
+		--ds-surface-raised: #FFFFFF;
+		--ds-surface-hover: #F4F4F4;
+		--ds-border: #ECECEC;
+		--ds-border-subtle: #F0F0F0;
+		--ds-text-primary: #14171F;
+		--ds-text-secondary: #5B6170;
+		--ds-text-tertiary: #8A90A0;
+		--ds-icon-secondary: #505868;
+		--ds-success: #1F8552;
+		--ds-warning: #E5A823;
+		--ds-error: #D43838;
+		/* LOCKED brand-blue trio = palette "Lapis" */
+		--brand-blue: #1378E6;
+		--brand-deep: #091F40;
+		--brand-mid: #4A9CFF;
+
 		/* Brand — gold-forward, green as subtle accent */
 		--brand: #C9A96E;
 		--brand-hover: #B8944F;
@@ -191,6 +256,21 @@
 	}
 
 	.dark {
+		/* ── New design system tokens — dark ── */
+		--ds-shell: #070709;
+		--ds-surface: #131215;
+		--ds-surface-raised: #171719;
+		--ds-surface-hover: #1C1C1F;
+		--ds-border: #2A2A2D;
+		--ds-border-subtle: #1F1F22;
+		--ds-text-primary: #EEEEEE;
+		--ds-text-secondary: #B0B0BA;
+		--ds-text-tertiary: #8A8A95;
+		--ds-icon-secondary: #B0B0BA;
+		--ds-success: #4ADE80;
+		--ds-warning: #F2C94C;
+		--ds-error: #F07070;
+
 		--background: oklch(0.145 0 0);
 		--foreground: oklch(0.985 0 0);
 		--card: oklch(0.145 0 0);
@@ -247,6 +327,16 @@
 
 .font-serif {
 	font-family: "Instrument Serif", serif;
+}
+
+.font-geist {
+	font-family: var(--font-geist);
+	font-feature-settings: "cv11", "ss01";
+	-webkit-font-smoothing: antialiased;
+}
+
+.font-geist-mono {
+	font-family: var(--font-geist-mono);
 }
 
 /* ─── Marquee animation ──────────────────────────────────────── */
@@ -623,5 +713,8 @@
 /* ─── Prevent horizontal scroll on mobile ───────────────────── */
 
 html, body {
-	overflow-x: hidden;
+	/* `clip` (not `hidden`) prevents horizontal scroll without turning body
+	   into a scroll container — which would otherwise defeat `position: sticky`
+	   on the page navbar. */
+	overflow-x: clip;
 }

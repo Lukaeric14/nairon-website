@@ -17,6 +17,7 @@ import { Route as FluxRouteImport } from './routes/flux'
 import { Route as DownloadRouteImport } from './routes/download'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as CareersRouteImport } from './routes/careers'
+import { Route as BrandkitRouteImport } from './routes/brandkit'
 import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
@@ -66,6 +67,11 @@ const CareersRoute = CareersRouteImport.update({
   path: '/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BrandkitRoute = BrandkitRouteImport.update({
+  id: '/brandkit',
+  path: '/brandkit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AcceptableUseRoute = AcceptableUseRouteImport.update({
   id: '/acceptable-use',
   path: '/acceptable-use',
@@ -113,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/acceptable-use': typeof AcceptableUseRoute
+  '/brandkit': typeof BrandkitRoute
   '/careers': typeof CareersRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/download': typeof DownloadRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/acceptable-use': typeof AcceptableUseRoute
+  '/brandkit': typeof BrandkitRoute
   '/careers': typeof CareersRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/download': typeof DownloadRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/acceptable-use': typeof AcceptableUseRoute
+  '/brandkit': typeof BrandkitRoute
   '/careers': typeof CareersRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/download': typeof DownloadRoute
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/acceptable-use'
+    | '/brandkit'
     | '/careers'
     | '/cookie-policy'
     | '/download'
@@ -188,6 +198,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/acceptable-use'
+    | '/brandkit'
     | '/careers'
     | '/cookie-policy'
     | '/download'
@@ -206,6 +217,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/acceptable-use'
+    | '/brandkit'
     | '/careers'
     | '/cookie-policy'
     | '/download'
@@ -225,6 +237,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
   AcceptableUseRoute: typeof AcceptableUseRoute
+  BrandkitRoute: typeof BrandkitRoute
   CareersRoute: typeof CareersRoute
   CookiePolicyRoute: typeof CookiePolicyRoute
   DownloadRoute: typeof DownloadRoute
@@ -298,6 +311,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CareersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/brandkit': {
+      id: '/brandkit'
+      path: '/brandkit'
+      fullPath: '/brandkit'
+      preLoaderRoute: typeof BrandkitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/acceptable-use': {
       id: '/acceptable-use'
       path: '/acceptable-use'
@@ -361,6 +381,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
   AcceptableUseRoute: AcceptableUseRoute,
+  BrandkitRoute: BrandkitRoute,
   CareersRoute: CareersRoute,
   CookiePolicyRoute: CookiePolicyRoute,
   DownloadRoute: DownloadRoute,

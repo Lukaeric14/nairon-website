@@ -17,3 +17,4 @@ tmp/
 *.gcp-service-account.json
 *-service-account.json
 secrets/
+.env*
