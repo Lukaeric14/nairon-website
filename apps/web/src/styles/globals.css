@@ -253,6 +253,24 @@
 		--sidebar-accent-foreground: oklch(0.205 0 0);
 		--sidebar-border: oklch(0.922 0 0);
 		--sidebar-ring: oklch(0.708 0 0);
+
+		/* ── Isometric illustration system — light blueprint ──
+		   Levers: ink (stroke), surface (base face), accent, stroke width,
+		   dash, linejoin. Face shades derive from surface via color-mix so a
+		   single "surface" lever drives all three visible faces. */
+		--iso-ink: #1a1916;
+		--iso-surface: #fbfaf8;
+		--iso-muted: #9a958a;
+		--iso-accent: #beff00;
+		--iso-stroke-w: 1.2;
+		--iso-dash: 4 4;
+		--iso-linejoin: round;
+		--iso-fill-top: var(--iso-surface);
+		--iso-fill-left: color-mix(in oklab, var(--iso-surface), var(--iso-ink) 5%);
+		--iso-fill-right: color-mix(in oklab, var(--iso-surface), var(--iso-ink) 11%);
+		--iso-accent-top: var(--iso-accent);
+		--iso-accent-left: color-mix(in oklab, var(--iso-accent), black 8%);
+		--iso-accent-right: color-mix(in oklab, var(--iso-accent), black 16%);
 	}
 
 	.dark {
@@ -303,6 +321,19 @@
 		--sidebar-accent-foreground: oklch(0.985 0 0);
 		--sidebar-border: oklch(0.269 0 0);
 		--sidebar-ring: oklch(0.439 0 0);
+
+		/* ── Isometric illustration system — dark variant ──
+		   Dark faces, light strokes. Sides go darker than the top. */
+		--iso-ink: #e7e5e0;
+		--iso-surface: #1b1b1f;
+		--iso-muted: #6b6b72;
+		--iso-accent: #beff00;
+		--iso-fill-top: var(--iso-surface);
+		--iso-fill-left: color-mix(in oklab, var(--iso-surface), black 22%);
+		--iso-fill-right: color-mix(in oklab, var(--iso-surface), black 38%);
+		--iso-accent-top: var(--iso-accent);
+		--iso-accent-left: color-mix(in oklab, var(--iso-accent), black 14%);
+		--iso-accent-right: color-mix(in oklab, var(--iso-accent), black 26%);
 	}
 }
 
@@ -337,6 +368,33 @@
 
 .font-geist-mono {
 	font-family: var(--font-geist-mono);
+}
+
+/* ─── Isometric illustration layers ──────────────────────────── */
+
+/* Shared stroke styling for every iso SVG group. Fills are set per
+   polygon (inline) so individual faces stay independently themeable. */
+.iso-layer {
+	fill: none;
+	stroke: var(--iso-ink);
+	stroke-width: var(--iso-stroke-w);
+	stroke-linejoin: var(--iso-linejoin);
+	stroke-linecap: round;
+}
+
+/* Blueprint backdrop used by the iso preview/playground surface. */
+.iso-blueprint {
+	background-color: var(--iso-canvas, transparent);
+	background-image:
+		linear-gradient(to right, rgba(12, 12, 12, 0.05) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(12, 12, 12, 0.05) 1px, transparent 1px);
+	background-size: 28px 28px;
+}
+
+.dark .iso-blueprint {
+	background-image:
+		linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 }
 
 /* ─── Marquee animation ──────────────────────────────────────── */
