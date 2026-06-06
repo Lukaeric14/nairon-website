@@ -23,6 +23,7 @@ const FOOTER_COLS: FooterCol[] = [
 		links: [
 			{ label: "AI Employees", action: "hire" },
 			{ label: "Real Estate", href: "/for/real-estate" },
+			{ label: "Download Hive", href: "/download" },
 		],
 	},
 	{

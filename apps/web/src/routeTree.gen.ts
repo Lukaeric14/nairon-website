@@ -14,6 +14,7 @@ import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-condi
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PitchDeckRouteImport } from './routes/pitch-deck'
 import { Route as FluxRouteImport } from './routes/flux'
+import { Route as DownloadRouteImport } from './routes/download'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
@@ -48,6 +49,11 @@ const PitchDeckRoute = PitchDeckRouteImport.update({
 const FluxRoute = FluxRouteImport.update({
   id: '/flux',
   path: '/flux',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DownloadRoute = DownloadRouteImport.update({
+  id: '/download',
+  path: '/download',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CookiePolicyRoute = CookiePolicyRouteImport.update({
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/acceptable-use': typeof AcceptableUseRoute
   '/careers': typeof CareersRoute
   '/cookie-policy': typeof CookiePolicyRoute
+  '/download': typeof DownloadRoute
   '/flux': typeof FluxRoute
   '/pitch-deck': typeof PitchDeckRoute
   '/privacy': typeof PrivacyRoute
@@ -126,6 +133,7 @@ export interface FileRoutesByTo {
   '/acceptable-use': typeof AcceptableUseRoute
   '/careers': typeof CareersRoute
   '/cookie-policy': typeof CookiePolicyRoute
+  '/download': typeof DownloadRoute
   '/flux': typeof FluxRoute
   '/pitch-deck': typeof PitchDeckRoute
   '/privacy': typeof PrivacyRoute
@@ -144,6 +152,7 @@ export interface FileRoutesById {
   '/acceptable-use': typeof AcceptableUseRoute
   '/careers': typeof CareersRoute
   '/cookie-policy': typeof CookiePolicyRoute
+  '/download': typeof DownloadRoute
   '/flux': typeof FluxRoute
   '/pitch-deck': typeof PitchDeckRoute
   '/privacy': typeof PrivacyRoute
@@ -163,6 +172,7 @@ export interface FileRouteTypes {
     | '/acceptable-use'
     | '/careers'
     | '/cookie-policy'
+    | '/download'
     | '/flux'
     | '/pitch-deck'
     | '/privacy'
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/acceptable-use'
     | '/careers'
     | '/cookie-policy'
+    | '/download'
     | '/flux'
     | '/pitch-deck'
     | '/privacy'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/acceptable-use'
     | '/careers'
     | '/cookie-policy'
+    | '/download'
     | '/flux'
     | '/pitch-deck'
     | '/privacy'
@@ -215,6 +227,7 @@ export interface RootRouteChildren {
   AcceptableUseRoute: typeof AcceptableUseRoute
   CareersRoute: typeof CareersRoute
   CookiePolicyRoute: typeof CookiePolicyRoute
+  DownloadRoute: typeof DownloadRoute
   FluxRoute: typeof FluxRoute
   PitchDeckRoute: typeof PitchDeckRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -262,6 +275,13 @@ declare module '@tanstack/react-router' {
       path: '/flux'
       fullPath: '/flux'
       preLoaderRoute: typeof FluxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/download': {
+      id: '/download'
+      path: '/download'
+      fullPath: '/download'
+      preLoaderRoute: typeof DownloadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cookie-policy': {
@@ -343,6 +363,7 @@ const rootRouteChildren: RootRouteChildren = {
   AcceptableUseRoute: AcceptableUseRoute,
   CareersRoute: CareersRoute,
   CookiePolicyRoute: CookiePolicyRoute,
+  DownloadRoute: DownloadRoute,
   FluxRoute: FluxRoute,
   PitchDeckRoute: PitchDeckRoute,
   PrivacyRoute: PrivacyRoute,

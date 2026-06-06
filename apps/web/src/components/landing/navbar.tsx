@@ -124,6 +124,17 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						Signals
 					</a>
 					<a
+						href="/download"
+						className={cn(
+							"px-4 py-2 rounded-full text-sm transition-colors",
+							location.pathname === "/download"
+								? "text-[#C9A96E]"
+								: "text-[#1A1916] hover:text-[#C9A96E]",
+						)}
+					>
+						Download
+					</a>
+					<a
 						href={DISCOVERY_CALL_URL}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -185,6 +196,13 @@ export function Navbar({ minimal = false }: { minimal?: boolean }) {
 						onClick={() => setMobileOpen(false)}
 					>
 						Signals
+					</a>
+					<a
+						href="/download"
+						className="block px-4 py-3 rounded-xl text-base text-[#1A1916] hover:bg-[#0C0C0C]/5 transition-colors"
+						onClick={() => setMobileOpen(false)}
+					>
+						Download
 					</a>
 					<div className="pt-4">
 						<a

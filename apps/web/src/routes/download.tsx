@@ -1,0 +1,283 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { Download, ExternalLink, MonitorDown, Smartphone } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Footer, Navbar } from "@/components/landing";
+import { CandidateModal } from "@/components/landing/candidate-modal";
+import { HireModal } from "@/components/landing/hire-modal";
+import { ModalProvider } from "@/components/landing/modal-provider";
+import { breadcrumbJsonLd, seoHead } from "@/lib/seo";
+
+const desktopFeedBase = "https://pub-d2c6ed77dc6a4e3c8bb10bc046eea41a.r2.dev";
+const androidInternalTrack =
+	"https://play.google.com/apps/internaltest/4700776313057299128";
+const testFlightApp = "https://apps.apple.com/app/testflight/id899247664";
+const appStoreConnect =
+	"https://appstoreconnect.apple.com/apps/6762267127/testflight/ios";
+
+const fallbackDesktop = {
+	version: "0.5.9",
+	macDmg: `${desktopFeedBase}/Hive-0.5.9-universal.dmg`,
+	windowsExe: `${desktopFeedBase}/Hive-Setup-0.5.9.exe`,
+	macManifest: `${desktopFeedBase}/latest-mac.yml`,
+	windowsManifest: `${desktopFeedBase}/latest.yml`,
+};
+
+const mobileVersion = "0.5.9";
+
+const breadcrumbsJsonLd = JSON.stringify(
+	breadcrumbJsonLd([
+		{ name: "Home", path: "/" },
+		{ name: "Download", path: "/download" },
+	]),
+);
+
+export const Route = createFileRoute("/download")({
+	component: DownloadPage,
+	head: () => {
+		const base = seoHead({
+			title: "Download Hive - Desktop and Mobile Apps",
+			description:
+				"Download the current Hive desktop app and find the mobile install channels for iOS TestFlight and Android internal testing.",
+			path: "/download",
+			noindex: true,
+		});
+		return {
+			...base,
+			scripts: [{ type: "application/ld+json", children: breadcrumbsJsonLd }],
+		};
+	},
+});
+
+type DesktopDownloadState = {
+	version: string;
+	macDmg: string;
+	windowsExe: string;
+	macManifest: string;
+	source: "R2 latest manifests" | "Static fallback";
+};
+
+function parseVersion(manifest: string) {
+	return manifest.match(/^version:\s*(.+)$/m)?.[1]?.trim();
+}
+
+function parseFileUrl(manifest: string, extension: string) {
+	const escapedExtension = extension.replace(".", "\\.");
+	const match = manifest.match(
+		new RegExp(`url:\\s*([^\\s]+${escapedExtension})(?:\\s|$)`, "m"),
+	);
+	return match?.[1]?.trim();
+}
+
+function useDesktopDownloads() {
+	const [downloads, setDownloads] = useState<DesktopDownloadState>({
+		...fallbackDesktop,
+		source: "Static fallback",
+	});
+
+	useEffect(() => {
+		let cancelled = false;
+
+		async function loadManifests() {
+			try {
+				const [macManifest, windowsManifest] = await Promise.all([
+					fetch(fallbackDesktop.macManifest).then((response) => {
+						if (!response.ok) throw new Error("mac manifest unavailable");
+						return response.text();
+					}),
+					fetch(fallbackDesktop.windowsManifest).then((response) => {
+						if (!response.ok) throw new Error("windows manifest unavailable");
+						return response.text();
+					}),
+				]);
+
+				const macDmg = parseFileUrl(macManifest, ".dmg");
+				const windowsExe = parseFileUrl(windowsManifest, ".exe");
+				const version =
+					parseVersion(macManifest) ??
+					parseVersion(windowsManifest) ??
+					fallbackDesktop.version;
+
+				if (!cancelled && macDmg && windowsExe) {
+					setDownloads({
+						version,
+						macDmg: `${desktopFeedBase}/${macDmg}`,
+						windowsExe: `${desktopFeedBase}/${windowsExe}`,
+						macManifest: fallbackDesktop.macManifest,
+						source: "R2 latest manifests",
+					});
+				}
+			} catch {
+				if (!cancelled) {
+					setDownloads({ ...fallbackDesktop, source: "Static fallback" });
+				}
+			}
+		}
+
+		loadManifests();
+		return () => {
+			cancelled = true;
+		};
+	}, []);
+
+	return downloads;
+}
+
+function DownloadPage() {
+	const desktop = useDesktopDownloads();
+	const desktopCards = useMemo(
+		() => [
+			{
+				name: "macOS",
+				detail: "Universal DMG for Apple Silicon and Intel Macs.",
+				href: desktop.macDmg,
+				label: "Download DMG",
+			},
+			{
+				name: "Windows",
+				detail: "Signed installer for Windows desktops.",
+				href: desktop.windowsExe,
+				label: "Download EXE",
+			},
+		],
+		[desktop.macDmg, desktop.windowsExe],
+	);
+
+	return (
+		<ModalProvider>
+			<div className="min-h-screen bg-white font-inter text-[#1A1916]">
+				<Navbar />
+				<main className="px-6 pt-32 pb-20 md:pt-40">
+					<section className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[minmax(0,0.95fr)_minmax(320px,0.65fr)] md:items-end">
+						<div>
+							<p className="mb-5 text-xs font-medium uppercase tracking-[0.22em] text-[#C9A96E]">
+								Hive downloads
+							</p>
+							<h1 className="max-w-3xl text-5xl font-normal leading-[0.95] text-[#1A1916] md:text-7xl">
+								Install the current Hive app.
+							</h1>
+							<p className="mt-7 max-w-2xl text-lg leading-8 text-[#5C584F]">
+								Desktop installers come from the public R2 updater feed. Mobile
+								installs come through TestFlight and Play internal testing, so
+								store membership controls what build appears on each phone.
+							</p>
+						</div>
+
+						<div className="border border-[#0C0C0C]/10 bg-[#F6F2EA] p-6">
+							<div className="flex items-start justify-between gap-6">
+								<div>
+									<p className="text-sm text-[#5C584F]">Desktop feed</p>
+									<p className="mt-2 text-4xl font-normal text-[#1A1916]">
+										v{desktop.version}
+									</p>
+								</div>
+								<MonitorDown className="mt-1 h-8 w-8 text-[#C9A96E]" />
+							</div>
+							<div className="mt-8 space-y-3 text-sm text-[#5C584F]">
+								<p>Source: {desktop.source}</p>
+								<a
+									href={desktop.macManifest}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="inline-flex items-center gap-2 text-[#8D6E2E] hover:text-[#1A1916]"
+								>
+									View mac manifest
+									<ExternalLink className="h-3.5 w-3.5" />
+								</a>
+							</div>
+						</div>
+					</section>
+
+					<section className="mx-auto mt-16 max-w-6xl">
+						<div className="grid gap-px overflow-hidden border border-[#0C0C0C]/10 bg-[#0C0C0C]/10 md:grid-cols-2">
+							{desktopCards.map((card) => (
+								<a
+									key={card.name}
+									href={card.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="group bg-white p-7 transition-colors hover:bg-[#F6F2EA]"
+								>
+									<div className="flex min-h-[220px] flex-col justify-between gap-10">
+										<div>
+											<div className="flex items-start justify-between gap-6">
+												<h2 className="text-3xl font-normal text-[#1A1916]">
+													{card.name}
+												</h2>
+												<Download className="h-6 w-6 text-[#C9A96E] transition-transform group-hover:translate-y-0.5" />
+											</div>
+											<p className="mt-4 max-w-sm text-base leading-7 text-[#5C584F]">
+												{card.detail}
+											</p>
+										</div>
+										<span className="inline-flex w-fit items-center gap-2 bg-[#C9A96E] px-5 py-3 text-sm font-semibold text-[#0C0C0C] transition-colors group-hover:bg-[#B8944F]">
+											{card.label}
+											<ExternalLink className="h-3.5 w-3.5" />
+										</span>
+									</div>
+								</a>
+							))}
+						</div>
+					</section>
+
+					<section className="mx-auto mt-16 max-w-6xl">
+						<div className="mb-6 flex items-center gap-3">
+							<Smartphone className="h-5 w-5 text-[#C9A96E]" />
+							<h2 className="text-2xl font-normal text-[#1A1916]">Mobile</h2>
+							<span className="text-sm text-[#5C584F]">configured v{mobileVersion}</span>
+						</div>
+
+						<div className="grid gap-px overflow-hidden border border-[#0C0C0C]/10 bg-[#0C0C0C]/10 md:grid-cols-2">
+							<div className="bg-white p-7">
+								<h3 className="text-2xl font-normal text-[#1A1916]">iOS</h3>
+								<p className="mt-4 text-base leading-7 text-[#5C584F]">
+									Hive for iPhone ships through TestFlight. Install TestFlight,
+									then use the invite sent to your Apple ID.
+								</p>
+								<div className="mt-8 flex flex-wrap gap-3">
+									<a
+										href={testFlightApp}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="inline-flex items-center gap-2 border border-[#C9A96E]/40 px-5 py-3 text-sm font-semibold text-[#8D6E2E] hover:border-[#C9A96E] hover:text-[#1A1916]"
+									>
+										Get TestFlight
+										<ExternalLink className="h-3.5 w-3.5" />
+									</a>
+									<a
+										href={appStoreConnect}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-[#5C584F] hover:text-[#1A1916]"
+									>
+										Manage invites
+										<ExternalLink className="h-3.5 w-3.5" />
+									</a>
+								</div>
+							</div>
+
+							<div className="bg-white p-7">
+								<h3 className="text-2xl font-normal text-[#1A1916]">Android</h3>
+								<p className="mt-4 text-base leading-7 text-[#5C584F]">
+									Android builds ship through the Google Play internal track.
+									Join once, then Play Store will show the newest accepted build.
+								</p>
+								<a
+									href={androidInternalTrack}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="mt-8 inline-flex items-center gap-2 border border-[#C9A96E]/40 px-5 py-3 text-sm font-semibold text-[#8D6E2E] hover:border-[#C9A96E] hover:text-[#1A1916]"
+								>
+									Open Play internal track
+									<ExternalLink className="h-3.5 w-3.5" />
+								</a>
+							</div>
+						</div>
+					</section>
+				</main>
+				<Footer />
+			</div>
+			<HireModal />
+			<CandidateModal />
+		</ModalProvider>
+	);
+}
