@@ -15,14 +15,18 @@ const appStoreConnect =
 	"https://appstoreconnect.apple.com/apps/6762267127/testflight/ios";
 
 const fallbackDesktop = {
-	version: "0.5.9",
-	macDmg: `${desktopFeedBase}/Hive-0.5.9-universal.dmg`,
-	windowsExe: `${desktopFeedBase}/Hive-Setup-0.5.9.exe`,
+	macVersion: "0.5.10",
+	windowsVersion: "0.5.12",
+	macDmg: `${desktopFeedBase}/Hive-0.5.10-universal.dmg`,
+	windowsExe: `${desktopFeedBase}/Hive-Setup-0.5.12.exe`,
 	macManifest: `${desktopFeedBase}/latest-mac.yml`,
 	windowsManifest: `${desktopFeedBase}/latest.yml`,
 };
 
-const mobileVersion = "0.5.9";
+const mobileVersions = {
+	ios: { version: "0.5.12", build: "21" },
+	android: { version: "0.5.12", build: "21" },
+};
 
 const breadcrumbsJsonLd = JSON.stringify(
 	breadcrumbJsonLd([
@@ -49,7 +53,8 @@ export const Route = createFileRoute("/download")({
 });
 
 type DesktopDownloadState = {
-	version: string;
+	macVersion: string;
+	windowsVersion: string;
 	macDmg: string;
 	windowsExe: string;
 	macManifest: string;
@@ -92,14 +97,14 @@ function useDesktopDownloads() {
 
 				const macDmg = parseFileUrl(macManifest, ".dmg");
 				const windowsExe = parseFileUrl(windowsManifest, ".exe");
-				const version =
-					parseVersion(macManifest) ??
-					parseVersion(windowsManifest) ??
-					fallbackDesktop.version;
+				const macVersion = parseVersion(macManifest) ?? fallbackDesktop.macVersion;
+				const windowsVersion =
+					parseVersion(windowsManifest) ?? fallbackDesktop.windowsVersion;
 
 				if (!cancelled && macDmg && windowsExe) {
 					setDownloads({
-						version,
+						macVersion,
+						windowsVersion,
 						macDmg: `${desktopFeedBase}/${macDmg}`,
 						windowsExe: `${desktopFeedBase}/${windowsExe}`,
 						macManifest: fallbackDesktop.macManifest,
@@ -128,18 +133,25 @@ function DownloadPage() {
 		() => [
 			{
 				name: "macOS",
+				version: desktop.macVersion,
 				detail: "Universal DMG for Apple Silicon and Intel Macs.",
 				href: desktop.macDmg,
 				label: "Download DMG",
 			},
 			{
 				name: "Windows",
+				version: desktop.windowsVersion,
 				detail: "Signed installer for Windows desktops.",
 				href: desktop.windowsExe,
 				label: "Download EXE",
 			},
 		],
-		[desktop.macDmg, desktop.windowsExe],
+		[
+			desktop.macDmg,
+			desktop.macVersion,
+			desktop.windowsExe,
+			desktop.windowsVersion,
+		],
 	);
 
 	return (
@@ -166,9 +178,14 @@ function DownloadPage() {
 							<div className="flex items-start justify-between gap-6">
 								<div>
 									<p className="text-sm text-[#5C584F]">Desktop feed</p>
-									<p className="mt-2 text-4xl font-normal text-[#1A1916]">
-										v{desktop.version}
-									</p>
+									<div className="mt-3 space-y-2 text-[#1A1916]">
+										<p className="text-2xl font-normal">
+											macOS v{desktop.macVersion}
+										</p>
+										<p className="text-2xl font-normal">
+											Windows v{desktop.windowsVersion}
+										</p>
+									</div>
 								</div>
 								<MonitorDown className="mt-1 h-8 w-8 text-[#C9A96E]" />
 							</div>
@@ -205,6 +222,9 @@ function DownloadPage() {
 												</h2>
 												<Download className="h-6 w-6 text-[#C9A96E] transition-transform group-hover:translate-y-0.5" />
 											</div>
+											<p className="mt-3 text-sm font-semibold text-[#8D6E2E]">
+												Current version v{card.version}
+											</p>
 											<p className="mt-4 max-w-sm text-base leading-7 text-[#5C584F]">
 												{card.detail}
 											</p>
@@ -223,12 +243,15 @@ function DownloadPage() {
 						<div className="mb-6 flex items-center gap-3">
 							<Smartphone className="h-5 w-5 text-[#C9A96E]" />
 							<h2 className="text-2xl font-normal text-[#1A1916]">Mobile</h2>
-							<span className="text-sm text-[#5C584F]">configured v{mobileVersion}</span>
 						</div>
 
 						<div className="grid gap-px overflow-hidden border border-[#0C0C0C]/10 bg-[#0C0C0C]/10 md:grid-cols-2">
 							<div className="bg-white p-7">
 								<h3 className="text-2xl font-normal text-[#1A1916]">iOS</h3>
+								<p className="mt-3 text-sm font-semibold text-[#8D6E2E]">
+									TestFlight build v{mobileVersions.ios.version} (
+									{mobileVersions.ios.build})
+								</p>
 								<p className="mt-4 text-base leading-7 text-[#5C584F]">
 									Hive for iPhone ships through TestFlight. Install TestFlight,
 									then use the invite sent to your Apple ID.
@@ -257,6 +280,10 @@ function DownloadPage() {
 
 							<div className="bg-white p-7">
 								<h3 className="text-2xl font-normal text-[#1A1916]">Android</h3>
+								<p className="mt-3 text-sm font-semibold text-[#8D6E2E]">
+									Play internal build v{mobileVersions.android.version} (
+									{mobileVersions.android.build})
+								</p>
 								<p className="mt-4 text-base leading-7 text-[#5C584F]">
 									Android builds ship through the Google Play internal track.
 									Join once, then Play Store will show the newest accepted build.
