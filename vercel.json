@@ -7,7 +7,7 @@
 		}
 	},
 	"installCommand": "bun install",
-	"buildCommand": "bunx turbo build --filter=@nairon-website/web",
+	"buildCommand": "bunx convex deploy -y --cmd 'bunx turbo build --filter=@nairon-website/web' --cmd-url-env-var-name VITE_CONVEX_URL",
 	"outputDirectory": "apps/web/.vercel/output",
 	"redirects": [
 		{ "source": "/residence", "destination": "/", "permanent": true },
