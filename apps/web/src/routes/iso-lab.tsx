@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { IsoSceneRenderer } from "@/components/iso";
-import { SCENE_LIST } from "@/components/iso/scenes";
+import { IsoZoomReveal } from "@/components/iso/iso-zoom-reveal";
+import { SCENE_LIST, SCENES } from "@/components/iso/scenes";
 import type { IsoSceneSpec } from "@/components/iso/core/types";
 import { cn } from "@/lib/utils";
 
@@ -29,13 +30,17 @@ interface Levers {
 	riseDuration: number;
 	drawDuration: number;
 	flow: boolean;
+	grow: boolean;
+	drop: boolean;
+	sink: boolean;
+	pulse: boolean;
 	reduceMotion: boolean;
 }
 
 function leversFromSpec(spec: IsoSceneSpec): Levers {
 	return {
 		unit: spec.unit ?? 30,
-		strokeWidth: spec.style?.strokeWidth ?? 1.2,
+		strokeWidth: spec.style?.strokeWidth ?? 0.8,
 		dash: spec.style?.dash ?? "4 4",
 		linejoin: spec.style?.linejoin ?? "round",
 		enableColors: false,
@@ -46,12 +51,25 @@ function leversFromSpec(spec: IsoSceneSpec): Levers {
 		riseDuration: spec.animation?.riseDuration ?? 0.6,
 		drawDuration: spec.animation?.drawDuration ?? 1.1,
 		flow: spec.animation?.flow ?? false,
+		grow: spec.animation?.grow ?? false,
+		drop: spec.animation?.drop ?? false,
+		sink: spec.animation?.sink ?? false,
+		pulse: spec.animation?.pulse ?? false,
 		reduceMotion: false,
 	};
 }
 
+/** Named multi-scene sequences (outer → zoom → inner), previewed via IsoZoomReveal. */
+const SEQUENCES = [
+	{ id: "▶ step2: bars→chip", outer: "twoBars", inner: "systemsDesignChip", holdMs: 2000, zoomMs: 700 },
+] as const;
+
 function IsoLab() {
 	const [sceneId, setSceneId] = useState(SCENE_LIST[0].id);
+	const [seqId, setSeqId] = useState<string | null>(null);
+	const activeSeq = SEQUENCES.find((q) => q.id === seqId) ?? null;
+	const seqOuter = activeSeq ? SCENES[activeSeq.outer] : undefined;
+	const seqInner = activeSeq ? SCENES[activeSeq.inner] : undefined;
 	const baseScene = useMemo(
 		() => SCENE_LIST.find((s) => s.id === sceneId) ?? SCENE_LIST[0],
 		[sceneId],
@@ -65,6 +83,8 @@ function IsoLab() {
 	const [playKey, setPlayKey] = useState(0);
 	const [dark, setDark] = useState(false);
 	const [copied, setCopied] = useState<string | null>(null);
+	// null = playing live; 0–1 = reveal frozen at that point for scrubbing.
+	const [scrub, setScrub] = useState<number | null>(null);
 
 	// Re-seed everything when the scene changes.
 	useEffect(() => {
@@ -73,6 +93,7 @@ function IsoLab() {
 		setDraft(JSON.stringify(baseScene, null, 2));
 		setJsonError(null);
 		setPlayKey((k) => k + 1);
+		setScrub(null);
 	}, [baseScene]);
 
 	const liveSpec = useMemo<IsoSceneSpec>(
@@ -93,6 +114,10 @@ function IsoLab() {
 				riseDuration: levers.riseDuration,
 				drawDuration: levers.drawDuration,
 				flow: levers.flow,
+				grow: levers.grow,
+				drop: levers.drop,
+				sink: levers.sink,
+				pulse: levers.pulse,
 			},
 		}),
 		[spec, levers],
@@ -147,15 +172,38 @@ function IsoLab() {
 								<button
 									key={s.id}
 									type="button"
-									onClick={() => setSceneId(s.id)}
+									onClick={() => {
+										setSceneId(s.id);
+										setSeqId(null);
+									}}
 									className={cn(
 										"rounded-md border px-2.5 py-1 font-mono text-[11px] transition-colors",
-										s.id === sceneId
+										s.id === sceneId && !seqId
 											? "border-[#1a1916] bg-[#1a1916] text-[#fbfaf8]"
 											: "border-[#1a1916]/15 hover:border-[#1a1916]/40",
 									)}
 								>
 									{s.id}
+								</button>
+							))}
+						</div>
+					</Section>
+
+					<Section label="Sequences">
+						<div className="flex flex-wrap gap-1.5">
+							{SEQUENCES.map((q) => (
+								<button
+									key={q.id}
+									type="button"
+									onClick={() => setSeqId(q.id)}
+									className={cn(
+										"rounded-md border px-2.5 py-1 font-mono text-[11px] transition-colors",
+										seqId === q.id
+											? "border-[#1378E6] bg-[#1378E6] text-white"
+											: "border-[#1378E6]/40 text-[#1378E6] hover:border-[#1378E6]",
+									)}
+								>
+									{q.id}
 								</button>
 							))}
 						</div>
@@ -206,6 +254,10 @@ function IsoLab() {
 						<Range label="Rise dur" min={0.2} max={1.6} step={0.05} value={levers.riseDuration} onChange={(v) => set("riseDuration", v)} />
 						<Range label="Draw dur" min={0.4} max={2.4} step={0.05} value={levers.drawDuration} onChange={(v) => set("drawDuration", v)} />
 						<Toggle label="Dash flow loop" checked={levers.flow} onChange={(v) => set("flow", v)} />
+						<Toggle label="Grow from flat" checked={levers.grow} onChange={(v) => set("grow", v)} />
+						<Toggle label="Drop from top" checked={levers.drop} onChange={(v) => set("drop", v)} />
+						<Toggle label="Sink into hole" checked={levers.sink} onChange={(v) => set("sink", v)} />
+						<Toggle label="Power-up pulse" checked={levers.pulse} onChange={(v) => set("pulse", v)} />
 						<Toggle label="Simulate reduced motion" checked={levers.reduceMotion} onChange={(v) => set("reduceMotion", v)} />
 					</Section>
 				</aside>
@@ -214,7 +266,7 @@ function IsoLab() {
 				<main className="space-y-px bg-[#1a1916]/10">
 					<div className="flex items-center justify-between bg-[#fbfaf8] px-5 py-3">
 						<div className="flex gap-2">
-							<button type="button" onClick={() => setPlayKey((k) => k + 1)} className="rounded-md bg-[#1a1916] px-3 py-1.5 font-mono text-[11px] text-[#fbfaf8]">
+							<button type="button" onClick={() => { setScrub(null); setPlayKey((k) => k + 1); }} className="rounded-md bg-[#1a1916] px-3 py-1.5 font-mono text-[11px] text-[#fbfaf8]">
 								↻ Replay
 							</button>
 							<button type="button" onClick={() => setDark((d) => !d)} className="rounded-md border border-[#1a1916]/15 px-3 py-1.5 font-mono text-[11px]">
@@ -232,15 +284,56 @@ function IsoLab() {
 						</div>
 					</div>
 
+					{!activeSeq && (
+						<div className="flex items-center gap-3 bg-[#fbfaf8] px-5 py-2.5">
+							<span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#1a1916]/45">Scrub</span>
+							<input
+								type="range"
+								min={0}
+								max={1}
+								step={0.004}
+								value={scrub ?? 0}
+								onChange={(e) => setScrub(Number(e.target.value))}
+								className="h-1 flex-1 accent-[#1378E6]"
+							/>
+							<span className="w-12 text-right font-mono text-[11px] text-[#1a1916]/55">
+								{scrub == null ? "live" : `${Math.round(scrub * 100)}%`}
+							</span>
+							{scrub != null && (
+								<button
+									type="button"
+									onClick={() => { setScrub(null); setPlayKey((k) => k + 1); }}
+									className="rounded-md border border-[#1a1916]/15 px-2.5 py-1 font-mono text-[10px]"
+								>
+									▶ Play
+								</button>
+							)}
+						</div>
+					)}
+
 					<div className={cn("flex items-center justify-center p-10", dark && "dark")}>
 						<div className={cn("iso-blueprint w-full max-w-2xl rounded-xl border p-6", dark ? "border-white/10 bg-[#0f0f12]" : "border-[#1a1916]/10 bg-white")}>
-							<IsoSceneRenderer
-								key={`${sceneId}-${dark}`}
-								spec={liveSpec}
-								trigger="mount"
-								playKey={playKey}
-								reduceMotion={levers.reduceMotion}
-							/>
+							{activeSeq && seqOuter && seqInner ? (
+								<IsoZoomReveal
+									key={`${activeSeq.id}-${dark}-${playKey}`}
+									outer={seqOuter}
+									inner={seqInner}
+									holdMs={activeSeq.holdMs}
+									zoomMs={activeSeq.zoomMs}
+									trigger="mount"
+									playKey={playKey}
+									reduceMotion={levers.reduceMotion}
+								/>
+							) : (
+								<IsoSceneRenderer
+									key={`${sceneId}-${dark}`}
+									spec={liveSpec}
+									trigger="mount"
+									playKey={playKey}
+									reduceMotion={levers.reduceMotion}
+									scrub={scrub}
+								/>
+							)}
 						</div>
 					</div>
 

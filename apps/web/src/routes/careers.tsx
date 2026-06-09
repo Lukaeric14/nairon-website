@@ -1,18 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CareersPage } from "@/components/careers";
+import { Careers } from "@/components/landing-v2/careers";
 import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/careers")({
 	component: CareersRoute,
 	head: () =>
 		seoHead({
-			title: "Careers at Nairon — Design Engineer Internship",
+			title: "Careers at Nairon — Build the AI workforce",
 			description:
-				"Register interest for Nairon's Summer 2026 Design Engineer internship, a 3-month role for building intuitive interfaces where agents and humans work well together.",
+				"We're hiring a Design Engineer, AI Engineer, and Healthcare AI Consultant to design, build, and deploy AI employees inside the systems our customers already use.",
 			path: "/careers",
 		}),
 });
 
 function CareersRoute() {
-	return <CareersPage />;
+	return <Careers />;
 }

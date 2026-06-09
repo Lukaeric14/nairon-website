@@ -87,3 +87,43 @@ export function useCountUp(
 
 	return value;
 }
+
+function easeOutCubic(t: number): number {
+	return 1 - (1 - t) ** 3;
+}
+
+/**
+ * Animate a 0→1 "grow" progress for extrude-from-flat reveals. Uses a gentle
+ * ease-out (not the count-up's aggressive expo) so the growth actually reads
+ * as growth instead of a snap. Honors reduced motion and a `play` gate;
+ * re-run by bumping `playKey`.
+ */
+export function useGrow(
+	opts: { duration?: number; reduce?: boolean; play?: boolean; playKey?: number } = {},
+): number {
+	const { duration = 0.7, reduce = false, play = true, playKey = 0 } = opts;
+	const [p, setP] = useState(reduce ? 1 : 0);
+	const raf = useRef<number>(0);
+
+	useEffect(() => {
+		if (reduce) {
+			setP(1);
+			return;
+		}
+		if (!play) {
+			setP(0);
+			return;
+		}
+		const start = performance.now();
+		const tick = (now: number) => {
+			const t = Math.min(1, (now - start) / (duration * 1000));
+			setP(easeOutCubic(t));
+			if (t < 1) raf.current = requestAnimationFrame(tick);
+		};
+		setP(0);
+		raf.current = requestAnimationFrame(tick);
+		return () => cancelAnimationFrame(raf.current);
+	}, [duration, reduce, play, playKey]);
+
+	return p;
+}

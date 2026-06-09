@@ -141,8 +141,9 @@ function RootComponent() {
 				<ConvexProvider client={convex}>
 					<ThemeProvider
 						attribute="class"
-						defaultTheme="system"
-						enableSystem
+						defaultTheme="light"
+						forcedTheme="light"
+						enableSystem={false}
 						disableTransitionOnChange
 					>
 						<ViewModeProvider>

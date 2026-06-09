@@ -49,8 +49,8 @@ export function QuoteBand() {
 			<div className="mx-auto max-w-4xl px-6 py-24 text-center text-white sm:py-28">
 				<QuoteMark />
 				<blockquote className="mt-6 text-2xl font-medium leading-snug tracking-tight sm:text-4xl">
-					The next era of operations won&apos;t be staffed. It will be deployed —
-					intelligent systems running the work inside the business.
+					Self-improving AI agents compound. The companies that adopt them first
+					won&apos;t just lead their market, they&apos;ll outrun it.
 				</blockquote>
 				<div className="mt-6 text-[0.875rem] text-white/70">— Nairon</div>
 			</div>

@@ -1,4 +1,7 @@
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { slugify } from "@/content/verticals";
+import { CAL_ATTRS } from "./cal";
+import { MENUS } from "./hero";
 
 /**
  * Site footer — deep-navy block with a bright-blue CTA band up top, link
@@ -7,18 +10,37 @@ import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
  * Colors reference the locked Lapis brand via CSS vars (--brand-deep/-blue).
  */
 
-const COLUMNS: { title: string; links: string[] }[] = [
-	{ title: "Product", links: ["How it works", "Our agents", "Case studies", "Security"] },
-	{ title: "Company", links: ["About", "Careers", "Changelog", "Contact"] },
-	{ title: "Resources", links: ["Docs", "Pricing", "FAQ", "Status"] },
-	{ title: "Legal", links: ["Privacy", "Terms", "Acceptable use", "Cookies"] },
+// Industries + Solutions mirror the navbar mega-menus (shared source); the rest
+// are footer-only link groups.
+const industries = MENUS.find((m) => m.id === "industries");
+const solutions = MENUS.find((m) => m.id === "solutions");
+
+type FooterLinkItem = { label: string; href: string };
+
+const COLUMNS: { title: string; links: FooterLinkItem[] }[] = [
+	{
+		title: "Industries",
+		links: industries?.items.map((i) => ({ label: i.title, href: `/industries/${slugify(i.title)}` })) ?? [],
+	},
+	{
+		title: "Solutions",
+		links: solutions?.items.map((i) => ({ label: i.title, href: `/solutions/${slugify(i.title)}` })) ?? [],
+	},
+	{
+		title: "Resources",
+		links: ["How it works", "Case studies", "Pricing", "FAQ", "Docs"].map((label) => ({ label, href: "#" })),
+	},
+	{
+		title: "Company",
+		links: ["About", "Careers", "Changelog", "Contact"].map((label) => ({ label, href: "#" })),
+	},
 ];
 
-function FooterLink({ label }: { label: string }) {
+function FooterLink({ label, href }: FooterLinkItem) {
 	return (
 		<li>
 			<a
-				href="#"
+				href={href}
 				className="text-[0.875rem] text-white/55 transition-colors hover:text-white"
 			>
 				{label}
@@ -41,6 +63,7 @@ export function Footer() {
 					</h2>
 					<button
 						type="button"
+						{...CAL_ATTRS}
 						className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl px-6 py-3.5 text-[0.9375rem] font-medium text-white transition-all hover:brightness-110"
 						style={{ backgroundColor: "var(--brand-blue)" }}
 					>
@@ -73,7 +96,7 @@ export function Footer() {
 						</div>
 						<ul className="space-y-2.5">
 							{col.links.map((l) => (
-								<FooterLink key={l} label={l} />
+								<FooterLink key={l.label} label={l.label} href={l.href} />
 							))}
 						</ul>
 					</div>
@@ -99,7 +122,15 @@ export function Footer() {
 			{/* Bottom bar */}
 			<div className="border-t border-white/10">
 				<div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-[0.8125rem] text-white/45 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-					<span>© 2026 Nairon, Inc. All rights reserved.</span>
+					<div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+						<span>© 2026 Nairon, Inc. All rights reserved.</span>
+						<a href="#" className="transition-colors hover:text-white">
+							Privacy
+						</a>
+						<a href="#" className="transition-colors hover:text-white">
+							Terms
+						</a>
+					</div>
 					<div className="flex items-center gap-5">
 						<a href="#" className="transition-colors hover:text-white">
 							X / Twitter

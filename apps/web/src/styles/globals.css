@@ -86,10 +86,15 @@
 	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-ring: var(--sidebar-ring);
-	--radius-sm: calc(var(--radius) - 4px);
-	--radius-md: calc(var(--radius) - 2px);
-	--radius-lg: var(--radius);
-	--radius-xl: calc(var(--radius) + 4px);
+	/* Sharp corners across the site — every rounded-* utility resolves to 0.
+	   rounded-full is unaffected (it uses infinity), so circles/dots stay round. */
+	--radius-xs: 0px;
+	--radius-sm: 0px;
+	--radius-md: 0px;
+	--radius-lg: 0px;
+	--radius-xl: 0px;
+	--radius-2xl: 0px;
+	--radius-3xl: 0px;
 
 	/* Brand colors — gold-forward, green as subtle accent */
 	--color-brand: var(--brand);
@@ -176,8 +181,8 @@
 	--tracking-label-wide: 0.22em;
 
 	/* Card radius scale */
-	--radius-card: 28px;
-	--radius-card-lg: 36px;
+	--radius-card: 0px;
+	--radius-card-lg: 0px;
 }
 
 @layer base {
@@ -244,7 +249,7 @@
 		--chart-3: oklch(0.398 0.07 227.392);
 		--chart-4: oklch(0.828 0.189 84.429);
 		--chart-5: oklch(0.769 0.188 70.08);
-		--radius: 0.625rem;
+		--radius: 0px;
 		--sidebar: oklch(0.985 0 0);
 		--sidebar-foreground: oklch(0.145 0 0);
 		--sidebar-primary: oklch(0.205 0 0);
@@ -259,10 +264,13 @@
 		   dash, linejoin. Face shades derive from surface via color-mix so a
 		   single "surface" lever drives all three visible faces. */
 		--iso-ink: #1a1916;
+		/* Line-work stroke. Defaults to ink, but can be set independently so a
+		   scene can lighten its outlines without dimming label text. */
+		--iso-stroke: var(--iso-ink);
 		--iso-surface: #fbfaf8;
 		--iso-muted: #9a958a;
-		--iso-accent: #beff00;
-		--iso-stroke-w: 1.2;
+		--iso-accent: #1378E6;
+		--iso-stroke-w: 0.8;
 		--iso-dash: 4 4;
 		--iso-linejoin: round;
 		--iso-fill-top: var(--iso-surface);
@@ -322,18 +330,9 @@
 		--sidebar-border: oklch(0.269 0 0);
 		--sidebar-ring: oklch(0.439 0 0);
 
-		/* ── Isometric illustration system — dark variant ──
-		   Dark faces, light strokes. Sides go darker than the top. */
-		--iso-ink: #e7e5e0;
-		--iso-surface: #1b1b1f;
-		--iso-muted: #6b6b72;
-		--iso-accent: #beff00;
-		--iso-fill-top: var(--iso-surface);
-		--iso-fill-left: color-mix(in oklab, var(--iso-surface), black 22%);
-		--iso-fill-right: color-mix(in oklab, var(--iso-surface), black 38%);
-		--iso-accent-top: var(--iso-accent);
-		--iso-accent-left: color-mix(in oklab, var(--iso-accent), black 14%);
-		--iso-accent-right: color-mix(in oklab, var(--iso-accent), black 26%);
+		/* Iso illustrations stay light (white) even in dark mode — the iso
+		   tokens are intentionally NOT overridden here, so they always inherit
+		   the :root light values (white surface, dark ink, Lapis accent). */
 	}
 }
 
@@ -376,7 +375,7 @@
    polygon (inline) so individual faces stay independently themeable. */
 .iso-layer {
 	fill: none;
-	stroke: var(--iso-ink);
+	stroke: var(--iso-stroke);
 	stroke-width: var(--iso-stroke-w);
 	stroke-linejoin: var(--iso-linejoin);
 	stroke-linecap: round;
@@ -427,6 +426,21 @@
 
 .animate-fade-in {
 	animation: fade-in 0.3s ease-out both;
+}
+
+@keyframes cursor-blink {
+	0%,
+	49% {
+		opacity: 1;
+	}
+	50%,
+	100% {
+		opacity: 0;
+	}
+}
+
+.animate-cursor-blink {
+	animation: cursor-blink 1s steps(1) infinite;
 }
 
 @keyframes tooltip-fade-in {

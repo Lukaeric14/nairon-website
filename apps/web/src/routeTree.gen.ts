@@ -13,7 +13,9 @@ import { Route as UniverseRouteImport } from './routes/universe'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PitchDeckRouteImport } from './routes/pitch-deck'
+import { Route as IsoStep2RouteImport } from './routes/iso-step2'
 import { Route as IsoLabRouteImport } from './routes/iso-lab'
+import { Route as HowItWorksLabRouteImport } from './routes/how-it-works-lab'
 import { Route as FluxRouteImport } from './routes/flux'
 import { Route as DownloadRouteImport } from './routes/download'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
@@ -23,8 +25,11 @@ import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SignalsIndexRouteImport } from './routes/signals.index'
+import { Route as SolutionsSlugRouteImport } from './routes/solutions.$slug'
 import { Route as SignalsSolvingTheAgentMemoryProblemRouteImport } from './routes/signals/solving-the-agent-memory-problem'
+import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
 import { Route as ForRealEstateRouteImport } from './routes/for/real-estate'
+import { Route as CareersSlugRouteImport } from './routes/careers_.$slug'
 import { Route as AdminCareersRouteImport } from './routes/admin.careers'
 import { Route as ForRealEstatePropertyPdfRouteImport } from './routes/for/real-estate_.property-pdf'
 
@@ -48,9 +53,19 @@ const PitchDeckRoute = PitchDeckRouteImport.update({
   path: '/pitch-deck',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IsoStep2Route = IsoStep2RouteImport.update({
+  id: '/iso-step2',
+  path: '/iso-step2',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IsoLabRoute = IsoLabRouteImport.update({
   id: '/iso-lab',
   path: '/iso-lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksLabRoute = HowItWorksLabRouteImport.update({
+  id: '/how-it-works-lab',
+  path: '/how-it-works-lab',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FluxRoute = FluxRouteImport.update({
@@ -98,15 +113,30 @@ const SignalsIndexRoute = SignalsIndexRouteImport.update({
   path: '/signals/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SolutionsSlugRoute = SolutionsSlugRouteImport.update({
+  id: '/solutions/$slug',
+  path: '/solutions/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignalsSolvingTheAgentMemoryProblemRoute =
   SignalsSolvingTheAgentMemoryProblemRouteImport.update({
     id: '/signals/solving-the-agent-memory-problem',
     path: '/signals/solving-the-agent-memory-problem',
     getParentRoute: () => rootRouteImport,
   } as any)
+const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
+  id: '/industries/$slug',
+  path: '/industries/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ForRealEstateRoute = ForRealEstateRouteImport.update({
   id: '/for/real-estate',
   path: '/for/real-estate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersSlugRoute = CareersSlugRouteImport.update({
+  id: '/careers_/$slug',
+  path: '/careers/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminCareersRoute = AdminCareersRouteImport.update({
@@ -130,14 +160,19 @@ export interface FileRoutesByFullPath {
   '/cookie-policy': typeof CookiePolicyRoute
   '/download': typeof DownloadRoute
   '/flux': typeof FluxRoute
+  '/how-it-works-lab': typeof HowItWorksLabRoute
   '/iso-lab': typeof IsoLabRoute
+  '/iso-step2': typeof IsoStep2Route
   '/pitch-deck': typeof PitchDeckRoute
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
   '/admin/careers': typeof AdminCareersRoute
+  '/careers/$slug': typeof CareersSlugRoute
   '/for/real-estate': typeof ForRealEstateRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
   '/signals/solving-the-agent-memory-problem': typeof SignalsSolvingTheAgentMemoryProblemRoute
+  '/solutions/$slug': typeof SolutionsSlugRoute
   '/signals/': typeof SignalsIndexRoute
   '/for/real-estate/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
@@ -150,14 +185,19 @@ export interface FileRoutesByTo {
   '/cookie-policy': typeof CookiePolicyRoute
   '/download': typeof DownloadRoute
   '/flux': typeof FluxRoute
+  '/how-it-works-lab': typeof HowItWorksLabRoute
   '/iso-lab': typeof IsoLabRoute
+  '/iso-step2': typeof IsoStep2Route
   '/pitch-deck': typeof PitchDeckRoute
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
   '/admin/careers': typeof AdminCareersRoute
+  '/careers/$slug': typeof CareersSlugRoute
   '/for/real-estate': typeof ForRealEstateRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
   '/signals/solving-the-agent-memory-problem': typeof SignalsSolvingTheAgentMemoryProblemRoute
+  '/solutions/$slug': typeof SolutionsSlugRoute
   '/signals': typeof SignalsIndexRoute
   '/for/real-estate/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
@@ -171,14 +211,19 @@ export interface FileRoutesById {
   '/cookie-policy': typeof CookiePolicyRoute
   '/download': typeof DownloadRoute
   '/flux': typeof FluxRoute
+  '/how-it-works-lab': typeof HowItWorksLabRoute
   '/iso-lab': typeof IsoLabRoute
+  '/iso-step2': typeof IsoStep2Route
   '/pitch-deck': typeof PitchDeckRoute
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/universe': typeof UniverseRoute
   '/admin/careers': typeof AdminCareersRoute
+  '/careers_/$slug': typeof CareersSlugRoute
   '/for/real-estate': typeof ForRealEstateRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
   '/signals/solving-the-agent-memory-problem': typeof SignalsSolvingTheAgentMemoryProblemRoute
+  '/solutions/$slug': typeof SolutionsSlugRoute
   '/signals/': typeof SignalsIndexRoute
   '/for/real-estate_/property-pdf': typeof ForRealEstatePropertyPdfRoute
 }
@@ -193,14 +238,19 @@ export interface FileRouteTypes {
     | '/cookie-policy'
     | '/download'
     | '/flux'
+    | '/how-it-works-lab'
     | '/iso-lab'
+    | '/iso-step2'
     | '/pitch-deck'
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
     | '/admin/careers'
+    | '/careers/$slug'
     | '/for/real-estate'
+    | '/industries/$slug'
     | '/signals/solving-the-agent-memory-problem'
+    | '/solutions/$slug'
     | '/signals/'
     | '/for/real-estate/property-pdf'
   fileRoutesByTo: FileRoutesByTo
@@ -213,14 +263,19 @@ export interface FileRouteTypes {
     | '/cookie-policy'
     | '/download'
     | '/flux'
+    | '/how-it-works-lab'
     | '/iso-lab'
+    | '/iso-step2'
     | '/pitch-deck'
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
     | '/admin/careers'
+    | '/careers/$slug'
     | '/for/real-estate'
+    | '/industries/$slug'
     | '/signals/solving-the-agent-memory-problem'
+    | '/solutions/$slug'
     | '/signals'
     | '/for/real-estate/property-pdf'
   id:
@@ -233,14 +288,19 @@ export interface FileRouteTypes {
     | '/cookie-policy'
     | '/download'
     | '/flux'
+    | '/how-it-works-lab'
     | '/iso-lab'
+    | '/iso-step2'
     | '/pitch-deck'
     | '/privacy'
     | '/terms-and-conditions'
     | '/universe'
     | '/admin/careers'
+    | '/careers_/$slug'
     | '/for/real-estate'
+    | '/industries/$slug'
     | '/signals/solving-the-agent-memory-problem'
+    | '/solutions/$slug'
     | '/signals/'
     | '/for/real-estate_/property-pdf'
   fileRoutesById: FileRoutesById
@@ -254,14 +314,19 @@ export interface RootRouteChildren {
   CookiePolicyRoute: typeof CookiePolicyRoute
   DownloadRoute: typeof DownloadRoute
   FluxRoute: typeof FluxRoute
+  HowItWorksLabRoute: typeof HowItWorksLabRoute
   IsoLabRoute: typeof IsoLabRoute
+  IsoStep2Route: typeof IsoStep2Route
   PitchDeckRoute: typeof PitchDeckRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   UniverseRoute: typeof UniverseRoute
   AdminCareersRoute: typeof AdminCareersRoute
+  CareersSlugRoute: typeof CareersSlugRoute
   ForRealEstateRoute: typeof ForRealEstateRoute
+  IndustriesSlugRoute: typeof IndustriesSlugRoute
   SignalsSolvingTheAgentMemoryProblemRoute: typeof SignalsSolvingTheAgentMemoryProblemRoute
+  SolutionsSlugRoute: typeof SolutionsSlugRoute
   SignalsIndexRoute: typeof SignalsIndexRoute
   ForRealEstatePropertyPdfRoute: typeof ForRealEstatePropertyPdfRoute
 }
@@ -296,11 +361,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PitchDeckRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/iso-step2': {
+      id: '/iso-step2'
+      path: '/iso-step2'
+      fullPath: '/iso-step2'
+      preLoaderRoute: typeof IsoStep2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/iso-lab': {
       id: '/iso-lab'
       path: '/iso-lab'
       fullPath: '/iso-lab'
       preLoaderRoute: typeof IsoLabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works-lab': {
+      id: '/how-it-works-lab'
+      path: '/how-it-works-lab'
+      fullPath: '/how-it-works-lab'
+      preLoaderRoute: typeof HowItWorksLabRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/flux': {
@@ -366,6 +445,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignalsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/solutions/$slug': {
+      id: '/solutions/$slug'
+      path: '/solutions/$slug'
+      fullPath: '/solutions/$slug'
+      preLoaderRoute: typeof SolutionsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signals/solving-the-agent-memory-problem': {
       id: '/signals/solving-the-agent-memory-problem'
       path: '/signals/solving-the-agent-memory-problem'
@@ -373,11 +459,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignalsSolvingTheAgentMemoryProblemRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/industries/$slug': {
+      id: '/industries/$slug'
+      path: '/industries/$slug'
+      fullPath: '/industries/$slug'
+      preLoaderRoute: typeof IndustriesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/for/real-estate': {
       id: '/for/real-estate'
       path: '/for/real-estate'
       fullPath: '/for/real-estate'
       preLoaderRoute: typeof ForRealEstateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers_/$slug': {
+      id: '/careers_/$slug'
+      path: '/careers/$slug'
+      fullPath: '/careers/$slug'
+      preLoaderRoute: typeof CareersSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/careers': {
@@ -406,15 +506,20 @@ const rootRouteChildren: RootRouteChildren = {
   CookiePolicyRoute: CookiePolicyRoute,
   DownloadRoute: DownloadRoute,
   FluxRoute: FluxRoute,
+  HowItWorksLabRoute: HowItWorksLabRoute,
   IsoLabRoute: IsoLabRoute,
+  IsoStep2Route: IsoStep2Route,
   PitchDeckRoute: PitchDeckRoute,
   PrivacyRoute: PrivacyRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   UniverseRoute: UniverseRoute,
   AdminCareersRoute: AdminCareersRoute,
+  CareersSlugRoute: CareersSlugRoute,
   ForRealEstateRoute: ForRealEstateRoute,
+  IndustriesSlugRoute: IndustriesSlugRoute,
   SignalsSolvingTheAgentMemoryProblemRoute:
     SignalsSolvingTheAgentMemoryProblemRoute,
+  SolutionsSlugRoute: SolutionsSlugRoute,
   SignalsIndexRoute: SignalsIndexRoute,
   ForRealEstatePropertyPdfRoute: ForRealEstatePropertyPdfRoute,
 }
