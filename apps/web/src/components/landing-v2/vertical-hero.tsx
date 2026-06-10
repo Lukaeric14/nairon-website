@@ -4,7 +4,7 @@
 
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { CAL_ATTRS } from "./cal";
-import { HeroDots } from "./hero-dots";
+import { LazyHeroDots as HeroDots } from "./hero-dots-lazy";
 
 export interface VerticalHeroProps {
 	headline: string;

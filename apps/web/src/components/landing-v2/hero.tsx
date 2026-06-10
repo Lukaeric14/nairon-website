@@ -29,7 +29,7 @@ import {
 import { DsButton } from "@/components/ui/ds-button";
 import { slugify } from "@/content/verticals";
 import { CAL_ATTRS } from "./cal";
-import { HeroDots } from "./hero-dots";
+import { LazyHeroDots as HeroDots } from "./hero-dots-lazy";
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 type MenuItem = { title: string; desc: string; icon: Icon; href: string };
