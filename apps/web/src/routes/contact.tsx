@@ -4,7 +4,6 @@ import {
 	ArrowUpRightIcon,
 	EnvelopeIcon,
 	CalendarDaysIcon,
-	ChatBubbleLeftRightIcon,
 } from "@heroicons/react/24/outline";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -24,9 +23,6 @@ export const Route = createFileRoute("/contact")({
 			path: "/contact",
 		}),
 });
-
-const COMMUNITY_URL =
-	"https://join.slack.com/t/naironaicommunity/shared_invite/zt-3iqxykjaq-U_PYxtF12xecClDIfgPsCQ";
 
 function ContactPage() {
 	useCalInit();
@@ -80,14 +76,6 @@ function ContactChannels() {
 				body="Prefer email? Reach the team directly and we'll get back to you fast."
 				actionLabel="info@naironai.com"
 				href="mailto:info@naironai.com"
-			/>
-			<Channel
-				icon={ChatBubbleLeftRightIcon}
-				title="Join the community"
-				body="Connect with other operators and builders working with AI employees."
-				actionLabel="Join the Slack"
-				href={COMMUNITY_URL}
-				external
 			/>
 		</div>
 	);
