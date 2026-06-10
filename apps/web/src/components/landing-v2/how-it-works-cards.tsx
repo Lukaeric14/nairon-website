@@ -85,7 +85,7 @@ export function HowItWorksCards() {
 	}, [active]);
 
 	return (
-		<section className="w-full bg-ds-surface px-6 pt-8 pb-10 md:pt-12 md:pb-14">
+		<section id="how-it-works" className="w-full bg-ds-surface px-6 pt-8 pb-10 md:pt-12 md:pb-14">
 			<div ref={sectionRef} className="mx-auto max-w-6xl">
 				<header className="mx-auto max-w-2xl text-center">
 					<h2 className="font-geist text-[34px] font-medium leading-[1.1] tracking-[-0.02em] text-[#1a1916] md:text-[46px]">

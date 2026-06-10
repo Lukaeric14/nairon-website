@@ -1,10 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Navbar, Footer } from "@/components/landing";
-import { ModalProvider } from "@/components/landing/modal-provider";
-import { HireModal } from "@/components/landing/hire-modal";
-import { CandidateModal } from "@/components/landing/candidate-modal";
+import { Navbar } from "@/components/landing-v2/hero";
+import { Footer } from "@/components/landing-v2/footer";
+import { useCalInit } from "@/components/landing-v2/cal";
 import { seoHead } from "@/lib/seo";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 export const Route = createFileRoute("/$")({
 	component: NotFoundPage,
@@ -19,43 +18,44 @@ export const Route = createFileRoute("/$")({
 });
 
 function NotFoundPage() {
+	useCalInit();
 	return (
-		<ModalProvider>
-			<div className="min-h-screen bg-white text-[#1A1916] font-inter">
-				<Navbar />
-				<main className="pt-32 pb-20 px-6">
-					<div className="max-w-2xl mx-auto text-center">
-						<p className="text-[#C9A96E] text-sm font-medium uppercase tracking-[0.16em] mb-4">
-							404
-						</p>
-						<h1 className="text-4xl md:text-6xl font-normal tracking-[-1.5px] text-[#1A1916] mb-6">
-							Page not found
-						</h1>
-						<p className="text-[#5C584F] text-lg leading-relaxed mb-10 max-w-md mx-auto">
-							The page you're looking for doesn't exist or has been moved.
-						</p>
+		<div className="font-geist min-h-screen flex flex-col" style={{ backgroundColor: "var(--ds-shell)" }}>
+			<Navbar />
+			<main className="flex-1 flex items-center justify-center px-6 py-32">
+				<div className="max-w-lg text-center">
+					<p
+						className="font-geist-mono text-[0.6875rem] font-medium uppercase tracking-[0.16em] mb-6"
+						style={{ color: "var(--brand-blue)" }}
+					>
+						404
+					</p>
+					<h1 className="text-5xl md:text-6xl font-medium tracking-[-1.5px] text-ds-text-primary mb-5">
+						Page not found
+					</h1>
+					<p className="text-[1.0625rem] leading-relaxed text-ds-text-tertiary mb-10 max-w-sm mx-auto">
+						The page you're looking for doesn't exist or has been moved.
+					</p>
 
-						<div className="flex flex-wrap justify-center gap-4">
-							<a
-								href="/"
-								className="inline-flex items-center gap-2 bg-[#C9A96E] hover:bg-[#B8944F] text-[#0C0C0C] font-semibold text-base px-6 py-3 rounded-full transition-colors"
-							>
-								Back to home
-								<ArrowUpRight className="w-4 h-4" />
-							</a>
-							<a
-								href="/signals"
-								className="inline-flex items-center gap-2 border border-[#0C0C0C]/10 text-[#1A1916] hover:border-[#C9A96E]/50 hover:text-[#C9A96E] font-medium text-base px-6 py-3 rounded-full transition-colors"
-							>
-								Read Signals
-							</a>
-						</div>
+					<div className="flex flex-wrap justify-center gap-3">
+						<a
+							href="/"
+							className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-[0.9375rem] font-medium text-white transition-all hover:brightness-110"
+							style={{ backgroundColor: "var(--brand-blue)" }}
+						>
+							Back to home
+							<ArrowRightIcon className="size-4" />
+						</a>
+						<a
+							href="/signals"
+							className="inline-flex items-center gap-2 rounded-xl border border-ds-border px-6 py-3 text-[0.9375rem] font-medium text-ds-text-secondary transition-colors hover:text-ds-text-primary hover:border-ds-border-strong"
+						>
+							Read Signals
+						</a>
 					</div>
-				</main>
-				<Footer />
-			</div>
-			<HireModal />
-			<CandidateModal />
-		</ModalProvider>
+				</div>
+			</main>
+			<Footer />
+		</div>
 	);
 }

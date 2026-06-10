@@ -20,7 +20,7 @@ import {
 	AdjustmentsHorizontalIcon,
 	ClipboardDocumentCheckIcon,
 	AcademicCapIcon,
-	SparklesIcon,
+	ArrowPathIcon,
 	InformationCircleIcon,
 	EnvelopeIcon,
 	BriefcaseIcon,
@@ -178,7 +178,7 @@ export const MENUS: MegaMenu[] = [
 			{
 				title: "How we work",
 				desc: "Weeks to working AI, not months of planning.",
-				icon: SparklesIcon,
+				icon: ArrowPathIcon,
 				href: "/#how-it-works",
 			},
 			{
