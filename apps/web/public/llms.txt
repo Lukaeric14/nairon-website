@@ -1,0 +1,32 @@
+# Nairon AI
+
+> Nairon builds and deploys custom AI employees for modern teams. Each AI employee owns real workflows end to end inside the tools a business already runs (CRM, inbox, PMS, helpdesk) with no migrations, and goes live in weeks.
+
+Nairon ships industry- and function-specific AI employees rather than a generic chatbot. The pages below are organized by industry (who it's for) and by solution (what function it runs).
+
+## Core
+- [Home](https://naironai.com/): What Nairon is, how it works, and how to book a call.
+- [Careers](https://naironai.com/careers): Open roles building and deploying AI employees.
+- [Signals](https://naironai.com/signals): Notes and essays from building AI employees in production.
+
+## Industries
+- [Property Management](https://naironai.com/industries/property-management): Nairon builds custom AI employees for property management that run leasing, maintenance coordination, and resident ops inside your existing tools. Live in weeks, no migrations.
+- [Commercial Real Estate](https://naironai.com/industries/commercial-real-estate): Nairon builds custom AI employees for commercial real estate that own reporting, comps, and tenant workflows inside your existing tools. Live in weeks, no migrations.
+- [Solar & Renewables](https://naironai.com/industries/solar-renewables): Nairon builds custom AI employees for solar and renewables that handle quoting, scheduling, and customer follow-up inside your existing tools. Live in weeks, no migrations.
+- [Logistics & 3PL](https://naironai.com/industries/logistics-3pl): Nairon builds custom AI employees for logistics and 3PL teams. Automate dispatch, load tracking, check calls, and back-office ops inside the tools you already run.
+- [Franchises](https://naironai.com/industries/franchises): Nairon builds custom AI employees for franchises that standardize operations across every location, handling onboarding, compliance, and reporting inside your existing tools.
+- [Healthcare Staffing](https://naironai.com/industries/healthcare-staffing): Nairon builds custom AI employees for healthcare staffing that fill open shifts, match credentialed clinicians, and run coordination inside your existing tools. Live in weeks.
+- [Software & Technology](https://naironai.com/industries/software-technology): Nairon builds custom AI employees for software and technology teams. They own support, GTM, and operations inside your existing tools. No migrations, live in weeks.
+
+## Solutions
+- [Revenue & GTM](https://naironai.com/solutions/revenue-gtm): Nairon builds custom AI employees for Revenue and GTM teams. They run prospecting, qualification, proposals, and pipeline ops inside your existing CRM and outreach tools.
+- [Customer Support](https://naironai.com/solutions/customer-support): Nairon builds custom AI employees for customer support. They triage, draft, and resolve tickets inside your existing helpdesk, with a human in the loop and no migrations.
+- [Back Office Operations](https://naironai.com/solutions/back-office-operations): Nairon builds custom AI employees that run back office operations like data entry, reconciliation, and reporting inside your existing tools. No migrations, live in weeks.
+- [Data & Research](https://naironai.com/solutions/data-research): Nairon builds custom AI employees for data and research teams that extract, structure, enrich, and route information at scale inside the tools and databases you already use.
+- [Content & Marketing](https://naironai.com/solutions/content-marketing): Nairon builds custom AI employees for content and marketing teams. They take briefs to publish-ready, on-brand copy inside your existing tools, with no migrations.
+- [Workflow Automation](https://naironai.com/solutions/workflow-automation): Nairon builds custom AI employees for workflow automation that own your repetitive operational processes end to end, inside the tools you already run. Live in weeks.
+
+## Legal
+- [Privacy Policy](https://naironai.com/privacy): How Nairon handles personal data.
+- [Terms & Conditions](https://naironai.com/terms-and-conditions): Terms governing use of the site and services.
+- [Acceptable Use](https://naironai.com/acceptable-use): Acceptable-use policy.

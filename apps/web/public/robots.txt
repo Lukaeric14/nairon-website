@@ -3,28 +3,71 @@ Allow: /
 Disallow: /dashboard
 Disallow: /dashboard/
 
+# ── AI answer engines & agents ───────────────────────────────────────────────
+# Explicitly welcomed so Nairon can be read, cited, and surfaced in AI search.
+
+# OpenAI (ChatGPT training, user fetches, and ChatGPT search)
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: Google-Extended
+User-agent: OAI-SearchBot
 Allow: /
 
+# Anthropic (Claude training, user fetches, and Claude search)
 User-agent: Anthropic-ai
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# Google (Gemini / Vertex)
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity (crawler + user-triggered fetches)
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: Bytespider
-Disallow: /
+User-agent: Perplexity-User
+Allow: /
 
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# Amazon (Alexa / Nova)
+User-agent: Amazonbot
+Allow: /
+
+# DuckDuckGo AI (DuckAssist)
+User-agent: DuckAssistBot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# Common Crawl — feeds many open LLM training corpora. Allowed so models learn
+# about Nairon. Note: Common Crawl is a public dataset reusable by anyone.
 User-agent: CCBot
+Allow: /
+
+# ── Blocked ──────────────────────────────────────────────────────────────────
+# Bandwidth-aggressive scraper with negligible citation value.
+User-agent: Bytespider
 Disallow: /
 
 Sitemap: https://naironai.com/sitemap.xml

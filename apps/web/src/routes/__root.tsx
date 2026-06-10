@@ -59,6 +59,11 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 			{ name: "theme-color", content: "#FFFFFF" },
 		],
 		links: [
+			// Warm up TCP/TLS to third-party origins used early on the page
+			// (booking widget, analytics, hero video) to shave connection latency.
+			{ rel: "preconnect", href: "https://app.cal.com", crossOrigin: "anonymous" },
+			{ rel: "preconnect", href: "https://www.googletagmanager.com" },
+			{ rel: "dns-prefetch", href: "https://iframe.videodelivery.net" },
 			{ rel: "icon", href: "/favicon.png", type: "image/png", sizes: "192x192" },
 			{ rel: "icon", href: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
 			{ rel: "icon", href: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },

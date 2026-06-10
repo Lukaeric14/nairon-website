@@ -1,7 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { VerticalLanding, VerticalNotFound } from "@/components/landing-v2/vertical-landing";
 import { VERTICALS } from "@/content/verticals";
-import { seoHead } from "@/lib/seo";
+import { breadcrumbJsonLd, seoHead, verticalServiceJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/industries/$slug")({
 	component: IndustryPage,
@@ -17,11 +17,29 @@ export const Route = createFileRoute("/industries/$slug")({
 		if (!c || c.kind !== "industry") {
 			return { meta: [{ name: "robots", content: "noindex, nofollow" }] };
 		}
-		return seoHead({
-			title: c.seo.title,
-			description: c.seo.description,
-			path: `/industries/${c.slug}`,
-		});
+		const path = `/industries/${c.slug}`;
+		const base = seoHead({ title: c.seo.title, description: c.seo.description, path });
+		return {
+			...base,
+			scripts: [
+				{
+					type: "application/ld+json",
+					children: JSON.stringify(
+						verticalServiceJsonLd({ name: `AI Employees for ${c.name}`, description: c.seo.description, path }),
+					),
+				},
+				{
+					type: "application/ld+json",
+					children: JSON.stringify(
+						breadcrumbJsonLd([
+							{ name: "Home", path: "/" },
+							{ name: "Industries", path: "/" },
+							{ name: c.name, path },
+						]),
+					),
+				},
+			],
+		};
 	},
 	notFoundComponent: () => <VerticalNotFound />,
 });

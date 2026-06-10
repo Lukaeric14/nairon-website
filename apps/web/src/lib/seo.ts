@@ -109,6 +109,32 @@ export function serviceJsonLd() {
 }
 
 /**
+ * JSON-LD Service schema for a single industry/solution vertical page. Lets
+ * Google understand each landing page as a distinct service offering tied to
+ * Nairon, instead of treating them as near-duplicate pages.
+ */
+export function verticalServiceJsonLd(config: {
+	name: string;
+	description: string;
+	path: string;
+}) {
+	return {
+		"@context": "https://schema.org",
+		"@type": "Service",
+		name: config.name,
+		description: config.description,
+		url: `${SITE_URL}${config.path}`,
+		serviceType: "AI Employees",
+		provider: {
+			"@type": "Organization",
+			name: SITE_NAME,
+			url: SITE_URL,
+		},
+		areaServed: { "@type": "Place", name: "Worldwide" },
+	};
+}
+
+/**
  * @deprecated Flux is retired from the public website. Keep this only for old
  * pages that have not been deleted yet.
  */
