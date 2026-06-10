@@ -67,7 +67,7 @@ export function HireFAQ() {
 					<SectionTag label="Questions" />
 					<SectionHeading className="mt-4">
 						All the Important Details Before Hiring from{" "}
-						<DimText>Nairon's AI Bootcamp in Dubai, UAE</DimText>
+						<DimText>Nairon's AI Bootcamp in Miami, FL</DimText>
 					</SectionHeading>
 					<a
 						href="/bookacall"

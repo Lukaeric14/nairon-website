@@ -108,7 +108,7 @@ function ChartVisual() {
 	);
 }
 
-function DubaiVisual() {
+function MiamiVisual() {
 	return (
 		<div className="mt-6 rounded-xl overflow-hidden bg-[#0C0C0C]/[0.02] min-h-[140px] relative flex items-end justify-center px-4 pb-4">
 			{/* Abstract skyline silhouette */}
@@ -227,8 +227,8 @@ function getVisual(visualType: BentoCardData["visualType"]) {
 	switch (visualType) {
 		case "chart":
 			return <ChartVisual />;
-		case "dubai":
-			return <DubaiVisual />;
+		case "miami":
+			return <MiamiVisual />;
 		case "avatars":
 			return <AvatarsVisual />;
 		case "logos":

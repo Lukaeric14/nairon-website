@@ -115,8 +115,8 @@ function TermsPage() {
 									7. Governing Law
 								</h2>
 								<p>
-									These terms are governed by the laws of the United Arab Emirates.
-									Any disputes shall be resolved in the courts of Dubai, UAE.
+									These terms are governed by the laws of the State of Florida, United States.
+									Any disputes shall be resolved in the courts of Miami-Dade County, Florida.
 								</p>
 							</section>
 

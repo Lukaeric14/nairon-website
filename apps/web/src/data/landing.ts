@@ -74,7 +74,7 @@ export const ENGINEER_NAV: NavConfig = {
 						{
 							label: "Residence",
 							href: "/program",
-							description: "8-week intensive AI engineering program in Dubai",
+							description: "8-week intensive AI engineering program in Miami",
 							icon: "building",
 						},
 						{
@@ -281,7 +281,7 @@ export const PROGRAM_PHASES: PhaseData[] = [
 				week: "Week 2",
 				title: "72-Hour Mobile AI App Hackathon + Full-Week Product Work",
 				description:
-					"Build a complete mobile application with integrated AI in 72 hours, then continue the week with code reviews, performance upgrades, added feature requests, and stakeholder-style feedback. The highest-performing engineers secure a direct invite to the on-site Dubai intensive.",
+					"Build a complete mobile application with integrated AI in 72 hours, then continue the week with code reviews, performance upgrades, added feature requests, and stakeholder-style feedback. The highest-performing engineers secure a direct invite to the on-site Miami intensive.",
 				guest: "Special Guest",
 				guestRole: "Head of Product at Series C AI Startup",
 			},
@@ -289,7 +289,7 @@ export const PROGRAM_PHASES: PhaseData[] = [
 	},
 	{
 		phase: "Phase 2",
-		title: "On-Site Dubai Intensive",
+		title: "On-Site Miami Intensive",
 		gradient: "phase-gradient-2",
 		weeks: [
 			{
@@ -393,7 +393,7 @@ export const FAQ_ITEMS = [
 	{
 		question: "What does the program include?",
 		answer:
-			"8 weeks of intensive AI engineering training, direct access to our mentor network, full relocation to Dubai, and guaranteed hiring positions at leading AI startups.",
+			"8 weeks of intensive AI engineering training, direct access to our mentor network, full relocation to Miami, and guaranteed hiring positions at leading AI startups.",
 	},
 	{
 		question: "Is there a cost to join?",
@@ -429,7 +429,7 @@ export const FOOTER_LINKS = {
 export const ENGINEER_BENEFITS = [
 	"8 Weeks free AI engineering training",
 	"Direct access to our mentor network",
-	"Full Relocation to Dubai",
+	"Full Relocation to Miami",
 	"Guaranteed hiring positions at leading AI Startups",
 ] as const;
 
@@ -505,9 +505,9 @@ export const PROGRAM_BENEFIT_CARDS = [
 	{
 		tag: "The Experience",
 		heading:
-			"Dubai is the experience — The opportunity is Global.",
+			"Miami is the experience — The opportunity is Global.",
 		items: [
-			{ icon: "home" as const, text: "Free housing during Dubai intensive weeks" },
+			{ icon: "home" as const, text: "Free housing during Miami intensive weeks" },
 			{ icon: "plane" as const, text: "Flights + transportation covered" },
 			{ icon: "food" as const, text: "Food + laundry service included" },
 		],
@@ -773,9 +773,9 @@ export const BENEFITS_BENTO_SECTION = {
 		cards: {
 			experience: {
 				tag: "The Experience",
-				heading: "Dubai is the experience - The opportunity is global.",
+				heading: "Miami is the experience - The opportunity is global.",
 				items: [
-					{ icon: "home" as const, text: "Free housing during Dubai intensive weeks" },
+					{ icon: "home" as const, text: "Free housing during Miami intensive weeks" },
 					{ icon: "plane" as const, text: "Flights + transportation covered" },
 					{ icon: "food" as const, text: "Food + laundry service included" },
 				],
@@ -936,7 +936,7 @@ export const STEPS_CTA = {
 export const RESIDENCE = {
 	engineer: {
 		title: "The Residency",
-		subtitle: "8 weeks in Dubai. Fully funded. Only 12 spots.",
+		subtitle: "8 weeks in Miami. Fully funded. Only 12 spots.",
 		points: [
 			"100hrs/week, 800hrs total",
 			"Housing, flights, and food included",
@@ -950,7 +950,7 @@ export const RESIDENCE = {
 		subtitle: "How we produce the top 1% of AI engineers",
 		points: [
 			"100hrs/week, 800hrs total",
-			"8-week intensive in Dubai",
+			"8-week intensive in Miami",
 			"Hackathons, live projects, peer pressure",
 			"Only 12 per cohort — extreme selectivity",
 			"Every graduate is verified by us",
@@ -1055,7 +1055,7 @@ export const FAQ_ENGINEER = [
 	{
 		question: "Where is the program based?",
 		answer:
-			"The Residence is based in Dubai, UAE. You'll fly out for the full 8-week intensive. The Apprenticeship is fully remote.",
+			"The Residence is based in Miami, FL. You'll fly out for the full 8-week intensive. The Apprenticeship is fully remote.",
 	},
 	{
 		question: "What happens after graduation?",

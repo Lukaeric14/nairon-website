@@ -158,7 +158,7 @@ export function courseJsonLd(config: {
 		courseMode: "onsite",
 		locationCreated: {
 			"@type": "Place",
-			name: "Dubai, United Arab Emirates",
+			name: "Miami, Florida, United States",
 		},
 	};
 }

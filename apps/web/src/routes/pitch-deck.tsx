@@ -236,7 +236,7 @@ function SlideContent({ index }: { index: number }) {
 					We build proprietary tooling and benchmarking systems to identify, train & place the next generation of AI-Native Engineers.
 				</p>
 				<p className="text-[14px] text-[#1A1916]/[0.2] mt-16 tracking-[0.16em] uppercase">
-					Dubai, UAE &middot; naironai.com
+					Miami, FL &middot; naironai.com
 				</p>
 			</div>
 		</SlideFrame>,
@@ -258,7 +258,7 @@ function SlideContent({ index }: { index: number }) {
 					{[
 						{ value: "600+", label: "Engineers assessed" },
 						{ value: "Flux", label: "Proprietary benchmark" },
-						{ value: "UAE", label: "HQ — Global reach" },
+						{ value: "Miami", label: "HQ — Global reach" },
 						{ value: "2026", label: "Founded" },
 					].map((stat, i) => (
 						<NotchedCell key={stat.label} borderRight={i < 3}>
@@ -609,7 +609,7 @@ function SlideContent({ index }: { index: number }) {
 						{
 							num: "01",
 							title: "Workspace & infrastructure",
-							desc: "Dedicated workspace to build, collaborate, and host client meetings in Dubai's innovation ecosystem",
+							desc: "Dedicated workspace to build, collaborate, and host client meetings in Miami's innovation ecosystem",
 						},
 						{
 							num: "02",
@@ -619,7 +619,7 @@ function SlideContent({ index }: { index: number }) {
 						{
 							num: "03",
 							title: "Licensing & legal",
-							desc: "Business licensing support to operate as a recruiting startup in the UAE market",
+							desc: "Business licensing support to operate as a startup in the US market",
 						},
 						{
 							num: "04",
@@ -684,7 +684,7 @@ function SlideContent({ index }: { index: number }) {
 					))}
 				</div>
 				<p className="text-[13px] text-[#1A1916]/[0.15] mt-16 tracking-[0.16em] uppercase">
-					Dubai, UAE
+					Miami, FL
 				</p>
 			</div>
 		</SlideFrame>,

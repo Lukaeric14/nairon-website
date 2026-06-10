@@ -24,7 +24,7 @@ export const ROLES: Role[] = [
 		title: "Design Engineer",
 		team: "Engineering",
 		type: "Full-time",
-		location: "Remote / Dubai",
+		location: "Remote / Miami",
 		blurb:
 			"Own the surfaces where humans and AI agents work side by side — from prototype to production. You turn product thinking into interfaces that feel obvious.",
 		description:
@@ -53,7 +53,7 @@ export const ROLES: Role[] = [
 		title: "AI Engineer",
 		team: "Engineering",
 		type: "Full-time",
-		location: "Remote / Dubai",
+		location: "Remote / Miami",
 		blurb:
 			"Design and ship the multi-agent systems that run real operational work inside customer stacks. Build, deploy, and tune AI employees end to end.",
 		description:

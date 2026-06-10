@@ -5,7 +5,7 @@ const testimonials = [
 		quote:
 			"Nairon helped us turn a messy acquisition workflow into an AI employee with real guardrails. It started saving the team time within the first month.",
 		name: "Sarah Al-Rashid",
-		role: "CEO, TechVentures Dubai",
+		role: "CEO, TechVentures Miami",
 		avatar: "/avatars/avatar-4.jpg",
 	},
 	{

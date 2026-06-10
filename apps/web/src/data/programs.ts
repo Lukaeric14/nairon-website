@@ -140,7 +140,7 @@ export const RESIDENCE_DATA: ProgramData = {
 		heading: "The most selective AI engineering program in the world.",
 		stats: [
 			{ label: "Duration", value: "8 Weeks Intensive" },
-			{ label: "Location", value: "Dubai, UAE" },
+			{ label: "Location", value: "Miami, FL" },
 			{ label: "Acceptance", value: "< 0.2%" },
 			{ label: "Cohort Size", value: "10 Engineers" },
 		],
@@ -152,7 +152,7 @@ export const RESIDENCE_DATA: ProgramData = {
 		{
 			size: "large",
 			icon: "MapPin",
-			title: "Full Relocation to Dubai",
+			title: "Full Relocation to Miami",
 			description:
 				"Flights, private housing, meals, laundry — everything covered for 6 weeks on-site. You focus on building. We handle the rest.",
 			visualType: "dubai",
@@ -226,7 +226,7 @@ export const RESIDENCE_DATA: ProgramData = {
 		heading: "8 Weeks. 3 Phases.",
 		dimHeading: "Zero Shortcuts.",
 		subheading:
-			"Every week is engineered for intensity. The first 2 weeks are remote evaluation. The top performers fly to Dubai for 6 weeks of on-site building.",
+			"Every week is engineered for intensity. The first 2 weeks are remote evaluation. The top performers fly to Miami for 6 weeks of on-site building.",
 		phases: PROGRAM_PHASES.map((p) => ({
 			phase: p.phase,
 			title: p.title,
@@ -249,7 +249,7 @@ export const RESIDENCE_DATA: ProgramData = {
 			"Strong builder — shipped production code under real deadlines",
 			"High agency — thrives under ambiguity and tight timelines",
 			"Full commitment — 12-hour days, 6 days a week for 8 weeks",
-			"Willing to relocate to Dubai for weeks 3–8",
+			"Willing to relocate to Miami for weeks 3–8",
 		],
 		subtext: "This is not for everyone. That's the point.",
 	},
@@ -325,7 +325,7 @@ export const RESIDENCE_DATA: ProgramData = {
 		dimHeading: "Full Commitment.",
 		price: "$0",
 		included: [
-			"Round-trip flights to Dubai",
+			"Round-trip flights to Miami",
 			"Private housing for the full program",
 			"Daily meals and laundry service",
 			"All AI tools, API credits, and compute",
@@ -361,9 +361,9 @@ export const RESIDENCE_DATA: ProgramData = {
 				"Correct. Flights, housing, meals, tools — everything is covered. We make money when our hiring partners hire you. Your only cost is your full commitment for 8 weeks.",
 		},
 		{
-			question: "Where exactly in Dubai?",
+			question: "Where exactly in Miami?",
 			answer:
-				"We provide private housing in a central Dubai location with modern amenities. The exact location is shared upon acceptance. All logistics are handled for you.",
+				"We provide private housing in a central Miami location with modern amenities. The exact location is shared upon acceptance. All logistics are handled for you.",
 		},
 		{
 			question: "What happens after the program?",
@@ -626,7 +626,7 @@ export const APPRENTICESHIP_DATA: ProgramData = {
 		{
 			question: "How does this compare to the Residence?",
 			answer:
-				"The Residence is an elite 8-week intensive in Dubai with guaranteed $100k+ placement. The Apprenticeship is a 6-week remote program focused on building AI skills and portfolio. Both produce engineers who can ship production AI.",
+				"The Residence is an elite 8-week intensive in Miami with guaranteed $100k+ placement. The Apprenticeship is a 6-week remote program focused on building AI skills and portfolio. Both produce engineers who can ship production AI.",
 		},
 		{
 			question: "Do I need AI experience?",
