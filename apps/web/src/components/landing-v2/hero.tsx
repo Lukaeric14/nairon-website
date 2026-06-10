@@ -16,6 +16,15 @@ import {
 	CircleStackIcon,
 	PencilSquareIcon,
 	BoltIcon,
+	UserGroupIcon,
+	AdjustmentsHorizontalIcon,
+	ClipboardDocumentCheckIcon,
+	AcademicCapIcon,
+	SparklesIcon,
+	InformationCircleIcon,
+	EnvelopeIcon,
+	BriefcaseIcon,
+	LinkIcon,
 } from "@heroicons/react/24/outline";
 import { DsButton } from "@/components/ui/ds-button";
 import { slugify } from "@/content/verticals";
@@ -139,11 +148,80 @@ export const MENUS: MegaMenu[] = [
 			href: "#",
 		},
 	},
+	{
+		id: "ai-training",
+		label: "AI Training",
+		items: [
+			{
+				title: "Workforce AI Training",
+				desc: "Upskill your team to work alongside AI agents and drive real output.",
+				icon: UserGroupIcon,
+				href: "https://academy.naironai.com",
+			},
+			{
+				title: "Executive AI Program",
+				desc: "Help leaders build AI fluency and make confident deployment decisions.",
+				icon: PresentationChartLineIcon,
+				href: "https://academy.naironai.com",
+			},
+			{
+				title: "Custom Team Programs",
+				desc: "Tailored training built around your tools, workflows, and org structure.",
+				icon: AdjustmentsHorizontalIcon,
+				href: "https://academy.naironai.com",
+			},
+			{
+				title: "AI Certification",
+				desc: "Structured learning paths that certify your people on real AI workflows.",
+				icon: ClipboardDocumentCheckIcon,
+				href: "https://academy.naironai.com",
+			},
+		],
+		cta: {
+			prompt: "Ready to build an AI-ready organization?",
+			label: "Explore training programs",
+			href: "https://academy.naironai.com",
+		},
+	},
+	{
+		id: "company",
+		label: "Company",
+		items: [
+			{
+				title: "How we work",
+				desc: "Weeks to working AI, not months of planning.",
+				icon: SparklesIcon,
+				href: "/#how-it-works",
+			},
+			{
+				title: "About",
+				desc: "From insight to execution without interruption.",
+				icon: InformationCircleIcon,
+				href: "/about",
+			},
+			{
+				title: "Contact us",
+				desc: "Make your AI real now.",
+				icon: EnvelopeIcon,
+				href: "/contact",
+			},
+			{
+				title: "Careers",
+				desc: "Move like a startup, build like an empire.",
+				icon: BriefcaseIcon,
+				href: "/careers",
+			},
+			{
+				title: "Partnerships",
+				desc: "Join forces to deliver more than we could alone.",
+				icon: LinkIcon,
+				href: "/partnerships",
+			},
+		],
+	},
 ];
 
 const LINKS: { label: string; href: string; external?: boolean }[] = [
-	{ label: "How it works", href: "/#how-it-works" },
-	{ label: "Careers", href: "/careers" },
 	{ label: "AI Academy", href: "https://academy.naironai.com", external: true },
 ];
 
@@ -166,7 +244,7 @@ function MegaPanel({ menu }: { menu: MegaMenu }) {
 							return (
 								<a
 										key={item.title}
-										href={`/${menu.id}/${slugify(item.title)}`}
+										href={item.href && item.href !== "#" ? item.href : `/${menu.id}/${slugify(item.title)}`}
 										className="group/item flex gap-3.5"
 									>
 									<Ico
@@ -258,7 +336,7 @@ export function Navbar() {
 					/>
 				</a>
 
-				<div className="hidden items-center gap-6 md:flex">
+				<div className="hidden items-center gap-10 md:flex">
 					{MENUS.map((menu) => {
 						const isOpen = open === menu.id;
 						return (
