@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "node ../../scripts/sync-convex-env.mjs && vite dev --port ${PORT:-3001}",
-    "build": "vite build",
+    "build": "bun run scripts/generate-sitemap.ts && vite build",
+    "generate-sitemap": "bun run scripts/generate-sitemap.ts",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {

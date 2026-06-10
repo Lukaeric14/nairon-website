@@ -2,30 +2,106 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://naironai.com/</loc>
-    <lastmod>2026-02-24</lastmod>
+    <lastmod>2026-06-10</lastmod>
   </url>
   <url>
-    <loc>https://naironai.com/nbench</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://naironai.com/careers</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/signals</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/pitch-deck</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/brandkit</loc>
+    <lastmod>2026-06-10</lastmod>
   </url>
   <url>
     <loc>https://naironai.com/privacy</loc>
-    <lastmod>2026-02-24</lastmod>
+    <lastmod>2026-06-10</lastmod>
   </url>
   <url>
     <loc>https://naironai.com/terms-and-conditions</loc>
-    <lastmod>2026-02-24</lastmod>
+    <lastmod>2026-06-10</lastmod>
   </url>
   <url>
     <loc>https://naironai.com/cookie-policy</loc>
-    <lastmod>2026-03-03</lastmod>
+    <lastmod>2026-06-10</lastmod>
   </url>
   <url>
     <loc>https://naironai.com/acceptable-use</loc>
-    <lastmod>2026-03-03</lastmod>
+    <lastmod>2026-06-10</lastmod>
   </url>
   <url>
-    <loc>https://naironai.com/universe</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://naironai.com/industries/property-management</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/industries/commercial-real-estate</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/industries/solar-renewables</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/industries/logistics-3pl</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/industries/franchises</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/industries/healthcare-staffing</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/industries/software-technology</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/solutions/revenue-gtm</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/solutions/customer-support</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/solutions/back-office-operations</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/solutions/data-research</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/solutions/content-marketing</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/solutions/workflow-automation</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/careers/design-engineer</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/careers/ai-engineer</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/careers/healthcare-ai-consultant</loc>
+    <lastmod>2026-06-10</lastmod>
+  </url>
+  <url>
+    <loc>https://naironai.com/signals/solving-the-agent-memory-problem</loc>
+    <lastmod>2026-04-30</lastmod>
   </url>
 </urlset>

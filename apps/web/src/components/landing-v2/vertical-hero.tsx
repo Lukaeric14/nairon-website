@@ -12,7 +12,13 @@ export interface VerticalHeroProps {
 	caseStudiesHref?: string;
 }
 
-export function VerticalHero({ headline, subcopy, caseStudiesHref = "#" }: VerticalHeroProps) {
+export function VerticalHero({
+	headline,
+	subcopy,
+	// No dedicated case-studies page exists yet — point at the live Signals hub
+	// so the CTA is a real, crawlable internal link rather than a dead `#`.
+	caseStudiesHref = "/signals",
+}: VerticalHeroProps) {
 	return (
 		<section className="relative overflow-hidden bg-ds-surface font-geist text-ds-text-primary">
 			<HeroDots className="pointer-events-none absolute inset-0 z-0" />

@@ -1,24 +1,32 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import { VerticalLanding, VerticalNotFound } from "@/components/landing-v2/vertical-landing";
 import { VERTICALS } from "@/content/verticals";
 import { seoHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/solutions/$slug")({
 	component: SolutionPage,
+	// Validate the slug server-side so unknown URLs return a real HTTP 404
+	// instead of a 200 "soft 404" (which Google penalizes).
+	loader: ({ params }) => {
+		const c = VERTICALS[params.slug];
+		if (!c || c.kind !== "solution") throw notFound();
+		return { content: c };
+	},
 	head: ({ params }) => {
 		const c = VERTICALS[params.slug];
-		if (!c || c.kind !== "solution") return {};
+		if (!c || c.kind !== "solution") {
+			return { meta: [{ name: "robots", content: "noindex, nofollow" }] };
+		}
 		return seoHead({
 			title: c.seo.title,
 			description: c.seo.description,
 			path: `/solutions/${c.slug}`,
 		});
 	},
+	notFoundComponent: () => <VerticalNotFound />,
 });
 
 function SolutionPage() {
-	const { slug } = Route.useParams();
-	const content = VERTICALS[slug];
-	if (!content || content.kind !== "solution") return <VerticalNotFound />;
+	const { content } = Route.useLoaderData();
 	return <VerticalLanding content={content} />;
 }

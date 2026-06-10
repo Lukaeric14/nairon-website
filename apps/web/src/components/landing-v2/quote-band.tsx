@@ -22,9 +22,11 @@ export function QuoteBand() {
 		<section className="relative isolate overflow-hidden font-geist">
 			{/* skyline photo */}
 			<img
-				src="/img/brandkit/skyline.jpg"
+				src="/img/brandkit/skyline.webp"
 				alt=""
 				aria-hidden
+				loading="lazy"
+				decoding="async"
 				className="absolute inset-0 -z-10 h-full w-full object-cover"
 			/>
 			{/* recolor to brand blue (duotone) */}
