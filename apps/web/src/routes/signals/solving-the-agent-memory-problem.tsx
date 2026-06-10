@@ -15,11 +15,11 @@ import {
 	Sparkles,
 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { Footer, Navbar } from "@/components/landing";
-import { CandidateModal } from "@/components/landing/candidate-modal";
-import { HireModal } from "@/components/landing/hire-modal";
+import { Navbar } from "@/components/landing-v2/hero";
+import { Footer } from "@/components/landing-v2/footer";
+import { useCalInit } from "@/components/landing-v2/cal";
 import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
-import { ModalProvider } from "@/components/landing/modal-provider";
+
 import {
 	Select,
 	SelectContent,
@@ -449,25 +449,22 @@ function scoreProviders(state: ToolState) {
 }
 
 function AgentMemoryArticlePage() {
+	useCalInit();
 	return (
-		<ModalProvider>
-			<div className="min-h-screen bg-[#F7F7F8] font-inter text-[#101014]">
-				<Navbar />
-				<article className="mx-auto max-w-[980px] border-x border-[#101014]/10 pt-24">
-					<Hero />
-					<ProblemSection />
-					<LandscapeSection />
-					<ProviderSection />
-					<HiveSection />
-					<DecisionTool />
-					<ArticleCTA />
-					<SourcesSection />
-				</article>
-				<Footer />
-			</div>
-			<HireModal />
-			<CandidateModal />
-		</ModalProvider>
+		<div className="min-h-screen bg-[#F7F7F8] font-geist text-[#101014]">
+			<Navbar />
+			<article className="mx-auto max-w-[980px] border-x border-[#101014]/10 pt-24">
+				<Hero />
+				<ProblemSection />
+				<LandscapeSection />
+				<ProviderSection />
+				<HiveSection />
+				<DecisionTool />
+				<ArticleCTA />
+				<SourcesSection />
+			</article>
+			<Footer />
+		</div>
 	);
 }
 
@@ -550,7 +547,7 @@ function ProblemSection() {
 								key={item}
 								className="flex items-start gap-3 border border-[#101014]/10 bg-[#F7F7F8] p-4"
 							>
-								<CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#3D3DFF]" />
+								<CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand-blue)]" />
 								<span className="text-sm leading-6 text-[#303036]">{item}</span>
 							</div>
 						))}
@@ -561,7 +558,7 @@ function ProblemSection() {
 							href="https://www.ycombinator.com/rfs?year=2026#company-brain"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="text-[#101014] underline decoration-[#3D3DFF]/45 underline-offset-4 transition-colors hover:decoration-[#3D3DFF]"
+							className="text-[#101014] underline decoration-[var(--brand-blue)]/45 underline-offset-4 transition-colors hover:decoration-[var(--brand-blue)]"
 						>
 							YC "Company Brain" request
 						</a>{" "}
@@ -590,7 +587,7 @@ function LandscapeSection() {
 							key={item.title}
 							className="border-b border-[#101014]/10 p-5 last:border-b-0 md:border-r md:border-b-0 md:last:border-r-0"
 						>
-							<item.icon className="h-5 w-5 text-[#3D3DFF]" />
+							<item.icon className="h-5 w-5 text-[var(--brand-blue)]" />
 							<h3 className="mt-5 text-lg font-medium text-[#101014]">
 								{item.title}
 							</h3>
@@ -684,7 +681,7 @@ function TradeoffList({
 						<span
 							className={cn(
 								"mt-2 h-1.5 w-1.5 shrink-0",
-								positive ? "bg-[#3D3DFF]" : "bg-[#101014]/45",
+								positive ? "bg-[var(--brand-blue)]" : "bg-[#101014]/45",
 							)}
 						/>
 						<span>{item}</span>
@@ -733,7 +730,7 @@ function HiveSection() {
 					<ul className="mt-6 space-y-4">
 						{hivePrinciples.map((principle) => (
 							<li key={principle} className="flex gap-3 text-sm leading-6">
-								<LockKeyhole className="mt-0.5 h-4 w-4 shrink-0 text-[#3D3DFF]" />
+								<LockKeyhole className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand-blue)]" />
 								<span className="text-[#303036]">{principle}</span>
 							</li>
 						))}
@@ -749,7 +746,7 @@ function ArticleCTA() {
 		<section className="border-b border-[#101014]/10 bg-white">
 			<div className="grid grid-cols-1 gap-8 px-8 py-12 md:grid-cols-[0.9fr_1.1fr] md:px-10 md:py-16">
 				<div>
-					<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#3D3DFF]">
+					<p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--brand-blue)]">
 						Where this goes
 					</p>
 					<h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-[-0.03em] text-[#101014] md:text-5xl">
@@ -778,7 +775,7 @@ function ArticleCTA() {
 				</div>
 				<div className="rounded-lg border border-[#101014]/10 bg-[#F7F7F8] p-5 md:p-6">
 					<div className="mb-5 border-b border-[#101014]/10 pb-5">
-						<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#3D3DFF]">
+						<p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--brand-blue)]">
 							Hive waitlist
 						</p>
 						<h3 className="mt-2 text-balance text-2xl font-normal tracking-[-0.02em] text-[#101014]">
@@ -901,7 +898,7 @@ function DecisionTool() {
 										<p className="text-base text-white">{provider.name}</p>
 										<p className="mt-1 text-xs text-white/50">{provider.short}</p>
 									</div>
-									<span className="font-mono text-sm text-[#7B7BFF]">
+									<span className="font-mono text-sm text-[var(--brand-blue)]">
 										{score}
 									</span>
 								</div>
@@ -934,7 +931,7 @@ function SelectControl({
 				value={value}
 				onValueChange={onChange}
 			>
-				<SelectTrigger className="h-12 rounded-none border-white/15 bg-white px-3 text-sm text-[#101014] shadow-none ring-offset-transparent focus:ring-1 focus:ring-[#7B7BFF] focus:ring-offset-0 data-[placeholder]:text-[#606069] [&>svg]:text-[#101014] [&>svg]:opacity-70">
+				<SelectTrigger className="h-12 rounded-none border-white/15 bg-white px-3 text-sm text-[#101014] shadow-none ring-offset-transparent focus:ring-1 focus:ring-[var(--brand-blue)] focus:ring-offset-0 data-[placeholder]:text-[#606069] [&>svg]:text-[#101014] [&>svg]:opacity-70">
 					<SelectValue />
 				</SelectTrigger>
 				<SelectContent className="z-[70] rounded-none border-[#101014]/10 bg-white text-[#101014] shadow-xl">
@@ -981,7 +978,7 @@ function SourcesSection() {
 							href={href}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="flex items-center justify-between gap-4 border border-[#101014]/10 bg-[#F7F7F8] p-4 text-sm text-[#303036] transition-colors hover:border-[#3D3DFF]/40 hover:text-[#101014]"
+							className="flex items-center justify-between gap-4 border border-[#101014]/10 bg-[#F7F7F8] p-4 text-sm text-[#303036] transition-colors hover:border-[var(--brand-blue)]/40 hover:text-[#101014]"
 						>
 							<span>{label}</span>
 							<ArrowUpRight className="h-4 w-4 shrink-0" />
@@ -1004,7 +1001,7 @@ function SectionHeading({
 }) {
 	return (
 		<div>
-			<p className="text-xs font-medium uppercase tracking-[0.18em] text-[#3D3DFF]">
+			<p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--brand-blue)]">
 				{kicker}
 			</p>
 			<h2 className="mt-4 max-w-3xl text-balance text-4xl font-normal leading-tight tracking-[-0.03em] text-[#101014] md:text-6xl">
@@ -1029,7 +1026,7 @@ function SectionKicker({
 	return (
 		<div>
 			<div className="inline-flex items-center gap-2 border border-[#101014]/10 bg-[#F7F7F8] px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#606069]">
-				<Icon className="h-4 w-4 text-[#3D3DFF]" />
+				<Icon className="h-4 w-4 text-[var(--brand-blue)]" />
 				{label}
 			</div>
 		</div>
@@ -1045,7 +1042,7 @@ function SignalPill({
 }) {
 	return (
 		<div className="inline-flex items-center gap-2 border border-[#101014]/10 bg-white px-3 py-2 text-sm text-[#303036]">
-			<Icon className="h-4 w-4 text-[#3D3DFF]" />
+			<Icon className="h-4 w-4 text-[var(--brand-blue)]" />
 			{label}
 		</div>
 	);
@@ -1058,7 +1055,7 @@ function ArticleSignalArt() {
 			className="relative h-[260px] overflow-hidden rounded-lg border border-[#101014]/10 bg-white md:h-[360px]"
 		>
 			<div className="absolute inset-0 [background-image:radial-gradient(#101014_0.8px,transparent_0.8px)] [background-size:8px_8px]" />
-			<div className="absolute inset-x-0 top-1/2 h-40 -translate-y-1/2 bg-[radial-gradient(ellipse_at_50%_50%,rgba(123,123,255,0.24),transparent_62%)] blur-2xl" />
+			<div className="absolute inset-x-0 top-1/2 h-40 -translate-y-1/2 bg-[radial-gradient(ellipse_at_50%_50%,color-mix(in srgb, var(--brand-blue) 24%, transparent),transparent_62%)] blur-2xl" />
 			<div className="absolute left-1/2 top-[42%] h-52 w-[150%] -translate-x-1/2 -translate-y-1/2 rotate-[8deg] rounded-[50%] bg-white" />
 			<div className="absolute left-1/2 top-[60%] h-44 w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] rounded-[50%] border-t border-[#101014]/35" />
 			<div className="absolute left-1/2 top-[54%] h-36 w-[126%] -translate-x-1/2 -translate-y-1/2 rotate-[6deg] rounded-[50%] border-t border-[#101014]/24" />

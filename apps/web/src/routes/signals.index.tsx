@@ -14,11 +14,10 @@ import {
 	UsersRound,
 	type LucideIcon,
 } from "lucide-react";
-import { CandidateModal } from "@/components/landing/candidate-modal";
-import { Footer, Navbar } from "@/components/landing";
-import { HireModal } from "@/components/landing/hire-modal";
+import { Navbar } from "@/components/landing-v2/hero";
+import { Footer } from "@/components/landing-v2/footer";
+import { useCalInit } from "@/components/landing-v2/cal";
 import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
-import { ModalProvider } from "@/components/landing/modal-provider";
 import { DISCOVERY_CALL_URL } from "@/lib/links";
 import { seoHead } from "@/lib/seo";
 
@@ -139,22 +138,18 @@ export const Route = createFileRoute("/signals/")({
 });
 
 function SignalsPage() {
+	useCalInit();
 	return (
-		<ModalProvider>
-			<div className="min-h-screen bg-[#F7F7F8] font-inter text-[#101014]">
-				<Navbar />
-				<main className="mx-auto max-w-[980px] border-x border-[#101014]/10 pt-24">
-					<PageTitle />
-					<FeaturedGrid />
-					<FilterRow />
-					<ArticleGrid />
-					<HiveWaitlistSection />
-				</main>
-				<Footer />
-			</div>
-			<HireModal />
-			<CandidateModal />
-		</ModalProvider>
+		<div className="font-geist min-h-screen bg-[#F7F7F8] text-[#101014]">
+			<Navbar />
+			<main className="mx-auto max-w-[980px] border-x border-[#101014]/10 pt-24">
+				<FeaturedGrid />
+				<FilterRow />
+				<ArticleGrid />
+				<HiveWaitlistSection />
+			</main>
+			<Footer />
+		</div>
 	);
 }
 
@@ -237,7 +232,7 @@ function FeaturedCard({
 				) : (
 					<span />
 				)}
-				<span className="inline-flex items-center gap-1 text-xs font-medium text-[#3D3DFF]">
+				<span className="inline-flex items-center gap-1 text-xs font-medium text-[var(--brand-blue)]">
 					{isReady ? "Read" : "Soon"}
 					<ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
 				</span>
@@ -306,7 +301,7 @@ function ArticleCard({ post }: { post: SignalPost }) {
 			<div className="flex items-center justify-between gap-4">
 				<p className="text-xs text-[#606069]">{post.date}</p>
 				<Icon
-					className={isReady ? "size-4 text-[#7B7BFF]" : "size-4 text-[#9C9DA5]"}
+					className={isReady ? "size-4 text-[var(--brand-blue)]" : "size-4 text-[#9C9DA5]"}
 				/>
 			</div>
 			<p className="mt-6 text-xs text-[#606069]">{post.category}</p>
@@ -335,7 +330,7 @@ function ArticleCard({ post }: { post: SignalPost }) {
 				<span
 					className={
 						isReady
-							? "inline-flex items-center gap-1 text-xs font-medium text-[#3D3DFF]"
+							? "inline-flex items-center gap-1 text-xs font-medium text-[var(--brand-blue)]"
 							: "inline-flex items-center gap-1 text-xs font-medium text-[#8F9098]"
 					}
 				>
@@ -431,7 +426,7 @@ function SignalWave({ className }: { className?: string }) {
 			className={`relative overflow-hidden bg-white ${className ?? ""}`}
 		>
 			<div className="absolute inset-0 opacity-[0.45] [background-image:radial-gradient(#101014_0.8px,transparent_0.8px)] [background-size:8px_8px]" />
-			<div className="absolute inset-x-0 top-1/2 h-36 -translate-y-1/2 bg-[radial-gradient(ellipse_at_50%_50%,rgba(61,61,255,0.28),transparent_62%)] blur-2xl" />
+			<div className="absolute inset-x-0 top-1/2 h-36 -translate-y-1/2 bg-[radial-gradient(ellipse_at_50%_50%,color-mix(in srgb, var(--brand-blue) 28%, transparent),transparent_62%)] blur-2xl" />
 			<div className="absolute left-1/2 top-1/2 h-36 w-[150%] -translate-x-1/2 -translate-y-1/2 rotate-[-7deg] rounded-[50%] border-t border-[#101014]/35" />
 			<div className="absolute left-1/2 top-[58%] h-28 w-[128%] -translate-x-1/2 -translate-y-1/2 rotate-[5deg] rounded-[50%] border-t border-[#101014]/25" />
 		</div>
@@ -446,7 +441,7 @@ function SignalDither({ className }: { className?: string }) {
 		>
 			<div className="absolute inset-0 [background-image:radial-gradient(#101014_0.75px,transparent_0.75px)] [background-size:7px_7px]" />
 			<div className="absolute -left-10 -top-8 h-44 w-[120%] rotate-[-6deg] rounded-[50%] bg-white" />
-			<div className="absolute inset-x-0 top-1/2 h-28 -translate-y-1/2 bg-[radial-gradient(ellipse_at_50%_50%,rgba(123,123,255,0.24),transparent_64%)] blur-xl" />
+			<div className="absolute inset-x-0 top-1/2 h-28 -translate-y-1/2 bg-[radial-gradient(ellipse_at_50%_50%,color-mix(in srgb, var(--brand-blue) 24%, transparent),transparent_64%)] blur-xl" />
 			<div className="absolute left-1/2 top-[47%] h-40 w-[135%] -translate-x-1/2 -translate-y-1/2 rotate-[8deg] rounded-[50%] border-t border-[#101014]/30" />
 			<div className="absolute left-1/2 top-[52%] h-32 w-[120%] -translate-x-1/2 -translate-y-1/2 rotate-[-4deg] rounded-[50%] border-t border-[#101014]/20" />
 			<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,transparent_0,transparent_48%,rgba(255,255,255,0.72)_78%)]" />

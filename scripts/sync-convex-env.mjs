@@ -26,10 +26,11 @@ function parseEnv(content) {
 		if (separatorIndex === -1) continue;
 
 		const key = line.slice(0, separatorIndex).trim();
-		const value = line
+		const raw = line
 			.slice(separatorIndex + 1)
 			.split(/\s+#/, 1)[0]
 			.trim();
+		const value = raw.replace(/^["']|["']$/g, "");
 
 		if (key) values[key] = value;
 	}

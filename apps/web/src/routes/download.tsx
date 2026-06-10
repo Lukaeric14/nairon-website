@@ -1,10 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Download, ExternalLink, MonitorDown, Smartphone } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { Footer, Navbar } from "@/components/landing";
-import { CandidateModal } from "@/components/landing/candidate-modal";
-import { HireModal } from "@/components/landing/hire-modal";
-import { ModalProvider } from "@/components/landing/modal-provider";
+import { Navbar } from "@/components/landing-v2/hero";
+import { Footer } from "@/components/landing-v2/footer";
+import { useCalInit } from "@/components/landing-v2/cal";
 import { breadcrumbJsonLd, seoHead } from "@/lib/seo";
 
 const desktopFeedBase = "https://pub-d2c6ed77dc6a4e3c8bb10bc046eea41a.r2.dev";
@@ -128,6 +127,7 @@ function useDesktopDownloads() {
 }
 
 function DownloadPage() {
+	useCalInit();
 	const desktop = useDesktopDownloads();
 	const desktopCards = useMemo(
 		() => [
@@ -155,156 +155,161 @@ function DownloadPage() {
 	);
 
 	return (
-		<ModalProvider>
-			<div className="min-h-screen bg-white font-inter text-[#1A1916]">
-				<Navbar />
-				<main className="px-6 pt-32 pb-20 md:pt-40">
-					<section className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[minmax(0,0.95fr)_minmax(320px,0.65fr)] md:items-end">
-						<div>
-							<p className="mb-5 text-xs font-medium uppercase tracking-[0.22em] text-[#C9A96E]">
-								Hive downloads
-							</p>
-							<h1 className="max-w-3xl text-5xl font-normal leading-[0.95] text-[#1A1916] md:text-7xl">
-								Install the current Hive app.
-							</h1>
-							<p className="mt-7 max-w-2xl text-lg leading-8 text-[#5C584F]">
-								Desktop installers come from the public R2 updater feed. Mobile
-								installs come through TestFlight and Play internal testing, so
-								store membership controls what build appears on each phone.
-							</p>
-						</div>
+		<div className="font-geist min-h-screen" style={{ backgroundColor: "var(--ds-shell)" }}>
+			<Navbar />
+			<main className="px-6 pt-32 pb-20 md:pt-40">
+				<section className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[minmax(0,0.95fr)_minmax(320px,0.65fr)] md:items-end">
+					<div>
+						<p
+							className="mb-5 font-geist-mono text-[0.6875rem] font-medium uppercase tracking-[0.22em]"
+							style={{ color: "var(--brand-blue)" }}
+						>
+							Hive downloads
+						</p>
+						<h1 className="max-w-3xl text-5xl font-medium leading-[0.95] text-ds-text-primary md:text-7xl">
+							Install the current Hive app.
+						</h1>
+						<p className="mt-7 max-w-2xl text-lg leading-8 text-ds-text-secondary">
+							Desktop installers come from the public R2 updater feed. Mobile
+							installs come through TestFlight and Play internal testing, so
+							store membership controls what build appears on each phone.
+						</p>
+					</div>
 
-						<div className="border border-[#0C0C0C]/10 bg-[#F6F2EA] p-6">
-							<div className="flex items-start justify-between gap-6">
-								<div>
-									<p className="text-sm text-[#5C584F]">Desktop feed</p>
-									<div className="mt-3 space-y-2 text-[#1A1916]">
-										<p className="text-2xl font-normal">
-											macOS v{desktop.macVersion}
-										</p>
-										<p className="text-2xl font-normal">
-											Windows v{desktop.windowsVersion}
-										</p>
-									</div>
+					<div className="rounded-xl border border-ds-border bg-ds-surface p-6">
+						<div className="flex items-start justify-between gap-6">
+							<div>
+								<p className="text-sm text-ds-text-tertiary">Desktop feed</p>
+								<div className="mt-3 space-y-2 text-ds-text-primary">
+									<p className="text-2xl font-medium">
+										macOS v{desktop.macVersion}
+									</p>
+									<p className="text-2xl font-medium">
+										Windows v{desktop.windowsVersion}
+									</p>
 								</div>
-								<MonitorDown className="mt-1 h-8 w-8 text-[#C9A96E]" />
 							</div>
-							<div className="mt-8 space-y-3 text-sm text-[#5C584F]">
-								<p>Source: {desktop.source}</p>
-								<a
-									href={desktop.macManifest}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="inline-flex items-center gap-2 text-[#8D6E2E] hover:text-[#1A1916]"
-								>
-									View mac manifest
-									<ExternalLink className="h-3.5 w-3.5" />
-								</a>
-							</div>
+							<MonitorDown className="mt-1 h-8 w-8" style={{ color: "var(--brand-blue)" }} />
 						</div>
-					</section>
+						<div className="mt-8 space-y-3 text-sm text-ds-text-tertiary">
+							<p>Source: {desktop.source}</p>
+							<a
+								href={desktop.macManifest}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-flex items-center gap-2 transition-colors hover:text-ds-text-primary"
+								style={{ color: "var(--brand-blue)" }}
+							>
+								View mac manifest
+								<ExternalLink className="h-3.5 w-3.5" />
+							</a>
+						</div>
+					</div>
+				</section>
 
-					<section className="mx-auto mt-16 max-w-6xl">
-						<div className="grid gap-px overflow-hidden border border-[#0C0C0C]/10 bg-[#0C0C0C]/10 md:grid-cols-2">
-							{desktopCards.map((card) => (
-								<a
-									key={card.name}
-									href={card.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="group bg-white p-7 transition-colors hover:bg-[#F6F2EA]"
-								>
-									<div className="flex min-h-[220px] flex-col justify-between gap-10">
-										<div>
-											<div className="flex items-start justify-between gap-6">
-												<h2 className="text-3xl font-normal text-[#1A1916]">
-													{card.name}
-												</h2>
-												<Download className="h-6 w-6 text-[#C9A96E] transition-transform group-hover:translate-y-0.5" />
-											</div>
-											<p className="mt-3 text-sm font-semibold text-[#8D6E2E]">
-												Current version v{card.version}
-											</p>
-											<p className="mt-4 max-w-sm text-base leading-7 text-[#5C584F]">
-												{card.detail}
-											</p>
+				<section className="mx-auto mt-16 max-w-6xl">
+					<div className="grid gap-px overflow-hidden rounded-xl border border-ds-border bg-ds-border md:grid-cols-2">
+						{desktopCards.map((card) => (
+							<a
+								key={card.name}
+								href={card.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="group bg-ds-surface p-7 transition-colors hover:bg-ds-surface-raised"
+							>
+								<div className="flex min-h-[220px] flex-col justify-between gap-10">
+									<div>
+										<div className="flex items-start justify-between gap-6">
+											<h2 className="text-3xl font-medium text-ds-text-primary">
+												{card.name}
+											</h2>
+											<Download className="h-6 w-6 transition-transform group-hover:translate-y-0.5" style={{ color: "var(--brand-blue)" }} />
 										</div>
-										<span className="inline-flex w-fit items-center gap-2 bg-[#C9A96E] px-5 py-3 text-sm font-semibold text-[#0C0C0C] transition-colors group-hover:bg-[#B8944F]">
-											{card.label}
-											<ExternalLink className="h-3.5 w-3.5" />
-										</span>
+										<p className="mt-3 text-sm font-semibold" style={{ color: "var(--brand-blue)" }}>
+											Current version v{card.version}
+										</p>
+										<p className="mt-4 max-w-sm text-base leading-7 text-ds-text-secondary">
+											{card.detail}
+										</p>
 									</div>
-								</a>
-							))}
-						</div>
-					</section>
-
-					<section className="mx-auto mt-16 max-w-6xl">
-						<div className="mb-6 flex items-center gap-3">
-							<Smartphone className="h-5 w-5 text-[#C9A96E]" />
-							<h2 className="text-2xl font-normal text-[#1A1916]">Mobile</h2>
-						</div>
-
-						<div className="grid gap-px overflow-hidden border border-[#0C0C0C]/10 bg-[#0C0C0C]/10 md:grid-cols-2">
-							<div className="bg-white p-7">
-								<h3 className="text-2xl font-normal text-[#1A1916]">iOS</h3>
-								<p className="mt-3 text-sm font-semibold text-[#8D6E2E]">
-									TestFlight build v{mobileVersions.ios.version} (
-									{mobileVersions.ios.build})
-								</p>
-								<p className="mt-4 text-base leading-7 text-[#5C584F]">
-									Hive for iPhone ships through TestFlight. Install TestFlight,
-									then use the invite sent to your Apple ID.
-								</p>
-								<div className="mt-8 flex flex-wrap gap-3">
-									<a
-										href={testFlightApp}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="inline-flex items-center gap-2 border border-[#C9A96E]/40 px-5 py-3 text-sm font-semibold text-[#8D6E2E] hover:border-[#C9A96E] hover:text-[#1A1916]"
+									<span
+										className="inline-flex w-fit items-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white transition-all group-hover:brightness-110"
+										style={{ backgroundColor: "var(--brand-blue)" }}
 									>
-										Get TestFlight
+										{card.label}
 										<ExternalLink className="h-3.5 w-3.5" />
-									</a>
-									<a
-										href={appStoreConnect}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-[#5C584F] hover:text-[#1A1916]"
-									>
-										Manage invites
-										<ExternalLink className="h-3.5 w-3.5" />
-									</a>
+									</span>
 								</div>
-							</div>
+							</a>
+						))}
+					</div>
+				</section>
 
-							<div className="bg-white p-7">
-								<h3 className="text-2xl font-normal text-[#1A1916]">Android</h3>
-								<p className="mt-3 text-sm font-semibold text-[#8D6E2E]">
-									Play internal build v{mobileVersions.android.version} (
-									{mobileVersions.android.build})
-								</p>
-								<p className="mt-4 text-base leading-7 text-[#5C584F]">
-									Android builds ship through the Google Play internal track.
-									Join once, then Play Store will show the newest accepted build.
-								</p>
+				<section className="mx-auto mt-16 max-w-6xl">
+					<div className="mb-6 flex items-center gap-3">
+						<Smartphone className="h-5 w-5" style={{ color: "var(--brand-blue)" }} />
+						<h2 className="text-2xl font-medium text-ds-text-primary">Mobile</h2>
+					</div>
+
+					<div className="grid gap-px overflow-hidden rounded-xl border border-ds-border bg-ds-border md:grid-cols-2">
+						<div className="bg-ds-surface p-7">
+							<h3 className="text-2xl font-medium text-ds-text-primary">iOS</h3>
+							<p className="mt-3 text-sm font-semibold" style={{ color: "var(--brand-blue)" }}>
+								TestFlight build v{mobileVersions.ios.version} (
+								{mobileVersions.ios.build})
+							</p>
+							<p className="mt-4 text-base leading-7 text-ds-text-secondary">
+								Hive for iPhone ships through TestFlight. Install TestFlight,
+								then use the invite sent to your Apple ID.
+							</p>
+							<div className="mt-8 flex flex-wrap gap-3">
 								<a
-									href={androidInternalTrack}
+									href={testFlightApp}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="mt-8 inline-flex items-center gap-2 border border-[#C9A96E]/40 px-5 py-3 text-sm font-semibold text-[#8D6E2E] hover:border-[#C9A96E] hover:text-[#1A1916]"
+									className="inline-flex items-center gap-2 rounded-lg border px-5 py-3 text-sm font-semibold transition-colors hover:text-ds-text-primary"
+									style={{ borderColor: "var(--brand-blue)", color: "var(--brand-blue)" }}
 								>
-									Open Play internal track
+									Get TestFlight
+									<ExternalLink className="h-3.5 w-3.5" />
+								</a>
+								<a
+									href={appStoreConnect}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-ds-text-secondary hover:text-ds-text-primary"
+								>
+									Manage invites
 									<ExternalLink className="h-3.5 w-3.5" />
 								</a>
 							</div>
 						</div>
-					</section>
-				</main>
-				<Footer />
-			</div>
-			<HireModal />
-			<CandidateModal />
-		</ModalProvider>
+
+						<div className="bg-ds-surface p-7">
+							<h3 className="text-2xl font-medium text-ds-text-primary">Android</h3>
+							<p className="mt-3 text-sm font-semibold" style={{ color: "var(--brand-blue)" }}>
+								Play internal build v{mobileVersions.android.version} (
+								{mobileVersions.android.build})
+							</p>
+							<p className="mt-4 text-base leading-7 text-ds-text-secondary">
+								Android builds ship through the Google Play internal track.
+								Join once, then Play Store will show the newest accepted build.
+							</p>
+							<a
+								href={androidInternalTrack}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="mt-8 inline-flex items-center gap-2 rounded-lg border px-5 py-3 text-sm font-semibold transition-colors hover:text-ds-text-primary"
+								style={{ borderColor: "var(--brand-blue)", color: "var(--brand-blue)" }}
+							>
+								Open Play internal track
+								<ExternalLink className="h-3.5 w-3.5" />
+							</a>
+						</div>
+					</div>
+				</section>
+			</main>
+			<Footer />
+		</div>
 	);
 }

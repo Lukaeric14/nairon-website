@@ -8,8 +8,8 @@
  * @module
  */
 
-import type * as contact from "../contact.js";
 import type * as careerApplications from "../careerApplications.js";
+import type * as contact from "../contact.js";
 import type * as email from "../email.js";
 import type * as healthCheck from "../healthCheck.js";
 import type * as hiveWaitlist from "../hiveWaitlist.js";
@@ -25,8 +25,8 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  contact: typeof contact;
   careerApplications: typeof careerApplications;
+  contact: typeof contact;
   email: typeof email;
   healthCheck: typeof healthCheck;
   hiveWaitlist: typeof hiveWaitlist;
