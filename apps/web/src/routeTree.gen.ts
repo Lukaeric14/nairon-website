@@ -17,6 +17,7 @@ import { Route as IsoLabRouteImport } from './routes/iso-lab'
 import { Route as HowItWorksLabRouteImport } from './routes/how-it-works-lab'
 import { Route as DownloadRouteImport } from './routes/download'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as BrandkitRouteImport } from './routes/brandkit'
 import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
@@ -68,6 +69,11 @@ const DownloadRoute = DownloadRouteImport.update({
 const CookiePolicyRoute = CookiePolicyRouteImport.update({
   id: '/cookie-policy',
   path: '/cookie-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CareersRoute = CareersRouteImport.update({
@@ -139,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/acceptable-use': typeof AcceptableUseRoute
   '/brandkit': typeof BrandkitRoute
   '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/download': typeof DownloadRoute
   '/how-it-works-lab': typeof HowItWorksLabRoute
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/acceptable-use': typeof AcceptableUseRoute
   '/brandkit': typeof BrandkitRoute
   '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/download': typeof DownloadRoute
   '/how-it-works-lab': typeof HowItWorksLabRoute
@@ -184,6 +192,7 @@ export interface FileRoutesById {
   '/acceptable-use': typeof AcceptableUseRoute
   '/brandkit': typeof BrandkitRoute
   '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
   '/cookie-policy': typeof CookiePolicyRoute
   '/download': typeof DownloadRoute
   '/how-it-works-lab': typeof HowItWorksLabRoute
@@ -208,6 +217,7 @@ export interface FileRouteTypes {
     | '/acceptable-use'
     | '/brandkit'
     | '/careers'
+    | '/contact'
     | '/cookie-policy'
     | '/download'
     | '/how-it-works-lab'
@@ -230,6 +240,7 @@ export interface FileRouteTypes {
     | '/acceptable-use'
     | '/brandkit'
     | '/careers'
+    | '/contact'
     | '/cookie-policy'
     | '/download'
     | '/how-it-works-lab'
@@ -252,6 +263,7 @@ export interface FileRouteTypes {
     | '/acceptable-use'
     | '/brandkit'
     | '/careers'
+    | '/contact'
     | '/cookie-policy'
     | '/download'
     | '/how-it-works-lab'
@@ -275,6 +287,7 @@ export interface RootRouteChildren {
   AcceptableUseRoute: typeof AcceptableUseRoute
   BrandkitRoute: typeof BrandkitRoute
   CareersRoute: typeof CareersRoute
+  ContactRoute: typeof ContactRoute
   CookiePolicyRoute: typeof CookiePolicyRoute
   DownloadRoute: typeof DownloadRoute
   HowItWorksLabRoute: typeof HowItWorksLabRoute
@@ -347,6 +360,13 @@ declare module '@tanstack/react-router' {
       path: '/cookie-policy'
       fullPath: '/cookie-policy'
       preLoaderRoute: typeof CookiePolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/careers': {
@@ -443,6 +463,7 @@ const rootRouteChildren: RootRouteChildren = {
   AcceptableUseRoute: AcceptableUseRoute,
   BrandkitRoute: BrandkitRoute,
   CareersRoute: CareersRoute,
+  ContactRoute: ContactRoute,
   CookiePolicyRoute: CookiePolicyRoute,
   DownloadRoute: DownloadRoute,
   HowItWorksLabRoute: HowItWorksLabRoute,
