@@ -224,7 +224,7 @@ function MegaPanel({ menu }: { menu: MegaMenu }) {
 					}`}
 				>
 					<div
-						className={`grid grid-cols-2 gap-x-16 gap-y-8 ${
+						className={`grid grid-cols-2 gap-x-10 gap-y-8 ${
 							menu.card ? "flex-1" : "lg:max-w-3xl"
 						}`}
 					>
