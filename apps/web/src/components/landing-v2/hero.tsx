@@ -17,14 +17,10 @@ import {
 	PencilSquareIcon,
 	BoltIcon,
 	UserGroupIcon,
-	AdjustmentsHorizontalIcon,
-	ClipboardDocumentCheckIcon,
-	AcademicCapIcon,
 	ArrowPathIcon,
 	InformationCircleIcon,
 	EnvelopeIcon,
 	BriefcaseIcon,
-	LinkIcon,
 } from "@heroicons/react/24/outline";
 import { DsButton } from "@/components/ui/ds-button";
 import { slugify } from "@/content/verticals";

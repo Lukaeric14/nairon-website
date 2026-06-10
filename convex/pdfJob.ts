@@ -1,6 +1,5 @@
 import { v } from "convex/values";
 import {
-	action,
 	internalAction,
 	internalMutation,
 	internalQuery,
@@ -8,7 +7,6 @@ import {
 	query,
 } from "./_generated/server";
 import { internal } from "./_generated/api";
-import type { Id } from "./_generated/dataModel";
 import { resend } from "./email";
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -1115,10 +1113,6 @@ async function classifyImages(
 
 	return classified;
 }
-
-// ── Non-property image tags (excluded from slide selection) ──
-
-const EXCLUDED_TAGS: ImageTag[] = ["floor_plan", "icon", "other"];
 
 // ── Neighborhood description ──
 

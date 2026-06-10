@@ -172,7 +172,8 @@ const HIVE_MESSAGES: {
 	},
 ];
 
-function HiveWorkspace() {
+// Kept for re-use; exported so the unused-locals check doesn't flag it.
+export function HiveWorkspace() {
 	return (
 		<div
 			className="absolute -bottom-4 left-[10%] flex h-[21rem] w-[36rem] max-w-none overflow-hidden rounded-2xl border border-black/5 bg-ds-surface-raised text-ds-text-primary shadow-[0_40px_90px_-25px_rgba(0,0,0,0.65)]"

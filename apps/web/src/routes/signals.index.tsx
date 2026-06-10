@@ -9,8 +9,6 @@ import {
 	GitBranch,
 	LockKeyhole,
 	Network,
-	Rss,
-	Search,
 	UsersRound,
 	type LucideIcon,
 } from "lucide-react";
@@ -126,8 +124,6 @@ const signalPosts: SignalPost[] = [
 		status: "Queued",
 	},
 ];
-
-const filters = ["All", "Company", "Security", "Evaluation", "Operations"];
 
 export const Route = createFileRoute("/signals/")({
 	component: SignalsPage,
@@ -255,34 +251,6 @@ function FeaturedCard({
 		<div className={mutedClassName} aria-disabled="true">
 			{content}
 		</div>
-	);
-}
-
-function FilterRow() {
-	return (
-		<section className="flex flex-col gap-4 border-b border-[#101014]/10 px-8 py-6 md:flex-row md:items-center md:justify-between md:px-10">
-			<div className="flex flex-wrap items-center gap-2">
-				{filters.map((filter) => (
-					<button
-						key={filter}
-						type="button"
-						className="inline-flex h-8 items-center rounded-full border border-transparent px-3 text-xs text-[#606069] transition-colors first:border-[#101014]/10 first:bg-white first:text-[#101014] hover:text-[#101014]"
-					>
-						{filter}
-					</button>
-				))}
-			</div>
-			<div className="flex items-center gap-3">
-				<label className="flex h-8 w-full items-center gap-2 rounded-full border border-[#101014]/10 bg-white px-3 text-xs text-[#606069] md:w-[172px]">
-					<Search className="size-3.5" />
-					<span>Search...</span>
-					<span className="ml-auto rounded border border-[#101014]/10 px-1 text-[10px]">
-						K
-					</span>
-				</label>
-				<Rss className="size-4 text-[#606069]" />
-			</div>
-		</section>
 	);
 }
 

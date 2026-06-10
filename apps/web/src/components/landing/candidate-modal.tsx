@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUpRight, X, Award, Users, TrendingUp } from "lucide-react";
+import { X, Award, Users, TrendingUp } from "lucide-react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { useModals } from "./modal-provider";
 

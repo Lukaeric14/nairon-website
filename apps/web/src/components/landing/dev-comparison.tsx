@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import { Bot, ChevronRight, UserRound } from "lucide-react";
+import { Bot, UserRound } from "lucide-react";
 import { GridCell, GridSection } from "./grid-system";
 
 function SectionLabel({

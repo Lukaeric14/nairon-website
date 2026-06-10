@@ -480,7 +480,7 @@ async function generateNeighborhoodDescription(
 Property details for context: ${listing.propertyType}, ${listing.beds} bedrooms, ${listing.baths} bathrooms, ${listing.sqft ? listing.sqft + " sqft" : ""}, ${listing.yearBuilt ? "built in " + listing.yearBuilt : ""}.
 
 Write naturally like a local real estate agent would describe the area to a buyer. Mention the feel of the community, what makes it a good place to live, and any likely nearby amenities. Do not use emdashes, exclamation marks, or marketing buzzwords. Keep it warm, conversational, and grounded. Do not start with "Welcome" or "Nestled in". Just describe the area plainly.`,
-			maxTokens: 200,
+			maxOutputTokens: 200,
 		});
 
 		return result.text.trim() || buildFallbackNeighborhoodDescription(listing);

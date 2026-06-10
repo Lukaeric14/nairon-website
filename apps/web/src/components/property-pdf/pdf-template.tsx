@@ -13,7 +13,6 @@ import type {
 	ZillowListing,
 	PdfPersonalization,
 	ImageTag,
-	ClassifiedImage,
 } from "@/server/zillow-scrape";
 
 const SERIF_BOLD = "Times-Bold";
@@ -32,11 +31,10 @@ const divider = "#D8D0C4";
 const LANDSCAPE = { width: 792, height: 612 };
 
 /**
- * Build an Unsplash URL for the property's city/state — used only on the
- * last slide (Location & Neighborhood) as a contextual stock image.
+ * Stock image for the last slide (Location & Neighborhood). The URL is a fixed
+ * suburban shot — city/state params are accepted for a future dynamic lookup.
  */
-function locationStockImage(city: string, state: string): string {
-	const query = [city, state].filter(Boolean).join(" ") || "suburban neighborhood";
+function locationStockImage(_city: string, _state: string): string {
 	return `https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=2400&q=90&fit=crop&auto=format`;
 }
 
@@ -141,16 +139,6 @@ function IconDollar() {
 		</Svg>
 	);
 }
-
-/* Map stat labels to icons */
-const STAT_ICONS: Record<string, () => JSX.Element> = {
-	Bedrooms: IconBed,
-	Bathrooms: IconBath,
-	"Square Feet": IconRuler,
-	"Year Built": IconCalendar,
-	"Lot Size": IconHome,
-	"List Price": IconDollar,
-};
 
 const s = StyleSheet.create({
 	/* ═══ PAGE 1: Cover ═══ */
@@ -541,24 +529,6 @@ export function PropertyPDF({
 		.join(", ");
 	const rawImages = listing.images;
 	const classified = listing.classifiedImages || [];
-
-	// Smart image picker: find best image for each slide by tag preference
-	// Page 1 (Cover): exterior/aerial — hero shot
-	// Page 2 (Overview): living_room/kitchen — interior wide
-	// Page 3 (About): kitchen/dining — lifestyle
-	// Page 4 (Highlights): bedroom/bathroom — features
-	// Page 5 (Location): backyard/exterior/aerial — outdoor/area
-	function pickImage(preferredTags: ImageTag[], fallbackIndex: number): string {
-		if (classified.length === 0) {
-			return rawImages.length > 0 ? rawImages[fallbackIndex % rawImages.length] : "";
-		}
-		for (const tag of preferredTags) {
-			const match = classified.find((c) => c.tag === tag);
-			if (match) return match.url;
-		}
-		// No tag match — use fallback index
-		return rawImages.length > 0 ? rawImages[fallbackIndex % rawImages.length] : "";
-	}
 
 	// Tags that should never appear in the PDF slides
 	const EXCLUDED_TAGS = new Set(["floor_plan", "icon", "other"]);

@@ -108,30 +108,6 @@ function ChartVisual() {
 	);
 }
 
-function MiamiVisual() {
-	return (
-		<div className="mt-6 rounded-xl overflow-hidden bg-[#0C0C0C]/[0.02] min-h-[140px] relative flex items-end justify-center px-4 pb-4">
-			{/* Abstract skyline silhouette */}
-			<div className="flex items-end gap-1.5 opacity-20">
-				{[60, 90, 45, 120, 70, 55, 100, 40, 80, 65, 50, 110, 75].map(
-					(h, i) => (
-						<div
-							key={i}
-							className="bg-white rounded-t-sm"
-							style={{
-								width: `${8 + Math.random() * 6}px`,
-								height: `${h}px`,
-							}}
-						/>
-					),
-				)}
-			</div>
-			{/* Gradient overlay */}
-			<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-		</div>
-	);
-}
-
 function AvatarsVisual() {
 	const avatars = [
 		"/assets/framer/SSmGx1bjs3koY1aPdILAeuc.webp",
@@ -227,8 +203,6 @@ function getVisual(visualType: BentoCardData["visualType"]) {
 	switch (visualType) {
 		case "chart":
 			return <ChartVisual />;
-		case "miami":
-			return <MiamiVisual />;
 		case "avatars":
 			return <AvatarsVisual />;
 		case "logos":
