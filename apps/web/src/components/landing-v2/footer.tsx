@@ -1,7 +1,7 @@
-import { ArrowUpRightIcon, ShieldCheckIcon, BuildingOffice2Icon } from "@heroicons/react/24/outline";
+import { ArrowUpRightIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
 import { slugify } from "@/content/verticals";
 import { CAL_ATTRS } from "./cal";
-import { MENUS } from "./hero";
+import { LINKS, MENUS } from "./hero";
 
 /**
  * Site footer — deep-navy block with a bright-blue CTA band up top, link
@@ -10,42 +10,83 @@ import { MENUS } from "./hero";
  * Colors reference the locked Lapis brand via CSS vars (--brand-deep/-blue).
  */
 
-// Industries + Solutions mirror the navbar mega-menus (shared source); the rest
-// are footer-only link groups.
-const industries = MENUS.find((m) => m.id === "industries");
-const solutions = MENUS.find((m) => m.id === "solutions");
+// Footer link columns mirror the navbar mega-menus 1:1 (single source of truth
+// in hero.tsx): Industries, Solutions, AI Training, Company. The standalone nav
+// link (AI Academy) is surfaced under AI Training. Hrefs are resolved exactly
+// the way the navbar resolves them, so the two can never drift.
+type FooterLinkItem = { label: string; href: string; external?: boolean };
 
-type FooterLinkItem = { label: string; href: string };
+const resolveItemHref = (menuId: string, href: string, title: string) =>
+	href && href !== "#" ? href : `/${menuId}/${slugify(title)}`;
 
-const COLUMNS: { title: string; links: FooterLinkItem[] }[] = [
-	{
-		title: "Industries",
-		links: industries?.items.map((i) => ({ label: i.title, href: `/industries/${slugify(i.title)}` })) ?? [],
-	},
-	{
-		title: "Solutions",
-		links: solutions?.items.map((i) => ({ label: i.title, href: `/solutions/${slugify(i.title)}` })) ?? [],
-	},
-	{
-		title: "Resources",
-		links: ["How it works", "Case studies", "Pricing", "FAQ", "Docs"].map((label) => ({ label, href: "#" })),
-	},
-	{
-		title: "Company",
-		links: ["About", "Careers", "Changelog", "Contact"].map((label) => ({ label, href: "#" })),
-	},
-];
+const isExternal = (href: string) => /^https?:\/\//.test(href);
 
-function FooterLink({ label, href }: FooterLinkItem) {
+const COLUMNS: { title: string; links: FooterLinkItem[] }[] = MENUS.map((menu) => {
+	const links: FooterLinkItem[] = menu.items.map((item) => ({
+		label: item.title,
+		href: resolveItemHref(menu.id, item.href, item.title),
+		external: isExternal(item.href),
+	}));
+	if (menu.id === "ai-training") {
+		for (const link of LINKS) {
+			links.push({ label: link.label, href: link.href, external: link.external });
+		}
+	}
+	return { title: menu.label, links };
+});
+
+function FooterLink({ label, href, external }: FooterLinkItem) {
 	return (
 		<li>
 			<a
 				href={href}
+				{...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
 				className="text-[0.875rem] text-white/55 transition-colors hover:text-white"
 			>
 				{label}
 			</a>
 		</li>
+	);
+}
+
+// Social links (verified handles, also mirrored in lib/seo.ts sameAs).
+const SOCIALS = [
+	{
+		label: "LinkedIn",
+		href: "https://www.linkedin.com/company/nairon-ai",
+		path: "M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24ZM96,176a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0ZM88,96a12,12,0,1,1,12-12A12,12,0,0,1,88,96Zm96,80a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140Z",
+	},
+	{
+		label: "X / Twitter",
+		href: "https://x.com/nairon__ai",
+		path: "M218.12,209.56l-61-95.8,59.72-69.36a12,12,0,1,0-18.2-15.64L142.82,93.08,99.56,25.16A12,12,0,0,0,89.13,20H48a12,12,0,0,0-10.12,18.44l61,95.8L39.16,203.6a12,12,0,0,0,18.2,15.64l55.82-64.88L156.44,222.84A12,12,0,0,0,166.87,228H208a12,12,0,0,0,10.12-18.44ZM97.29,44l55.22,88-20.67,24L68.83,44ZM158.71,204l-55.22-88,20.67-24L187.17,204Z",
+	},
+];
+
+function FooterSocials() {
+	return (
+		<div className="flex items-center gap-4">
+			{SOCIALS.map((s) => (
+				<a
+					key={s.label}
+					href={s.href}
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label={s.label}
+					className="text-white/45 transition-colors hover:text-white"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 256 256"
+						className="size-[1.125rem]"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path d={s.path} />
+					</svg>
+				</a>
+			))}
+		</div>
 	);
 }
 
@@ -94,10 +135,6 @@ export function Footer() {
 					</div>
 					<div className="mt-5 flex flex-col gap-2">
 						<div className="flex items-center gap-1.5 text-[0.75rem] text-white/40">
-							<BuildingOffice2Icon className="size-3.5 shrink-0" />
-							<span>US-Incorporated · Florida</span>
-						</div>
-						<div className="flex items-center gap-1.5 text-[0.75rem] text-white/40">
 							<ShieldCheckIcon className="size-3.5 shrink-0" />
 							<span>Enterprise-grade security</span>
 						</div>
@@ -111,7 +148,12 @@ export function Footer() {
 						</div>
 						<ul className="space-y-2.5">
 							{col.links.map((l) => (
-								<FooterLink key={l.label} label={l.label} href={l.href} />
+								<FooterLink
+									key={l.label}
+									label={l.label}
+									href={l.href}
+									external={l.external}
+								/>
 							))}
 						</ul>
 					</div>
@@ -136,27 +178,32 @@ export function Footer() {
 
 			{/* Bottom bar */}
 			<div className="border-t border-white/10">
-				<div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-[0.8125rem] text-white/45 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-					<div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+				<div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-6 text-[0.8125rem] text-white/45 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+					<div className="flex flex-wrap items-center gap-x-5 gap-y-1.5">
 						<span>© 2026 Nairon, Inc. All rights reserved.</span>
-						<a href="#" className="transition-colors hover:text-white">
+						<a href="/privacy" className="transition-colors hover:text-white">
 							Privacy
 						</a>
-						<a href="#" className="transition-colors hover:text-white">
-							Terms
+						<a
+							href="/terms-and-conditions"
+							className="transition-colors hover:text-white"
+						>
+							Terms &amp; Conditions
+						</a>
+						<a
+							href="/cookie-policy"
+							className="transition-colors hover:text-white"
+						>
+							Cookie Policy
+						</a>
+						<a
+							href="/acceptable-use"
+							className="transition-colors hover:text-white"
+						>
+							Acceptable Use
 						</a>
 					</div>
-					<div className="flex items-center gap-5">
-						<a href="#" className="transition-colors hover:text-white">
-							X / Twitter
-						</a>
-						<a href="#" className="transition-colors hover:text-white">
-							LinkedIn
-						</a>
-						<a href="#" className="transition-colors hover:text-white">
-							GitHub
-						</a>
-					</div>
+					<FooterSocials />
 				</div>
 			</div>
 		</footer>
