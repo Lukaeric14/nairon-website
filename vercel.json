@@ -10,12 +10,6 @@
 	"buildCommand": "bunx turbo build --filter=@nairon-website/web",
 	"outputDirectory": "apps/web/.vercel/output",
 	"redirects": [
-		{
-			"source": "/:path*",
-			"has": [{ "type": "host", "value": "www.naironai.com" }],
-			"destination": "https://naironai.com/:path*",
-			"permanent": true
-		},
 		{ "source": "/residence", "destination": "/", "permanent": true },
 		{ "source": "/apprenticeship", "destination": "/", "permanent": true },
 		{ "source": "/hire", "destination": "/", "permanent": true },
