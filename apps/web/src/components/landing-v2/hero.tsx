@@ -164,18 +164,6 @@ export const MENUS: MegaMenu[] = [
 				icon: PresentationChartLineIcon,
 				href: "https://academy.naironai.com",
 			},
-			{
-				title: "Custom Team Programs",
-				desc: "Tailored training built around your tools, workflows, and org structure.",
-				icon: AdjustmentsHorizontalIcon,
-				href: "https://academy.naironai.com",
-			},
-			{
-				title: "AI Certification",
-				desc: "Structured learning paths that certify your people on real AI workflows.",
-				icon: ClipboardDocumentCheckIcon,
-				href: "https://academy.naironai.com",
-			},
 		],
 		cta: {
 			prompt: "Ready to build an AI-ready organization?",
