@@ -15,7 +15,6 @@
 		{ "source": "/hire", "destination": "/", "permanent": true },
 		{ "source": "/team", "destination": "/", "permanent": true },
 		{ "source": "/contact", "destination": "/", "permanent": true },
-		{ "source": "/careers", "destination": "/", "permanent": true },
 		{ "source": "/program", "destination": "/", "permanent": true }
 	],
 	"headers": [
