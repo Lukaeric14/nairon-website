@@ -142,9 +142,9 @@ function SignalsPage() {
 	return (
 		<div className="font-geist min-h-screen bg-[#F7F7F8] text-[#101014]">
 			<Navbar />
-			<main className="mx-auto max-w-[980px] border-x border-[#101014]/10 pt-24">
+			<main className="mx-auto max-w-[980px] border-x border-[#101014]/10 pt-24 pb-24">
+				<PageTitle />
 				<FeaturedGrid />
-				<FilterRow />
 				<ArticleGrid />
 				<HiveWaitlistSection />
 			</main>
