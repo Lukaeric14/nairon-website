@@ -199,12 +199,6 @@ export const MENUS: MegaMenu[] = [
 				icon: BriefcaseIcon,
 				href: "/careers",
 			},
-			{
-				title: "Partnerships",
-				desc: "Join forces to deliver more than we could alone.",
-				icon: LinkIcon,
-				href: "/partnerships",
-			},
 		],
 	},
 ];
