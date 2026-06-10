@@ -20,6 +20,7 @@ import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as BrandkitRouteImport } from './routes/brandkit'
 import { Route as AcceptableUseRouteImport } from './routes/acceptable-use'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SignalsIndexRouteImport } from './routes/signals.index'
@@ -84,6 +85,11 @@ const AcceptableUseRoute = AcceptableUseRouteImport.update({
   path: '/acceptable-use',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
   path: '/$',
@@ -129,6 +135,7 @@ const AdminCareersRoute = AdminCareersRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/about': typeof AboutRoute
   '/acceptable-use': typeof AcceptableUseRoute
   '/brandkit': typeof BrandkitRoute
   '/careers': typeof CareersRoute
@@ -150,6 +157,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/about': typeof AboutRoute
   '/acceptable-use': typeof AcceptableUseRoute
   '/brandkit': typeof BrandkitRoute
   '/careers': typeof CareersRoute
@@ -172,6 +180,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/about': typeof AboutRoute
   '/acceptable-use': typeof AcceptableUseRoute
   '/brandkit': typeof BrandkitRoute
   '/careers': typeof CareersRoute
@@ -195,6 +204,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$'
+    | '/about'
     | '/acceptable-use'
     | '/brandkit'
     | '/careers'
@@ -216,6 +226,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/$'
+    | '/about'
     | '/acceptable-use'
     | '/brandkit'
     | '/careers'
@@ -237,6 +248,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$'
+    | '/about'
     | '/acceptable-use'
     | '/brandkit'
     | '/careers'
@@ -259,6 +271,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
+  AboutRoute: typeof AboutRoute
   AcceptableUseRoute: typeof AcceptableUseRoute
   BrandkitRoute: typeof BrandkitRoute
   CareersRoute: typeof CareersRoute
@@ -357,6 +370,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AcceptableUseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$': {
       id: '/$'
       path: '/$'
@@ -419,6 +439,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
+  AboutRoute: AboutRoute,
   AcceptableUseRoute: AcceptableUseRoute,
   BrandkitRoute: BrandkitRoute,
   CareersRoute: CareersRoute,
