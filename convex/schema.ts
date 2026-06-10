@@ -77,6 +77,13 @@ export default defineSchema({
 		updatedAt: v.number(),
 	}).index("by_email", ["email"]),
 
+	// Signals newsletter subscribers
+	newsletterSubscribers: defineTable({
+		email: v.string(),
+		source: v.optional(v.string()), // e.g., "Landing newsletter"
+		createdAt: v.number(),
+	}).index("by_email", ["email"]),
+
 	// Career role applications
 	careerApplications: defineTable({
 		roleId: v.string(),

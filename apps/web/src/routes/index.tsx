@@ -7,6 +7,7 @@ import { HowItWorksCards } from "@/components/landing-v2/how-it-works-cards";
 import { UseCases } from "@/components/landing-v2/use-cases";
 import { DiscoveryCall } from "@/components/landing-v2/discovery-call";
 import { Faq } from "@/components/landing-v2/faq";
+import { Newsletter } from "@/components/landing-v2/newsletter";
 import { QuoteBand } from "@/components/landing-v2/quote-band";
 import { Footer } from "@/components/landing-v2/footer";
 import { seoHead } from "@/lib/seo";
@@ -35,6 +36,7 @@ function HomePage() {
 			<UseCases />
 			<QuoteBand />
 			<DiscoveryCall />
+			<Newsletter />
 			<Faq />
 			<Footer />
 		</div>

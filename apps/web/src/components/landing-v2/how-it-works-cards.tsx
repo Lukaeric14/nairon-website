@@ -5,7 +5,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { IsoSceneRenderer, revealDuration } from "@/components/iso";
+import { IsoSceneRenderer, revealDuration, type IsoSceneSpec } from "@/components/iso";
 import { IsoZoomReveal } from "@/components/iso/iso-zoom-reveal";
 import { brandIsoStyle, SCENES } from "@/components/iso/scenes";
 
@@ -47,19 +47,41 @@ const CARDS: CardSpec[] = [
 	},
 ];
 
+// Section-wide pacing multiplier for the reveal choreography. <1 runs faster.
+const SPEED = 0.8; // 20% faster
+
 // Zoom-reveal timing for the sequence card — kept here so the duration math below
 // stays in sync with what we pass to <IsoZoomReveal>.
-const ZOOM_HOLD_MS = 2200;
-const ZOOM_MS = 700;
+const ZOOM_HOLD_MS = 2200 * SPEED;
+const ZOOM_MS = 700 * SPEED;
 // Pause between one card finishing and the next starting.
-const CARD_GAP_MS = 450;
+const CARD_GAP_MS = 450 * SPEED;
+
+// Iso-engine timing defaults (mirror ANIM_DEFAULTS in scene-renderer). Used to
+// scale a scene's reveal so it runs SPEED× as long — without touching the shared
+// engine defaults that every other iso scene on the site relies on.
+const ISO_TIMING_DEFAULTS = { stagger: 0.08, riseDuration: 0.6, drawDuration: 1.1 };
+
+/** A copy of an iso scene whose reveal timing is scaled by SPEED. */
+function faster(spec: IsoSceneSpec): IsoSceneSpec {
+	const a = spec.animation ?? {};
+	return {
+		...spec,
+		animation: {
+			...a,
+			stagger: (a.stagger ?? ISO_TIMING_DEFAULTS.stagger) * SPEED,
+			riseDuration: (a.riseDuration ?? ISO_TIMING_DEFAULTS.riseDuration) * SPEED,
+			drawDuration: (a.drawDuration ?? ISO_TIMING_DEFAULTS.drawDuration) * SPEED,
+		},
+	};
+}
 
 /** How long a card's graphic takes to fully reveal (ms). */
 function cardDurationMs(card: CardSpec): number {
 	if (card.sequence) {
-		return ZOOM_HOLD_MS + ZOOM_MS + revealDuration(SCENES[card.sequence[1]]) * 1000;
+		return ZOOM_HOLD_MS + ZOOM_MS + revealDuration(faster(SCENES[card.sequence[1]])) * 1000;
 	}
-	if (card.scene) return revealDuration(SCENES[card.scene]) * 1000;
+	if (card.scene) return revealDuration(faster(SCENES[card.scene])) * 1000;
 	return 0;
 }
 
@@ -137,8 +159,8 @@ function NotchedCard({
 					play={play}
 					holdMs={ZOOM_HOLD_MS}
 					zoomMs={ZOOM_MS}
-					outer={{ ...SCENES[sequence[0]], viewBox: [60, 30, 300, 286], origin: { sx: 210, sy: 222 } }}
-					inner={{ ...SCENES[sequence[1]], viewBox: [70, 4, 300, 286], origin: { sx: 220, sy: 180 } }}
+					outer={{ ...faster(SCENES[sequence[0]]), viewBox: [60, 30, 300, 286], origin: { sx: 210, sy: 222 } }}
+					inner={{ ...faster(SCENES[sequence[1]]), viewBox: [70, 4, 300, 286], origin: { sx: 220, sy: 180 } }}
 					className="h-full w-[110%] max-w-none shrink-0"
 					// Mobile: fill the box height (like cards 1 & 3) so the chip reads
 					// large; desktop keeps the width-fill that already frames well.
@@ -151,7 +173,7 @@ function NotchedCard({
 				<IsoSceneRenderer
 					play={play}
 					spec={{
-						...SCENES[scene],
+						...faster(SCENES[scene]),
 						style: brandIsoStyle,
 						viewBox: SCENE_FRAME[scene].viewBox,
 						origin: SCENE_FRAME[scene].origin,

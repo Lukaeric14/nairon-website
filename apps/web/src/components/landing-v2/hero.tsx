@@ -210,7 +210,9 @@ export const MENUS: MegaMenu[] = [
 	},
 ];
 
-const LINKS: { label: string; href: string; external?: boolean }[] = [
+// Standalone nav links (not mega-menus). Exported so the footer surfaces the
+// same set and the two never drift.
+export const LINKS: { label: string; href: string; external?: boolean }[] = [
 	{ label: "AI Academy", href: "https://academy.naironai.com", external: true },
 ];
 
