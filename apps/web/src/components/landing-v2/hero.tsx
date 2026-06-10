@@ -141,9 +141,10 @@ export const MENUS: MegaMenu[] = [
 	},
 ];
 
-const LINKS: { label: string; href: string }[] = [
+const LINKS: { label: string; href: string; external?: boolean }[] = [
 	{ label: "How it works", href: "/#how-it-works" },
 	{ label: "Careers", href: "/careers" },
+	{ label: "AI Academy", href: "https://academy.naironai.com", external: true },
 ];
 
 function MegaPanel({ menu }: { menu: MegaMenu }) {
@@ -286,6 +287,7 @@ export function Navbar() {
 							key={item.label}
 							href={item.href}
 							onMouseEnter={() => setOpen(null)}
+							{...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
 							className="text-[0.875rem] font-medium text-ds-text-secondary transition-colors hover:text-ds-text-primary"
 						>
 							{item.label}
