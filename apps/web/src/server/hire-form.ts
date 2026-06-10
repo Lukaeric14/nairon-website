@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { notifyHive } from "./hive-notify";
 
 interface HireFormData {
 	name: string;
@@ -68,6 +69,17 @@ export const submitHireForm = createServerFn({ method: "POST" })
 		} else {
 			console.warn("SLACK_WEBHOOK_URL not configured");
 		}
+
+		await notifyHive({
+			form: "AI Employee inquiry",
+			fields: {
+				Name: name,
+				Company: company,
+				Email: email,
+				"Use case": useCase,
+				"Team size": teamSize,
+			},
+		});
 
 		return { success: true };
 	});

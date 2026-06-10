@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { ConvexHttpClient } from "convex/browser";
 import { anyApi } from "convex/server";
+import { notifyHive } from "./hive-notify";
 
 interface CareerApplicationData {
 	roleId: string;
@@ -145,6 +146,17 @@ export const submitCareerApplication = createServerFn({ method: "POST" })
 		);
 
 		await notifySlack(application, result.alreadyExists);
+
+		await notifyHive({
+			form: "Career application",
+			fields: {
+				Role: application.roleTitle,
+				Name: application.name,
+				Email: application.email,
+				Portfolio: application.portfolioUrl,
+				"AI workflow": application.toolingWorkflow,
+			},
+		});
 
 		return result;
 	});

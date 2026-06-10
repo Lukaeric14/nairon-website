@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@convex/_generated/api";
+import { notifyHive } from "./hive-notify";
 
 interface NewsletterData {
 	email: string;
@@ -29,6 +30,11 @@ export const subscribeNewsletter = createServerFn({ method: "POST" })
 		const result = await convex.action(api.newsletter.subscribeToNewsletter, {
 			email,
 			source: data.source,
+		});
+
+		await notifyHive({
+			form: "Newsletter",
+			fields: { Email: email, Source: data.source },
 		});
 
 		const webhookUrl = process.env.SLACK_WEBHOOK_URL;

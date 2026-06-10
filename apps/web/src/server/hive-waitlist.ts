@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@convex/_generated/api";
+import { notifyHive } from "./hive-notify";
 
 interface HiveWaitlistData {
 	firstName: string;
@@ -30,6 +31,11 @@ export const submitHiveWaitlist = createServerFn({ method: "POST" })
 		const result = await convex.action(api.hiveWaitlist.joinHiveWaitlist, {
 			firstName,
 			email,
+		});
+
+		await notifyHive({
+			form: "Hive waitlist",
+			fields: { Name: firstName, Email: email },
 		});
 
 		const webhookUrl = process.env.SLACK_WEBHOOK_URL;

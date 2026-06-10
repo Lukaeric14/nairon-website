@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@convex/_generated/api";
+import { notifyHive } from "./hive-notify";
 
 interface ContactFormData {
 	firstName: string;
@@ -40,6 +41,16 @@ export const submitContactForm = createServerFn({ method: "POST" })
 			email,
 			phone,
 			message,
+		});
+
+		await notifyHive({
+			form: "Contact",
+			fields: {
+				Name: `${firstName} ${lastName}`,
+				Email: email,
+				Phone: phone,
+				Message: message,
+			},
 		});
 
 		return { success: true };
