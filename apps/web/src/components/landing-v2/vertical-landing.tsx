@@ -10,8 +10,10 @@ import { ToolsStrip } from "./tools-strip";
 import { VerticalUseCases } from "./vertical-use-cases";
 import { OurApproach } from "./our-approach";
 import { DiscoveryCall } from "./discovery-call";
+import { VerticalFaqSection } from "./vertical-faq";
 import { Footer } from "./footer";
 import type { VerticalContent } from "@/content/verticals";
+import { verticalFaqs } from "@/content/vertical-faqs";
 
 export function VerticalLanding({ content }: { content: VerticalContent }) {
 	// One page-wide Cal init so every CTA with CAL_ATTRS opens the modal.
@@ -23,6 +25,7 @@ export function VerticalLanding({ content }: { content: VerticalContent }) {
 			<ToolsStrip tools={content.tools} />
 			<VerticalUseCases name={content.name} useCases={content.useCases} />
 			<OurApproach />
+			<VerticalFaqSection name={content.name} faqs={verticalFaqs(content)} />
 			<DiscoveryCall />
 			<Footer />
 		</div>

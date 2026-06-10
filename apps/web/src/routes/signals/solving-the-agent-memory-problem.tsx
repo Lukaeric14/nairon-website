@@ -28,52 +28,19 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { DISCOVERY_CALL_URL } from "@/lib/links";
-import { blogPostJsonLd, breadcrumbJsonLd, seoHead } from "@/lib/seo";
+import { articleHead } from "@/lib/seo";
+import { getArticle } from "@/content/signals";
 import { cn } from "@/lib/utils";
 
-const ARTICLE_PATH = "/signals/solving-the-agent-memory-problem";
-const ARTICLE_TITLE = "Solving the Agent Memory problem";
-const ARTICLE_DESCRIPTION =
-	"A practical look at Supermemory, Mem0, Zep, Letta, LangMem, and company-brain memory layers for AI employees inside Hive.";
-const PUBLISHED_DATE = "2026-04-30";
-const ARTICLE_AUTHOR = "Obaid Ur-Rahmaan";
-const ARTICLE_AUTHOR_AVATAR = "/avatars/obaid-ur-rahmaan.png";
-
-const articleJsonLd = JSON.stringify(
-	blogPostJsonLd({
-		title: ARTICLE_TITLE,
-		description: ARTICLE_DESCRIPTION,
-		path: ARTICLE_PATH,
-		datePublished: PUBLISHED_DATE,
-		authorName: ARTICLE_AUTHOR,
-	}),
-);
-
-const breadcrumbsJsonLd = JSON.stringify(
-	breadcrumbJsonLd([
-		{ name: "Home", path: "/" },
-		{ name: ARTICLE_TITLE, path: ARTICLE_PATH },
-	]),
-);
+// Canonical metadata lives in the registry (content/signals.ts) so the
+// sitemap, llms.txt, Signals index, and this page can never disagree.
+const article = getArticle("solving-the-agent-memory-problem")!;
+const ARTICLE_AUTHOR = article.author;
+const ARTICLE_AUTHOR_AVATAR = article.authorAvatar;
 
 export const Route = createFileRoute("/signals/solving-the-agent-memory-problem")({
 	component: AgentMemoryArticlePage,
-	head: () => {
-		const base = seoHead({
-			title: `${ARTICLE_TITLE} | Nairon AI`,
-			description: ARTICLE_DESCRIPTION,
-			path: ARTICLE_PATH,
-			type: "article",
-		});
-
-		return {
-			...base,
-			scripts: [
-				{ type: "application/ld+json", children: articleJsonLd },
-				{ type: "application/ld+json", children: breadcrumbsJsonLd },
-			],
-		};
-	},
+	head: () => articleHead(article),
 });
 
 type ProviderId =

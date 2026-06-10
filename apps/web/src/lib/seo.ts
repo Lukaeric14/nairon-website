@@ -109,6 +109,60 @@ export function serviceJsonLd() {
 }
 
 /**
+ * Complete head() for a Signals article: canonical, OG (article type),
+ * Twitter card, BlogPosting schema, and Home → Signals → article breadcrumbs.
+ * Accepts a SignalArticle from @/content/signals directly. One call per
+ * article route — nothing else to remember.
+ */
+export function articleHead(article: {
+	slug: string;
+	title: string;
+	description: string;
+	datePublished: string;
+	dateModified?: string;
+	author: string;
+	ogImage?: string;
+}) {
+	const path = `/signals/${article.slug}`;
+	const base = seoHead({
+		title: `${article.title} | Nairon AI`,
+		description: article.description,
+		path,
+		type: "article",
+		ogImage: article.ogImage,
+	});
+	return {
+		...base,
+		scripts: [
+			{
+				type: "application/ld+json",
+				children: JSON.stringify(
+					blogPostJsonLd({
+						title: article.title,
+						description: article.description,
+						path,
+						datePublished: article.datePublished,
+						dateModified: article.dateModified,
+						authorName: article.author,
+						image: article.ogImage,
+					}),
+				),
+			},
+			{
+				type: "application/ld+json",
+				children: JSON.stringify(
+					breadcrumbJsonLd([
+						{ name: "Home", path: "/" },
+						{ name: "Signals", path: "/signals" },
+						{ name: article.title, path },
+					]),
+				),
+			},
+		],
+	};
+}
+
+/**
  * JSON-LD Service schema for a single industry/solution vertical page. Lets
  * Google understand each landing page as a distinct service offering tied to
  * Nairon, instead of treating them as near-duplicate pages.

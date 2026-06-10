@@ -26,6 +26,9 @@ Nairon ships industry- and function-specific AI employees rather than a generic 
 - [Content & Marketing](https://naironai.com/solutions/content-marketing): Nairon builds custom AI employees for content and marketing teams. They take briefs to publish-ready, on-brand copy inside your existing tools, with no migrations.
 - [Workflow Automation](https://naironai.com/solutions/workflow-automation): Nairon builds custom AI employees for workflow automation that own your repetitive operational processes end to end, inside the tools you already run. Live in weeks.
 
+## Articles
+- [Solving the Agent Memory problem](https://naironai.com/signals/solving-the-agent-memory-problem): A practical look at Supermemory, Mem0, Zep, Letta, LangMem, and company-brain memory layers for AI employees inside Hive.
+
 ## Legal
 - [Privacy Policy](https://naironai.com/privacy): How Nairon handles personal data.
 - [Terms & Conditions](https://naironai.com/terms-and-conditions): Terms governing use of the site and services.

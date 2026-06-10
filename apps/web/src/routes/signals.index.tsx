@@ -20,17 +20,20 @@ import { useCalInit } from "@/components/landing-v2/cal";
 import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
 import { DISCOVERY_CALL_URL } from "@/lib/links";
 import { seoHead } from "@/lib/seo";
+import { SIGNAL_ARTICLES, articlePath } from "@/content/signals";
 
+// Sourced from the article registry so the index, sitemap, llms.txt, and the
+// article's own schema always agree.
+const latest = SIGNAL_ARTICLES[0];
 const featuredPost = {
-	title: "Solving the Agent Memory problem",
-	href: "/signals/solving-the-agent-memory-problem",
-	category: "Company memory",
-	date: "Apr 30, 2026",
-	readTime: "12 min read",
-	description:
-		"A practical look at Supermemory, Mem0, Zep, Letta, LangMem, company-brain tools, and the memory layer we need for Hive.",
-	author: "Obaid Ur-Rahmaan",
-	authorAvatar: "/avatars/obaid-ur-rahmaan.png",
+	title: latest.title,
+	href: articlePath(latest),
+	category: latest.category,
+	date: latest.displayDate,
+	readTime: latest.readTime,
+	description: latest.description,
+	author: latest.author,
+	authorAvatar: latest.authorAvatar,
 };
 
 type SignalPost = {

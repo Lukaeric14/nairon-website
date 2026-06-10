@@ -14,6 +14,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { INDUSTRIES, SOLUTIONS, VERTICALS } from "../src/content/verticals";
 import { ROLES } from "../src/components/landing-v2/careers-data";
+import { SIGNAL_ARTICLES, articlePath } from "../src/content/signals";
 
 const SITE_URL = "https://naironai.com";
 
@@ -38,10 +39,12 @@ const CORE_PAGES: SitemapEntry[] = [
 	{ path: "/acceptable-use" },
 ];
 
-// Signals articles. Add a line here when a new article ships (keep its real date).
-const SIGNALS_ARTICLES: SitemapEntry[] = [
-	{ path: "/signals/solving-the-agent-memory-problem", lastmod: "2026-04-30" },
-];
+// Signals articles come from the registry (src/content/signals.ts) — adding
+// an article there is the only step needed to get it into the sitemap.
+const SIGNALS_ARTICLES: SitemapEntry[] = SIGNAL_ARTICLES.map((a) => ({
+	path: articlePath(a),
+	lastmod: a.dateModified ?? a.datePublished,
+}));
 
 const verticalEntries = Object.values(VERTICALS).map((v) => ({
 	path: `/${v.kind === "industry" ? "industries" : "solutions"}/${v.slug}`,
@@ -99,6 +102,9 @@ const llms = [
 	"",
 	"## Solutions",
 	...SOLUTIONS.map((v) => link(v.name, `/solutions/${v.slug}`, v.seo.description)),
+	"",
+	"## Articles",
+	...SIGNAL_ARTICLES.map((a) => link(a.title, articlePath(a), a.description)),
 	"",
 	"## Legal",
 	link("Privacy Policy", "/privacy", "How Nairon handles personal data."),

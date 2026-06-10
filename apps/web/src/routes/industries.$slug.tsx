@@ -1,7 +1,8 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { VerticalLanding, VerticalNotFound } from "@/components/landing-v2/vertical-landing";
 import { VERTICALS } from "@/content/verticals";
-import { breadcrumbJsonLd, seoHead, verticalServiceJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, faqJsonLd, seoHead, verticalServiceJsonLd } from "@/lib/seo";
+import { verticalFaqs } from "@/content/vertical-faqs";
 
 export const Route = createFileRoute("/industries/$slug")({
 	component: IndustryPage,
@@ -37,6 +38,10 @@ export const Route = createFileRoute("/industries/$slug")({
 							{ name: c.name, path },
 						]),
 					),
+				},
+				{
+					type: "application/ld+json",
+					children: JSON.stringify(faqJsonLd(verticalFaqs(c))),
 				},
 			],
 		};
