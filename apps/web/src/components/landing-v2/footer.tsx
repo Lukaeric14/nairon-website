@@ -1,4 +1,4 @@
-import { ArrowUpRightIcon, MapPinIcon, ShieldCheckIcon, BuildingOffice2Icon } from "@heroicons/react/24/outline";
+import { ArrowUpRightIcon, ShieldCheckIcon, BuildingOffice2Icon } from "@heroicons/react/24/outline";
 import { slugify } from "@/content/verticals";
 import { CAL_ATTRS } from "./cal";
 import { MENUS } from "./hero";
@@ -87,11 +87,10 @@ export function Footer() {
 						AI employees built around your workflows, deployed inside your
 						existing systems.
 					</p>
-					<div className="mt-5 space-y-2">
-						<div className="flex items-start gap-2 text-[0.8125rem] text-white/45">
-							<MapPinIcon className="mt-0.5 size-3.5 shrink-0" />
-							<span>2125 Biscayne Blvd<br />Miami, FL 33137<br />United States</span>
-						</div>
+					<div className="mt-5">
+						<p className="text-[0.8125rem] leading-relaxed text-white/45">
+							2125 Biscayne Blvd<br />Miami, FL 33137<br />United States
+						</p>
 					</div>
 					<div className="mt-5 flex flex-col gap-2">
 						<div className="flex items-center gap-1.5 text-[0.75rem] text-white/40">
