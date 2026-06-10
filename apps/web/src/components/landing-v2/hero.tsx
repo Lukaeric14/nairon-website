@@ -200,6 +200,13 @@ export const MENUS: MegaMenu[] = [
 				href: "/careers",
 			},
 		],
+		card: {
+			eyebrow: "Work with us",
+			title: "Book an AI audit",
+			body: "A free session to map where AI can unlock the most value in your business.",
+			ctaLabel: "Book a call",
+			href: "#",
+		},
 	},
 ];
 
