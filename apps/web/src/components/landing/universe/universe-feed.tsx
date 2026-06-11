@@ -262,7 +262,7 @@ export function UniverseFeed() {
 						</div>
 						<div className="hidden md:flex items-center gap-2 text-[#5C584F] text-sm">
 							<div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-							Live — refreshed every hour
+							Live: refreshed every hour
 						</div>
 					</div>
 				</GridCell>

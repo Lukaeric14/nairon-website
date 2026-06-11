@@ -32,9 +32,9 @@ type ModeContent = {
 const CONTENT: Record<Mode, ModeContent> = {
 	agents: {
 		heading: ["AI employees, built", "around your workflows"],
-		body: "Deploy AI employees that execute real operational work end to end — across revenue, support, and operations.",
+		body: "Deploy AI employees that execute real operational work end to end across revenue, support, and operations.",
 		emphasis: "Each one runs on top of the tools you already use",
-		bodyTail: " — no migrations, no new software to learn.",
+		bodyTail: ". No migrations, no new software to learn.",
 		panelTitle: "Your agents",
 		rows: [
 			{ name: "Maya", role: "Chief of Staff" },
@@ -52,7 +52,7 @@ const CONTENT: Record<Mode, ModeContent> = {
 	},
 	hive: {
 		heading: ["One workspace for", "humans and agents"],
-		body: "Hive is where your team and your AI employees work side by side — assign work, review output, and stay in the loop.",
+		body: "Hive is where your team and your AI employees work side by side: assign work, review output, and stay in the loop.",
 		emphasis: "Channels, threads, and approvals keep every agent accountable",
 		bodyTail: " to a human on your team.",
 		panelTitle: "Your workspace",

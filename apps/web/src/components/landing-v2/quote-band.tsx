@@ -54,7 +54,7 @@ export function QuoteBand() {
 					Self-improving AI agents compound. The companies that adopt them first
 					won&apos;t just lead their market, they&apos;ll outrun it.
 				</blockquote>
-				<div className="mt-6 text-[0.875rem] text-white/70">— Nairon</div>
+				<div className="mt-6 text-[0.875rem] text-white/70">- Nairon</div>
 			</div>
 		</section>
 	);

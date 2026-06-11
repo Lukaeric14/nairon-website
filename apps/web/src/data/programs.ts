@@ -154,7 +154,7 @@ export const RESIDENCE_DATA: ProgramData = {
 			icon: "MapPin",
 			title: "Full Relocation to Miami",
 			description:
-				"Flights, private housing, meals, laundry — everything covered for 6 weeks on-site. You focus on building. We handle the rest.",
+				"Flights, private housing, meals, laundry. Everything covered for 6 weeks on-site. You focus on building. We handle the rest.",
 			visualType: "dubai",
 		},
 		{
@@ -162,7 +162,7 @@ export const RESIDENCE_DATA: ProgramData = {
 			icon: "Cpu",
 			title: "Unlimited AI Tooling",
 			description:
-				"OpenAI, Anthropic, Vercel, and every premium tool — unlimited API credits and access throughout the program.",
+				"OpenAI, Anthropic, Vercel, and every premium tool. Unlimited API credits and access throughout the program.",
 			visualType: "tools",
 		},
 		{
@@ -201,7 +201,7 @@ export const RESIDENCE_DATA: ProgramData = {
 	testimonials: {
 		engineer: {
 			quote:
-				"The Nairon Residence completely changed how I approach engineering. The pressure was real — 12-hour days, shipping production code every week. But that's exactly what made it transformative. I went from being a decent engineer to someone companies fight over.",
+				"The Nairon Residence completely changed how I approach engineering. The pressure was real: 12-hour days, shipping production code every week. But that's exactly what made it transformative. I went from being a decent engineer to someone companies fight over.",
 			name: "Abdulrahman Abdi",
 			role: "Founding AI Engineer",
 			company: "Nairon",
@@ -212,14 +212,14 @@ export const RESIDENCE_DATA: ProgramData = {
 		},
 		hiringManager: {
 			quote:
-				"We've tried every hiring channel — recruiters, job boards, referrals. Nothing compares to the quality of engineers coming out of Nairon. They ship faster, communicate better, and understand production systems at a level we rarely see in candidates with 5+ years of experience.",
+				"We've tried every hiring channel: recruiters, job boards, referrals. Nothing compares to the quality of engineers coming out of Nairon. They ship faster, communicate better, and understand production systems at a level we rarely see in candidates with 5+ years of experience.",
 			name: "Hiring Partner",
 			role: "Head of Engineering",
 			company: "Series B AI Startup",
 			image:
 				"/assets/framer/47jhKH0AA1f2ZNcovBPcmjTlLM.png",
 			caseStudy:
-				"Hired 2 Nairon graduates in the first cohort. Both ramped to full productivity within 2 weeks — compared to the usual 2-month onboarding.",
+				"Hired 2 Nairon graduates in the first cohort. Both ramped to full productivity within 2 weeks, compared to the usual 2-month onboarding.",
 		},
 	},
 	curriculum: {
@@ -246,9 +246,9 @@ export const RESIDENCE_DATA: ProgramData = {
 		items: [
 			"3+ years professional software engineering experience",
 			"95th percentile or higher on the CCAT cognitive assessment",
-			"Strong builder — shipped production code under real deadlines",
-			"High agency — thrives under ambiguity and tight timelines",
-			"Full commitment — 12-hour days, 6 days a week for 8 weeks",
+			"Strong builder: shipped production code under real deadlines",
+			"High agency: thrives under ambiguity and tight timelines",
+			"Full commitment: 12-hour days, 6 days a week for 8 weeks",
 			"Willing to relocate to Miami for weeks 3–8",
 		],
 		subtext: "This is not for everyone. That's the point.",
@@ -308,10 +308,10 @@ export const RESIDENCE_DATA: ProgramData = {
 		paragraphs: [
 			{
 				bold: "Traditional hiring is broken for engineers.",
-				rest: "Mass-applying into the void, endless recruiter screens, ghosted after six interviews — then being reduced to a ticket machine inside companies that don't ship fast.",
+				rest: "Mass-applying into the void, endless recruiter screens, ghosted after six interviews, then being reduced to a ticket machine inside companies that don't ship fast.",
 			},
 			{
-				bold: "We built the Residence as a place where engineers earn their value in one dimension only —",
+				bold: "We built the Residence as a place where engineers earn their value in one dimension only:",
 				rest: "can you ship reliable, production AI under pressure? No resume theater, no recruiter games, no endless take-homes.",
 			},
 			{
@@ -348,7 +348,7 @@ export const RESIDENCE_DATA: ProgramData = {
 		{
 			question: "Do I need AI or ML experience?",
 			answer:
-				"No. You need strong engineering fundamentals — the ability to architect, debug, and ship production code fast. We'll teach the AI. You bring the ability to build.",
+				"No. You need strong engineering fundamentals: the ability to architect, debug, and ship production code fast. We'll teach the AI. You bring the ability to build.",
 		},
 		{
 			question: "What is the selection process?",
@@ -358,7 +358,7 @@ export const RESIDENCE_DATA: ProgramData = {
 		{
 			question: "Is there really no cost?",
 			answer:
-				"Correct. Flights, housing, meals, tools — everything is covered. We make money when our hiring partners hire you. Your only cost is your full commitment for 8 weeks.",
+				"Correct. Flights, housing, meals, tools. Everything is covered. We make money when our hiring partners hire you. Your only cost is your full commitment for 8 weeks.",
 		},
 		{
 			question: "Where exactly in Miami?",
@@ -395,7 +395,7 @@ export const APPRENTICESHIP_DATA: ProgramData = {
 		],
 		primaryCta: { label: "Apply Now", href: "https://apply.naironai.com" },
 		secondaryCta: { label: "Join Weekly Office Hours", href: "/contact" },
-		subtext: "Rolling enrollment — start anytime",
+		subtext: "Rolling enrollment. Start anytime",
 	},
 	bentoCards: [
 		{
@@ -403,7 +403,7 @@ export const APPRENTICESHIP_DATA: ProgramData = {
 			icon: "Code2",
 			title: "Build Real AI Applications",
 			description:
-				"Ship 3-4 production-quality projects across RAG systems, AI agents, and full-stack AI apps. No toy demos — real tools that solve real problems.",
+				"Ship 3-4 production-quality projects across RAG systems, AI agents, and full-stack AI apps. No toy demos. Real tools that solve real problems.",
 			visualType: "code",
 		},
 		{
@@ -470,7 +470,7 @@ export const APPRENTICESHIP_DATA: ProgramData = {
 			image:
 				"/assets/framer/47jhKH0AA1f2ZNcovBPcmjTlLM.png",
 			caseStudy:
-				"Hired an Apprenticeship graduate who built a production RAG system in their first month — work that typically takes a senior engineer 2-3 months.",
+				"Hired an Apprenticeship graduate who built a production RAG system in their first month, work that typically takes a senior engineer 2-3 months.",
 		},
 	},
 	curriculum: {
@@ -494,7 +494,7 @@ export const APPRENTICESHIP_DATA: ProgramData = {
 						week: "Week 2",
 						title: "Production Web Apps with AI",
 						description:
-							"Build a full-stack web application with embedded AI features — from smart search to AI-powered content generation. Deploy to production by Friday.",
+							"Build a full-stack web application with embedded AI features, from smart search to AI-powered content generation. Deploy to production by Friday.",
 					},
 					{
 						week: "Week 3",
@@ -512,7 +512,7 @@ export const APPRENTICESHIP_DATA: ProgramData = {
 						week: "Week 5",
 						title: "Client-Style Project Sprint",
 						description:
-							"Tackle a real-world brief from a Nairon partner company. Scope, build, and deliver a production MVP under realistic constraints — just like a senior engineer would.",
+							"Tackle a real-world brief from a Nairon partner company. Scope, build, and deliver a production MVP under realistic constraints, just like a senior engineer would.",
 					},
 					{
 						week: "Week 6",
@@ -545,7 +545,7 @@ export const APPRENTICESHIP_DATA: ProgramData = {
 				number: 1,
 				title: "Submit Application",
 				description:
-					"Tell us about your background, goals, and what you want to build with AI. No tests, no hackathons — just a straightforward application.",
+					"Tell us about your background, goals, and what you want to build with AI. No tests, no hackathons. Just a straightforward application.",
 			},
 			{
 				number: 2,
@@ -584,7 +584,7 @@ export const APPRENTICESHIP_DATA: ProgramData = {
 		paragraphs: [
 			{
 				bold: "We were forced into launching the Apprenticeship.",
-				rest: "Thousands of engineers applied to the Residence. Most didn't meet the bar — not because they lacked talent, but because they hadn't had the right environment to develop it.",
+				rest: "Thousands of engineers applied to the Residence. Most didn't meet the bar, not because they lacked talent, but because they hadn't had the right environment to develop it.",
 			},
 			{
 				bold: "The Apprenticeship exists to close that gap.",
@@ -592,7 +592,7 @@ export const APPRENTICESHIP_DATA: ProgramData = {
 			},
 			{
 				bold: "This isn't a consolation prize.",
-				rest: "It's a standalone product designed to make engineers AI-native in 6 weeks. Some graduates go on to the Residence. Most don't need to — they're already competitive.",
+				rest: "It's a standalone product designed to make engineers AI-native in 6 weeks. Some graduates go on to the Residence. Most don't need to. They're already competitive.",
 			},
 		],
 	},
@@ -616,7 +616,7 @@ export const APPRENTICESHIP_DATA: ProgramData = {
 		{
 			question: "How is this different from a coding bootcamp?",
 			answer:
-				"Bootcamps teach you to code. We take engineers who already know how to code and train them to build production AI systems. Every week you ship real projects — not tutorials.",
+				"Bootcamps teach you to code. We take engineers who already know how to code and train them to build production AI systems. Every week you ship real projects, not tutorials.",
 		},
 		{
 			question: "Can I do this while working full-time?",

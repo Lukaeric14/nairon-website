@@ -32,17 +32,17 @@ const SCENE_FRAME: Record<
 const CARDS: CardSpec[] = [
 	{
 		title: "01: AI Opportunity Audit",
-		body: "A consultative deep-dive that maps where AI creates real leverage — not a list of pains, but the concrete capabilities and highest-value opportunities to apply them.",
+		body: "A consultative deep-dive that maps where AI creates real leverage: not a list of pains, but the concrete capabilities and highest-value opportunities to apply them.",
 		scene: "capabilityAtlas",
 	},
 	{
 		title: "02: AI Systems Design",
-		body: "We take the audit and architect the actual AI systems — the multi-agent workflows, how they route and connect — before any building or deploying.",
+		body: "We take the audit and architect the actual AI systems, the multi-agent workflows and how they route and connect, before any building or deploying.",
 		sequence: ["twoBars", "systemsDesignChip"],
 	},
 	{
 		title: "03: Deployment & Go-Live",
-		body: "We deploy the designed system into the tools and workflows you already run — wired into your existing stack, switched on, and live in production.",
+		body: "We deploy the designed system into the tools and workflows you already run, wired into your existing stack, switched on, and live in production.",
 		scene: "deployGoLiveCascade",
 	},
 ];

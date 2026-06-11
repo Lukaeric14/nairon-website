@@ -48,7 +48,7 @@ const features: Feature[] = [
     },
     {
         name: 'Ralph mode (fully autonomous)',
-        description: 'Run an entire epic unattended — all tasks, reviews, and reflections without stopping.',
+        description: 'Run an entire epic unattended: all tasks, reviews, and reflections without stopping.',
         plans: {
             codex: false,
             flux: true,

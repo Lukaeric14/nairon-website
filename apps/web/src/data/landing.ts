@@ -232,7 +232,7 @@ export const FEATURED_MEMBER = {
 	twitter: "https://x.com/founderLuka",
 	bio: [
 		"Luka Eric is the founder of Abundance AI and a consultant who has led product, marketing, and innovation work across the UAE, U.S., and Europe. He has designed and scaled ventures in AI, education, real estate, logistics, and e-commerce, partnering with both startups and established brands.",
-		"Luka previously built Rhetora AI, a Techstars-backed company developing conversational AI models for call centers. His work blends strategic clarity with hands-on execution. Luka helps companies turn ideas into real products, strong funnels, and measurable growth — from product design and hiring to branding, go-to-market, and operational systems. He enjoys building alongside ambitious teams and tackling complex problems where technology, business, and creativity intersect.",
+		"Luka previously built Rhetora AI, a Techstars-backed company developing conversational AI models for call centers. His work blends strategic clarity with hands-on execution. Luka helps companies turn ideas into real products, strong funnels, and measurable growth, from product design and hiring to branding, go-to-market, and operational systems. He enjoys building alongside ambitious teams and tackling complex problems where technology, business, and creativity intersect.",
 	],
 	logos: [
 		{ name: "Techstars", src: "/assets/framer/pUNtUdgSwe33FoYh1m5LpqWPnCg.png" },
@@ -447,7 +447,7 @@ export const PROGRAM_MISSION = [
 	"Traditional hiring is broken for engineers. Mass-applying into the void, endless recruiter screens, ghosted after six interviews, assignments, then being reduced to a ticket machine inside companies that don't ship fast.",
 	{
 		before:
-			"We built Nairon as a place where engineers earn their value in one dimension only — ",
+			"We built Nairon as a place where engineers earn their value in one dimension only: ",
 		bold: "can you ship reliable, production AI under pressure?",
 		after:
 			" No resume theater, no recruiter games, no endless take-homes.",
@@ -460,7 +460,7 @@ export const PROGRAM_APPROACH = [
 	"One intense program, engineered for failure. Not everyone makes it, and that's the point.",
 	"Ship under real ambiguity and deadlines.",
 	"Production before theory.",
-	"Collaborative, founder-level environment — Tight rooms, daily builds, async ownership, and no hand-holding.",
+	"Collaborative, founder-level environment. Tight rooms, daily builds, async ownership, and no hand-holding.",
 ] as const;
 
 // ─── Program page: Stats ────────────────────────────────────────
@@ -497,7 +497,7 @@ export const PROGRAM_REVIEW = {
 		"Proof of building real things",
 		"Curiosity and problem-solving",
 	],
-	responseTime: "Within 24 Hours — By real human",
+	responseTime: "Within 24 Hours. By real human",
 } as const;
 
 // ─── Program page: Benefit cards ────────────────────────────────
@@ -505,7 +505,7 @@ export const PROGRAM_BENEFIT_CARDS = [
 	{
 		tag: "The Experience",
 		heading:
-			"Miami is the experience — The opportunity is Global.",
+			"Miami is the experience. The opportunity is Global.",
 		items: [
 			{ icon: "home" as const, text: "Free housing during Miami intensive weeks" },
 			{ icon: "plane" as const, text: "Flights + transportation covered" },
@@ -952,7 +952,7 @@ export const RESIDENCE = {
 			"100hrs/week, 800hrs total",
 			"8-week intensive in Miami",
 			"Hackathons, live projects, peer pressure",
-			"Only 12 per cohort — extreme selectivity",
+			"Only 12 per cohort: extreme selectivity",
 			"Every graduate is verified by us",
 		],
 		cta: { label: "Find talent", href: "/approach" },
@@ -964,7 +964,7 @@ export const APPRENTICESHIP_CONTENT = {
 	engineer: {
 		title: "Start with Apprenticeship.",
 		description:
-			"Built after hundreds of engineers asked for a scaled version of our Residency, Apprenticeship helps you build the same execution habits remotely — then apply to Residency when you're ready.",
+			"Built after hundreds of engineers asked for a scaled version of our Residency, Apprenticeship helps you build the same execution habits remotely, then apply to Residency when you're ready.",
 		points: [
 			"8hrs/week, 48hrs total",
 			"Part-time, remote format",
@@ -1040,12 +1040,12 @@ export const FAQ_ENGINEER = [
 	{
 		question: "Is the Residence really free?",
 		answer:
-			"Yes. The Residence is completely free for engineers — housing, flights, food, and training are all covered. We make money when our hiring partners hire you after graduation.",
+			"Yes. The Residence is completely free for engineers: housing, flights, food, and training are all covered. We make money when our hiring partners hire you after graduation.",
 	},
 	{
 		question: "What happens if I don't get into the Residence?",
 		answer:
-			"You can join the Apprenticeship — a remote, self-paced version of the same curriculum for $1,500. You still get access to our hiring partner network upon completion.",
+			"You can join the Apprenticeship, a remote, self-paced version of the same curriculum for $1,500. You still get access to our hiring partner network upon completion.",
 	},
 	{
 		question: "What does the selection process look like?",
@@ -1068,7 +1068,7 @@ export const FAQ_HIRING_MANAGER = [
 	{
 		question: "How are Nairon engineers different from other candidates?",
 		answer:
-			"Nairon engineers have survived 8 weeks of real-world AI projects, hackathons, and intense evaluation. They think in systems, communicate like CTOs, and deliver under pressure — not just pass interviews.",
+			"Nairon engineers have survived 8 weeks of real-world AI projects, hackathons, and intense evaluation. They think in systems, communicate like CTOs, and deliver under pressure, not just pass interviews.",
 	},
 	{
 		question: "What does the matching process look like?",
@@ -1088,12 +1088,12 @@ export const FAQ_HIRING_MANAGER = [
 	{
 		question: "How quickly can I hire an engineer?",
 		answer:
-			"Our average time to hire is under 14 days from role submission to signed offer. You skip the sourcing, screening, and vetting — we've already done it.",
+			"Our average time to hire is under 14 days from role submission to signed offer. You skip the sourcing, screening, and vetting. We've already done it.",
 	},
 	{
 		question: "Can I specify technical requirements for my role?",
 		answer:
-			"Absolutely. You tell us exactly what you need — tech stack, seniority, domain expertise — and we match from our pool of trained engineers.",
+			"Absolutely. You tell us exactly what you need: tech stack, seniority, domain expertise. We match from our pool of trained engineers.",
 	},
 ] as const;
 
@@ -1104,7 +1104,7 @@ export const FAQ_CONTENT = {
 	},
 	hiringManager: {
 		heading: "How hiring through Nairon works",
-		headingDim: "— from role submission to signed offer",
+		headingDim: "from role submission to signed offer",
 	},
 } as const;
 

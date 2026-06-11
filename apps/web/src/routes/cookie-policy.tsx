@@ -8,7 +8,7 @@ export const Route = createFileRoute("/cookie-policy")({
 	component: CookiePolicyPage,
 	head: () => ({
 		...seoHead({
-			title: "Cookie Policy — Nairon AI",
+			title: "Cookie Policy - Nairon AI",
 			description:
 				"Learn how Nairon AI uses cookies and local storage on our website.",
 			path: "/cookie-policy",
@@ -63,15 +63,15 @@ function CookiePolicyPage() {
 							</p>
 							<ul className="list-disc pl-6 space-y-2">
 								<li>
-									<strong className="text-ds-text-primary">Authentication session cookies</strong>{" "}
-									— used to keep you signed in after logging in with your
+									<strong className="text-ds-text-primary">Authentication session cookies</strong>:{" "}
+									used to keep you signed in after logging in with your
 									email/password or Google account via Better-Auth. These
 									cookies are strictly necessary and expire when your session
 									ends or after a set period of inactivity.
 								</li>
 								<li>
-									<strong className="text-ds-text-primary">User preference cookies</strong>{" "}
-									— used to remember your settings and preferences across
+									<strong className="text-ds-text-primary">User preference cookies</strong>:{" "}
+									used to remember your settings and preferences across
 									visits, such as theme or dismissed notices.
 								</li>
 							</ul>
@@ -87,8 +87,8 @@ function CookiePolicyPage() {
 							</p>
 							<ul className="list-disc pl-6 space-y-2">
 								<li>
-									<strong className="text-ds-text-primary">Article view tracking</strong>{" "}
-									— we store a count of Signals articles you have viewed in
+									<strong className="text-ds-text-primary">Article view tracking</strong>:{" "}
+									we store a count of Signals articles you have viewed in
 									localStorage. This data never leaves your browser and is
 									not transmitted to our servers.
 								</li>
@@ -120,21 +120,21 @@ function CookiePolicyPage() {
 							</p>
 							<ul className="list-disc pl-6 space-y-2">
 								<li>
-									<strong className="text-ds-text-primary">Chrome</strong> —
+									<strong className="text-ds-text-primary">Chrome</strong>:
 									Settings &gt; Privacy and Security &gt; Cookies and other
 									site data.
 								</li>
 								<li>
-									<strong className="text-ds-text-primary">Firefox</strong> —
+									<strong className="text-ds-text-primary">Firefox</strong>:
 									Settings &gt; Privacy &amp; Security &gt; Cookies and Site
 									Data.
 								</li>
 								<li>
-									<strong className="text-ds-text-primary">Safari</strong> —
+									<strong className="text-ds-text-primary">Safari</strong>:
 									Preferences &gt; Privacy &gt; Manage Website Data.
 								</li>
 								<li>
-									<strong className="text-ds-text-primary">Edge</strong> —
+									<strong className="text-ds-text-primary">Edge</strong>:
 									Settings &gt; Cookies and site permissions &gt; Manage and
 									delete cookies and site data.
 								</li>

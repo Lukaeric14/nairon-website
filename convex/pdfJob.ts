@@ -364,7 +364,7 @@ export const sendPdfReadyEmail = internalAction({
       Download Your PDF
     </a>
     <p style="font-size: 13px; color: #666; margin-top: 40px;">
-      — Nairon Property Tools
+      - Nairon Property Tools
     </p>
   </div>
 </body>

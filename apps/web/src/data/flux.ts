@@ -181,17 +181,17 @@ export const FLUX_WHAT_WE_TRACK = {
 		{
 			title: "Collaboration quality",
 			items: [
-				"Interview depth — how well you clarify requirements",
-				"Pushback ratio — how often you disagree vs. accept",
-				"Prompt quality — context richness and specificity",
+				"Interview depth: how well you clarify requirements",
+				"Pushback ratio: how often you disagree vs. accept",
+				"Prompt quality: context richness and specificity",
 			],
 		},
 		{
 			title: "Execution efficiency",
 			items: [
-				"Iteration efficiency — first-pass success rate",
-				"Tool breadth — MCPs, skills, and patterns in use",
-				"Context preservation — sessions without memory loss",
+				"Iteration efficiency: first-pass success rate",
+				"Tool breadth: MCPs, skills, and patterns in use",
+				"Context preservation: sessions without memory loss",
 			],
 		},
 	],

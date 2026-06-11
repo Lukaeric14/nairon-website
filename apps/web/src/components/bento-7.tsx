@@ -24,7 +24,7 @@ export default function BentoSeven() {
         <section className="bg-background @container py-24">
             <div className="mx-auto w-full max-w-5xl px-6">
                 <div className="mb-10 max-w-2xl">
-                    <h2 className="text-3xl font-semibold lg:text-4xl">HITL or AFK—same guarantees</h2>
+                    <h2 className="text-3xl font-semibold lg:text-4xl">HITL or AFK: same guarantees</h2>
                     <p className="text-muted-foreground mt-4 text-lg">Work task-by-task with full control, or hand off an entire epic. Re-anchoring keeps agents aligned, evidence validates every step, cross-model review catches drift before it compounds.</p>
                 </div>
                 <div className="@2xl:grid-cols-2 @2xl:grid-rows-2 @4xl:grid-cols-3 grid gap-3">
@@ -33,7 +33,7 @@ export default function BentoSeven() {
                             <div>
                                 <BetweenHorizonalEnd className="text-muted-foreground size-4" />
                                 <h3 className="text-foreground mb-2 mt-4 font-medium">Re-anchoring at every checkpoint</h3>
-                                <p className="text-muted-foreground text-balance">Agents continuously verify against original intent. Before execution, during implementation, after completion—drift is caught and corrected automatically.</p>
+                                <p className="text-muted-foreground text-balance">Agents continuously verify against original intent. Before execution, during implementation, after completion. Drift is caught and corrected automatically.</p>
                             </div>
                             <div className="-mx-6 overflow-hidden pl-2 md:-mx-8 md:pl-6">
                                 <Flow10Illustration />
@@ -78,7 +78,7 @@ export default function BentoSeven() {
                         <div>
                             <Activity className="text-muted-foreground size-4" />
                             <h3 className="text-foreground mb-2 mt-4 font-medium">Zero context drift</h3>
-                            <p className="text-muted-foreground">Persistent memory across sessions. Agents remember intent, decisions, and constraints—even when you walk away.</p>
+                            <p className="text-muted-foreground">Persistent memory across sessions. Agents remember intent, decisions, and constraints, even when you walk away.</p>
                         </div>
                         <AiMemoryIllustration />
                     </Card>

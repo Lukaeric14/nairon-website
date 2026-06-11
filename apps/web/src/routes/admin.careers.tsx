@@ -6,7 +6,7 @@ export const Route = createFileRoute("/admin/careers")({
 	component: CareersAdminRoute,
 	head: () =>
 		seoHead({
-			title: "Careers Admin — Nairon",
+			title: "Careers Admin - Nairon",
 			description: "Internal dashboard for reviewing Design Engineer applications.",
 			path: "/admin/careers",
 			noindex: true,

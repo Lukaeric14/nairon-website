@@ -141,7 +141,7 @@ const heroObject: IsoSceneSpec = {
 const capabilityAtlas: IsoSceneSpec = {
 	id: "capabilityAtlas",
 	title: "Capability Atlas: AI capabilities mapped onto a business grid, surfacing opportunities",
-	desc: "A field of low 3D blocks representing the business. Three circles above are AI capabilities; dashed beams drop onto the field and two blocks rise tallest, labelled — the identified opportunities.",
+	desc: "A field of low 3D blocks representing the business. Three circles above are AI capabilities; dashed beams drop onto the field and two blocks rise tallest, labelled as the identified opportunities.",
 	viewBox: [0, 0, 480, 380],
 	unit: 30,
 	style: brandIsoStyle,
@@ -289,7 +289,7 @@ const primitivesGallery: IsoSceneSpec = {
 const deploymentGoLive: IsoSceneSpec = {
 	id: "deploymentGoLive",
 	title: "Deployment & Go-Live: the AI unit docks into the existing stack from the top and powers it live",
-	desc: "A white layered stack (your existing software) with a circular socket on top. A blue cylinder — the AI unit — slides in from above and docks into the socket; power then flows down the stack's edges and a 'Live' status appears.",
+	desc: "A white layered stack (your existing software) with a circular socket on top. A blue cylinder, the AI unit, slides in from above and docks into the socket; power then flows down the stack's edges and a 'Live' status appears.",
 	viewBox: [0, 0, 440, 380],
 	unit: 40,
 	style: { accent: "#1378E6" },

@@ -9,7 +9,7 @@ const COMMUNITY_STATS = [
 
 const RECENT_TOPICS = [
 	"Best practices for Claude Code in monorepos",
-	"Cursor vs Windsurf — real benchmark comparison",
+	"Cursor vs Windsurf: real benchmark comparison",
 	"How we shipped a full-stack app in 48 hours with AI",
 	"Token efficiency tips that actually work",
 	"The future of code review in an agentic world",

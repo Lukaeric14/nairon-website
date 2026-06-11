@@ -59,7 +59,7 @@ export function FluxPricing() {
             </span>
           </h2>
           <p className="text-[#5C584F] mt-4 text-lg max-w-2xl mx-auto">
-            Free users get friction detection — the most valuable part. Pro adds
+            Free users get friction detection, the most valuable part. Pro adds
             the intelligence layer: recommendations matched to your stack,
             ranked by what actually works.
           </p>
@@ -140,7 +140,7 @@ export function FluxPricing() {
         </div>
 
         <p className="text-center text-[#5C584F] text-sm mt-8">
-          Enterprise observability coming soon — org-wide friction heatmaps,
+          Enterprise observability coming soon: org-wide friction heatmaps,
           team metrics, and tool standardization.
         </p>
       </div>

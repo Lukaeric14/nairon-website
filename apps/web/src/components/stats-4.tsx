@@ -116,7 +116,7 @@ export default function StatsSection() {
                         </div>
                         <div className="@max-xl:border-0 space-y-2">
                             <div className="bg-gradient-to-t from-[#1A1916] to-[#5C584F] bg-clip-text text-3xl font-medium text-transparent md:text-5xl">Quality</div>
-                            <p className="text-[#5C584F] text-sm">Thinking metrics, not just velocity — measure how engineers collaborate with AI</p>
+                            <p className="text-[#5C584F] text-sm">Thinking metrics, not just velocity. Measure how engineers collaborate with AI</p>
                         </div>
                         <div className="@max-xl:hidden space-y-2">
                             <div className="bg-gradient-to-t from-[#1A1916] to-[#5C584F] bg-clip-text text-3xl font-medium text-transparent md:text-5xl">Hiring</div>

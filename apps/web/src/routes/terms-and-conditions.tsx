@@ -8,7 +8,7 @@ export const Route = createFileRoute("/terms-and-conditions")({
 	component: TermsPage,
 	head: () =>
 		seoHead({
-			title: "Terms & Conditions — Nairon AI",
+			title: "Terms & Conditions - Nairon AI",
 			description:
 				"Terms and conditions for using Nairon AI services, including our AI workforce platform.",
 			path: "/terms-and-conditions",

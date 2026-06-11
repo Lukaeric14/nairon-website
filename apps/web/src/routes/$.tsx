@@ -9,7 +9,7 @@ export const Route = createFileRoute("/$")({
 	component: NotFoundPage,
 	head: () =>
 		seoHead({
-			title: "Page Not Found — Nairon AI",
+			title: "Page Not Found - Nairon AI",
 			description:
 				"The page you're looking for doesn't exist. Explore Nairon AI or read our latest Signals.",
 			path: "/404",

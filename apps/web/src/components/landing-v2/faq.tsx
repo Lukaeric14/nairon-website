@@ -15,7 +15,7 @@ import { CAL_ATTRS } from "./cal";
 const FAQS: { q: string; a: string }[] = [
 	{
 		q: "What exactly is an AI employee?",
-		a: "An AI worker built around one of your real workflows. It executes operational work end to end — across revenue, support, and operations — rather than handling a single isolated task.",
+		a: "An AI worker built around one of your real workflows. It executes operational work end to end across revenue, support, and operations, rather than handling a single isolated task.",
 	},
 	{
 		q: "How is this different from buying more software?",
@@ -23,7 +23,7 @@ const FAQS: { q: string; a: string }[] = [
 	},
 	{
 		q: "How long until something is live?",
-		a: "Weeks, not quarters. We scope a workflow, build the agent against it, and get it running inside your systems — no 18-month timelines or rip-and-replace projects.",
+		a: "Weeks, not quarters. We scope a workflow, build the agent against it, and get it running inside your systems. No 18-month timelines or rip-and-replace projects.",
 	},
 	{
 		q: "Is our data secure?",
@@ -31,7 +31,7 @@ const FAQS: { q: string; a: string }[] = [
 	},
 	{
 		q: "Do we need engineers to maintain them?",
-		a: "No. Nairon builds and tunes the agents. Your team reviews output and stays in the loop through Hive — assigning work and approving actions like you would with any teammate.",
+		a: "No. Nairon builds and tunes the agents. Your team reviews output and stays in the loop through Hive, assigning work and approving actions like you would with any teammate.",
 	},
 	{
 		q: "Which AI models do you use?",

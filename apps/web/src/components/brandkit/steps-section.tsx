@@ -101,7 +101,7 @@ export function StepsSection() {
 					</h3>
 					<p className="mt-4 max-w-xl text-[0.9375rem] leading-relaxed text-white/75">
 						We run a structured audit of how work moves through your organization
-						across teams, systems, and decision points — pinpointing where AI can
+						across teams, systems, and decision points, pinpointing where AI can
 						cut overhead, accelerate execution, or replace manual coordination
 						entirely.
 					</p>
@@ -123,7 +123,7 @@ export function StepsSection() {
 							</h3>
 							<p className="mt-4 max-w-md text-[0.9375rem] leading-relaxed text-white/80">
 								We design and build the AI agent system that executes the
-								workflow — integrating it with the tools, data, and operational
+								workflow, integrating it with the tools, data, and operational
 								logic that power the process. You stay in the loop the whole way.
 							</p>
 						</div>
@@ -144,7 +144,7 @@ export function StepsSection() {
 							<p className="mt-4 max-w-md text-[0.9375rem] leading-relaxed text-white/85">
 								We deploy the agent system into your stack, connecting it to live
 								systems and workflows so it begins executing real operational
-								work — built on top of your existing software, no migrations
+								work. Built on top of your existing software, no migrations
 								required.
 							</p>
 						</div>

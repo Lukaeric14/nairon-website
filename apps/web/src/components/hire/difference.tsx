@@ -59,7 +59,7 @@ function BeforeAfterComparison() {
 					Experienced Engineers
 				</h4>
 				<p className={`text-sm ${colors.textBody}`}>
-					Backend, frontend, infra—already shipping code in production
+					Backend, frontend, infra. Already shipping code in production
 				</p>
 			</GlassCard>
 

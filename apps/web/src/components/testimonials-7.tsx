@@ -18,7 +18,7 @@ const StealthLogo = () => (
 const testimonials = [
     {
         id: 'luka',
-        text: "I'm mostly a product person — not an engineer. But with Flux guiding my Claude Code sessions, I've been able to ship real features and help build a 6-figure ARR startup. The workflow loops keep me from making dumb mistakes and the recommendations actually make sense.",
+        text: "I'm mostly a product person, not an engineer. But with Flux guiding my Claude Code sessions, I've been able to ship real features and help build a 6-figure ARR startup. The workflow loops keep me from making dumb mistakes and the recommendations actually make sense.",
         avatar: LUKA_AVATAR,
         name: 'Luka Eric',
         title: 'Co-founder',

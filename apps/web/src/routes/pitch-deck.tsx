@@ -6,7 +6,7 @@ export const Route = createFileRoute("/pitch-deck")({
 	component: PitchDeckPage,
 	head: () =>
 		seoHead({
-			title: "Pitch Deck — Nairon",
+			title: "Pitch Deck - Nairon",
 			description:
 				"Nairon pitch deck. Data-driven technical recruiting startup specializing in AI-native engineering talent.",
 			path: "/pitch-deck",
@@ -251,14 +251,14 @@ function SlideContent({ index }: { index: number }) {
 					talent gap
 				</h2>
 				<p className="text-[22px] text-[#5C584F] max-w-[1100px] mb-16 leading-[1.7]">
-					Nairon is a data-driven technical recruiting startup that uses proprietary benchmarks to match companies with AI-native engineers — developers who don't just use AI tools, but build systems where AI is a first-class citizen.
+					Nairon is a data-driven technical recruiting startup that uses proprietary benchmarks to match companies with AI-native engineers: developers who don't just use AI tools, but build systems where AI is a first-class citizen.
 				</p>
 				{/* Stats grid with dividers */}
 				<NotchedGrid cols={4}>
 					{[
 						{ value: "600+", label: "Engineers assessed" },
 						{ value: "Flux", label: "Proprietary benchmark" },
-						{ value: "Miami", label: "HQ — Global reach" },
+						{ value: "Miami", label: "HQ, global reach" },
 						{ value: "2026", label: "Founded" },
 					].map((stat, i) => (
 						<NotchedCell key={stat.label} borderRight={i < 3}>
@@ -286,10 +286,10 @@ function SlideContent({ index }: { index: number }) {
 					{[
 						{
 							title: "Technical Recruiting",
-							desc: "End-to-end hiring pipeline for AI-native engineers. From sourcing to placement, powered by data — not gut feel.",
+							desc: "End-to-end hiring pipeline for AI-native engineers. From sourcing to placement, powered by data, not gut feel.",
 						},
 						{
-							title: "Flux — AI Workflow Tool",
+							title: "Flux: AI Workflow Tool",
 							desc: "Open-source structured scoping, execution, and review plugin for AI-augmented development. 30+ curated tools.",
 						},
 					].map((item) => (
@@ -313,7 +313,7 @@ function SlideContent({ index }: { index: number }) {
 						{
 							step: "02",
 							title: "Benchmark",
-							desc: "Candidates are scored on AI-nativeness using our proprietary Flux benchmark — not resumes",
+							desc: "Candidates are scored on AI-nativeness using our proprietary Flux benchmark, not resumes",
 						},
 						{
 							step: "03",

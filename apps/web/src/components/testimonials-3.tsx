@@ -21,7 +21,7 @@ export default function TestimonialsSection() {
                     />
                     <div className="mt-10">
                         <p className='text-xl md:text-3xl md:leading-[1.4] font-normal text-[#1A1916] before:mr-1 before:content-["\201C"] after:ml-1 after:content-["\201D"]'>
-                            I'm mostly a product person — not an engineer. But with Flux guiding my Claude Code sessions, I've been able to ship real features and help build a <span className="font-serif italic text-[#C9A96E]">6-figure ARR startup</span>. The workflow loops keep me from making dumb mistakes.
+                            I'm mostly a product person, not an engineer. But with Flux guiding my Claude Code sessions, I've been able to ship real features and help build a <span className="font-serif italic text-[#C9A96E]">6-figure ARR startup</span>. The workflow loops keep me from making dumb mistakes.
                         </p>
 
                         <div className="mt-12 flex items-center gap-6">

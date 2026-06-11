@@ -5,7 +5,7 @@ export const Route = createFileRoute("/how-it-works-lab")({
 	component: HowItWorksLab,
 	head: () => ({
 		meta: [
-			{ title: "How It Works — Nairon" },
+			{ title: "How It Works - Nairon" },
 			{ name: "robots", content: "noindex, nofollow" },
 		],
 	}),

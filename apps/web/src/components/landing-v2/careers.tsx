@@ -36,8 +36,8 @@ export function Careers() {
 				</h1>
 				<p className="mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-ds-text-secondary">
 					We design, build, and operate AI employees that run real work inside the
-					systems our customers already use. We're a small team that ships fast —
-					here's who we're hiring.
+					systems our customers already use. We're a small team that ships fast.
+					Here's who we're hiring.
 				</p>
 
 				{/* Open roles */}

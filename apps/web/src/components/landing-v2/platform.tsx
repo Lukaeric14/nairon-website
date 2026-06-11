@@ -41,7 +41,7 @@ const TABS: Tab[] = [
 		description:
 			"We architect custom agent systems that handle your end-to-end workflows.",
 		image: "/platform/agents1.png",
-		imageAlt: "Intelligent document processing — agents extracting and routing structured data",
+		imageAlt: "Intelligent document processing: agents extracting and routing structured data",
 		frames: ["/platform/agents1.png", "/platform/agents2.png", "/platform/agents3.png"],
 	},
 	{
@@ -50,7 +50,7 @@ const TABS: Tab[] = [
 		icon: Squares2X2Icon,
 		title: "Hive",
 		description:
-			"Where your team and AI agents work side by side — assign, review, and approve in one place.",
+			"Where your team and AI agents work side by side: assign, review, and approve in one place.",
 		image: "/platform/hive1.png",
 		imageAlt: "Hive workspace showing a human and AI agent collaborating in a thread",
 		frames: ["/platform/hive1.png", "/platform/hive2.png", "/platform/hive3.png"],

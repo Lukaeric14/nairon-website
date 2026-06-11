@@ -8,7 +8,7 @@ export const Route = createFileRoute("/acceptable-use")({
 	component: AcceptableUsePage,
 	head: () => ({
 		...seoHead({
-			title: "Acceptable Use Policy — Nairon AI",
+			title: "Acceptable Use Policy - Nairon AI",
 			description:
 				"Rules and guidelines for using the Nairon AI platform and Signals content.",
 			path: "/acceptable-use",
@@ -62,36 +62,36 @@ function AcceptableUsePage() {
 							</p>
 							<ul className="list-disc pl-6 space-y-2">
 								<li>
-									<strong className="text-ds-text-primary">Misrepresentation</strong>{" "}
-									— providing false, misleading, or fraudulent information in
+									<strong className="text-ds-text-primary">Misrepresentation</strong>:{" "}
+									providing false, misleading, or fraudulent information in
 									any communication with Nairon AI or its clients.
 								</li>
 								<li>
-									<strong className="text-ds-text-primary">Scraping and data harvesting</strong>{" "}
-									— using automated tools, bots, or scripts to scrape,
+									<strong className="text-ds-text-primary">Scraping and data harvesting</strong>:{" "}
+									using automated tools, bots, or scripts to scrape,
 									crawl, or extract data from our website or platform
 									without prior written consent.
 								</li>
 								<li>
-									<strong className="text-ds-text-primary">Unauthorized access</strong>{" "}
-									— attempting to gain access to accounts, systems, or data
+									<strong className="text-ds-text-primary">Unauthorized access</strong>:{" "}
+									attempting to gain access to accounts, systems, or data
 									that you are not authorized to access, including bypassing
 									authentication or security measures.
 								</li>
 								<li>
-									<strong className="text-ds-text-primary">Spam and unsolicited communications</strong>{" "}
-									— using our platform to send bulk unsolicited messages,
+									<strong className="text-ds-text-primary">Spam and unsolicited communications</strong>:{" "}
+									using our platform to send bulk unsolicited messages,
 									advertisements, or promotional content to other users.
 								</li>
 								<li>
-									<strong className="text-ds-text-primary">Illegal activity</strong>{" "}
-									— using our services for any purpose that violates
+									<strong className="text-ds-text-primary">Illegal activity</strong>:{" "}
+									using our services for any purpose that violates
 									applicable laws or regulations, including those applicable
 									in the United States.
 								</li>
 								<li>
-									<strong className="text-ds-text-primary">Disruption of services</strong>{" "}
-									— interfering with the availability, performance, or
+									<strong className="text-ds-text-primary">Disruption of services</strong>:{" "}
+									interfering with the availability, performance, or
 									security of our platform, including denial-of-service
 									attacks or introducing malicious code.
 								</li>

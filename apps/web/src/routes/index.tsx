@@ -16,9 +16,9 @@ export const Route = createFileRoute("/")({
 	component: HomePage,
 	head: () =>
 		seoHead({
-			title: "Nairon — The AI workforce for modern teams",
+			title: "Nairon - The AI workforce for modern teams",
 			description:
-				"Nairon builds AI employees around your real workflows and deploys them inside the systems you already run — measurable outcomes, no migrations.",
+				"Nairon builds AI employees around your real workflows and deploys them inside the systems you already run. Measurable outcomes, no migrations.",
 			path: "/",
 		}),
 });

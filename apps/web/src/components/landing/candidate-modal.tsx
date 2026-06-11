@@ -108,7 +108,7 @@ export function CandidateModal() {
 								className="mt-8 w-full inline-flex items-center justify-center gap-2 font-semibold text-sm px-6 py-3 rounded-full bg-[#0C0C0C]/[0.06] text-[#5C584F] cursor-not-allowed opacity-60"
 								aria-disabled="true"
 							>
-								Enter Nairon Universe — Coming Soon
+								Enter Nairon Universe: Coming Soon
 							</span>
 						</div>
 					</div>

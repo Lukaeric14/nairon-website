@@ -10,7 +10,7 @@ export const Route = createFileRoute("/iso-lab")({
 	component: IsoLab,
 	head: () => ({
 		meta: [
-			{ title: "Iso Lab — Nairon" },
+			{ title: "Iso Lab - Nairon" },
 			{ name: "robots", content: "noindex, nofollow" },
 		],
 	}),

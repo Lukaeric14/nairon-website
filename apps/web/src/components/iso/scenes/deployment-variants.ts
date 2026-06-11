@@ -40,7 +40,7 @@ const deployGoLiveMono: IsoSceneSpec = {
 // it seats, the whole block flips to accent at once and a ring seal energizes.
 const deployGoLiveReactor: IsoSceneSpec = {
 	id: "deployGoLiveReactor",
-	title: "Reactor Core — deploy and go-live",
+	title: "Reactor Core: deploy and go-live",
 	desc: "A prebuilt white layered block with a deep central socket. A blue core cylinder drops in from above and seats flush with the block top, then the entire block ignites to Lapis blue at once and a blue ring seal appears on the top surface.",
 	viewBox: [0, 0, 440, 420],
 	origin: { sx: 220, sy: 300 },
@@ -61,7 +61,7 @@ const deployGoLiveReactor: IsoSceneSpec = {
 // they ignite bottom → top, and the AI core lights last.
 const deployGoLiveCascade: IsoSceneSpec = {
 	id: "deployGoLiveCascade",
-	title: "Deployment & Go-Live — ignition cascade",
+	title: "Deployment & Go-Live: ignition cascade",
 	desc: "A layered software stack with a socket cut into its top. An AI unit drops in and seats flush. The charge then climbs the stack layer by layer, powering the whole block on in Lapis blue, with the AI core igniting last.",
 	viewBox: [0, 0, 440, 440],
 	origin: { sx: 220, sy: 300 },
@@ -112,7 +112,7 @@ const deployGoLiveKeystone: IsoSceneSpec = {
 const deployGoLiveRack: IsoSceneSpec = {
 	id: "deployGoLiveRack",
 	title: "Deployment & Go-Live: the AI unit docks flush into a wide enterprise server block, which then powers on live",
-	desc: "A wide, flat white 6-layer server appliance with a centered round socket on top. A blue cylinder — the AI unit — drops in from above and seats flush with the top deck. The entire block then ignites Lapis blue all at once, and a dots matrix, a status disc and a LIVE label confirm the appliance is online.",
+	desc: "A wide, flat white 6-layer server appliance with a centered round socket on top. A blue cylinder, the AI unit, drops in from above and seats flush with the top deck. The entire block then ignites Lapis blue all at once, and a dots matrix, a status disc and a LIVE label confirm the appliance is online.",
 	viewBox: [0, 0, 440, 420],
 	origin: { sx: 220, sy: 250 },
 	unit: 40,

@@ -8,7 +8,7 @@ export const Route = createFileRoute("/iso-step2")({
 	component: Step2Lab,
 	head: () => ({
 		meta: [
-			{ title: "Iso Step 2 — Nairon" },
+			{ title: "Iso Step 2 - Nairon" },
 			{ name: "robots", content: "noindex, nofollow" },
 		],
 	}),
@@ -22,7 +22,7 @@ function Step2Lab() {
 		<div className="min-h-screen bg-[#fbfaf8] p-10 font-inter text-[#1a1916]">
 			<div className="mx-auto max-w-3xl space-y-5">
 				<div className="flex items-baseline justify-between">
-					<h1 className="font-serif text-2xl">Step 2 — AI Systems Design</h1>
+					<h1 className="font-serif text-2xl">Step 2: AI Systems Design</h1>
 					<div className="flex gap-2">
 						<button
 							type="button"

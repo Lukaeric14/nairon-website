@@ -90,7 +90,7 @@ export function GradientCardsSection() {
 							1,505,650,017
 						</div>
 						<p className="mt-4 max-w-md text-[0.9375rem] leading-relaxed text-white/75">
-							Every number is a task an AI employee handled end to end — across
+							Every number is a task an AI employee handled end to end, across
 							revenue, support, and operations teams already in production.
 						</p>
 					</div>

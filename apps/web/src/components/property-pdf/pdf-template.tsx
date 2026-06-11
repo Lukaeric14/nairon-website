@@ -685,7 +685,7 @@ export function PropertyPDF({
 					<Text style={s.aboutHeading}>
 						{listing.propertyType}
 						{listing.yearBuilt
-							? ` — Built ${listing.yearBuilt}`
+							? `, built ${listing.yearBuilt}`
 							: ""}
 					</Text>
 					<Text style={s.aboutDesc}>

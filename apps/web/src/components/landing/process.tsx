@@ -12,19 +12,19 @@ const steps = [
 		number: "02",
 		title: "Step 2: Audit",
 		description:
-			"We run a technical audit of your existing stack and design the AI infrastructure your business needs — so what we build integrates cleanly and empowers your team, without adding complexity to your operations.",
+			"We run a technical audit of your existing stack and design the AI infrastructure your business needs, so what we build integrates cleanly and empowers your team, without adding complexity to your operations.",
 	},
 	{
 		number: "03",
 		title: "Step 3: Implement",
 		description:
-			"Our engineers build, test, and deploy your AI employee directly into your environment — running on real hardware, integrated with your tools, and ready to operate end-to-end.",
+			"Our engineers build, test, and deploy your AI employee directly into your environment: running on real hardware, integrated with your tools, and ready to operate end-to-end.",
 	},
 	{
 		number: "04",
 		title: "Step 4: Optimize",
 		description:
-			"We move from deployment into a weekly operating rhythm — monitoring performance, refining output, and continuously improving your AI employees so they only get better over time.",
+			"We move from deployment into a weekly operating rhythm: monitoring performance, refining output, and continuously improving your AI employees so they only get better over time.",
 	},
 ];
 

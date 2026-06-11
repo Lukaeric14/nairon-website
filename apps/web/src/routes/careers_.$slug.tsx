@@ -16,7 +16,7 @@ export const Route = createFileRoute("/careers_/$slug")({
 		const role = getRole(params.slug);
 		if (!role) return { meta: [{ name: "robots", content: "noindex, nofollow" }] };
 		return seoHead({
-			title: `${role.title} — Careers at Nairon`,
+			title: `${role.title} - Careers at Nairon`,
 			description: role.blurb,
 			path: `/careers/${role.slug}`,
 		});

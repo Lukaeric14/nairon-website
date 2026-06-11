@@ -44,7 +44,7 @@ export function verticalFaqs(v: VerticalContent): VerticalFaq[] {
 		},
 		{
 			question: `Does it work with ${toolList}, and the rest of our stack?`,
-			answer: `Yes. Nairon's AI employees run inside the systems ${ctx} teams already use — including ${toolList} — plus your inbox, calendar, and Slack. There is no new platform to migrate to and nothing for your team to learn.`,
+			answer: `Yes. Nairon's AI employees run inside the systems ${ctx} teams already use, including ${toolList}, plus your inbox, calendar, and Slack. There is no new platform to migrate to and nothing for your team to learn.`,
 		},
 		{
 			question: "How long until it's live, and what does rollout look like?",
@@ -52,7 +52,7 @@ export function verticalFaqs(v: VerticalContent): VerticalFaq[] {
 		},
 		{
 			question: "Who stays in control of what the AI employee does?",
-			answer: `Your team does. Every AI employee runs with role-based access and human approval on sensitive actions, and you manage it through Hive like any other teammate — assign work, review output, tighten or widen its autonomy as trust builds.`,
+			answer: `Your team does. Every AI employee runs with role-based access and human approval on sensitive actions, and you manage it through Hive like any other teammate: assign work, review output, tighten or widen its autonomy as trust builds.`,
 		},
 	];
 }

@@ -133,7 +133,7 @@ export function HireProcess() {
 					<p className={`text-base leading-relaxed ${colors.textBody} max-w-2xl`}>
 						Priority and Exclusive Partners can submit real product challenges or
 						internal tasks for the cohort to work on. Your roadmap directly shapes
-						their training — and you get early visibility into top performers.
+						their training, and you get early visibility into top performers.
 					</p>
 				</div>
 				<a

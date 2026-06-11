@@ -19,7 +19,7 @@ export const Route = createFileRoute("/contact")({
 		seoHead({
 			title: "Contact | Nairon AI",
 			description:
-				"Get in touch with Nairon — book a discovery call, email the team, or join the community.",
+				"Get in touch with Nairon: book a discovery call, email the team, or join the community.",
 			path: "/contact",
 		}),
 });
@@ -42,7 +42,7 @@ function ContactPage() {
 						</h1>
 						<p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-ds-text-secondary">
 							Tell us about a workflow you'd hand to an AI employee, or just say
-							hello. The fastest way in is to book a call — but a message works
+							hello. The fastest way in is to book a call, but a message works
 							too.
 						</p>
 					</div>
@@ -148,7 +148,7 @@ function ContactForm() {
 			await submitContactForm({ data: form });
 			setForm(EMPTY);
 			toast("Message sent.", {
-				description: "Thanks — we'll get back to you shortly.",
+				description: "Thanks, we'll get back to you shortly.",
 				style: toastStyle,
 			});
 		} catch {

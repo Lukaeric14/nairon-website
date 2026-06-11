@@ -8,7 +8,7 @@ export const Route = createFileRoute("/privacy")({
 	component: PrivacyPage,
 	head: () =>
 		seoHead({
-			title: "Privacy Policy — Nairon AI",
+			title: "Privacy Policy - Nairon AI",
 			description:
 				"How Nairon AI collects, uses, and protects your personal data. Read our privacy policy.",
 			path: "/privacy",
@@ -40,17 +40,17 @@ function PrivacyPage() {
 							</p>
 							<ul className="list-disc pl-6 space-y-2">
 								<li>
-									<strong className="text-ds-text-primary">Contact information</strong>{" "}
-									— name, email address, phone number, and company name provided
+									<strong className="text-ds-text-primary">Contact information</strong>:{" "}
+									name, email address, phone number, and company name provided
 									through our forms.
 								</li>
 								<li>
-									<strong className="text-ds-text-primary">Professional information</strong>{" "}
-									— resume, portfolio links, GitHub profile, and technical
+									<strong className="text-ds-text-primary">Professional information</strong>:{" "}
+									resume, portfolio links, GitHub profile, and technical
 									assessment results from deprecated benchmarking tools.
 								</li>
 								<li>
-									<strong className="text-ds-text-primary">Usage data</strong> — pages
+									<strong className="text-ds-text-primary">Usage data</strong>: pages
 									visited, time spent, and interaction patterns on our website.
 								</li>
 							</ul>

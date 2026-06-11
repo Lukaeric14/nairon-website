@@ -36,7 +36,7 @@ export function UniverseCTA() {
 					</h2>
 					<p className="text-[#5C584F] text-lg mb-8 max-w-lg mx-auto">
 						The Universe is coming soon. Engineers who engage will stay at the cutting
-						edge — and get matched to the best opportunities.
+						edge, and get matched to the best opportunities.
 					</p>
 					<div className="flex flex-wrap justify-center gap-4">
 						<span className="inline-flex items-center gap-2 bg-[#0C0C0C]/[0.06] text-[#5C584F] font-semibold text-base px-8 py-3.5 rounded-full cursor-not-allowed opacity-70">

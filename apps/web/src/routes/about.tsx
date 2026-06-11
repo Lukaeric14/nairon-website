@@ -11,7 +11,7 @@ export const Route = createFileRoute("/about")({
 		seoHead({
 			title: "About | Nairon AI",
 			description:
-				"Nairon builds AI employees around your real workflows and deploys them inside the systems you already run — measurable outcomes, no migrations.",
+				"Nairon builds AI employees around your real workflows and deploys them inside the systems you already run. Measurable outcomes, no migrations.",
 			path: "/about",
 		}),
 });
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/about")({
 const STATS: { value: string; label: string }[] = [
 	{
 		value: "Weeks",
-		label: "From a scoped workflow to a working AI employee — not quarters.",
+		label: "From a scoped workflow to a working AI employee, not quarters.",
 	},
 	{
 		value: "Zero",
@@ -36,7 +36,7 @@ const STATS: { value: string; label: string }[] = [
 const PRINCIPLES: { title: string; body: string }[] = [
 	{
 		title: "Start from the workflow",
-		body: "We map a real, high-leverage workflow before we build anything — the agent is shaped around how the work actually happens.",
+		body: "We map a real, high-leverage workflow before we build anything. The agent is shaped around how the work actually happens.",
 	},
 	{
 		title: "Run on your stack",
@@ -139,7 +139,7 @@ function Hero() {
 				</h1>
 				<p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-ds-text-secondary">
 					We build AI workers around your real workflows and deploy them inside
-					the systems you already run — measurable results, no migrations.
+					the systems you already run. Measurable results, no migrations.
 				</p>
 			</div>
 		</section>
@@ -164,7 +164,7 @@ function Mission() {
 					<p>
 						The hard part was never the model. It's the business context, the
 						permissions, and the human checkpoints that make an agent safe to
-						trust — and that's exactly what we build, with{" "}
+						trust. That's exactly what we build, with{" "}
 						<a
 							href="/signals/solving-the-agent-memory-problem"
 							className="font-medium underline-offset-4 hover:underline"
@@ -213,7 +213,7 @@ function Approach() {
 					<p className="text-[1.0625rem] leading-relaxed text-ds-text-secondary lg:pb-1.5">
 						Pilots fail on everything around the model: unclear scope, missing
 						context, no owner, no path to production. We do that unglamorous
-						upfront work so the agent actually goes live — and stays useful.
+						upfront work so the agent actually goes live, and stays useful.
 					</p>
 				</div>
 
@@ -255,8 +255,8 @@ function Team() {
 					of consultants.
 				</h2>
 				<p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-ds-text-secondary">
-					A small, senior team that designs, deploys, and tunes every AI employee
-					— and uses the same platform inside Nairon every day.
+					A small, senior team that designs, deploys, and tunes every AI
+					employee, and uses the same platform inside Nairon every day.
 				</p>
 
 				<div className="mt-14 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">

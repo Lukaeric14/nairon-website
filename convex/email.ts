@@ -37,11 +37,11 @@ export const sendWaitlistConfirmation = internalAction({
     </h1>
 
     <p style="font-size: 16px; line-height: 1.7; color: #A39E96; margin-bottom: 32px;">
-      We're building the developer productivity platform for the AI era—think DORA metrics, but for AI-native engineering. Measure how your teams are actually adopting agentic workflows, where friction lives in your SDLC, and which patterns produce the highest quality output.
+      We're building the developer productivity platform for the AI era. Think DORA metrics, but for AI-native engineering. Measure how your teams are actually adopting agentic workflows, where friction lives in your SDLC, and which patterns produce the highest quality output.
     </p>
 
     <p style="font-size: 16px; line-height: 1.7; color: #A39E96; margin-bottom: 32px;">
-      Org-level visibility into AI-Nativeness: team benchmarks, workflow quality scores, and actionable recommendations—not just dashboards, but the full tooling layer to improve how your engineering org collaborates with AI.
+      Org-level visibility into AI-Nativeness: team benchmarks, workflow quality scores, and actionable recommendations. Not just dashboards, but the full tooling layer to improve how your engineering org collaborates with AI.
     </p>
 
     <p style="font-size: 16px; line-height: 1.7; color: #A39E96; margin-bottom: 32px;">
@@ -53,7 +53,7 @@ export const sendWaitlistConfirmation = internalAction({
     </p>
 
     <p style="font-size: 14px; color: #666; margin-top: 48px;">
-      — The Nairon team
+      - The Nairon team
     </p>
   </div>
 </body>
@@ -103,7 +103,7 @@ export const sendHiveWaitlistConfirmation = internalAction({
     </p>
 
     <p style="font-size: 14px; color: #8B806F; margin: 36px 0 0;">
-      — The Nairon team
+      - The Nairon team
     </p>
   </div>
 </body>

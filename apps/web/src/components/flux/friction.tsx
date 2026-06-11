@@ -71,7 +71,7 @@ export function FluxFriction() {
 							What Flux detects
 						</h2>
 						<p className="text-muted-foreground mt-4 text-lg mb-8">
-							Patterns that slow you down. Not model failures—<span className="text-foreground font-medium">process failures</span>.
+							Patterns that slow you down. Not model failures, <span className="text-foreground font-medium">process failures</span>.
 						</p>
 
 						<div className="space-y-3">

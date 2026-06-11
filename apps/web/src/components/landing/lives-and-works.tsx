@@ -19,7 +19,7 @@ export function LivesAndWorks() {
 					</h2>
 					<p className="mt-5 text-[#5C584F] text-base md:text-lg max-w-2xl leading-relaxed">
 						Each AI employee runs on its own dedicated machine in our data center and
-						operates inside Hive — so you can drop one under every role on your org
+						operates inside Hive, so you can drop one under every role on your org
 						chart without touching headcount.
 					</p>
 				</GridCell>
@@ -41,7 +41,7 @@ export function LivesAndWorks() {
 						</h3>
 						<p className="text-[#5C584F] text-sm md:text-base leading-relaxed">
 							Same chain of command, twice the throughput. Each AI employee gets its own
-							dedicated Mac Mini in our data center — running 24/7, holding context,
+							dedicated Mac Mini in our data center, running 24/7, holding context,
 							executing while your team sleeps.
 						</p>
 					</div>
@@ -61,7 +61,7 @@ export function LivesAndWorks() {
 							</span>
 						</div>
 						<h3 className="text-2xl md:text-3xl font-normal text-[#1A1916] tracking-[-0.4px] mb-3">
-							Hive — your operations layer
+							Hive: your operations layer
 						</h3>
 						<p className="text-[#5C584F] text-sm md:text-base leading-relaxed">
 							Brief them like a teammate. Watch every action, decision, and output in

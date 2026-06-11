@@ -147,7 +147,7 @@ function SubscribePanel() {
 			</h2>
 			<p className="mt-5 max-w-md text-[1.0625rem] leading-relaxed text-ds-text-secondary">
 				Practical field notes on AI employees, company memory, and agent
-				infrastructure — from our client work and from building Hive. No noise.
+				infrastructure, from our client work and from building Hive. No noise.
 			</p>
 
 			<form

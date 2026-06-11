@@ -20,7 +20,7 @@ export function HowItWorks() {
 					</h2>
 					<p className="mt-4 text-[1.0625rem] leading-relaxed text-ds-text-secondary">
 						One workflow, one measurable outcome, deployed inside the tools you
-						already run — then improved continuously.
+						already run, then improved continuously.
 					</p>
 				</div>
 

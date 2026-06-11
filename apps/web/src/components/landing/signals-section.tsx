@@ -13,7 +13,7 @@ const signalPosts: SignalPost[] = [
 	{
 		title: "Why AI-Native Engineers Ship 3x Faster",
 		subtitle:
-			"The data behind our boldest claim — and what it means for your next hire.",
+			"The data behind our boldest claim, and what it means for your next hire.",
 		category: "Research",
 		date: "Feb 18, 2026",
 		author: {

@@ -23,7 +23,7 @@ export const HIRE_CAPABILITIES = [
 		number: "02",
 		title: "Make architectural decisions",
 		description:
-			"They know when to use RAG vs. fine-tuning vs. agents\u2014and can defend that decision to your investors.",
+			"They know when to use RAG vs. fine-tuning vs. agents, and can defend that decision to your investors.",
 	},
 	{
 		number: "03",
@@ -160,8 +160,8 @@ export const HIRE_COMPARISON: ComparisonSection[] = [
 			{ feature: "Access Week", starter: "8", priority: "6", exclusive: "4" },
 			{
 				feature: "First Pick of Top-Ranked",
-				starter: "\u2014",
-				priority: "\u2014",
+				starter: "-",
+				priority: "-",
 				exclusive: "\u2713",
 			},
 		],
@@ -183,7 +183,7 @@ export const HIRE_COMPARISON: ComparisonSection[] = [
 			},
 			{
 				feature: "Partnership Manager",
-				starter: "\u2014",
+				starter: "-",
 				priority: "Dedicated",
 				exclusive: "Dedicated",
 			},
@@ -211,38 +211,38 @@ export const HIRE_COMPARISON: ComparisonSection[] = [
 		rows: [
 			{
 				feature: "Project Briefs",
-				starter: "\u2014",
+				starter: "-",
 				priority: "1",
 				exclusive: "Unlimited",
 			},
 			{
 				feature: "Guest Speaker Slots",
-				starter: "\u2014",
+				starter: "-",
 				priority: "1",
 				exclusive: "2+",
 			},
 			{
 				feature: "VIP Demo Day",
-				starter: "\u2014",
-				priority: "\u2014",
+				starter: "-",
+				priority: "-",
 				exclusive: "\u2713",
 			},
 			{
 				feature: "Hackathon Sponsorship",
-				starter: "\u2014",
-				priority: "\u2014",
+				starter: "-",
+				priority: "-",
 				exclusive: "\u2713",
 			},
 			{
 				feature: "Cohort Slack Access",
-				starter: "\u2014",
-				priority: "\u2014",
+				starter: "-",
+				priority: "-",
 				exclusive: "\u2713",
 			},
 			{
 				feature: "Mentorship Slots",
-				starter: "\u2014",
-				priority: "\u2014",
+				starter: "-",
+				priority: "-",
 				exclusive: "\u2713",
 			},
 		],

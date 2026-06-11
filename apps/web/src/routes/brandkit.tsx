@@ -29,7 +29,7 @@ export const Route = createFileRoute("/brandkit")({
 	component: BrandKitPage,
 	head: () =>
 		seoHead({
-			title: "Nairon — Brand Kit",
+			title: "Nairon - Brand Kit",
 			description: "Design tokens, typography, and palette tests for the Nairon rebrand.",
 			path: "/brandkit",
 		}),
@@ -81,7 +81,7 @@ function BrandKitPage() {
 							<div className="mt-1 text-[0.6875rem] text-ds-text-tertiary">
 								{PALETTES.length > 1
 									? `Testing ${PALETTES.length} blue palettes`
-									: `Locked — ${PALETTES[0].name}`}
+									: `Locked: ${PALETTES[0].name}`}
 							</div>
 						</div>
 					</div>
@@ -143,7 +143,7 @@ function BrandKitPage() {
 				{/* ── Component slider — flip through real components in the palette ── */}
 				<section>
 					<div className="mb-5 flex items-center justify-between">
-						<Eyebrow>Component preview — swap palettes above to compare</Eyebrow>
+						<Eyebrow>Component preview: swap palettes above to compare</Eyebrow>
 						<div className="flex items-center gap-3">
 							<span className="text-[0.8125rem] font-medium text-ds-text-secondary">
 								{current.label}
@@ -201,7 +201,7 @@ function BrandKitPage() {
 				<section>
 					<SectionTitle>Color</SectionTitle>
 					<SectionNote>
-						Neutral surface ladder, text scale, and semantic colors — pulled from
+						Neutral surface ladder, text scale, and semantic colors, pulled from
 						Hive. These stay constant across palettes; only the three blues move.
 					</SectionNote>
 
@@ -244,7 +244,7 @@ function BrandKitPage() {
 				<section>
 					<SectionTitle>Typography</SectionTitle>
 					<SectionNote>
-						Geist for everything. Two weights only — Regular (400) and Medium
+						Geist for everything. Two weights only: Regular (400) and Medium
 						(500). Hierarchy comes from size and color, never from bold.
 					</SectionNote>
 					<div className="mt-6 divide-y divide-ds-border-subtle rounded-xl border border-ds-border bg-ds-surface-raised">
@@ -280,7 +280,7 @@ function BrandKitPage() {
 				<section>
 					<SectionTitle>Iconography</SectionTitle>
 					<SectionNote>
-						Heroicons (outline), 1.5px stroke — same set the Hive product uses.
+						Heroicons (outline), 1.5px stroke, the same set the Hive product uses.
 						Icons take the mid blue or a neutral, never the loud bright blue.
 					</SectionNote>
 					<div className="mt-6 flex flex-wrap gap-3">
@@ -346,7 +346,7 @@ function BrandKitPage() {
 				</section>
 
 				<footer className="border-t border-ds-border pt-8 text-[0.8125rem] text-ds-text-tertiary">
-					Nairon Brand Kit — pick a palette, feel the component, then we lock the
+					Nairon Brand Kit: pick a palette, feel the component, then we lock the
 					three blues and roll the rest of the site behind it.
 				</footer>
 			</main>

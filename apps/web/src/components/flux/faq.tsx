@@ -42,7 +42,7 @@ const faqItems = [
 			{
 				id: "recommendations",
 				question: "Where do recommendations come from?",
-				answer: "From Nairon-AI/flux-recommendations on GitHub — 30+ curated tools, community-driven. You can browse and contribute.",
+				answer: "From Nairon-AI/flux-recommendations on GitHub: 30+ curated tools, community-driven. You can browse and contribute.",
 			},
 		],
 	},
