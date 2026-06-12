@@ -125,6 +125,9 @@ function RootComponent() {
 	const [enableSmoothScroll, setEnableSmoothScroll] = useState(false);
 
 	useEffect(() => {
+		// Touch devices keep native scrolling — Lenis doesn't smooth touch input,
+		// and the snap plugin fights native momentum (yanks, stutter, URL-bar churn).
+		if (window.matchMedia("(pointer: coarse)").matches) return;
 		const smoothTimeoutId = window.setTimeout(() => setEnableSmoothScroll(true), 1200);
 		return () => {
 			window.clearTimeout(smoothTimeoutId);

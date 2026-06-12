@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactLenis, useLenis } from "lenis/react";
+import "lenis/dist/lenis.css";
 import Snap from "lenis/snap";
 import { useEffect, useRef, type ReactNode } from "react";
 

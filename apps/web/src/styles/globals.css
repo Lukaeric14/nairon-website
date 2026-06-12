@@ -190,6 +190,12 @@
 		scroll-behavior: smooth;
 	}
 
+	/* While Lenis drives scrolling it must own all scroll animation —
+	   CSS smooth scrolling double-animates anchors and snaps against it. */
+	html.lenis {
+		scroll-behavior: auto !important;
+	}
+
 		:root {
 		/* ── New design system tokens (Hive-derived neutral ladder) ── */
 		--ds-shell: #F1F1F1;
