@@ -1,6 +1,22 @@
 // Open roles — single source of truth for the careers list and the per-role
 // detail pages. Each role has a slug used in its URL (/careers/<slug>).
 
+export interface RoleSectionStep {
+	title: string;
+	paragraphs: string[];
+	bullets?: string[];
+}
+
+export interface RoleSection {
+	title: string;
+	paragraphs?: string[];
+	bullets?: string[];
+	/** Paragraphs rendered after the bullet list. */
+	paragraphsAfter?: string[];
+	/** Numbered steps, e.g. an interview process. */
+	steps?: RoleSectionStep[];
+}
+
 export interface Role {
 	slug: string;
 	title: string;
@@ -14,6 +30,11 @@ export interface Role {
 	responsibilities: string[];
 	requirements: string[];
 	niceToHave?: string[];
+	/**
+	 * Long-form layout: when present, the detail page renders these sections
+	 * in order instead of the default description/responsibilities layout.
+	 */
+	sections?: RoleSection[];
 }
 
 export const APPLY_EMAIL = "careers@nairon.ai";
@@ -49,32 +70,151 @@ export const ROLES: Role[] = [
 		],
 	},
 	{
-		slug: "ai-engineer",
-		title: "AI Engineer",
+		slug: "founding-engineer",
+		title: "Founding Engineer",
 		team: "Engineering",
 		type: "Full-time",
-		location: "Remote / Miami",
+		location: "In-person · Dubai, UAE",
 		blurb:
-			"Design and ship the multi-agent systems that run real operational work inside customer stacks. Build, deploy, and tune AI employees end to end.",
+			"Be the first engineer alongside the founders. Build Hive, deploy it into real companies, and improve the system until it works reliably in the real world.",
 		description:
-			"You'll design and ship the multi-agent systems that run real operational work inside customer stacks, building, deploying, and tuning AI employees end to end. You care about reliability in production, not just demos, and you like working close to real customer problems.",
-		responsibilities: [
-			"Architect multi-agent workflows that handle end-to-end operational tasks.",
-			"Integrate agents into customer tools: CRM, ERP, Slack, email, and industry systems.",
-			"Build evals and guardrails so agents are reliable and safe in production.",
-			"Deploy and operate agents on our infrastructure; monitor and continuously improve them.",
-			"Work directly with customers to scope and tune their first AI employee.",
-		],
-		requirements: [
-			"Strong software engineering in Python and/or TypeScript.",
-			"Hands-on experience building with LLMs and agent frameworks.",
-			"A bias for shipping and measuring, not just prototyping.",
-			"Comfort owning systems in production.",
-		],
-		niceToHave: [
-			"RAG, tool-use orchestration, or evals experience.",
-			"Infra / DevOps experience.",
-			"Experience deploying AI into real business workflows.",
+			"We are hiring a Founding Engineer. You will be the first engineer alongside the founders, and you will touch everything: building Hive, deploying it into real companies, mapping workflows, shipping production features, debugging issues, and improving the system until it works reliably in the real world.",
+		responsibilities: [],
+		requirements: [],
+		sections: [
+			{
+				title: "About Nairon",
+				paragraphs: [
+					"Nairon is an AI startup. We are building Hive, our platform for AI employees that take on real work end to end inside the tools companies already use.",
+					"We are a second-time founding team. Our previous startup went through Techstars, raised from Silicon Valley investors, and ran for three years in sales tech. We have raised, hired, shipped, and sold before.",
+					"We deploy Hive directly into real companies. That means everything we build is tested against messy, real-world operations from day one.",
+				],
+			},
+			{
+				title: "The role",
+				paragraphs: [
+					"We are hiring a Founding Engineer.",
+					"This is not a narrow specialist role. You will be the first engineer alongside the founders, and you will touch everything: building Hive, deploying it into real companies, mapping workflows, shipping production features, debugging issues, and improving the system until it works reliably in the real world.",
+					"This is not a role where you wait for perfect specs.",
+					"You need to be comfortable taking ambiguity, asking good questions, working with AI agents, and getting to good working code quickly.",
+				],
+			},
+			{
+				title: "What you will do",
+				bullets: [
+					"Build core parts of Hive alongside the founders.",
+					"Deploy AI-native workflows, internal tools, and agent-powered systems into real companies.",
+					"Work directly with the founding team in-person from our Dubai office.",
+					"Translate real business problems into practical implementation plans.",
+					"Use coding agents heavily to move faster and produce better work.",
+					"Orchestrate multiple AI agents at once when needed.",
+					"Go deep into implementation details when needed, and stay high-level when needed.",
+					"Ask sharp questions after thinking through the problem with your own tools and agents.",
+				],
+			},
+			{
+				title: "What we are looking for",
+				paragraphs: [
+					"We care less about your CV and more about how you think, what you have built, and how strong your AI-native workflow is.",
+					"You should be:",
+				],
+				bullets: [
+					"Strong at engineering fundamentals.",
+					"An all-rounder who can move across the stack and across problems.",
+					"Already using coding agents seriously.",
+					"Comfortable showing how you prompt, plan, review, and implement with agents.",
+					"Fast without being careless.",
+					"Detail-oriented enough to be trusted with real production systems.",
+					"Clear in communication with both technical and non-technical people.",
+					"Low-ego, practical, and easy to work with.",
+					"Comfortable in a startup where speed matters a lot.",
+					"Able to work in-person with us every day in Dubai.",
+				],
+			},
+			{
+				title: "AI-native expectations",
+				paragraphs: [
+					"You should have at least 6+ months of serious hands-on experience using coding agents.",
+					"We want to see how you actually work. You should be able to explain your full AI stack, including:",
+				],
+				bullets: [
+					"Orchestrator",
+					"Coding agents",
+					"Models",
+					"Tools",
+					"Libraries",
+					"Skills",
+					"Prompting patterns",
+					"Review workflows",
+					"Any custom setup that helps you move faster or produce better work",
+				],
+				paragraphsAfter: [
+					"We are especially interested in how you reach consensus with an agent before implementing, how you catch bad outputs, how you test work, and how you get to working code that does not break.",
+				],
+			},
+			{
+				title: "Compensation",
+				paragraphs: [
+					"13,000 - 20,000 AED per month.",
+					"Equity allocation of 0.5% to 1%.",
+				],
+			},
+			{
+				title: "How to apply",
+				paragraphs: ["Please send:"],
+				bullets: [
+					"Full name",
+					"Email",
+					"Phone number",
+					"Portfolio link, GitHub, or personal website",
+					"traces.com session link showing a non-sensitive coding agent session",
+					"Your full AI stack",
+					"2-3 projects you have built that best show your ability",
+					"A short note on why this role is interesting to you",
+				],
+				paragraphsAfter: [
+					"Applications missing required links or details will not be reviewed.",
+					"We do not need a traditional CV. We care much more about what you have built, how you think, and how you work with AI.",
+				],
+			},
+			{
+				title: "Interview process",
+				steps: [
+					{
+						title: "Application review",
+						paragraphs: [
+							"We review your projects, traces.com session, and AI stack. We are looking for evidence that you can use AI agents well, think clearly, and get to working implementation.",
+						],
+					},
+					{
+						title: "15-minute screening",
+						paragraphs: [
+							"This is mostly about culture, communication, and how you think. We want to understand how you handle ambiguity, speed, tradeoffs, and startup pressure.",
+						],
+					},
+					{
+						title: "Technical interview",
+						paragraphs: [
+							"You will work through a realistic repo and implementation task that mimics the kind of work we do at Nairon. We care less about memorized algorithms and more about how you:",
+						],
+						bullets: [
+							"Clarify requirements",
+							"Use coding agents",
+							"Break down the problem",
+							"Review generated code",
+							"Test the result",
+							"Explain tradeoffs",
+							"Recover when something goes wrong",
+						],
+					},
+					{
+						title: "Build simulation",
+						paragraphs: [
+							"You will work on a realistic, messy problem of the kind we solve every week. The goal is to see whether you can take something unclear and turn it into something useful, working, and reliable.",
+						],
+					},
+				],
+			},
 		],
 	},
 	{

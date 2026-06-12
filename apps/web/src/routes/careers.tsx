@@ -8,7 +8,7 @@ export const Route = createFileRoute("/careers")({
 		seoHead({
 			title: "Careers at Nairon - Build the AI workforce",
 			description:
-				"We're hiring a Design Engineer, AI Engineer, and Healthcare AI Consultant to design, build, and deploy AI employees inside the systems our customers already use.",
+				"We're hiring a Design Engineer, Founding Engineer, and Healthcare AI Consultant to design, build, and deploy AI employees inside the systems our customers already use.",
 			path: "/careers",
 		}),
 });

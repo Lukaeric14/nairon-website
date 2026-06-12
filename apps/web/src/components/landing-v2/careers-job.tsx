@@ -2,7 +2,7 @@
 // /careers/$slug route; takes a Role and lays out the full description.
 
 import { ArrowLeftIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
-import { applyHref, type Role } from "./careers-data";
+import { applyHref, type Role, type RoleSection } from "./careers-data";
 import { Navbar } from "./hero";
 import { Footer } from "./footer";
 
@@ -49,19 +49,87 @@ function BulletSection({ title, items }: { title: string; items: string[] }) {
 	return (
 		<section className="mt-12">
 			<h2 className="text-[1.375rem] font-medium tracking-tight">{title}</h2>
-			<ul className="mt-5 space-y-3.5">
-				{items.map((item) => (
-					<li key={item} className="flex gap-3">
-						<span
-							className="mt-[0.5rem] size-1.5 shrink-0 rounded-full"
-							style={{ backgroundColor: "var(--brand-blue)" }}
-						/>
-						<span className="text-[1rem] leading-relaxed text-ds-text-secondary">
-							{item}
-						</span>
-					</li>
-				))}
-			</ul>
+			<Bullets items={items} />
+		</section>
+	);
+}
+
+function Bullets({ items }: { items: string[] }) {
+	return (
+		<ul className="mt-5 space-y-3.5">
+			{items.map((item) => (
+				<li key={item} className="flex gap-3">
+					<span
+						className="mt-[0.5rem] size-1.5 shrink-0 rounded-full"
+						style={{ backgroundColor: "var(--brand-blue)" }}
+					/>
+					<span className="text-[1rem] leading-relaxed text-ds-text-secondary">
+						{item}
+					</span>
+				</li>
+			))}
+		</ul>
+	);
+}
+
+/** Long-form section: paragraphs, bullets, trailing paragraphs, or numbered steps. */
+function LongFormSection({
+	section,
+	first,
+}: {
+	section: RoleSection;
+	first: boolean;
+}) {
+	return (
+		<section className={first ? "mt-12 border-t border-ds-border pt-12" : "mt-12"}>
+			<h2 className="text-[1.375rem] font-medium tracking-tight">
+				{section.title}
+			</h2>
+			{section.paragraphs?.map((p) => (
+				<p
+					key={p}
+					className="mt-5 text-[1.0625rem] leading-relaxed text-ds-text-secondary"
+				>
+					{p}
+				</p>
+			))}
+			{section.bullets && <Bullets items={section.bullets} />}
+			{section.paragraphsAfter?.map((p) => (
+				<p
+					key={p}
+					className="mt-5 text-[1.0625rem] leading-relaxed text-ds-text-secondary"
+				>
+					{p}
+				</p>
+			))}
+			{section.steps && (
+				<ol className="mt-7 space-y-8">
+					{section.steps.map((step, i) => (
+						<li key={step.title} className="flex gap-4">
+							<span
+								className="font-geist-mono mt-0.5 text-[0.875rem] font-medium"
+								style={{ color: "var(--brand-blue)" }}
+							>
+								{String(i + 1).padStart(2, "0")}
+							</span>
+							<div>
+								<h3 className="text-[1.0625rem] font-medium tracking-tight">
+									{step.title}
+								</h3>
+								{step.paragraphs.map((p) => (
+									<p
+										key={p}
+										className="mt-2 text-[1rem] leading-relaxed text-ds-text-secondary"
+									>
+										{p}
+									</p>
+								))}
+								{step.bullets && <Bullets items={step.bullets} />}
+							</div>
+						</li>
+					))}
+				</ol>
+			)}
 		</section>
 	);
 }
@@ -110,20 +178,32 @@ export function JobDetail({ role }: { role: Role }) {
 					</div>
 				</div>
 
-				{/* About */}
-				<section className="mt-12 border-t border-ds-border pt-12">
-					<h2 className="text-[1.375rem] font-medium tracking-tight">
-						About the role
-					</h2>
-					<p className="mt-5 text-[1.0625rem] leading-relaxed text-ds-text-secondary">
-						{role.description}
-					</p>
-				</section>
+				{role.sections ? (
+					role.sections.map((section, i) => (
+						<LongFormSection
+							key={section.title}
+							section={section}
+							first={i === 0}
+						/>
+					))
+				) : (
+					<>
+						{/* About */}
+						<section className="mt-12 border-t border-ds-border pt-12">
+							<h2 className="text-[1.375rem] font-medium tracking-tight">
+								About the role
+							</h2>
+							<p className="mt-5 text-[1.0625rem] leading-relaxed text-ds-text-secondary">
+								{role.description}
+							</p>
+						</section>
 
-				<BulletSection title="What you'll do" items={role.responsibilities} />
-				<BulletSection title="What you bring" items={role.requirements} />
-				{role.niceToHave && (
-					<BulletSection title="Nice to have" items={role.niceToHave} />
+						<BulletSection title="What you'll do" items={role.responsibilities} />
+						<BulletSection title="What you bring" items={role.requirements} />
+						{role.niceToHave && (
+							<BulletSection title="Nice to have" items={role.niceToHave} />
+						)}
+					</>
 				)}
 
 				{/* Closing CTA */}
