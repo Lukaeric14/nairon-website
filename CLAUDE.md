@@ -90,19 +90,9 @@ When working on frontend code (components, pages, styles, animations), always us
 
 When working on offer creation, pricing, positioning, copy, lead magnets, funnels, sales messaging, or growth strategy, use the local `hormozi-marketing` skill. It should gather repo and org context first, then query the Hormozi NotebookLM via `agent-browser` only after the business model and current funnel are clear.
 
-## Upwork Proposals
+## Current Business Truth (2026-06-11)
 
-Two project-scoped skills handle the Nairon Upwork pipeline. They live at `.claude/skills/` and only load inside this repo.
-
-- **`upwork-proposal`** — Use when the user pastes an Upwork job post, asks for a proposal, asks for a reply to a lead, or asks for a fit assessment of a job. **Always reads the knowledge base at `knowledge-base/upwork-proposals/` before drafting anything** — this is the source of truth for Luka's voice, ICP, proof points, pricing, positioning, target jobs, and the proposal-writing playbook. Drafting without loading the KB is forbidden because the agent will produce generic copy that doesn't match Luka's voice or cite the right proof. Critical rule baked into the skill: proposals exist only to book a 15-minute call — never pitch Nairon's methodology, 3-day timeline, Hive, hardware, or "AI employees" framing in the proposal text itself; that's call-stage material.
-
-- **`upwork-pipeline`** — Use when the user asks to log a proposal, update a status (replied/interview/won/lost), look up past proposals, or check pipeline metrics. Reads/writes the v2 Google Sheet (`Upwork_Proposal_Tracker`, ID `1oX47YUr2aCdcdjCJXo6s4JmZAa9kVel4KTVuyIthRos`) via the `google-sheets` MCP server. Knows the 26-column schema, the dropdown values, and the safe-write rules (never writes to v1, never writes to Dashboard, never fabricates client signals).
-
-Compose them: draft a proposal with `upwork-proposal`, then log it with `upwork-pipeline`. The proposal skill always offers the handoff at the end of a draft.
-
-Every drafted proposal is also saved to `knowledge-base/upwork-proposals/drafts/` as a structured markdown file (frontmatter + sections). This builds an A/B testable corpus over time — never skip the archive step, never delete a file. When a status changes, both the sheet row and the draft file must be updated together.
-
-The Google Sheets MCP server is configured in `.mcp.json` and authenticates via a service account (`nairon-sheets-bot@naironai-hive.iam.gserviceaccount.com`). New teammates: follow `docs/upwork-onboarding.md` for end-to-end setup. The deeper service-account / GCP details (admin-only) live in `docs/sheets-setup.md`.
+The Upwork channel is discontinued — its KB, skills, tracker, and pricing logic were removed from this repo (recoverable in git history). Other standing corrections: AI employees run in **cloud sandboxes** (not Mac Minis / a data center), **Flux is retired** (site components pending removal), and the "first AI employee free" hero offer is **under revision** along Hormozi offer-construction principles. The current company onboarding brief lives at `knowledge-base/research/hormozi-notebooklm/md/nairon-onboarding-brief.md`.
 
 ## Supermemory
 

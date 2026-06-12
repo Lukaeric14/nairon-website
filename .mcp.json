@@ -1,12 +1,3 @@
 {
-  "mcpServers": {
-    "google-sheets": {
-      "command": "uvx",
-      "args": ["mcp-google-sheets@latest"],
-      "env": {
-        "SERVICE_ACCOUNT_PATH": "${HOME}/.config/nairon/sheets-key.json",
-        "DRIVE_FOLDER_ID": ""
-      }
-    }
-  }
+	"mcpServers": {}
 }
