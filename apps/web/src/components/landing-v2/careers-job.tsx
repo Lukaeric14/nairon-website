@@ -2,6 +2,7 @@
 // /careers/$slug route; takes a Role and lays out the full description.
 
 import { ArrowLeftIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { CareersApplyForm } from "./careers-apply-form";
 import { applyHref, type Role, type RoleSection } from "./careers-data";
 import { Navbar } from "./hero";
 import { Footer } from "./footer";
@@ -137,7 +138,7 @@ function LongFormSection({
 function ApplyButton({ role }: { role: Role }) {
 	return (
 		<a
-			href={applyHref(role.title)}
+			href={role.applyForm ? "#apply" : applyHref(role.title)}
 			className="group inline-flex items-center justify-center gap-1.5 px-6 py-3.5 text-[0.9375rem] font-medium text-white transition-all hover:brightness-110"
 			style={{ backgroundColor: "var(--brand-blue)" }}
 		>
@@ -206,19 +207,23 @@ export function JobDetail({ role }: { role: Role }) {
 					</>
 				)}
 
-				{/* Closing CTA */}
-				<section className="mt-14 border-t border-ds-border pt-10">
-					<h2 className="text-[1.375rem] font-medium tracking-tight">
-						Sound like you?
-					</h2>
-					<p className="mt-3 max-w-lg text-[1rem] leading-relaxed text-ds-text-secondary">
-						Send us a note with your background and anything you've built. We
-						review every application and reply.
-					</p>
-					<div className="mt-6">
-						<ApplyButton role={role} />
-					</div>
-				</section>
+				{role.applyForm ? (
+					<CareersApplyForm role={role} />
+				) : (
+					/* Closing CTA */
+					<section className="mt-14 border-t border-ds-border pt-10">
+						<h2 className="text-[1.375rem] font-medium tracking-tight">
+							Sound like you?
+						</h2>
+						<p className="mt-3 max-w-lg text-[1rem] leading-relaxed text-ds-text-secondary">
+							Send us a note with your background and anything you've built. We
+							review every application and reply.
+						</p>
+						<div className="mt-6">
+							<ApplyButton role={role} />
+						</div>
+					</section>
+				)}
 			</main>
 
 			<Footer />

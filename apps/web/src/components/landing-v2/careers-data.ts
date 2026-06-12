@@ -35,6 +35,11 @@ export interface Role {
 	 * in order instead of the default description/responsibilities layout.
 	 */
 	sections?: RoleSection[];
+	/**
+	 * When true, the detail page collects applications through an on-page
+	 * form (#apply) instead of the mailto link.
+	 */
+	applyForm?: boolean;
 }
 
 export const APPLY_EMAIL = "careers@nairon.ai";
@@ -81,6 +86,7 @@ export const ROLES: Role[] = [
 			"We are hiring a Founding Engineer. You will be the first engineer alongside the founders, and you will touch everything: building Hive, deploying it into real companies, mapping workflows, shipping production features, debugging issues, and improving the system until it works reliably in the real world.",
 		responsibilities: [],
 		requirements: [],
+		applyForm: true,
 		sections: [
 			{
 				title: "About Nairon",
@@ -161,7 +167,7 @@ export const ROLES: Role[] = [
 			},
 			{
 				title: "How to apply",
-				paragraphs: ["Please send:"],
+				paragraphs: ["Apply with the form at the bottom of this page. You will need:"],
 				bullets: [
 					"Full name",
 					"Email",
