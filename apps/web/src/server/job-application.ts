@@ -1,59 +1,64 @@
-// Handles applications submitted from /careers/<slug> role pages. Like every
-// other public form on the site, submissions fire the Slack webhook and the
-// shared Hive webhook (see hive-notify.ts).
+// Handles applications submitted from /careers/<slug> role pages. Fields are
+// declared per role in careers-data.ts and arrive as label/type/value rows.
+// Like every other public form on the site, submissions fire the Slack webhook
+// and the shared Hive webhook (see hive-notify.ts).
 
 import { createServerFn } from "@tanstack/react-start";
 import { notifyHive } from "./hive-notify";
 
+interface SubmittedField {
+	label: string;
+	type: string;
+	value: string;
+}
+
 interface JobApplicationData {
 	roleTitle: string;
-	name: string;
-	email: string;
-	phone: string;
-	portfolioUrl: string;
-	tracesUrl: string;
-	aiStack: string;
-	projects: string;
-	note: string;
+	fields: SubmittedField[];
 }
 
-function requireUrl(value: string, label: string) {
-	try {
-		const url = new URL(value);
-		if (!["http:", "https:"].includes(url.protocol)) {
-			throw new Error();
-		}
-	} catch {
-		throw new Error(`${label} must be a valid link (https://...)`);
-	}
-}
+const MAX_FIELDS = 20;
+const MAX_VALUE_LENGTH = 5000;
 
 function normalize(data: JobApplicationData) {
-	const normalized = {
-		roleTitle: data.roleTitle.trim(),
-		name: data.name.trim(),
-		email: data.email.trim().toLowerCase(),
-		phone: data.phone.trim(),
-		portfolioUrl: data.portfolioUrl.trim(),
-		tracesUrl: data.tracesUrl.trim(),
-		aiStack: data.aiStack.trim(),
-		projects: data.projects.trim(),
-		note: data.note.trim(),
-	};
+	const roleTitle = data.roleTitle.trim();
+	if (!roleTitle) throw new Error("Missing role");
 
-	for (const [key, value] of Object.entries(normalized)) {
-		if (!value) throw new Error(`Missing required field: ${key}`);
+	if (!Array.isArray(data.fields) || data.fields.length === 0) {
+		throw new Error("Missing fields");
+	}
+	if (data.fields.length > MAX_FIELDS) {
+		throw new Error("Too many fields");
 	}
 
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-	if (!emailRegex.test(normalized.email)) {
-		throw new Error("Invalid email address");
-	}
 
-	requireUrl(normalized.portfolioUrl, "Portfolio link");
-	requireUrl(normalized.tracesUrl, "traces.com session link");
+	const fields = data.fields.map((field) => {
+		const label = field.label.trim();
+		const value = field.value.trim();
 
-	return normalized;
+		if (!label || !value) {
+			throw new Error(`Missing required field: ${label || "unknown"}`);
+		}
+		if (value.length > MAX_VALUE_LENGTH) {
+			throw new Error(`${label} is too long`);
+		}
+		if (field.type === "email" && !emailRegex.test(value.toLowerCase())) {
+			throw new Error("Invalid email address");
+		}
+		if (field.type === "url") {
+			try {
+				const url = new URL(value);
+				if (!["http:", "https:"].includes(url.protocol)) throw new Error();
+			} catch {
+				throw new Error(`${label} must be a valid link (https://...)`);
+			}
+		}
+
+		return { label, type: field.type, value };
+	});
+
+	return { roleTitle, fields };
 }
 
 async function notifySlack(application: ReturnType<typeof normalize>) {
@@ -62,6 +67,10 @@ async function notifySlack(application: ReturnType<typeof normalize>) {
 		console.warn("SLACK_WEBHOOK_URL not configured");
 		return;
 	}
+
+	// Short answers go into one two-column section; long answers get their own.
+	const shortFields = application.fields.filter((f) => f.type !== "textarea");
+	const longFields = application.fields.filter((f) => f.type === "textarea");
 
 	const slackMessage = {
 		blocks: [
@@ -75,26 +84,18 @@ async function notifySlack(application: ReturnType<typeof normalize>) {
 			},
 			{
 				type: "section",
-				fields: [
-					{ type: "mrkdwn", text: `*Name:*\n${application.name}` },
-					{ type: "mrkdwn", text: `*Email:*\n${application.email}` },
-					{ type: "mrkdwn", text: `*Phone:*\n${application.phone}` },
-					{ type: "mrkdwn", text: `*Portfolio:*\n${application.portfolioUrl}` },
-					{ type: "mrkdwn", text: `*Traces session:*\n${application.tracesUrl}` },
-				],
+				fields: shortFields.slice(0, 10).map((field) => ({
+					type: "mrkdwn",
+					text: `*${field.label}:*\n${field.value}`,
+				})),
 			},
-			{
+			...longFields.map((field) => ({
 				type: "section",
-				text: { type: "mrkdwn", text: `*AI stack:*\n${application.aiStack}` },
-			},
-			{
-				type: "section",
-				text: { type: "mrkdwn", text: `*Projects:*\n${application.projects}` },
-			},
-			{
-				type: "section",
-				text: { type: "mrkdwn", text: `*Why this role:*\n${application.note}` },
-			},
+				text: {
+					type: "mrkdwn",
+					text: `*${field.label}:*\n${field.value}`,
+				},
+			})),
 			{
 				type: "context",
 				elements: [
@@ -132,14 +133,9 @@ export const submitJobApplication = createServerFn({ method: "POST" })
 			form: "Job application",
 			fields: {
 				Role: application.roleTitle,
-				Name: application.name,
-				Email: application.email,
-				Phone: application.phone,
-				Portfolio: application.portfolioUrl,
-				"Traces session": application.tracesUrl,
-				"AI stack": application.aiStack,
-				Projects: application.projects,
-				"Why this role": application.note,
+				...Object.fromEntries(
+					application.fields.map((field) => [field.label, field.value]),
+				),
 			},
 		});
 

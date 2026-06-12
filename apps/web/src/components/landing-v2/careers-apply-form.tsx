@@ -1,11 +1,12 @@
 // Inline application form for role pages that collect details on-site instead
-// of over email. Rendered at the bottom of the job detail page (#apply) and
-// submits through the shared form pipeline (Slack + Hive webhooks).
+// of over email. Fields are declared per role in careers-data.ts. Rendered at
+// the bottom of the job detail page (#apply) and submits through the shared
+// form pipeline (Slack + Hive webhooks).
 
 import { ArrowUpRightIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { submitJobApplication } from "@/server/job-application";
-import type { Role } from "./careers-data";
+import type { ApplyField, Role } from "./careers-data";
 
 const inputClass =
 	"w-full border border-ds-border bg-ds-surface-raised px-3.5 py-3 text-[0.9375rem] text-ds-text-primary outline-none transition-colors placeholder:text-ds-text-tertiary focus:border-[var(--brand-blue)] disabled:opacity-60";
@@ -13,27 +14,21 @@ const inputClass =
 const labelClass =
 	"mb-1.5 block text-[0.8125rem] font-medium text-ds-text-secondary";
 
-const EMPTY_FORM = {
-	name: "",
-	email: "",
-	phone: "",
-	portfolioUrl: "",
-	tracesUrl: "",
-	aiStack: "",
-	projects: "",
-	note: "",
-};
+function emptyForm(fields: ApplyField[]) {
+	return Object.fromEntries(fields.map((field) => [field.key, ""]));
+}
 
 export function CareersApplyForm({ role }: { role: Role }) {
-	const [form, setForm] = useState(EMPTY_FORM);
+	const fields = role.applyForm ?? [];
+	const [form, setForm] = useState(() => emptyForm(fields));
 	const [submitting, setSubmitting] = useState(false);
 	const [submitted, setSubmitted] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
 	const update =
-		(field: keyof typeof form) =>
+		(key: string) =>
 		(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-			setForm((current) => ({ ...current, [field]: event.target.value }));
+			setForm((current) => ({ ...current, [key]: event.target.value }));
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -42,7 +37,14 @@ export function CareersApplyForm({ role }: { role: Role }) {
 
 		try {
 			await submitJobApplication({
-				data: { ...form, roleTitle: role.title },
+				data: {
+					roleTitle: role.title,
+					fields: fields.map((field) => ({
+						label: field.label,
+						type: field.type,
+						value: form[field.key] ?? "",
+					})),
+				},
 			});
 			setSubmitted(true);
 		} catch (submitError) {
@@ -90,118 +92,49 @@ export function CareersApplyForm({ role }: { role: Role }) {
 				not be reviewed.
 			</p>
 
-			<form onSubmit={handleSubmit} className="mt-8 space-y-5">
+			<form onSubmit={handleSubmit} className="mt-8">
 				<div className="grid gap-5 sm:grid-cols-2">
-					<label className="block">
-						<span className={labelClass}>Full name</span>
-						<input
-							required
-							type="text"
-							value={form.name}
-							onChange={update("name")}
-							placeholder="Jane Smith"
-							className={inputClass}
-							disabled={submitting}
-						/>
-					</label>
-					<label className="block">
-						<span className={labelClass}>Email</span>
-						<input
-							required
-							type="email"
-							value={form.email}
-							onChange={update("email")}
-							placeholder="jane@example.com"
-							className={inputClass}
-							disabled={submitting}
-						/>
-					</label>
-					<label className="block">
-						<span className={labelClass}>Phone number</span>
-						<input
-							required
-							type="tel"
-							value={form.phone}
-							onChange={update("phone")}
-							placeholder="+971 50 123 4567"
-							className={inputClass}
-							disabled={submitting}
-						/>
-					</label>
-					<label className="block">
-						<span className={labelClass}>
-							Portfolio, GitHub, or personal website
-						</span>
-						<input
-							required
-							type="url"
-							value={form.portfolioUrl}
-							onChange={update("portfolioUrl")}
-							placeholder="https://github.com/you"
-							className={inputClass}
-							disabled={submitting}
-						/>
-					</label>
+					{fields.map((field) => (
+						<label
+							key={field.key}
+							className={
+								field.type === "textarea" || field.fullWidth
+									? "block sm:col-span-2"
+									: "block"
+							}
+						>
+							<span className={labelClass}>{field.label}</span>
+							{field.type === "textarea" ? (
+								<textarea
+									required
+									value={form[field.key]}
+									onChange={update(field.key)}
+									placeholder={field.placeholder}
+									className={`${inputClass} min-h-28 resize-y`}
+									disabled={submitting}
+								/>
+							) : (
+								<input
+									required
+									type={field.type}
+									value={form[field.key]}
+									onChange={update(field.key)}
+									placeholder={field.placeholder}
+									className={inputClass}
+									disabled={submitting}
+								/>
+							)}
+							{field.hint && (
+								<span className="mt-1.5 block text-[0.8125rem] text-ds-text-tertiary">
+									{field.hint}
+								</span>
+							)}
+						</label>
+					))}
 				</div>
 
-				<label className="block">
-					<span className={labelClass}>traces.com session link</span>
-					<input
-						required
-						type="url"
-						value={form.tracesUrl}
-						onChange={update("tracesUrl")}
-						placeholder="https://traces.com/..."
-						className={inputClass}
-						disabled={submitting}
-					/>
-					<span className="mt-1.5 block text-[0.8125rem] text-ds-text-tertiary">
-						A non-sensitive coding agent session that shows how you work.
-					</span>
-				</label>
-
-				<label className="block">
-					<span className={labelClass}>Your full AI stack</span>
-					<textarea
-						required
-						value={form.aiStack}
-						onChange={update("aiStack")}
-						placeholder="Orchestrator, coding agents, models, tools, libraries, skills, prompting patterns, review workflows, and any custom setup."
-						className={`${inputClass} min-h-28 resize-y`}
-						disabled={submitting}
-					/>
-				</label>
-
-				<label className="block">
-					<span className={labelClass}>
-						2-3 projects that best show your ability
-					</span>
-					<textarea
-						required
-						value={form.projects}
-						onChange={update("projects")}
-						placeholder="Links, plus a sentence on what you built and what you owned."
-						className={`${inputClass} min-h-28 resize-y`}
-						disabled={submitting}
-					/>
-				</label>
-
-				<label className="block">
-					<span className={labelClass}>
-						Why is this role interesting to you?
-					</span>
-					<textarea
-						required
-						value={form.note}
-						onChange={update("note")}
-						placeholder="A short note is enough."
-						className={`${inputClass} min-h-24 resize-y`}
-						disabled={submitting}
-					/>
-				</label>
-
 				{error && (
-					<p className="text-[0.875rem] leading-relaxed text-red-500">
+					<p className="mt-5 text-[0.875rem] leading-relaxed text-red-500">
 						{error}
 					</p>
 				)}
@@ -209,7 +142,7 @@ export function CareersApplyForm({ role }: { role: Role }) {
 				<button
 					type="submit"
 					disabled={submitting}
-					className="group inline-flex items-center justify-center gap-1.5 px-6 py-3.5 text-[0.9375rem] font-medium text-white transition-all hover:brightness-110 disabled:opacity-60"
+					className="group mt-6 inline-flex items-center justify-center gap-1.5 px-6 py-3.5 text-[0.9375rem] font-medium text-white transition-all hover:brightness-110 disabled:opacity-60"
 					style={{ backgroundColor: "var(--brand-blue)" }}
 				>
 					{submitting ? "Submitting..." : "Submit application"}
@@ -218,9 +151,9 @@ export function CareersApplyForm({ role }: { role: Role }) {
 					)}
 				</button>
 
-				<p className="text-[0.8125rem] leading-relaxed text-ds-text-tertiary">
+				<p className="mt-5 text-[0.8125rem] leading-relaxed text-ds-text-tertiary">
 					We do not need a traditional CV. We care much more about what you
-					have built, how you think, and how you work with AI.
+					have made, how you think, and how you work.
 				</p>
 			</form>
 		</section>

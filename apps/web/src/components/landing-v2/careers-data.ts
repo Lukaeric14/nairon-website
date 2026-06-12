@@ -1,6 +1,17 @@
 // Open roles — single source of truth for the careers list and the per-role
 // detail pages. Each role has a slug used in its URL (/careers/<slug>).
 
+export interface ApplyField {
+	key: string;
+	label: string;
+	type: "text" | "email" | "tel" | "url" | "textarea";
+	placeholder: string;
+	/** Helper text shown under the input. */
+	hint?: string;
+	/** Short inputs sit two per row; set to span the full row. */
+	fullWidth?: boolean;
+}
+
 export interface RoleSectionStep {
 	title: string;
 	paragraphs: string[];
@@ -36,10 +47,10 @@ export interface Role {
 	 */
 	sections?: RoleSection[];
 	/**
-	 * When true, the detail page collects applications through an on-page
-	 * form (#apply) instead of the mailto link.
+	 * When present, the detail page collects applications through an on-page
+	 * form (#apply) with these fields instead of the mailto link.
 	 */
-	applyForm?: boolean;
+	applyForm?: ApplyField[];
 }
 
 export const APPLY_EMAIL = "careers@nairon.ai";
@@ -86,7 +97,59 @@ export const ROLES: Role[] = [
 			"We are hiring a Founding Engineer. You will be the first engineer alongside the founders, and you will touch everything: building Hive, deploying it into real companies, mapping workflows, shipping production features, debugging issues, and improving the system until it works reliably in the real world.",
 		responsibilities: [],
 		requirements: [],
-		applyForm: true,
+		applyForm: [
+			{
+				key: "name",
+				label: "Full name",
+				type: "text",
+				placeholder: "Jane Smith",
+			},
+			{
+				key: "email",
+				label: "Email",
+				type: "email",
+				placeholder: "jane@example.com",
+			},
+			{
+				key: "phone",
+				label: "Phone number",
+				type: "tel",
+				placeholder: "+971 50 123 4567",
+			},
+			{
+				key: "portfolio",
+				label: "Portfolio, GitHub, or personal website",
+				type: "url",
+				placeholder: "https://github.com/you",
+			},
+			{
+				key: "traces",
+				label: "traces.com session link",
+				type: "url",
+				placeholder: "https://traces.com/...",
+				hint: "A non-sensitive coding agent session that shows how you work.",
+				fullWidth: true,
+			},
+			{
+				key: "aiStack",
+				label: "Your full AI stack",
+				type: "textarea",
+				placeholder:
+					"Orchestrator, coding agents, models, tools, libraries, skills, prompting patterns, review workflows, and any custom setup.",
+			},
+			{
+				key: "projects",
+				label: "2-3 projects that best show your ability",
+				type: "textarea",
+				placeholder: "Links, plus a sentence on what you built and what you owned.",
+			},
+			{
+				key: "note",
+				label: "Why is this role interesting to you?",
+				type: "textarea",
+				placeholder: "A short note is enough.",
+			},
+		],
 		sections: [
 			{
 				title: "About Nairon",
@@ -249,6 +312,132 @@ export const ROLES: Role[] = [
 		niceToHave: [
 			"Prior AI or automation deployment experience in healthcare.",
 			"A clinical or health-systems background.",
+		],
+	},
+	{
+		slug: "content-marketing-intern",
+		title: "Content Marketing Intern",
+		team: "Marketing",
+		type: "Paid internship · Full-time",
+		location: "In-person · Dubai, UAE",
+		blurb:
+			"Own the production of our content: edit videos, design graphics, and help us publish consistently. A strong intern will be given priority for the full-time content role opening in September.",
+		description:
+			"We are hiring a Content Marketing Intern. This is a paid, full-time internship. You will work in-person with us in Dubai and own the production of our content: editing videos, designing graphics, and helping us publish consistently.",
+		responsibilities: [],
+		requirements: [],
+		sections: [
+			{
+				title: "About Nairon",
+				paragraphs: [
+					"Nairon is an AI startup. We are building Hive, our platform for AI employees that take on real work end to end inside the tools companies already use.",
+					"We are a small founding team based in Dubai. Content is how people find us, so this role matters and your work will be visible from day one.",
+				],
+			},
+			{
+				title: "The role",
+				paragraphs: [
+					"We are hiring a Content Marketing Intern.",
+					"This is a paid, full-time internship. You will work in-person with us in Dubai and own the production of our content: editing videos, designing graphics, and helping us publish consistently.",
+					"We are opening a full-time content position in September. A strong intern will be given priority for that role.",
+				],
+			},
+			{
+				title: "What you will do",
+				bullets: [
+					"Edit short-form and long-form videos: product demos, founder content, and social clips.",
+					"Design graphics for social media, the website, and presentations.",
+					"Write clear captions and copy in English.",
+					"Help plan and keep a consistent publishing schedule.",
+					"Use AI tools to produce more and better content, faster.",
+					"Work in-person with the founding team from our Dubai office.",
+				],
+			},
+			{
+				title: "What we are looking for",
+				bullets: [
+					"Video editing experience. This is a must. We want to see work you have edited.",
+					"Graphic design skills.",
+					"High English proficiency, written and spoken.",
+					"Able to commute daily to in5 Media in Dubai.",
+					"Available full-time.",
+					"Organized, fast, and comfortable with feedback.",
+					"Bonus: experience with AI content tools.",
+				],
+			},
+			{
+				title: "How to apply",
+				paragraphs: ["Apply with the form at the bottom of this page. You will need:"],
+				bullets: [
+					"Full name",
+					"Email",
+					"Phone number",
+					"Portfolio, reel, or links to videos you have edited",
+					"2-3 pieces of work you are most proud of",
+					"A short note on why this role is interesting to you",
+				],
+				paragraphsAfter: [
+					"We do not need a traditional CV. Show us what you have made.",
+				],
+			},
+			{
+				title: "Interview process",
+				steps: [
+					{
+						title: "Application review",
+						paragraphs: ["We look at your editing and design work."],
+					},
+					{
+						title: "Short call",
+						paragraphs: ["Culture, communication, and availability."],
+					},
+					{
+						title: "Small test task",
+						paragraphs: [
+							"A quick edit or design so we can see how you work.",
+						],
+					},
+				],
+			},
+		],
+		applyForm: [
+			{
+				key: "name",
+				label: "Full name",
+				type: "text",
+				placeholder: "Jane Smith",
+			},
+			{
+				key: "email",
+				label: "Email",
+				type: "email",
+				placeholder: "jane@example.com",
+			},
+			{
+				key: "phone",
+				label: "Phone number",
+				type: "tel",
+				placeholder: "+971 50 123 4567",
+			},
+			{
+				key: "portfolio",
+				label: "Portfolio or reel link",
+				type: "url",
+				placeholder: "https://...",
+				hint: "A link to your portfolio, reel, or videos you have edited.",
+			},
+			{
+				key: "work",
+				label: "2-3 pieces of work you are most proud of",
+				type: "textarea",
+				placeholder: "Links, plus a sentence on what you made and your role.",
+			},
+			{
+				key: "note",
+				label: "Why is this role interesting to you?",
+				type: "textarea",
+				placeholder: "A short note is enough.",
+			},
 		],
 	},
 ];
