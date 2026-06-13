@@ -39,7 +39,9 @@ export function CareersApplyForm({ role }: { role: Role }) {
 			await submitJobApplication({
 				data: {
 					roleTitle: role.title,
+					roleSlug: role.slug,
 					fields: fields.map((field) => ({
+						key: field.key,
 						label: field.label,
 						type: field.type,
 						value: form[field.key] ?? "",
@@ -116,7 +118,10 @@ export function CareersApplyForm({ role }: { role: Role }) {
 							) : (
 								<input
 									required
-									type={field.type}
+									type={field.type === "url" ? "text" : field.type}
+									inputMode={field.type === "url" ? "url" : undefined}
+									autoCapitalize={field.type === "url" ? "none" : undefined}
+									autoCorrect={field.type === "url" ? "off" : undefined}
 									value={form[field.key]}
 									onChange={update(field.key)}
 									placeholder={field.placeholder}

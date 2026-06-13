@@ -11,8 +11,16 @@ interface CareerApplicationRecord {
 	portfolioUrl: string;
 	toolingWorkflow?: string;
 	source?: string;
+	applicationFieldsJson?: string;
 	createdAt: number;
 	updatedAt: number;
+}
+
+interface ApplicationFieldRecord {
+	key?: string;
+	label: string;
+	type: string;
+	value: string;
 }
 
 function formatDate(timestamp: number) {
@@ -30,6 +38,24 @@ function getHostname(url: string) {
 		return new URL(url).hostname.replace(/^www\./, "");
 	} catch {
 		return url;
+	}
+}
+
+function getApplicationFields(application: CareerApplicationRecord) {
+	if (!application.applicationFieldsJson) return [];
+
+	try {
+		const fields = JSON.parse(application.applicationFieldsJson);
+		if (!Array.isArray(fields)) return [];
+		return fields.filter(
+			(field): field is ApplicationFieldRecord =>
+				field &&
+				typeof field.label === "string" &&
+				typeof field.value === "string" &&
+				typeof field.type === "string",
+		);
+	} catch {
+		return [];
 	}
 }
 
@@ -108,12 +134,11 @@ export function CareersAdminPage() {
 							Careers admin
 						</p>
 						<h1 className="max-w-xl text-4xl font-normal leading-tight tracking-[-0.04em] md:text-6xl">
-							Design Engineer applications
+							Career applications
 						</h1>
 						<p className="mt-4 max-w-xl text-base leading-7 text-[#5C584F]">
-							Review candidates by portfolio quality, interface taste, and
-							evidence that they can design for agent-human collaboration. Pay
-							close attention to how they use coding agents and models.
+							Review candidates by role, links, work samples, and evidence that
+							they can use AI tools to produce strong work.
 						</p>
 					</div>
 
@@ -170,9 +195,7 @@ export function CareersAdminPage() {
 						<p className="text-xs uppercase tracking-[0.16em] text-[#5C584F]">
 							Role
 						</p>
-						<p className="mt-2 text-base font-medium">
-							Design Engineer Internship
-						</p>
+						<p className="mt-2 text-base font-medium">All roles</p>
 					</div>
 				</div>
 
@@ -222,6 +245,30 @@ export function CareersAdminPage() {
 									</p>
 
 									<div className="lg:col-span-4">
+										<p className="mb-3 text-sm font-semibold text-[#1A1916]">
+											{application.roleTitle}
+										</p>
+										{getApplicationFields(application).length ? (
+											<div className="mb-5 grid gap-4 md:grid-cols-2">
+												{getApplicationFields(application).map((field) => (
+													<div
+														key={`${application._id}-${field.label}`}
+														className={
+															field.type === "textarea"
+																? "md:col-span-2"
+																: undefined
+														}
+													>
+														<p className="mb-1 text-[11px] font-medium uppercase tracking-[0.16em] text-[#8A6418]">
+															{field.label}
+														</p>
+														<p className="whitespace-pre-wrap break-words text-sm leading-6 text-[#5C584F]">
+															{field.value}
+														</p>
+													</div>
+												))}
+											</div>
+										) : null}
 										<p className="mb-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-[#8A6418]">
 											AI tooling workflow
 										</p>

@@ -29,6 +29,7 @@ export const submitApplication = mutation({
 		portfolioUrl: v.string(),
 		toolingWorkflow: v.string(),
 		source: v.optional(v.string()),
+		applicationFieldsJson: v.optional(v.string()),
 	},
 	handler: async (ctx, args) => {
 		const roleId = args.roleId.trim();
@@ -79,6 +80,7 @@ export const submitApplication = mutation({
 				portfolioUrl,
 				toolingWorkflow,
 				source: args.source,
+				applicationFieldsJson: args.applicationFieldsJson,
 				updatedAt: now,
 			});
 
@@ -93,6 +95,7 @@ export const submitApplication = mutation({
 			portfolioUrl,
 			toolingWorkflow,
 			source: args.source,
+			applicationFieldsJson: args.applicationFieldsJson,
 			createdAt: now,
 			updatedAt: now,
 		});
