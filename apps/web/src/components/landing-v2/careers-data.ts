@@ -138,12 +138,6 @@ export const ROLES: Role[] = [
 					"Orchestrator, coding agents, models, tools, libraries, skills, prompting patterns, review workflows, and any custom setup.",
 			},
 			{
-				key: "projects",
-				label: "2-3 projects that best show your ability",
-				type: "textarea",
-				placeholder: "Links, plus a sentence on what you built and what you owned.",
-			},
-			{
 				key: "note",
 				label: "Why is this role interesting to you?",
 				type: "textarea",
@@ -238,50 +232,11 @@ export const ROLES: Role[] = [
 					"Portfolio link, GitHub, or personal website",
 					"traces.com session link showing a non-sensitive coding agent session",
 					"Your full AI stack",
-					"2-3 projects you have built that best show your ability",
 					"A short note on why this role is interesting to you",
 				],
 				paragraphsAfter: [
 					"Applications missing required links or details will not be reviewed.",
 					"We do not need a traditional CV. We care much more about what you have built, how you think, and how you work with AI.",
-				],
-			},
-			{
-				title: "Interview process",
-				steps: [
-					{
-						title: "Application review",
-						paragraphs: [
-							"We review your projects, traces.com session, and AI stack. We are looking for evidence that you can use AI agents well, think clearly, and get to working implementation.",
-						],
-					},
-					{
-						title: "15-minute screening",
-						paragraphs: [
-							"This is mostly about culture, communication, and how you think. We want to understand how you handle ambiguity, speed, tradeoffs, and startup pressure.",
-						],
-					},
-					{
-						title: "Technical interview",
-						paragraphs: [
-							"You will work through a realistic repo and implementation task that mimics the kind of work we do at Nairon. We care less about memorized algorithms and more about how you:",
-						],
-						bullets: [
-							"Clarify requirements",
-							"Use coding agents",
-							"Break down the problem",
-							"Review generated code",
-							"Test the result",
-							"Explain tradeoffs",
-							"Recover when something goes wrong",
-						],
-					},
-					{
-						title: "Build simulation",
-						paragraphs: [
-							"You will work on a realistic, messy problem of the kind we solve every week. The goal is to see whether you can take something unclear and turn it into something useful, working, and reliable.",
-						],
-					},
 				],
 			},
 		],
