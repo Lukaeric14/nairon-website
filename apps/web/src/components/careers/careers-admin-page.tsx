@@ -60,12 +60,14 @@ function getApplicationFields(application: CareerApplicationRecord) {
 }
 
 export function CareersAdminPage() {
+	const [adminEmail, setAdminEmail] = useState("");
 	const [adminToken, setAdminToken] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
 	const [applications, setApplications] = useState<CareerApplicationRecord[]>([]);
 
 	useEffect(() => {
+		setAdminEmail(window.sessionStorage.getItem("careers-admin-email") ?? "");
 		setAdminToken(window.sessionStorage.getItem("careers-admin-token") ?? "");
 	}, []);
 
@@ -75,7 +77,12 @@ export function CareersAdminPage() {
 	}, [applications]);
 
 	async function loadApplications(token = adminToken) {
+		const trimmedEmail = adminEmail.trim().toLowerCase();
 		const trimmedToken = token.trim();
+		if (!trimmedEmail) {
+			setError("Enter your admin email.");
+			return;
+		}
 		if (!trimmedToken) {
 			setError("Enter the admin access key.");
 			return;
@@ -86,9 +93,10 @@ export function CareersAdminPage() {
 
 		try {
 			const result = await listCareerApplications({
-				data: { adminToken: trimmedToken },
+				data: { adminEmail: trimmedEmail, adminToken: trimmedToken },
 			});
 			setApplications(result.applications as CareerApplicationRecord[]);
+			window.sessionStorage.setItem("careers-admin-email", trimmedEmail);
 			window.sessionStorage.setItem("careers-admin-token", trimmedToken);
 		} catch (loadError) {
 			const message =
@@ -144,8 +152,20 @@ export function CareersAdminPage() {
 
 					<form
 						onSubmit={handleSubmit}
-						className="rounded-xl border border-[#0C0C0C]/10 bg-white p-4"
+						className="space-y-3 rounded-xl border border-[#0C0C0C]/10 bg-white p-4"
 					>
+						<label className="block">
+							<span className="mb-1.5 block text-xs text-[#5C584F]">
+								Admin email
+							</span>
+							<input
+								type="email"
+								value={adminEmail}
+								onChange={(event) => setAdminEmail(event.target.value)}
+								placeholder="you@naironai.com"
+								className="h-11 w-full rounded-lg border border-[#0C0C0C]/10 bg-[#F7F5EF] px-3 text-sm outline-none focus:border-[#C9A96E] focus:ring-2 focus:ring-[#C9A96E]/15"
+							/>
+						</label>
 						<label className="block">
 							<span className="mb-1.5 block text-xs text-[#5C584F]">
 								Admin access key

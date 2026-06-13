@@ -14,8 +14,11 @@ interface CareerApplicationData {
 }
 
 interface AdminApplicationsRequest {
+	adminEmail: string;
 	adminToken: string;
 }
+
+const CAREERS_ADMIN_EMAILS = new Set(["obaid@naironai.com", "luka@naironai.com"]);
 
 const api = anyApi as {
 	careerApplications: {
@@ -164,6 +167,7 @@ export const submitCareerApplication = createServerFn({ method: "POST" })
 export const listCareerApplications = createServerFn({ method: "POST" })
 	.inputValidator((data: AdminApplicationsRequest) => data)
 	.handler(async ({ data }) => {
+		const adminEmail = data.adminEmail.trim().toLowerCase();
 		const adminToken = data.adminToken.trim();
 		const configuredToken = process.env.CAREERS_ADMIN_TOKEN;
 
@@ -175,10 +179,15 @@ export const listCareerApplications = createServerFn({ method: "POST" })
 			throw new Error("Invalid admin token");
 		}
 
+		if (!CAREERS_ADMIN_EMAILS.has(adminEmail)) {
+			throw new Error("This email is not authorized for careers admin");
+		}
+
 		const convex = new ConvexHttpClient(getConvexUrl());
 		const applications = await convex.query(
 			api.careerApplications.listApplications,
 			{
+				adminEmail,
 				adminToken,
 				limit: 200,
 			},

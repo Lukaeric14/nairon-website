@@ -2,14 +2,16 @@ import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
+const CAREERS_ADMIN_EMAILS = new Set(["obaid@naironai.com", "luka@naironai.com"]);
 
 function getAdminToken() {
 	return (globalThis as { process?: { env?: Record<string, string | undefined> } })
 		.process?.env?.CAREERS_ADMIN_TOKEN;
 }
 
-function assertAdmin(adminToken: string) {
+function assertAdmin(adminEmail: string, adminToken: string) {
 	const configuredToken = getAdminToken();
+	const normalizedAdminEmail = normalizeEmail(adminEmail);
 
 	if (!configuredToken) {
 		throw new Error("CAREERS_ADMIN_TOKEN is not configured");
@@ -17,6 +19,10 @@ function assertAdmin(adminToken: string) {
 
 	if (adminToken !== configuredToken) {
 		throw new Error("Invalid admin token");
+	}
+
+	if (!CAREERS_ADMIN_EMAILS.has(normalizedAdminEmail)) {
+		throw new Error("This email is not authorized for careers admin");
 	}
 }
 
@@ -106,11 +112,12 @@ export const submitApplication = mutation({
 
 export const listApplications = query({
 	args: {
+		adminEmail: v.string(),
 		adminToken: v.string(),
 		limit: v.optional(v.number()),
 	},
 	handler: async (ctx, args) => {
-		assertAdmin(args.adminToken);
+		assertAdmin(args.adminEmail, args.adminToken);
 
 		const limit = Math.min(Math.max(args.limit ?? 200, 1), 500);
 
