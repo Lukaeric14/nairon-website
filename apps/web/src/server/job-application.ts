@@ -4,9 +4,12 @@
 // and the shared Hive webhook (see hive-notify.ts).
 
 import { createServerFn } from "@tanstack/react-start";
+import { ConvexHttpClient } from "convex/browser";
+import { anyApi } from "convex/server";
 import { notifyHive } from "./hive-notify";
 
 interface SubmittedField {
+	key?: string;
 	label: string;
 	type: string;
 	value: string;
@@ -14,11 +17,47 @@ interface SubmittedField {
 
 interface JobApplicationData {
 	roleTitle: string;
+	roleSlug?: string;
 	fields: SubmittedField[];
 }
 
 const MAX_FIELDS = 20;
 const MAX_VALUE_LENGTH = 5000;
+
+const api = anyApi as {
+	careerApplications: {
+		submitApplication: any;
+	};
+};
+
+function getConvexUrl() {
+	const convexUrl =
+		process.env.CONVEX_URL ??
+		process.env.VITE_CONVEX_URL ??
+		import.meta.env.VITE_CONVEX_URL;
+
+	if (!convexUrl) {
+		throw new Error("Convex URL is not configured");
+	}
+
+	return convexUrl;
+}
+
+function normalizeUrl(value: string) {
+	const withProtocol = /^[a-z][a-z0-9+.-]*:\/\//i.test(value)
+		? value
+		: `https://${value}`;
+
+	try {
+		const url = new URL(withProtocol);
+		if (!["http:", "https:"].includes(url.protocol) || !url.hostname) {
+			throw new Error();
+		}
+		return url.toString();
+	} catch {
+		return null;
+	}
+}
 
 function normalize(data: JobApplicationData) {
 	const roleTitle = data.roleTitle.trim();
@@ -34,8 +73,9 @@ function normalize(data: JobApplicationData) {
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 	const fields = data.fields.map((field) => {
+		const key = field.key?.trim();
 		const label = field.label.trim();
-		const value = field.value.trim();
+		let value = field.value.trim();
 
 		if (!label || !value) {
 			throw new Error(`Missing required field: ${label || "unknown"}`);
@@ -47,18 +87,54 @@ function normalize(data: JobApplicationData) {
 			throw new Error("Invalid email address");
 		}
 		if (field.type === "url") {
-			try {
-				const url = new URL(value);
-				if (!["http:", "https:"].includes(url.protocol)) throw new Error();
-			} catch {
-				throw new Error(`${label} must be a valid link (https://...)`);
-			}
+			const normalizedUrl = normalizeUrl(value);
+			if (!normalizedUrl) throw new Error(`${label} must be a valid link`);
+			value = normalizedUrl;
 		}
 
-		return { label, type: field.type, value };
+		return { key, label, type: field.type, value };
 	});
 
-	return { roleTitle, fields };
+	return { roleTitle, roleSlug: data.roleSlug?.trim() || roleTitle, fields };
+}
+
+function findField(application: ReturnType<typeof normalize>, keys: string[]) {
+	const normalizedKeys = keys.map((key) => key.toLowerCase());
+	return application.fields.find((field) => {
+		const key = field.key?.toLowerCase();
+		const label = field.label.toLowerCase();
+		return (
+			(key && normalizedKeys.includes(key)) ||
+			normalizedKeys.some((candidate) => label.includes(candidate))
+		);
+	});
+}
+
+function toCareerApplication(application: ReturnType<typeof normalize>) {
+	const name = findField(application, ["name", "full name"])?.value ?? "";
+	const email = findField(application, ["email"])?.value.toLowerCase() ?? "";
+	const portfolioUrl =
+		findField(application, ["portfolio", "github", "website", "reel"])?.value ??
+		findField(application, ["traces"])?.value ??
+		"";
+	const toolingWorkflow =
+		findField(application, ["aistack", "ai stack", "tooling", "workflow"])
+			?.value ??
+		application.fields
+			.filter((field) => field.type === "textarea")
+			.map((field) => `${field.label}\n${field.value}`)
+			.join("\n\n");
+
+	return {
+		roleId: application.roleSlug,
+		roleTitle: application.roleTitle,
+		name,
+		email,
+		portfolioUrl,
+		toolingWorkflow,
+		source: "job-role-page",
+		applicationFieldsJson: JSON.stringify(application.fields),
+	};
 }
 
 async function notifySlack(application: ReturnType<typeof normalize>) {
@@ -122,22 +198,29 @@ async function notifySlack(application: ReturnType<typeof normalize>) {
 	}
 }
 
+export async function submitJobApplicationData(data: JobApplicationData) {
+	const application = normalize(data);
+	const convex = new ConvexHttpClient(getConvexUrl());
+	const result = await convex.mutation(
+		api.careerApplications.submitApplication,
+		toCareerApplication(application),
+	);
+
+	await notifySlack(application);
+
+	await notifyHive({
+		form: "Job application",
+		fields: {
+			Role: application.roleTitle,
+			...Object.fromEntries(
+				application.fields.map((field) => [field.label, field.value]),
+			),
+		},
+	});
+
+	return result;
+}
+
 export const submitJobApplication = createServerFn({ method: "POST" })
 	.inputValidator((data: JobApplicationData) => data)
-	.handler(async ({ data }) => {
-		const application = normalize(data);
-
-		await notifySlack(application);
-
-		await notifyHive({
-			form: "Job application",
-			fields: {
-				Role: application.roleTitle,
-				...Object.fromEntries(
-					application.fields.map((field) => [field.label, field.value]),
-				),
-			},
-		});
-
-		return { success: true };
-	});
+	.handler(async ({ data }) => submitJobApplicationData(data));

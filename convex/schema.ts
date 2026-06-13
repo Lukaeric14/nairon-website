@@ -93,6 +93,7 @@ export default defineSchema({
 		portfolioUrl: v.string(),
 		toolingWorkflow: v.optional(v.string()),
 		source: v.optional(v.string()),
+		applicationFieldsJson: v.optional(v.string()),
 		createdAt: v.number(),
 		updatedAt: v.number(),
 	})

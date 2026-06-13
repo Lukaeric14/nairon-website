@@ -1,6 +1,5 @@
 import { ArrowUpRight, Loader2, RefreshCcw } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { listCareerApplications } from "@/server/careers";
 
 interface CareerApplicationRecord {
 	_id: string;
@@ -11,8 +10,16 @@ interface CareerApplicationRecord {
 	portfolioUrl: string;
 	toolingWorkflow?: string;
 	source?: string;
+	applicationFieldsJson?: string;
 	createdAt: number;
 	updatedAt: number;
+}
+
+interface ApplicationFieldRecord {
+	key?: string;
+	label: string;
+	type: string;
+	value: string;
 }
 
 function formatDate(timestamp: number) {
@@ -33,13 +40,38 @@ function getHostname(url: string) {
 	}
 }
 
+function getApplicationFields(application: CareerApplicationRecord) {
+	if (!application.applicationFieldsJson) return [];
+
+	try {
+		const fields = JSON.parse(application.applicationFieldsJson);
+		if (!Array.isArray(fields)) return [];
+		return fields.filter(
+			(field): field is ApplicationFieldRecord =>
+				field &&
+				typeof field.label === "string" &&
+				typeof field.value === "string" &&
+				typeof field.type === "string",
+		);
+	} catch {
+		return [];
+	}
+}
+
+async function parseJsonResponse(response: Response) {
+	const text = await response.text();
+	return text ? JSON.parse(text) : {};
+}
+
 export function CareersAdminPage() {
+	const [adminEmail, setAdminEmail] = useState("");
 	const [adminToken, setAdminToken] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
 	const [applications, setApplications] = useState<CareerApplicationRecord[]>([]);
 
 	useEffect(() => {
+		setAdminEmail(window.sessionStorage.getItem("careers-admin-email") ?? "");
 		setAdminToken(window.sessionStorage.getItem("careers-admin-token") ?? "");
 	}, []);
 
@@ -48,8 +80,13 @@ export function CareersAdminPage() {
 		return formatDate(applications[0].createdAt);
 	}, [applications]);
 
-	async function loadApplications(token = adminToken) {
+	async function loadApplications(email = adminEmail, token = adminToken) {
+		const trimmedEmail = email.trim().toLowerCase();
 		const trimmedToken = token.trim();
+		if (!trimmedEmail) {
+			setError("Enter your admin email.");
+			return;
+		}
 		if (!trimmedToken) {
 			setError("Enter the admin access key.");
 			return;
@@ -59,10 +96,20 @@ export function CareersAdminPage() {
 		setError("");
 
 		try {
-			const result = await listCareerApplications({
-				data: { adminToken: trimmedToken },
+			const response = await fetch("/api/career-applications", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					adminEmail: trimmedEmail,
+					adminToken: trimmedToken,
+				}),
 			});
+			const result = await parseJsonResponse(response);
+			if (!response.ok) {
+				throw new Error(result.error ?? "Could not load applications.");
+			}
 			setApplications(result.applications as CareerApplicationRecord[]);
+			window.sessionStorage.setItem("careers-admin-email", trimmedEmail);
 			window.sessionStorage.setItem("careers-admin-token", trimmedToken);
 		} catch (loadError) {
 			const message =
@@ -78,7 +125,11 @@ export function CareersAdminPage() {
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		await loadApplications();
+		const formData = new FormData(event.currentTarget);
+		await loadApplications(
+			String(formData.get("adminEmail") ?? ""),
+			String(formData.get("adminToken") ?? ""),
+		);
 	}
 
 	return (
@@ -108,24 +159,37 @@ export function CareersAdminPage() {
 							Careers admin
 						</p>
 						<h1 className="max-w-xl text-4xl font-normal leading-tight tracking-[-0.04em] md:text-6xl">
-							Design Engineer applications
+							Career applications
 						</h1>
 						<p className="mt-4 max-w-xl text-base leading-7 text-[#5C584F]">
-							Review candidates by portfolio quality, interface taste, and
-							evidence that they can design for agent-human collaboration. Pay
-							close attention to how they use coding agents and models.
+							Review candidates by role, links, work samples, and evidence that
+							they can use AI tools to produce strong work.
 						</p>
 					</div>
 
 					<form
 						onSubmit={handleSubmit}
-						className="rounded-xl border border-[#0C0C0C]/10 bg-white p-4"
+						className="space-y-3 rounded-xl border border-[#0C0C0C]/10 bg-white p-4"
 					>
+						<label className="block">
+							<span className="mb-1.5 block text-xs text-[#5C584F]">
+								Admin email
+							</span>
+							<input
+								name="adminEmail"
+								type="email"
+								value={adminEmail}
+								onChange={(event) => setAdminEmail(event.target.value)}
+								placeholder="you@naironai.com"
+								className="h-11 w-full rounded-lg border border-[#0C0C0C]/10 bg-[#F7F5EF] px-3 text-sm outline-none focus:border-[#C9A96E] focus:ring-2 focus:ring-[#C9A96E]/15"
+							/>
+						</label>
 						<label className="block">
 							<span className="mb-1.5 block text-xs text-[#5C584F]">
 								Admin access key
 							</span>
 							<input
+								name="adminToken"
 								type="password"
 								value={adminToken}
 								onChange={(event) => setAdminToken(event.target.value)}
@@ -170,9 +234,7 @@ export function CareersAdminPage() {
 						<p className="text-xs uppercase tracking-[0.16em] text-[#5C584F]">
 							Role
 						</p>
-						<p className="mt-2 text-base font-medium">
-							Design Engineer Internship
-						</p>
+						<p className="mt-2 text-base font-medium">All roles</p>
 					</div>
 				</div>
 
@@ -222,6 +284,30 @@ export function CareersAdminPage() {
 									</p>
 
 									<div className="lg:col-span-4">
+										<p className="mb-3 text-sm font-semibold text-[#1A1916]">
+											{application.roleTitle}
+										</p>
+										{getApplicationFields(application).length ? (
+											<div className="mb-5 grid gap-4 md:grid-cols-2">
+												{getApplicationFields(application).map((field) => (
+													<div
+														key={`${application._id}-${field.label}`}
+														className={
+															field.type === "textarea"
+																? "md:col-span-2"
+																: undefined
+														}
+													>
+														<p className="mb-1 text-[11px] font-medium uppercase tracking-[0.16em] text-[#8A6418]">
+															{field.label}
+														</p>
+														<p className="whitespace-pre-wrap break-words text-sm leading-6 text-[#5C584F]">
+															{field.value}
+														</p>
+													</div>
+												))}
+											</div>
+										) : null}
 										<p className="mb-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-[#8A6418]">
 											AI tooling workflow
 										</p>
