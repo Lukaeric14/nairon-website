@@ -198,27 +198,29 @@ async function notifySlack(application: ReturnType<typeof normalize>) {
 	}
 }
 
+export async function submitJobApplicationData(data: JobApplicationData) {
+	const application = normalize(data);
+	const convex = new ConvexHttpClient(getConvexUrl());
+	const result = await convex.mutation(
+		api.careerApplications.submitApplication,
+		toCareerApplication(application),
+	);
+
+	await notifySlack(application);
+
+	await notifyHive({
+		form: "Job application",
+		fields: {
+			Role: application.roleTitle,
+			...Object.fromEntries(
+				application.fields.map((field) => [field.label, field.value]),
+			),
+		},
+	});
+
+	return result;
+}
+
 export const submitJobApplication = createServerFn({ method: "POST" })
 	.inputValidator((data: JobApplicationData) => data)
-	.handler(async ({ data }) => {
-		const application = normalize(data);
-		const convex = new ConvexHttpClient(getConvexUrl());
-		const result = await convex.mutation(
-			api.careerApplications.submitApplication,
-			toCareerApplication(application),
-		);
-
-		await notifySlack(application);
-
-		await notifyHive({
-			form: "Job application",
-			fields: {
-				Role: application.roleTitle,
-				...Object.fromEntries(
-					application.fields.map((field) => [field.label, field.value]),
-				),
-			},
-		});
-
-		return result;
-	});
+	.handler(async ({ data }) => submitJobApplicationData(data));

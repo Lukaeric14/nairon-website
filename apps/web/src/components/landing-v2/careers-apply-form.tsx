@@ -5,7 +5,6 @@
 
 import { ArrowUpRightIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { useState, type ChangeEvent, type FormEvent } from "react";
-import { submitJobApplication } from "@/server/job-application";
 import type { ApplyField, Role } from "./careers-data";
 
 const inputClass =
@@ -16,6 +15,11 @@ const labelClass =
 
 function emptyForm(fields: ApplyField[]) {
 	return Object.fromEntries(fields.map((field) => [field.key, ""]));
+}
+
+async function parseJsonResponse(response: Response) {
+	const text = await response.text();
+	return text ? JSON.parse(text) : {};
 }
 
 export function CareersApplyForm({ role }: { role: Role }) {
@@ -35,19 +39,28 @@ export function CareersApplyForm({ role }: { role: Role }) {
 		setSubmitting(true);
 		setError(null);
 
+		const formData = new FormData(event.currentTarget);
+
 		try {
-			await submitJobApplication({
-				data: {
+			const response = await fetch("/api/job-application", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
 					roleTitle: role.title,
 					roleSlug: role.slug,
 					fields: fields.map((field) => ({
 						key: field.key,
 						label: field.label,
 						type: field.type,
-						value: form[field.key] ?? "",
+						value: String(formData.get(field.key) ?? ""),
 					})),
-				},
+				}),
 			});
+
+			const result = await parseJsonResponse(response);
+			if (!response.ok || !result.success) {
+				throw new Error(result.error ?? "Something went wrong. Please try again.");
+			}
 			setSubmitted(true);
 		} catch (submitError) {
 			setError(
@@ -109,6 +122,7 @@ export function CareersApplyForm({ role }: { role: Role }) {
 							{field.type === "textarea" ? (
 								<textarea
 									required
+									name={field.key}
 									value={form[field.key]}
 									onChange={update(field.key)}
 									placeholder={field.placeholder}
@@ -118,6 +132,7 @@ export function CareersApplyForm({ role }: { role: Role }) {
 							) : (
 								<input
 									required
+									name={field.key}
 									type={field.type === "url" ? "text" : field.type}
 									inputMode={field.type === "url" ? "url" : undefined}
 									autoCapitalize={field.type === "url" ? "none" : undefined}

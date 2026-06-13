@@ -164,34 +164,36 @@ export const submitCareerApplication = createServerFn({ method: "POST" })
 		return result;
 	});
 
+export async function listCareerApplicationsData(data: AdminApplicationsRequest) {
+	const adminEmail = data.adminEmail.trim().toLowerCase();
+	const adminToken = data.adminToken.trim();
+	const configuredToken = process.env.CAREERS_ADMIN_TOKEN;
+
+	if (!configuredToken) {
+		throw new Error("CAREERS_ADMIN_TOKEN is not configured");
+	}
+
+	if (!adminToken || adminToken !== configuredToken) {
+		throw new Error("Invalid admin token");
+	}
+
+	if (!CAREERS_ADMIN_EMAILS.has(adminEmail)) {
+		throw new Error("This email is not authorized for careers admin");
+	}
+
+	const convex = new ConvexHttpClient(getConvexUrl());
+	const applications = await convex.query(
+		api.careerApplications.listApplications,
+		{
+			adminEmail,
+			adminToken,
+			limit: 200,
+		},
+	);
+
+	return { applications };
+}
+
 export const listCareerApplications = createServerFn({ method: "POST" })
 	.inputValidator((data: AdminApplicationsRequest) => data)
-	.handler(async ({ data }) => {
-		const adminEmail = data.adminEmail.trim().toLowerCase();
-		const adminToken = data.adminToken.trim();
-		const configuredToken = process.env.CAREERS_ADMIN_TOKEN;
-
-		if (!configuredToken) {
-			throw new Error("CAREERS_ADMIN_TOKEN is not configured");
-		}
-
-		if (!adminToken || adminToken !== configuredToken) {
-			throw new Error("Invalid admin token");
-		}
-
-		if (!CAREERS_ADMIN_EMAILS.has(adminEmail)) {
-			throw new Error("This email is not authorized for careers admin");
-		}
-
-		const convex = new ConvexHttpClient(getConvexUrl());
-		const applications = await convex.query(
-			api.careerApplications.listApplications,
-			{
-				adminEmail,
-				adminToken,
-				limit: 200,
-			},
-		);
-
-		return { applications };
-	});
+	.handler(async ({ data }) => listCareerApplicationsData(data));

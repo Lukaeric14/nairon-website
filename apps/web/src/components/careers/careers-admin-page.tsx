@@ -1,6 +1,5 @@
 import { ArrowUpRight, Loader2, RefreshCcw } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { listCareerApplications } from "@/server/careers";
 
 interface CareerApplicationRecord {
 	_id: string;
@@ -59,6 +58,11 @@ function getApplicationFields(application: CareerApplicationRecord) {
 	}
 }
 
+async function parseJsonResponse(response: Response) {
+	const text = await response.text();
+	return text ? JSON.parse(text) : {};
+}
+
 export function CareersAdminPage() {
 	const [adminEmail, setAdminEmail] = useState("");
 	const [adminToken, setAdminToken] = useState("");
@@ -76,8 +80,8 @@ export function CareersAdminPage() {
 		return formatDate(applications[0].createdAt);
 	}, [applications]);
 
-	async function loadApplications(token = adminToken) {
-		const trimmedEmail = adminEmail.trim().toLowerCase();
+	async function loadApplications(email = adminEmail, token = adminToken) {
+		const trimmedEmail = email.trim().toLowerCase();
 		const trimmedToken = token.trim();
 		if (!trimmedEmail) {
 			setError("Enter your admin email.");
@@ -92,9 +96,18 @@ export function CareersAdminPage() {
 		setError("");
 
 		try {
-			const result = await listCareerApplications({
-				data: { adminEmail: trimmedEmail, adminToken: trimmedToken },
+			const response = await fetch("/api/career-applications", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					adminEmail: trimmedEmail,
+					adminToken: trimmedToken,
+				}),
 			});
+			const result = await parseJsonResponse(response);
+			if (!response.ok) {
+				throw new Error(result.error ?? "Could not load applications.");
+			}
 			setApplications(result.applications as CareerApplicationRecord[]);
 			window.sessionStorage.setItem("careers-admin-email", trimmedEmail);
 			window.sessionStorage.setItem("careers-admin-token", trimmedToken);
@@ -112,7 +125,11 @@ export function CareersAdminPage() {
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		await loadApplications();
+		const formData = new FormData(event.currentTarget);
+		await loadApplications(
+			String(formData.get("adminEmail") ?? ""),
+			String(formData.get("adminToken") ?? ""),
+		);
 	}
 
 	return (
@@ -159,6 +176,7 @@ export function CareersAdminPage() {
 								Admin email
 							</span>
 							<input
+								name="adminEmail"
 								type="email"
 								value={adminEmail}
 								onChange={(event) => setAdminEmail(event.target.value)}
@@ -171,6 +189,7 @@ export function CareersAdminPage() {
 								Admin access key
 							</span>
 							<input
+								name="adminToken"
 								type="password"
 								value={adminToken}
 								onChange={(event) => setAdminToken(event.target.value)}

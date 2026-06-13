@@ -2,7 +2,7 @@ import { StrictMode, startTransition } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { StartClient } from "@tanstack/react-start/client";
 
-if (import.meta.env.DEV) {
+if (import.meta.env.DEV && import.meta.env.VITE_DISABLE_REACT_GRAB !== "true") {
 	import("react-grab").then(() => {
 		// Move toolbar to top-left corner once React Grab initializes
 		const tryMove = () => {
