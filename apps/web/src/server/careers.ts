@@ -18,12 +18,25 @@ interface AdminApplicationsRequest {
 	adminToken: string;
 }
 
+type ApplicationStatus = "new" | "strong" | "maybe" | "rejected";
+
+interface AdminApplicationStatusRequest extends AdminApplicationsRequest {
+	id: string;
+	status: ApplicationStatus;
+}
+
+interface AdminApplicationDeleteRequest extends AdminApplicationsRequest {
+	id: string;
+}
+
 const CAREERS_ADMIN_EMAILS = new Set(["obaid@naironai.com", "luka@naironai.com"]);
 
 const api = anyApi as {
 	careerApplications: {
 		submitApplication: any;
 		listApplications: any;
+		updateApplicationStatus: any;
+		deleteApplication: any;
 	};
 };
 
@@ -197,3 +210,55 @@ export async function listCareerApplicationsData(data: AdminApplicationsRequest)
 export const listCareerApplications = createServerFn({ method: "POST" })
 	.inputValidator((data: AdminApplicationsRequest) => data)
 	.handler(async ({ data }) => listCareerApplicationsData(data));
+
+function assertCareersAdmin(data: AdminApplicationsRequest) {
+	const adminEmail = data.adminEmail.trim().toLowerCase();
+	const adminToken = data.adminToken.trim();
+	const configuredToken = process.env.CAREERS_ADMIN_TOKEN;
+
+	if (!configuredToken) {
+		throw new Error("CAREERS_ADMIN_TOKEN is not configured");
+	}
+
+	if (!adminToken || adminToken !== configuredToken) {
+		throw new Error("Invalid admin token");
+	}
+
+	if (!CAREERS_ADMIN_EMAILS.has(adminEmail)) {
+		throw new Error("This email is not authorized for careers admin");
+	}
+
+	return { adminEmail, adminToken };
+}
+
+export async function updateCareerApplicationStatusData(
+	data: AdminApplicationStatusRequest,
+) {
+	const { adminEmail, adminToken } = assertCareersAdmin(data);
+	const status = data.status;
+
+	if (!["new", "strong", "maybe", "rejected"].includes(status)) {
+		throw new Error("Invalid application status");
+	}
+
+	const convex = new ConvexHttpClient(getConvexUrl());
+	return await convex.mutation(api.careerApplications.updateApplicationStatus, {
+		adminEmail,
+		adminToken,
+		id: data.id,
+		status,
+	});
+}
+
+export async function deleteCareerApplicationData(
+	data: AdminApplicationDeleteRequest,
+) {
+	const { adminEmail, adminToken } = assertCareersAdmin(data);
+
+	const convex = new ConvexHttpClient(getConvexUrl());
+	return await convex.mutation(api.careerApplications.deleteApplication, {
+		adminEmail,
+		adminToken,
+		id: data.id,
+	});
+}

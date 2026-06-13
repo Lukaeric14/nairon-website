@@ -1,5 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { listCareerApplicationsData } from "@/server/careers";
+import {
+	deleteCareerApplicationData,
+	listCareerApplicationsData,
+	updateCareerApplicationStatusData,
+} from "@/server/careers";
 
 function json(data: unknown, init?: ResponseInit) {
 	return Response.json(data, init);
@@ -18,6 +22,24 @@ export const Route = createFileRoute("/api/career-applications")({
 				try {
 					const data = await request.json();
 					const result = await listCareerApplicationsData(data);
+					return json(result);
+				} catch (error) {
+					return errorJson(error);
+				}
+			},
+			PATCH: async ({ request }) => {
+				try {
+					const data = await request.json();
+					const result = await updateCareerApplicationStatusData(data);
+					return json(result);
+				} catch (error) {
+					return errorJson(error);
+				}
+			},
+			DELETE: async ({ request }) => {
+				try {
+					const data = await request.json();
+					const result = await deleteCareerApplicationData(data);
 					return json(result);
 				} catch (error) {
 					return errorJson(error);

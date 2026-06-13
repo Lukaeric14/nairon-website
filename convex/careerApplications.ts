@@ -3,6 +3,12 @@ import { mutation, query } from "./_generated/server";
 
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
 const CAREERS_ADMIN_EMAILS = new Set(["obaid@naironai.com", "luka@naironai.com"]);
+const applicationStatus = v.union(
+	v.literal("new"),
+	v.literal("strong"),
+	v.literal("maybe"),
+	v.literal("rejected"),
+);
 
 function getAdminToken() {
 	return (globalThis as { process?: { env?: Record<string, string | undefined> } })
@@ -102,6 +108,7 @@ export const submitApplication = mutation({
 			toolingWorkflow,
 			source: args.source,
 			applicationFieldsJson: args.applicationFieldsJson,
+			status: "new",
 			createdAt: now,
 			updatedAt: now,
 		});
@@ -126,5 +133,52 @@ export const listApplications = query({
 			.withIndex("by_created_at")
 			.order("desc")
 			.take(limit);
+	},
+});
+
+export const updateApplicationStatus = mutation({
+	args: {
+		adminEmail: v.string(),
+		adminToken: v.string(),
+		id: v.id("careerApplications"),
+		status: applicationStatus,
+	},
+	handler: async (ctx, args) => {
+		assertAdmin(args.adminEmail, args.adminToken);
+
+		const existing = await ctx.db.get(args.id);
+		if (!existing) {
+			throw new Error("Application not found");
+		}
+
+		const now = Date.now();
+		await ctx.db.patch(args.id, {
+			status: args.status,
+			statusUpdatedAt: now,
+			statusUpdatedBy: normalizeEmail(args.adminEmail),
+			updatedAt: now,
+		});
+
+		return { success: true, id: args.id, status: args.status };
+	},
+});
+
+export const deleteApplication = mutation({
+	args: {
+		adminEmail: v.string(),
+		adminToken: v.string(),
+		id: v.id("careerApplications"),
+	},
+	handler: async (ctx, args) => {
+		assertAdmin(args.adminEmail, args.adminToken);
+
+		const existing = await ctx.db.get(args.id);
+		if (!existing) {
+			throw new Error("Application not found");
+		}
+
+		await ctx.db.delete(args.id);
+
+		return { success: true, id: args.id };
 	},
 });

@@ -94,6 +94,16 @@ export default defineSchema({
 		toolingWorkflow: v.optional(v.string()),
 		source: v.optional(v.string()),
 		applicationFieldsJson: v.optional(v.string()),
+		status: v.optional(
+			v.union(
+				v.literal("new"),
+				v.literal("strong"),
+				v.literal("maybe"),
+				v.literal("rejected"),
+			),
+		),
+		statusUpdatedAt: v.optional(v.number()),
+		statusUpdatedBy: v.optional(v.string()),
 		createdAt: v.number(),
 		updatedAt: v.number(),
 	})
