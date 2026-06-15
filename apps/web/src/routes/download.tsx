@@ -15,9 +15,9 @@ const appStoreConnect =
 
 const fallbackDesktop = {
 	macVersion: "0.5.67",
-	windowsVersion: "0.5.67",
+	windowsVersion: "0.5.68",
 	macDmg: `${desktopFeedBase}/Hive-0.5.67-universal.dmg`,
-	windowsExe: `${desktopFeedBase}/Hive-Setup-0.5.67.exe`,
+	windowsExe: `${desktopFeedBase}/Hive-Setup-0.5.68.exe`,
 	macManifest: `${desktopFeedBase}/latest-mac.yml`,
 	windowsManifest: `${desktopFeedBase}/latest.yml`,
 };
