@@ -61,7 +61,7 @@ export const ROLES: Role[] = [
 		title: "Design Engineer",
 		team: "Engineering",
 		type: "Full-time",
-		location: "Remote / Miami",
+		location: "In-person · Office",
 		blurb:
 			"Own the surfaces where humans and AI agents work side by side, from prototype to production. You turn product thinking into interfaces that feel obvious.",
 		description:
@@ -90,7 +90,7 @@ export const ROLES: Role[] = [
 		title: "Founding Engineer",
 		team: "Engineering",
 		type: "Full-time",
-		location: "In-person · Dubai, UAE",
+		location: "In-person · Office",
 		blurb:
 			"Be the first engineer alongside the founders. Build Hive, deploy it into real companies, and improve the system until it works reliably in the real world.",
 		description:
@@ -247,7 +247,7 @@ export const ROLES: Role[] = [
 		title: "Healthcare AI Consultant",
 		team: "Delivery",
 		type: "Full-time",
-		location: "Remote",
+		location: "In-person · Office",
 		blurb:
 			"Partner with healthcare clients to map workflows, scope AI employees, and drive adoption. Part strategist, part builder, turning clinical and ops pain into deployed systems.",
 		description:
@@ -275,7 +275,7 @@ export const ROLES: Role[] = [
 		title: "Content Marketing Intern",
 		team: "Marketing",
 		type: "Paid internship · Full-time",
-		location: "In-person · Dubai, UAE",
+		location: "In-person · Office",
 		blurb:
 			"Own the production of our content: edit videos, design graphics, and help us publish consistently. A strong intern will be given priority for the full-time content role opening in September.",
 		description:

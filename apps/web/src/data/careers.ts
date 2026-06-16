@@ -23,7 +23,7 @@ export const DESIGN_ENGINEER_ROLE: CareerRole = {
 	department: "Engineering",
 	type: "Internship",
 	duration: "3 months",
-	location: "Remote / Miami",
+	location: "In-person · Office",
 	opening: "Summer 2026",
 	summary:
 		"A 3-month internship for frontend builders who care about agent-friendly UI: interfaces where humans can direct, inspect, and trust agent work without friction.",
