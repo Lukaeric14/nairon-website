@@ -13,8 +13,31 @@ const inputClass =
 const labelClass =
 	"mb-1.5 block text-[0.8125rem] font-medium text-ds-text-secondary";
 
+const tracesUrlPattern =
+	"^(https?://)?([A-Za-z0-9-]+\\.)*traces\\.com(/.*)?$";
+
 function emptyForm(fields: ApplyField[]) {
 	return Object.fromEntries(fields.map((field) => [field.key, ""]));
+}
+
+function normalizeUrl(value: string) {
+	const withProtocol = /^[a-z][a-z0-9+.-]*:\/\//i.test(value)
+		? value
+		: `https://${value}`;
+
+	try {
+		const url = new URL(withProtocol);
+		return url;
+	} catch {
+		return null;
+	}
+}
+
+function isTracesUrl(value: string) {
+	const url = normalizeUrl(value);
+	if (!url) return false;
+	const hostname = url.hostname.toLowerCase();
+	return hostname === "traces.com" || hostname.endsWith(".traces.com");
 }
 
 async function parseJsonResponse(response: Response) {
@@ -34,12 +57,28 @@ export function CareersApplyForm({ role }: { role: Role }) {
 		(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
 			setForm((current) => ({ ...current, [key]: event.target.value }));
 
+	function isTracesField(key: string) {
+		return key === "traces";
+	}
+
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		setSubmitting(true);
 		setError(null);
 
 		const formData = new FormData(event.currentTarget);
+		const tracesValue = String(formData.get("traces") ?? "");
+
+		if (
+			fields.some((field) => isTracesField(field.key)) &&
+			!isTracesUrl(tracesValue)
+		) {
+			setError(
+				"Enter a valid traces.com session link. Applications without one will not be considered.",
+			);
+			setSubmitting(false);
+			return;
+		}
 
 		try {
 			const response = await fetch("/api/job-application", {
@@ -137,6 +176,14 @@ export function CareersApplyForm({ role }: { role: Role }) {
 									inputMode={field.type === "url" ? "url" : undefined}
 									autoCapitalize={field.type === "url" ? "none" : undefined}
 									autoCorrect={field.type === "url" ? "off" : undefined}
+									pattern={
+										isTracesField(field.key) ? tracesUrlPattern : undefined
+									}
+									title={
+										isTracesField(field.key)
+											? "Enter a valid traces.com session link."
+											: undefined
+									}
 									value={form[field.key]}
 									onChange={update(field.key)}
 									placeholder={field.placeholder}

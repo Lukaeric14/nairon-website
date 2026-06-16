@@ -59,6 +59,21 @@ function normalizeUrl(value: string) {
 	}
 }
 
+function isTracesField(field: SubmittedField) {
+	const key = field.key?.trim().toLowerCase();
+	const label = field.label.trim().toLowerCase();
+	return key === "traces" || label.includes("traces.com");
+}
+
+function isTracesUrl(value: string) {
+	try {
+		const hostname = new URL(value).hostname.toLowerCase();
+		return hostname === "traces.com" || hostname.endsWith(".traces.com");
+	} catch {
+		return false;
+	}
+}
+
 function normalize(data: JobApplicationData) {
 	const roleTitle = data.roleTitle.trim();
 	if (!roleTitle) throw new Error("Missing role");
@@ -90,6 +105,11 @@ function normalize(data: JobApplicationData) {
 			const normalizedUrl = normalizeUrl(value);
 			if (!normalizedUrl) throw new Error(`${label} must be a valid link`);
 			value = normalizedUrl;
+			if (isTracesField(field) && !isTracesUrl(value)) {
+				throw new Error(
+					"traces.com session link must be a traces.com URL. Applications without a valid traces.com link will not be considered.",
+				);
+			}
 		}
 
 		return { key, label, type: field.type, value };
