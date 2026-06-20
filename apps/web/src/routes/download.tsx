@@ -14,10 +14,10 @@ const appStoreConnect =
 	"https://appstoreconnect.apple.com/apps/6762267127/testflight/ios";
 
 const fallbackDesktop = {
-	macVersion: "0.5.96",
-	windowsVersion: "0.5.96",
-	macDmg: `${desktopFeedBase}/Hive-0.5.96-universal.dmg`,
-	windowsExe: `${desktopFeedBase}/Hive-Setup-0.5.96.exe`,
+	macVersion: "0.5.108",
+	windowsVersion: "0.5.108",
+	macDmg: `${desktopFeedBase}/Hive-0.5.108-universal.dmg`,
+	windowsExe: `${desktopFeedBase}/Hive-Setup-0.5.108.exe`,
 	macManifest: `${desktopFeedBase}/latest-mac.yml`,
 	windowsManifest: `${desktopFeedBase}/latest.yml`,
 };
