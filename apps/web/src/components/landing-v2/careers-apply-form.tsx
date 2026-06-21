@@ -14,7 +14,7 @@ const labelClass =
 	"mb-1.5 block text-[0.8125rem] font-medium text-ds-text-secondary";
 
 const tracesUrlPattern =
-	"^(https?://)?([A-Za-z0-9-]+\\.)*traces\\.com(/.*)?$";
+	"^(https?://)?([A-Za-z0-9-]+\\.)*traces\\.com/s/.+$";
 
 function emptyForm(fields: ApplyField[]) {
 	return Object.fromEntries(fields.map((field) => [field.key, ""]));
@@ -37,7 +37,10 @@ function isTracesUrl(value: string) {
 	const url = normalizeUrl(value);
 	if (!url) return false;
 	const hostname = url.hostname.toLowerCase();
-	return hostname === "traces.com" || hostname.endsWith(".traces.com");
+	return (
+		(hostname === "traces.com" || hostname.endsWith(".traces.com")) &&
+		url.pathname.startsWith("/s/")
+	);
 }
 
 async function parseJsonResponse(response: Response) {
@@ -74,7 +77,7 @@ export function CareersApplyForm({ role }: { role: Role }) {
 			!isTracesUrl(tracesValue)
 		) {
 			setError(
-				"Enter a valid traces.com session link. Applications without one will not be considered.",
+				"Enter a valid traces.com session link, like https://traces.com/s/...",
 			);
 			setSubmitting(false);
 			return;
@@ -181,7 +184,7 @@ export function CareersApplyForm({ role }: { role: Role }) {
 									}
 									title={
 										isTracesField(field.key)
-											? "Enter a valid traces.com session link."
+											? "Enter a valid traces.com session link, like https://traces.com/s/..."
 											: undefined
 									}
 									value={form[field.key]}

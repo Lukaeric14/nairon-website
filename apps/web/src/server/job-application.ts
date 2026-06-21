@@ -67,8 +67,12 @@ function isTracesField(field: SubmittedField) {
 
 function isTracesUrl(value: string) {
 	try {
-		const hostname = new URL(value).hostname.toLowerCase();
-		return hostname === "traces.com" || hostname.endsWith(".traces.com");
+		const url = new URL(value);
+		const hostname = url.hostname.toLowerCase();
+		return (
+			(hostname === "traces.com" || hostname.endsWith(".traces.com")) &&
+			url.pathname.startsWith("/s/")
+		);
 	} catch {
 		return false;
 	}
@@ -107,7 +111,7 @@ function normalize(data: JobApplicationData) {
 			value = normalizedUrl;
 			if (isTracesField(field) && !isTracesUrl(value)) {
 				throw new Error(
-					"traces.com session link must be a traces.com URL. Applications without a valid traces.com link will not be considered.",
+					"traces.com session link must be a valid session URL, like https://traces.com/s/...",
 				);
 			}
 		}
