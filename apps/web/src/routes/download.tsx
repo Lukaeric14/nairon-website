@@ -13,13 +13,9 @@ const testFlightApp = "https://apps.apple.com/app/testflight/id899247664";
 const appStoreConnect =
 	"https://appstoreconnect.apple.com/apps/6762267127/testflight/ios";
 
-const fallbackDesktop = {
-	macVersion: "0.8.9",
-	windowsVersion: "0.8.9",
-	macDmg: `${desktopFeedBase}/Hive-0.8.9-universal.dmg`,
-	windowsExe: `${desktopFeedBase}/Hive-Setup-0.8.9.exe`,
-	macManifest: `${desktopFeedBase}/latest-mac.yml`,
-	windowsManifest: `${desktopFeedBase}/latest.yml`,
+const desktopManifestUrls = {
+	mac: `${desktopFeedBase}/latest-mac.yml`,
+	windows: `${desktopFeedBase}/latest.yml`,
 };
 
 const mobileVersions = {
@@ -51,13 +47,21 @@ export const Route = createFileRoute("/download")({
 	},
 });
 
+type DesktopPlatformDownload = {
+	version: string | null;
+	href: string;
+	manifest: string;
+	hasInstaller: boolean;
+};
+
 type DesktopDownloadState = {
-	macVersion: string;
-	windowsVersion: string;
-	macDmg: string;
-	windowsExe: string;
-	macManifest: string;
-	source: "R2 latest manifests" | "Static fallback";
+	mac: DesktopPlatformDownload;
+	windows: DesktopPlatformDownload;
+	source:
+		| "Loading latest manifests"
+		| "R2 latest manifests"
+		| "Partial R2 manifests"
+		| "Manifest unavailable";
 };
 
 function parseVersion(manifest: string) {
@@ -72,48 +76,82 @@ function parseFileUrl(manifest: string, extension: string) {
 	return match?.[1]?.trim();
 }
 
+async function fetchManifest(url: string) {
+	const response = await fetch(url);
+	if (!response.ok) throw new Error(`manifest unavailable: ${url}`);
+	return response.text();
+}
+
+function fromManifestResult(
+	result: PromiseSettledResult<string>,
+	manifestUrl: string,
+	extension: string,
+): DesktopPlatformDownload {
+	if (result.status !== "fulfilled") {
+		return {
+			version: null,
+			href: manifestUrl,
+			manifest: manifestUrl,
+			hasInstaller: false,
+		};
+	}
+
+	const version = parseVersion(result.value) ?? null;
+	const fileUrl = parseFileUrl(result.value, extension);
+
+	return {
+		version,
+		href: fileUrl ? `${desktopFeedBase}/${fileUrl}` : manifestUrl,
+		manifest: manifestUrl,
+		hasInstaller: Boolean(fileUrl),
+	};
+}
+
+function sourceFor(downloads: DesktopPlatformDownload[]): DesktopDownloadState["source"] {
+	const loadedCount = downloads.filter((download) => download.hasInstaller).length;
+	if (loadedCount === downloads.length) return "R2 latest manifests";
+	if (loadedCount > 0) return "Partial R2 manifests";
+	return "Manifest unavailable";
+}
+
 function useDesktopDownloads() {
 	const [downloads, setDownloads] = useState<DesktopDownloadState>({
-		...fallbackDesktop,
-		source: "Static fallback",
+		mac: {
+			version: null,
+			href: desktopManifestUrls.mac,
+			manifest: desktopManifestUrls.mac,
+			hasInstaller: false,
+		},
+		windows: {
+			version: null,
+			href: desktopManifestUrls.windows,
+			manifest: desktopManifestUrls.windows,
+			hasInstaller: false,
+		},
+		source: "Loading latest manifests",
 	});
 
 	useEffect(() => {
 		let cancelled = false;
 
 		async function loadManifests() {
-			try {
-				const [macManifest, windowsManifest] = await Promise.all([
-					fetch(fallbackDesktop.macManifest).then((response) => {
-						if (!response.ok) throw new Error("mac manifest unavailable");
-						return response.text();
-					}),
-					fetch(fallbackDesktop.windowsManifest).then((response) => {
-						if (!response.ok) throw new Error("windows manifest unavailable");
-						return response.text();
-					}),
-				]);
+			const [macResult, windowsResult] = await Promise.allSettled([
+				fetchManifest(desktopManifestUrls.mac),
+				fetchManifest(desktopManifestUrls.windows),
+			]);
 
-				const macDmg = parseFileUrl(macManifest, ".dmg");
-				const windowsExe = parseFileUrl(windowsManifest, ".exe");
-				const macVersion = parseVersion(macManifest) ?? fallbackDesktop.macVersion;
-				const windowsVersion =
-					parseVersion(windowsManifest) ?? fallbackDesktop.windowsVersion;
-
-				if (!cancelled && macDmg && windowsExe) {
-					setDownloads({
-						macVersion,
-						windowsVersion,
-						macDmg: `${desktopFeedBase}/${macDmg}`,
-						windowsExe: `${desktopFeedBase}/${windowsExe}`,
-						macManifest: fallbackDesktop.macManifest,
-						source: "R2 latest manifests",
-					});
-				}
-			} catch {
-				if (!cancelled) {
-					setDownloads({ ...fallbackDesktop, source: "Static fallback" });
-				}
+			if (!cancelled) {
+				const mac = fromManifestResult(macResult, desktopManifestUrls.mac, ".dmg");
+				const windows = fromManifestResult(
+					windowsResult,
+					desktopManifestUrls.windows,
+					".exe",
+				);
+				setDownloads({
+					mac,
+					windows,
+					source: sourceFor([mac, windows]),
+				});
 			}
 		}
 
@@ -133,24 +171,26 @@ function DownloadPage() {
 		() => [
 			{
 				name: "macOS",
-				version: desktop.macVersion,
+				version: desktop.mac.version,
 				detail: "Universal DMG for Apple Silicon and Intel Macs.",
-				href: desktop.macDmg,
-				label: "Download DMG",
+				href: desktop.mac.href,
+				label: desktop.mac.hasInstaller ? "Download DMG" : "View manifest",
 			},
 			{
 				name: "Windows",
-				version: desktop.windowsVersion,
+				version: desktop.windows.version,
 				detail: "Signed installer for Windows desktops.",
-				href: desktop.windowsExe,
-				label: "Download EXE",
+				href: desktop.windows.href,
+				label: desktop.windows.hasInstaller ? "Download EXE" : "View manifest",
 			},
 		],
 		[
-			desktop.macDmg,
-			desktop.macVersion,
-			desktop.windowsExe,
-			desktop.windowsVersion,
+			desktop.mac.hasInstaller,
+			desktop.mac.href,
+			desktop.mac.version,
+			desktop.windows.hasInstaller,
+			desktop.windows.href,
+			desktop.windows.version,
 		],
 	);
 
@@ -182,10 +222,11 @@ function DownloadPage() {
 								<p className="text-sm text-ds-text-tertiary">Desktop feed</p>
 								<div className="mt-3 space-y-2 text-ds-text-primary">
 									<p className="text-2xl font-medium">
-										macOS v{desktop.macVersion}
+										macOS {desktop.mac.version ? `v${desktop.mac.version}` : "latest"}
 									</p>
 									<p className="text-2xl font-medium">
-										Windows v{desktop.windowsVersion}
+										Windows{" "}
+										{desktop.windows.version ? `v${desktop.windows.version}` : "latest"}
 									</p>
 								</div>
 							</div>
@@ -194,13 +235,23 @@ function DownloadPage() {
 						<div className="mt-8 space-y-3 text-sm text-ds-text-tertiary">
 							<p>Source: {desktop.source}</p>
 							<a
-								href={desktop.macManifest}
+								href={desktop.mac.manifest}
 								target="_blank"
 								rel="noopener noreferrer"
 								className="inline-flex items-center gap-2 transition-colors hover:text-ds-text-primary"
 								style={{ color: "var(--brand-blue)" }}
 							>
 								View mac manifest
+								<ExternalLink className="h-3.5 w-3.5" />
+							</a>
+							<a
+								href={desktop.windows.manifest}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-flex items-center gap-2 transition-colors hover:text-ds-text-primary"
+								style={{ color: "var(--brand-blue)" }}
+							>
+								View Windows manifest
 								<ExternalLink className="h-3.5 w-3.5" />
 							</a>
 						</div>
@@ -226,7 +277,9 @@ function DownloadPage() {
 											<Download className="h-6 w-6 transition-transform group-hover:translate-y-0.5" style={{ color: "var(--brand-blue)" }} />
 										</div>
 										<p className="mt-3 text-sm font-semibold" style={{ color: "var(--brand-blue)" }}>
-											Current version v{card.version}
+											{card.version
+												? `Current version v${card.version}`
+												: "Current version from latest manifest"}
 										</p>
 										<p className="mt-4 max-w-sm text-base leading-7 text-ds-text-secondary">
 											{card.detail}
