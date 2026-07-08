@@ -28,7 +28,7 @@ export interface RouterContext {
 const jsonLdOrg = JSON.stringify(organizationJsonLd());
 const jsonLdSite = JSON.stringify(websiteJsonLd());
 const jsonLdService = JSON.stringify(serviceJsonLd());
-const googleTagManagerId = "GTM-MZWSKCFH";
+const googleTagManagerId = "GTM-PNS89ZDJ";
 const shouldLoadGoogleTagManager = import.meta.env.MODE === "production";
 const metaPixelId = "1762219641876021";
 const shouldLoadMetaPixel = import.meta.env.MODE === "production";
@@ -39,7 +39,7 @@ const googleTagManagerScripts = shouldLoadGoogleTagManager
 	? [
 			{
 				children:
-					"(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MZWSKCFH');",
+					`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${googleTagManagerId}');`,
 			},
 		]
 	: [];
