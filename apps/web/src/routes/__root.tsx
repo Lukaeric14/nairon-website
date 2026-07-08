@@ -28,8 +28,21 @@ export interface RouterContext {
 const jsonLdOrg = JSON.stringify(organizationJsonLd());
 const jsonLdSite = JSON.stringify(websiteJsonLd());
 const jsonLdService = JSON.stringify(serviceJsonLd());
+const googleTagManagerId = "GTM-MZWSKCFH";
+const shouldLoadGoogleTagManager = import.meta.env.MODE === "production";
 const metaPixelId = "1762219641876021";
 const shouldLoadMetaPixel = import.meta.env.MODE === "production";
+
+// Google Tag Manager — keyed to Vite mode so production builds include it even
+// when local env sets NODE_ENV=development.
+const googleTagManagerScripts = shouldLoadGoogleTagManager
+	? [
+			{
+				children:
+					"(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MZWSKCFH');",
+			},
+		]
+	: [];
 
 // Google Analytics (gtag.js) — GA4 property G-VKNPNM07L5.
 // Production-only so local dev traffic doesn't pollute the GA property.
@@ -128,6 +141,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 				type: "application/ld+json",
 				children: jsonLdService,
 			},
+			...googleTagManagerScripts,
 			...gaScripts,
 			...metaPixelScripts,
 		],
@@ -154,6 +168,17 @@ function RootComponent() {
 				<HeadContent />
 			</head>
 			<body className="min-h-screen bg-background font-sans antialiased" style={{ backgroundColor: "#FFFFFF" }}>
+				{shouldLoadGoogleTagManager ? (
+					<noscript>
+						<iframe
+							height="0"
+							src={`https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}`}
+							style={{ display: "none", visibility: "hidden" }}
+							title="Google Tag Manager"
+							width="0"
+						/>
+					</noscript>
+				) : null}
 				<a
 					href="#main-content"
 					className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-lg focus:bg-[#C9A96E] focus:px-4 focus:py-2 focus:text-[#0C0C0C] focus:font-medium"
