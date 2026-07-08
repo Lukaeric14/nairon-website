@@ -28,6 +28,8 @@ export interface RouterContext {
 const jsonLdOrg = JSON.stringify(organizationJsonLd());
 const jsonLdSite = JSON.stringify(websiteJsonLd());
 const jsonLdService = JSON.stringify(serviceJsonLd());
+const metaPixelId = "1762219641876021";
+const shouldLoadMetaPixel = import.meta.env.MODE === "production";
 
 // Google Analytics (gtag.js) — GA4 property G-VKNPNM07L5.
 // Production-only so local dev traffic doesn't pollute the GA property.
@@ -40,6 +42,17 @@ const gaScripts = import.meta.env.PROD
 			{
 				children:
 					"window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VKNPNM07L5');",
+			},
+		]
+	: [];
+
+// Meta Pixel — keyed to Vite mode because local env can set NODE_ENV=development
+// during production builds.
+const metaPixelScripts = shouldLoadMetaPixel
+	? [
+			{
+				children:
+					"!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1762219641876021');fbq('track','PageView');",
 			},
 		]
 	: [];
@@ -116,6 +129,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 				children: jsonLdService,
 			},
 			...gaScripts,
+			...metaPixelScripts,
 		],
 	}),
 });
@@ -179,6 +193,17 @@ function RootComponent() {
 						<Toaster />
 					</ThemeProvider>
 				</ConvexProvider>
+				{shouldLoadMetaPixel ? (
+					<noscript>
+						<img
+							alt=""
+							height="1"
+							src={`https://www.facebook.com/tr?id=${metaPixelId}&ev=PageView&noscript=1`}
+							style={{ display: "none" }}
+							width="1"
+						/>
+					</noscript>
+				) : null}
 				<Scripts />
 			</body>
 		</html>
