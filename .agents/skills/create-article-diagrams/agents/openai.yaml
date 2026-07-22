@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Article Diagrams"
+  short_description: "Turn finished articles into useful concept models"
+  default_prompt: "Use $create-article-diagrams to find and build a useful interactive concept model for this finished article."
