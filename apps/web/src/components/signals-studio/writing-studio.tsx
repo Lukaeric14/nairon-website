@@ -575,29 +575,32 @@ export function WritingStudio() {
 	}
 
 	return (
-		<main id="main-content" className="flex h-dvh min-h-[620px] flex-col overflow-hidden bg-[#f4f2ed] font-geist text-[#171714]">
-			<header className="flex h-14 shrink-0 items-center border-b border-black/10 bg-[#f7f5f0] px-3 sm:px-4">
-				<button className="mr-1 p-2 text-black/50 lg:hidden" onClick={() => setLeftOpen(true)} type="button" aria-label="Open drafts">
+		<main id="main-content" className="writing-studio-dark flex h-dvh min-h-[620px] flex-col overflow-hidden bg-[#050505] font-geist text-white">
+			<header className="flex h-14 shrink-0 items-center border-b border-white/[0.09] bg-[#080808] px-3 sm:px-4">
+				<button className="mr-1 inline-flex h-8 items-center gap-2 px-2 text-white/42 transition-colors hover:bg-white/5 hover:text-white" onClick={() => setLeftOpen(true)} type="button" aria-label="Open drafts">
 					<PanelLeft className="size-4" />
+					<span className="hidden font-mono text-[8px] uppercase tracking-[0.14em] sm:inline">Drafts</span>
 				</button>
-				<a href="/" className="hidden text-[11px] font-semibold uppercase tracking-[0.16em] text-black/70 sm:block">Nairon</a>
-				<span className="mx-3 hidden h-4 w-px bg-black/15 sm:block" />
-				<span className="text-xs text-black/45">Writing Studio</span>
+				<span className="mx-2 hidden h-4 w-px bg-white/10 sm:block" />
+				<a href="/" className="hidden text-[15px] font-semibold tracking-[-0.06em] text-white sm:block">n.</a>
+				<span className="mx-2 hidden h-4 w-px bg-white/10 sm:block" />
+				<span className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/28">Writing room</span>
 				<div className="ml-auto flex items-center gap-1 sm:gap-2">
-					<span className="hidden items-center gap-1.5 text-[11px] text-black/35 sm:flex">
+					<span className="hidden items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.1em] text-white/28 sm:flex">
 						{saving ? <Loader2 className="size-3 animate-spin" /> : <span className={`size-1.5 rounded-full ${dirty ? "bg-amber-400" : "bg-emerald-500"}`} />}
 						{saving ? "Saving" : dirty ? "Unsaved" : savedAt ? `Saved ${formatTime(savedAt)}` : "Saved"}
 					</span>
-					<button className="p-2 text-black/50 hover:bg-black/5" onClick={() => void saveNow()} type="button" aria-label="Save draft">
+					<button className="p-2 text-white/38 hover:bg-white/5 hover:text-white" onClick={() => void saveNow()} type="button" aria-label="Save draft">
 						<Save className="size-4" />
 					</button>
-					<button className="p-2 text-black/50 hover:bg-black/5 xl:hidden" onClick={() => setRightOpen(true)} type="button" aria-label="Open writing tools">
+					<button className="inline-flex h-8 items-center gap-2 px-2 text-white/42 transition-colors hover:bg-white/5 hover:text-white" onClick={() => setRightOpen(true)} type="button" aria-label="Open writing tools">
+						<span className="hidden font-mono text-[8px] uppercase tracking-[0.14em] sm:inline">Tools</span>
 						<PanelRight className="size-4" />
 					</button>
 					{detail?.liveRevision ? <span className="hidden border border-emerald-200 bg-emerald-50 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-emerald-700 sm:inline">Live v{detail.liveRevision.revision}</span> : null}
 					{detail ? (
 						<div className="relative group">
-							<button className="flex h-8 items-center gap-2 border border-black/15 bg-white px-3 text-xs font-medium hover:border-black/30" type="button">
+							<button className="flex h-8 items-center gap-2 border border-white/15 bg-[#101010] px-3 text-xs font-medium text-white/70 hover:border-white/30" type="button">
 								<StatusPill status={detail.article.status} /> <ChevronDown className="size-3" />
 							</button>
 							<div className="invisible absolute right-0 top-full z-50 mt-1 w-44 border border-black/10 bg-white p-1 opacity-0 shadow-xl transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
@@ -613,13 +616,13 @@ export function WritingStudio() {
 			</header>
 
 			<div className="flex min-h-0 flex-1">
-				<aside className={`${leftOpen ? "fixed inset-y-0 left-0 z-50 flex w-[290px]" : "hidden"} shrink-0 flex-col border-r border-black/10 bg-[#efede7] lg:static lg:inset-auto lg:z-auto lg:flex lg:w-[260px]`}>
+				<aside className={`${leftOpen ? "fixed inset-y-0 left-0 z-50 flex w-[min(330px,92vw)]" : "hidden"} shrink-0 flex-col border-r border-white/[0.1] bg-[#0a0a0a] shadow-[24px_0_80px_rgba(0,0,0,.45)]`}>
 					<div className="flex h-14 items-center border-b border-black/10 px-4">
 						<span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-black/45">Drafts</span>
 						<button className="ml-auto p-2 text-black/45 hover:bg-black/5" onClick={() => void createNew()} type="button" aria-label="New article">
 							{creating ? <Loader2 className="size-4 animate-spin" /> : <Plus className="size-4" />}
 						</button>
-						<button className="p-2 text-black/45 lg:hidden" onClick={() => setLeftOpen(false)} type="button" aria-label="Close drafts"><X className="size-4" /></button>
+						<button className="p-2 text-white/40 hover:text-white" onClick={() => setLeftOpen(false)} type="button" aria-label="Close drafts"><X className="size-4" /></button>
 					</div>
 					<div className="min-h-0 flex-1 overflow-y-auto p-2">
 						{articles?.map((article) => (
@@ -642,33 +645,33 @@ export function WritingStudio() {
 						<button className="w-full px-2 py-2 text-left text-[11px] text-black/40 hover:bg-black/5" onClick={() => void authClient.signOut()} type="button">{access.email} · Sign out</button>
 					</div>
 				</aside>
-				{leftOpen ? <button className="fixed inset-0 z-40 bg-black/20 lg:hidden" onClick={() => setLeftOpen(false)} type="button" aria-label="Close drafts overlay" /> : null}
+				{leftOpen ? <button className="fixed inset-0 z-40 bg-black/70 backdrop-blur-[2px]" onClick={() => setLeftOpen(false)} type="button" aria-label="Close drafts overlay" /> : null}
 
 				{!detail ? <EmptyStudio onCreate={() => void createNew()} creating={creating} /> : (
-					<section className="min-w-0 flex-1 overflow-y-auto bg-[#fbfaf7]">
-						<div className="mx-auto flex min-h-full max-w-[860px] flex-col px-5 pb-28 pt-12 sm:px-10 lg:px-14 lg:pt-16">
+					<section className="min-w-0 flex-1 overflow-y-auto bg-[#080808]">
+						<div className="mx-auto flex min-h-full max-w-[980px] flex-col px-5 pb-32 pt-12 sm:px-12 lg:px-20 lg:pt-20">
 							{lockedBy ? <div className="mb-5 border border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-900"><strong>{lockedBy}</strong> is editing this Draft. This canvas is read-only until their lock expires.</div> : null}
 							{recovery ? <div className="mb-5 flex flex-col gap-3 border border-blue-200 bg-blue-50 p-3 text-xs leading-5 text-blue-900 sm:flex-row sm:items-center"><span className="flex-1">Unsynced browser edits from {formatTime(recovery.savedAt)} are available.</span><div className="flex gap-2"><button className="bg-[#1378e6] px-3 py-1.5 font-medium text-white" onClick={useRecovery} type="button">Recover them</button><button className="px-3 py-1.5 font-medium" onClick={discardRecovery} type="button">Discard</button></div></div> : null}
-							<div className="flex flex-wrap items-center gap-3 border-b border-black/10 pb-5">
-								<div className="flex border border-black/10 bg-[#f3f1ec] p-0.5">
-									<button className={`px-3 py-1.5 text-[11px] font-medium ${mode === "deep" ? "bg-white text-black shadow-sm" : "text-black/45"}`} onClick={() => setMode("deep")} type="button">Deep Read</button>
-									<button className={`px-3 py-1.5 text-[11px] font-medium ${mode === "brief" ? "bg-white text-black shadow-sm" : "text-black/45"}`} onClick={() => setMode("brief")} type="button">Brief</button>
+							<div className="flex flex-wrap items-center gap-3 border-b border-white/[0.09] pb-5">
+								<div className="flex border border-white/10">
+									<button className={`px-3 py-2 font-mono text-[8px] uppercase tracking-[0.12em] ${mode === "deep" ? "bg-white text-black" : "text-white/32 hover:text-white"}`} onClick={() => setMode("deep")} type="button">Deep Read</button>
+									<button className={`border-l border-white/10 px-3 py-2 font-mono text-[8px] uppercase tracking-[0.12em] ${mode === "brief" ? "bg-white text-black" : "text-white/32 hover:text-white"}`} onClick={() => setMode("brief")} type="button">Brief</button>
 								</div>
 								{detail.article.briefStale && mode === "brief" ? <div className="flex items-center gap-2"><span className="text-[11px] text-amber-700">Brief needs review</span><button className="border border-amber-200 bg-amber-50 px-2 py-1 text-[10px] font-medium text-amber-800" onClick={async () => { if (!selectedId) return; await approveBrief({ articleId: selectedId }); toast.success("Brief approved."); }} type="button">Approve current Brief</button></div> : null}
-								<div className="ml-auto flex items-center gap-1 text-[11px] text-black/35">
+								<div className="ml-auto flex items-center gap-1 font-mono text-[8px] uppercase tracking-[0.1em] text-white/24">
 									<span>{stats.wordCount.toLocaleString()} words</span><span>·</span><span>{stats.readingMinutes} min</span>
 								</div>
 							</div>
 							<textarea
 								aria-label="Article title"
-								className="mt-10 w-full resize-none overflow-hidden bg-transparent font-serif text-[clamp(2.65rem,7vw,5.25rem)] leading-[0.95] tracking-[-0.045em] outline-none [field-sizing:content] placeholder:text-black/18"
+								className="mt-12 w-full resize-none overflow-hidden bg-transparent text-[clamp(2.8rem,7vw,6rem)] font-normal leading-[0.92] tracking-[-0.06em] text-white outline-none [field-sizing:content] placeholder:text-white/12"
 								onChange={(event) => edit(setTitle, event.target.value)}
 								placeholder="Untitled idea"
 								readOnly={Boolean(lockedBy)}
 								rows={1}
 								value={title}
 							/>
-							<div className="mt-5 flex items-center gap-2 font-mono text-[10px] text-black/30">
+							<div className="mt-5 flex items-center gap-2 font-mono text-[9px] text-white/20">
 								<span>/signals/</span>
 								<input aria-label="Article URL slug" className="min-w-0 flex-1 bg-transparent outline-none focus:text-black/60" onChange={(event) => edit(setSlug, event.target.value)} readOnly={Boolean(lockedBy || detail.liveRevision)} title={detail.liveRevision ? "Published article URLs stay stable" : undefined} value={slug} />
 								{detail.liveRevision ? <span className="hidden text-emerald-700 sm:inline">Stable published URL</span> : null}
@@ -676,7 +679,7 @@ export function WritingStudio() {
 							<div className="relative mt-12 flex-1">
 								<textarea
 									aria-label={mode === "deep" ? "Deep Read article canvas" : "Brief article canvas"}
-									className="h-full min-h-[52vh] w-full resize-none bg-transparent font-serif text-[20px] leading-[1.72] tracking-[-0.012em] text-[#24231f] outline-none placeholder:text-black/22 sm:text-[22px]"
+									className="h-full min-h-[52vh] w-full resize-none bg-transparent text-[18px] leading-[1.82] tracking-[-0.012em] text-white/72 outline-none placeholder:text-white/18 sm:text-[21px]"
 									onChange={(event) => edit(setCurrentText, event.target.value)}
 									placeholder={mode === "deep" ? "Dump the thought here. Fragments, questions, pasted notes—anything goes." : "The short version for a reader who has two minutes."}
 									readOnly={Boolean(lockedBy)}
@@ -685,7 +688,7 @@ export function WritingStudio() {
 								/>
 							</div>
 						</div>
-						<div className="fixed bottom-4 left-1/2 z-30 flex max-w-[calc(100vw-24px)] -translate-x-1/2 items-center gap-1 border border-black/10 bg-[#1d1d1a] p-1.5 text-white shadow-[0_12px_40px_rgba(0,0,0,.18)] lg:left-[calc(50%+130px)] xl:left-[calc(50%-40px)]">
+						<div className="fixed bottom-4 left-1/2 z-30 flex max-w-[calc(100vw-24px)] -translate-x-1/2 items-center gap-1 border border-white/15 bg-[#0d0d0d] p-1.5 text-white shadow-[0_12px_50px_rgba(0,0,0,.55)]">
 							<button aria-label={dictating ? "Stop dictation" : "Start dictation"} className="flex h-9 items-center gap-2 px-3 text-xs hover:bg-white/10" onClick={toggleDictation} type="button">
 								<Mic className={`size-4 ${dictating ? "text-red-400" : ""}`} /> <span className="hidden sm:inline">{dictating ? "Stop" : "Dictate"}</span>
 							</button>
@@ -703,12 +706,12 @@ export function WritingStudio() {
 					</section>
 				)}
 
-				<aside className={`${rightOpen ? "fixed inset-y-0 right-0 z-50 flex w-[min(380px,92vw)]" : "hidden"} shrink-0 flex-col border-l border-black/10 bg-[#f7f5f0] xl:static xl:inset-auto xl:z-auto xl:flex xl:w-[350px]`}>
+				<aside className={`${rightOpen ? "fixed inset-y-0 right-0 z-50 flex w-[min(410px,94vw)]" : "hidden"} shrink-0 flex-col border-l border-white/[0.1] bg-[#0a0a0a] shadow-[-24px_0_80px_rgba(0,0,0,.45)]`}>
 					<div className="flex h-14 shrink-0 items-center border-b border-black/10 px-3">
 						{(["coach", "references", "history", ...(access.role === "owner" ? ["access" as const] : [])] as RightPanel[]).map((item) => (
-							<button className={`px-2 py-2 text-[11px] font-medium capitalize ${panel === item ? "text-black" : "text-black/35"}`} key={item} onClick={() => setPanel(item)} type="button">{item}</button>
+							<button className={`px-2 py-2 text-[11px] font-medium capitalize ${panel === item ? "text-white/85" : "text-white/35 hover:text-white/65"}`} key={item} onClick={() => setPanel(item)} type="button">{item}</button>
 						))}
-						<button className="ml-auto p-2 text-black/45 xl:hidden" onClick={() => setRightOpen(false)} type="button" aria-label="Close writing tools"><X className="size-4" /></button>
+						<button className="ml-auto p-2 text-white/40 hover:text-white" onClick={() => setRightOpen(false)} type="button" aria-label="Close writing tools"><X className="size-4" /></button>
 					</div>
 					<div className="min-h-0 flex-1 overflow-y-auto">
 						{panel === "coach" ? (
@@ -766,7 +769,7 @@ export function WritingStudio() {
 						) : null}
 					</div>
 				</aside>
-				{rightOpen ? <button className="fixed inset-0 z-40 bg-black/20 xl:hidden" onClick={() => setRightOpen(false)} type="button" aria-label="Close writing tools overlay" /> : null}
+				{rightOpen ? <button className="fixed inset-0 z-40 bg-black/70 backdrop-blur-[2px]" onClick={() => setRightOpen(false)} type="button" aria-label="Close writing tools overlay" /> : null}
 			</div>
 		</main>
 	);

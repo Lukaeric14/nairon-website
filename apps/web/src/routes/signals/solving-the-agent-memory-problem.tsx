@@ -15,9 +15,6 @@ import {
 	Sparkles,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Navbar } from "@/components/landing-v2/hero";
-import { Footer } from "@/components/landing-v2/footer";
-import { useCalInit } from "@/components/landing-v2/cal";
 import { HiveWaitlistForm } from "@/components/landing/hive-waitlist-form";
 
 import {
@@ -39,6 +36,7 @@ import {
 } from "@/components/signals/article-reader-toolbar";
 import { MemoryConceptModel } from "@/components/signals/memory-concept-model";
 import { SelectionExplainer } from "@/components/signals/selection-explainer";
+import { SignalsArticleMasthead } from "@/components/signals/signals-article-masthead";
 
 // Canonical metadata lives in the registry (content/signals.ts) so the
 // sitemap, llms.txt, Signals index, and this page can never disagree.
@@ -424,7 +422,6 @@ function scoreProviders(state: ToolState) {
 }
 
 function AgentMemoryArticlePage() {
-	useCalInit();
 	const [mode, setMode] = useState<ReaderMode>("brief");
 	const [focus, setFocus] = useState(false);
 	const [size, setSize] = useState<ReaderSize>("medium");
@@ -456,15 +453,13 @@ function AgentMemoryArticlePage() {
 		return () => window.removeEventListener("scroll", rememberPosition);
 	}, [mode, size, width]);
 
-	const widthClass = width === "narrow" ? "max-w-[780px]" : width === "wide" ? "max-w-[1180px]" : "max-w-[980px]";
+	const widthClass = width === "narrow" ? "max-w-[1120px]" : width === "wide" ? "max-w-[1536px]" : "max-w-[1380px]";
 	return (
-		<div className={`min-h-screen font-geist text-[#101014] ${focus ? "bg-[#e9e6df]" : "bg-[#F7F7F8]"}`} data-reader-size={size}>
-			{focus ? null : <Navbar />}
-			<div>
+		<div className="min-h-screen bg-[#020202] font-geist text-white" data-reader-size={size}>
+			<article className={`reader-copy signals-essay mx-auto min-h-screen border-x border-white/[0.09] bg-[#080808] transition-[max-width] ${widthClass}`}>
+				{focus ? null : <SignalsArticleMasthead />}
 				<ArticleReaderToolbar mode={mode} onModeChange={setMode} focus={focus} onFocusChange={setFocus} size={size} onSizeChange={setSize} width={width} onWidthChange={setWidth} />
-			</div>
-			<article className={`reader-copy mx-auto border-x border-[#101014]/10 transition-[max-width] ${widthClass}`}>
-				<Hero compact={mode === "brief"} />
+				<Hero />
 				{mode === "brief" ? (
 					<BriefArticle onDeepRead={() => setMode("deep")} />
 				) : (
@@ -481,35 +476,33 @@ function AgentMemoryArticlePage() {
 				)}
 			</article>
 			<SelectionExplainer slug={article.slug} />
-			{focus ? null : <Footer />}
 		</div>
 	);
 }
 
-function Hero({ compact = false }: { compact?: boolean }) {
+function Hero() {
 	return (
-		<header className="relative overflow-hidden border-b border-[#101014]/10">
-			<div className="absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(16,16,20,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(16,16,20,0.045)_1px,transparent_1px)] [background-size:76px_76px]" />
-			<div className="relative px-8 py-12 md:px-[148px] md:py-16">
-				<div className="flex items-center gap-2 text-xs text-[#606069]">
-					<a href="/signals" className="transition-colors hover:text-[#101014]">
-						Blog
+		<header className="border-b border-white/[0.09]">
+			<div className="px-6 py-16 sm:px-10 sm:py-20 md:px-[148px] md:py-28">
+				<div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-white/28">
+					<a href="/signals" className="transition-colors hover:text-white">
+						Signals
 					</a>
 					<ArrowRight className="size-3" />
-					<span>Company</span>
+					<span>Company memory</span>
 				</div>
-				<h1 className="mt-6 max-w-2xl text-balance text-4xl font-semibold leading-[1.03] tracking-[-0.04em] text-[#101014] md:text-5xl">
+				<h1 className="mt-12 max-w-5xl text-balance text-[clamp(3.4rem,8.5vw,8.6rem)] font-normal leading-[0.88] tracking-[-0.065em] text-white">
 					Solving the Agent Memory problem
 				</h1>
-				<p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-[#303036]">
+				<p className="mt-10 max-w-3xl text-pretty text-[clamp(1rem,1.5vw,1.35rem)] leading-[1.55] text-white/46">
 						We often get asked.... which memory layer should we trust for AI
 						employees: Supermemory, Mem0, Zep, Letta, LangMem, or something
 						closer to a company brain?
 				</p>
 			</div>
-			<div className="relative grid border-t border-[#101014]/10 px-8 py-5 text-xs text-[#606069] md:grid-cols-[1fr_auto] md:px-[148px]">
+			<div className="grid border-t border-white/[0.09] px-6 py-5 font-mono text-[9px] uppercase tracking-[0.13em] text-white/28 sm:px-10 md:grid-cols-[1fr_auto] md:px-[148px]">
 				<div className="flex items-center gap-3">
-					<span className="grid size-5 place-items-center overflow-hidden rounded-full bg-[#101014] text-[10px] font-semibold text-white ring-1 ring-[#101014]/10">
+					<span className="grid size-5 place-items-center overflow-hidden rounded-full bg-white/10 text-[10px] font-semibold text-white ring-1 ring-white/10">
 						<img
 							src={ARTICLE_AUTHOR_AVATAR}
 							alt=""
@@ -522,7 +515,6 @@ function Hero({ compact = false }: { compact?: boolean }) {
 				</div>
 				<span className="mt-3 md:mt-0">Apr 30, 2026</span>
 			</div>
-			{compact ? null : <div className="relative border-t border-[#101014]/10 px-8 py-10 md:px-[148px]"><ArticleSignalArt /></div>}
 		</header>
 	);
 }
@@ -530,9 +522,9 @@ function Hero({ compact = false }: { compact?: boolean }) {
 function BriefArticle({ onDeepRead }: { onDeepRead: () => void }) {
 	return (
 		<>
-			<section className="border-b border-[#101014]/10 bg-[#fbfaf7] px-8 py-12 md:px-[148px] md:py-16">
-				<p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#1378e6]">The bottom line</p>
-				<h2 className="mt-5 font-serif text-4xl leading-[1.05] tracking-[-0.035em] md:text-5xl">AI employees do not need more stored text. They need the right business context at the moment of a decision.</h2>
+			<section className="border-b border-white/[0.09] bg-[#080808] px-6 py-16 sm:px-10 md:px-[148px] md:py-24">
+				<p className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/28">The bottom line</p>
+				<h2 className="mt-7 max-w-5xl text-[clamp(2.2rem,5vw,5.4rem)] font-normal leading-[0.98] tracking-[-0.05em]">AI employees do not need more stored text. They need the right business context at the moment of a decision.</h2>
 				<div className="mt-9 space-y-6 text-[16px] leading-8 text-[#303036]">
 					<p>An agent that remembers a person’s name is useful. An agent that knows the current budget, active customer promises, prior decisions, permission boundaries, and why a constraint exists can work like a responsible teammate.</p>
 					<p>No memory provider solves that alone. Supermemory, Mem0, Zep, Letta, LangMem, and company-brain tools make different tradeoffs. The right choice depends on your data sources, sensitivity, hosting needs, and whether facts change over time.</p>
@@ -545,7 +537,7 @@ function BriefArticle({ onDeepRead }: { onDeepRead: () => void }) {
 					].map(([label, copy], index) => <div className="border-b border-black/10 p-4 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0" key={label}><span className="font-mono text-[9px] text-black/30">0{index + 1}</span><h3 className="mt-4 text-sm font-semibold">{label}</h3><p className="mt-2 text-[13px] leading-6 text-black/50">{copy}</p></div>)}
 				</div>
 				<div className="mt-10 border-l-2 border-amber-400 bg-amber-50 p-4"><p className="text-[13px] leading-6 text-amber-950"><strong>Important limit:</strong> bad capture rules create noisy memory, while weak permissions create risk. Treat raw transcripts as source material—not durable truth.</p></div>
-				<button className="mt-10 inline-flex h-11 items-center gap-2 bg-[#171714] px-5 text-sm font-medium text-white hover:bg-[#1378e6]" onClick={onDeepRead} type="button">Open the Deep Read <ArrowRight className="size-4" /></button>
+				<button className="mt-10 inline-flex h-11 items-center gap-2 border border-white/20 bg-white px-5 font-mono text-[9px] uppercase tracking-[0.12em] text-black transition-colors hover:bg-transparent hover:text-white" onClick={onDeepRead} type="button">Open the Deep Read <ArrowRight className="size-4" /></button>
 			</section>
 			<MemoryConceptModel />
 		</>
@@ -1085,22 +1077,6 @@ function SignalPill({
 		<div className="inline-flex items-center gap-2 border border-[#101014]/10 bg-white px-3 py-2 text-sm text-[#303036]">
 			<Icon className="h-4 w-4 text-[var(--brand-blue)]" />
 			{label}
-		</div>
-	);
-}
-
-function ArticleSignalArt() {
-	return (
-		<div
-			aria-hidden="true"
-			className="relative h-[260px] overflow-hidden rounded-lg border border-[#101014]/10 bg-white md:h-[360px]"
-		>
-			<div className="absolute inset-0 [background-image:radial-gradient(#101014_0.8px,transparent_0.8px)] [background-size:8px_8px]" />
-			<div className="absolute inset-x-0 top-1/2 h-40 -translate-y-1/2 bg-[radial-gradient(ellipse_at_50%_50%,color-mix(in srgb, var(--brand-blue) 24%, transparent),transparent_62%)] blur-2xl" />
-			<div className="absolute left-1/2 top-[42%] h-52 w-[150%] -translate-x-1/2 -translate-y-1/2 rotate-[8deg] rounded-[50%] bg-white" />
-			<div className="absolute left-1/2 top-[60%] h-44 w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] rounded-[50%] border-t border-[#101014]/35" />
-			<div className="absolute left-1/2 top-[54%] h-36 w-[126%] -translate-x-1/2 -translate-y-1/2 rotate-[6deg] rounded-[50%] border-t border-[#101014]/24" />
-			<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,transparent_0,transparent_54%,rgba(255,255,255,0.76)_86%)]" />
 		</div>
 	);
 }
