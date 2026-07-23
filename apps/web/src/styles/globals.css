@@ -796,3 +796,27 @@ html, body {
 	   on the page navbar. */
 	overflow-x: clip;
 }
+
+/* Signals reader controls deliberately affect prose, not navigation labels. */
+[data-reader-size="small"] .reader-copy p:not(.font-mono),
+[data-reader-size="small"] .reader-copy li {
+	font-size: 14px !important;
+	line-height: 1.72 !important;
+}
+
+[data-reader-size="large"] .reader-copy p:not(.font-mono),
+[data-reader-size="large"] .reader-copy li {
+	font-size: 18px !important;
+	line-height: 1.82 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reader-copy *,
+	.reader-copy *::before,
+	.reader-copy *::after {
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+}

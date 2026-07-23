@@ -21,8 +21,8 @@ export async function getRouter() {
 	let convex: ConvexReactClient;
 
 	if (convexUrl) {
-		convex = new ConvexReactClient(convexUrl);
-		const convexQueryClient = new ConvexQueryClient(convex);
+		convex = new ConvexReactClient(convexUrl, { expectAuth: true });
+		const convexQueryClient = new ConvexQueryClient(convexUrl);
 		queryClient.setDefaultOptions({
 			queries: {
 				queryKeyHashFn: convexQueryClient.hashFn(),

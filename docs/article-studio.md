@@ -1,6 +1,6 @@
 # Signals Writing Studio
 
-> Status: Product decisions accepted on 2026-07-23 — implementation pending.
+> Status: Core V1 implemented on 2026-07-23. Production rollout and the follow-up work listed below are still pending.
 
 ## Product intent
 
@@ -101,9 +101,15 @@ The diagnostic combines the concrete pattern catalogue from `petergyang/no-ai-sl
 
 Unresolved Slop findings do not block publication. They remain visible in the Ready review so the accountable human author can fix or knowingly override them.
 
+## Pangram experiment
+
+The Article canvas also includes a separate `Try Pangram` action. It sends the current Draft to Pangram's V3 API only when an admin explicitly clicks the button and a `PANGRAM_API_KEY` is configured in the Convex environment.
+
+Pangram's response is displayed as a third-party, probabilistic classification with its label, score fractions, and highlighted windows when available. The Studio always says that this result is **not proof of authorship**. It must not block publishing, replace the local style diagnostic, or be presented as a reliable way to decide whether a human wrote the article.
+
 ## References, claims, and privacy
 
-V1 References may be pasted text, webpages, PDFs, or text documents. Images are not imported as article material in V1.
+Core V1 References are pasted text with an optional source URL. Automated webpage, PDF, and document extraction is follow-up work. Images are not imported as article material.
 
 The Writing Coach may flag a claim that lacks support and suggest a citation from imported References. It may not invent a citation or confirm its own suggestion. An admin reviews each source, decides whether it supports the claim, and explicitly accepts the citation.
 
@@ -136,33 +142,43 @@ The Diagram Skill ships in V1 and runs on demand when the Deep Read is nearly fi
 - The existing careers email-and-shared-token check is not valid authorization for the Writing Studio.
 - Every Published revision names a human Author and may name human editors. AI is never the byline.
 - The Ready review covers the Brief, sources, accessibility, writing findings, Concept models, and final human approval. Warnings may be overridden with a recorded reason.
-- An admin may preview, publish immediately, schedule publication, or unpublish. Every publication creates an immutable revision at the stable article URL.
-- Deleting a Draft moves it to Trash for 30 days before permanent deletion.
+- An admin may publish immediately or unpublish. Every publication creates an immutable revision at the stable article URL. Preview and scheduled publication remain follow-up work.
+- Deleting a Draft moves it to Trash. Automatic permanent deletion after 30 days remains follow-up work.
 - The existing Signals article is imported as a Published revision without changing its URL or SEO metadata.
 
 ## Measurement
 
 Public article analytics are privacy-friendly and limited to the signals needed to improve understanding: article completion, Brief/Deep Read switches, and Concept-model interactions. They must not require an account or build an advertising profile.
 
-## Current repository constraints
+## Implemented core
 
-- The current Signals article is a bespoke React route with hardcoded prose, sources, artwork, and an interactive picker.
-- Signals metadata lives in a separate registry that feeds the index, sitemap, `llms.txt`, and structured SEO data.
-- Convex has no article, draft, revision, editorial, or admin-role data model.
-- Better Auth exists, but the Writing Studio has no role-based access gate.
-- No article-specific automated tests exist.
+- Better Auth sign-in with server-enforced `admin` and `owner` access. Owners can grant or revoke Studio access by email.
+- A free-form Draft canvas with browser dictation, autosave, recoverable local unsynced text, saved versions, restore, edit locks, References, Brief and Deep Read modes, and trash/restore.
+- Explicit Writing Coach actions with a deterministic first-pass fallback, a local slop-and-rhythm diagnostic, and the opt-in Pangram experiment.
+- Draft, Ready, Published, and Unpublished states. Publishing snapshots an immutable revision; editing afterward creates a new Draft without mutating the live article.
+- Dynamic public article routes, a public Signals index, Brief-first reading, Deep Read switching, reader preferences, focus mode, reading-position memory, selected-text explanations with caching/rate limiting, and an accessible interactive Concept model.
+- A reusable `.agents/skills/create-article-diagrams` workflow for deciding, storyboarding, implementing, and verifying useful article diagrams.
 
-## Remaining implementation work
+## Configuration
 
-- Define the Convex article, Draft, revision, Reference, citation, review, lock, role, and audit schemas.
-- Choose and verify the approved AI and transcription data-processing configuration.
-- Define server-rendered SEO, sitemap, `llms.txt`, canonical URL, scheduling, and unpublishing behavior.
-- Define safe public explanation limits, caching, abuse controls, and failure messaging.
-- Define input limits, content sanitization, prompt-injection isolation, malware handling, and Reference retention.
-- Define offline autosave reconciliation, edit-lock expiry and takeover, audit events, and restoration behavior.
-- Build the migration and prove that the current article's URL, metadata, and structured data remain stable.
-- Add keyboard, screen-reader, zoom, contrast, motion, focus, recovery, authorization, and publication tests.
-- Update the cookie/privacy disclosures so they match the actual local preferences and analytics implementation.
+The Studio uses these Convex environment variables:
+
+- `WRITING_STUDIO_OWNER_EMAILS` — comma-separated initial owner emails. It defaults to Nairon's owner email when omitted.
+- `SITE_URL` — the trusted website origin used by Better Auth.
+- `BETTER_AUTH_SECRET` — the Better Auth signing secret.
+- `RESEND_API_KEY` — sends the admin account verification email required in production.
+- `WRITING_STUDIO_ALLOW_UNVERIFIED_EMAIL` — local-development escape hatch only. Set it to `true` only on an isolated development deployment without production data.
+- `OPENAI_API_KEY` — optional Writing Coach and public selected-passage explanations. Manual writing and local checks continue when it is absent or unavailable.
+- `PANGRAM_API_KEY` — optional Pangram V3 experiment. The button shows a clear configuration message when it is absent.
+
+## Remaining production work
+
+- Configure and verify approved production providers, secrets, retention terms, and privacy disclosures for OpenAI, Pangram, browser speech recognition, and future source extraction.
+- Add per-article server-rendered metadata, structured data, sitemap and `llms.txt` entries for database-backed Published revisions.
+- Add preview URLs, scheduled publication, audit events, trash expiry, richer citation review, and safe webpage/PDF/document extraction.
+- Extend offline recovery into explicit two-copy conflict reconciliation and add lock takeover/administrator recovery.
+- Add privacy-friendly completion and reader-control analytics without advertising profiles.
+- Expand automated authorization, publication, recovery, keyboard, screen-reader, zoom, contrast, and reduced-motion coverage before production release.
 
 ## Design and research sources
 

@@ -32,8 +32,14 @@
     "typescript": "catalog:"
   },
   "packageManager": "bun@1.2.0",
+  "overrides": {
+    "convex": "1.31.7",
+    "vite": "7.3.1"
+  },
   "dependencies": {
+    "@convex-dev/better-auth": "0.10.10",
     "@convex-dev/resend": "0.2.3",
+    "better-auth": "1.4.9",
     "resend": "6.9.3"
   }
 }

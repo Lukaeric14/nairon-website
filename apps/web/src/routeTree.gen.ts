@@ -27,10 +27,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SignalsIndexRouteImport } from './routes/signals.index'
 import { Route as SolutionsSlugRouteImport } from './routes/solutions.$slug'
 import { Route as SignalsSolvingTheAgentMemoryProblemRouteImport } from './routes/signals/solving-the-agent-memory-problem'
+import { Route as SignalsSlugRouteImport } from './routes/signals.$slug'
 import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
 import { Route as CareersSlugRouteImport } from './routes/careers_.$slug'
 import { Route as ApiJobApplicationRouteImport } from './routes/api.job-application'
 import { Route as ApiCareerApplicationsRouteImport } from './routes/api.career-applications'
+import { Route as AdminSignalsRouteImport } from './routes/admin.signals'
 import { Route as AdminCareersRouteImport } from './routes/admin.careers'
 
 const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
@@ -124,6 +126,11 @@ const SignalsSolvingTheAgentMemoryProblemRoute =
     path: '/signals/solving-the-agent-memory-problem',
     getParentRoute: () => rootRouteImport,
   } as any)
+const SignalsSlugRoute = SignalsSlugRouteImport.update({
+  id: '/signals/$slug',
+  path: '/signals/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
   id: '/industries/$slug',
   path: '/industries/$slug',
@@ -142,6 +149,11 @@ const ApiJobApplicationRoute = ApiJobApplicationRouteImport.update({
 const ApiCareerApplicationsRoute = ApiCareerApplicationsRouteImport.update({
   id: '/api/career-applications',
   path: '/api/career-applications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSignalsRoute = AdminSignalsRouteImport.update({
+  id: '/admin/signals',
+  path: '/admin/signals',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminCareersRoute = AdminCareersRouteImport.update({
@@ -167,10 +179,12 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/admin/careers': typeof AdminCareersRoute
+  '/admin/signals': typeof AdminSignalsRoute
   '/api/career-applications': typeof ApiCareerApplicationsRoute
   '/api/job-application': typeof ApiJobApplicationRoute
   '/careers/$slug': typeof CareersSlugRoute
   '/industries/$slug': typeof IndustriesSlugRoute
+  '/signals/$slug': typeof SignalsSlugRoute
   '/signals/solving-the-agent-memory-problem': typeof SignalsSolvingTheAgentMemoryProblemRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/signals/': typeof SignalsIndexRoute
@@ -192,10 +206,12 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/admin/careers': typeof AdminCareersRoute
+  '/admin/signals': typeof AdminSignalsRoute
   '/api/career-applications': typeof ApiCareerApplicationsRoute
   '/api/job-application': typeof ApiJobApplicationRoute
   '/careers/$slug': typeof CareersSlugRoute
   '/industries/$slug': typeof IndustriesSlugRoute
+  '/signals/$slug': typeof SignalsSlugRoute
   '/signals/solving-the-agent-memory-problem': typeof SignalsSolvingTheAgentMemoryProblemRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/signals': typeof SignalsIndexRoute
@@ -218,10 +234,12 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/admin/careers': typeof AdminCareersRoute
+  '/admin/signals': typeof AdminSignalsRoute
   '/api/career-applications': typeof ApiCareerApplicationsRoute
   '/api/job-application': typeof ApiJobApplicationRoute
   '/careers_/$slug': typeof CareersSlugRoute
   '/industries/$slug': typeof IndustriesSlugRoute
+  '/signals/$slug': typeof SignalsSlugRoute
   '/signals/solving-the-agent-memory-problem': typeof SignalsSolvingTheAgentMemoryProblemRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/signals/': typeof SignalsIndexRoute
@@ -245,10 +263,12 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/admin/careers'
+    | '/admin/signals'
     | '/api/career-applications'
     | '/api/job-application'
     | '/careers/$slug'
     | '/industries/$slug'
+    | '/signals/$slug'
     | '/signals/solving-the-agent-memory-problem'
     | '/solutions/$slug'
     | '/signals/'
@@ -270,10 +290,12 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/admin/careers'
+    | '/admin/signals'
     | '/api/career-applications'
     | '/api/job-application'
     | '/careers/$slug'
     | '/industries/$slug'
+    | '/signals/$slug'
     | '/signals/solving-the-agent-memory-problem'
     | '/solutions/$slug'
     | '/signals'
@@ -295,10 +317,12 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms-and-conditions'
     | '/admin/careers'
+    | '/admin/signals'
     | '/api/career-applications'
     | '/api/job-application'
     | '/careers_/$slug'
     | '/industries/$slug'
+    | '/signals/$slug'
     | '/signals/solving-the-agent-memory-problem'
     | '/solutions/$slug'
     | '/signals/'
@@ -321,10 +345,12 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   AdminCareersRoute: typeof AdminCareersRoute
+  AdminSignalsRoute: typeof AdminSignalsRoute
   ApiCareerApplicationsRoute: typeof ApiCareerApplicationsRoute
   ApiJobApplicationRoute: typeof ApiJobApplicationRoute
   CareersSlugRoute: typeof CareersSlugRoute
   IndustriesSlugRoute: typeof IndustriesSlugRoute
+  SignalsSlugRoute: typeof SignalsSlugRoute
   SignalsSolvingTheAgentMemoryProblemRoute: typeof SignalsSolvingTheAgentMemoryProblemRoute
   SolutionsSlugRoute: typeof SolutionsSlugRoute
   SignalsIndexRoute: typeof SignalsIndexRoute
@@ -458,6 +484,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignalsSolvingTheAgentMemoryProblemRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/signals/$slug': {
+      id: '/signals/$slug'
+      path: '/signals/$slug'
+      fullPath: '/signals/$slug'
+      preLoaderRoute: typeof SignalsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/industries/$slug': {
       id: '/industries/$slug'
       path: '/industries/$slug'
@@ -484,6 +517,13 @@ declare module '@tanstack/react-router' {
       path: '/api/career-applications'
       fullPath: '/api/career-applications'
       preLoaderRoute: typeof ApiCareerApplicationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/signals': {
+      id: '/admin/signals'
+      path: '/admin/signals'
+      fullPath: '/admin/signals'
+      preLoaderRoute: typeof AdminSignalsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/careers': {
@@ -513,10 +553,12 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   AdminCareersRoute: AdminCareersRoute,
+  AdminSignalsRoute: AdminSignalsRoute,
   ApiCareerApplicationsRoute: ApiCareerApplicationsRoute,
   ApiJobApplicationRoute: ApiJobApplicationRoute,
   CareersSlugRoute: CareersSlugRoute,
   IndustriesSlugRoute: IndustriesSlugRoute,
+  SignalsSlugRoute: SignalsSlugRoute,
   SignalsSolvingTheAgentMemoryProblemRoute:
     SignalsSolvingTheAgentMemoryProblemRoute,
   SolutionsSlugRoute: SolutionsSlugRoute,

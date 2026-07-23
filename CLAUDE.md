@@ -60,7 +60,12 @@ If the frontend ever boots with a placeholder Convex URL, treat that as a setup 
 - `BRIGHTDATA_API_KEY` — Primary Zillow data source for the property PDF generator
 - `BRIGHTDATA_DATASET_ID` — Optional Bright Data dataset override; defaults to the Zillow dataset in code
 - `FIRECRAWL_API_KEY` — Optional fallback HTML scraper for Zillow when Bright Data is unavailable
-- `OPENAI_API_KEY` — Neighborhood description generation
+- `OPENAI_API_KEY` — Neighborhood copy plus optional Signals Writing Coach and reader explanations
+- `PANGRAM_API_KEY` — Optional Pangram V3 AI-detection experiment in the Signals Writing Studio
+- `WRITING_STUDIO_OWNER_EMAILS` — Comma-separated initial Writing Studio owner emails
+- `SITE_URL` — Trusted Better Auth website origin
+- `BETTER_AUTH_SECRET` — Better Auth signing secret
+- `WRITING_STUDIO_ALLOW_UNVERIFIED_EMAIL` — Local-only bypass for admin email verification; never enable in production
 - `FAL_KEY` — Listing image classification
 - `SLACK_WEBHOOK_URL` — Optional Slack notification when a PDF job completes
 

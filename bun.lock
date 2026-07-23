@@ -1,11 +1,12 @@
 {
   "lockfileVersion": 1,
-  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "nairon-website",
       "dependencies": {
+        "@convex-dev/better-auth": "0.10.10",
         "@convex-dev/resend": "0.2.3",
+        "better-auth": "1.4.9",
         "resend": "6.9.3",
       },
       "devDependencies": {
@@ -116,6 +117,10 @@
         "typescript": "catalog:",
       },
     },
+  },
+  "overrides": {
+    "convex": "1.31.7",
+    "vite": "7.3.1",
   },
   "catalog": {
     "@types/react": "19.2.11",

@@ -49,6 +49,106 @@ export default defineSchema({
 		updatedAt: v.optional(v.number()),
 	}).index("by_identifier", ["identifier"]),
 
+	// Signals Writing Studio authorization. Better Auth owns identities;
+	// this table owns the small set of people allowed into the Studio.
+	writingAdmins: defineTable({
+		email: v.string(),
+		authUserId: v.optional(v.string()),
+		role: v.union(v.literal("owner"), v.literal("admin")),
+		grantedBy: v.string(),
+		createdAt: v.number(),
+		updatedAt: v.number(),
+	})
+		.index("by_email", ["email"])
+		.index("by_auth_user", ["authUserId"]),
+
+	signalArticles: defineTable({
+		title: v.string(),
+		slug: v.string(),
+		deepRead: v.string(),
+		brief: v.string(),
+		briefStale: v.boolean(),
+		status: v.union(
+			v.literal("draft"),
+			v.literal("ready"),
+			v.literal("published"),
+			v.literal("trashed"),
+		),
+		statusBeforeTrash: v.optional(
+			v.union(v.literal("draft"), v.literal("ready"), v.literal("published")),
+		),
+		authorName: v.string(),
+		authorEmail: v.string(),
+		authorAuthId: v.string(),
+		createdAt: v.number(),
+		updatedAt: v.number(),
+		publishedAt: v.optional(v.number()),
+		trashedAt: v.optional(v.number()),
+	})
+		.index("by_slug", ["slug"])
+		.index("by_status_updated", ["status", "updatedAt"]),
+
+	signalArticleReferences: defineTable({
+		articleId: v.id("signalArticles"),
+		kind: v.union(v.literal("text"), v.literal("url"), v.literal("document")),
+		title: v.string(),
+		content: v.string(),
+		sourceUrl: v.optional(v.string()),
+		createdBy: v.string(),
+		createdAt: v.number(),
+		updatedAt: v.number(),
+	}).index("by_article_updated", ["articleId", "updatedAt"]),
+
+	signalArticleVersions: defineTable({
+		articleId: v.id("signalArticles"),
+		title: v.string(),
+		slug: v.string(),
+		deepRead: v.string(),
+		brief: v.string(),
+		savedBy: v.string(),
+		savedAt: v.number(),
+		source: v.union(v.literal("autosave"), v.literal("restore")),
+	}).index("by_article_saved", ["articleId", "savedAt"]),
+
+	signalArticleRevisions: defineTable({
+		articleId: v.id("signalArticles"),
+		revision: v.number(),
+		title: v.string(),
+		slug: v.string(),
+		deepRead: v.string(),
+		brief: v.string(),
+		authorName: v.string(),
+		authorEmail: v.string(),
+		publishedBy: v.string(),
+		publishedAt: v.number(),
+		unpublishedAt: v.optional(v.number()),
+	})
+		.index("by_article_revision", ["articleId", "revision"])
+		.index("by_slug_published", ["slug", "publishedAt"]),
+
+	signalArticleLocks: defineTable({
+		articleId: v.id("signalArticles"),
+		authUserId: v.string(),
+		editorEmail: v.string(),
+		editorName: v.string(),
+		expiresAt: v.number(),
+		updatedAt: v.number(),
+	}).index("by_article", ["articleId"]),
+
+	signalReaderExplanations: defineTable({
+		cacheKey: v.string(),
+		slug: v.string(),
+		style: v.union(v.literal("simple"), v.literal("example"), v.literal("deeper")),
+		answer: v.string(),
+		createdAt: v.number(),
+	}).index("by_cache_key", ["cacheKey"]),
+
+	signalReaderRateLimits: defineTable({
+		visitorId: v.string(),
+		windowStartedAt: v.number(),
+		count: v.number(),
+	}).index("by_visitor", ["visitorId"]),
+
 	// Example table
 	tasks: defineTable({
 		text: v.string(),

@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useQuery } from "convex/react";
+import { api } from "@convex/_generated/api";
 import {
 	ArrowRight,
 	ArrowUpRight,
@@ -138,17 +140,50 @@ export const Route = createFileRoute("/signals/")({
 
 function SignalsPage() {
 	useCalInit();
+	const studioArticles = useQuery(api.articles.listPublished);
 	return (
 		<div className="font-geist min-h-screen bg-[#F7F7F8] text-[#101014]">
 			<Navbar />
 			<main className="mx-auto max-w-[980px] border-x border-[#101014]/10 pt-24 pb-24">
 				<PageTitle />
 				<FeaturedGrid />
+				<PublishedStudioArticles articles={studioArticles ?? []} />
 				<ArticleGrid />
 				<HiveWaitlistSection />
 			</main>
 			<Footer />
 		</div>
+	);
+}
+
+function PublishedStudioArticles({
+	articles,
+}: {
+	articles: Array<{
+		_id: string;
+		slug: string;
+		title: string;
+		brief: string;
+		authorName: string;
+		publishedAt: number;
+	}>;
+}) {
+	const visible = articles.filter((item) => item.slug !== latest.slug);
+	if (!visible.length) return null;
+	return (
+		<section className="border-b border-[#101014]/10 bg-white px-8 py-12 md:px-10">
+			<div className="flex items-end justify-between gap-6"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--brand-blue)]">New Signals</p><h2 className="mt-3 font-serif text-4xl tracking-[-0.035em]">Recently published</h2></div></div>
+			<div className="mt-8 grid border border-[#101014]/10 md:grid-cols-2">
+				{visible.map((item) => (
+					<a className="group border-b border-[#101014]/10 p-5 last:border-b-0 hover:bg-[#F7F7F8] md:border-r md:border-b-0 md:last:border-r-0" href={`/signals/${item.slug}`} key={item._id}>
+						<div className="flex items-center justify-between gap-4 text-[10px] text-[#606069]"><span>{item.authorName}</span><time dateTime={new Date(item.publishedAt).toISOString()}>{new Intl.DateTimeFormat("en", { dateStyle: "medium" }).format(item.publishedAt)}</time></div>
+						<h3 className="mt-6 text-2xl font-medium leading-tight tracking-[-0.025em] group-hover:text-[var(--brand-blue)]">{item.title}</h3>
+						<p className="mt-3 line-clamp-3 text-sm leading-6 text-[#5F6068]">{item.brief}</p>
+						<span className="mt-6 inline-flex items-center gap-2 text-xs font-medium">Read Brief <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" /></span>
+					</a>
+				))}
+			</div>
+		</section>
 	);
 }
 

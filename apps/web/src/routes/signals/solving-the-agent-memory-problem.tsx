@@ -14,7 +14,7 @@ import {
 	ShieldCheck,
 	Sparkles,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Navbar } from "@/components/landing-v2/hero";
 import { Footer } from "@/components/landing-v2/footer";
 import { useCalInit } from "@/components/landing-v2/cal";
@@ -31,6 +31,14 @@ import { DISCOVERY_CALL_URL } from "@/lib/links";
 import { articleHead } from "@/lib/seo";
 import { getArticle } from "@/content/signals";
 import { cn } from "@/lib/utils";
+import {
+	ArticleReaderToolbar,
+	type ReaderMode,
+	type ReaderSize,
+	type ReaderWidth,
+} from "@/components/signals/article-reader-toolbar";
+import { MemoryConceptModel } from "@/components/signals/memory-concept-model";
+import { SelectionExplainer } from "@/components/signals/selection-explainer";
 
 // Canonical metadata lives in the registry (content/signals.ts) so the
 // sitemap, llms.txt, Signals index, and this page can never disagree.
@@ -417,25 +425,68 @@ function scoreProviders(state: ToolState) {
 
 function AgentMemoryArticlePage() {
 	useCalInit();
+	const [mode, setMode] = useState<ReaderMode>("brief");
+	const [focus, setFocus] = useState(false);
+	const [size, setSize] = useState<ReaderSize>("medium");
+	const [width, setWidth] = useState<ReaderWidth>("comfortable");
+	const restored = useRef(false);
+
+	useEffect(() => {
+		const savedMode = window.localStorage.getItem("signals:reader-mode");
+		const savedSize = window.localStorage.getItem("signals:reader-size");
+		const savedWidth = window.localStorage.getItem("signals:reader-width");
+		if (savedMode === "brief" || savedMode === "deep") setMode(savedMode);
+		if (savedSize === "small" || savedSize === "medium" || savedSize === "large") setSize(savedSize);
+		if (savedWidth === "narrow" || savedWidth === "comfortable" || savedWidth === "wide") setWidth(savedWidth);
+		const position = Number(window.localStorage.getItem(`signals:position:${article.slug}`));
+		window.setTimeout(() => {
+			if (position > 0) window.scrollTo({ top: position });
+			restored.current = true;
+		}, 80);
+	}, []);
+
+	useEffect(() => {
+		window.localStorage.setItem("signals:reader-mode", mode);
+		window.localStorage.setItem("signals:reader-size", size);
+		window.localStorage.setItem("signals:reader-width", width);
+		function rememberPosition() {
+			if (restored.current) window.localStorage.setItem(`signals:position:${article.slug}`, String(Math.round(window.scrollY)));
+		}
+		window.addEventListener("scroll", rememberPosition, { passive: true });
+		return () => window.removeEventListener("scroll", rememberPosition);
+	}, [mode, size, width]);
+
+	const widthClass = width === "narrow" ? "max-w-[780px]" : width === "wide" ? "max-w-[1180px]" : "max-w-[980px]";
 	return (
-		<div className="min-h-screen bg-[#F7F7F8] font-geist text-[#101014]">
-			<Navbar />
-			<article className="mx-auto max-w-[980px] border-x border-[#101014]/10 pt-24">
-				<Hero />
-				<ProblemSection />
-				<LandscapeSection />
-				<ProviderSection />
-				<HiveSection />
-				<DecisionTool />
-				<ArticleCTA />
-				<SourcesSection />
+		<div className={`min-h-screen font-geist text-[#101014] ${focus ? "bg-[#e9e6df]" : "bg-[#F7F7F8]"}`} data-reader-size={size}>
+			{focus ? null : <Navbar />}
+			<div>
+				<ArticleReaderToolbar mode={mode} onModeChange={setMode} focus={focus} onFocusChange={setFocus} size={size} onSizeChange={setSize} width={width} onWidthChange={setWidth} />
+			</div>
+			<article className={`reader-copy mx-auto border-x border-[#101014]/10 transition-[max-width] ${widthClass}`}>
+				<Hero compact={mode === "brief"} />
+				{mode === "brief" ? (
+					<BriefArticle onDeepRead={() => setMode("deep")} />
+				) : (
+					<>
+						<ProblemSection />
+						<MemoryConceptModel />
+						<LandscapeSection />
+						<ProviderSection />
+						<HiveSection />
+						<DecisionTool />
+						<ArticleCTA />
+						<SourcesSection />
+					</>
+				)}
 			</article>
-			<Footer />
+			<SelectionExplainer slug={article.slug} />
+			{focus ? null : <Footer />}
 		</div>
 	);
 }
 
-function Hero() {
+function Hero({ compact = false }: { compact?: boolean }) {
 	return (
 		<header className="relative overflow-hidden border-b border-[#101014]/10">
 			<div className="absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(16,16,20,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(16,16,20,0.045)_1px,transparent_1px)] [background-size:76px_76px]" />
@@ -471,10 +522,33 @@ function Hero() {
 				</div>
 				<span className="mt-3 md:mt-0">Apr 30, 2026</span>
 			</div>
-			<div className="relative border-t border-[#101014]/10 px-8 py-10 md:px-[148px]">
-				<ArticleSignalArt />
-			</div>
+			{compact ? null : <div className="relative border-t border-[#101014]/10 px-8 py-10 md:px-[148px]"><ArticleSignalArt /></div>}
 		</header>
+	);
+}
+
+function BriefArticle({ onDeepRead }: { onDeepRead: () => void }) {
+	return (
+		<>
+			<section className="border-b border-[#101014]/10 bg-[#fbfaf7] px-8 py-12 md:px-[148px] md:py-16">
+				<p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#1378e6]">The bottom line</p>
+				<h2 className="mt-5 font-serif text-4xl leading-[1.05] tracking-[-0.035em] md:text-5xl">AI employees do not need more stored text. They need the right business context at the moment of a decision.</h2>
+				<div className="mt-9 space-y-6 text-[16px] leading-8 text-[#303036]">
+					<p>An agent that remembers a person’s name is useful. An agent that knows the current budget, active customer promises, prior decisions, permission boundaries, and why a constraint exists can work like a responsible teammate.</p>
+					<p>No memory provider solves that alone. Supermemory, Mem0, Zep, Letta, LangMem, and company-brain tools make different tradeoffs. The right choice depends on your data sources, sensitivity, hosting needs, and whether facts change over time.</p>
+				</div>
+				<div className="mt-10 grid border border-black/10 bg-white sm:grid-cols-3">
+					{[
+						["Start", "Test a managed layer against your own documents and transcripts."],
+						["Protect", "Every memory needs a source, permission boundary, and freshness rule."],
+						["Design for change", "Keep Hive provider-aware so one vendor does not define the product."],
+					].map(([label, copy], index) => <div className="border-b border-black/10 p-4 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0" key={label}><span className="font-mono text-[9px] text-black/30">0{index + 1}</span><h3 className="mt-4 text-sm font-semibold">{label}</h3><p className="mt-2 text-[13px] leading-6 text-black/50">{copy}</p></div>)}
+				</div>
+				<div className="mt-10 border-l-2 border-amber-400 bg-amber-50 p-4"><p className="text-[13px] leading-6 text-amber-950"><strong>Important limit:</strong> bad capture rules create noisy memory, while weak permissions create risk. Treat raw transcripts as source material—not durable truth.</p></div>
+				<button className="mt-10 inline-flex h-11 items-center gap-2 bg-[#171714] px-5 text-sm font-medium text-white hover:bg-[#1378e6]" onClick={onDeepRead} type="button">Open the Deep Read <ArrowRight className="size-4" /></button>
+			</section>
+			<MemoryConceptModel />
+		</>
 	);
 }
 

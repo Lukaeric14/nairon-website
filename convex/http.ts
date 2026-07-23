@@ -2,8 +2,11 @@ import { httpRouter } from "convex/server";
 import { httpAction } from "./_generated/server";
 import { healthCheck } from "./healthCheck";
 import { internal } from "./_generated/api";
+import { authComponent, createAuth } from "./auth";
 
 const http = httpRouter();
+
+authComponent.registerRoutes(http, createAuth, { cors: true });
 
 http.route({
 	path: "/health",

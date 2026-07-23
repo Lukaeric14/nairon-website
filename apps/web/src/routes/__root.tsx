@@ -7,12 +7,13 @@ import {
 } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
 import type { ConvexReactClient } from "convex/react";
-import { ConvexProvider } from "convex/react";
+import { ConvexBetterAuthProvider } from "@convex-dev/better-auth/react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ViewModeProvider } from "@/contexts/view-mode-context";
 import { Toaster } from "sonner";
 import { organizationJsonLd, websiteJsonLd, serviceJsonLd } from "@/lib/seo";
 import "@/styles/globals.css";
+import { authClient } from "@/lib/auth-client";
 
 const SmoothScroll = lazy(() =>
 	import("@/components/smooth-scroll").then((m) => ({
@@ -185,7 +186,7 @@ function RootComponent() {
 				>
 					Skip to content
 				</a>
-				<ConvexProvider client={convex}>
+				<ConvexBetterAuthProvider client={convex} authClient={authClient}>
 					<ThemeProvider
 						attribute="class"
 						defaultTheme="light"
@@ -217,7 +218,7 @@ function RootComponent() {
 						</ViewModeProvider>
 						<Toaster />
 					</ThemeProvider>
-				</ConvexProvider>
+				</ConvexBetterAuthProvider>
 				{shouldLoadMetaPixel ? (
 					<noscript>
 						<img
