@@ -575,32 +575,32 @@ export function WritingStudio() {
 	}
 
 	return (
-		<main id="main-content" className="writing-studio-dark flex h-dvh min-h-[620px] flex-col overflow-hidden bg-[#050505] font-geist text-white">
-			<header className="flex h-14 shrink-0 items-center border-b border-white/[0.09] bg-[#080808] px-3 sm:px-4">
-				<button className="mr-1 inline-flex h-8 items-center gap-2 px-2 text-white/42 transition-colors hover:bg-white/5 hover:text-white" onClick={() => setLeftOpen(true)} type="button" aria-label="Open drafts">
+		<main id="main-content" className="writing-studio-shell flex h-dvh min-h-[620px] flex-col overflow-hidden bg-ds-shell font-geist text-ds-text-primary">
+			<header className="flex h-14 shrink-0 items-center border-b border-ds-border bg-ds-surface px-3 sm:px-4">
+				<button className="mr-1 inline-flex h-8 items-center gap-2 px-2 text-ds-text-secondary transition-colors hover:bg-ds-surface-hover hover:text-ds-text-primary" onClick={() => setLeftOpen(true)} type="button" aria-label="Open drafts">
 					<PanelLeft className="size-4" />
 					<span className="hidden font-mono text-[8px] uppercase tracking-[0.14em] sm:inline">Drafts</span>
 				</button>
-				<span className="mx-2 hidden h-4 w-px bg-white/10 sm:block" />
-				<a href="/" className="hidden text-[15px] font-semibold tracking-[-0.06em] text-white sm:block">n.</a>
-				<span className="mx-2 hidden h-4 w-px bg-white/10 sm:block" />
-				<span className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/28">Writing room</span>
+				<span className="mx-2 hidden h-4 w-px bg-ds-border sm:block" />
+				<a href="/" className="hidden text-[15px] font-semibold tracking-[-0.06em] text-ds-text-primary sm:block">n.</a>
+				<span className="mx-2 hidden h-4 w-px bg-ds-border sm:block" />
+				<span className="font-mono text-[8px] uppercase tracking-[0.14em] text-ds-text-tertiary">Writing room</span>
 				<div className="ml-auto flex items-center gap-1 sm:gap-2">
-					<span className="hidden items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.1em] text-white/28 sm:flex">
+					<span className="hidden items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.1em] text-ds-text-tertiary sm:flex">
 						{saving ? <Loader2 className="size-3 animate-spin" /> : <span className={`size-1.5 rounded-full ${dirty ? "bg-amber-400" : "bg-emerald-500"}`} />}
 						{saving ? "Saving" : dirty ? "Unsaved" : savedAt ? `Saved ${formatTime(savedAt)}` : "Saved"}
 					</span>
-					<button className="p-2 text-white/38 hover:bg-white/5 hover:text-white" onClick={() => void saveNow()} type="button" aria-label="Save draft">
+					<button className="p-2 text-ds-text-secondary hover:bg-ds-surface-hover hover:text-ds-text-primary" onClick={() => void saveNow()} type="button" aria-label="Save draft">
 						<Save className="size-4" />
 					</button>
-					<button className="inline-flex h-8 items-center gap-2 px-2 text-white/42 transition-colors hover:bg-white/5 hover:text-white" onClick={() => setRightOpen(true)} type="button" aria-label="Open writing tools">
+					<button className="inline-flex h-8 items-center gap-2 px-2 text-ds-text-secondary transition-colors hover:bg-ds-surface-hover hover:text-ds-text-primary" onClick={() => setRightOpen(true)} type="button" aria-label="Open writing tools">
 						<span className="hidden font-mono text-[8px] uppercase tracking-[0.14em] sm:inline">Tools</span>
 						<PanelRight className="size-4" />
 					</button>
 					{detail?.liveRevision ? <span className="hidden border border-emerald-200 bg-emerald-50 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-emerald-700 sm:inline">Live v{detail.liveRevision.revision}</span> : null}
 					{detail ? (
 						<div className="relative group">
-							<button className="flex h-8 items-center gap-2 border border-white/15 bg-[#101010] px-3 text-xs font-medium text-white/70 hover:border-white/30" type="button">
+							<button className="flex h-8 items-center gap-2 border border-ds-border bg-ds-surface-raised px-3 text-xs font-medium text-ds-text-secondary hover:border-ds-text-tertiary hover:text-ds-text-primary" type="button">
 								<StatusPill status={detail.article.status} /> <ChevronDown className="size-3" />
 							</button>
 							<div className="invisible absolute right-0 top-full z-50 mt-1 w-44 border border-black/10 bg-white p-1 opacity-0 shadow-xl transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
@@ -616,18 +616,18 @@ export function WritingStudio() {
 			</header>
 
 			<div className="flex min-h-0 flex-1">
-				<aside className={`${leftOpen ? "fixed inset-y-0 left-0 z-50 flex w-[min(330px,92vw)]" : "hidden"} shrink-0 flex-col border-r border-white/[0.1] bg-[#0a0a0a] shadow-[24px_0_80px_rgba(0,0,0,.45)]`}>
-					<div className="flex h-14 items-center border-b border-black/10 px-4">
-						<span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-black/45">Drafts</span>
-						<button className="ml-auto p-2 text-black/45 hover:bg-black/5" onClick={() => void createNew()} type="button" aria-label="New article">
+				<aside className={`${leftOpen ? "fixed inset-y-0 left-0 z-50 flex w-[min(330px,92vw)]" : "hidden"} shrink-0 flex-col border-r border-ds-border bg-ds-surface text-ds-text-primary shadow-[24px_0_80px_rgba(20,23,31,.14)]`}>
+					<div className="flex h-14 items-center border-b border-ds-border px-4">
+						<span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ds-text-secondary">Drafts</span>
+						<button className="ml-auto p-2 text-ds-text-secondary hover:bg-ds-surface-hover hover:text-ds-text-primary" onClick={() => void createNew()} type="button" aria-label="New article">
 							{creating ? <Loader2 className="size-4 animate-spin" /> : <Plus className="size-4" />}
 						</button>
-						<button className="p-2 text-white/40 hover:text-white" onClick={() => setLeftOpen(false)} type="button" aria-label="Close drafts"><X className="size-4" /></button>
+						<button className="p-2 text-ds-text-secondary hover:bg-ds-surface-hover hover:text-ds-text-primary" onClick={() => setLeftOpen(false)} type="button" aria-label="Close drafts"><X className="size-4" /></button>
 					</div>
 					<div className="min-h-0 flex-1 overflow-y-auto p-2">
 						{articles?.map((article) => (
 							<button
-								className={`mb-1 w-full border px-3 py-3 text-left transition ${selectedId === article._id ? "border-black/10 bg-[#fbfaf7] shadow-sm" : "border-transparent hover:bg-black/[0.035]"}`}
+								className={`mb-1 w-full border px-3 py-3 text-left transition ${selectedId === article._id ? "border-ds-border bg-[#F7F5F0]" : "border-transparent hover:bg-ds-surface-hover"}`}
 								key={article._id}
 								onClick={() => { hydratedId.current = null; setSelectedId(article._id); setLeftOpen(false); }}
 								type="button"
@@ -635,51 +635,51 @@ export function WritingStudio() {
 								<div className="line-clamp-2 text-[13px] font-medium leading-5">{article.title}</div>
 								<div className="mt-2 flex items-center justify-between gap-2">
 									<StatusPill status={article.status} />
-									<span className="text-[10px] text-black/35">{formatTime(article.updatedAt)}</span>
+									<span className="text-[10px] text-ds-text-tertiary">{formatTime(article.updatedAt)}</span>
 								</div>
 							</button>
 						))}
-						{articles?.length === 0 ? <p className="px-3 py-8 text-xs leading-5 text-black/40">No Drafts yet. Start with whatever is in your head.</p> : null}
+						{articles?.length === 0 ? <p className="px-3 py-8 text-xs leading-5 text-ds-text-secondary">No Drafts yet. Start with whatever is in your head.</p> : null}
 					</div>
-					<div className="border-t border-black/10 p-3">
-						<button className="w-full px-2 py-2 text-left text-[11px] text-black/40 hover:bg-black/5" onClick={() => void authClient.signOut()} type="button">{access.email} · Sign out</button>
+					<div className="border-t border-ds-border p-3">
+						<button className="w-full px-2 py-2 text-left text-[11px] text-ds-text-secondary hover:bg-ds-surface-hover hover:text-ds-text-primary" onClick={() => void authClient.signOut()} type="button">{access.email} · Sign out</button>
 					</div>
 				</aside>
-				{leftOpen ? <button className="fixed inset-0 z-40 bg-black/70 backdrop-blur-[2px]" onClick={() => setLeftOpen(false)} type="button" aria-label="Close drafts overlay" /> : null}
+				{leftOpen ? <button className="fixed inset-0 z-40 bg-[#14171F]/25 backdrop-blur-[2px]" onClick={() => setLeftOpen(false)} type="button" aria-label="Close drafts overlay" /> : null}
 
 				{!detail ? <EmptyStudio onCreate={() => void createNew()} creating={creating} /> : (
-					<section className="min-w-0 flex-1 overflow-y-auto bg-[#080808]">
-						<div className="mx-auto flex min-h-full max-w-[980px] flex-col px-5 pb-32 pt-12 sm:px-12 lg:px-20 lg:pt-20">
+					<section className="min-w-0 flex-1 overflow-y-auto bg-ds-surface">
+						<div className="mx-auto flex min-h-full max-w-[900px] flex-col px-5 pb-32 pt-12 sm:px-12 lg:px-20 lg:pt-20">
 							{lockedBy ? <div className="mb-5 border border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-900"><strong>{lockedBy}</strong> is editing this Draft. This canvas is read-only until their lock expires.</div> : null}
 							{recovery ? <div className="mb-5 flex flex-col gap-3 border border-blue-200 bg-blue-50 p-3 text-xs leading-5 text-blue-900 sm:flex-row sm:items-center"><span className="flex-1">Unsynced browser edits from {formatTime(recovery.savedAt)} are available.</span><div className="flex gap-2"><button className="bg-[#1378e6] px-3 py-1.5 font-medium text-white" onClick={useRecovery} type="button">Recover them</button><button className="px-3 py-1.5 font-medium" onClick={discardRecovery} type="button">Discard</button></div></div> : null}
-							<div className="flex flex-wrap items-center gap-3 border-b border-white/[0.09] pb-5">
-								<div className="flex border border-white/10">
-									<button className={`px-3 py-2 font-mono text-[8px] uppercase tracking-[0.12em] ${mode === "deep" ? "bg-white text-black" : "text-white/32 hover:text-white"}`} onClick={() => setMode("deep")} type="button">Deep Read</button>
-									<button className={`border-l border-white/10 px-3 py-2 font-mono text-[8px] uppercase tracking-[0.12em] ${mode === "brief" ? "bg-white text-black" : "text-white/32 hover:text-white"}`} onClick={() => setMode("brief")} type="button">Brief</button>
+							<div className="flex flex-wrap items-center gap-3 border-b border-ds-border pb-5">
+								<div className="flex border border-ds-border bg-ds-surface-raised">
+									<button className={`px-3 py-2 font-mono text-[8px] uppercase tracking-[0.12em] ${mode === "deep" ? "bg-ds-text-primary text-white" : "text-ds-text-secondary hover:bg-ds-surface-hover hover:text-ds-text-primary"}`} onClick={() => setMode("deep")} type="button">Deep Read</button>
+									<button className={`border-l border-ds-border px-3 py-2 font-mono text-[8px] uppercase tracking-[0.12em] ${mode === "brief" ? "bg-ds-text-primary text-white" : "text-ds-text-secondary hover:bg-ds-surface-hover hover:text-ds-text-primary"}`} onClick={() => setMode("brief")} type="button">Brief</button>
 								</div>
 								{detail.article.briefStale && mode === "brief" ? <div className="flex items-center gap-2"><span className="text-[11px] text-amber-700">Brief needs review</span><button className="border border-amber-200 bg-amber-50 px-2 py-1 text-[10px] font-medium text-amber-800" onClick={async () => { if (!selectedId) return; await approveBrief({ articleId: selectedId }); toast.success("Brief approved."); }} type="button">Approve current Brief</button></div> : null}
-								<div className="ml-auto flex items-center gap-1 font-mono text-[8px] uppercase tracking-[0.1em] text-white/24">
+								<div className="ml-auto flex items-center gap-1 font-mono text-[8px] uppercase tracking-[0.1em] text-ds-text-tertiary">
 									<span>{stats.wordCount.toLocaleString()} words</span><span>·</span><span>{stats.readingMinutes} min</span>
 								</div>
 							</div>
 							<textarea
 								aria-label="Article title"
-								className="mt-12 w-full resize-none overflow-hidden bg-transparent text-[clamp(2.8rem,7vw,6rem)] font-normal leading-[0.92] tracking-[-0.06em] text-white outline-none [field-sizing:content] placeholder:text-white/12"
+								className="mt-12 w-full resize-none overflow-hidden bg-transparent text-[clamp(2.7rem,7vw,5.7rem)] font-normal leading-[0.96] tracking-[-0.055em] text-ds-text-primary outline-none [field-sizing:content] placeholder:text-ds-text-tertiary"
 								onChange={(event) => edit(setTitle, event.target.value)}
 								placeholder="Untitled idea"
 								readOnly={Boolean(lockedBy)}
 								rows={1}
 								value={title}
 							/>
-							<div className="mt-5 flex items-center gap-2 font-mono text-[9px] text-white/20">
+							<div className="mt-5 flex items-center gap-2 font-mono text-[9px] text-ds-text-tertiary">
 								<span>/signals/</span>
-								<input aria-label="Article URL slug" className="min-w-0 flex-1 bg-transparent outline-none focus:text-black/60" onChange={(event) => edit(setSlug, event.target.value)} readOnly={Boolean(lockedBy || detail.liveRevision)} title={detail.liveRevision ? "Published article URLs stay stable" : undefined} value={slug} />
+								<input aria-label="Article URL slug" className="min-w-0 flex-1 bg-transparent outline-none focus:text-ds-text-primary" onChange={(event) => edit(setSlug, event.target.value)} readOnly={Boolean(lockedBy || detail.liveRevision)} title={detail.liveRevision ? "Published article URLs stay stable" : undefined} value={slug} />
 								{detail.liveRevision ? <span className="hidden text-emerald-700 sm:inline">Stable published URL</span> : null}
 							</div>
 							<div className="relative mt-12 flex-1">
 								<textarea
 									aria-label={mode === "deep" ? "Deep Read article canvas" : "Brief article canvas"}
-									className="h-full min-h-[52vh] w-full resize-none bg-transparent text-[18px] leading-[1.82] tracking-[-0.012em] text-white/72 outline-none placeholder:text-white/18 sm:text-[21px]"
+									className="h-full min-h-[52vh] w-full resize-none bg-transparent text-[18px] leading-[1.82] tracking-[-0.008em] text-ds-text-primary outline-none placeholder:text-ds-text-tertiary sm:text-[20px]"
 									onChange={(event) => edit(setCurrentText, event.target.value)}
 									placeholder={mode === "deep" ? "Dump the thought here. Fragments, questions, pasted notes—anything goes." : "The short version for a reader who has two minutes."}
 									readOnly={Boolean(lockedBy)}
@@ -688,30 +688,30 @@ export function WritingStudio() {
 								/>
 							</div>
 						</div>
-						<div className="fixed bottom-4 left-1/2 z-30 flex max-w-[calc(100vw-24px)] -translate-x-1/2 items-center gap-1 border border-white/15 bg-[#0d0d0d] p-1.5 text-white shadow-[0_12px_50px_rgba(0,0,0,.55)]">
-							<button aria-label={dictating ? "Stop dictation" : "Start dictation"} className="flex h-9 items-center gap-2 px-3 text-xs hover:bg-white/10" onClick={toggleDictation} type="button">
+						<div className="fixed bottom-4 left-1/2 z-30 flex max-w-[calc(100vw-24px)] -translate-x-1/2 items-center gap-1 border border-ds-border bg-ds-surface-raised p-1.5 text-ds-text-primary shadow-[0_12px_50px_rgba(20,23,31,.16)]">
+							<button aria-label={dictating ? "Stop dictation" : "Start dictation"} className="flex h-9 items-center gap-2 px-3 text-xs hover:bg-ds-surface-hover" onClick={toggleDictation} type="button">
 								<Mic className={`size-4 ${dictating ? "text-red-400" : ""}`} /> <span className="hidden sm:inline">{dictating ? "Stop" : "Dictate"}</span>
 							</button>
-							<span className="h-5 w-px bg-white/15" />
-							<button aria-label="Run first pass" className="flex h-9 items-center gap-2 px-3 text-xs hover:bg-white/10" disabled={Boolean(coachPending)} onClick={() => void coach("first-pass")} type="button">
+							<span className="h-5 w-px bg-ds-border" />
+							<button aria-label="Run first pass" className="flex h-9 items-center gap-2 px-3 text-xs hover:bg-ds-surface-hover" disabled={Boolean(coachPending)} onClick={() => void coach("first-pass")} type="button">
 								<Sparkles className="size-4" /> <span className="hidden sm:inline">Light first pass</span>
 							</button>
-							<button aria-label="Run writing check" className="flex h-9 items-center gap-2 px-3 text-xs hover:bg-white/10" onClick={runLocalCheck} type="button">
+							<button aria-label="Run writing check" className="flex h-9 items-center gap-2 px-3 text-xs hover:bg-ds-surface-hover" onClick={runLocalCheck} type="button">
 								<SearchCheck className="size-4" /> <span className="hidden sm:inline">Check writing</span>
 							</button>
-							<button aria-label="Try Pangram AI detection" className="flex h-9 items-center gap-2 border border-white/15 px-3 text-xs hover:bg-white/10" disabled={pangramPending} onClick={() => void pangram()} type="button">
+							<button aria-label="Try Pangram AI detection" className="flex h-9 items-center gap-2 border border-ds-border px-3 text-xs hover:bg-ds-surface-hover" disabled={pangramPending} onClick={() => void pangram()} type="button">
 								{pangramPending ? <Loader2 className="size-4 animate-spin" /> : <span className="font-semibold">P</span>} <span className="hidden sm:inline">Try Pangram</span>
 							</button>
 						</div>
 					</section>
 				)}
 
-				<aside className={`${rightOpen ? "fixed inset-y-0 right-0 z-50 flex w-[min(410px,94vw)]" : "hidden"} shrink-0 flex-col border-l border-white/[0.1] bg-[#0a0a0a] shadow-[-24px_0_80px_rgba(0,0,0,.45)]`}>
-					<div className="flex h-14 shrink-0 items-center border-b border-black/10 px-3">
+				<aside className={`${rightOpen ? "fixed inset-y-0 right-0 z-50 flex w-[min(410px,94vw)]" : "hidden"} shrink-0 flex-col border-l border-ds-border bg-ds-surface text-ds-text-primary shadow-[-24px_0_80px_rgba(20,23,31,.14)]`}>
+					<div className="flex h-14 shrink-0 items-center border-b border-ds-border px-3">
 						{(["coach", "references", "history", ...(access.role === "owner" ? ["access" as const] : [])] as RightPanel[]).map((item) => (
-							<button className={`px-2 py-2 text-[11px] font-medium capitalize ${panel === item ? "text-white/85" : "text-white/35 hover:text-white/65"}`} key={item} onClick={() => setPanel(item)} type="button">{item}</button>
+							<button className={`px-2 py-2 text-[11px] font-medium capitalize ${panel === item ? "text-ds-text-primary" : "text-ds-text-tertiary hover:text-ds-text-secondary"}`} key={item} onClick={() => setPanel(item)} type="button">{item}</button>
 						))}
-						<button className="ml-auto p-2 text-white/40 hover:text-white" onClick={() => setRightOpen(false)} type="button" aria-label="Close writing tools"><X className="size-4" /></button>
+						<button className="ml-auto p-2 text-ds-text-secondary hover:bg-ds-surface-hover hover:text-ds-text-primary" onClick={() => setRightOpen(false)} type="button" aria-label="Close writing tools"><X className="size-4" /></button>
 					</div>
 					<div className="min-h-0 flex-1 overflow-y-auto">
 						{panel === "coach" ? (
@@ -769,7 +769,7 @@ export function WritingStudio() {
 						) : null}
 					</div>
 				</aside>
-				{rightOpen ? <button className="fixed inset-0 z-40 bg-black/70 backdrop-blur-[2px]" onClick={() => setRightOpen(false)} type="button" aria-label="Close writing tools overlay" /> : null}
+				{rightOpen ? <button className="fixed inset-0 z-40 bg-[#14171F]/25 backdrop-blur-[2px]" onClick={() => setRightOpen(false)} type="button" aria-label="Close writing tools overlay" /> : null}
 			</div>
 		</main>
 	);

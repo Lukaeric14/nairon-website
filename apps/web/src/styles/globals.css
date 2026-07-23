@@ -798,15 +798,15 @@ html, body {
 }
 
 /* Signals reader controls deliberately affect prose, not navigation labels. */
-[data-reader-size="small"] .reader-copy p:not(.font-mono),
-[data-reader-size="small"] .reader-copy li {
-	font-size: 14px !important;
-	line-height: 1.72 !important;
+[data-reader-size="small"] .reader-copy .article-prose p:not(.font-mono),
+[data-reader-size="small"] .reader-copy .article-prose li {
+	font-size: 17px !important;
+	line-height: 1.76 !important;
 }
 
-[data-reader-size="large"] .reader-copy p:not(.font-mono),
-[data-reader-size="large"] .reader-copy li {
-	font-size: 18px !important;
+[data-reader-size="large"] .reader-copy .article-prose p:not(.font-mono),
+[data-reader-size="large"] .reader-copy .article-prose li {
+	font-size: 22px !important;
 	line-height: 1.82 !important;
 }
 
@@ -821,59 +821,15 @@ html, body {
 	}
 }
 
-/* Signals is a framed editorial canvas. Keep the treatment neutral so the
-   article and its concept models carry the attention, not site chrome. */
-.signals-essay [class~="text-[#101014]"] {
-	color: rgba(255, 255, 255, 0.92) !important;
+/* Signals keeps Momito's framed editorial rhythm while using Nairon's own
+   light surface, neutral ink, and restrained brand accents. */
+.signals-essay {
+	color: var(--ds-text-primary);
 }
 
-.signals-essay [class~="text-[#303036]"],
-.signals-essay [class~="text-[#292821]"],
-.signals-essay [class~="text-[#24231f]"] {
-	color: rgba(255, 255, 255, 0.7) !important;
-}
-
-.signals-essay [class~="text-[#5F6068]"],
-.signals-essay [class~="text-[#606069]"],
-.signals-essay [class*="text-black/"] {
-	color: rgba(255, 255, 255, 0.42) !important;
-}
-
-.signals-essay [class~="text-[var(--brand-blue)]"],
-.signals-essay [class~="text-[#1378e6]"] {
-	color: rgba(255, 255, 255, 0.66) !important;
-}
-
-.signals-essay section[class~="bg-white"],
-.signals-essay article[class~="bg-white"],
-.signals-essay div[class~="bg-white"],
-.signals-essay a[class~="bg-white"],
-.signals-essay section[class~="bg-[#F7F7F8]"],
-.signals-essay div[class~="bg-[#F7F7F8]"],
-.signals-essay a[class~="bg-[#F7F7F8]"],
-.signals-essay section[class~="bg-[#fbfaf7]"],
-.signals-essay div[class~="bg-[#fbfaf7]"] {
-	background-color: #0a0a0a !important;
-}
-
-.signals-essay [class~="bg-amber-50"],
-.signals-essay [class~="bg-blue-50"] {
-	background-color: rgba(255, 255, 255, 0.035) !important;
-}
-
-.signals-essay [class~="text-amber-950"],
-.signals-essay [class~="text-amber-800"],
-.signals-essay [class~="text-blue-800"] {
-	color: rgba(255, 255, 255, 0.56) !important;
-}
-
-.signals-essay [class~="bg-[var(--brand-blue)]"] {
-	background-color: rgba(255, 255, 255, 0.56) !important;
-}
-
-.signals-essay [class*="border-[#101014]/"],
-.signals-essay [class*="border-black/"] {
-	border-color: rgba(255, 255, 255, 0.09) !important;
+.signals-essay [class*="text-black/"],
+.writing-studio-shell [class*="text-black/"] {
+	color: var(--ds-text-secondary) !important;
 }
 
 .signals-essay [class~="rounded-lg"] {
@@ -885,72 +841,26 @@ html, body {
 }
 
 .signals-essay [role="combobox"] {
-	border-color: rgba(255, 255, 255, 0.15) !important;
-	background: #0b0b0b !important;
-	color: rgba(255, 255, 255, 0.82) !important;
+	border-color: var(--ds-border) !important;
+	background: var(--ds-surface-raised) !important;
+	color: var(--ds-text-primary) !important;
 }
 
 .signals-essay > section > div > .space-y-7 > p {
-	font-size: clamp(1.05rem, 1.35vw, 1.28rem);
-	line-height: 1.72;
+	max-width: 760px;
+	font-size: clamp(1.08rem, 1.35vw, 1.25rem);
+	line-height: 1.78;
 }
 
-/* The private Studio uses the same writing-room palette, but keeps the
-   document as the only persistent surface. Supporting tools live in drawers. */
-.writing-studio-dark [class~="text-[#171714]"],
-.writing-studio-dark [class~="text-[#24231f]"] {
-	color: rgba(255, 255, 255, 0.82) !important;
+/* The private Studio keeps the document as the only persistent surface.
+   Supporting tools live in drawers on the same Nairon neutral ladder. */
+.writing-studio-shell input,
+.writing-studio-shell textarea {
+	color: var(--ds-text-primary);
+	caret-color: var(--ds-text-primary);
 }
 
-.writing-studio-dark [class*="text-black/"] {
-	color: rgba(255, 255, 255, 0.38) !important;
-}
-
-.writing-studio-dark section[class~="bg-white"],
-.writing-studio-dark article[class~="bg-white"],
-.writing-studio-dark div[class~="bg-white"],
-.writing-studio-dark form[class~="bg-white"],
-.writing-studio-dark input[class~="bg-white"],
-.writing-studio-dark textarea[class~="bg-white"],
-.writing-studio-dark div[class~="bg-[#fbfaf7]"],
-.writing-studio-dark div[class~="bg-[#efede7]"],
-.writing-studio-dark div[class~="bg-[#f7f5f0]"],
-.writing-studio-dark div[class~="bg-[#f3f1ec]"] {
-	background-color: #0d0d0d !important;
-}
-
-.writing-studio-dark [class~="bg-blue-50"],
-.writing-studio-dark [class~="bg-amber-50"],
-.writing-studio-dark [class~="bg-emerald-50"],
-.writing-studio-dark [class~="bg-violet-50"] {
-	background-color: rgba(255, 255, 255, 0.035) !important;
-}
-
-.writing-studio-dark [class*="border-black/"] {
-	border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.writing-studio-dark input,
-.writing-studio-dark textarea {
-	color: rgba(255, 255, 255, 0.76);
-	caret-color: white;
-}
-
-.writing-studio-dark textarea[aria-label="Article title"] {
-	color: rgba(255, 255, 255, 0.96);
-}
-
-.writing-studio-dark aside button[class~="bg-white"],
-.writing-studio-dark aside button[class~="bg-[#fbfaf7]"] {
-	background-color: #111 !important;
-	color: rgba(255, 255, 255, 0.78) !important;
-}
-
-.writing-studio-dark input::placeholder,
-.writing-studio-dark textarea::placeholder {
-	color: rgba(255, 255, 255, 0.18);
-}
-
-.writing-studio-dark [class*="shadow-"] {
-	box-shadow: none !important;
+.writing-studio-shell input::placeholder,
+.writing-studio-shell textarea::placeholder {
+	color: var(--ds-text-tertiary);
 }

@@ -455,8 +455,8 @@ function AgentMemoryArticlePage() {
 
 	const widthClass = width === "narrow" ? "max-w-[1120px]" : width === "wide" ? "max-w-[1536px]" : "max-w-[1380px]";
 	return (
-		<div className="min-h-screen bg-[#020202] font-geist text-white" data-reader-size={size}>
-			<article className={`reader-copy signals-essay mx-auto min-h-screen border-x border-white/[0.09] bg-[#080808] transition-[max-width] ${widthClass}`}>
+		<div className="min-h-screen bg-ds-shell font-geist text-ds-text-primary" data-reader-size={size}>
+			<article className={`reader-copy signals-essay mx-auto min-h-screen border-x border-ds-border bg-ds-surface transition-[max-width] ${widthClass}`}>
 				{focus ? null : <SignalsArticleMasthead />}
 				<ArticleReaderToolbar mode={mode} onModeChange={setMode} focus={focus} onFocusChange={setFocus} size={size} onSizeChange={setSize} width={width} onWidthChange={setWidth} />
 				<Hero />
@@ -482,27 +482,27 @@ function AgentMemoryArticlePage() {
 
 function Hero() {
 	return (
-		<header className="border-b border-white/[0.09]">
-			<div className="px-6 py-16 sm:px-10 sm:py-20 md:px-[148px] md:py-28">
-				<div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-white/28">
-					<a href="/signals" className="transition-colors hover:text-white">
+		<header className="border-b border-ds-border">
+			<div className="px-6 py-16 sm:px-10 sm:py-20 md:px-[clamp(5rem,10.7vw,9.25rem)] md:py-28">
+				<div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-ds-text-tertiary">
+					<a href="/signals" className="transition-colors hover:text-ds-text-primary">
 						Signals
 					</a>
 					<ArrowRight className="size-3" />
 					<span>Company memory</span>
 				</div>
-				<h1 className="mt-12 max-w-5xl text-balance text-[clamp(3.4rem,8.5vw,8.6rem)] font-normal leading-[0.88] tracking-[-0.065em] text-white">
+				<h1 className="mt-10 max-w-5xl text-balance text-[clamp(3rem,7.5vw,7.2rem)] font-normal leading-[0.92] tracking-[-0.06em] text-ds-text-primary">
 					Solving the Agent Memory problem
 				</h1>
-				<p className="mt-10 max-w-3xl text-pretty text-[clamp(1rem,1.5vw,1.35rem)] leading-[1.55] text-white/46">
+				<p className="mt-10 max-w-[760px] text-pretty text-[clamp(1.08rem,1.5vw,1.28rem)] leading-[1.65] text-ds-text-secondary">
 						We often get asked.... which memory layer should we trust for AI
 						employees: Supermemory, Mem0, Zep, Letta, LangMem, or something
 						closer to a company brain?
 				</p>
 			</div>
-			<div className="grid border-t border-white/[0.09] px-6 py-5 font-mono text-[9px] uppercase tracking-[0.13em] text-white/28 sm:px-10 md:grid-cols-[1fr_auto] md:px-[148px]">
+			<div className="grid border-t border-ds-border px-6 py-5 font-mono text-[10px] uppercase tracking-[0.13em] text-ds-text-secondary sm:px-10 md:grid-cols-[1fr_auto] md:px-[clamp(5rem,10.7vw,9.25rem)]">
 				<div className="flex items-center gap-3">
-					<span className="grid size-5 place-items-center overflow-hidden rounded-full bg-white/10 text-[10px] font-semibold text-white ring-1 ring-white/10">
+					<span className="grid size-5 place-items-center overflow-hidden rounded-full bg-ds-surface-hover text-[10px] font-semibold text-ds-text-primary ring-1 ring-ds-border">
 						<img
 							src={ARTICLE_AUTHOR_AVATAR}
 							alt=""
@@ -522,10 +522,10 @@ function Hero() {
 function BriefArticle({ onDeepRead }: { onDeepRead: () => void }) {
 	return (
 		<>
-			<section className="border-b border-white/[0.09] bg-[#080808] px-6 py-16 sm:px-10 md:px-[148px] md:py-24">
-				<p className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/28">The bottom line</p>
-				<h2 className="mt-7 max-w-5xl text-[clamp(2.2rem,5vw,5.4rem)] font-normal leading-[0.98] tracking-[-0.05em]">AI employees do not need more stored text. They need the right business context at the moment of a decision.</h2>
-				<div className="mt-9 space-y-6 text-[16px] leading-8 text-[#303036]">
+			<section className="border-b border-ds-border bg-ds-surface px-6 py-16 sm:px-10 md:px-[clamp(5rem,10.7vw,9.25rem)] md:py-24">
+				<p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ds-text-tertiary">The bottom line</p>
+				<h2 className="mt-7 max-w-5xl text-[clamp(2.2rem,5vw,5rem)] font-normal leading-[1] tracking-[-0.05em]">AI employees do not need more stored text. They need the right business context at the moment of a decision.</h2>
+				<div className="article-prose mt-9 max-w-[760px] space-y-6 text-[18px] leading-8 text-ds-text-primary sm:text-[20px] sm:leading-9">
 					<p>An agent that remembers a person’s name is useful. An agent that knows the current budget, active customer promises, prior decisions, permission boundaries, and why a constraint exists can work like a responsible teammate.</p>
 					<p>No memory provider solves that alone. Supermemory, Mem0, Zep, Letta, LangMem, and company-brain tools make different tradeoffs. The right choice depends on your data sources, sensitivity, hosting needs, and whether facts change over time.</p>
 				</div>
@@ -537,7 +537,7 @@ function BriefArticle({ onDeepRead }: { onDeepRead: () => void }) {
 					].map(([label, copy], index) => <div className="border-b border-black/10 p-4 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0" key={label}><span className="font-mono text-[9px] text-black/30">0{index + 1}</span><h3 className="mt-4 text-sm font-semibold">{label}</h3><p className="mt-2 text-[13px] leading-6 text-black/50">{copy}</p></div>)}
 				</div>
 				<div className="mt-10 border-l-2 border-amber-400 bg-amber-50 p-4"><p className="text-[13px] leading-6 text-amber-950"><strong>Important limit:</strong> bad capture rules create noisy memory, while weak permissions create risk. Treat raw transcripts as source material—not durable truth.</p></div>
-				<button className="mt-10 inline-flex h-11 items-center gap-2 border border-white/20 bg-white px-5 font-mono text-[9px] uppercase tracking-[0.12em] text-black transition-colors hover:bg-transparent hover:text-white" onClick={onDeepRead} type="button">Open the Deep Read <ArrowRight className="size-4" /></button>
+				<button className="mt-10 inline-flex h-11 items-center gap-2 border border-ds-text-primary bg-ds-text-primary px-5 font-mono text-[9px] uppercase tracking-[0.12em] text-white transition-colors hover:bg-transparent hover:text-ds-text-primary" onClick={onDeepRead} type="button">Open the Deep Read <ArrowRight className="size-4" /></button>
 			</section>
 			<MemoryConceptModel />
 		</>
@@ -549,7 +549,7 @@ function ProblemSection() {
 		<section className="border-b border-[#101014]/10 bg-white">
 			<div className="px-8 py-12 md:px-[148px] md:py-16">
 				<SectionKicker icon={AlertTriangle} label="The actual bottleneck" />
-				<div className="mt-8 space-y-7 text-pretty text-[15px] leading-7 text-[#303036]">
+				<div className="article-prose mt-8 space-y-7 text-pretty text-[18px] leading-8 text-[#303036] sm:text-[20px] sm:leading-9">
 					<p>
 						The memory problem is not that agents forget your name. That is the
 						small version. The business version is harder: agents do not know
@@ -833,18 +833,18 @@ function DecisionTool() {
 	}
 
 	return (
-		<section className="border-b border-[#101014]/10 bg-[#101014] text-white">
+		<section className="border-b border-ds-border bg-[#F7F5F0] text-ds-text-primary">
 			<div className="px-8 py-12 md:px-10 md:py-16">
 				<div className="grid grid-cols-1 gap-10 md:grid-cols-[0.9fr_1.1fr]">
 					<div>
-						<div className="inline-flex items-center gap-2 border border-white/15 px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-[#DCDCFD]">
+						<div className="inline-flex items-center gap-2 border border-ds-border bg-ds-surface-raised px-3 py-2 text-xs font-medium uppercase tracking-[0.16em] text-ds-text-secondary">
 							<Sparkles className="h-4 w-4" />
 							Memory picker
 						</div>
 						<h2 className="mt-6 text-balance text-4xl font-normal leading-tight tracking-[-0.03em] md:text-6xl">
 							Which memory layer should your company test first?
 						</h2>
-						<p className="mt-6 max-w-xl text-pretty text-base leading-7 text-white/68">
+						<p className="mt-6 max-w-xl text-pretty text-[17px] leading-8 text-ds-text-secondary">
 							This is a directional picker, not procurement advice. It encodes
 							the tradeoffs above so a founder or operator can get to the first
 							serious pilot faster.
@@ -900,7 +900,7 @@ function DecisionTool() {
 				</div>
 
 				<div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-[1.25fr_0.75fr]">
-					<div className="border border-white/15 bg-white p-6 text-[#101014]">
+					<div className="border border-ds-border bg-ds-surface-raised p-6 text-ds-text-primary">
 						<p className="font-mono text-xs uppercase tracking-[0.18em] text-[#606069]">
 							Recommended first pilot
 						</p>
@@ -917,19 +917,19 @@ function DecisionTool() {
 							</p>
 						</div>
 					</div>
-					<div className="border border-white/15 bg-white/5 p-6">
-						<p className="font-mono text-xs uppercase tracking-[0.18em] text-[#DCDCFD]">
+					<div className="border border-ds-border bg-ds-surface p-6">
+						<p className="font-mono text-xs uppercase tracking-[0.18em] text-ds-text-tertiary">
 							Also compare
 						</p>
 						<div className="mt-5 space-y-4">
 							{runnerUps.map(({ provider, score }) => (
 								<div
 									key={provider.id}
-									className="flex items-center justify-between border-b border-white/10 pb-4"
+									className="flex items-center justify-between border-b border-ds-border pb-4"
 								>
 									<div>
-										<p className="text-base text-white">{provider.name}</p>
-										<p className="mt-1 text-xs text-white/50">{provider.short}</p>
+										<p className="text-base text-ds-text-primary">{provider.name}</p>
+										<p className="mt-1 text-xs text-ds-text-secondary">{provider.short}</p>
 									</div>
 									<span className="font-mono text-sm text-[var(--brand-blue)]">
 										{score}
@@ -957,14 +957,14 @@ function SelectControl({
 }) {
 	return (
 		<div className="block">
-			<span className="mb-2 block text-xs font-medium uppercase tracking-[0.16em] text-white/52">
+			<span className="mb-2 block text-xs font-medium uppercase tracking-[0.16em] text-ds-text-secondary">
 				{label}
 			</span>
 			<Select
 				value={value}
 				onValueChange={onChange}
 			>
-				<SelectTrigger className="h-12 rounded-none border-white/15 bg-white px-3 text-sm text-[#101014] shadow-none ring-offset-transparent focus:ring-1 focus:ring-[var(--brand-blue)] focus:ring-offset-0 data-[placeholder]:text-[#606069] [&>svg]:text-[#101014] [&>svg]:opacity-70">
+				<SelectTrigger className="h-12 rounded-none border-ds-border bg-ds-surface-raised px-3 text-sm text-ds-text-primary shadow-none ring-offset-transparent focus:ring-1 focus:ring-[var(--brand-blue)] focus:ring-offset-0 data-[placeholder]:text-ds-text-secondary [&>svg]:text-ds-text-primary [&>svg]:opacity-70">
 					<SelectValue />
 				</SelectTrigger>
 				<SelectContent className="z-[70] rounded-none border-[#101014]/10 bg-white text-[#101014] shadow-xl">
