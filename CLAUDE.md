@@ -1,98 +1,123 @@
 # Nairon Website
 
-Full-stack TypeScript monorepo for the Nairon website.
+This is the main repo for the Nairon website (naironai.com).
 
 ## Structure
 
 ```
 nairon-website/
-├── apps/web/              → TanStack Start frontend (React 19, Vite 7, TailwindCSS 4)
-├── packages/backend/      → Convex backend + Better-Auth authentication
-├── packages/env/           → Runtime environment variable validation (t3-env + Zod)
-├── packages/config/        → Shared TypeScript configuration
-├── scripts/                → Dev utility scripts
+├── site/                    → THE WEBSITE. Astro 7 + Tailwind 4. This is what ships.
+├── brand/                   → Brand source of truth (STRATEGY.md, DESIGN.md, style bible, moodboard)
+├── convex/                  → Convex backend (waitlist, newsletter, contact, email)
+├── packages/backend/        → Better-Auth config for Convex
+├── packages/env/            → Runtime env validation (t3-env + Zod)
+├── packages/config/         → Shared TypeScript config
+├── docs/website-v2/         → Design + build decision log for the current site
+├── archive/legacy-design/   → ARCHIVED. Old TanStack site, kept for design/UI reference only.
+│                              Not built, not deployed, not a workspace. Do not import from it.
+└── scripts/                 → Dev utility scripts
 ```
+
+### History — read this before you get confused
+
+Until 2026-08, this repo held a TanStack Start + React site. The live site was rebuilt from
+scratch as a separate Astro project (the `Nairon-AI/website-v2` repo) and went live on
+naironai.com on 2026-08-05.
+
+In 2026-08 that Astro site was brought into this repo as `site/`, and this repo became the
+single home for the website again. The old TanStack frontend was moved to
+`archive/legacy-design/` and kept **only as a visual/design reference** — the components,
+layouts and styling are worth looking at, but nothing there is live and nothing should import
+from it.
+
+Four features from the old site were deliberately dropped and are **not** in the current site:
+Hive desktop download (`/download`), the property-PDF generator, the careers admin + job
+application form, and `/brandkit` + `/pitch-deck`. If someone asks where those went, they were
+dropped on purpose — the code is in `archive/legacy-design/`.
 
 ## Tech Stack
 
-- **Frontend**: TanStack Start (SSR), React 19, TailwindCSS 4, shadcn/ui (new-york)
-- **Backend**: Convex (reactive BaaS), Better-Auth (email/password auth)
-- **Build**: Turborepo, Bun, Vite 7
-- **Deployment**: Vercel (Nitro preset)
-- **Code Quality**: Biome (linting, formatting, import sorting)
+- **Site**: Astro 7, Tailwind CSS 4, GSAP + Motion, React 19 islands, MDX content collections
+- **Backend**: Convex (waitlist / newsletter / contact), Better-Auth
+- **Deployment**: Vercel (static Astro output)
+- **Package managers**: `site/` uses npm (has its own `package-lock.json`). The repo root uses
+  Bun workspaces for `packages/*`. `site/` is deliberately **not** a Bun workspace — don't add it.
 
 ## Commands
 
 ```bash
-bun run dev          # Start all services (Turborepo)
-bun run dev:web      # Start web app only
+bun run dev          # Start the website dev server (Astro)
+bun run dev:site     # Same thing, explicit
 bun run dev:server   # Start Convex backend only
-bun run build        # Build all packages
-bun run check-types  # Type-check all packages
+bun run build        # Build the website → site/dist (74 pages)
+bun run build:backend # Build the Convex packages via Turborepo
+bun run check-types  # Type-check the backend packages
 ```
 
-## Running Locally
+Working directly in `site/` also works: `cd site && npm run dev`.
 
-Use this order for a clean local boot:
+Node >= 22.12 is required by `site/package.json`.
 
-1. `cd packages/backend && bun run dev`
-2. Wait for Convex to finish provisioning and writing the repo root `.env.local`
-3. `cd apps/web && bun run dev`
+## Deployment
 
-The web app syncs `CONVEX_URL` and `CONVEX_SITE_URL` from the repo root into `apps/web/.env.local` before Vite starts.
+Vercel builds from the repo root using the root `vercel.json`, which shells into `site/`:
 
-The backend package script jumps to the repo root before running Convex, because the real Convex app lives in the repo-root `convex/` directory. Do not run raw `bunx convex dev` inside `packages/backend`.
+- install: `npm --prefix site ci`
+- build: `npm --prefix site run build`
+- output: `site/dist`
 
-If the frontend ever boots with a placeholder Convex URL, treat that as a setup failure. Start the backend first, then restart the web app.
+Only `main` deploys (`git.deploymentEnabled` in `vercel.json`). `site/vercel.json` is the
+original config from the standalone repo and is kept for reference — the **root** one is the
+one Vercel actually reads.
+
+Alternative if you prefer: set the Vercel project's Root Directory to `site` and let
+`site/vercel.json` take over. Don't do both.
 
 ## Environment Variables
 
-### Root (.env)
-- `ANTHROPIC_API_KEY` — Anthropic API key
-
-### Web (apps/web/.env.local)
-- `VITE_CONVEX_URL` — Convex deployment URL (required)
-- `VITE_CONVEX_SITE_URL` — Convex site URL for auth (required)
-- `NODE_ENV` — development | production
-- `PORT` — Dev server port (default: 3001)
+### Site (site/.env)
+- `PUBLIC_NEWSLETTER_WEBHOOK` — where the newsletter form POSTs. This is **not** Convex; it's an
+  external webhook set in the Vercel project. Check Vercel before assuming it's broken.
 
 ### Convex Env
-- `BRIGHTDATA_API_KEY` — Primary Zillow data source for the property PDF generator
-- `BRIGHTDATA_DATASET_ID` — Optional Bright Data dataset override; defaults to the Zillow dataset in code
-- `FIRECRAWL_API_KEY` — Optional fallback HTML scraper for Zillow when Bright Data is unavailable
-- `OPENAI_API_KEY` — Neighborhood description generation
-- `FAL_KEY` — Listing image classification
-- `SLACK_WEBHOOK_URL` — Optional Slack notification when a PDF job completes
+- `SLACK_WEBHOOK_URL` — optional Slack notification
+- `RESEND_API_KEY` — transactional email via `@convex-dev/resend`
 
-## Property PDF Generator
+Convex exposes only two HTTP routes (`convex/http.ts`): `GET /health` and `POST /waitlist`.
+The waitlist endpoint serves the Hive product, not this website.
 
-The `/for/real-estate/property-pdf` flow runs as a Convex background job:
+Dormant Convex functions left over from the dropped features: `pdfJob.ts`,
+`careerApplications.ts`. They are not called by the current site. Safe to delete when someone
+confirms nothing else uses them.
 
-1. Frontend calls `pdfJob.createJob`
-2. Convex background action fetches Zillow data
-3. Bright Data dataset is the primary source
-4. Firecrawl → Jina → direct fetch are fallback HTML paths only
-5. Images are validated and classified
-6. OpenAI generates neighborhood copy
-7. Frontend subscribes to the job and renders the PDF client-side
+## Content
 
-## Setup
-
-```bash
-./scripts/setup-env.sh   # Create .env files
-bun install               # Install dependencies
-bun run dev               # Start development
-```
+Academy lessons are MDX/Markdown content collections in `site/src/content/academy/` with topic
+groupings in `site/src/content/academy-topics/`. There's an ingest script in `site/scripts/`.
+Page routes live in `site/src/pages/`, sections in `site/src/components/sections/`.
 
 ## Frontend Development
 
-When working on frontend code (components, pages, styles, animations), always use the `frontend-design` skill from ui-skills for guidance on design quality, typography, motion, and visual polish. Invoke it via `/frontend-design` with the relevant file path and description of what needs to be built or improved.
+When working on frontend code (components, pages, styles, animations), always use the
+`frontend-design` skill from ui-skills for guidance on design quality, typography, motion, and
+visual polish. Invoke it via `/frontend-design` with the relevant file path and description of
+what needs to be built or improved.
 
-When working on offer creation, pricing, positioning, copy, lead magnets, funnels, sales messaging, or growth strategy, use the local `hormozi-marketing` skill. It should gather repo and org context first, then query the Hormozi NotebookLM via `agent-browser` only after the business model and current funnel are clear.
+Before changing how the site looks, read `brand/DESIGN.md` and check `docs/website-v2/DECISIONS.md`
+— it has a "DO NOT FIX" list of things that look wrong but are intentional.
+
+When working on offer creation, pricing, positioning, copy, lead magnets, funnels, sales
+messaging, or growth strategy, use the local `hormozi-marketing` skill. It should gather repo and
+org context first, then query the Hormozi NotebookLM via `agent-browser` only after the business
+model and current funnel are clear.
 
 ## Current Business Truth (2026-06-11)
 
-The Upwork channel is discontinued — its KB, skills, tracker, and pricing logic were removed from this repo (recoverable in git history). Other standing corrections: AI employees run in **cloud sandboxes** (not Mac Minis / a data center), **Flux is retired** (site components pending removal), and the "first AI employee free" hero offer is **under revision** along Hormozi offer-construction principles. The current company onboarding brief lives at `knowledge-base/research/hormozi-notebooklm/md/nairon-onboarding-brief.md`.
+The Upwork channel is discontinued — its KB, skills, tracker, and pricing logic were removed from
+this repo (recoverable in git history). Other standing corrections: AI employees run in **cloud
+sandboxes** (not Mac Minis / a data center), **Flux is retired**, and the "first AI employee free"
+hero offer is **under revision** along Hormozi offer-construction principles. The current company
+onboarding brief lives at `knowledge-base/research/hormozi-notebooklm/md/nairon-onboarding-brief.md`.
 
 ## Supermemory
 

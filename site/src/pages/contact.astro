@@ -1,0 +1,108 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Nairon',
+  url: 'https://naironai.com/contact',
+};
+---
+
+<Page
+  title="Contact — Nairon"
+  description="Talk to the Nairon team about putting AI employees to work inside your business."
+  eyebrow="Contact"
+  heading="Talk to us."
+  intro="Tell us about your business and where AI employees could take real work off your team. We'll reply within one business day."
+  jsonLd={jsonLd}
+>
+  <div class="page-body">
+    <div class="page-grid cols-2" style="align-items: start; gap: clamp(32px, 5vw, 72px); max-width: 1060px;">
+      <!-- Form -->
+      <form data-contact data-webhook={SITE.contactWebhook} style="display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 540px;">
+        <div class="page-grid cols-2" style="gap: 16px;">
+          <div>
+            <label class="field-label" for="c-name">Name</label>
+            <input id="c-name" name="name" class="field-input" required autocomplete="name" />
+          </div>
+          <div>
+            <label class="field-label" for="c-company">Company</label>
+            <input id="c-company" name="company" class="field-input" autocomplete="organization" />
+          </div>
+        </div>
+        <div class="page-grid cols-2" style="gap: 16px;">
+          <div>
+            <label class="field-label" for="c-email">Work email</label>
+            <input id="c-email" name="email" type="email" class="field-input" required autocomplete="email" />
+          </div>
+          <div>
+            <label class="field-label" for="c-segment">What best describes you?</label>
+            <input id="c-segment" name="segment" class="field-input" placeholder="e.g. Leasing, Maintenance &amp; dispatch, Rent &amp; renewals" />
+          </div>
+        </div>
+        <div>
+          <label class="field-label" for="c-message">What would you want an AI employee to handle?</label>
+          <textarea id="c-message" name="message" class="field-textarea" required></textarea>
+        </div>
+        <button
+          type="submit"
+          class="contact-submit"
+          style="align-self: flex-start; align-items: center; background-color: #0f6bd4; border: none; border-radius: 40px; box-sizing: border-box; color: #fff; cursor: pointer; display: inline-flex; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; font-weight: 500; gap: 8px; padding: 13px 24px;"
+        >
+          Send message
+          <span aria-hidden="true">→</span>
+        </button>
+        <div class="contact-status" role="status" aria-live="polite" style="display: none; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 1.5;"></div>
+      </form>
+
+      <!-- Aside -->
+      <aside style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+        <a class="page-card" href="/#book" style="text-decoration: none; display: block;">
+          <div class="page-card-kicker">Fastest path</div>
+          <h3 style="margin-top: 8px;">Book an AI opportunity audit →</h3>
+          <p>Skip the form — grab a 30-minute slot and we'll map it live.</p>
+        </a>
+        <div class="page-card">
+          <div class="page-card-kicker">Email</div>
+          <h3 style="margin-top: 8px;"><a href={`mailto:${SITE.email}`} style="color: #0f6bd4;">{SITE.email}</a></h3>
+          <p style="margin-top: 10px;">{SITE.address.street}<br />{SITE.address.city}, {SITE.address.region} {SITE.address.postalCode}</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    import { postLead } from '../lib/leads';
+
+    const form = document.querySelector<HTMLFormElement>('[data-contact]');
+    if (form) {
+      const status = form.querySelector<HTMLElement>('.contact-status');
+      const webhook = form.getAttribute('data-webhook') || '';
+      const show = (msg: string, ok = true) => {
+        if (!status) return;
+        status.textContent = msg;
+        status.style.display = 'block';
+        status.style.color = ok ? '#2E9E6A' : '#C0362B';
+      };
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        if (!webhook) {
+          show("Thanks! Our form is being connected — email hello@naironai.com in the meantime.");
+          return;
+        }
+        show('Sending…');
+        try {
+          await postLead(webhook, 'contact', data as Record<string, string>);
+          show("Thanks — we'll be in touch within one business day.");
+          form.reset();
+          (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag?.('event', 'contact_submit', {});
+        } catch {
+          show('Something went wrong — please email hello@naironai.com.', false);
+        }
+      });
+    }
+  </script>
+</Page>

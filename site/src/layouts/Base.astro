@@ -1,0 +1,184 @@
+---
+import '../styles/global.css';
+import { SITE } from '../data/site';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  preloadImage?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Keep this page out of search. Used by the /go lead-magnet funnels, which
+   *  would otherwise cannibalise the lesson article targeting the same query. */
+  noindex?: boolean;
+  /** Point the canonical somewhere other than this URL — pairs with `noindex`
+   *  to consolidate signals onto the indexable twin of the page. */
+  canonicalPath?: string;
+}
+
+const {
+  title = 'Nairon — An AI workforce for property management businesses',
+  description = 'Nairon builds, runs, and manages AI employees around your real workflows — for leasing teams, maintenance & dispatch, and rent & renewals.',
+  image = '/og-default.jpg',
+  preloadImage,
+  jsonLd,
+  noindex = false,
+  canonicalPath,
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://naironai.com');
+const canonical = new URL(canonicalPath ?? Astro.url.pathname, site).href;
+const ogImage = new URL(image, site).href;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  legalName: SITE.legalName,
+  url: site.href,
+  logo: new URL('/nairon-logo.png', site).href,
+  description,
+  email: SITE.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.address.street,
+    addressLocality: SITE.address.city,
+    addressRegion: SITE.address.region,
+    postalCode: SITE.address.postalCode,
+    addressCountry: SITE.address.country,
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: SITE.email,
+    url: new URL('/contact', site).href,
+  },
+  sameAs: [SITE.social.linkedin, SITE.social.x],
+};
+
+const schemas = [orgSchema, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {/* Google Analytics (GA4) — migrated from the previous naironai.com site. */}
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-VKNPNM07L5"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-VKNPNM07L5');
+    </script>
+
+    {/* Enable scroll-reveal hidden states before first paint. If JS is off,
+        this never runs and all content stays visible (SEO / no-JS safe). */}
+    <script is:inline>document.documentElement.classList.add('reveal-enabled');</script>
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/instrument-serif-latin-400-normal.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/geist-sans-latin-400-normal.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/geist-sans-latin-600-normal.woff2" crossorigin />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nairon" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@nairon" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {schemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Scroll reveal: fade + rise elements in once as they enter the viewport.
+      // - [data-reveal]            → a single element that reveals itself.
+      // - [data-reveal-group]      → a container whose [data-reveal] descendants
+      //                              reveal together with a staggered cascade.
+      const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal-group]'));
+      // Assign each group child an incremental delay for the cascade.
+      for (const g of groups) {
+        const stagger = Number(g.dataset.revealStagger || 70);
+        g.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el, i) => {
+          el.style.setProperty('--reveal-delay', `${i * stagger}ms`);
+        });
+      }
+      const solo = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]')).filter(
+        (el) => !el.closest('[data-reveal-group]'),
+      );
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!('IntersectionObserver' in window) || reduce) {
+        document
+          .querySelectorAll('[data-reveal]')
+          .forEach((el) => el.classList.add('reveal-in'));
+      } else {
+        const reveal = (el: Element) => el.classList.add('reveal-in');
+        const io = new IntersectionObserver(
+          (entries, obs) => {
+            for (const e of entries) {
+              if (!e.isIntersecting) continue;
+              const t = e.target as HTMLElement;
+              if (t.hasAttribute('data-reveal-group')) {
+                t.querySelectorAll('[data-reveal]').forEach(reveal);
+              } else {
+                reveal(t);
+              }
+              obs.unobserve(t);
+            }
+          },
+          { rootMargin: '0px 0px -12% 0px', threshold: 0.06 },
+        );
+        for (const g of groups) io.observe(g);
+        for (const el of solo) io.observe(el);
+      }
+    </script>
+    <script>
+      // GA4 events: booking-CTA clicks + outbound-link clicks. Delegated once
+      // here so it covers every CTA/link on every page with no per-element wiring.
+      (() => {
+        const track = (name: string, params: Record<string, unknown>) => {
+          const g = (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag;
+          if (typeof g === 'function') g('event', name, params);
+        };
+        document.addEventListener(
+          'click',
+          (e) => {
+            const a = (e.target as Element)?.closest?.('a');
+            if (!a) return;
+            const href = a.getAttribute('href') || '';
+            const text = (a.textContent || '').trim().slice(0, 60);
+            if (href === '#book' || href === '/#book') {
+              track('cta_book_audit', { link_text: text });
+            } else if (/^https?:\/\//.test(href) && !href.includes('naironai.com')) {
+              track('outbound_click', { link_url: href, link_text: text });
+            }
+          },
+          { capture: true },
+        );
+      })();
+    </script>
+  </body>
+</html>

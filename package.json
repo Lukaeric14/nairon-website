@@ -3,16 +3,16 @@
   "type": "module",
   "private": true,
   "workspaces": [
-    "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "dev": "turbo dev",
-    "dev:web": "turbo dev --filter=@nairon-website/web",
+    "dev": "npm --prefix site run dev",
+    "dev:site": "npm --prefix site run dev",
     "dev:server": "turbo dev --filter=@nairon-website/backend",
     "probe:zillow:brightdata:dataset": "bun run scripts/probe-zillow-brightdata-dataset.ts",
     "verify:zillow": "bun run scripts/verify-zillow-smoke.ts",
-    "build": "turbo build",
+    "build": "npm --prefix site run build",
+    "build:backend": "turbo build",
     "check-types": "turbo check-types"
   },
   "catalog": {

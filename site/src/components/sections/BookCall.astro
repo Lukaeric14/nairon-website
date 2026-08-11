@@ -1,0 +1,97 @@
+---
+// BookCall.astro — "Book an AI audit" section with a Cal.com inline embed.
+// This is the #book target that the nav CTA + hero CTA scroll to. It sits
+// directly under the Newsletter section (light ground between the dark
+// Newsletter above and the dark Footer below).
+---
+
+<section
+  id="book"
+  data-testid="book-call"
+  class="w-full overflow-clip py-[72px] md:py-[88px] lg:py-[104px]"
+  style="background-color: #FBFBFB; box-sizing: border-box; font-synthesis: none; scroll-margin-top: 88px; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased;"
+>
+  <div
+    class="mx-auto flex w-full max-w-[1248px] flex-col items-center gap-10 px-5 md:px-10 lg:gap-[52px] lg:px-0"
+    style="box-sizing: border-box;"
+  >
+    <!-- Header block -->
+    <div
+      data-reveal-group
+      class="flex w-full flex-col items-center gap-[18px]"
+      style="box-sizing: border-box;"
+    >
+      <div data-reveal style="align-items: center; box-sizing: border-box; display: flex; gap: 9px;">
+        <div style="background-color: #0f6bd4; border-radius: 8px; box-sizing: border-box; flex-shrink: 0; height: 8px; width: 8px;"></div>
+        <div style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; line-height: 16px;">
+          BOOK A CALL
+        </div>
+      </div>
+      <h2
+        data-reveal
+        class="text-[clamp(32px,7vw,52px)] leading-[1.1] lg:text-[52px] lg:leading-[58px]"
+        style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; letter-spacing: -0.035em; margin: 0; text-align: center; text-wrap: balance;"
+      >
+        Book an AI opportunity audit
+      </h2>
+      <p
+        data-reveal
+        class="w-full max-w-[560px] text-[15px] lg:text-[17px]"
+        style="box-sizing: border-box; color: #5B6170; font-family: 'Geist', system-ui, sans-serif; line-height: 27px; margin: 0; text-align: center; text-wrap: balance;"
+      >
+        A 30-minute call to map where AI employees can take real work off your team — and what it would take to put one live inside your systems.
+      </p>
+    </div>
+
+    <!-- Cal.com inline embed, framed in a clean white card -->
+    <div data-reveal class="cal-embed" style="box-sizing: border-box;">
+      <!-- Cal inline embed code begins -->
+      <div style="width:100%" id="my-cal-inline-30min"></div>
+      <!-- Cal inline embed code ends -->
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript" is:inline>
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "30min", {origin:"https://app.cal.com"});
+  Cal.config = Cal.config || {};
+  Cal.config.forwardQueryParams = true;
+
+  Cal.ns["30min"]("inline", {
+    elementOrSelector:"#my-cal-inline-30min",
+    config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"},
+    calLink: "luka-eric-vuqogn/30min",
+  });
+
+  Cal.ns["30min"]("ui", {"hideEventTypeDetails":false,"layout":"month_view","theme":"dark"});
+
+  // Fire a GA4 conversion when a booking completes.
+  Cal.ns["30min"]("on", {
+    action: "bookingSuccessful",
+    callback: function () {
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "book_audit_completed", { value: 1, currency: "USD" });
+      }
+    },
+  });
+</script>
+
+<style>
+  .cal-embed {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    height: auto; /* hug the Cal iframe — no white padding above/below */
+    background-color: #171717; /* Cal.com's exact dark-theme bg (sampled) — seamless, no blue tint */
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px -34px rgba(11, 13, 18, 0.34);
+    box-sizing: border-box;
+  }
+  /* Cal injects an iframe sized to its own content — let it drive the height. */
+  .cal-embed :global(iframe) {
+    display: block;
+  }
+</style>

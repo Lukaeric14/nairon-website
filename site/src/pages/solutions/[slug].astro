@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Container from '../../components/primitives/Container.astro';
+import Eyebrow from '../../components/primitives/Eyebrow.astro';
+import SectionHeading from '../../components/primitives/SectionHeading.astro';
+import Button from '../../components/primitives/Button.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('solutions');
+  return items.map((item) => ({ params: { slug: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const { title, tagline, intro, pains, useCases } = item.data;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `Nairon — ${title}`,
+  serviceType: 'AI workforce',
+  provider: { '@type': 'Organization', name: 'Nairon' },
+  description: intro,
+};
+---
+
+<Base title={`${title} — Nairon`} description={intro} jsonLd={jsonLd}>
+  <main data-testid="solution-page">
+    <section class="bg-dark text-white">
+      <Container class="py-[clamp(80px,12vw,140px)]">
+        <div class="flex max-w-2xl flex-col gap-5">
+          <Eyebrow tone="dark">SOLUTION</Eyebrow>
+          <SectionHeading as="h1" tone="dark" class="text-[clamp(2.5rem,6vw,4rem)]">{tagline}</SectionHeading>
+          <p class="max-w-md text-lg text-white/70">{intro}</p>
+          <div><Button variant="primary" href="/#book">Book an AI opportunity audit</Button></div>
+        </div>
+      </Container>
+    </section>
+
+    <section class="bg-paper-cool">
+      <Container class="py-[clamp(64px,10vw,120px)]">
+        <Eyebrow>WHAT IT SOLVES</Eyebrow>
+        <div class="mt-10 grid gap-8 md:grid-cols-3">
+          {pains.map((p) => (
+            <div class="border-t border-[color:var(--color-hairline)] pt-6">
+              <p class="text-lg font-medium text-ink">{p}</p>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <section class="bg-paper">
+      <Container class="py-[clamp(64px,10vw,120px)]">
+        <Eyebrow>USE CASES</Eyebrow>
+        <ul class="mt-8 flex flex-col divide-y divide-[color:var(--color-hairline)]">
+          {useCases.map((u) => (<li class="py-4 text-ink">{u}</li>))}
+        </ul>
+      </Container>
+    </section>
+  </main>
+</Base>

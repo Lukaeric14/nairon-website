@@ -1,0 +1,198 @@
+---
+// Footer.astro — pixel-perfect reproduction of Paper node LC5-0, made fully responsive.
+// Desktop (>=1024px) is visually IDENTICAL to the original 1440px design: all original
+// colors/fonts/sizes/spacing/radii/gradients/images are pinned behind lg: arbitrary values.
+// Mobile/tablet/wide behavior is new: full-bleed dark band, content capped at 1440 and
+// centered, responsive horizontal padding, stacked columns, fluid type. Zero horizontal
+// overflow at 390 / 768 / 1280 / 1920px.
+---
+
+<div
+  data-testid="footer"
+  class="relative w-full lg:h-[756px] overflow-clip"
+  style="background-color: #0A1322; box-sizing: border-box; font-synthesis: none; font-size: 12px; line-height: 16px; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased;"
+>
+  <div class="relative flex h-full w-full flex-col overflow-clip" style="background-color: #0A1322; box-sizing: border-box;">
+
+    <!-- CTA band -->
+    <div
+      data-reveal
+      class="mx-auto flex w-full max-w-[1440px] flex-col gap-6 px-5 py-10 md:flex-row md:items-center md:justify-between md:px-10 md:py-[52px] lg:gap-0 lg:px-[120px]"
+      style="box-sizing: border-box; border-bottom: 1px solid #FFFFFF1A;"
+    >
+      <div
+        class="min-w-0 text-[clamp(24px,6vw,30px)] lg:text-[30px]"
+        style="box-sizing: border-box; color: #FFFFFF; font-family: 'Geist', system-ui, sans-serif; font-weight: 600; letter-spacing: -0.02em; line-height: 115%; max-width: 520px;"
+      >
+        Ready to put AI employees to work?
+      </div>
+      <div
+        class="flex shrink-0 items-center gap-[9px] self-start md:self-auto"
+        style="background-color: #0f6bd4; border-radius: 2px; box-sizing: border-box; padding-block: 14px; padding-inline: 24px;"
+      >
+        <div style="box-sizing: border-box; color: #FFFFFF; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; font-weight: 500; line-height: 18px;">
+          Book a call
+        </div>
+        <div style="box-sizing: border-box; color: #FFFFFF; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 18px;">
+          ↗
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle block (brand + link groups + trust badges) -->
+    <div style="align-items: start; align-self: stretch; box-sizing: border-box; display: flex; flex-direction: column;">
+
+      <!-- Brand column + link groups -->
+      <div
+        class="mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 pb-9 pt-10 md:px-10 md:pt-[52px] lg:flex-row lg:items-start lg:gap-[48px] lg:px-[120px] lg:pt-[52px] lg:pb-[36px]"
+        style="box-sizing: border-box;"
+      >
+        <!-- Brand column -->
+        <div data-reveal class="flex min-w-0 shrink-0 flex-col gap-5 lg:w-[220px]" style="box-sizing: border-box;">
+          <div style="background-image: url(/paper/35Q21ZCTBW0XNFTW3V5S0K8QW2.webp); background-position: left center; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 30px; width: 126px;"></div>
+          <div style="box-sizing: border-box; color: #FFFFFF8C; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 155%;">
+            AI employees built around your workflows, deployed inside your existing systems.
+          </div>
+          <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 5px;">
+            <div style="box-sizing: border-box; color: #FFFFFF6B; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px;">
+              2125 Biscayne Blvd
+            </div>
+            <div style="box-sizing: border-box; color: #FFFFFF6B; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px;">
+              Miami, FL 33137
+            </div>
+            <div style="box-sizing: border-box; color: #FFFFFF6B; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px;">
+              United States
+            </div>
+          </div>
+          <div style="align-items: center; box-sizing: border-box; display: flex; gap: 7px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+              <path d="M12 2l8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5l8-3z" fill="none" stroke="rgb(255 255 255 / 42%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M9 12l2 2 4-4" fill="none" stroke="rgb(255 255 255 / 42%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <div style="box-sizing: border-box; color: #FFFFFF6B; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 12.5px; line-height: 16px;">
+              Enterprise-grade security
+            </div>
+          </div>
+        </div>
+
+        <!-- Link groups: 2-col mobile, 3-col tablet, original space-between row desktop -->
+        <div data-reveal-group class="grid w-full min-w-0 grid-cols-2 gap-8 md:grid-cols-3 lg:flex lg:flex-1 lg:basis-0 lg:grow lg:justify-between lg:gap-6" style="box-sizing: border-box;">
+
+          <div data-reveal class="flex min-w-0 flex-col gap-4" style="box-sizing: border-box;">
+            <div style="box-sizing: border-box; color: #FFFFFF61; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.16em; line-height: 14px;">
+              SOLUTIONS
+            </div>
+            <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 13px;">
+              <a href="/solutions/revenue-gtm" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Revenue &amp; GTM</a>
+              <a href="/solutions/customer-support" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Customer support</a>
+              <a href="/solutions/back-office-operations" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Back office operations</a>
+              <a href="/solutions/data-research" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Data &amp; research</a>
+              <a href="/solutions/content-marketing" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Content &amp; marketing</a>
+              <a href="/solutions/workflow-automation" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Workflow automation</a>
+            </div>
+          </div>
+
+          <div data-reveal class="flex min-w-0 flex-col gap-4" style="box-sizing: border-box;">
+            <div style="box-sizing: border-box; color: #FFFFFF61; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.16em; line-height: 14px;">
+              AI TRAINING
+            </div>
+            <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 13px;">
+              <a href="/workforce-ai-training" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Workforce AI Training</a>
+              <a href="/executive-ai-program" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Executive AI Program</a>
+              <a href="/academy" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">AI Academy</a>
+            </div>
+          </div>
+
+          <div data-reveal class="flex min-w-0 flex-col gap-4" style="box-sizing: border-box;">
+            <div style="box-sizing: border-box; color: #FFFFFF61; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.16em; line-height: 14px;">
+              COMPANY
+            </div>
+            <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 13px;">
+              <a href="/how-we-work" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">How we work</a>
+              <a href="/about" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">About</a>
+              <a href="/contact" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Contact us</a>
+              <a href="/careers" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Careers</a>
+            </div>
+          </div>
+
+          <div data-reveal class="flex min-w-0 flex-col gap-4" style="box-sizing: border-box;">
+            <div style="box-sizing: border-box; color: #FFFFFF61; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.16em; line-height: 14px;">
+              TRUST
+            </div>
+            <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 13px;">
+              <a href="/security" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Security</a>
+              <a href="https://docs.naironai.com/overview/what-is-nairon" target="_blank" rel="noopener noreferrer" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Docs</a>
+              <a href="https://status.naironai.com" target="_blank" rel="noopener noreferrer" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Status</a>
+              <a href="/trust-center" style="box-sizing: border-box; color: #FFFFFFB8; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; text-decoration: none;">Trust Center</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Trust badges row -->
+      <div
+        data-reveal
+        class="mx-auto flex w-full max-w-[1440px] flex-wrap items-center gap-[10px] px-5 pb-[22px] pt-[2px] md:px-10 lg:px-[120px]"
+        style="box-sizing: border-box; align-self: stretch;"
+      >
+        <div style="background-image: url(/paper/3D7HFHDMCGTE56AD6Q1RMPGAX2.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 80px; width: 80px;"></div>
+        <div style="background-image: url(/paper/6XCHFZCCER8DDBAQ7QXSMZ0ERJ.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 80px; width: 80px;"></div>
+        <div style="align-items: center; border-color: #FFFFFF24; border-radius: 2px; border-style: solid; border-width: 1px; box-sizing: border-box; display: flex; gap: 7px; padding-block: 7px; padding-inline: 13px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <rect x="4" y="11" width="16" height="10" rx="2" fill="none" stroke="rgb(255 255 255 / 55%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="rgb(255 255 255 / 55%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <div style="box-sizing: border-box; color: #FFFFFF99; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 12.5px; line-height: 16px;">
+            256-bit SSL Secured
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacer (fills remaining height on desktop where root is fixed 756px) -->
+    <div class="hidden lg:flex" style="align-items: center; box-sizing: border-box; flex: 1; gap: 10px; padding-bottom: 22px; padding-inline: 120px; padding-top: 2px;"></div>
+
+    <!-- Bottom bar -->
+    <div
+      data-reveal
+      class="mx-auto flex w-full max-w-[1440px] flex-col gap-5 px-5 pb-8 pt-[22px] md:flex-row md:items-center md:justify-between md:px-10 lg:px-[120px] lg:pb-[40px]"
+      style="box-sizing: border-box; border-top: 1px solid #FFFFFF1A;"
+    >
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2 lg:gap-5" style="box-sizing: border-box;">
+        <div style="box-sizing: border-box; color: #FFFFFF66; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px;">
+          © 2026 Nairon, Inc. All rights reserved.
+        </div>
+        <a href="/privacy" style="box-sizing: border-box; color: #FFFFFF8C; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px; text-decoration: none;">Privacy</a>
+        <a href="/terms" style="box-sizing: border-box; color: #FFFFFF8C; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px; text-decoration: none;">Terms &amp; Conditions</a>
+        <a href="/cookie-policy" style="box-sizing: border-box; color: #FFFFFF8C; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px; text-decoration: none;">Cookie Policy</a>
+        <a href="/acceptable-use" style="box-sizing: border-box; color: #FFFFFF8C; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px; text-decoration: none;">Acceptable Use</a>
+      </div>
+      <div class="flex shrink-0 items-center gap-4" style="box-sizing: border-box;">
+        <div style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.73v20.54C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z" fill="rgb(255 255 255 / 60%)" />
+          </svg>
+        </div>
+        <div style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <path d="M18.9 1.5h3.68l-8.05 9.2L24 22.5h-7.41l-5.8-7.58-6.63 7.58H.46l8.6-9.83L0 1.5h7.6l5.24 6.93L18.9 1.5zm-1.29 18.79h2.04L6.48 3.6H4.28l13.33 16.69z" fill="rgb(255 255 255 / 60%)" />
+          </svg>
+        </div>
+        <div style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z" fill="rgb(255 255 255 / 60%)" />
+          </svg>
+        </div>
+        <div style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.1 0 4.7-2.8 5.7-5.5 6 .5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z" fill="rgb(255 255 255 / 60%)" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Faded watermark logo (full-bleed, spans viewport) -->
+    <div class="pointer-events-none absolute bottom-[-46px] left-0 h-[240px] w-full" style="background-image: url(/paper/35Q21ZCTBW0XNFTW3V5S0K8QW2.webp); background-position: center bottom; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; opacity: 0.05;"></div>
+  </div>
+</div>

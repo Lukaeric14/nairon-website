@@ -1,0 +1,9 @@
+---
+interface Props { square?: boolean; tone?: 'light' | 'dark'; class?: string; }
+const { square = true, tone = 'light', class: cls = '' } = Astro.props;
+const text = tone === 'dark' ? 'text-lapis-300' : 'text-mono-muted';
+---
+<div class:list={["flex items-center gap-[9px]", cls]}>
+  {square && <span class="h-[5px] w-[5px] bg-lapis"></span>}
+  <span class:list={["font-mono text-[11px] uppercase tracking-[0.18em]", text]}><slot /></span>
+</div>

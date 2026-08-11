@@ -1,0 +1,544 @@
+---
+// Lead-magnet funnel page — "Centered VSL" (Paper: Funnel V2).
+//
+// This page exists to convert YouTube traffic, not to rank. It is `noindex`
+// with a canonical pointing at the lesson article, so it never competes with
+// the academy page for the same query, and it carries no nav links out.
+//
+// The URL is deliberately short and speakable — naironai.com/go/ai-fundamentals
+// is what goes in a video description and gets read aloud on camera.
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import LessonVideo from '../../components/academy/LessonVideo.astro';
+import { thumbUrl, formatDuration } from '../../data/academy';
+import { SITE } from '../../data/site';
+
+export async function getStaticPaths() {
+  const magnets = await getCollection('magnets');
+  return magnets.map((magnet) => ({ params: { slug: magnet.id }, props: { magnet } }));
+}
+
+const { magnet } = Astro.props;
+const m = magnet.data;
+
+// Canonical points at the lesson this magnet belongs to — that's the indexable
+// twin of this page. Falls back to the academy index if no lesson uses it yet.
+const lessons = await getCollection('academy');
+const homeLesson = lessons.find((l) => l.data.magnet === magnet.id && l.data.youtubeId === m.youtubeId)
+  ?? lessons.find((l) => l.data.magnet === magnet.id);
+const canonicalPath = homeLesson ? `/academy/${homeLesson.id}` : '/academy';
+
+const video = homeLesson?.data ?? { duration: 240, title: m.title };
+const topic = homeLesson ? await getEntry('academyTopics', homeLesson.data.topic) : undefined;
+---
+
+<Base title={`${m.title} — free download`} description={m.description} image={thumbUrl(m.youtubeId)} noindex canonicalPath={canonicalPath}>
+  <main class="funnel" data-testid="funnel-page">
+    <!-- ============ BARE NAV — logo only, no exits ============ -->
+    <header class="funnel-nav">
+      <a href="/" aria-label="Nairon home">
+        <span
+          class="funnel-logo"
+          style="background-image: url(/paper/0VG8PRRSWYZ4M872HN6J7RD0CG.webp); background-position: center; background-repeat: no-repeat; background-size: contain; filter: invert(1) brightness(0.15);"
+        ></span>
+      </a>
+    </header>
+
+    <!-- ============ HERO ============ -->
+    <section class="funnel-hero" data-reveal-group>
+      <div data-reveal class="funnel-badge">
+        <span class="funnel-badge-dot" aria-hidden="true">
+          <svg width="9" height="9" viewBox="0 0 8 8">
+            <path d="M1 4.2 3 6.2 7 1.8" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </span>
+        Free · No credit card · Instant download
+      </div>
+
+      <h1 data-reveal class="funnel-h1">{m.headline}</h1>
+      <p data-reveal class="funnel-sub">{m.subhead}</p>
+
+      <div data-reveal class="funnel-video">
+        <LessonVideo youtubeId={m.youtubeId} title={video.title} duration={video.duration} />
+      </div>
+
+      <a data-reveal href="#get" class="funnel-cta" data-cta="hero">
+        <span>Get the free guide</span>
+        <span class="funnel-cta-dot" aria-hidden="true">
+          <svg width="11" height="11" viewBox="0 0 10 10">
+            <path d="M5 1.4v6M2.3 5 5 7.7 7.7 5" fill="none" stroke="var(--color-lapis)" stroke-width="1.3" stroke-linecap="square"></path>
+          </svg>
+        </span>
+      </a>
+      <p data-reveal class="funnel-microproof">
+        {m.format}{m.pages ? ` · ${m.pages} pages` : ''} · opens the moment you submit
+      </p>
+    </section>
+
+    <!-- ============ WHAT YOU GET ============ -->
+    {m.benefits.length > 0 && (
+      <section class="funnel-benefits" data-reveal-group>
+        <h2 data-reveal class="funnel-h2">What you get, and what it saves you</h2>
+        <ul class="funnel-rows">
+          {m.benefits.map((b) => (
+            <li data-reveal class="funnel-row">
+              <span class="funnel-check" aria-hidden="true">
+                <svg width="10" height="10" viewBox="0 0 8 8">
+                  <path d="M1 4.2 3 6.2 7 1.8" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+              <span><strong>{b.title}.</strong> {b.body}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <!-- ============ PROOF ============ -->
+    {m.quote && (
+      <section class="funnel-quote" data-reveal-group>
+        <blockquote data-reveal class="funnel-quote-text">“{m.quote.text}”</blockquote>
+        <p data-reveal class="funnel-quote-by">{m.quote.attribution}</p>
+      </section>
+    )}
+
+    <!-- ============ FORM ============ -->
+    <section id="get" class="funnel-form-section" data-reveal-group>
+      <p data-reveal class="funnel-kicker">Send it to me</p>
+      <h2 data-reveal class="funnel-h2">Two fields, then it's yours.</h2>
+
+      <form
+        data-reveal
+        class="funnel-form"
+        data-magnet-form
+        data-webhook={SITE.magnetWebhook}
+        data-file={m.file}
+        data-magnet={magnet.id}
+      >
+        <label class="sr-only" for="magnet-name">First name</label>
+        <input id="magnet-name" class="funnel-input" type="text" name="firstName" required autocomplete="given-name" placeholder="First name" />
+
+        <label class="sr-only" for="magnet-email">Work email</label>
+        <input id="magnet-email" class="funnel-input" type="email" name="email" required autocomplete="email" placeholder="Work email" />
+
+        <button type="submit" class="funnel-submit">
+          <span>Send me the guide</span>
+          <svg width="12" height="12" viewBox="0 0 10 10" aria-hidden="true">
+            <path d="M2 5h5.5M5 2.2 7.8 5 5 7.8" fill="none" stroke="#FFFFFF" stroke-width="1.3" stroke-linecap="square"></path>
+          </svg>
+        </button>
+        <p class="funnel-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <ul data-reveal class="funnel-trust">
+        <li>
+          <svg width="11" height="12" viewBox="0 0 12 13" aria-hidden="true">
+            <path d="M2.4 5.5V3.9a3.6 3.6 0 0 1 7.2 0v1.6" fill="none" stroke="#9AA0AC" stroke-width="1.1"></path>
+            <rect x="1.4" y="5.5" width="9.2" height="6.4" rx="1.4" fill="none" stroke="#9AA0AC" stroke-width="1.1"></rect>
+          </svg>
+          No spam, ever
+        </li>
+        <li>Unsubscribe in one click</li>
+        <li>No sales call</li>
+      </ul>
+    </section>
+
+    <footer class="funnel-footer">
+      <span>© {new Date().getFullYear()} {SITE.legalName}</span>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      {topic && <a href={canonicalPath}>Read the lesson</a>}
+    </footer>
+  </main>
+</Base>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .funnel {
+    background-color: var(--color-paper);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .funnel-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70px;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .funnel-logo {
+    display: block;
+    width: 96px;
+    height: 24px;
+  }
+
+  /* ---- hero ------------------------------------------------------------ */
+  .funnel-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    padding: clamp(40px, 6vw, 64px) 20px 0;
+  }
+  @media (min-width: 768px) {
+    .funnel-hero {
+      padding-inline: 40px;
+    }
+  }
+
+  .funnel-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px 6px 8px;
+    border: 1px solid var(--color-hairline);
+    border-radius: 48px;
+    background-color: #ffffff;
+    color: var(--color-ink);
+    font-size: 12px;
+  }
+  .funnel-badge-dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background-color: var(--color-green);
+  }
+
+  .funnel-h1 {
+    margin: 24px 0 0;
+    max-width: 900px;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(32px, 6.2vw, 56px);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.06;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .funnel-sub {
+    margin: 20px 0 0;
+    max-width: 660px;
+    color: #5b6170;
+    font-size: clamp(16px, 2.2vw, 19px);
+    line-height: 1.6;
+    text-align: center;
+    text-wrap: pretty;
+  }
+
+  .funnel-video {
+    width: 100%;
+    max-width: 900px;
+    margin-top: clamp(28px, 4vw, 40px);
+  }
+
+  .funnel-cta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    padding: 16px 18px 16px 30px;
+    border-radius: 48px;
+    background-color: var(--color-lapis);
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 500;
+    transition: background-color 0.15s ease;
+  }
+  .funnel-cta:hover {
+    background-color: #0b5cbb;
+  }
+  .funnel-cta-dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background-color: #ffffff;
+  }
+  .funnel-microproof {
+    margin: 14px 0 0;
+    color: #9aa0ac;
+    font-size: 13px;
+  }
+
+  /* ---- benefits -------------------------------------------------------- */
+  .funnel-benefits {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    padding: clamp(56px, 9vw, 88px) 20px 0;
+  }
+  @media (min-width: 768px) {
+    .funnel-benefits {
+      padding-inline: 40px;
+    }
+  }
+  .funnel-h2 {
+    margin: 0;
+    max-width: 680px;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(26px, 4vw, 34px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.18;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .funnel-rows {
+    width: 100%;
+    max-width: 760px;
+    margin: 34px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .funnel-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--color-hairline);
+    color: var(--color-ink);
+    font-size: 16px;
+    line-height: 26px;
+  }
+  .funnel-row strong {
+    font-weight: 500;
+  }
+  .funnel-check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    border-radius: 999px;
+    background-color: var(--color-green);
+  }
+
+  /* ---- proof ----------------------------------------------------------- */
+  .funnel-quote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    padding: clamp(56px, 8vw, 80px) 20px 0;
+  }
+  .funnel-quote-text {
+    margin: 0;
+    max-width: 760px;
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: clamp(22px, 3.4vw, 30px);
+    line-height: 1.34;
+    text-align: center;
+    text-wrap: pretty;
+  }
+  .funnel-quote-by {
+    margin: 16px 0 0;
+    color: #5b6170;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  /* ---- form ------------------------------------------------------------ */
+  .funnel-form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: clamp(56px, 9vw, 88px);
+    padding: clamp(56px, 9vw, 88px) 20px clamp(60px, 9vw, 96px);
+    background-color: var(--color-paper-cool);
+    border-top: 1px solid var(--color-hairline);
+    scroll-margin-top: 0;
+  }
+  .funnel-kicker {
+    margin: 0 0 14px;
+    color: #5b6170;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .funnel-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 440px;
+    margin-top: 30px;
+  }
+  .funnel-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 16px;
+    border: 1px solid #d6d3c8;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .funnel-input::placeholder {
+    color: #9aa0ac;
+  }
+  .funnel-input:focus {
+    outline: none;
+    border-color: var(--color-lapis);
+    box-shadow: 0 0 0 3px rgb(15 107 212 / 0.12);
+  }
+  .funnel-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 100%;
+    padding: 16px;
+    border: 0;
+    border-radius: 10px;
+    background-color: var(--color-lapis);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+  .funnel-submit:hover:not(:disabled) {
+    background-color: #0b5cbb;
+  }
+  .funnel-submit:disabled {
+    opacity: 0.62;
+    cursor: default;
+  }
+  .funnel-status {
+    display: none;
+    margin: 2px 0 0;
+    color: #5b6170;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .funnel-status[data-state] {
+    display: block;
+  }
+  .funnel-status[data-state='error'] {
+    color: #b3392b;
+  }
+
+  .funnel-trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .funnel-trust li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #5b6170;
+    font-size: 12px;
+  }
+
+  .funnel-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    width: 100%;
+    padding: 32px 20px;
+    color: #9aa0ac;
+    font-size: 12px;
+  }
+  .funnel-footer a:hover {
+    color: var(--color-ink);
+  }
+</style>
+
+<script>
+  // Magnet capture: fire the lead at the webhook, then hand over the file.
+  // Delivery does not wait on the webhook — a slow or misconfigured endpoint
+  // must never cost us the conversion we already earned.
+  import { postLead } from '../../lib/leads';
+
+  document.querySelectorAll<HTMLFormElement>('[data-magnet-form]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('.funnel-status');
+    const submit = form.querySelector<HTMLButtonElement>('.funnel-submit');
+    const webhook = form.dataset.webhook || '';
+    const file = form.dataset.file || '';
+    const magnet = form.dataset.magnet || '';
+
+    const show = (msg: string, state: 'ok' | 'error' = 'ok') => {
+      if (!status) return;
+      status.textContent = msg;
+      status.dataset.state = state;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const firstName = String(data.get('firstName') || '').trim();
+      const email = String(data.get('email') || '').trim();
+      if (!firstName || !email) return;
+
+      if (submit) submit.disabled = true;
+      show('Sending…');
+
+      const payload = { firstName, email, magnet };
+
+      try {
+        await postLead(webhook, 'magnet', payload);
+      } catch {
+        // Swallow: the lead may be lost, but the visitor still gets the file.
+      }
+
+      (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag?.('event', 'magnet_download', {
+        magnet,
+        page: location.pathname,
+      });
+
+      show('Opening your guide…');
+      if (file) window.location.href = file;
+      else show('Thanks — we’ll email it over shortly.');
+    });
+  });
+</script>

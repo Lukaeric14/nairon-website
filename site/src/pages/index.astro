@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/sections/Nav.astro';
+import Hero from '../components/sections/Hero.astro';
+import WhoItsFor from '../components/sections/WhoItsFor.astro';
+import Section2 from '../components/sections/Section2.astro';
+import HowWeWork from '../components/sections/HowWeWork.astro';
+import UseCases from '../components/sections/UseCases.astro';
+import Academy from '../components/sections/Academy.astro';
+import Newsletter from '../components/sections/Newsletter.astro';
+import BookCall from '../components/sections/BookCall.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import Footer from '../components/sections/Footer.astro';
+
+const faq = [
+  ['What is Nairon?', 'An AI workforce for property management businesses. We build, run, and manage AI employees that do real operational work — leasing, dispatch, rent, renewals — inside the tools you already use.'],
+  ['How is this different from software we buy?', 'You don’t configure it yourself. We embed with your team, build the agents around your workflows, and keep tuning them. A service on top of a platform, not another app to manage.'],
+  ['Which businesses do you serve?', 'Property management, exclusively — leasing, maintenance & dispatch, and rent & renewals today.'],
+  ['Do the agents work in our current tools?', 'Yes — your CRM, scheduling, and inbox. No rip-and-replace.'],
+  ['How fast do we see value?', 'Most teams have an agent handling live work within weeks, not quarters.'],
+  ['Is our data secure?', 'Your data stays in your systems. Agents act with scoped, audited access — every action is logged.'],
+];
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+};
+---
+
+<Base jsonLd={faqSchema} preloadImage="/photos/hero-property-management.webp">
+  <Nav />
+  <main>
+    <Hero />
+    <WhoItsFor />
+    <Section2 />
+    <HowWeWork />
+    <UseCases />
+    <Academy />
+    <Newsletter />
+    <BookCall />
+    <FAQ />
+    <Footer />
+  </main>
+</Base>

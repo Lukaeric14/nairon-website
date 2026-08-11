@@ -1,0 +1,577 @@
+---
+// HowWeWork — pinned, scroll-scrubbed "how we work" section.
+//
+// DESKTOP (>=1024px): the whole stage PINS and fills the viewport, so the title,
+// the isometric layer diagram + image/text, and the phase bar are ALL visible at
+// once. As you scroll, the 4 layers peel apart ONE AT A TIME — each layer rises
+// out of the compressed block and highlights in turn (Discover → Build → Tune →
+// Enable), with the image, step text, progress bar and labels all in sync. The
+// scroll runs across 5 viewport-heights so every bit of scroll moves something
+// (granular, not a fast blur).
+//
+// FALLBACK (<1024 / prefers-reduced-motion / no GSAP): no pin, no scrub — a static
+// fanned diagram + the 4 steps as a clean vertical sequence that reveals on scroll.
+
+const STEPS = [
+  {
+    n: '01', label: 'Discover', title: 'We map the work with your team.',
+    body: 'Our consultants and engineers sit down with your people to find the one job worth automating — and map exactly how it runs today.',
+    img: '/paper/78GEDCVB67HRGW0EYJGN23Y1KS.webp',
+  },
+  {
+    n: '02', label: 'Build', title: 'We build the agents.',
+    body: 'We turn that map into working AI employees, wired into your CRM, scheduling, and inbox — doing the real job end to end.',
+    img: '/paper/7S51KMWB9W3F102M4FPRAY88XA.webp',
+  },
+  {
+    n: '03', label: 'Tune', title: 'We tune them on real work.',
+    body: 'We run them on live cases, correct the edges, and keep improving accuracy until the output is trusted.',
+    img: '/paper/0D3A3QSMBE9DG5A0KFMJCXDMR8.webp',
+  },
+  {
+    n: '04', label: 'Enable', title: 'We train your team to own it.',
+    body: 'We hand over the controls: your people supervise, adjust, and scale the AI workforce without us in the loop.',
+    img: '/paper/5F01PXCRRMY558FP35NRXMSTF2.webp',
+  },
+];
+
+// Scene 0 — the intro state, shown before the four steps. Its own image + copy;
+// on the first scroll it transitions into step 1 (Discover).
+const SCENE0 = {
+  eyebrow: 'OUR MODEL',
+  title: 'A model built on 30+ successful AI projects.',
+  body: 'Then we put it to work for you — in four steps.',
+  img: '/paper/hww-scene0-break.webp',
+};
+---
+
+<section
+  data-testid="how-we-work"
+  data-hww-root
+  class="hww-section w-full"
+  style="background-color: #FBFBFB; box-sizing: border-box; font-synthesis: none; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased;"
+>
+  <div class="w-full max-w-[1248px] mx-auto px-5 md:px-10 lg:px-[96px]">
+    <!-- PINNED STAGE. Desktop: fills the viewport (title top / row middle / bar bottom).
+         Mobile: normal flow. -->
+    <div data-hww-pin class="hww-stage">
+      <!-- Header (inside the pin so the title stays visible the whole scroll). -->
+      <div class="hww-head">
+        <div style="align-items: center; box-sizing: border-box; display: flex; gap: 9px;">
+          <div style="background-color: #0f6bd4; border-radius: 8px; box-sizing: border-box; flex-shrink: 0; height: 8px; width: 8px;"></div>
+          <div style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; line-height: 16px;">
+            HOW WE WORK
+          </div>
+        </div>
+        <div
+          class="hww-title text-[clamp(26px,5.2vw,42px)] leading-[1.1] lg:leading-[46px]"
+          style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; letter-spacing: -0.03em; text-align: center;"
+        >
+          It starts with people. It ends with people.
+        </div>
+      </div>
+
+      <!-- Middle row: diagram (left) + image/text (right), vertically centered. -->
+      <div class="hww-row">
+        <!-- Left: isometric layer diagram. -->
+        <div class="hww-diagram-col">
+          <div class="hww-diagram">
+            <svg class="w-full h-full block" width="470" height="600" viewBox="0 0 470 600" xmlns="http://www.w3.org/2000/svg">
+              <!-- Layer 4 — Enable (bottom). Spread translate 0,21. -->
+              <g class="hww-layer" data-layer="4" style="transform: translate(0px, 21px);">
+                <path class="hww-face-top"  d="M280,415 L430,490 L280,565 L130,490 Z" style="fill: rgb(238, 242, 248); stroke: rgb(203, 213, 226); stroke-width: 1.2;" />
+                <path class="hww-face-left" d="M130,490 L280,565 L280,574 L130,499 Z" style="fill: rgb(226, 233, 243); stroke: rgb(203, 213, 226); stroke-width: 1.2;" />
+                <path class="hww-face-right" d="M430,490 L280,565 L280,574 L430,499 Z" style="fill: rgb(244, 247, 251); stroke: rgb(214, 222, 233); stroke-width: 1.2;" />
+              </g>
+              <!-- Layer 3 — Tune. Spread translate 0,36. -->
+              <g class="hww-layer" data-layer="3" style="transform: translate(0px, 36px);">
+                <path class="hww-face-top"  d="M280,255 L430,330 L280,405 L130,330 Z" style="fill: rgb(238, 242, 248); stroke: rgb(203, 213, 226); stroke-width: 1.2;" />
+                <path class="hww-face-left" d="M130,330 L280,405 L280,414 L130,339 Z" style="fill: rgb(226, 233, 243); stroke: rgb(203, 213, 226); stroke-width: 1.2;" />
+                <path class="hww-face-right" d="M430,330 L280,405 L280,414 L430,339 Z" style="fill: rgb(244, 247, 251); stroke: rgb(214, 222, 233); stroke-width: 1.2;" />
+              </g>
+              <!-- Layer 2 — Build. Spread translate 0,-49. -->
+              <g class="hww-layer" data-layer="2" style="transform: translate(0px, -49px);">
+                <path class="hww-face-top"  d="M280,195 L430,270 L280,345 L130,270 Z" style="fill: rgb(238, 242, 248); stroke: rgb(203, 213, 226); stroke-width: 1.2;" />
+                <path class="hww-face-left" d="M130,270 L280,345 L280,354 L130,279 Z" style="fill: rgb(226, 233, 243); stroke: rgb(203, 213, 226); stroke-width: 1.2;" />
+                <path class="hww-face-right" d="M430,270 L280,345 L280,354 L430,279 Z" style="fill: rgb(244, 247, 251); stroke: rgb(214, 222, 233); stroke-width: 1.2;" />
+              </g>
+              <!-- Layer 1 — Discover (top). Spread translate 0,-35. -->
+              <g class="hww-layer" data-layer="1" style="transform: translate(0px, -35px);">
+                <path class="hww-face-top"  d="M280,35 L430,110 L280,185 L130,110 Z" style="fill: rgb(238, 242, 248); stroke: rgb(203, 213, 226); stroke-width: 1.2;" />
+                <path class="hww-face-left" d="M130,110 L280,185 L280,194 L130,119 Z" style="fill: rgb(226, 233, 243); stroke: rgb(203, 213, 226); stroke-width: 1.2;" />
+                <path class="hww-face-right" d="M430,110 L280,185 L280,194 L430,119 Z" style="fill: rgb(244, 247, 251); stroke: rgb(214, 222, 233); stroke-width: 1.2;" />
+              </g>
+            </svg>
+            <!-- Labels: positioned in % of the box so they scale with the SVG.
+                 data-label 1..4 = Discover/Build/Tune/Enable; JS toggles active color,
+                 GSAP fades each in as its layer separates. -->
+            <div class="hww-label absolute" data-label="1" style="align-items: center; box-sizing: border-box; display: flex; gap: 8px; justify-content: flex-end; left: 0; top: 17%; translate: 0 -5.8333%; width: 20.4255%;">
+              <div class="hww-label-text" style="box-sizing: border-box; color: #6b7079; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; font-weight: 500; line-height: 18px; white-space: nowrap;">Discover</div>
+              <div class="hww-label-dot" style="background-color: #D0D5DD; border-radius: 7px; box-sizing: border-box; flex-shrink: 0; height: 7px; width: 7px;"></div>
+            </div>
+            <div class="hww-label absolute" data-label="2" style="align-items: center; box-sizing: border-box; display: flex; gap: 8px; justify-content: flex-end; left: 0; top: 43.6667%; translate: 0 -8.1667%; width: 20.4255%;">
+              <div class="hww-label-text" style="box-sizing: border-box; color: #6b7079; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; white-space: nowrap;">Build</div>
+              <div class="hww-label-dot" style="background-color: #D0D5DD; border-radius: 7px; box-sizing: border-box; flex-shrink: 0; height: 7px; width: 7px;"></div>
+            </div>
+            <div class="hww-label absolute" data-label="3" style="align-items: center; box-sizing: border-box; display: flex; gap: 8px; justify-content: flex-end; left: 0; top: 53.6667%; translate: 0 6%; width: 20.4255%;">
+              <div class="hww-label-text" style="box-sizing: border-box; color: #6b7079; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; white-space: nowrap;">Tune</div>
+              <div class="hww-label-dot" style="background-color: #D0D5DD; border-radius: 7px; box-sizing: border-box; flex-shrink: 0; height: 7px; width: 7px;"></div>
+            </div>
+            <div class="hww-label absolute" data-label="4" style="align-items: center; box-sizing: border-box; display: flex; gap: 8px; justify-content: flex-end; left: 0; top: 80.3333%; translate: 0 3.5%; width: 20.4255%;">
+              <div class="hww-label-text" style="box-sizing: border-box; color: #6b7079; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px; white-space: nowrap;">Enable</div>
+              <div class="hww-label-dot" style="background-color: #D0D5DD; border-radius: 7px; box-sizing: border-box; flex-shrink: 0; height: 7px; width: 7px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: per-state image (crossfades) + text. Index 0 = scene 0 intro; 1..4 = steps. -->
+        <div class="hww-content-col">
+          <div data-hww-imgtrack class="hww-imgtrack">
+            <div class="hww-img" data-img="0" style={`background-image: url(${SCENE0.img});`} />
+            {STEPS.map((s, i) => (
+              <div class="hww-img" data-img={i + 1} style={`background-image: url(${s.img});`} />
+            ))}
+          </div>
+          <div data-hww-steptrack class="hww-steptrack">
+            <!-- Scene 0 intro (no step number) -->
+            <div class="hww-step" data-step="0" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 12px;">
+              <div style="box-sizing: border-box; color: #6f747e; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; line-height: 14px;">
+                {SCENE0.eyebrow}
+              </div>
+              <div
+                class="text-[clamp(22px,4.4vw,28px)] leading-[1.2] lg:leading-[34px]"
+                style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-weight: 500; letter-spacing: -0.02em;"
+              >
+                {SCENE0.title}
+              </div>
+              <div style="box-sizing: border-box; color: #5B6170; font-family: 'Geist', system-ui, sans-serif; font-size: 16px; line-height: 25px;">
+                {SCENE0.body}
+              </div>
+            </div>
+            {STEPS.map((s, i) => (
+              <div class="hww-step" data-step={i + 1} style="box-sizing: border-box; display: flex; flex-direction: column; gap: 12px;">
+                <div style="box-sizing: border-box; color: #6f747e; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; line-height: 14px;">
+                  STEP {s.n} / 04
+                </div>
+                <div
+                  class="text-[clamp(22px,4.4vw,28px)] leading-[1.2] lg:leading-[34px]"
+                  style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-weight: 500; letter-spacing: -0.02em;"
+                >
+                  {s.title}
+                </div>
+                <div style="box-sizing: border-box; color: #5B6170; font-family: 'Geist', system-ui, sans-serif; font-size: 16px; line-height: 25px;">
+                  {s.body}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase bar. data-prog 1..4; JS fills up to the active step. -->
+      <div class="hww-progress">
+        {STEPS.map((s, i) => (
+          <div class="min-w-0 lg:flex-1 lg:basis-0" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 10px;">
+            <div class="hww-prog-bar" data-prog={i + 1} style="background-color: #E4E6EA; border-radius: 3px; box-sizing: border-box; flex-shrink: 0; height: 3px; width: 100%;"></div>
+            <div class="hww-prog-label" data-prog-label={i + 1} style="box-sizing: border-box; color: #6b7079; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; line-height: 14px;">
+              {s.n} · {s.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Section: modest padding; the desktop stage supplies its own vertical rhythm. */
+  .hww-section {
+    padding-block: clamp(48px, 9vw, 88px);
+  }
+
+  /* Stage. Mobile: normal flex column. Desktop: fills the viewport so title,
+     diagram/text and the phase bar are all on screen at once. */
+  .hww-stage {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 5vw, 40px);
+  }
+  .hww-head {
+    width: 100%;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .hww-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(28px, 5vw, 44px);
+  }
+  .hww-diagram-col {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .hww-diagram {
+    position: relative;
+    width: 470px;
+    max-width: 100%;
+    aspect-ratio: 470 / 600;
+  }
+  .hww-content-col {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 2.4vh, 24px);
+  }
+  .hww-imgtrack {
+    position: relative;
+    width: 100%;
+    height: clamp(200px, 30vh, 300px);
+    border-radius: 2px;
+    overflow: clip;
+  }
+  .hww-img {
+    position: absolute;
+    inset: 0;
+    background-position: 50%;
+    background-size: cover;
+    box-sizing: border-box;
+  }
+  .hww-steptrack {
+    position: relative;
+    width: 100%;
+  }
+  .hww-progress {
+    width: 100%;
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  /* ---- DESKTOP: pin-friendly full-viewport stage ---- */
+  @media (min-width: 1024px) {
+    .hww-section {
+      padding-block: clamp(32px, 5vh, 64px);
+    }
+    .hww-stage {
+      min-height: 100svh;
+      /* Center the whole (title + row + phase bar) group so the title sits a set
+         48px above the content, not stretched to the top. */
+      justify-content: center;
+      gap: 48px;
+      padding-block: clamp(14px, 3vh, 36px);
+    }
+    .hww-row {
+      flex: 0 0 auto;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(40px, 5vw, 64px);
+    }
+    .hww-diagram-col {
+      width: auto;
+      flex: 0 0 auto;
+    }
+    /* Diagram scales with viewport height so the whole stage always fits. Kept
+       close to the content column's height so they center together with a tight
+       gap under the title. */
+    .hww-diagram {
+      width: auto;
+      height: clamp(320px, 46vh, 480px);
+    }
+    .hww-content-col {
+      width: 500px;
+      flex: 0 0 auto;
+    }
+    .hww-progress {
+      display: flex;
+      gap: 12px;
+      /* Extra breathing room between the text and the phase bar (on top of the
+         48px group gap) → ~80px total. */
+      margin-top: 32px;
+    }
+  }
+
+  /* Reduced motion: the stage never pins (JS handles it); keep it as normal flow. */
+  @media (prefers-reduced-motion: reduce) {
+    .hww-stage { min-height: 0; }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { Observer } from 'gsap/Observer';
+  gsap.registerPlugin(ScrollTrigger, Observer);
+
+  // ---- Palette (matches the frozen design tokens in the markup) ----
+  const HL = { top: 'rgb(30, 134, 232)', left: 'rgb(19, 112, 216)', right: 'rgb(74, 156, 255)', stroke: 'rgb(15, 95, 191)' };
+  const NEUTRAL = { top: 'rgb(238, 242, 248)', left: 'rgb(226, 233, 243)', right: 'rgb(244, 247, 251)', strokeTop: 'rgb(203, 213, 226)', strokeRight: 'rgb(214, 222, 233)' };
+  const ACTIVE_DOT = '#D6A45C', IDLE_DOT = '#D0D5DD';
+  const ACTIVE_LABEL = '#14171F', IDLE_LABEL = '#6b7079';
+  const PROG_ACTIVE = '#0f6bd4', PROG_IDLE = '#E4E6EA';
+  const PROG_LABEL_ACTIVE = '#5B6170', PROG_LABEL_IDLE = '#6b7079';
+
+  const root = document.querySelector('[data-hww-root]') as HTMLElement | null;
+  if (root) initHowWeWork(root);
+
+  function initHowWeWork(root: HTMLElement) {
+    const layers = Array.from(root.querySelectorAll<SVGGElement>('.hww-layer'));
+    const labelEls = Array.from(root.querySelectorAll<HTMLElement>('[data-label]'));
+    const steps = Array.from(root.querySelectorAll<HTMLElement>('.hww-step'));
+    const imgs = Array.from(root.querySelectorAll<HTMLElement>('.hww-img'));
+    const stepTrack = root.querySelector<HTMLElement>('[data-hww-steptrack]');
+    const pinEl = root.querySelector<HTMLElement>('[data-hww-pin]')!;
+    const byLayer = (n: number) => layers.find((l) => l.dataset.layer === String(n))!;
+    const labelOf = (n: number) => labelEls.find((l) => l.dataset.label === String(n))!;
+
+    // Spread (fanned) vertical offsets = the original inline translates.
+    const SPREAD: Record<string, number> = { '1': -35, '2': -49, '3': 36, '4': 21 };
+    // Compressed offsets pull all 4 layers into a tight block centred in the box.
+    const COMPRESS: Record<string, number> = { '1': 168, '2': 23, '3': -22, '4': -167 };
+
+    function colorLayer(g: SVGGElement, active: boolean) {
+      const top = g.querySelector<SVGPathElement>('.hww-face-top')!;
+      const left = g.querySelector<SVGPathElement>('.hww-face-left')!;
+      const right = g.querySelector<SVGPathElement>('.hww-face-right')!;
+      if (active) {
+        top.style.fill = HL.top; top.style.stroke = HL.stroke; top.style.strokeWidth = '1.8';
+        left.style.fill = HL.left; left.style.stroke = HL.stroke;
+        right.style.fill = HL.right; right.style.stroke = HL.stroke;
+      } else {
+        top.style.fill = NEUTRAL.top; top.style.stroke = NEUTRAL.strokeTop; top.style.strokeWidth = '1.2';
+        left.style.fill = NEUTRAL.left; left.style.stroke = NEUTRAL.strokeTop;
+        right.style.fill = NEUTRAL.right; right.style.stroke = NEUTRAL.strokeRight;
+      }
+    }
+
+    // Discrete state for a step (1..4), or 0 for the neutral intro whole.
+    function setActiveStep(active: number) {
+      layers.forEach((g) => colorLayer(g, Number(g.dataset.layer) === active));
+      labelEls.forEach((el) => {
+        const on = Number(el.dataset.label) === active;
+        el.querySelector<HTMLElement>('.hww-label-text')!.style.color = on ? ACTIVE_LABEL : IDLE_LABEL;
+        el.querySelector<HTMLElement>('.hww-label-dot')!.style.backgroundColor = on ? ACTIVE_DOT : IDLE_DOT;
+      });
+      root.querySelectorAll<HTMLElement>('[data-prog]').forEach((el) => {
+        el.style.backgroundColor = active > 0 && Number(el.dataset.prog) <= active ? PROG_ACTIVE : PROG_IDLE;
+      });
+      root.querySelectorAll<HTMLElement>('[data-prog-label]').forEach((el) => {
+        el.style.color = Number(el.dataset.progLabel) === active ? PROG_LABEL_ACTIVE : PROG_LABEL_IDLE;
+      });
+    }
+
+    const mm = gsap.matchMedia();
+
+    // ---------- DESKTOP: pin + ONE scroll = ONE step (GSAP Observer) ----------
+    // The stage pins to fill the viewport. Each scroll gesture (wheel or swipe),
+    // no matter how big or small, advances EXACTLY one step — animated elegantly.
+    // At the first/last step a further scroll releases the pin so the page keeps
+    // scrolling normally (the user is never trapped).
+    mm.add({ isDesktop: '(min-width: 1024px)', reduce: '(prefers-reduced-motion: reduce)' }, (ctx) => {
+      const { isDesktop, reduce } = (ctx as any).conditions;
+      if (!isDesktop || reduce) return;
+
+      // Overlay the step-text blocks (crossfade in place); lock height so it never jumps.
+      if (stepTrack) {
+        const tallest = Math.max(...steps.map((s) => s.offsetHeight));
+        stepTrack.style.minHeight = tallest + 'px';
+      }
+      steps.forEach((el, i) => gsap.set(el, { position: 'absolute', top: 0, left: 0, width: '100%', opacity: i === 0 ? 1 : 0 }));
+
+      const STATES = 5; // 0 = compressed intro, 1..4 = Discover / Build / Tune / Enable
+      let index = 0;
+      let animating = false;
+      let engaged = false;
+
+      // Snap the whole diagram + content to a state instantly (used on entry).
+      function setStateInstant(k: number) {
+        layers.forEach((g) => {
+          const n = Number(g.dataset.layer);
+          gsap.set(g, { y: n <= k ? SPREAD[String(n)] : COMPRESS[String(n)] });
+        });
+        labelEls.forEach((el) => gsap.set(el, { opacity: Number(el.dataset.label) <= k ? 1 : 0 }));
+        // Index 0 = scene 0 intro; 1..4 = the steps. State maps 1:1 to img/text index.
+        imgs.forEach((el, i) => gsap.set(el, { opacity: i === k ? 1 : 0 }));
+        steps.forEach((el, i) => gsap.set(el, { opacity: i === k ? 1 : 0 }));
+        setActiveStep(k);
+        index = k;
+      }
+
+      // Animate exactly ONE step in the given direction. Only the single layer that
+      // toggles moves; highlight / image / text / progress crossfade to the target.
+      function stepTo(target: number, dir: number) {
+        animating = true;
+        const moving = dir > 0 ? target : index; // the layer that separates / recompresses
+        const g = byLayer(moving);
+        const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' }, onComplete: () => { animating = false; } });
+        tl.to(g, { y: dir > 0 ? SPREAD[String(moving)] : COMPRESS[String(moving)], duration: 0.8 }, 0);
+        tl.to(labelOf(moving), { opacity: dir > 0 ? 1 : 0, duration: 0.5 }, 0);
+        setActiveStep(target);
+        // State maps 1:1 to img/text index (0 = scene 0 intro).
+        steps.forEach((el, i) => tl.to(el, { opacity: i === target ? 1 : 0, duration: 0.35 }, 0));
+        imgs.forEach((el, i) => tl.to(el, { opacity: i === target ? 1 : 0, duration: 0.4 }, 0));
+        index = target;
+      }
+
+      setStateInstant(0);
+
+      const st = ScrollTrigger.create({
+        trigger: pinEl,
+        start: 'top top',
+        end: '+=' + Math.round(window.innerHeight * 0.6),
+        pin: true,
+        pinSpacing: true,
+        anticipatePin: 1,
+        onEnter: () => engage(true),
+        onEnterBack: () => engage(false),
+        onLeave: () => disengage(),
+        onLeaveBack: () => disengage(),
+      });
+
+      function engage(fromTop: boolean) {
+        engaged = true;
+        setStateInstant(fromTop ? 0 : STATES - 1);
+        observer.enable();
+        // Swallow the entry gesture's momentum so the incoming state shows before stepping.
+        animating = true;
+        gsap.delayedCall(0.4, () => { animating = false; });
+      }
+      function disengage() {
+        engaged = false;
+        observer.disable();
+      }
+      function releaseTo(y: number) {
+        disengage();
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+
+      function onGesture(dir: number) {
+        if (!engaged || animating) return;
+        const target = index + dir;
+        if (target < 0) { releaseTo(st.start - 80); return; } // scroll up past the first step
+        if (target > STATES - 1) { releaseTo(st.end + 80); return; } // scroll down past the last
+        stepTo(target, dir);
+      }
+
+      const observer = Observer.create({
+        target: window,
+        type: 'wheel,touch',
+        tolerance: 12,
+        preventDefault: true,
+        onDown: () => onGesture(1), // scroll/swipe down → next step
+        onUp: () => onGesture(-1), // scroll/swipe up → previous step
+      });
+      observer.disable();
+
+      return () => {
+        st.kill();
+        observer.kill();
+        if (stepTrack) stepTrack.style.minHeight = '';
+        steps.forEach((el) => gsap.set(el, { clearProps: 'position,top,left,width,opacity' }));
+        imgs.forEach((el) => gsap.set(el, { clearProps: 'opacity' }));
+        layers.forEach((g) => gsap.set(g, { clearProps: 'transform,y' }));
+        gsap.set(labelEls, { clearProps: 'opacity' });
+      };
+    });
+
+    // ---------- MOBILE / TABLET: auto-advance (no pin, no scroll-hijack) ----------
+    // Below lg the pinned Observer stepper is hostile to touch scrolling, so the
+    // same peel animation plays automatically on a timer once the section scrolls
+    // into view: Discover → Build → Tune → Enable, image + text + progress syncing,
+    // holding on the final step. Reduced-motion (any width) gets a static fanned
+    // diagram with the steps simply stacked and shown.
+    mm.add({ mobile: '(max-width: 1023px)', reduce: '(prefers-reduced-motion: reduce)' }, (ctx) => {
+      const { mobile, reduce } = (ctx as any).conditions as { mobile: boolean; reduce: boolean };
+      if (!mobile && !reduce) return; // desktop + motion is handled by the pinned block above
+
+      // Reduced motion (any width): static fanned diagram, steps stacked & visible.
+      if (reduce) {
+        steps.forEach((el, i) => {
+          gsap.set(el, { clearProps: 'position,top,left,width,opacity,y' });
+          el.style.marginTop = i === 0 ? '0' : '24px';
+        });
+        layers.forEach((g) => gsap.set(g, { y: SPREAD[g.dataset.layer!] }));
+        gsap.set(labelEls, { opacity: 1 });
+        imgs.forEach((el, i) => gsap.set(el, { opacity: i === 0 ? 1 : 0 }));
+        setActiveStep(1);
+        return;
+      }
+
+      // Mobile with motion allowed: overlay the steps (crossfade in place) and
+      // auto-advance through them.
+      const STATES = 5; // 0 = intro, 1..4 = Discover / Build / Tune / Enable
+      let index = 0;
+      let timer: gsap.core.Tween | null = null;
+      let playing = false;
+
+      steps.forEach((el) => (el.style.marginTop = ''));
+      if (stepTrack) {
+        const tallest = Math.max(...steps.map((s) => s.offsetHeight));
+        stepTrack.style.minHeight = tallest + 'px';
+      }
+      steps.forEach((el, i) => gsap.set(el, { position: 'absolute', top: 0, left: 0, width: '100%', opacity: i === 0 ? 1 : 0 }));
+
+      function snap(k: number) {
+        layers.forEach((g) => {
+          const n = Number(g.dataset.layer);
+          gsap.set(g, { y: n <= k ? SPREAD[String(n)] : COMPRESS[String(n)] });
+        });
+        labelEls.forEach((el) => gsap.set(el, { opacity: Number(el.dataset.label) <= k ? 1 : 0 }));
+        imgs.forEach((el, i) => gsap.set(el, { opacity: i === k ? 1 : 0 }));
+        steps.forEach((el, i) => gsap.set(el, { opacity: i === k ? 1 : 0 }));
+        setActiveStep(k);
+        index = k;
+      }
+      function animateTo(target: number) {
+        const g = byLayer(target); // going forward, the target layer separates out
+        const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+        tl.to(g, { y: SPREAD[String(target)], duration: 0.7 }, 0);
+        tl.to(labelOf(target), { opacity: 1, duration: 0.45 }, 0);
+        setActiveStep(target);
+        steps.forEach((el, i) => tl.to(el, { opacity: i === target ? 1 : 0, duration: 0.35 }, 0));
+        imgs.forEach((el, i) => tl.to(el, { opacity: i === target ? 1 : 0, duration: 0.4 }, 0));
+        index = target;
+      }
+
+      snap(0);
+
+      function advance() {
+        if (index >= STATES - 1) { playing = false; return; } // hold on the last step
+        animateTo(index + 1);
+        timer = gsap.delayedCall(2.0, advance);
+      }
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting && !playing) {
+              playing = true;
+              timer = gsap.delayedCall(0.6, advance);
+              io.disconnect();
+            }
+          });
+        },
+        { threshold: 0.3 },
+      );
+      io.observe(pinEl);
+
+      return () => {
+        if (timer) timer.kill();
+        io.disconnect();
+        if (stepTrack) stepTrack.style.minHeight = '';
+        steps.forEach((el) => { el.style.marginTop = ''; gsap.set(el, { clearProps: 'position,top,left,width,opacity,y' }); });
+        imgs.forEach((el) => gsap.set(el, { clearProps: 'opacity' }));
+        layers.forEach((g) => gsap.set(g, { clearProps: 'transform,y' }));
+        gsap.set(labelEls, { clearProps: 'opacity' });
+      };
+    });
+  }
+</script>

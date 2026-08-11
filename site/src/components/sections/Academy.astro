@@ -1,0 +1,134 @@
+---
+// Academy.astro — the "AI Academy" section: a short, horizontal row of the
+// latest YouTube lessons (the AI Fundamentals track). Sharp editorial register
+// (no rounded corners, info on the surface, hairline rule) — matches the Paper
+// V6 direction. Thumbnails come straight from YouTube; each card links to the
+// video, "View all" links to the academy.
+// Cards now link to the on-domain lesson pages, not straight out to YouTube.
+// Sending the homepage's authority to /academy/* is the entire point of moving
+// the academy on-domain; linking off-site instead would waste it.
+import { lessonsByTopic, thumbUrlSmall, LEVEL_LABELS } from '../../data/academy';
+
+const ACADEMY_URL = '/academy';
+const TRACK = await lessonsByTopic('ai-fundamentals');
+const TOTAL = TRACK.length;
+const LESSONS = TRACK.slice(0, 4);
+---
+
+<section
+  data-testid="academy"
+  class="w-full overflow-clip py-[84px] md:py-[112px]"
+  style="background-color: #F7F6F2; box-sizing: border-box; font-synthesis: none; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased;"
+>
+  <div class="mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-[96px]" style="box-sizing: border-box;">
+    <!-- Header -->
+    <div
+      data-reveal-group
+      class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+      style="box-sizing: border-box;"
+    >
+      <div data-reveal class="flex min-w-0 flex-col gap-4" style="box-sizing: border-box;">
+        <div style="box-sizing: border-box; color: #0F6BD4; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; line-height: 16px;">
+          AI ACADEMY
+        </div>
+        <h2
+          class="text-[clamp(32px,5.5vw,48px)] leading-[1.06] lg:text-[48px] lg:leading-[52px]"
+          style="margin: 0; box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-weight: 500; letter-spacing: -0.03em;"
+        >
+          Learn AI, minus the jargon.
+        </h2>
+      </div>
+      <div data-reveal class="flex shrink-0 flex-col gap-3 md:items-end" style="box-sizing: border-box;">
+        <div style="box-sizing: border-box; color: #9AA0AC; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 11.5px; letter-spacing: 0.14em; line-height: 16px;">
+          AI FUNDAMENTALS — {TOTAL} LESSONS
+        </div>
+        <a
+          href={ACADEMY_URL}
+          class="flex items-center gap-2"
+          style="box-sizing: border-box; text-decoration: none;"
+        >
+          <span style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; font-weight: 500; line-height: 20px;">View all</span>
+          <span style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 20px;">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Hairline + horizontal rail of lessons -->
+    <div
+      data-reveal-group
+      class="academy-rail flex gap-6 pt-10"
+      style="border-top: 1px solid rgba(20,23,31,0.13); box-sizing: border-box; margin-top: 34px; overflow-x: auto;"
+    >
+      {
+        LESSONS.map((l) => (
+          <a
+            data-reveal
+            href={`/academy/${l.id}`}
+            class="academy-card shrink-0"
+            style="box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; text-decoration: none;"
+          >
+            <div class="academy-thumb" style="position: relative; width: 100%; overflow: hidden; aspect-ratio: 16 / 9; background-color: #0A1322; box-sizing: border-box;">
+              <img
+                src={thumbUrlSmall(l.data.youtubeId)}
+                alt={`Nairon AI Academy lesson: ${l.data.title}`}
+                loading="lazy"
+                width="480"
+                height="270"
+                style="width: 100%; height: 100%; object-fit: cover; display: block;"
+              />
+              <div style="position: absolute; left: 0; bottom: 0; box-sizing: border-box; align-items: center; background-color: rgba(10,19,34,0.85); display: flex; height: 34px; justify-content: center; width: 34px;">
+                <svg width="12" height="12" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                  <path d="M3.5 2 L12 7 L3.5 12 Z" fill="#FFFFFF"></path>
+                </svg>
+              </div>
+            </div>
+            <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 8px;">
+              <div style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-size: 17px; font-weight: 500; letter-spacing: -0.01em; line-height: 22px;">
+                {l.data.title}
+              </div>
+              <div style="box-sizing: border-box; color: #9AA0AC; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.14em; line-height: 14px;">
+                LESSON {String(l.data.order).padStart(2, '0')} · {LEVEL_LABELS[l.data.level].toUpperCase()}
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Horizontal row: on desktop the four cards fill the width exactly (no
+     scroll); below lg they keep a comfortable width and the row scrolls. */
+  .academy-card {
+    width: 78vw;
+    max-width: 320px;
+  }
+  @media (min-width: 768px) {
+    .academy-card {
+      width: 300px;
+      max-width: none;
+    }
+  }
+  @media (min-width: 1024px) {
+    .academy-rail {
+      overflow-x: visible;
+    }
+    .academy-card {
+      width: calc((100% - 72px) / 4);
+      max-width: none;
+    }
+  }
+  /* Subtle hover: the thumbnail lifts slightly. */
+  .academy-card .academy-thumb {
+    transition: opacity 0.2s ease;
+  }
+  .academy-card:hover .academy-thumb {
+    opacity: 0.9;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .academy-card .academy-thumb {
+      transition: none;
+    }
+  }
+</style>

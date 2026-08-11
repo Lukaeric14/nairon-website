@@ -1,0 +1,59 @@
+---
+import Page from '../layouts/Page.astro';
+---
+<Page title="Security &amp; data access — Nairon" description="How Nairon keeps your data safe: scoped, audited, least-privilege access inside your own systems. Encryption, access controls, and an honest roadmap." eyebrow="Security" heading="Security is how the work gets done — not an afterthought." intro="Nairon runs AI employees inside the tools you already use. That means access is scoped, every action is logged, and your data stays where it lives — under your control." updated="July 25, 2026">
+  <div class="page-body">
+    <section class="page-section">
+      <h2 class="page-section-title">How access works</h2>
+      <p class="page-section-sub">We build our security model around one rule: an agent should only touch what its job requires, and every touch should leave a record.</p>
+      <div class="page-grid cols-2">
+        <div class="page-card">
+          <div class="page-card-kicker">Your systems</div>
+          <h3>Your data stays in your systems</h3>
+          <p>Agents act inside your existing CRM, scheduling, and inbox. We do not rip out your stack or migrate your records into a separate app. Your data stays in the systems you already own and administer.</p>
+        </div>
+        <div class="page-card">
+          <div class="page-card-kicker">Least privilege</div>
+          <h3>Scoped, audited access</h3>
+          <p>Each agent gets least-privilege access to the specific tools and actions its work requires — nothing more. Every action an agent takes is logged and reviewable, so you can see exactly what was done and when.</p>
+        </div>
+        <div class="page-card">
+          <div class="page-card-kicker">Encryption</div>
+          <h3>Encryption in transit and at rest</h3>
+          <p>Data moving between systems is encrypted in transit. Data we hold is encrypted at rest. We rely on the security features of the platforms and infrastructure providers we build on.</p>
+        </div>
+        <div class="page-card">
+          <div class="page-card-kicker">Access controls</div>
+          <h3>Access controls</h3>
+          <p>We support single sign-on and role-based access where your systems allow it. Access follows the principle of least privilege, and credentials are held only for the integrations an agent needs to do its work.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <h2 class="page-section-title">Infrastructure &amp; providers</h2>
+      <p class="page-section-sub">We build on established providers rather than reinventing the parts of security that others do well.</p>
+      <div class="page-grid cols-2">
+        <div class="page-card">
+          <div class="page-card-kicker">Subprocessors</div>
+          <h3>Vendors and subprocessors</h3>
+          <p>We use reputable providers for hosting and infrastructure. These subprocessors carry their own security controls and compliance programs, and we choose them to keep your data on a well-secured foundation.</p>
+        </div>
+        <div class="page-card">
+          <div class="page-card-kicker">Roadmap</div>
+          <h3>Certifications — an honest note</h3>
+          <p>We do not currently hold formal certifications such as SOC 2. Building toward them is on our roadmap. We would rather tell you where we are than claim a badge we have not earned yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <h2 class="page-section-title">Privacy &amp; reporting</h2>
+      <p class="page-section-sub">For how we handle personal data, see our <a href="/privacy">Privacy Policy</a>.</p>
+      <p>Found a security issue, or have a question about how we handle access? Email us at <a href="mailto:hello@naironai.com">hello@naironai.com</a> and we will respond directly.</p>
+      <div style="margin-top:24px;">
+        <a href="/#book" style="align-items:center; background-color:#0f6bd4; border-radius:40px; color:#fff; display:inline-flex; font-family:'Geist',system-ui,sans-serif; font-size:15px; font-weight:500; gap:8px; margin-top:8px; padding:13px 24px; text-decoration:none;">Book an AI audit <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+  </div>
+</Page>

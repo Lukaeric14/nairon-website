@@ -1,0 +1,71 @@
+---
+// Lesson card — thumbnail, kicker, title. Used by the academy index, the topic
+// hubs and the "continue the track" row, so all three stay identical.
+import { thumbUrlSmall, formatDuration, type Lesson } from '../../data/academy';
+
+export interface Props {
+  lesson: Lesson;
+  /** Show the topic instead of the lesson number (used on mixed-topic rows). */
+  showTopic?: boolean;
+  topicLabel?: string;
+}
+const { lesson, showTopic = false, topicLabel } = Astro.props;
+const d = lesson.data;
+const kicker = showTopic && topicLabel ? topicLabel : `Lesson ${String(d.order || 1).padStart(2, '0')}`;
+---
+
+<a data-reveal href={`/academy/${lesson.id}`} class="lesson-card">
+  <div class="lesson-card-thumb">
+    <img src={thumbUrlSmall(d.youtubeId)} alt="" width="480" height="270" loading="lazy" />
+  </div>
+  <p class="lesson-card-kicker">{kicker} · {formatDuration(d.duration)}</p>
+  <p class="lesson-card-title">{d.title}</p>
+</a>
+
+<style>
+  .lesson-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+  }
+  .lesson-card-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: clip;
+    border-radius: 10px;
+    background-color: #0a1322;
+  }
+  .lesson-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .lesson-card:hover .lesson-card-thumb img {
+    transform: scale(1.03);
+  }
+  .lesson-card-kicker {
+    margin: 0;
+    color: #9aa0ac;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .lesson-card-title {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 21px;
+    text-wrap: balance;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lesson-card-thumb img {
+      transition: none;
+    }
+  }
+</style>

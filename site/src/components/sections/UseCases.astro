@@ -1,0 +1,1149 @@
+---
+// UseCases section — pixel-perfect reproduction of Paper node K72-0
+// Responsive: mobile-first base, tablet at md(>=768), desktop UNCHANGED at lg(>=1024).
+// Desktop pixel-perfect design lives behind the .uc-* classes' lg rules; below lg the
+// two-column rows stack and each glass "stage" (native 618px square) scales down with
+// container-query units so nothing ever exceeds the viewport.
+
+// Use Case 3 (Property Management — Accounts table). No AGENT column: each row is
+// an account's next rent/renewal step; on scroll-in the accounts come in
+// unassigned, then the Nova agent is added to the left of each row one by one
+// (see <script>).
+const NOVA_AVATAR = '/paper/1SSBFY17CYYFA93GJQ32AND2YC.webp';
+const uc3rows = [
+  { req: 'Unit 4B · Rent overdue', working: 'Sending reminder…', done: 'Reminder sent', type: 'Delinquency' },
+  { req: 'Unit 12 · Lease renewal', working: 'Drafting offer…', done: 'Offer sent', type: 'Renewal' },
+  { req: 'Unit 7 · Deposit refund', working: 'Processing…', done: 'Refund issued', type: 'Move-out' },
+  { req: 'Unit 15 · Renewal signed', working: 'Confirming…', done: 'Lease renewed', type: 'Renewal' },
+];
+---
+<div
+  data-testid="use-cases"
+  class="uc-root"
+  style="align-items: center; background-color: #FFFFFF; box-sizing: border-box; display: flex; flex-direction: column; font-size: 12px; font-synthesis: none; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased;"
+>
+  <!-- Centered, capped content container -->
+  <div class="uc-container" style="box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+    <!-- Header -->
+    <div class="uc-header" data-reveal-group style="align-items: center; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px; width: 100%;">
+      <div data-reveal style="align-items: center; box-sizing: border-box; display: flex; gap: 8px;">
+        <div style="background-color: #0f6bd4; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 8px; width: 8px;"></div>
+        <div style="box-sizing: border-box; color: #5B6170; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; line-height: 14px;">
+          USE CASES
+        </div>
+      </div>
+      <div style="align-items: center; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; width: 100%;">
+        <div class="uc-h2" data-reveal style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-weight: 500; letter-spacing: -0.02em; line-height: 106%; text-align: center; text-wrap: balance;">
+          Built for your industry — and your stack.
+        </div>
+        <div class="uc-sub" data-reveal style="box-sizing: border-box; color: #5B6170; font-family: 'Geist', system-ui, sans-serif; line-height: 160%; max-width: 640px; text-align: center;">
+          Nairon’s agents own the jobs that clog your day — right inside the software you already run on.
+        </div>
+      </div>
+    </div>
+
+    <div class="uc-rows" style="align-items: center; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; width: 100%;">
+      <!-- ROW 1 — text left, image right. Choreographed on scroll-in (see <script> below). -->
+      <div class="uc-row" style="box-sizing: border-box; width: 100%;">
+        <div class="uc-row-inner" data-uc1 style="box-sizing: border-box; display: flex; width: 100%;">
+          <!-- TEXT COLUMN -->
+          <div class="uc-textcol" style="box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 30px; width: 100%;">
+              <div data-uc1-t="title" style="box-sizing: border-box; display: flex; flex-direction: column; max-width: 400px; width: 100%;">
+                <div style="box-sizing: border-box; font-variation-settings: 'wght' 450;">
+                  <div class="uc-rowtitle" style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; letter-spacing: -0.02em; text-wrap: balance;">
+                    Leads answered, tours booked — 24/7
+                  </div>
+                </div>
+              </div>
+              <div class="uc-rowbody" data-uc1-t="body" style="box-sizing: border-box; display: flex; flex-direction: column; width: 100%; word-break: break-word;">
+                <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                  <div style="box-sizing: border-box; color: #68655E; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                    Every leasing inquiry gets an answer in minutes, day or night — qualified, invited, and booked straight into the tour calendar.
+                  </div>
+                </div>
+              </div>
+              <div data-uc1-t="works" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 11px; padding-top: 6px;">
+                <div style="box-sizing: border-box; color: #75726b; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 10px; letter-spacing: 0.14em; line-height: 12px;">
+                  WORKS WITH
+                </div>
+                <div style="align-items: center; box-sizing: border-box; display: flex; gap: 16px;">
+                  <div style="background-image: url(/paper/4CKDF1VA7QQB4H98Y6CNRDY0HH.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 22px; width: 22px;"></div>
+                  <div style="background-image: url(/paper/1K0RMHRFW2MNM0QFN1PJVQMZA0.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 22px; width: 22px;"></div>
+                  <div style="background-image: url(/paper/19AT5N079TXZT737MK72JY55TW.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 22px; width: 22px;"></div>
+                  <div style="background-image: url(/paper/5FG3JNWJXCG4XCF67XPS1R9PFJ.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 22px; width: 22px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="uc-substeps" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 30px; max-width: 532px; width: 100%;">
+              <div data-uc1-t="s1" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 15px; padding-left: 20px; position: relative; width: 100%;">
+                <div style="box-sizing: border-box; display: flex; flex-direction: column;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                      Answer every inquiry instantly
+                    </div>
+                  </div>
+                </div>
+                <div style="box-sizing: border-box; display: flex; flex-direction: column; max-width: 70%; width: 100%; word-break: break-word;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #68655E; font-family: system-ui, sans-serif; font-size: 14.08px; line-height: 19.712px;">
+                      Pricing, availability, pet policy, move-in dates — answered from your listings the moment a lead writes in.
+                    </div>
+                  </div>
+                </div>
+                <div style="box-sizing: border-box; display: flex; flex-direction: column; left: 0px; position: absolute; top: 0px;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                      ↳
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-uc1-t="s2" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 15px; padding-left: 20px; width: 100%;">
+                <div style="box-sizing: border-box; display: flex; flex-direction: column;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                      Pre-qualify and book tours
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-uc1-t="s3" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 15px; padding-left: 20px; width: 100%;">
+                <div style="box-sizing: border-box; display: flex; flex-direction: column;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                      Follow up until move-in
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- IMAGE COLUMN — photo present immediately; the glass panel is choreographed. -->
+          <div class="uc-imgcol">
+            <div class="uc-stage" style="border-radius: 2px; box-sizing: border-box; overflow: clip; position: relative;">
+              <img class="uc-photo" src="/paper/0D3A3QSMBE9DG5A0KFMJCXDMR8.webp" alt="Leasing workflow: AI chat handling a prospective tenant inquiry" loading="lazy" decoding="async" />
+              <div class="uc-dots" style="align-items: center; background-color: #00000066; border-radius: 24px; box-sizing: border-box; display: flex; gap: 5px; left: 20px; padding-block: 6px; padding-inline: 10px; position: absolute; top: 20px;">
+                <div style="background-color: #FFFFFF8C; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 5px; width: 5px;"></div>
+                <div style="background-color: #FFFFFF8C; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 5px; width: 5px;"></div>
+                <div style="background-color: #FFFFFF8C; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 5px; width: 5px;"></div>
+              </div>
+              <div class="uc-panel uc-panel-chat" style="backdrop-filter: blur(34px); background-color: #F9FBFF8C; border-color: #FFFFFF99; border-radius: 22px; border-style: solid; border-width: 1px; box-shadow: #1016264D 0px 30px 60px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; padding: 20px; position: absolute; right: 28px; top: 34px;">
+                <div style="box-sizing: border-box; display: flex; justify-content: flex-end;">
+                  <div style="background-image: url(/paper/5J3Q61EVP9X31HMH8MBXB73C4B.webp); background-position: 50%; background-size: cover; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 34px; object-position: 50% 22%; width: 34px;"></div>
+                </div>
+                <div style="box-sizing: border-box; display: flex; justify-content: flex-end;">
+                  <div style="background-color: #78849633; border-radius: 16px; box-sizing: border-box; max-width: 82%; padding-block: 12px; padding-inline: 16px;">
+                    <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 135%;">
+                      Follow up with today's leasing leads
+                    </div>
+                  </div>
+                </div>
+                <div style="box-sizing: border-box; display: flex; justify-content: flex-end;">
+                  <div style="align-items: center; background-color: #7884962E; border-radius: 14px; box-sizing: border-box; display: flex; gap: 9px; padding-block: 9px; padding-inline: 13px;">
+                    <svg width="18" height="18" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" style="box-sizing: border-box; flex-shrink: 0;">
+                      <path d="M5 2.5A1.5 1.5 0 0 1 6.5 1H12l4 4v10.5A1.5 1.5 0 0 1 14.5 17h-8A1.5 1.5 0 0 1 5 15.5v-13z" fill="#107C41" />
+                      <path d="M12 1l4 4h-2.75A1.25 1.25 0 0 1 12 3.75V1z" fill="#8ED1A8" />
+                      <text x="10.2" y="14.3" font-family="'Geist', system-ui, sans-serif" font-size="5" font-weight="700" letter-spacing="0.1" fill="#FFFFFF" text-anchor="middle">CSV</text>
+                    </svg>
+                    <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px;">
+                      Maple_St_Leads.csv
+                    </div>
+                  </div>
+                </div>
+                <div style="border-radius: 50%; box-shadow: #00000029 0px 1px 3px, #0000001A 0px 1px 1px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 38px; overflow: clip; position: relative; width: 38px;">
+                  <div style="background-image: url(/paper/1SSBFY17CYYFA93GJQ32AND2YC.webp); background-position: 50%; background-size: cover; box-sizing: border-box; height: 100%; width: 100%;"></div>
+                  <div style="background-image: radial-gradient(circle farthest-corner at 32% 24% in oklab, oklab(100% 0 0 / 50%) 0%, oklab(100% 0 0 / 0%) 42%); border-radius: 50%; box-sizing: border-box; height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;"></div>
+                </div>
+                <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 2px;">
+                  <div style="align-items: center; box-sizing: border-box; display: flex; gap: 8px;">
+                    <div class="uc1-status" style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-size: 17px; font-weight: 500; line-height: 22px;">
+                      6 tours booked
+                    </div>
+                    <div class="uc1-dots" aria-hidden="true" style="align-items: center; box-sizing: border-box; display: none; gap: 3px;">
+                      <span></span><span></span><span></span>
+                    </div>
+                  </div>
+                </div>
+                <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 11px;">
+                  <div style="align-items: center; box-sizing: border-box; display: flex; gap: 12px;">
+                    <div style="box-sizing: border-box; color: #626875; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 12px; line-height: 16px;">
+                      1
+                    </div>
+                    <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; font-weight: 500; line-height: 18px;">
+                      Replied to 14 inquiries
+                    </div>
+                    <div style="box-sizing: border-box; flex-basis: 0%; flex-grow: 1;"></div>
+                    <div style="box-sizing: border-box; color: #6b7079; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px;">
+                      ⌃
+                    </div>
+                  </div>
+                  <div style="box-sizing: border-box; color: #4E5460; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 150%;">
+                    Pricing, availability, and pet policy answered from the listing — median reply time 4 minutes.
+                  </div>
+                  <div style="align-items: center; box-sizing: border-box; display: flex; gap: 10px;">
+                    <div style="box-sizing: border-box; flex-basis: 0%; flex-grow: 1;"></div>
+                    <div style="align-items: center; background-color: #FFFFFF59; border-color: #14171F24; border-radius: 20px; border-style: solid; border-width: 1px; box-sizing: border-box; display: flex; justify-content: center; padding-block: 8px; padding-inline: 16px;">
+                      <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px;">
+                        Dismiss
+                      </div>
+                    </div>
+                    <div style="align-items: center; background-color: #14171F; border-radius: 20px; box-sizing: border-box; display: flex; gap: 6px; padding-block: 8px; padding-inline: 16px;">
+                      <div style="box-sizing: border-box; color: #FFFFFF; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; font-weight: 500; line-height: 16px;">
+                        Review
+                      </div>
+                      <div style="box-sizing: border-box; color: #FFFFFF; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 11px; line-height: 14px;">
+                        ⌃
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="align-items: center; border-top-color: #14171F1A; border-top-style: solid; border-top-width: 1px; box-sizing: border-box; display: flex; gap: 12px; padding-top: 12px;">
+                  <div style="box-sizing: border-box; color: #626875; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 12px; line-height: 16px;">
+                    2
+                  </div>
+                  <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 18px;">
+                    Tours on the calendar — 6
+                  </div>
+                  <div style="box-sizing: border-box; flex-basis: 0%; flex-grow: 1;"></div>
+                  <div style="box-sizing: border-box; color: #6b7079; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px;">
+                    ⌄
+                  </div>
+                </div>
+                <div style="align-items: center; border-top-color: #14171F1A; border-top-style: solid; border-top-width: 1px; box-sizing: border-box; display: flex; gap: 12px; padding-top: 12px;">
+                  <div style="box-sizing: border-box; color: #626875; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 12px; line-height: 16px;">
+                    3
+                  </div>
+                  <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 18px;">
+                    Follow-ups scheduled — 8
+                  </div>
+                  <div style="box-sizing: border-box; flex-basis: 0%; flex-grow: 1;"></div>
+                  <div style="box-sizing: border-box; color: #6b7079; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px;">
+                    ⌄
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW 2 — image left, text right. Choreographed on scroll-in (see <script>). -->
+      <div class="uc-row" style="box-sizing: border-box; width: 100%;">
+        <div class="uc-row-inner uc-row-rev" data-uc2 style="box-sizing: border-box; display: flex; width: 100%;">
+          <!-- IMAGE COLUMN — photo present; the dispatch panel is choreographed. -->
+          <div class="uc-imgcol">
+            <div class="uc-stage" style="border-radius: 2px; box-sizing: border-box; overflow: clip; position: relative;">
+              <img class="uc-photo" src="/photos/uc-maintenance-dispatch.webp" alt="Maintenance & dispatch workflow: AI triaging and routing a work order" loading="lazy" decoding="async" />
+              <div class="uc-dots" style="align-items: center; background-color: #00000066; border-radius: 24px; box-sizing: border-box; display: flex; gap: 5px; left: 20px; padding-block: 6px; padding-inline: 10px; position: absolute; top: 20px;">
+                <div style="background-color: #FFFFFF8C; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 5px; width: 5px;"></div>
+                <div style="background-color: #FFFFFF8C; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 5px; width: 5px;"></div>
+                <div style="background-color: #FFFFFF8C; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 5px; width: 5px;"></div>
+              </div>
+              <div class="uc-panel uc-panel-dispatch" style="backdrop-filter: blur(34px); background-color: #F9FBFF8C; border-color: #FFFFFF99; border-radius: 22px; border-style: solid; border-width: 1px; box-shadow: #1016264D 0px 30px 60px; box-sizing: border-box; display: flex; flex-direction: column; gap: 15px; left: 30px; padding: 20px; position: absolute; top: 74px;">
+                <div style="align-items: center; box-sizing: border-box; display: flex; gap: 8px;">
+                  <div style="box-sizing: border-box; flex-basis: 0%; flex-grow: 1;"></div>
+                  <div style="box-sizing: border-box; color: #6f747e; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 10px; line-height: 12px;">
+                    11:03 AM
+                  </div>
+                </div>
+                <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 5px;">
+                  <div style="align-items: center; box-sizing: border-box; display: flex; gap: 9px;">
+                    <div style="align-items: center; background-color: #2E9E6AA6; border-color: #FFFFFF33; border-radius: 5px; border-style: solid; border-width: 1px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 18px; justify-content: center; width: 18px;">
+                      <svg width="11" height="11" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="#FFFFFF" />
+                      </svg>
+                    </div>
+                    <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px;">
+                      Work order · Unit 4B
+                    </div>
+                  </div>
+                  <div style="box-sizing: border-box; display: inline-block; padding-left: 27px;">
+                    <div style="box-sizing: border-box; color: #6f747e; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 11px; line-height: 14px;">
+                      No hot water · plumbing
+                    </div>
+                  </div>
+                </div>
+                <div style="align-items: center; box-sizing: border-box; display: flex; gap: 8px; padding-left: 27px;">
+                  <div class="uc2-status" style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-size: 13.5px; font-weight: 500; line-height: 16px;">
+                    Booking window
+                  </div>
+                  <div class="uc2-dots" aria-hidden="true" style="align-items: center; box-sizing: border-box; display: none; gap: 3px;">
+                    <span></span><span></span><span></span>
+                  </div>
+                </div>
+                <div style="background-color: #14171F1A; box-sizing: border-box; flex-shrink: 0; height: 1px;"></div>
+                <div style="align-items: center; box-sizing: border-box; display: flex; gap: 13px;">
+                  <div style="background-image: url(/photos/avatar-tech.webp); background-position: 50%; background-size: cover; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 52px; object-position: 50% 26%; width: 52px;"></div>
+                  <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 3px;">
+                    <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 16px; font-weight: 500; line-height: 20px;">
+                      Dan Kowalski
+                    </div>
+                    <div style="box-sizing: border-box; color: #626875; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px;">
+                      Plumber · Rapid Rooter
+                    </div>
+                    <div style="align-items: center; box-sizing: border-box; display: flex; gap: 7px;">
+                      <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px;">
+                        Confirmed · today 1:15 PM
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 7px;">
+                  <div style="background-color: #14171F1A; border-radius: 3px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 6px; overflow: clip;">
+                    <div style="background-color: #0f6bd4; border-radius: 3px; box-sizing: border-box; height: 6px; width: round(56%, 1px);"></div>
+                  </div>
+                  <div style="align-items: center; box-sizing: border-box; display: flex;">
+                    <div style="box-sizing: border-box; flex-basis: 0%; flex-grow: 1;"></div>
+                    <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 10px; line-height: 12px;">
+                      WINDOW 1:00–3:00 PM
+                    </div>
+                  </div>
+                </div>
+                <div style="align-items: center; box-sizing: border-box; display: flex; gap: 9px;">
+                  <div style="align-items: center; background-color: #FFFFFF59; border-color: #14171F24; border-radius: 20px; border-style: solid; border-width: 1px; box-sizing: border-box; display: flex; flex-basis: 0%; flex-grow: 1; justify-content: center; padding-block: 9px; padding-inline: 16px;">
+                    <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; line-height: 16px;">
+                      Message
+                    </div>
+                  </div>
+                  <div style="align-items: center; background-color: #14171F; border-radius: 20px; box-sizing: border-box; display: flex; flex-basis: 0%; flex-grow: 1; justify-content: center; padding-block: 9px; padding-inline: 16px;">
+                    <div style="box-sizing: border-box; color: #FFFFFF; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; font-weight: 500; line-height: 16px;">
+                      Call vendor
+                    </div>
+                  </div>
+                </div>
+                <div style="background-color: #14171F1A; box-sizing: border-box; flex-shrink: 0; height: 1px;"></div>
+                <div style="align-items: center; box-sizing: border-box; display: flex; gap: 9px;">
+                  <div style="border-radius: 50%; box-sizing: border-box; display: flex; flex-shrink: 0; height: 22px; overflow: clip; position: relative; width: 22px;">
+                    <div style="background-image: url(/paper/1SSBFY17CYYFA93GJQ32AND2YC.webp); background-position: 50%; background-size: cover; box-sizing: border-box; height: 100%; width: 100%;"></div>
+                    <div style="background-image: radial-gradient(circle farthest-corner at 32% 24% in oklab, oklab(100% 0 0 / 50%) 0%, oklab(100% 0 0 / 0%) 42%); border-radius: 50%; box-sizing: border-box; height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;"></div>
+                  </div>
+                  <div style="box-sizing: border-box; color: #626875; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 12.5px; line-height: 16px;">
+                    Dispatched by Nova · just now
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- TEXT COLUMN -->
+          <div class="uc-textcol" style="box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 30px; width: 100%;">
+              <div data-uc2-t="title" style="box-sizing: border-box; display: flex; flex-direction: column; max-width: 400px; width: 100%;">
+                <div style="box-sizing: border-box; font-variation-settings: 'wght' 450;">
+                  <div class="uc-rowtitle" style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; letter-spacing: -0.02em; text-wrap: balance;">
+                    Vendors dispatched and tracked
+                  </div>
+                </div>
+              </div>
+              <div class="uc-rowbody" data-uc2-t="body" style="box-sizing: border-box; display: flex; flex-direction: column; width: 100%; word-break: break-word;">
+                <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                  <div style="box-sizing: border-box; color: #68655E; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                    When a work order needs outside hands, Hive picks the vendor, books the window, and tracks the job to done — receipts filed, resident updated.
+                  </div>
+                </div>
+              </div>
+              <div data-uc2-t="works" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 11px; padding-top: 6px;">
+                <div style="box-sizing: border-box; color: #75726b; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 10px; letter-spacing: 0.14em; line-height: 12px;">
+                  WORKS WITH
+                </div>
+                <div style="align-items: center; box-sizing: border-box; display: flex; gap: 16px;">
+                  <div style="background-image: url(/paper/4CKDF1VA7QQB4H98Y6CNRDY0HH.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 22px; width: 22px;"></div>
+                  <div style="background-image: url(/paper/1K0RMHRFW2MNM0QFN1PJVQMZA0.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 22px; width: 22px;"></div>
+                  <div style="background-image: url(/paper/19AT5N079TXZT737MK72JY55TW.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 22px; width: 22px;"></div>
+                  <div style="background-image: url(/paper/5FG3JNWJXCG4XCF67XPS1R9PFJ.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 22px; width: 22px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="uc-substeps" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 30px; max-width: 532px; width: 100%;">
+              <div data-uc2-t="s1" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 15px; padding-left: 20px; position: relative; width: 100%;">
+                <div style="box-sizing: border-box; display: flex; flex-direction: column;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                      Dispatch the right vendor
+                    </div>
+                  </div>
+                </div>
+                <div style="box-sizing: border-box; display: flex; flex-direction: column; max-width: 70%; width: 100%; word-break: break-word;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #68655E; font-family: system-ui, sans-serif; font-size: 14.08px; line-height: 19.712px;">
+                      Matched by trade, rating, and response time — with the work order and unit access notes attached.
+                    </div>
+                  </div>
+                </div>
+                <div style="box-sizing: border-box; display: flex; flex-direction: column; left: 0px; position: absolute; top: 0px;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                      ↳
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-uc2-t="s2" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 15px; padding-left: 20px; width: 100%;">
+                <div style="box-sizing: border-box; display: flex; flex-direction: column;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                      Track the job to closed
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW 3 — text left, image right. Choreographed on scroll-in (see <script>). -->
+      <div class="uc-row" style="box-sizing: border-box; width: 100%;">
+        <div class="uc-row-inner" data-uc3 style="box-sizing: border-box; display: flex; width: 100%;">
+          <!-- TEXT COLUMN -->
+          <div class="uc-textcol" style="box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 30px; width: 100%;">
+              <div data-uc3-t="title" style="box-sizing: border-box; display: flex; flex-direction: column; max-width: 400px; width: 100%;">
+                <div style="box-sizing: border-box; font-variation-settings: 'wght' 450;">
+                  <div class="uc-rowtitle" style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; letter-spacing: -0.02em; text-wrap: balance;">
+                    Rent and renewals, chased every day
+                  </div>
+                </div>
+              </div>
+              <div class="uc-rowbody" data-uc3-t="body" style="box-sizing: border-box; display: flex; flex-direction: column; width: 100%; word-break: break-word;">
+                <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                  <div style="box-sizing: border-box; color: #68655E; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                    Overdue rent, lease renewals, security deposit follow-ups — Hive works every account's next step daily, so nothing slips through for weeks.
+                  </div>
+                </div>
+              </div>
+              <div data-uc3-t="works" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 11px; padding-top: 6px;">
+                <div style="box-sizing: border-box; color: #75726b; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 10px; letter-spacing: 0.14em; line-height: 12px;">
+                  WORKS WITH
+                </div>
+                <div style="align-items: center; box-sizing: border-box; display: flex; gap: 16px;">
+                  <div style="background-image: url(/paper/4CKDF1VA7QQB4H98Y6CNRDY0HH.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 22px; width: 22px;"></div>
+                  <div style="background-image: url(/paper/1K0RMHRFW2MNM0QFN1PJVQMZA0.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 22px; width: 22px;"></div>
+                  <div style="background-image: url(/paper/19AT5N079TXZT737MK72JY55TW.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 22px; width: 22px;"></div>
+                  <div style="background-image: url(/paper/5FG3JNWJXCG4XCF67XPS1R9PFJ.webp); background-position: 50%; background-repeat: no-repeat; background-size: contain; box-sizing: border-box; flex-shrink: 0; height: 22px; width: 22px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="uc-substeps" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 30px; max-width: 532px; width: 100%;">
+              <div data-uc3-t="s1" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 15px; padding-left: 20px; position: relative; width: 100%;">
+                <div style="box-sizing: border-box; display: flex; flex-direction: column;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                      Track every account
+                    </div>
+                  </div>
+                </div>
+                <div style="box-sizing: border-box; display: flex; flex-direction: column; max-width: 70%; width: 100%; word-break: break-word;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #68655E; font-family: system-ui, sans-serif; font-size: 14.08px; line-height: 19.712px;">
+                      Each unit's rent status, renewal date, and outstanding balance sits in one queue — checked and chased automatically.
+                    </div>
+                  </div>
+                </div>
+                <div style="box-sizing: border-box; display: flex; flex-direction: column; left: 0px; position: absolute; top: 0px;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                      ↳
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-uc3-t="s2" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 15px; padding-left: 20px; width: 100%;">
+                <div style="box-sizing: border-box; display: flex; flex-direction: column;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                      Send renewal offers on schedule
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-uc3-t="s3" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 15px; padding-left: 20px; width: 100%;">
+                <div style="box-sizing: border-box; display: flex; flex-direction: column;">
+                  <div style="box-sizing: border-box; font-variation-settings: 'wght' 440;">
+                    <div style="box-sizing: border-box; color: #0D1016; font-family: system-ui, sans-serif; font-size: 16px; line-height: 22.4px;">
+                      Flag delinquencies before they cost a month
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- IMAGE COLUMN — photo present; the Accounts table is choreographed. -->
+          <div class="uc-imgcol">
+            <div class="uc-stage" style="border-radius: 2px; box-sizing: border-box; overflow: clip; position: relative;">
+              <img class="uc-photo" src="/photos/uc-rent-renewals.webp" alt="Rent & renewals workflow: AI tracking rent status across units" loading="lazy" decoding="async" />
+              <div class="uc-dots" style="align-items: center; background-color: #00000066; border-radius: 24px; box-sizing: border-box; display: flex; gap: 5px; left: 20px; padding-block: 6px; padding-inline: 10px; position: absolute; top: 20px;">
+                <div style="background-color: #FFFFFF8C; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 5px; width: 5px;"></div>
+                <div style="background-color: #FFFFFF8C; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 5px; width: 5px;"></div>
+                <div style="background-color: #FFFFFF8C; border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 5px; width: 5px;"></div>
+              </div>
+              <div class="uc-panel uc-table-panel" style="backdrop-filter: blur(34px); background-color: #F9FBFF99; border-color: #FFFFFF99; border-radius: 20px; border-style: solid; border-width: 1px; box-shadow: #1016264D 0px 30px 60px; box-sizing: border-box; display: flex; flex-direction: column; left: 144px; overflow: clip; position: absolute; top: 114px;">
+                <div style="align-items: center; border-bottom-color: #14171F14; border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; display: flex; gap: 10px; padding-block: 17px; padding-inline: 24px;">
+                  <div style="box-sizing: border-box; color: #161616; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 16px; font-weight: 500; line-height: 20px;">
+                    Accounts
+                  </div>
+                  <div style="box-sizing: border-box; flex-basis: 0%; flex-grow: 1;"></div>
+                  <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 13px; font-weight: 500; line-height: 16px;">
+                    22 moved this week
+                  </div>
+                </div>
+                <div style="align-items: center; background-color: #14171F08; box-sizing: border-box; display: flex; padding-block: 9px; padding-inline: 24px;">
+                  <div style="box-sizing: border-box; flex-shrink: 0; width: 34px;"></div>
+                  <div style="box-sizing: border-box; color: #565656; display: inline-block; flex-shrink: 0; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 10px; letter-spacing: 0.1em; line-height: 12px; width: 300px;">
+                    UNIT
+                  </div>
+                  <div style="box-sizing: border-box; color: #6b7079; display: inline-block; flex-basis: 0%; flex-grow: 1; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 10px; letter-spacing: 0.1em; line-height: 12px;">
+                    STATUS
+                  </div>
+                </div>
+                {uc3rows.map((r) => (
+                  <div class="uc3-row" style="align-items: center; border-top-color: #14171F0F; border-top-style: solid; border-top-width: 1px; box-sizing: border-box; display: flex; padding-block: 11px; padding-inline: 24px;">
+                    <div class="uc3-avatar" style="border-radius: 50%; box-sizing: border-box; flex-shrink: 0; height: 24px; margin-right: 10px; overflow: clip; position: relative; width: 24px;">
+                      <div style={`background-image: url(${NOVA_AVATAR}); background-position: 50%; background-size: cover; box-sizing: border-box; height: 100%; width: 100%;`} />
+                      <div style="background-image: radial-gradient(circle farthest-corner at 32% 24% in oklab, oklab(100% 0 0 / 50%) 0%, oklab(100% 0 0 / 0%) 42%); border-radius: 50%; box-sizing: border-box; height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;" />
+                    </div>
+                    <div style="box-sizing: border-box; display: flex; flex-direction: column; flex-shrink: 0; gap: 1px; min-width: 0; overflow: clip; width: 300px;">
+                      <div class="uc3-req" style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; font-weight: 500; line-height: 18px; white-space: nowrap;">
+                        {r.req}
+                      </div>
+                      <div class="uc3-action" data-done={r.done} style="box-sizing: border-box; color: #7A7F8A; font-family: 'Geist', system-ui, sans-serif; font-size: 12.5px; font-weight: 500; line-height: 16px; white-space: nowrap;">
+                        {r.working}
+                      </div>
+                    </div>
+                    <div class="uc3-type" style="box-sizing: border-box; color: #626875; flex-basis: 0%; flex-grow: 1; font-family: 'Geist', system-ui, sans-serif; font-size: 12.5px; line-height: 16px;">
+                      {r.type}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ============================================================
+     UseCases responsive layer.
+
+     Strategy (first principles):
+     - Below 1024px the layout REFLOWS, it does not zoom. Each row
+       stacks (text, then the image "stage"). The glass panel stays ON
+       the photo at EVERY breakpoint: the photo fills the stage as a
+       background layer and the panel floats over it in normal flow,
+       centered inside the stage's padding frame. Panels stay readable
+       at real type sizes; the wide "Accounts" table scrolls
+       horizontally inside its own card so the page never scrolls.
+     - At >=1024px (lg) we restore the ORIGINAL Paper design
+       PIXEL-FOR-PIXEL: two-column rows, the glass panels absolutely
+       positioned over a 618px-tall photo at their exact coordinates.
+       Every desktop-only value lives behind @media (min-width:1024px),
+       so nothing below lg can touch the desktop render.
+     - Zero fixed page-driving widths: no 618/730/1440/1680px in the
+       base/tablet layers. Desktop pins those values, gated by lg.
+     ============================================================ */
+
+  /* ---- ROOT: full-bleed dark/white section, fluid padding ---- */
+  .uc-root {
+    width: 100%;
+    /* fluid section padding — desktop max = original 96px block / 72px inline */
+    padding-block: clamp(56px, 12vw, 96px);
+    padding-inline: 20px;
+    gap: 60px;
+  }
+
+  /* ---- CONTAINER: centered, capped so it stays put on wide screens
+     while the section bg fills edge-to-edge. Desktop pins the original
+     1680 cap (content never exceeds it at 1440, so 1440 is identical). ---- */
+  .uc-container {
+    max-width: 1296px;
+    margin-inline: auto;
+    gap: 0;
+  }
+
+  /* ---- HEADER ---- */
+  .uc-header {
+    padding-bottom: clamp(40px, 8vw, 72px);
+  }
+  .uc-h2 {
+    font-size: clamp(30px, 7vw, 48px);
+  }
+  .uc-sub {
+    font-size: clamp(15px, 3.6vw, 17px);
+  }
+
+  /* ---- ROWS: stack vertically; fluid gap between rows ---- */
+  .uc-rows {
+    gap: clamp(72px, 16vw, 160px);
+  }
+
+  /* ---- ROW INNER: stacked (column) on mobile, photo above panel ---- */
+  .uc-row-inner {
+    flex-direction: column;
+    gap: clamp(28px, 6vw, 44px);
+    align-items: stretch;
+  }
+  /* Row 2's source order is image-first; keep it stacked the same way
+     (text -> photo -> panel) below lg for a consistent reading rhythm. */
+  .uc-row-rev {
+    flex-direction: column;
+  }
+
+  /* ---- TEXT COLUMN ---- */
+  .uc-textcol {
+    width: 100%;
+    min-width: 0;
+    gap: 28px;
+  }
+  .uc-rowtitle {
+    font-size: clamp(26px, 6.4vw, 36px);
+    line-height: 1.2;
+  }
+  .uc-rowbody { max-width: 520px; }
+  .uc-substeps { max-width: 532px; }
+
+  /* ---- IMAGE COLUMN ----
+     A normal full-width column. It holds the photo banner and, stacked
+     beneath it, the glass panel — both fluid. No fixed width, no zoom. ---- */
+  .uc-imgcol {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* ---- STAGE: a positioned frame at EVERY breakpoint. The photo fills it
+     as a background layer; the glass panel sits IN-FLOW on top, centered,
+     with the stage's padding forming a photo "frame" around it. The panel
+     therefore floats OVER the photo (like desktop) and the photo's height
+     follows the panel — so it can never overflow or get clipped short. ---- */
+  .uc-stage {
+    display: block;
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    min-height: 300px;
+    overflow: clip;
+    border-radius: 12px;
+    padding: 44px 16px; /* the visible photo frame around the panel */
+  }
+
+  /* Photo fills the whole stage, behind the panel. */
+  .uc-photo {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: auto;
+    border-radius: 0;
+    order: 0;
+    z-index: 0;
+    object-fit: cover;
+    object-position: 50%;
+  }
+
+  /* Window-dots chip: pinned to the top-left corner of the photo. */
+  .uc-dots {
+    position: absolute !important;
+    top: 16px !important;
+    left: 16px !important;
+    z-index: 2;
+  }
+
+  /* Glass panels: float OVER the photo. In normal flow (so they set the
+     stage height), centered, capped for readability — never detached below
+     the image. */
+  .uc-panel {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    z-index: 1;
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+  }
+
+  /* The wide "Accounts" table: its rows keep their intrinsic ~730px width
+     (fixed AGENT/REQUEST columns). It floats on the photo too, and scrolls
+     horizontally INSIDE the card so the document never gains a scrollbar. */
+  .uc-table-panel {
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .uc-table-panel > div {
+    min-width: max-content;
+  }
+
+  /* ============================================================
+     TABLET (>=768px, <1024px): still stacked, but center the column
+     content and give panels a touch more room + more inline padding.
+     ============================================================ */
+  @media (min-width: 768px) {
+    .uc-root { padding-inline: 40px; }
+    .uc-row-inner { align-items: center; }
+    .uc-textcol { align-self: center; max-width: 640px; }
+    .uc-imgcol {
+      max-width: 640px;
+      margin-inline: auto;
+      align-self: center;
+    }
+    /* more photo shows around a slightly larger floating panel */
+    .uc-stage { min-height: 460px; padding: 64px 28px; }
+    .uc-panel { max-width: 420px !important; }
+    .uc-table-panel { max-width: 560px !important; }
+  }
+
+  /* ============================================================
+     DESKTOP (>=1024px / lg): restore the ORIGINAL pixel-perfect
+     design. Everything below returns each element to its source
+     values so the rendered result is byte-identical to the
+     original component at >=1024px.
+     ============================================================ */
+  @media (min-width: 1024px) {
+    .uc-root {
+      padding-block: 96px;
+      padding-inline: 72px;
+      gap: 60px;
+      align-content: center;
+      justify-content: flex-start;
+      height: min-content;
+    }
+    .uc-container {
+      max-width: 1440px;
+      flex-shrink: 0;
+      height: min-content;
+    }
+    .uc-header {
+      gap: 20px;
+      padding-bottom: 72px;
+    }
+    .uc-h2 {
+      font-size: 48px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      line-height: 106%;
+    }
+    .uc-sub {
+      font-size: 17px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .uc-rows {
+      gap: 160px;
+      flex-shrink: 0;
+      height: min-content;
+      overflow: clip;
+    }
+    .uc-row { flex-shrink: 0; }
+    .uc-row-inner {
+      flex-direction: row;
+      align-content: flex-start;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 60px;
+      height: min-content;
+    }
+    .uc-row-rev { flex-direction: row; }
+    .uc-textcol {
+      align-content: flex-start;
+      align-items: flex-start;
+      align-self: stretch;
+      flex-basis: 0px;
+      flex-grow: 1;
+      flex-shrink: 0;
+      justify-content: space-between;
+      width: 1px;
+      gap: 0;
+    }
+    .uc-rowtitle {
+      font-size: 36px;
+      line-height: 43.2px;
+      letter-spacing: -0.72px;
+    }
+    .uc-rowbody { max-width: 70%; width: 378px; }
+    .uc-substeps { max-width: 532px; }
+    .uc-imgcol {
+      aspect-ratio: 1 / 1;
+      flex-basis: 0px;
+      flex-grow: 1;
+      flex-shrink: 0;
+      width: 0px;
+      max-width: none;
+      margin-inline: 0;
+      align-self: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Stage returns to the original positioned square that fills the column
+       (position:relative + overflow:clip come from the element's inline style;
+       we only need to undo the base flex-stack). */
+    .uc-stage {
+      display: block;
+      gap: 0;
+      overflow: clip !important;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      flex: 1 1 auto;
+    }
+    /* Photo returns to the full-bleed 618px-tall background layer. */
+    .uc-photo {
+      position: static;
+      width: 100% !important;
+      height: 618px !important;
+      aspect-ratio: auto;
+      border-radius: 0;
+      order: 0;
+      flex-shrink: 0;
+    }
+    /* Dots return to original absolute coords (top:20px; left:20px). */
+    .uc-dots {
+      top: 20px !important;
+      left: 20px !important;
+    }
+    /* Panels return to absolute positioning at their exact source coords. */
+    .uc-panel {
+      position: absolute !important;
+      max-width: none;
+      margin-inline: 0;
+    }
+    .uc-panel-chat {
+      right: 28px !important;
+      top: 34px !important;
+      left: auto !important;
+      width: 384px !important;
+    }
+    .uc-panel-dispatch {
+      left: 30px !important;
+      top: 74px !important;
+      right: auto !important;
+      width: 372px !important;
+    }
+    .uc-table-panel {
+      left: 144px !important;
+      top: 114px !important;
+      right: auto !important;
+      width: 720px !important;
+      max-width: none !important;
+      overflow: clip !important;
+    }
+    .uc-table-panel > div {
+      min-width: 0;
+    }
+  }
+
+  /* Use Cases — simple small "working" dots (subtle opacity only, no motion). */
+  .uc1-dots span,
+  .uc2-dots span {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: #9AA0AC;
+    animation: uc1DotPulse 1.3s ease-in-out infinite;
+  }
+  .uc1-dots span:nth-child(2),
+  .uc2-dots span:nth-child(2) { animation-delay: 0.22s; }
+  .uc1-dots span:nth-child(3),
+  .uc2-dots span:nth-child(3) { animation-delay: 0.44s; }
+  @keyframes uc1DotPulse {
+    0%, 70%, 100% { opacity: 0.3; }
+    35% { opacity: 1; }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+
+  // ── Use Case 1 (Leasing) choreography ────────────────────────────────────────
+  // On scroll-in (desktop, motion allowed) the row plays a one-time sequence:
+  //   the left text loads in (title → body → WORKS WITH → "Answer every inquiry
+  //   instantly") WHILE the glass panel builds itself — glass appears → avatar →
+  //   "Follow up with today's leasing leads" message → file chip → EXPAND to
+  //   "6 tours booked" + Replied to 14 inquiries + buttons → (~1s pause) Tours on
+  //   the calendar → (~1s pause) Follow-ups scheduled. Only once the panel is
+  //   complete do "Pre-qualify…" and "Follow up…" load in.
+  // Mobile / reduced-motion: everything is simply visible (no hiding).
+  function initUseCase1() {
+    const root = document.querySelector<HTMLElement>('[data-uc1]');
+    if (!root) return;
+    const panel = root.querySelector<HTMLElement>('.uc-panel-chat');
+    if (!panel) return;
+
+    // Runs on ALL breakpoints (mobile + desktop); only prefers-reduced-motion
+    // opts out. The choreography measures elements live, so it adapts to the
+    // panel's size at any width.
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return; // leave everything visible
+
+    const t = (name: string) => root.querySelector<HTMLElement>(`[data-uc1-t="${name}"]`);
+    const title = t('title'), body = t('body'), works = t('works');
+    const s1 = t('s1'), s2 = t('s2'), s3 = t('s3');
+    const textEls = [title, body, works, s1, s2, s3].filter(Boolean) as HTMLElement[];
+    // Panel direct children, in order:
+    // 0 avatar, 1 message bubble, 2 file chip, 3 nova avatar, 4 "6 tours booked",
+    // 5 item 1 (Replied to inquiries), 6 item 2 (Tours), 7 item 3 (Follow-ups).
+    const kids = Array.from(panel.children) as HTMLElement[];
+    if (kids.length < 8) return;
+
+    let started = false;
+    const setup = () => {
+      // Measure the panel height at each build phase (at natural full height).
+      const top = panel.getBoundingClientRect().top;
+      const bottomOf = (el: HTMLElement) => el.getBoundingClientRect().bottom - top;
+      const PAD = 21; // bottom padding + border
+      const H_A = bottomOf(kids[2]) + PAD; // through the file chip
+      const H_status = bottomOf(kids[4]) + PAD; // through the live status line
+      const H_B = bottomOf(kids[5]) + PAD; // through item 1 (Forms complete)
+      const H_C = bottomOf(kids[6]) + PAD; // through item 2 (Fees)
+      const H_D = bottomOf(kids[7]) + PAD; // through item 3 (Docs) — full
+
+      // Live status line: cycles through what the agent is "doing", then settles.
+      const statusEl = root.querySelector<HTMLElement>('.uc1-status');
+      const dotsEl = root.querySelector<HTMLElement>('.uc1-dots');
+      const setStatus = (text: string, working: boolean) => {
+        if (statusEl) statusEl.textContent = text;
+        if (dotsEl) dotsEl.style.display = working ? 'inline-flex' : 'none';
+      };
+
+      // Initial hidden state.
+      gsap.set(textEls, { opacity: 0, y: 14 });
+      gsap.set(panel, { opacity: 0, height: H_A, overflow: 'hidden' });
+      gsap.set(kids, { opacity: 0 });
+      gsap.set([kids[1], kids[2]], { y: 8 });
+      setStatus('Reading new inquiries', true); // heading is hidden until it fades in
+
+      const play = () => {
+        if (started) return;
+        started = true;
+        const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+        // Glass panel appears.
+        tl.to(panel, { opacity: 1, duration: 0.5 }, 0.15);
+        // Left text loads in (stops at "Answer every inquiry instantly").
+        tl.to(title, { opacity: 1, y: 0, duration: 0.5 }, 0.0);
+        tl.to(body, { opacity: 1, y: 0, duration: 0.5 }, 0.15);
+        tl.to(works, { opacity: 1, y: 0, duration: 0.5 }, 0.3);
+        tl.to(s1, { opacity: 1, y: 0, duration: 0.5 }, 0.5);
+        // Panel phase A: avatar → message bubble → file chip.
+        tl.to(kids[0], { opacity: 1, duration: 0.35 }, 0.5);
+        tl.to(kids[1], { opacity: 1, y: 0, duration: 0.4 }, 0.8);
+        tl.to(kids[2], { opacity: 1, y: 0, duration: 0.4 }, 1.2);
+        // Phase B: expand to reveal the nova avatar + the live status line.
+        tl.to(panel, { height: H_status, duration: 0.55, ease: 'power2.inOut' }, 1.9);
+        tl.to([kids[3], kids[4]], { opacity: 1, duration: 0.5, stagger: 0.08 }, 2.0);
+        tl.call(() => setStatus('Reading new inquiries', true), undefined, 2.05);
+        tl.call(() => setStatus('Checking availability', true), undefined, 2.85);
+        // Forms complete appears (result of the two searches).
+        tl.to(panel, { height: H_B, duration: 0.5, ease: 'power2.inOut' }, 3.5);
+        tl.to(kids[5], { opacity: 1, duration: 0.45 }, 3.6);
+        tl.call(() => setStatus('Booking tours', true), undefined, 3.9);
+        // ~1s → Fees calculated appears.
+        tl.to(panel, { height: H_C, duration: 0.5, ease: 'power2.inOut' }, 4.6);
+        tl.to(kids[6], { opacity: 1, duration: 0.45 }, 4.7);
+        tl.call(() => setStatus('Scheduling follow-ups', true), undefined, 5.0);
+        // ~1s → Docs attached appears.
+        tl.to(panel, { height: H_D, duration: 0.5, ease: 'power2.inOut' }, 5.7);
+        tl.to(kids[7], { opacity: 1, duration: 0.45 }, 5.8);
+        // All three done → settle the status to "6 tours booked" (dots off).
+        tl.call(() => setStatus('6 tours booked', false), undefined, 6.5);
+        // Panel complete → the remaining left steps load in.
+        tl.to(s2, { opacity: 1, y: 0, duration: 0.5 }, 6.9);
+        tl.to(s3, { opacity: 1, y: 0, duration: 0.5 }, 7.1);
+        // Release the fixed pixel height so the panel is content-driven again.
+        tl.set(panel, { clearProps: 'height' }, 7.7);
+      };
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) if (e.isIntersecting) { play(); io.disconnect(); }
+        },
+        { threshold: 0.3 },
+      );
+      io.observe(root);
+    };
+
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(setup);
+    else setup();
+  }
+  initUseCase1();
+
+  // ── Use Case 2 (Dispatch) choreography ─────────────────────────────────────
+  // The work order arrives, then the panel narrates the dispatch on a live status
+  // line (Matching vendor → Sending work order → Booking window → "Vendor
+  // booked"), and the vendor card, progress + buttons, and the "Dispatched by
+  // Nova" confirmation build in. The left text loads in through "Dispatch the
+  // right vendor"; "Track the job to closed" comes in once the panel is done.
+  function initUseCase2() {
+    const root = document.querySelector<HTMLElement>('[data-uc2]');
+    if (!root) return;
+    const panel = root.querySelector<HTMLElement>('.uc-panel-dispatch');
+    if (!panel) return;
+
+    // Runs on ALL breakpoints (mobile + desktop); only prefers-reduced-motion
+    // opts out. The choreography measures elements live, so it adapts to the
+    // panel's size at any width.
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+
+    const t = (name: string) => root.querySelector<HTMLElement>(`[data-uc2-t="${name}"]`);
+    const title = t('title'), body = t('body'), works = t('works');
+    const s1 = t('s1'), s2 = t('s2');
+    const textEls = [title, body, works, s1, s2].filter(Boolean) as HTMLElement[];
+    // Panel direct children:
+    // 0 timestamp, 1 call header, 2 status line, 3 divider, 4 tech card,
+    // 5 progress/ETA, 6 buttons, 7 divider, 8 "Dispatched by Nova".
+    const kids = Array.from(panel.children) as HTMLElement[];
+    if (kids.length < 9) return;
+
+    let started = false;
+    const setup = () => {
+      const top = panel.getBoundingClientRect().top;
+      const bottomOf = (el: HTMLElement) => el.getBoundingClientRect().bottom - top;
+      const PAD = 21;
+      const H_A = bottomOf(kids[2]) + PAD; // through the status line
+      const H_B = bottomOf(kids[4]) + PAD; // through the tech card
+      const H_C = bottomOf(kids[6]) + PAD; // through the buttons
+      const H_D = bottomOf(kids[8]) + PAD; // through "Dispatched by Nova" — full
+
+      const statusEl = root.querySelector<HTMLElement>('.uc2-status');
+      const dotsEl = root.querySelector<HTMLElement>('.uc2-dots');
+      const setStatus = (text: string, working: boolean) => {
+        if (statusEl) statusEl.textContent = text;
+        if (dotsEl) dotsEl.style.display = working ? 'inline-flex' : 'none';
+      };
+
+      gsap.set(textEls, { opacity: 0, y: 14 });
+      gsap.set(panel, { opacity: 0, height: H_A, overflow: 'hidden' });
+      gsap.set(kids, { opacity: 0 });
+      gsap.set(kids[1], { y: 8 });
+      setStatus('Matching vendor', true);
+
+      const play = () => {
+        if (started) return;
+        started = true;
+        const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+        tl.to(panel, { opacity: 1, duration: 0.5 }, 0.15);
+        // Left text loads in (stops at "Dispatch the right vendor").
+        tl.to(title, { opacity: 1, y: 0, duration: 0.5 }, 0.0);
+        tl.to(body, { opacity: 1, y: 0, duration: 0.5 }, 0.15);
+        tl.to(works, { opacity: 1, y: 0, duration: 0.5 }, 0.3);
+        tl.to(s1, { opacity: 1, y: 0, duration: 0.5 }, 0.5);
+        // Phase A: the work order arrives + the live matching status.
+        tl.to(kids[0], { opacity: 1, duration: 0.4 }, 0.5); // timestamp
+        tl.to(kids[1], { opacity: 1, y: 0, duration: 0.45 }, 0.7); // call header
+        tl.to(kids[2], { opacity: 1, duration: 0.45 }, 1.1); // status line
+        tl.call(() => setStatus('Matching vendor', true), undefined, 1.1);
+        tl.call(() => setStatus('Sending work order', true), undefined, 1.85);
+        tl.call(() => setStatus('Booking window', true), undefined, 2.6);
+        // Phase B: vendor booked → the vendor card appears.
+        tl.to(panel, { height: H_B, duration: 0.55, ease: 'power2.inOut' }, 3.2);
+        tl.to([kids[3], kids[4]], { opacity: 1, duration: 0.5, stagger: 0.06 }, 3.3);
+        tl.call(() => setStatus('Vendor booked', false), undefined, 3.5);
+        // Phase C: progress + buttons.
+        tl.to(panel, { height: H_C, duration: 0.5, ease: 'power2.inOut' }, 4.3);
+        tl.to([kids[5], kids[6]], { opacity: 1, duration: 0.5, stagger: 0.08 }, 4.4);
+        // Phase D: the "Dispatched by Nova" confirmation.
+        tl.to(panel, { height: H_D, duration: 0.5, ease: 'power2.inOut' }, 5.3);
+        tl.to([kids[7], kids[8]], { opacity: 1, duration: 0.5, stagger: 0.06 }, 5.4);
+        // Panel complete → the remaining left step loads in.
+        tl.to(s2, { opacity: 1, y: 0, duration: 0.5 }, 6.1);
+        tl.set(panel, { clearProps: 'height' }, 6.7);
+      };
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) if (e.isIntersecting) { play(); io.disconnect(); }
+        },
+        { threshold: 0.3 },
+      );
+      io.observe(root);
+    };
+
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(setup);
+    else setup();
+  }
+  initUseCase2();
+
+  // ── Use Case 3 (Property Management — Accounts table) choreography ─────────
+  // The "Accounts" table has no AGENT column: on scroll-in the accounts come in
+  // unassigned, then the Nova agent is added to the LEFT of each row one by one.
+  // Left text loads through "Track every account"; the last two steps come in
+  // once every account has an agent.
+  function initUseCase3() {
+    const root = document.querySelector<HTMLElement>('[data-uc3]');
+    if (!root) return;
+    const panel = root.querySelector<HTMLElement>('.uc-table-panel');
+    if (!panel) return;
+
+    // Runs on ALL breakpoints (mobile + desktop); only prefers-reduced-motion
+    // opts out. The choreography measures elements live, so it adapts to the
+    // panel's size at any width.
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+
+    const t = (name: string) => root.querySelector<HTMLElement>(`[data-uc3-t="${name}"]`);
+    const title = t('title'), body = t('body'), works = t('works');
+    const s1 = t('s1'), s2 = t('s2'), s3 = t('s3');
+    const textEls = [title, body, works, s1, s2, s3].filter(Boolean) as HTMLElement[];
+    const rows = Array.from(root.querySelectorAll<HTMLElement>('.uc3-row'));
+    const avatars = Array.from(root.querySelectorAll<HTMLElement>('.uc3-avatar'));
+    const actions = Array.from(root.querySelectorAll<HTMLElement>('.uc3-action'));
+    if (rows.length === 0) return;
+
+    let started = false;
+    const setup = () => {
+      gsap.set(textEls, { opacity: 0, y: 14 });
+      gsap.set(panel, { opacity: 0 });
+      gsap.set(rows, { opacity: 0, y: 8 });
+      gsap.set(avatars, { opacity: 0, scale: 0.4 });
+      gsap.set(actions, { opacity: 0 });
+
+      const play = () => {
+        if (started) return;
+        started = true;
+        const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+        // Glass + table frame (header + column headers) appears.
+        tl.to(panel, { opacity: 1, duration: 0.5 }, 0.15);
+        // Left text loads in (stops at "Track every account").
+        tl.to(title, { opacity: 1, y: 0, duration: 0.5 }, 0.0);
+        tl.to(body, { opacity: 1, y: 0, duration: 0.5 }, 0.15);
+        tl.to(works, { opacity: 1, y: 0, duration: 0.5 }, 0.3);
+        tl.to(s1, { opacity: 1, y: 0, duration: 0.5 }, 0.5);
+        // The accounts come in, unassigned.
+        tl.to(rows, { opacity: 1, y: 0, duration: 0.45, stagger: 0.16 }, 0.9);
+        // Then the Nova agent is added to the left of each request, one by one.
+        tl.to(avatars, { opacity: 1, scale: 1, duration: 0.42, stagger: 0.55, ease: 'back.out(1.7)' }, 2.2);
+        tl.to(actions, { opacity: 1, duration: 0.4, stagger: 0.55 }, 2.35);
+        // Each request runs, then completes — its action flips to the done state
+        // (green), one by one, until every request is handled.
+        actions.forEach((el, i) => {
+          const at = 4.9 + i * 0.35;
+          tl.to(el, { opacity: 0.2, duration: 0.18, onComplete: () => { const d = el.getAttribute('data-done'); if (d) el.textContent = d; el.style.color = '#2BA66E'; } }, at);
+          tl.to(el, { opacity: 1, duration: 0.3 }, at + 0.18);
+        });
+        // Every request handled → the remaining left steps load in.
+        tl.to(s2, { opacity: 1, y: 0, duration: 0.5 }, 6.5);
+        tl.to(s3, { opacity: 1, y: 0, duration: 0.5 }, 6.7);
+      };
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) if (e.isIntersecting) { play(); io.disconnect(); }
+        },
+        { threshold: 0.3 },
+      );
+      io.observe(root);
+    };
+
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(setup);
+    else setup();
+  }
+  initUseCase3();
+</script>

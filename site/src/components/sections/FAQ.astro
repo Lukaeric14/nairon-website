@@ -1,0 +1,138 @@
+---
+// Default = the landing-page FAQ. Other pages can pass their own `faqs` prop.
+export interface Props {
+  faqs?: [string, string][];
+  sub?: string;
+}
+
+const DEFAULT_FAQS: [string, string][] = [
+  ['What is Nairon?', 'An AI workforce for property management businesses. We build, run, and manage AI employees that do real operational work — leasing, dispatch, rent, renewals — inside the tools you already use.'],
+  ['How is this different from software we buy?', 'You don’t configure it yourself. We embed with your team, build the agents around your workflows, and keep tuning them. A service on top of a platform, not another app to manage.'],
+  ['Which businesses do you serve?', 'Property management, exclusively — leasing, maintenance & dispatch, and rent & renewals today.'],
+  ['Do the agents work in our current tools?', 'Yes — your CRM, scheduling, and inbox. No rip-and-replace.'],
+  ['How fast do we see value?', 'Most teams have an agent handling live work within weeks, not quarters.'],
+  ['Is our data secure?', 'Your data stays in your systems. Agents act with scoped, audited access — every action is logged.'],
+];
+
+const {
+  faqs = DEFAULT_FAQS,
+  sub = 'Everything you need to know about working with Nairon.',
+} = Astro.props;
+---
+
+<div
+  data-testid="faq"
+  class="w-full lg:min-h-[1000px]"
+  style="background-color: #FFFFFF; box-sizing: border-box; display: flex; flex-direction: column; flex-shrink: 0; font-size: 12px; font-synthesis: none; -moz-osx-font-smoothing: grayscale; overflow: clip; -webkit-font-smoothing: antialiased;"
+>
+  <!-- Full-bleed background band (white here) spans the full viewport; content is capped + centered inside -->
+  <div
+    class="w-full gap-[34px] py-[clamp(48px,9vw,96px)] px-5 md:px-10 lg:gap-[50px] lg:py-[96px] lg:px-[120px]"
+    style="align-items: center; background-color: #FFFFFF; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; min-height: 100%;"
+  >
+    <!-- Centered content container: capped at 1440, backgrounds above still fill wide screens -->
+    <div class="w-full max-w-[1440px] mx-auto flex flex-col items-center gap-[34px] lg:gap-[50px]">
+      <div data-reveal-group style="align-items: center; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; min-width: 0;">
+        <div data-reveal style="align-items: center; box-sizing: border-box; display: flex; gap: 9px;">
+          <div style="background-color: #0f6bd4; box-sizing: border-box; flex-shrink: 0; height: 5px; width: 5px;"></div>
+          <div style="box-sizing: border-box; color: #6b7079; display: inline-block; font-family: 'Geist Mono', system-ui, sans-serif; font-size: 11px; letter-spacing: 0.2em; line-height: 14px;">
+            FAQ
+          </div>
+        </div>
+        <div
+          data-reveal
+          class="text-[clamp(32px,7vw,54px)] lg:text-[54px]"
+          style="box-sizing: border-box; color: #14171F; display: flex; flex-wrap: wrap; font-family: 'Instrument Serif', system-ui, sans-serif; justify-content: center; line-height: 104%; text-align: center;"
+        >
+          Common questions
+        </div>
+        <div
+          data-reveal
+          class="text-[15px] lg:text-[16.5px]"
+          style="box-sizing: border-box; color: #626875; display: flex; flex-wrap: wrap; font-family: 'Geist', system-ui, sans-serif; justify-content: center; line-height: 155%; max-width: 520px; text-align: center;"
+        >
+          {sub}
+        </div>
+      </div>
+      <div data-reveal-group data-reveal-stagger="90" class="faq-list" style="box-sizing: border-box; display: flex; flex-direction: column; max-width: 860px; width: 100%; min-width: 0;">
+        {faqs.map(([q, a], i) => {
+          const open = i === 0;
+          const last = i === faqs.length - 1;
+          return (
+            <div data-reveal class={`faq-item${open ? ' is-open' : ''}`} style={`border-top-color: #14171F1F; border-top-style: solid; border-top-width: 1px;${last ? ' border-bottom-color: #14171F1F; border-bottom-style: solid; border-bottom-width: 1px;' : ''} box-sizing: border-box;`}>
+              <button type="button" class="faq-q" aria-expanded={open ? 'true' : 'false'} style="align-items: center; background: none; border: none; box-sizing: border-box; cursor: pointer; display: flex; gap: 20px; margin: 0; min-width: 0; padding: 24px 2px; text-align: left; width: 100%;">
+                <div style="box-sizing: border-box; color: #14171F; flex-basis: 0%; flex-grow: 1; min-width: 0; font-family: 'Geist', system-ui, sans-serif; font-size: 17.5px; font-weight: 500; line-height: 22px;">
+                  {q}
+                </div>
+                <div class="faq-icon" style={`box-sizing: border-box; color: ${open ? '#14171F' : '#6b7079'}; flex-shrink: 0; font-family: 'Geist', system-ui, sans-serif; font-size: 20px; line-height: 100%;`}>
+                  {open ? '−' : '+'}
+                </div>
+              </button>
+              <div class="faq-a-wrap" style={`box-sizing: border-box; height: ${open ? 'auto' : '0'}; overflow: hidden;`}>
+                <div style="box-sizing: border-box; color: #626875; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 160%; max-width: 720px; padding: 0 2px 24px;">
+                  {a}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div class="flex-wrap justify-center" style="align-items: center; box-sizing: border-box; display: flex; gap: 9px;">
+        <div style="box-sizing: border-box; color: #626875; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 18px;">
+          Still have a question?
+        </div>
+        <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; font-weight: 500; line-height: 18px;">
+          Talk to us
+        </div>
+        <div style="box-sizing: border-box; color: #14171F; display: inline-block; font-family: 'Geist', system-ui, sans-serif; font-size: 16px; line-height: 20px;">
+          →
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .faq-a-wrap { transition: height 0.34s cubic-bezier(0.22, 0.61, 0.36, 1); }
+  .faq-q:focus-visible { outline: 2px solid #0f6bd4; outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) { .faq-a-wrap { transition: none !important; } }
+</style>
+
+<script>
+  // FAQ accordion — click a question to expand/collapse its answer (animated).
+  function initFAQ() {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll<HTMLElement>('.faq-item').forEach((item) => {
+      const btn = item.querySelector<HTMLElement>('.faq-q');
+      const wrap = item.querySelector<HTMLElement>('.faq-a-wrap');
+      const icon = item.querySelector<HTMLElement>('.faq-icon');
+      if (!btn || !wrap || !icon) return;
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('is-open');
+        if (isOpen) {
+          item.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+          icon.textContent = '+';
+          icon.style.color = '#6b7079';
+          if (reduce) { wrap.style.height = '0px'; return; }
+          wrap.style.height = wrap.scrollHeight + 'px';
+          void wrap.offsetHeight; // reflow so the next set animates
+          wrap.style.height = '0px';
+        } else {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+          icon.textContent = '−';
+          icon.style.color = '#14171F';
+          if (reduce) { wrap.style.height = 'auto'; return; }
+          wrap.style.height = wrap.scrollHeight + 'px';
+          const onEnd = () => {
+            if (item.classList.contains('is-open')) wrap.style.height = 'auto';
+            wrap.removeEventListener('transitionend', onEnd);
+          };
+          wrap.addEventListener('transitionend', onEnd);
+        }
+      });
+    });
+  }
+  initFAQ();
+</script>

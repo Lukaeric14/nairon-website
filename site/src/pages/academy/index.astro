@@ -1,0 +1,343 @@
+---
+// AI Academy index — the hub. Every lesson, grouped by topic and level, plus
+// fuzzy search and a resume-where-you-left-off rail.
+//
+// Everything that matters for search is static HTML: the full lesson list is in
+// the markup, not fetched. Search and progress are progressive enhancements
+// layered on top.
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/sections/Nav.astro';
+import Footer from '../../components/sections/Footer.astro';
+import LessonCard from '../../components/academy/LessonCard.astro';
+import AcademySearch from '../../components/academy/AcademySearch.astro';
+import { allLessons, searchIndex, formatDuration, LEVELS, LEVEL_LABELS, thumbUrl } from '../../data/academy';
+import { SITE } from '../../data/site';
+
+const lessons = await allLessons();
+const topics = (await getCollection('academyTopics')).sort((a, b) => a.data.order - b.data.order);
+const index = await searchIndex();
+const site = Astro.site ?? new URL(SITE.url);
+
+const byTopic = topics
+  .map((t) => ({ topic: t, lessons: lessons.filter((l) => l.data.topic === t.id) }))
+  .filter((g) => g.lessons.length > 0);
+
+const featured = lessons[0];
+const totalMinutes = Math.round(lessons.reduce((n, l) => n + l.data.duration, 0) / 60);
+
+const title = 'AI Academy — free AI training for property management businesses';
+const description = `${lessons.length} short lessons on how AI actually works, in plain English. Built for owners and operators in property management — leasing teams, maintenance & dispatch, and rent & renewals.`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: 'Nairon AI Academy',
+    description,
+    provider: { '@type': 'Organization', name: SITE.name, sameAs: site.href },
+    isAccessibleForFree: true,
+    hasCourseInstance: byTopic.map((g) => ({
+      '@type': 'CourseInstance',
+      name: g.topic.data.label,
+      description: g.topic.data.description,
+      courseMode: 'online',
+      courseWorkload: `PT${Math.round(g.lessons.reduce((n, l) => n + l.data.duration, 0) / 60)}M`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: lessons.map((l, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: l.data.title,
+      url: new URL(`/academy/${l.id}`, site).href,
+    })),
+  },
+];
+---
+
+<Base title={title} description={description} jsonLd={jsonLd} image={featured ? thumbUrl(featured.data.youtubeId) : undefined}>
+  <Nav solid />
+  <main data-testid="academy-index" style="background-color: #FFFFFF; padding-top: 62px;">
+    <!-- ============ HEADER ============ -->
+    <header
+      data-reveal-group
+      class="mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-12 pt-[clamp(48px,8vw,104px)] pb-[clamp(28px,4vw,44px)]"
+      style="box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 22px;"
+    >
+      <div data-reveal style="display: flex; align-items: center; gap: 9px;">
+        <span style="width: 6px; height: 6px; border-radius: 999px; background-color: var(--color-lapis); flex-shrink: 0;"></span>
+        <span class="ac-eyebrow">AI Academy</span>
+      </div>
+      <h1
+        data-reveal
+        class="text-[clamp(32px,6vw,54px)] leading-[1.06]"
+        style="margin: 0; color: var(--color-ink); font-family: var(--font-sans); font-weight: 500; letter-spacing: -0.03em; max-width: 900px; text-wrap: balance;"
+      >
+        Understand AI well enough to decide where it belongs in your business.
+      </h1>
+      <p data-reveal class="ac-lead">
+        {lessons.length} short {lessons.length === 1 ? 'lesson' : 'lessons'}, {totalMinutes} minutes end to
+        end. No code, no maths — written for owners and operators, not engineers. Free, and it stays that way.
+      </p>
+      <div data-reveal style="width: 100%; max-width: 560px; padding-top: 6px;">
+        <AcademySearch index={index} />
+      </div>
+    </header>
+
+    <!-- ============ RESUME (progressive enhancement) ============ -->
+    <section id="ac-resume" class="ac-resume" hidden aria-label="Continue where you left off">
+      <div class="mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-12" style="box-sizing: border-box;">
+        <div class="ac-resume-inner">
+          <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
+            <span class="ac-kicker">Pick up where you left off</span>
+            <a id="ac-resume-link" class="ac-resume-title" href="/academy"></a>
+          </div>
+          <div class="ac-progress">
+            <div class="ac-progress-track"><div id="ac-progress-fill" class="ac-progress-fill"></div></div>
+            <span id="ac-progress-count" class="ac-progress-count"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TOPICS ============ -->
+    {byTopic.map((group) => (
+      <section class="ac-topic" aria-labelledby={`t-${group.topic.id}`}>
+        <div class="mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-12" style="box-sizing: border-box;">
+          <div class="ac-topic-head">
+            <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0; max-width: 640px;">
+              <h2 id={`t-${group.topic.id}`} class="ac-topic-title">
+                <a href={`/academy/topic/${group.topic.id}`}>{group.topic.data.label}</a>
+              </h2>
+              <p class="ac-topic-desc">{group.topic.data.description}</p>
+            </div>
+            <a class="ac-topic-count" href={`/academy/topic/${group.topic.id}`}>
+              {group.lessons.length} {group.lessons.length === 1 ? 'lesson' : 'lessons'} ·{' '}
+              {formatDuration(group.lessons.reduce((n, l) => n + l.data.duration, 0))}
+            </a>
+          </div>
+
+          {LEVELS.filter((lvl) => group.lessons.some((l) => l.data.level === lvl)).map((lvl) => (
+            <div class="ac-level">
+              <div class="ac-level-head">
+                <span class="ac-kicker">{LEVEL_LABELS[lvl]}</span>
+                <span class="ac-rule"></span>
+              </div>
+              <div data-reveal-group class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                {group.lessons
+                  .filter((l) => l.data.level === lvl)
+                  .map((l) => <LessonCard lesson={l} />)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <Footer />
+  </main>
+</Base>
+
+<style>
+  .ac-eyebrow {
+    color: #5b6170;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .ac-lead {
+    margin: 0;
+    max-width: 660px;
+    color: #5b6170;
+    font-size: clamp(16px, 2.3vw, 19px);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .ac-kicker {
+    color: #5b6170;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* ---- resume rail ------------------------------------------------------ */
+  .ac-resume {
+    padding-block: 20px;
+    background-color: #e9f0fa;
+    border-block: 1px solid rgb(15 107 212 / 0.12);
+  }
+  .ac-resume-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  @media (min-width: 768px) {
+    .ac-resume-inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+  }
+  .ac-resume-title {
+    color: var(--color-ink);
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .ac-resume-title:hover {
+    color: var(--color-lapis);
+  }
+  .ac-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 200px;
+    flex-shrink: 0;
+  }
+  .ac-progress-track {
+    flex-grow: 1;
+    height: 4px;
+    border-radius: 999px;
+    background-color: rgb(15 107 212 / 0.18);
+    overflow: hidden;
+  }
+  .ac-progress-fill {
+    width: 0%;
+    height: 100%;
+    border-radius: 999px;
+    background-color: var(--color-lapis);
+    transition: width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .ac-progress-count {
+    flex-shrink: 0;
+    color: #5b6170;
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  /* ---- topic sections --------------------------------------------------- */
+  .ac-topic {
+    padding-block: clamp(40px, 6vw, 64px);
+    border-top: 1px solid var(--color-hairline);
+  }
+  .ac-topic:first-of-type {
+    border-top: 0;
+  }
+  .ac-topic-head {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 30px;
+  }
+  @media (min-width: 768px) {
+    .ac-topic-head {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+    }
+  }
+  .ac-topic-title {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(24px, 3.6vw, 32px);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+  .ac-topic-title a:hover {
+    color: var(--color-lapis);
+  }
+  .ac-topic-desc {
+    margin: 0;
+    color: #5b6170;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .ac-topic-count {
+    flex-shrink: 0;
+    color: #5b6170;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .ac-topic-count:hover {
+    color: var(--color-ink);
+  }
+  .ac-level + .ac-level {
+    margin-top: 40px;
+  }
+  .ac-level-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 18px;
+  }
+  .ac-rule {
+    flex-grow: 1;
+    height: 1px;
+    background-color: var(--color-hairline);
+  }
+
+  /* Completion ticks, painted in by the progress script. */
+  :global(.lesson-card[data-done='true'] .lesson-card-kicker::after) {
+    content: ' · done';
+    color: var(--color-green);
+  }
+  :global(.lesson-card[data-done='true'] .lesson-card-thumb) {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  import { getCompleted, getLastVisited } from '../../components/academy/progress';
+
+  const paint = () => {
+    const done = getCompleted();
+    const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>('.lesson-card'));
+    const slugs = new Set<string>();
+
+    for (const card of cards) {
+      const slug = card.getAttribute('href')?.replace('/academy/', '') ?? '';
+      if (!slug) continue;
+      slugs.add(slug);
+      card.dataset.done = String(done.has(slug));
+    }
+
+    const total = slugs.size;
+    const completed = [...done].filter((s) => slugs.has(s)).length;
+
+    const fill = document.getElementById('ac-progress-fill');
+    const count = document.getElementById('ac-progress-count');
+    const resume = document.getElementById('ac-resume');
+    const link = document.getElementById('ac-resume-link') as HTMLAnchorElement | null;
+
+    // The rail only earns its space once there's something to resume.
+    const last = getLastVisited();
+    if (!resume || !link || (!last && completed === 0)) return;
+
+    if (last) {
+      const card = cards.find((c) => c.getAttribute('href') === `/academy/${last}`);
+      link.href = `/academy/${last}`;
+      link.textContent = card?.querySelector('.lesson-card-title')?.textContent ?? 'Continue the track';
+    } else {
+      link.href = cards[0]?.getAttribute('href') ?? '/academy';
+      link.textContent = cards[0]?.querySelector('.lesson-card-title')?.textContent ?? 'Start the track';
+    }
+
+    if (fill) fill.style.width = total ? `${Math.round((completed / total) * 100)}%` : '0%';
+    if (count) count.textContent = `${completed}/${total}`;
+    resume.hidden = false;
+  };
+
+  paint();
+  document.addEventListener('academy:progress', paint);
+</script>

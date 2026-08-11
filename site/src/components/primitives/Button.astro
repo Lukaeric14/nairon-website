@@ -1,0 +1,14 @@
+---
+interface Props { href?: string; variant?: 'primary' | 'light' | 'ghost'; arrow?: '' | 'right' | 'up-right' | false; class?: string; }
+const { href = '#', variant = 'primary', arrow = 'right', class: cls = '' } = Astro.props;
+const base = 'inline-flex items-center gap-[9px] rounded-[2px] text-[14.5px] font-medium transition-colors';
+const map = {
+  primary: 'bg-lapis text-white px-[22px] py-[13px] hover:bg-[#0f66c8]',
+  light: 'bg-white text-dark px-[22px] py-[13px] hover:bg-neutral-100',
+  ghost: 'text-ink px-0 py-0 hover:text-lapis',
+};
+const glyph = arrow === 'up-right' ? '↗' : arrow === 'right' ? '→' : '';
+---
+<a href={href} class:list={[base, map[variant], cls]}>
+  <slot />{glyph && <span aria-hidden="true">{glyph}</span>}
+</a>

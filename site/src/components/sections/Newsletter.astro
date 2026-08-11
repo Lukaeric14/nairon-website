@@ -1,0 +1,126 @@
+---
+// Newsletter section — pixel-perfect reproduction of Paper frame KXQ-0
+// Responsive: mobile-first base + md (>=768) + lg (>=1024) locks the exact desktop design.
+// At >=1024px this renders visually identical to the original 1440px frame.
+// The email row is a real form that POSTs to SITE.newsletterWebhook (client-side).
+import { SITE } from '../../data/site';
+---
+
+<section
+  data-testid="newsletter"
+  class="relative flex w-full flex-col overflow-clip py-[72px] md:py-[88px] lg:h-[720px] lg:py-0"
+  style="background-color: #FBFBFB; box-sizing: border-box; flex-shrink: 0; font-size: 12px; font-synthesis: none; line-height: 16px; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased;"
+>
+  <!-- Full-bleed photo background: spans the entire viewport width on every screen -->
+  <div
+    class="absolute inset-0 h-full w-full"
+    style="background-image: url(/paper/7RK7D76K3XKVKK1MEJXFJ5BNQZ.webp); background-position: 50% 45%; background-size: cover; box-sizing: border-box;"
+  ></div>
+  <!-- Horizontal dark scrim (left → right) — full viewport width -->
+  <div
+    class="absolute inset-0 h-full w-full"
+    style="background-image: linear-gradient(in oklab 90deg, oklab(14.9% -0.004 -0.021 / 88%) 0%, oklab(14.9% -0.004 -0.021 / 58%) 44%, oklab(14.9% -0.004 -0.021 / 12%) 100%); box-sizing: border-box;"
+  ></div>
+  <!-- Top-down dark scrim — full viewport width -->
+  <div
+    class="absolute inset-0 h-full w-full"
+    style="background-image: linear-gradient(in oklab 180deg, oklab(14.9% -0.004 -0.021 / 32%) 0%, oklab(14.9% -0.004 -0.021 / 0%) 42%); box-sizing: border-box;"
+  ></div>
+
+  <!-- Centered content container: capped at 1440, responsive side padding.
+       On lg it recreates the original left:96px inset + vertical centering. -->
+  <div
+    class="relative mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-center px-5 md:px-10 lg:px-[96px]"
+  >
+    <div
+      class="flex w-full min-w-0 flex-col gap-10 md:gap-14 lg:max-w-[620px] lg:gap-[86px]"
+      data-reveal-group
+    >
+      <!-- Heading block -->
+      <div class="flex w-full min-w-0 flex-col gap-[22px] lg:w-[560px] lg:max-w-[560px] lg:gap-[26.68px]" data-reveal>
+        <h2
+          class="min-w-0 text-[clamp(38px,9vw,66px)] lg:text-[66px]"
+          style="box-sizing: border-box; color: #FFFFFF; font-family: 'Instrument Serif', system-ui, sans-serif; line-height: 102%; font-weight: 400; margin: 0;"
+        >
+          Field intelligence, in your inbox.
+        </h2>
+        <p
+          class="min-w-0 max-w-[440px] text-[15px] md:text-[16px] lg:text-[17px]"
+          style="box-sizing: border-box; color: #FFFFFFB8; font-family: 'Geist', system-ui, sans-serif; line-height: 155%; margin: 0;"
+        >
+          A weekly newsletter on AI employees and property automation — what’s working across leasing, maintenance, and rent &amp; renewals.
+        </p>
+      </div>
+
+      <!-- Email form row (real form → newsletter webhook) -->
+      <div data-reveal style="box-sizing: border-box; width: 100%;" class="lg:max-w-[420px]">
+        <form
+          data-newsletter
+          data-webhook={SITE.newsletterWebhook}
+          class="flex w-full min-w-0 items-center gap-4 pb-[13px]"
+          style="border-bottom-color: #FFFFFF59; border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box;"
+        >
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="you@company.com"
+            aria-label="Email address"
+            class="nl-input min-w-0 flex-1"
+            style="background: transparent; border: none; box-sizing: border-box; color: #FFFFFF; font-family: 'Geist', system-ui, sans-serif; font-size: 16px; line-height: 20px; outline: none; padding: 0;"
+          />
+          <button
+            type="submit"
+            class="nl-submit flex flex-shrink-0 items-center gap-[9px]"
+            style="background: none; border: none; box-sizing: border-box; cursor: pointer; padding: 0;"
+          >
+            <span style="color: #FFFFFF; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; font-weight: 500; line-height: 18px; white-space: nowrap;">Subscribe</span>
+            <span style="color: #FFFFFF; font-family: 'Geist', system-ui, sans-serif; font-size: 16px; line-height: 20px;">→</span>
+          </button>
+        </form>
+        <div class="nl-status" role="status" aria-live="polite" style="display: none; margin-top: 10px; box-sizing: border-box; color: #FFFFFFCC; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 1.5;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .nl-input::placeholder { color: #FFFFFF8C; }
+</style>
+
+<script>
+  // Newsletter signup → POST to the configured webhook (no-cors: opaque but
+  // delivered). Falls back to a friendly message if the webhook isn't set yet.
+  import { postLead } from '../../lib/leads';
+
+  document.querySelectorAll<HTMLFormElement>('[data-newsletter]').forEach((form) => {
+    const wrap = form.parentElement;
+    const status = wrap?.querySelector<HTMLElement>('.nl-status');
+    const webhook = form.getAttribute('data-webhook') || '';
+    const show = (msg: string, ok = true) => {
+      if (!status) return;
+      status.textContent = msg;
+      status.style.display = 'block';
+      status.style.color = ok ? '#FFFFFFCC' : '#FFB4A6';
+    };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = (new FormData(form).get('email') || '').toString().trim();
+      if (!email) return;
+      if (!webhook) {
+        show('Thanks — newsletter sign-ups open shortly.');
+        form.reset();
+        return;
+      }
+      show('Subscribing…');
+      try {
+        await postLead(webhook, 'newsletter', { email });
+        show("You're subscribed. Watch your inbox.");
+        form.reset();
+        (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag?.('event', 'newsletter_signup', {});
+      } catch {
+        show('Something went wrong — please try again.', false);
+      }
+    });
+  });
+</script>

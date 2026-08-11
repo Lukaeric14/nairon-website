@@ -1,0 +1,605 @@
+---
+// WhoItsFor.astro — auto-advancing coverflow over Nairon's 3 property-management
+// sub-niches (2026-08-04 revision: property-management-only canon, replacing the
+// same-day solar-only canon — brand/STRATEGY.md section 3).
+//
+// Derived from Paper section GKA-0. The original static 3-slot coverflow is now
+// a living slideshow: the active sub-niche sits large & full-colour in the centre
+// slot, its two neighbours sit small & dimmed in the side slots, and every ~2s
+// the filmstrip advances (real transform+opacity slide, not an instant swap),
+// looping forever. Panel copy + dot indicator stay in sync with the active item.
+//
+// ── Single source of truth ──────────────────────────────────────────────────
+// One array drives EVERYTHING: the cards, the panel name/description, and the
+// dots. To add / reorder sub-niches, edit this array only. To drop in a real
+// photo for a placeholder sub-niche later, change its `img` from null to a URL —
+// no other code change needed.
+type Industry = { key: string; label: string; img: string | null; desc: string };
+
+const ALL_INDUSTRIES: Industry[] = [
+  {
+    key: "leasing",
+    label: "Leasing",
+    img: "/paper/00QY75TH63W9RRG9RP0QPEPTKS.webp",
+    desc: "AI employees that answer inquiries, pre-qualify applicants, and book tours around the clock.",
+  },
+  {
+    key: "maintenance",
+    label: "Maintenance & Dispatch",
+    img: "/photos/whoitsfor-maintenance-dispatch.webp",
+    desc: "AI employees that triage work orders, dispatch the right vendor, and track every job to closed.",
+  },
+  {
+    key: "rent",
+    label: "Rent & Renewals",
+    img: "/photos/whoitsfor-rent-renewals.webp",
+    desc: "AI employees that chase overdue rent, send renewal offers on schedule, and flag delinquencies early.",
+  },
+];
+
+const INDUSTRIES = ALL_INDUSTRIES;
+
+const AUTOPLAY_MS = 2800; // ~2.8s per industry (calmer than the original 2s)
+---
+
+<div
+  data-testid="who-its-for"
+  class="w-full flex flex-col items-center overflow-clip gap-8 lg:gap-[44px] pt-[72px] pb-[64px] lg:pt-[104px] lg:pb-[96px]"
+  style="background-color: #FBFBFB; box-sizing: border-box; font-synthesis: none; height: fit-content; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased;"
+>
+  <!-- Header block (unchanged, keeps its reveal hooks) -->
+  <div
+    data-reveal-group
+    class="w-full max-w-[1248px] mx-auto flex flex-col items-center gap-[18px] px-5 md:px-10 lg:px-0"
+    style="box-sizing: border-box;"
+  >
+    <div data-reveal style="align-items: center; box-sizing: border-box; display: flex; gap: 9px;">
+      <div style="background-color: #0f6bd4; border-radius: 8px; box-sizing: border-box; flex-shrink: 0; height: 8px; width: 8px;"></div>
+      <div style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; line-height: 16px;">
+        WHO HIVE IS FOR
+      </div>
+    </div>
+    <div
+      data-reveal
+      class="flex flex-wrap justify-center text-[clamp(32px,7vw,56px)] leading-[1.1] lg:text-[56px] lg:leading-[62px]"
+      style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; letter-spacing: -0.035em; text-align: center; white-space: pre-wrap;"
+    >
+      Built for Property Management
+    </div>
+    <div
+      data-reveal
+      class="w-full max-w-[560px]"
+      style="box-sizing: border-box; color: #5B6170; display: flex; flex-wrap: wrap; font-family: 'Geist', system-ui, sans-serif; font-size: 17px; justify-content: center; line-height: 27px; text-align: center; text-wrap: balance;"
+    >
+      AI employees that own real jobs for leasing teams, maintenance & dispatch, and rent & renewals — not another dashboard to manage.
+    </div>
+  </div>
+
+  <!--
+    Slideshow block. ONE data-reveal wraps the whole thing so the global reveal
+    system fades it in once on scroll (it applies its transform to THIS wrapper,
+    which has no transform of its own — so it never fights the card transforms my
+    JS drives on the inner .wif-card elements).
+  -->
+  <div
+    data-reveal
+    class="wif w-full flex flex-col items-center gap-8 lg:gap-[44px]"
+    data-autoplay={AUTOPLAY_MS}
+  >
+    <!-- Coverflow stage. 5 cards are rendered once; JS assigns each a slot
+         (center / left / right / hidden) every tick and CSS animates the move. -->
+    <div
+      class="wif-stage w-full max-w-[1440px] mx-auto px-5 md:px-10 lg:px-0"
+      style="box-sizing: border-box;"
+    >
+      <div class="wif-track">
+        {
+          INDUSTRIES.map((ind, i) => (
+            <div class="wif-card" data-index={i} data-desc={ind.desc} aria-hidden="true">
+              {ind.img ? (
+                <img class="wif-photo" src={ind.img} alt={ind.label} loading="lazy" decoding="async" />
+              ) : (
+                // On-brand placeholder for industries without a photo yet:
+                // dark cinematic card with a soft top radial highlight.
+                <div class="wif-photo wif-photo--placeholder" />
+              )}
+              {/* Dim wash — only visible on the two side (inactive) cards. */}
+              <div class="wif-wash" />
+              <div class="wif-label" set:text={ind.label} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Carousel controls: real prev / dots / next -->
+    <div
+      class="w-full max-w-[1248px] mx-auto flex items-center justify-between px-5 md:px-10 lg:px-0"
+      style="box-sizing: border-box;"
+    >
+      <button type="button" class="wif-nav" data-dir="-1" aria-label="Previous">
+        <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <path d="M11.4 7H3.2M6.6 3.4L3 7l3.6 3.6" fill="none" stroke="#14171F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+
+      <div class="wif-dots" role="tablist" aria-label="Property management segments">
+        {
+          INDUSTRIES.map((ind, i) => (
+            <button
+              type="button"
+              class="wif-dot"
+              data-index={i}
+              role="tab"
+              aria-label={ind.label}
+            />
+          ))
+        }
+      </div>
+
+      <button type="button" class="wif-nav" data-dir="1" aria-label="Next">
+        <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <path d="M2.6 7h8.2M7.4 3.4L11 7l-3.6 3.6" fill="none" stroke="#14171F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Active-item panel: name + description crossfade in sync with the active card. -->
+    <div
+      class="wif-panel w-full max-w-[560px] mx-auto flex flex-col items-center gap-4 px-5 md:px-10 lg:px-0"
+      style="box-sizing: border-box;"
+      aria-live="polite"
+    >
+      <div class="wif-panel-name" style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-size: 24px; font-weight: 500; letter-spacing: -0.02em; line-height: 30px;">
+        {INDUSTRIES[0].label}
+      </div>
+      <div class="wif-panel-desc" style="box-sizing: border-box; color: #5B6170; display: flex; flex-wrap: wrap; font-family: 'Geist', system-ui, sans-serif; font-size: 16px; justify-content: center; line-height: 26px; text-align: center; text-wrap: balance;">
+        {INDUSTRIES[0].desc}
+      </div>
+      <div style="align-items: center; box-sizing: border-box; display: flex; gap: 8px; width: max-content;">
+        <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <path d="M2 1.5v5.5h7M6.6 4.6L9 7l-2.4 2.4" fill="none" stroke="#14171F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div style="box-sizing: border-box; color: #14171F; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; line-height: 18px;">
+          Read more
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Coverflow stage ────────────────────────────────────────────────────────
+     The track is a relative box; cards are absolutely positioned and centred,
+     then pushed left / right / scaled via transform. That way every card shares
+     one origin and the slot transitions read as a smooth slide + scale.
+     Base (mobile) & md (tablet): single full-width card, neighbours hidden.
+     lg (>=1024): full 3-up coverflow at the original pixel sizes. */
+  .wif-stage {
+    position: relative;
+  }
+  .wif-track {
+    position: relative;
+    margin: 0 auto;
+    /* Mobile: one card, capped width, its own height. */
+    width: 100%;
+    max-width: 340px;
+    height: 300px;
+  }
+  .wif-card {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    height: 300px;
+    border-radius: 6px;
+    overflow: clip;
+    /* Centre horizontally by default; slot classes add the offset/scale. */
+    transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    transition:
+      transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+      opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: transform, opacity;
+    z-index: 0;
+  }
+
+  .wif-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50%;
+    background-position: 50%;
+    background-size: cover;
+    box-sizing: border-box;
+  }
+  /* On-brand placeholder: dark cinematic ground + soft top radial highlight. */
+  .wif-photo--placeholder {
+    background-color: #14171f;
+    background-image:
+      radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 55%),
+      linear-gradient(180deg, #14171f 0%, #0a1322 100%);
+  }
+
+  /* Dim wash over inactive (side) cards — the original #FBFBFBA6 look. */
+  .wif-wash {
+    position: absolute;
+    inset: 0;
+    background-color: #fbfbfba6;
+    opacity: 0;
+    box-sizing: border-box;
+    transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .wif-label {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    color: #14171f;
+    font-family: "Geist", system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+  /* Placeholder cards are dark, so their label must be light. */
+  .wif-photo--placeholder ~ .wif-label {
+    color: #ffffff;
+  }
+
+  /* ── Slot states (set by JS) ────────────────────────────────────────────────
+     Mobile default: only the centre card shows; left/right behave like hidden
+     (they peek very slightly for depth but are dimmed to near-invisible). */
+  .wif-card.is-center {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    z-index: 3;
+  }
+  .wif-card.is-center .wif-label {
+    color: #ffffff;
+    font-size: 15px;
+    top: 22px;
+  }
+  .wif-card.is-center .wif-photo--placeholder ~ .wif-label {
+    color: #ffffff;
+  }
+  .wif-card.is-center .wif-wash {
+    opacity: 0;
+  }
+
+  /* On mobile the neighbours are hidden entirely (no room for 3-up). */
+  .wif-card.is-left,
+  .wif-card.is-right,
+  .wif-card.is-hidden {
+    opacity: 0;
+    z-index: 1;
+  }
+  .wif-card.is-left {
+    transform: translateX(-50%) scale(0.9);
+  }
+  .wif-card.is-right {
+    transform: translateX(-50%) scale(0.9);
+  }
+  .wif-card.is-left .wif-wash,
+  .wif-card.is-right .wif-wash {
+    opacity: 1;
+  }
+
+  /* ── Desktop coverflow (lg >= 1024): the real 3-up layout ──────────────────
+     Track grows to the original center-card footprint; side cards translate out
+     and scale down to the 300x380 side size, center stays 520x480. */
+  @media (min-width: 1024px) {
+    .wif-track {
+      max-width: 1140px; /* 520 center + 2×300 sides + gaps, comfortably */
+      height: 480px;
+    }
+    .wif-card {
+      width: 520px;
+      height: 480px;
+    }
+
+    /* Side cards: scale to ~0.64 (≈333×307) and slide out so there's a clean
+       ~22px gap from the 520px centre card (no overlap). Offset = half centre
+       (260) + gap (~22) + half scaled side (166) ≈ 448px. On narrower desktops
+       the sides may bleed past the viewport edges — the section clips, so they
+       simply peek in from the sides (a normal coverflow look). */
+    .wif-card.is-left {
+      opacity: 1;
+      transform: translateX(calc(-50% - 448px)) scale(0.64);
+      z-index: 1;
+    }
+    .wif-card.is-right {
+      opacity: 1;
+      transform: translateX(calc(-50% + 448px)) scale(0.64);
+      z-index: 1;
+    }
+    /* Cards beyond the immediate neighbours: parked further out + smaller,
+       invisible, ready to slide in from whichever side. */
+    .wif-card.is-hidden {
+      opacity: 0;
+    }
+    .wif-card.is-hidden.from-left {
+      transform: translateX(calc(-50% - 600px)) scale(0.5);
+    }
+    .wif-card.is-hidden.from-right {
+      transform: translateX(calc(-50% + 600px)) scale(0.5);
+    }
+  }
+
+  /* ── Nav buttons ────────────────────────────────────────────────────────── */
+  .wif-nav {
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #e4e6ea;
+    border-radius: 36px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-shrink: 0;
+    height: 36px;
+    justify-content: center;
+    width: 36px;
+    padding: 0;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .wif-nav:hover {
+    background-color: #f5f6f8;
+    border-color: #d3d6dc;
+  }
+  .wif-nav:focus-visible {
+    outline: 2px solid #0f6bd4;
+    outline-offset: 2px;
+  }
+
+  /* ── Dot indicator: 5 dots, active one elongated & dark ─────────────────── */
+  .wif-dots {
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 7px;
+    padding-block: 9px;
+    padding-inline: 14px;
+  }
+  .wif-dot {
+    background-color: #c9cdd5;
+    border: none;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 6px;
+    width: 6px;
+    padding: 0;
+    transition: width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), background-color 0.4s ease;
+  }
+  .wif-dot.is-active {
+    background-color: #14171f;
+    width: 22px;
+  }
+  .wif-dot:focus-visible {
+    outline: 2px solid #0f6bd4;
+    outline-offset: 2px;
+  }
+
+  /* ── Panel crossfade ──────────────────────────────────────────────────────
+     JS toggles .is-swapping to fade the name+desc out, swaps text, fades in. */
+  .wif-panel-name,
+  .wif-panel-desc {
+    transition: opacity 0.3s ease;
+  }
+  .wif-panel.is-swapping .wif-panel-name,
+  .wif-panel.is-swapping .wif-panel-desc {
+    opacity: 0;
+  }
+
+  /* ── Reduced motion: no autoplay-driven movement, static active card ──────
+     JS also stops the timer; here we kill transforms/transitions so the active
+     card simply appears in place and side cards stay hidden. */
+  @media (prefers-reduced-motion: reduce) {
+    .wif-card,
+    .wif-wash,
+    .wif-dot,
+    .wif-panel-name,
+    .wif-panel-desc {
+      transition: none !important;
+    }
+    .wif-card.is-left,
+    .wif-card.is-right {
+      opacity: 0 !important;
+    }
+  }
+</style>
+
+<script>
+  // Vanilla TS coverflow controller. No framework, no libs.
+  // Runs per-section so multiple instances (if ever) stay independent.
+  type Ctx = {
+    root: HTMLElement;
+    cards: HTMLElement[];
+    dots: HTMLElement[];
+    panel: HTMLElement | null;
+    nameEl: HTMLElement | null;
+    descEl: HTMLElement | null;
+    labels: string[];
+    descs: string[];
+    count: number;
+    active: number;
+    intervalMs: number;
+    firstMs: number;
+    timer: number | null;
+    reduce: boolean;
+  };
+
+  function initWhoItsFor(root: HTMLElement) {
+    const track = root.querySelector<HTMLElement>(".wif-track");
+    if (!track) return;
+
+    const cards = Array.from(root.querySelectorAll<HTMLElement>(".wif-card"));
+    const dots = Array.from(root.querySelectorAll<HTMLElement>(".wif-dot"));
+    const panel = root.querySelector<HTMLElement>(".wif-panel");
+    const nameEl = root.querySelector<HTMLElement>(".wif-panel-name");
+    const descEl = root.querySelector<HTMLElement>(".wif-panel-desc");
+
+    // Read all copy straight off the rendered DOM so the frontmatter INDUSTRIES
+    // array stays the single source of truth: labels from each card's label,
+    // descriptions from the data-desc attribute stamped on each card.
+    const labels = cards.map(
+      (c) => c.querySelector<HTMLElement>(".wif-label")?.textContent?.trim() ?? "",
+    );
+    const descs = cards.map((c) => c.getAttribute("data-desc") ?? "");
+
+    const ctx: Ctx = {
+      root,
+      cards,
+      dots,
+      panel,
+      nameEl,
+      descEl,
+      labels,
+      descs,
+      count: cards.length,
+      active: 0,
+      intervalMs: Number(root.getAttribute("data-autoplay")) || 2000,
+      // First advance comes soon after it enters view so motion starts quickly
+      // (the slideshow no longer pauses under the cursor, so this is the real start).
+      firstMs: 450,
+      timer: null,
+      reduce: matchMedia("(prefers-reduced-motion: reduce)").matches,
+    };
+
+    render(ctx);
+    bindControls(ctx);
+    if (!ctx.reduce) {
+      beginWhenVisible(ctx);
+    }
+  }
+
+  // Assign a slot class to every card based on its distance from `active`,
+  // update dots + panel. This is the one place state maps to the DOM.
+  function render(ctx: Ctx) {
+    const { cards, dots, count, active } = ctx;
+
+    cards.forEach((card, i) => {
+      card.classList.remove("is-center", "is-left", "is-right", "is-hidden", "from-left", "from-right");
+      // Signed shortest distance around the loop: -2..+2 for 5 items.
+      let d = i - active;
+      if (d > count / 2) d -= count;
+      if (d < -count / 2) d += count;
+
+      if (d === 0) card.classList.add("is-center");
+      else if (d === -1) card.classList.add("is-left");
+      else if (d === 1) card.classList.add("is-right");
+      else {
+        // Park hidden cards on the side they're closest to, so when they
+        // become a neighbour they slide IN from the correct direction.
+        card.classList.add("is-hidden", d < 0 ? "from-left" : "from-right");
+      }
+    });
+
+    dots.forEach((dot, i) => dot.classList.toggle("is-active", i === active));
+
+    updatePanel(ctx);
+  }
+
+  // Crossfade the panel name + description to the active industry.
+  function updatePanel(ctx: Ctx) {
+    const { panel, nameEl, descEl, labels, descs, active, reduce } = ctx;
+    if (!nameEl || !descEl) return;
+    const setText = () => {
+      nameEl.textContent = labels[active];
+      descEl.textContent = descs[active];
+    };
+    if (reduce || !panel) {
+      setText();
+      return;
+    }
+    panel.classList.add("is-swapping");
+    window.setTimeout(() => {
+      setText();
+      panel.classList.remove("is-swapping");
+    }, 300); // matches the panel opacity transition
+  }
+
+  function go(ctx: Ctx, index: number) {
+    ctx.active = ((index % ctx.count) + ctx.count) % ctx.count;
+    render(ctx);
+  }
+
+  function next(ctx: Ctx) {
+    go(ctx, ctx.active + 1);
+  }
+
+  // Start autoplay. `firstDelay` sets the wait until the FIRST advance; after that it
+  // settles into the steady interval. The initial start passes a short delay so the
+  // slideshow gets moving quickly once it's in view.
+  function startAutoplay(ctx: Ctx, firstDelay?: number) {
+    stopAutoplay(ctx);
+    const first = firstDelay ?? ctx.intervalMs;
+    ctx.timer = window.setTimeout(() => {
+      next(ctx);
+      ctx.timer = window.setInterval(() => next(ctx), ctx.intervalMs);
+    }, first);
+  }
+  function stopAutoplay(ctx: Ctx) {
+    if (ctx.timer !== null) {
+      clearTimeout(ctx.timer);
+      clearInterval(ctx.timer);
+      ctx.timer = null;
+    }
+  }
+  // Any manual interaction resets the timer (full interval) so the user isn't fighting it.
+  function resetAutoplay(ctx: Ctx) {
+    if (ctx.reduce) return;
+    startAutoplay(ctx, ctx.intervalMs);
+  }
+  // Kick the slideshow off the first time it scrolls into view, with a quick first
+  // advance — so it never sits idle for a full interval before the user sees motion.
+  function beginWhenVisible(ctx: Ctx) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            startAutoplay(ctx, ctx.firstMs);
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(ctx.root);
+  }
+
+  function bindControls(ctx: Ctx) {
+    ctx.root.querySelectorAll<HTMLElement>(".wif-nav").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const dir = Number(btn.getAttribute("data-dir")) || 1;
+        go(ctx, ctx.active + dir);
+        resetAutoplay(ctx);
+      });
+    });
+    ctx.dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        go(ctx, i);
+        resetAutoplay(ctx);
+      });
+    });
+  }
+
+  function boot() {
+    document.querySelectorAll<HTMLElement>(".wif").forEach(initWhoItsFor);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+</script>

@@ -1,0 +1,84 @@
+---
+import Page from '../layouts/Page.astro';
+---
+<Page title="Trust Center — Nairon" description="Everything about how Nairon handles your data, your access, and your systems: security, privacy, cookies, acceptable use, status, and docs." eyebrow="Trust" heading="Trust Center" intro="Everything about how Nairon handles your data, your access, and your systems — in one place." updated="July 25, 2026">
+  <div class="page-body">
+    <div class="page-grid cols-2">
+      <a href="/security" style="text-decoration:none;">
+        <div class="page-card">
+          <div class="page-card-kicker">Security</div>
+          <h3>Security</h3>
+          <p>How we scope, audit, and protect the access your AI employees use inside your systems.</p>
+        </div>
+      </a>
+      <a href="/privacy" style="text-decoration:none;">
+        <div class="page-card">
+          <div class="page-card-kicker">Policy</div>
+          <h3>Privacy Policy</h3>
+          <p>What data we process, why we process it, and the choices you have over it.</p>
+        </div>
+      </a>
+      <a href="/cookie-policy" style="text-decoration:none;">
+        <div class="page-card">
+          <div class="page-card-kicker">Policy</div>
+          <h3>Cookie Policy</h3>
+          <p>The cookies our site uses, what they do, and how to control them.</p>
+        </div>
+      </a>
+      <a href="/acceptable-use" style="text-decoration:none;">
+        <div class="page-card">
+          <div class="page-card-kicker">Policy</div>
+          <h3>Acceptable Use</h3>
+          <p>The rules that govern how Nairon and its AI employees may be used.</p>
+        </div>
+      </a>
+      <a href="https://status.naironai.com" style="text-decoration:none;">
+        <div class="page-card">
+          <div class="page-card-kicker">Live</div>
+          <h3>System Status</h3>
+          <p>Real-time uptime and incident history for the Nairon platform.</p>
+        </div>
+      </a>
+      <a href="https://docs.naironai.com/overview/what-is-nairon" style="text-decoration:none;">
+        <div class="page-card">
+          <div class="page-card-kicker">Docs</div>
+          <h3>Documentation</h3>
+          <p>How the platform works, how agents are built, and what they can and cannot do.</p>
+        </div>
+      </a>
+    </div>
+
+    <section class="page-section">
+      <h2 class="page-section-title">Principles</h2>
+      <p class="page-section-sub">The commitments behind every AI employee we run.</p>
+      <div class="page-grid cols-2">
+        <div class="page-card">
+          <div class="page-card-kicker">Your systems</div>
+          <h3>Data stays where it lives</h3>
+          <p>Agents work inside the tools you already use. We do not migrate your data into a separate app or make you rebuild your stack.</p>
+        </div>
+        <div class="page-card">
+          <div class="page-card-kicker">Access</div>
+          <h3>Least-privilege and audited</h3>
+          <p>Every agent gets scoped access to only what its work requires. Actions are logged, so you can see exactly what was done and by whom.</p>
+        </div>
+        <div class="page-card">
+          <div class="page-card-kicker">Ownership</div>
+          <h3>We never sell your data</h3>
+          <p>Your data is yours. We do not sell it, and we do not use it to train models for other companies.</p>
+        </div>
+        <div class="page-card">
+          <div class="page-card-kicker">Control</div>
+          <h3>Measurable and reversible</h3>
+          <p>Outcomes are tracked against clear metrics. Access can be scoped down or revoked at any time, with no rip-and-replace to unwind.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <h2 class="page-section-title">Questions</h2>
+      <p class="page-section-sub">Reach our team about security, privacy, or access at <strong>hello@naironai.com</strong>.</p>
+      <a href="/#book" style="align-items:center; background-color:#0f6bd4; border-radius:40px; color:#fff; display:inline-flex; font-family:'Geist',system-ui,sans-serif; font-size:15px; font-weight:500; gap:8px; margin-top:8px; padding:13px 24px; text-decoration:none;">Book an AI audit <span aria-hidden="true">&rarr;</span></a>
+    </section>
+  </div>
+</Page>

@@ -1,0 +1,31 @@
+---
+import Page from '../layouts/Page.astro';
+---
+
+<Page
+  title="Page not found — Nairon"
+  description="The page you were looking for doesn't exist or has moved."
+  eyebrow="404"
+  heading="This page isn't here."
+  intro="The link may be broken or the page may have moved. Here are a few good places to go instead."
+>
+  <div class="page-body">
+    <div class="page-grid cols-3" style="max-width: 940px;">
+      <a class="page-card" href="/" style="text-decoration: none; display: block;">
+        <div class="page-card-kicker">Home</div>
+        <h3 style="margin-top: 8px;">Back to the homepage</h3>
+        <p>The AI workforce for property management.</p>
+      </a>
+      <a class="page-card" href="/#book" style="text-decoration: none; display: block;">
+        <div class="page-card-kicker">Talk to us</div>
+        <h3 style="margin-top: 8px;">Book an AI audit</h3>
+        <p>A 30-minute call to map where AI employees can help.</p>
+      </a>
+      <a class="page-card" href="/contact" style="text-decoration: none; display: block;">
+        <div class="page-card-kicker">Contact</div>
+        <h3 style="margin-top: 8px;">Get in touch</h3>
+        <p>Questions, partnerships, or press — we'll get back fast.</p>
+      </a>
+    </div>
+  </div>
+</Page>

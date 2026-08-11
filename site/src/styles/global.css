@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+/* Self-hosted fonts — family names match the Paper design ('Geist', 'Geist Mono', 'Instrument Serif') */
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/geist-sans-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/geist-sans-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/geist-sans-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Geist Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/geist-mono-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-400-normal.woff2') format('woff2'); }
+
+@theme {
+  --color-ink: #14171F;
+  --color-ink-muted: #6A7080;
+  --color-mono-muted: #9AA0AC;
+  --color-paper: #FBFAF6;
+  --color-paper-cool: #FAF9F7;
+  --color-dark: #0A1322;
+  --color-lapis: #0F6BD4;
+  --color-lapis-300: #4A9CFF;
+  --color-green: #2E9E6A;
+  --color-hairline: rgb(20 23 31 / 0.10);
+  --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { margin: 0; font-family: var(--font-sans); color: var(--color-ink); background: #FFFFFF; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   Scroll-reveal system (Legora feel: subtle fade + small rise,
+   once). Gated on `.reveal-enabled` — an inline <head> script adds
+   that class before first paint, so if JS is disabled the class is
+   never added and ALL content stays fully visible (no hidden content
+   for crawlers / no-JS users). A deferred module toggles `.reveal-in`
+   via IntersectionObserver when each element scrolls into view.
+   ============================================================ */
+.reveal-enabled [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal-enabled [data-reveal].reveal-in {
+  opacity: 1;
+  transform: none;
+}
+/* Accessibility: users who ask for reduced motion get no movement at
+   all — content is simply present. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-enabled [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   Supporting pages (legal, company, trust, training, 404).
+   Shared layout classes used by src/layouts/Page.astro and the
+   pages that render inside it. Keeps every supporting page on the
+   same type scale + rhythm as the marketing sections.
+   ============================================================ */
+.page-main {
+  background-color: #ffffff;
+  /* The nav is a fixed bar — clear it. */
+  padding-top: 62px;
+  min-height: 60vh;
+}
+.page-header {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1180px;
+  padding-inline: 20px;
+  padding-top: clamp(44px, 7vw, 84px);
+  padding-bottom: clamp(26px, 4.5vw, 44px);
+  box-sizing: border-box;
+}
+.page-eyebrow {
+  align-items: center;
+  color: #6a7080;
+  display: flex;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  gap: 9px;
+  letter-spacing: 0.18em;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+.page-eyebrow-dot {
+  background-color: var(--color-lapis);
+  border-radius: 50%;
+  flex-shrink: 0;
+  height: 6px;
+  width: 6px;
+}
+.page-h1 {
+  margin: 18px 0 0;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  font-size: clamp(32px, 6vw, 52px);
+  line-height: 1.07;
+  max-width: 900px;
+  text-wrap: balance;
+}
+.page-lead {
+  margin: 18px 0 0;
+  color: #5b6170;
+  font-family: var(--font-sans);
+  font-size: clamp(16px, 2.3vw, 19px);
+  line-height: 1.6;
+  max-width: 660px;
+  text-wrap: pretty;
+}
+.page-updated {
+  margin: 18px 0 0;
+  color: #9aa0ac;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+.page-body {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1180px;
+  padding-inline: 20px;
+  padding-bottom: clamp(64px, 10vw, 120px);
+  box-sizing: border-box;
+}
+@media (min-width: 768px) {
+  .page-header, .page-body { padding-inline: 40px; }
+}
+@media (min-width: 1024px) {
+  .page-header, .page-body { padding-inline: 96px; }
+}
+/* Narrow measure for long-form reading (legal, policies). */
+.page-prose { max-width: 760px; color: #3a3f4a; font-size: 16px; line-height: 1.72; }
+.page-prose > :first-child { margin-top: 0; }
+.page-prose h2 { margin: 44px 0 12px; color: var(--color-ink); font-size: clamp(20px, 3vw, 24px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; }
+.page-prose h3 { margin: 30px 0 8px; color: var(--color-ink); font-size: 17px; font-weight: 600; }
+.page-prose p { margin: 0 0 16px; }
+.page-prose ul, .page-prose ol { margin: 0 0 18px; padding-left: 22px; }
+.page-prose li { margin: 0 0 9px; }
+.page-prose li::marker { color: #9aa0ac; }
+.page-prose a { color: var(--color-lapis); text-decoration: underline; text-underline-offset: 2px; }
+.page-prose strong { color: var(--color-ink); font-weight: 600; }
+.page-prose hr { border: none; border-top: 1px solid var(--color-hairline); margin: 34px 0; }
+
+/* Reusable feature grid for company/trust/training pages. */
+.page-grid {
+  display: grid;
+  gap: clamp(20px, 3vw, 32px);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) { .page-grid.cols-2, .page-grid.cols-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .page-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
+.page-card {
+  border: 1px solid var(--color-hairline);
+  border-radius: 14px;
+  padding: clamp(20px, 2.4vw, 28px);
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+.page-card h3 { margin: 0 0 8px; color: var(--color-ink); font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.page-card p { margin: 0; color: #5b6170; font-size: 15px; line-height: 1.6; }
+.page-card-kicker { color: var(--color-lapis); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+
+/* Section rhythm inside a page body. */
+.page-section { margin-top: clamp(40px, 6vw, 72px); }
+.page-section-title { margin: 0 0 6px; color: var(--color-ink); font-family: var(--font-sans); font-size: clamp(22px, 3.4vw, 30px); font-weight: 500; letter-spacing: -0.025em; }
+.page-section-sub { margin: 0 0 28px; color: #6a7080; font-size: 16px; line-height: 1.6; max-width: 640px; }
+
+/* Simple forms (contact, newsletter). */
+.field-label { display: block; margin-bottom: 7px; color: var(--color-ink); font-size: 13px; font-weight: 500; }
+.field-input, .field-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--color-hairline);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--color-ink);
+  background-color: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field-input:focus, .field-textarea:focus {
+  outline: none;
+  border-color: var(--color-lapis);
+  box-shadow: 0 0 0 3px rgb(15 107 212 / 0.12);
+}
+.field-textarea { min-height: 132px; resize: vertical; }

@@ -1,54 +1,72 @@
 {
 	"$schema": "https://openapi.vercel.sh/vercel.json",
+	"framework": null,
+	"installCommand": "npm --prefix site ci",
+	"buildCommand": "npm --prefix site run build",
+	"outputDirectory": "site/dist",
+	"cleanUrls": true,
+	"trailingSlash": false,
 	"git": {
 		"deploymentEnabled": {
 			"main": true,
 			"*": false
 		}
 	},
-	"installCommand": "bun install",
-	"buildCommand": "bunx turbo build --filter=@nairon-website/web",
-	"outputDirectory": "apps/web/.vercel/output",
 	"redirects": [
+		{
+			"source": "/academy/what-is-a-wrapper",
+			"destination": "/academy/what-is-an-ai-wrapper",
+			"permanent": true
+		},
+		{
+			"source": "/academy/what-they-dont-want-you-to-know-about-fable-5",
+			"destination": "/academy/anthropic-fable-5-explained",
+			"permanent": true
+		},
 		{ "source": "/residence", "destination": "/", "permanent": true },
 		{ "source": "/apprenticeship", "destination": "/", "permanent": true },
 		{ "source": "/hire", "destination": "/", "permanent": true },
 		{ "source": "/team", "destination": "/", "permanent": true },
-		{ "source": "/program", "destination": "/", "permanent": true }
+		{ "source": "/program", "destination": "/", "permanent": true },
+		{
+			"source": "/:path*",
+			"has": [{ "type": "host", "value": "www.naironai.com" }],
+			"destination": "https://naironai.com/:path*",
+			"permanent": true
+		}
 	],
 	"headers": [
 		{
-			"source": "/(.*)\\.(js|css|woff2|woff|ttf|ico|webp|jpg|jpeg|png|svg|avif|mp4)",
-			"headers": [
-				{
-					"key": "Cache-Control",
-					"value": "public, max-age=31536000, immutable"
-				}
-			]
-		},
-		{
 			"source": "/(.*)",
 			"headers": [
-				{
-					"key": "X-Content-Type-Options",
-					"value": "nosniff"
-				},
-				{
-					"key": "X-Frame-Options",
-					"value": "DENY"
-				},
+				{ "key": "X-Content-Type-Options", "value": "nosniff" },
+				{ "key": "X-Frame-Options", "value": "SAMEORIGIN" },
 				{
 					"key": "Referrer-Policy",
 					"value": "strict-origin-when-cross-origin"
 				},
 				{
-					"key": "Strict-Transport-Security",
-					"value": "max-age=31536000; includeSubDomains"
-				},
-				{
 					"key": "Permissions-Policy",
 					"value": "camera=(), microphone=(), geolocation=()"
 				}
+			]
+		},
+		{
+			"source": "/fonts/(.*)",
+			"headers": [
+				{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+			]
+		},
+		{
+			"source": "/_astro/(.*)",
+			"headers": [
+				{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+			]
+		},
+		{
+			"source": "/photos/(.*)",
+			"headers": [
+				{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
 			]
 		}
 	]

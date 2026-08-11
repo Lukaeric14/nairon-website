@@ -1,0 +1,652 @@
+---
+// Lesson page — "Legora Classic" (Paper: Lesson V1).
+//
+// Structure: eyebrow + 48px title on an 820px measure, full-bleed 16:9 video,
+// then a 300px meta rail beside a 690px reading column. The article is the
+// markdown body; the transcript is structured frontmatter rendered below it.
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/sections/Nav.astro';
+import Footer from '../../components/sections/Footer.astro';
+import LessonVideo from '../../components/academy/LessonVideo.astro';
+import MagnetCta from '../../components/academy/MagnetCta.astro';
+import LessonCard from '../../components/academy/LessonCard.astro';
+import {
+  adjacent,
+  allLessons,
+  formatDuration,
+  formatTimestamp,
+  relatedLessons,
+  watchUrl,
+  LEVEL_LABELS,
+  thumbUrl,
+} from '../../data/academy';
+import { SITE } from '../../data/site';
+
+export async function getStaticPaths() {
+  const lessons = await allLessons();
+  return lessons.map((lesson) => ({ params: { slug: lesson.id }, props: { lesson } }));
+}
+
+const { lesson } = Astro.props;
+const d = lesson.data;
+const { Content } = await render(lesson);
+
+const topic = await getEntry('academyTopics', d.topic);
+const topicLabel = topic?.data.label ?? d.topic;
+const magnet = d.magnet ? await getEntry('magnets', d.magnet) : undefined;
+const { next } = await adjacent(lesson);
+const related = await relatedLessons(lesson, 4);
+const topicCount = (await getCollection('academy')).filter((l) => l.data.topic === d.topic).length;
+
+const site = Astro.site ?? new URL(SITE.url);
+const pageUrl = new URL(`/academy/${lesson.id}`, site).href;
+const thumbAbs = new URL(thumbUrl(d.youtubeId), site).href;
+const published = d.publishedAt ? new Date(d.publishedAt) : undefined;
+
+// ISO 8601 duration — Google requires this exact shape on VideoObject.
+const iso8601 = `PT${Math.floor(d.duration / 60)}M${d.duration % 60}S`;
+
+const jsonLd: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: d.title,
+    description: d.description,
+    thumbnailUrl: [thumbAbs],
+    uploadDate: published?.toISOString(),
+    duration: iso8601,
+    contentUrl: watchUrl(d.youtubeId),
+    embedUrl: `https://www.youtube-nocookie.com/embed/${d.youtubeId}`,
+    publisher: {
+      '@type': 'Organization',
+      name: SITE.name,
+      logo: { '@type': 'ImageObject', url: new URL('/nairon-logo.png', site).href },
+    },
+    // Timestamped blocks double as chapter markers in search results.
+    hasPart: d.transcript.slice(0, 8).map((b) => ({
+      '@type': 'Clip',
+      name: b.text.slice(0, 70).replace(/\s+\S*$/, ''),
+      startOffset: b.t,
+      url: `${watchUrl(d.youtubeId)}&t=${b.t}s`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: d.seoTitle ?? d.title,
+    description: d.description,
+    image: [thumbAbs],
+    datePublished: published?.toISOString(),
+    author: { '@type': 'Organization', name: SITE.name },
+    publisher: { '@type': 'Organization', name: SITE.name },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+    isPartOf: { '@type': 'Course', name: `Nairon AI Academy — ${topicLabel}` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'AI Academy', item: new URL('/academy', site).href },
+      { '@type': 'ListItem', position: 2, name: topicLabel, item: new URL(`/academy/topic/${d.topic}`, site).href },
+      { '@type': 'ListItem', position: 3, name: d.title, item: pageUrl },
+    ],
+  },
+];
+
+const META = [
+  ['Topic', topicLabel],
+  ['Level', LEVEL_LABELS[d.level]],
+  published ? ['Published', published.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })] : null,
+  ['Runtime', formatDuration(d.duration)],
+].filter(Boolean) as [string, string][];
+---
+
+<Base
+  {/* Short brand suffix: Google truncates around 65 characters, and " — Nairon
+      AI Academy" spent 20 of them on branding that gets cut off anyway. */}
+  title={`${d.seoTitle ?? d.title} | Nairon`}
+  description={d.description}
+  image={thumbUrl(d.youtubeId)}
+  preloadImage={thumbUrl(d.youtubeId)}
+  jsonLd={jsonLd}
+>
+  <Nav solid />
+  <main class="lesson" data-testid="lesson-page" style="background-color: #FFFFFF; padding-top: 62px;">
+    <!-- ============ HEADER ============ -->
+    <header
+      data-reveal-group
+      class="mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-12 pt-[clamp(48px,8vw,104px)] pb-[clamp(28px,4vw,48px)]"
+      style="box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 22px;"
+    >
+      <nav data-reveal aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <a href={`/academy/topic/${d.topic}`} class="lesson-eyebrow-link">{topicLabel}</a>
+        <span style="width: 14px; height: 1px; background-color: var(--color-hairline); flex-shrink: 0;"></span>
+        <span class="lesson-eyebrow">Lesson {d.order || 1}</span>
+      </nav>
+      <h1
+        data-reveal
+        class="text-[clamp(30px,5.4vw,48px)] leading-[1.06]"
+        style="margin: 0; color: var(--color-ink); font-family: var(--font-sans); font-weight: 500; letter-spacing: -0.03em; max-width: 820px; text-wrap: balance;"
+      >
+        {d.seoTitle ?? d.title}
+      </h1>
+    </header>
+
+    <!-- ============ VIDEO (full bleed, like the reference frame) ============ -->
+    <LessonVideo youtubeId={d.youtubeId} title={d.title} duration={d.duration} bleed />
+
+    <!-- ============ BODY: meta rail + reading column ============ -->
+    <div
+      class="lesson-body mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-12 pt-[clamp(40px,6vw,80px)]"
+      style="box-sizing: border-box;"
+    >
+      <aside class="lesson-rail" aria-label="Lesson details">
+        {META.map(([label, value]) => (
+          <div style="display: flex; align-items: flex-start; gap: 10px; width: 100%;">
+            <span class="lesson-meta-label">{label}</span>
+            <span class="lesson-meta-value">{value}</span>
+          </div>
+        ))}
+        <div style="display: flex; align-items: flex-start; gap: 10px; width: 100%;">
+          <span class="lesson-meta-label">Watch</span>
+          <a class="lesson-meta-value lesson-link" href={watchUrl(d.youtubeId)} target="_blank" rel="noopener">
+            On YouTube
+          </a>
+        </div>
+        <button type="button" class="lesson-done" data-mark-complete data-slug={lesson.id} aria-pressed="false">
+          <span class="lesson-done-box" aria-hidden="true">
+            <svg width="10" height="10" viewBox="0 0 8 8">
+              <path d="M1 4.2 3 6.2 7 1.8" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span data-label>Mark complete</span>
+        </button>
+      </aside>
+
+      <div class="lesson-column">
+        {d.takeaways.length > 0 && (
+          <section data-reveal class="lesson-takeaways" aria-label="Key takeaways">
+            <p class="lesson-takeaways-title">In 30 seconds</p>
+            <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+              {d.takeaways.map((t) => (
+                <li style="display: flex; align-items: flex-start; gap: 11px;">
+                  <span style="width: 5px; height: 5px; border-radius: 999px; background-color: var(--color-lapis); flex-shrink: 0; margin-top: 9px;"></span>
+                  <span style="color: var(--color-ink); font-size: 15px; line-height: 23px;">{t}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <article class="lesson-prose">
+          <Content />
+        </article>
+
+        {magnet && <MagnetCta magnet={magnet} />}
+
+        {d.transcript.length > 0 && (
+          <section class="lesson-transcript" aria-label="Full transcript">
+            <details>
+              <summary>
+                <h2 style="margin: 0; color: var(--color-ink); font-family: var(--font-sans); font-size: 20px; font-weight: 500; letter-spacing: -0.01em;">
+                  Full transcript
+                </h2>
+                <span class="lesson-transcript-toggle">Expand</span>
+              </summary>
+              <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 16px;">
+                {d.transcript.map((b) => (
+                  <div style="display: flex; align-items: flex-start; gap: 20px;">
+                    <button type="button" data-seek={b.t} class="lesson-ts" aria-label={`Play from ${formatTimestamp(b.t)}`}>
+                      {formatTimestamp(b.t)}
+                    </button>
+                    <p style="margin: 0; flex-grow: 1; color: #5B6170; font-size: 14px; line-height: 23px;">{b.text}</p>
+                  </div>
+                ))}
+              </div>
+            </details>
+          </section>
+        )}
+
+        {next && (
+          <a class="lesson-next" href={`/academy/${next.id}`}>
+            <span class="lesson-next-kicker">Next in {topicLabel}</span>
+            <span class="lesson-next-title">{next.data.title}</span>
+          </a>
+        )}
+      </div>
+    </div>
+
+    <!-- ============ CONTINUE THE TRACK ============ -->
+    {related.length > 0 && (
+      <section class="lesson-related" aria-label="More lessons">
+        <div class="mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-12" style="box-sizing: border-box;">
+          <div
+            class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"
+            style="box-sizing: border-box; padding-bottom: 26px;"
+          >
+            <h2
+              class="text-[clamp(20px,3vw,24px)]"
+              style="margin: 0; color: var(--color-ink); font-family: var(--font-sans); font-weight: 500; letter-spacing: -0.02em;"
+            >
+              Continue the track
+            </h2>
+            <a href={`/academy/topic/${d.topic}`} style="color: #5B6170; font-size: 13px;">
+              {topicCount} {topicCount === 1 ? 'lesson' : 'lessons'} in {topicLabel}
+            </a>
+          </div>
+          <div data-reveal-group class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {related.map((l) => <LessonCard lesson={l} />)}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <Footer />
+  </main>
+</Base>
+
+<style>
+  /* ---- eyebrow + meta rail ------------------------------------------- */
+  .lesson-eyebrow,
+  .lesson-eyebrow-link {
+    color: #5b6170;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+  .lesson-eyebrow-link:hover {
+    color: var(--color-ink);
+  }
+
+  .lesson-body {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: flex-start;
+  }
+  .lesson-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    flex-shrink: 0;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .lesson-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    max-width: 690px;
+  }
+  @media (min-width: 1024px) {
+    .lesson-body {
+      flex-direction: row;
+      gap: 80px;
+    }
+    .lesson-rail {
+      width: 300px;
+      padding-bottom: 0;
+      border-bottom: 0;
+      position: sticky;
+      top: 92px;
+    }
+    .lesson-column {
+      flex-grow: 1;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .lesson-rail {
+      scroll-behavior: smooth;
+    }
+  }
+
+  .lesson-meta-label {
+    width: 88px;
+    flex-shrink: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    line-height: 19px;
+    text-transform: uppercase;
+  }
+  .lesson-meta-value {
+    flex-grow: 1;
+    color: #5b6170;
+    font-size: 13px;
+    line-height: 19px;
+  }
+  .lesson-link {
+    color: var(--color-lapis);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .lesson-done {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    align-self: flex-start;
+    margin-top: 14px;
+    padding: 8px 14px 8px 10px;
+    border: 1px solid var(--color-hairline);
+    border-radius: 48px;
+    background: transparent;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+  }
+  .lesson-done:hover {
+    border-color: #c9c6bb;
+  }
+  .lesson-done-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border: 1.4px solid #c9c6bb;
+    border-radius: 999px;
+    box-sizing: border-box;
+  }
+  .lesson-done-box svg {
+    opacity: 0;
+  }
+  .lesson-done[aria-pressed='true'] .lesson-done-box {
+    background-color: var(--color-green);
+    border-color: var(--color-green);
+  }
+  .lesson-done[aria-pressed='true'] .lesson-done-box svg {
+    opacity: 1;
+  }
+
+  /* ---- "in 30 seconds" ------------------------------------------------ */
+  .lesson-takeaways {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 24px 26px;
+    margin-bottom: 40px;
+    background-color: #e9f0fa;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+  .lesson-takeaways-title {
+    margin: 0;
+    color: var(--color-lapis);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* ---- article prose --------------------------------------------------
+     Legora's blog measure: a 32px lede, 15px body on a 690px column, 20px
+     section heads. Tight, dense, professional — not a wide editorial column. */
+  .lesson-prose {
+    color: var(--color-ink);
+    font-size: 15px;
+    line-height: 24px;
+  }
+  .lesson-prose > :global(:first-child) {
+    margin-top: 0;
+    font-size: clamp(22px, 3.4vw, 26px);
+    line-height: 1.36;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+  .lesson-prose :global(p) {
+    margin: 0 0 20px;
+  }
+  .lesson-prose :global(h2) {
+    margin: 44px 0 18px;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 24px;
+    scroll-margin-top: 90px;
+  }
+  .lesson-prose :global(h3) {
+    margin: 30px 0 10px;
+    color: var(--color-ink);
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .lesson-prose :global(strong) {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+  .lesson-prose :global(a) {
+    color: var(--color-lapis);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  /* Numbered lists render as hairline-separated rows with a mono index — the
+     structural element that a transcript can't offer. */
+  .lesson-prose :global(ol) {
+    margin: 28px 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+  .lesson-prose :global(ol > li) {
+    counter-increment: step;
+    display: flex;
+    gap: 18px;
+    padding: 18px 0;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .lesson-prose :global(ol > li:last-child) {
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .lesson-prose :global(ol > li)::before {
+    content: '0' counter(step);
+    width: 22px;
+    flex-shrink: 0;
+    color: var(--color-lapis);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 24px;
+  }
+  .lesson-prose :global(ol > li > p) {
+    margin: 0;
+  }
+  .lesson-prose :global(ul) {
+    margin: 0 0 20px;
+    padding-left: 20px;
+  }
+  .lesson-prose :global(ul li) {
+    margin-bottom: 9px;
+  }
+  .lesson-prose :global(ul li::marker) {
+    color: #9aa0ac;
+  }
+  .lesson-prose :global(blockquote) {
+    margin: 32px 0;
+    padding-left: 22px;
+    border-left: 2px solid var(--color-lapis);
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .lesson-prose :global(pre) {
+    margin: 28px 0;
+    padding: 20px 22px;
+    overflow-x: auto;
+    border: 1px solid var(--color-hairline);
+    border-left: 2px solid var(--color-lapis);
+    background: var(--color-paper) !important;
+    color: var(--color-ink) !important;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 22px;
+    white-space: pre-wrap;
+  }
+  .lesson-prose :global(pre code),
+  .lesson-prose :global(pre code span) {
+    color: var(--color-ink) !important;
+    font-family: inherit;
+  }
+  .lesson-prose :global(:not(pre) > code) {
+    padding: 2px 5px;
+    border-radius: 3px;
+    background: rgb(20 23 31 / 0.06);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+  }
+  .lesson-prose :global(table) {
+    width: 100%;
+    margin: 28px 0;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .lesson-prose :global(th),
+  .lesson-prose :global(td) {
+    padding: 12px 14px;
+    border-top: 1px solid var(--color-hairline);
+    text-align: left;
+    vertical-align: top;
+  }
+  .lesson-prose :global(th) {
+    color: #5b6170;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* ---- transcript ------------------------------------------------------ */
+  .lesson-transcript {
+    margin-top: 56px;
+  }
+  .lesson-transcript summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--color-hairline);
+    cursor: pointer;
+    list-style: none;
+  }
+  .lesson-transcript summary::-webkit-details-marker {
+    display: none;
+  }
+  .lesson-transcript-toggle {
+    color: var(--color-lapis);
+    font-size: 13px;
+  }
+  .lesson-transcript details[open] .lesson-transcript-toggle::after {
+    content: '';
+  }
+  .lesson-transcript details[open] .lesson-transcript-toggle {
+    font-size: 0;
+  }
+  .lesson-transcript details[open] .lesson-transcript-toggle::before {
+    content: 'Collapse';
+    font-size: 13px;
+  }
+  .lesson-ts {
+    width: 38px;
+    flex-shrink: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #9aa0ac;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 23px;
+    text-align: left;
+    cursor: pointer;
+  }
+  .lesson-ts:hover {
+    color: var(--color-lapis);
+  }
+
+  /* ---- next ------------------------------------------------------------ */
+  .lesson-next {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 48px;
+    padding: 22px 24px;
+    border: 1px solid var(--color-ink);
+    border-radius: 12px;
+    transition: background-color 0.15s ease;
+  }
+  .lesson-next:hover {
+    background-color: #faf9f7;
+  }
+  .lesson-next-kicker {
+    color: #5b6170;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .lesson-next-title {
+    color: var(--color-ink);
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /* ---- related --------------------------------------------------------- */
+  .lesson-related {
+    margin-top: clamp(64px, 9vw, 96px);
+    padding-block: clamp(56px, 8vw, 88px);
+    background-color: #faf9f7;
+    border-top: 1px solid var(--color-hairline);
+  }
+  :global(.lesson-card[data-done='true'] .lesson-card-kicker::after) {
+    content: ' · done';
+    color: var(--color-green);
+  }
+</style>
+
+<script>
+  import { isComplete, setComplete, setLastVisited, getCompleted } from '../../components/academy/progress';
+
+  const btn = document.querySelector<HTMLButtonElement>('[data-mark-complete]');
+  const slug = btn?.dataset.slug;
+
+  if (btn && slug) {
+    const label = btn.querySelector<HTMLElement>('[data-label]');
+    const sync = () => {
+      const done = isComplete(slug);
+      btn.setAttribute('aria-pressed', String(done));
+      if (label) label.textContent = done ? 'Completed' : 'Mark complete';
+    };
+    btn.addEventListener('click', () => {
+      setComplete(slug, !isComplete(slug));
+      sync();
+    });
+    sync();
+    // Landing on a lesson is what "where you left off" means.
+    setLastVisited(slug);
+  }
+
+  const paint = () => {
+    const done = getCompleted();
+    document.querySelectorAll<HTMLAnchorElement>('.lesson-card').forEach((card) => {
+      const s = card.getAttribute('href')?.replace('/academy/', '') ?? '';
+      card.dataset.done = String(done.has(s));
+    });
+  };
+  paint();
+  document.addEventListener('academy:progress', paint);
+</script>

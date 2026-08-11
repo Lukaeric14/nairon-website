@@ -1,0 +1,180 @@
+---
+// Topic hub — one page per track. This is the page that should rank for
+// category queries ("AI fundamentals course", "AI models explained"), so the
+// full lesson list is static HTML with real descriptions, not a client render.
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/sections/Nav.astro';
+import Footer from '../../../components/sections/Footer.astro';
+import LessonCard from '../../../components/academy/LessonCard.astro';
+import { lessonsByTopic, formatDuration, LEVELS, LEVEL_LABELS, thumbUrl } from '../../../data/academy';
+import { SITE } from '../../../data/site';
+
+export async function getStaticPaths() {
+  const topics = await getCollection('academyTopics');
+  return topics.map((topic) => ({ params: { id: topic.id }, props: { topic } }));
+}
+
+const { topic } = Astro.props;
+const lessons = await lessonsByTopic(topic.id);
+const site = Astro.site ?? new URL(SITE.url);
+const minutes = Math.round(lessons.reduce((n, l) => n + l.data.duration, 0) / 60);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: `${topic.data.label} — Nairon AI Academy`,
+    description: topic.data.description,
+    provider: { '@type': 'Organization', name: SITE.name, sameAs: site.href },
+    isAccessibleForFree: true,
+    numberOfCredits: lessons.length,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: lessons.map((l, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: l.data.title,
+      url: new URL(`/academy/${l.id}`, site).href,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'AI Academy', item: new URL('/academy', site).href },
+      { '@type': 'ListItem', position: 2, name: topic.data.label, item: new URL(`/academy/topic/${topic.id}`, site).href },
+    ],
+  },
+];
+---
+
+<Base
+  title={`${topic.data.label} — free AI training for operators | Nairon`}
+  description={topic.data.description}
+  jsonLd={jsonLd}
+  image={lessons[0] ? thumbUrl(lessons[0].data.youtubeId) : undefined}
+>
+  <Nav solid />
+  <main data-testid="academy-topic" style="background-color: #FFFFFF; padding-top: 62px;">
+    <header
+      data-reveal-group
+      class="mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-12 pt-[clamp(48px,8vw,104px)] pb-[clamp(28px,4vw,48px)]"
+      style="box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 20px;"
+    >
+      <nav data-reveal aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 9px;">
+        <a href="/academy" class="tp-crumb">AI Academy</a>
+        <span style="color: #C9C6BB; font-size: 12px;">/</span>
+        <span class="tp-crumb tp-crumb--current">{topic.data.label}</span>
+      </nav>
+      <h1
+        data-reveal
+        class="text-[clamp(30px,5.6vw,50px)] leading-[1.06]"
+        style="margin: 0; color: var(--color-ink); font-family: var(--font-sans); font-weight: 500; letter-spacing: -0.03em; max-width: 860px; text-wrap: balance;"
+      >
+        {topic.data.label}
+      </h1>
+      <p data-reveal class="tp-lead">{topic.data.description}</p>
+      <p data-reveal class="tp-count">
+        {lessons.length} {lessons.length === 1 ? 'lesson' : 'lessons'} · {minutes} minutes end to end · free
+      </p>
+    </header>
+
+    <section class="tp-body">
+      <div class="mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-12" style="box-sizing: border-box;">
+        {LEVELS.filter((lvl) => lessons.some((l) => l.data.level === lvl)).map((lvl) => (
+          <div class="tp-level">
+            <div class="tp-level-head">
+              <span class="tp-kicker">{LEVEL_LABELS[lvl]}</span>
+              <span class="tp-rule"></span>
+              <span class="tp-level-count">
+                {formatDuration(lessons.filter((l) => l.data.level === lvl).reduce((n, l) => n + l.data.duration, 0))}
+              </span>
+            </div>
+            <div data-reveal-group class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {lessons.filter((l) => l.data.level === lvl).map((l) => <LessonCard lesson={l} />)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Base>
+
+<style>
+  .tp-crumb {
+    color: #9aa0ac;
+    font-size: 12px;
+  }
+  .tp-crumb:hover {
+    color: var(--color-ink);
+  }
+  .tp-crumb--current {
+    color: var(--color-ink);
+  }
+  .tp-lead {
+    margin: 0;
+    max-width: 660px;
+    color: #5b6170;
+    font-size: clamp(16px, 2.3vw, 19px);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .tp-count {
+    margin: 0;
+    color: #9aa0ac;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+  .tp-body {
+    padding-bottom: clamp(64px, 9vw, 104px);
+  }
+  .tp-level + .tp-level {
+    margin-top: 48px;
+  }
+  .tp-level-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 18px;
+  }
+  .tp-kicker {
+    color: #5b6170;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .tp-rule {
+    flex-grow: 1;
+    height: 1px;
+    background-color: var(--color-hairline);
+  }
+  .tp-level-count {
+    color: #9aa0ac;
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+  :global(.lesson-card[data-done='true'] .lesson-card-kicker::after) {
+    content: ' · done';
+    color: var(--color-green);
+  }
+</style>
+
+<script>
+  import { getCompleted } from '../../../components/academy/progress';
+  const paint = () => {
+    const done = getCompleted();
+    document.querySelectorAll<HTMLAnchorElement>('.lesson-card').forEach((card) => {
+      const slug = card.getAttribute('href')?.replace('/academy/', '') ?? '';
+      card.dataset.done = String(done.has(slug));
+    });
+  };
+  paint();
+  document.addEventListener('academy:progress', paint);
+</script>

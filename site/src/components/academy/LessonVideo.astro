@@ -1,0 +1,128 @@
+---
+// Lesson video — a click-to-load facade rather than a live YouTube embed.
+//
+// A real <iframe> costs ~600KB and a dozen requests on every lesson page, which
+// tanks Core Web Vitals on pages whose whole job is to rank. This renders the
+// thumbnail (already local, already sized) and only swaps in the iframe on
+// click, at which point it autoplays so the interaction still feels like one
+// step. `seekTo` lets the transcript jump the player once it's live.
+import { thumbUrl, formatDuration } from '../../data/academy';
+
+export interface Props {
+  youtubeId: string;
+  title: string;
+  duration: number;
+  /** Full-bleed (lesson hero) vs. contained with a radius (everywhere else). */
+  bleed?: boolean;
+}
+const { youtubeId, title, duration, bleed = false } = Astro.props;
+---
+
+<div
+  class="lesson-video"
+  data-lesson-video
+  data-youtube-id={youtubeId}
+  style={`position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: clip; background-color: #0A1322; ${bleed ? '' : 'border-radius: 14px;'}`}
+>
+  <img
+    src={thumbUrl(youtubeId)}
+    alt={`${title} — watch on YouTube`}
+    width="1280"
+    height="720"
+    loading="eager"
+    style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;"
+  />
+  <div style="position: absolute; inset: 0; background-color: rgba(10, 19, 34, 0.26);"></div>
+
+  <button
+    type="button"
+    data-play
+    aria-label={`Play: ${title}`}
+    style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; border: 0; background: transparent; cursor: pointer; padding: 0;"
+  >
+    <span
+      class="lesson-video-btn"
+      style="display: flex; align-items: center; justify-content: center; width: 76px; height: 76px; border-radius: 999px; background-color: #FBFAF6; box-shadow: 0 2px 18px rgba(10, 19, 34, 0.28); transition: transform 0.18s ease;"
+    >
+      <svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true" style="margin-left: 3px;">
+        <path d="M19 11 0.25 21.4V0.6z" fill="#14171F"></path>
+      </svg>
+    </span>
+  </button>
+
+  <div
+    data-duration
+    style="position: absolute; left: 20px; bottom: 18px; display: flex; align-items: center; border-radius: 999px; padding: 6px 12px; background-color: rgba(20, 23, 31, 0.66);"
+  >
+    <span style="color: #FBFAF6; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.04em;">
+      {formatDuration(duration)}
+    </span>
+  </div>
+</div>
+
+<style>
+  .lesson-video button:hover .lesson-video-btn,
+  .lesson-video button:focus-visible .lesson-video-btn {
+    transform: scale(1.06);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lesson-video-btn {
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  // One delegated handler covers every facade on the page.
+  const load = (root: HTMLElement, startAt = 0) => {
+    const id = root.dataset.youtubeId;
+    if (!id) return;
+    const params = new URLSearchParams({
+      autoplay: '1',
+      rel: '0',
+      modestbranding: '1',
+      playsinline: '1',
+    });
+    if (startAt > 0) params.set('start', String(Math.floor(startAt)));
+
+    const frame = document.createElement('iframe');
+    frame.src = `https://www.youtube-nocookie.com/embed/${id}?${params}`;
+    frame.title = 'Lesson video';
+    frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
+    frame.allowFullscreen = true;
+    frame.setAttribute(
+      'style',
+      'position:absolute;inset:0;width:100%;height:100%;border:0;',
+    );
+
+    // Replace the whole facade — this also handles re-seeking an already-live
+    // player, since a timestamp click rebuilds the iframe at the new offset.
+    root.replaceChildren(frame);
+    root.dataset.loaded = 'true';
+
+    const g = (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag;
+    if (typeof g === 'function') g('event', 'lesson_video_play', { video_id: id, start: startAt });
+  };
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as Element | null;
+
+    const play = target?.closest?.('[data-play]');
+    if (play) {
+      const root = play.closest('[data-lesson-video]') as HTMLElement | null;
+      if (root) load(root);
+      return;
+    }
+
+    // Transcript timestamps seek the player (loading it first if needed).
+    const seek = target?.closest?.('[data-seek]') as HTMLElement | null;
+    if (seek) {
+      const root = document.querySelector('[data-lesson-video]') as HTMLElement | null;
+      if (!root) return;
+      e.preventDefault();
+      const at = Number(seek.dataset.seek || 0);
+      load(root, at);
+      root.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+</script>

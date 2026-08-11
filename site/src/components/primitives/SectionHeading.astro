@@ -1,0 +1,9 @@
+---
+interface Props { as?: 'h1' | 'h2' | 'h3'; tone?: 'light' | 'dark'; class?: string; }
+const { as = 'h2', tone = 'light', class: cls = '' } = Astro.props;
+const Tag = as;
+const color = tone === 'dark' ? 'text-white' : 'text-ink';
+---
+<Tag class:list={["font-serif leading-[1.05] tracking-[-0.01em]", color, cls]}>
+  <slot />
+</Tag>

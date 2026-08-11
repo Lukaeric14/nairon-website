@@ -1,0 +1,130 @@
+---
+// Hero C — Aerial (Paper node GIL-0).
+// Desktop (>=1024px) is pixel-for-pixel identical to the original 1440px Paper
+// reproduction: exact values are pinned behind `lg:` arbitrary utilities.
+// Base (mobile) and md (tablet) add responsive behavior only.
+// The top nav now lives in Nav.astro (a fixed, scroll-aware bar that overlays
+// this hero) — the hero content is pinned to the bottom via justify-content.
+//
+// Background photo (2026-08-04): swapped from a solar-rooftop aerial (left over
+// from before either vertical pivot — never actually property-management-themed)
+// to a purpose-generated aerial over a garden-style apartment community, 4k
+// upscaled per the premium finishing lane. brand/images/LEDGER.md v107.
+---
+
+<div
+  data-testid="hero"
+  class="w-full min-h-[560px] lg:h-[900px]"
+  style="align-self: stretch; background-color: #0B0D12; box-sizing: border-box; display: flex; flex-direction: column; flex-shrink: 0; font-synthesis: none; justify-content: flex-end; -moz-osx-font-smoothing: grayscale; overflow: clip; position: relative; -webkit-font-smoothing: antialiased;"
+>
+  <!-- Full-bleed background photo (spans full viewport width) -->
+  <div
+    class="hero-img absolute inset-0 w-full h-full"
+    style="background-image: url(/photos/hero-property-management.webp); background-position: center 42%; background-size: cover; box-sizing: border-box;"
+  >
+  </div>
+  <!-- Full-bleed gradient scrim -->
+  <div
+    class="hero-scrim absolute inset-0 w-full h-full"
+    style="background-image: linear-gradient(in oklab 180deg, oklab(12.8% -0.001 -0.013 / 62%) 0%, oklab(12.8% -0.001 -0.013 / 16%) 24%, oklab(12.8% -0.001 -0.013 / 44%) 52%, oklab(12.8% -0.001 -0.013 / 82%) 74%, oklab(12.8% -0.001 -0.013 / 96%) 100%); box-sizing: border-box;"
+  >
+  </div>
+
+  <!-- ============ HERO CONTENT ============ -->
+  <div class="relative w-full">
+    <div
+      class="mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-[96px] pb-14 lg:pb-[76px]"
+      style="align-items: center; box-sizing: border-box; display: flex; flex-direction: column; flex-shrink: 0; gap: 26px;"
+    >
+      <h1
+        class="text-[clamp(32px,7vw,60px)] leading-[1.05] lg:text-[60px] lg:leading-[63px]"
+        style="margin: 0; box-sizing: border-box; color: #FFFFFF; font-family: 'Geist', system-ui, sans-serif; letter-spacing: -0.04em; max-width: 1120px; text-align: center; text-wrap: balance;"
+      >
+        <span class="hero-word" style="--i:0">Power</span> <span class="hero-word" style="--i:1">Your</span> <span class="hero-word" style="--i:2">Business</span> <span class="hero-word" style="--i:3">with</span> <span class="hero-word" style="--i:4">an</span> <span class="hero-word" style="--i:5">AI</span> <span class="hero-word" style="--i:6">workforce.</span>
+      </h1>
+      <div
+        class="hero-sub text-[15px] leading-[24px] lg:text-[17px] lg:leading-[27px]"
+        style="box-sizing: border-box; color: #FFFFFFCC; display: flex; flex-wrap: wrap; font-family: 'Geist', system-ui, sans-serif; justify-content: center; letter-spacing: -0.005em; max-width: 620px; text-align: center; text-wrap: balance;"
+      >
+        Nairon builds AI employees around your real workflows and runs them inside the systems you already use. Measurable outcomes, no migrations.
+      </div>
+      <a
+        href="#book"
+        class="hero-cta relative top-[14px] max-w-full"
+        style="align-items: center; background-color: #0f6bd4; border-radius: 48px; box-sizing: border-box; display: flex; flex-shrink: 0; gap: 12px; padding-block: 5px; padding-left: 22px; padding-right: 5px; text-decoration: none; width: max-content;"
+      >
+        <div
+          class="min-w-0"
+          style="box-sizing: border-box; color: #FFFFFF; font-family: 'Geist', system-ui, sans-serif; font-size: 14px; font-weight: 500; letter-spacing: -0.005em; line-height: 18px;"
+        >
+          Book an AI opportunity audit
+        </div>
+        <div
+          style="align-items: center; background-color: #FFFFFF; border-radius: 32px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 32px; justify-content: center; width: 32px;"
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <path d="M2.6 7h8.2M7.4 3.4L11 7l-3.6 3.6" fill="none" stroke="#0f6bd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ============================================================
+     Hero ON-LOAD sequence (Legora feel). Runs once on page load,
+     pure CSS (no JS). Order: photo scale-settles + fades in,
+     headline words stagger up, then subhead, then CTA.
+     All settle well under ~1.5s.
+     ============================================================ */
+
+  /* Background photo: fade in with a subtle scale-settle — echoes the
+     "alive" motion of Legora's looping hero video on our static photo. */
+  .hero-img {
+    opacity: 0;
+    animation: heroImg 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+  @keyframes heroImg {
+    from { opacity: 0; transform: scale(1.06); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .hero-scrim {
+    opacity: 0;
+    animation: heroFade 1.2s ease-out 0.15s forwards;
+  }
+  @keyframes heroFade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Per-word stagger — each word fades + rises, ~60ms apart. */
+  .hero-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.45em);
+    animation: heroWord 0.62s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    animation-delay: calc(0.32s + var(--i) * 0.06s);
+    will-change: transform, opacity;
+  }
+  @keyframes heroWord {
+    from { opacity: 0; transform: translateY(0.45em); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .hero-sub { opacity: 0; animation: heroUp 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.74s forwards; }
+  .hero-cta { opacity: 0; animation: heroUp 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.9s forwards; }
+  @keyframes heroUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-img, .hero-scrim, .hero-word, .hero-sub, .hero-cta {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
